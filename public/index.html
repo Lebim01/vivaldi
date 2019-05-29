@@ -4,36 +4,19 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="CoreUI for React - Open Source Bootstrap Admin Template">
-    <meta name="author" content="Łukasz Holeczek">
     <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,CSS,SCSS,HTML,RWD,Dashboard,React">
-    <title>CoreUI for React</title>
+    <title>Vivaldi</title>
     <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      // Shared ID
-      gtag('config', 'UA-118965717-3');
-      // React.js ID
-      gtag('config', 'UA-118965717-6');
-    </script>
+    <!-- Custom CSS -->
+    <link href="assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
+    <link href="assets/extra-libs/c3/c3.min.css" rel="stylesheet">
+    <link href="assets/libs/morris.js/morris.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="dist/css/style.min.css" rel="stylesheet">
   </head>
 
   <!-- BODY options, add following classes to body to change options
@@ -65,10 +48,22 @@
   -->
 
   <body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
-    <div id="root"></div>
+    <div id="main-wrapper" data-layout="horizontal" data-navbarbg="skin1" data-sidebartype="full" data-boxed-layout="boxed">
+      
+    </div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -79,5 +74,37 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="../../assets/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="../../assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="../../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- apps -->
+    <script src="../../dist/js/app.min.js"></script>
+    <script src="../../dist/js/app.init.horizontal.js"></script>
+    <script src="../../dist/js/app-style-switcher.horizontal.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="../../assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="../../assets/extra-libs/sparkline/sparkline.js"></script>
+    <!--Wave Effects -->
+    <script src="../../dist/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="../../dist/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="../../dist/js/custom.min.js"></script>
+    <!--This page JavaScript -->
+    <!--chartis chart-->
+    <script src="../../assets/libs/chartist/dist/chartist.min.js"></script>
+    <script src="../../assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+    <!--c3 charts -->
+    <script src="../../assets/extra-libs/c3/d3.min.js"></script>
+    <script src="../../assets/extra-libs/c3/c3.min.js"></script>
+    <!--chartjs -->
+    <script src="../../assets/libs/raphael/raphael.min.js"></script>
+    <script src="../../assets/libs/morris.js/morris.min.js"></script>
+
+    <script src="../../dist/js/pages/dashboards/dashboard1.js"></script>
   </body>
 </html>

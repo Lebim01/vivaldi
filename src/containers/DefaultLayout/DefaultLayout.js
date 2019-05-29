@@ -6,7 +6,6 @@ import { Container } from 'reactstrap';
 import {
   AppAside,
   AppFooter,
-  AppHeader,
   AppSidebar,
   AppSidebarFooter,
   AppSidebarForm,
@@ -36,11 +35,11 @@ class DefaultLayout extends Component {
   render() {
     return (
       <div className="app">
-        <AppHeader fixed>
+        <header className="topbar" fixed data-navbarbg="skin1">
           <Suspense  fallback={this.loading()}>
             <DefaultHeader onLogout={e=>this.signOut(e)}/>
           </Suspense>
-        </AppHeader>
+        </header>
         <div className="app-body">
           <AppSidebar fixed display="lg">
             <AppSidebarHeader />
