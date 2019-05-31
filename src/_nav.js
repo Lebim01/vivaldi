@@ -1,280 +1,258 @@
 export default {
   items: [
     {
-      name: 'Dashboard',
-      url: '/dashboard',
-      icon: 'icon-speedometer',
-      badge: {
-        variant: 'info',
-        text: 'NEW',
-      },
+      name: 'Localidades',
+      //icon: 'icon-map',
+      children : [
+        {
+          name : 'Localidades',
+          url : '/#/localidades/list'
+        },
+        {
+          name : 'Sitios',
+          url : '/#/localidades/sitios'
+        },
+        {
+          name : 'Traffic Control',
+          url : '/#/localidades/traffic-control'
+        }
+      ]
     },
     {
-      title: true,
-      name: 'Theme',
-      wrapper: {            // optional wrapper object
-        element: '',        // required valid HTML5 element tag
-        attributes: {}        // optional valid JS object with JS API naming ex: { className: "my-class", style: { fontFamily: "Verdana" }, id: "my-id"}
-      },
-      class: ''             // optional class names space delimited list for title item ex: "text-center"
+      name: 'Usuarios',
+      //icon: 'icon-user',
+      children : [
+        {
+          name : 'Usuarios',
+          url : '/#/usuarios/usuarios'
+        },
+        {
+          name : 'Roles',
+          url : '/#/usuarios/roles'
+        }
+      ]
     },
     {
-      name: 'Colors',
-      url: '/theme/colors',
-      icon: 'icon-drop',
+      name: 'Cooperativas',
+      //icon: 'icon-home',
+      children : [
+        {
+          name : 'Cooperativas',
+          url : '/#/cooperativas/cooperativas'
+        },
+        {
+          name : 'Gremios',
+          url : '/#/cooperativas/gremios'
+        },
+        {
+          name : 'Buses',
+          url : '/#/cooperativas/buses'
+        },
+        {
+          name : 'Conductores',
+          url : '/#/cooperativas/conductores'
+        }
+      ]
     },
     {
-      name: 'Typography',
-      url: '/theme/typography',
-      icon: 'icon-pencil',
-    },
-    {
-      title: true,
-      name: 'Components',
-      wrapper: {
-        element: '',
-        attributes: {},
-      },
-    },
-    {
-      name: 'Base',
-      url: '/base',
-      icon: 'icon-puzzle',
+      name: 'Operaciones',
+      //icon: 'icon-desktop',
       children: [
         {
-          name: 'Breadcrumbs',
-          url: '/base/breadcrumbs',
+          name: 'Rutas',
+          url: '/#/operaciones/rutas',
           icon: 'icon-puzzle',
         },
         {
-          name: 'Cards',
-          url: '/base/cards',
+          name: 'Viajes',
+          url: '/#/operaciones/viajes',
           icon: 'icon-puzzle',
         },
         {
-          name: 'Carousels',
-          url: '/base/carousels',
+          name: 'Viajes Planificados',
+          url: '/#/operaciones/viajes-planificados',
           icon: 'icon-puzzle',
         },
         {
-          name: 'Collapses',
-          url: '/base/collapses',
+          name: 'Frecuencias',
+          url: '/operaciones/frecuencias',
           icon: 'icon-puzzle',
         },
         {
-          name: 'Dropdowns',
-          url: '/base/dropdowns',
+          name: 'Frecuencias extra',
+          url: '/#/operaciones/frecuencias-extra',
           icon: 'icon-puzzle',
         },
         {
-          name: 'Forms',
-          url: '/base/forms',
+          name: 'Frecuencias por lote',
+          url: '/#/operaciones/frecuencias-lote',
           icon: 'icon-puzzle',
         },
         {
-          name: 'Jumbotrons',
-          url: '/base/jumbotrons',
+          name: ' Tasas Contingencia',
+          url: '/#/operaciones/tasas-contingencia',
           icon: 'icon-puzzle',
         },
         {
-          name: 'List groups',
-          url: '/base/list-groups',
+          name: 'Consulta Tasa',
+          url: '/#/operaciones/consulta-tasa',
           icon: 'icon-puzzle',
         },
         {
-          name: 'Navs',
-          url: '/base/navs',
+          name: 'Solicitudes',
           icon: 'icon-puzzle',
-        },
-        {
-          name: 'Paginations',
-          url: '/base/paginations',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Popovers',
-          url: '/base/popovers',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Progress Bar',
-          url: '/base/progress-bar',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Switches',
-          url: '/base/switches',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Tables',
-          url: '/base/tables',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Tabs',
-          url: '/base/tabs',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Tooltips',
-          url: '/base/tooltips',
-          icon: 'icon-puzzle',
+          children : [
+            {
+              name : 'Usuario',
+              url : '/#/operaciones/solicitudes/usuario'
+            },
+            {
+              name : 'Frecuencias',
+              url : '/#/operaciones/solicitudes/frecuencias'
+            },
+            {
+              name : 'Buses',
+              url : '/#/operaciones/solicitudes/buses'
+            },
+            {
+              name : 'Modificación de buses',
+              url : '/#/operaciones/solicitudes/modificaciones-buses'
+            },
+            {
+              name : 'Choferes',
+              url : '/#/operaciones/solicitudes/choferes'
+            }
+          ]
         },
       ],
     },
     {
-      name: 'Buttons',
-      url: '/buttons',
-      icon: 'icon-cursor',
+      name: 'Facturación',
+      //icon: 'icon-calculator',
       children: [
         {
-          name: 'Buttons',
-          url: '/buttons/buttons',
+          name: 'Clientes',
+          url: '/#/facturacion/clientes',
           icon: 'icon-cursor',
         },
         {
-          name: 'Button dropdowns',
-          url: '/buttons/button-dropdowns',
-          icon: 'icon-cursor',
-        },
-        {
-          name: 'Button groups',
-          url: '/buttons/button-groups',
-          icon: 'icon-cursor',
-        },
-        {
-          name: 'Brand Buttons',
-          url: '/buttons/brand-buttons',
+          name: 'Documentos',
+          url: '/#/facturacion/documentos',
           icon: 'icon-cursor',
         },
       ],
     },
     {
-      name: 'Charts',
-      url: '/charts',
-      icon: 'icon-pie-chart',
+      name: 'Recaudaciones',
+      //icon: 'icon-wallet',
+      children : [
+        {
+          name : 'Panel de recaudación',
+          url : '/#/recaudaciones/panel'
+        },
+        {
+          name : 'Reporte de clientes frecuentes',
+          url : '/#/recaudaciones/clientes-frecuentes'
+        },
+        {
+          name : 'Reporte boletos y tasas',
+          url : '/#/recaudaciones/reporte-boletos-tasas'
+        },
+        {
+          name : 'Turnos por cooperativa',
+          url : '/#/recaudaciones/turnos-cooperativa'
+        },
+        {
+          name : 'Tasas emitidas vs usadas',
+          url : '/#/recaudaciones/tasas-emitidas-vs-usadas'
+        },
+        {
+          name : 'Tasas usadas por viaje',
+          url : '/#/recaudaciones/tasas-usadas-por-viaje'
+        },
+        {
+          name : 'Recaudación',
+          url : '/#/recaudaciones/recaudacion'
+        },
+        {
+          name : 'Ventas por turno',
+          url : '/#/recaudaciones/ventas-por-turno'
+        },
+        {
+          name : 'Salida de viajes',
+          url : '/#/recaudaciones/salida-de-viajes'
+        },
+        {
+          name : 'Pasajeros por viaje',
+          url : '/#/recaudaciones/pasajeros-por-viaje'
+        },
+        {
+          name : 'Viajes por bus',
+          url : '/#/recaudaciones/viajes-por-bus'
+        },
+        {
+          name : 'Viajes diario',
+          url : '/#/recaudaciones/viajes-diario'
+        },
+        {
+          name : 'Viajes semanales',
+          url : '/#/recaudaciones/viajes-semanales'
+        },
+        {
+          name : 'Viajes por liquidar',
+          url : '/#/recaudaciones/viajes-por-liquidar'
+        }
+      ]
     },
     {
-      name: 'Icons',
-      url: '/icons',
-      icon: 'icon-star',
-      children: [
+      name : 'Cobranza',
+      icon : '',
+      children : [
         {
-          name: 'CoreUI Icons',
-          url: '/icons/coreui-icons',
-          icon: 'icon-star',
-          badge: {
-            variant: 'info',
-            text: 'NEW',
-          },
+          name : 'Diarios',
+          url : '/#/cobranza/diarios'
         },
         {
-          name: 'Flags',
-          url: '/icons/flags',
-          icon: 'icon-star',
+          name : 'Pendientes',
+          url : '/#/cobranza/pendientes'
         },
         {
-          name: 'Font Awesome',
-          url: '/icons/font-awesome',
-          icon: 'icon-star',
-          badge: {
-            variant: 'secondary',
-            text: '4.7',
-          },
-        },
-        {
-          name: 'Simple Line Icons',
-          url: '/icons/simple-line-icons',
-          icon: 'icon-star',
-        },
-      ],
+          name : 'Consultas',
+          url : '/#/cobranza/consultas'
+        }
+      ]
     },
     {
-      name: 'Notifications',
-      url: '/notifications',
-      icon: 'icon-bell',
-      children: [
+      name : 'Auditoria',
+      icon : '',
+      children : [
         {
-          name: 'Alerts',
-          url: '/notifications/alerts',
-          icon: 'icon-bell',
+          name : 'Reportes Detallados',
+          url : '/#/auditoria/reportes-detallados'
         },
         {
-          name: 'Badges',
-          url: '/notifications/badges',
-          icon: 'icon-bell',
+          name : 'Tipo Emisión Cooperativas',
+          url : '/#/auditoria/tipo-emision-cooperativas'
         },
         {
-          name: 'Modals',
-          url: '/notifications/modals',
-          icon: 'icon-bell',
-        },
-      ],
+          name : 'Permisos Roles',
+          url : '/#/auditoria/permisos-roles'
+        }
+      ]
     },
     {
-      name: 'Widgets',
-      url: '/widgets',
-      icon: 'icon-calculator',
-      badge: {
-        variant: 'info',
-        text: 'NEW',
-      },
-    },
-    {
-      divider: true,
-    },
-    {
-      title: true,
-      name: 'Extras',
-    },
-    {
-      name: 'Pages',
-      url: '/pages',
-      icon: 'icon-star',
-      children: [
+      name : 'Auditoria SRI',
+      icon : '',
+      children : [
         {
-          name: 'Login',
-          url: '/login',
-          icon: 'icon-star',
+          name : 'Registro Acciones',
+          url : '/#/auditoria-sri/registro-acciones'
         },
         {
-          name: 'Register',
-          url: '/register',
-          icon: 'icon-star',
-        },
-        {
-          name: 'Error 404',
-          url: '/404',
-          icon: 'icon-star',
-        },
-        {
-          name: 'Error 500',
-          url: '/500',
-          icon: 'icon-star',
-        },
-      ],
-    },
-    {
-      name: 'Disabled',
-      url: '/dashboard',
-      icon: 'icon-ban',
-      attributes: { disabled: true },
-    },
-    {
-      name: 'Download CoreUI',
-      url: 'https://coreui.io/react/',
-      icon: 'icon-cloud-download',
-      class: 'mt-auto',
-      variant: 'success',
-      attributes: { target: '_blank', rel: "noopener" },
-    },
-    {
-      name: 'Try CoreUI PRO',
-      url: 'https://coreui.io/pro/react/',
-      icon: 'icon-layers',
-      variant: 'danger',
-      attributes: { target: '_blank', rel: "noopener" },
-    },
+          name : 'Totalizados',
+          url : '/#/auditoria-sri/totalizados'
+        }
+      ]
+    }
   ],
 };

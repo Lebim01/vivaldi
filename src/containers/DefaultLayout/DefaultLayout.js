@@ -4,15 +4,8 @@ import * as router from 'react-router-dom';
 import { Container } from 'reactstrap';
 
 import {
-  AppAside,
   AppFooter,
-  AppSidebar,
-  AppSidebarFooter,
-  AppSidebarForm,
-  AppSidebarHeader,
-  AppSidebarMinimizer,
   AppBreadcrumb2 as AppBreadcrumb,
-  AppSidebarNav2 as AppSidebarNav,
 } from '@coreui/react';
 // sidebar nav config
 import navigation from '../../_nav';
@@ -35,21 +28,15 @@ class DefaultLayout extends Component {
   render() {
     return (
       <div className="app">
-        <header className="topbar" fixed data-navbarbg="skin1">
+        <header className="topbar" data-navbarbg="skin1">
           <Suspense  fallback={this.loading()}>
             <DefaultHeader onLogout={e=>this.signOut(e)}/>
           </Suspense>
         </header>
-        <div className="app-body">
-          <AppSidebar fixed display="lg">
-            <AppSidebarHeader />
-            <AppSidebarForm />
-            <Suspense>
-            <AppSidebarNav navConfig={navigation} {...this.props} router={router}/>
-            </Suspense>
-            <AppSidebarFooter />
-            <AppSidebarMinimizer />
-          </AppSidebar>
+        <Suspense fallback={this.loading()}>
+          <DefaultAside navConfig={navigation} {...this.props} router={router} />
+        </Suspense>
+        <div className="page-wrapper" style={{display: 'block'}}>
           <main className="main">
             <AppBreadcrumb appRoutes={routes} router={router}/>
             <Container fluid>
@@ -72,17 +59,12 @@ class DefaultLayout extends Component {
               </Suspense>
             </Container>
           </main>
-          <AppAside fixed>
+          <AppFooter>
             <Suspense fallback={this.loading()}>
-              <DefaultAside />
+              <DefaultFooter />
             </Suspense>
-          </AppAside>
+          </AppFooter>
         </div>
-        <AppFooter>
-          <Suspense fallback={this.loading()}>
-            <DefaultFooter />
-          </Suspense>
-        </AppFooter>
       </div>
     );
   }
