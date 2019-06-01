@@ -75,7 +75,7 @@ export default {
         },
         {
           name: 'Frecuencias',
-          url: '/operaciones/frecuencias',
+          url: '/#/operaciones/frecuencias',
           icon: 'icon-puzzle',
         },
         {

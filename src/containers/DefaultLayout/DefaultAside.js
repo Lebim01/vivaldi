@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import { Nav, NavItem, NavLink, Progress, TabContent, TabPane, ListGroup, ListGroupItem } from 'reactstrap';
+import { Nav, NavItem, NavLink } from 'reactstrap';
 
 const propTypes = {
     children: PropTypes.node,
@@ -8,9 +8,38 @@ const propTypes = {
   
 const defaultProps = {};
 
+class MenuItem extends React.Component {
+    render(){
+        const { name, icon, children, badge, url, level } = this.props
+
+        let level_name = ''
+        if(level == 1) level_name = 'first'
+        else if(level == 2) level_name = 'second'
+
+        return (
+            <NavItem className="sidebar-item">
+                <NavLink className={`sidebar-link waves-effect waves-dark ${children?'has-arrow':''}`} aria-expanded="false" href={url}>
+                    { icon && <i className={icon}></i> }
+                    { children ? <span className="hide-menu"> {name} </span> : name }
+                    { badge && <span class={`badge badge-pill badge-${badge.variant} float-right`}>{badge.text}</span> }
+                </NavLink>
+                { children &&
+                    <ul aria-expanded="false" className={`collapse ${level_name}-level in`}>
+                        { children.map((submenu, j) => 
+                            <MenuItem {...submenu} level={level+1} key={`${level+1}-${j}`} />
+                        )}
+                    </ul>
+                }
+            </NavItem>
+        )
+    }
+}
+
 class Aside extends React.Component {
+
     render(){
         const { navConfig } = this.props
+        let level = 1
         return (
             <aside className="left-sidebar" data-sidebarbg="skin6">
                 {/*<!-- Sidebar scroll-->*/}
@@ -20,25 +49,7 @@ class Aside extends React.Component {
                         <nav className="sidebar-nav">
                             <ul id="sidebarnav" className="in">
                                 { navConfig.items.map((menu, i) =>
-                                    <NavItem className="sidebar-item" key={'menu'+i}>
-                                        <NavLink className={`sidebar-link waves-effect waves-dark ${menu.children?'has-arrow':''}`} aria-expanded="false" href={menu.url}>
-                                            { menu.icon && <i className={menu.icon}></i> }
-                                            { menu.children ? <span className="hide-menu"> {menu.name} </span> : menu.name }
-                                            { menu.badge && <span class={`badge badge-pill badge-${menu.badge.variant} float-right`}>{menu.badge.text}</span> }
-                                        </NavLink>
-                                        { menu.children &&
-                                            <ul aria-expanded="false" className="collapse first-level in">
-                                                { menu.children.map((submenu, j) => 
-                                                    <NavItem className="sidebar-item" key={'submenu-'+i+'-'+j}>
-                                                        <NavLink className="sidebar-link" href={submenu.url}>
-                                                            { submenu.icon && <i className={submenu.icon}></i> }
-                                                            { submenu.name }
-                                                        </NavLink>
-                                                    </NavItem>
-                                                )}
-                                            </ul>
-                                        }
-                                    </NavItem>
+                                    <MenuItem {...menu} level={level} key={level+'-'+i} />
                                 )}
                             </ul>
                         </nav>
