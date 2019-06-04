@@ -1,0 +1,28 @@
+// If you want to override variables do it here
+@import "variables";
+
+// Import styles
+// @import "~@coreui/coreui/scss/coreui.scss";
+
+// Temp fix for reactstrap
+@import '~@coreui/coreui/scss/_dropdown-menu-right.scss';
+
+// If you want to add something do it here
+@import "custom";
+
+// ie fixes
+@import "ie-fix";
+
+
+#main-wrapper[data-layout=horizontal] .left-sidebar .scroll-sidebar {
+    height : auto;
+}
+#main-wrapper[data-layout=horizontal] .sidebar-nav #sidebarnav .badge, #main-wrapper[data-layout=horizontal] .sidebar-nav #sidebarnav .nav-small-cap, #main-wrapper[data-layout=horizontal] .sidebar-nav #sidebarnav .sidebar-footer, #main-wrapper[data-layout=horizontal] .sidebar-nav #sidebarnav .user-pro, #main-wrapper[data-layout=horizontal] .sidebar-nav #sidebarnav>.sidebar-item>.has-arrow:after {
+    display: unset;
+}
+.sidebar-nav .has-arrow::after {
+    position: unset;
+}
+main {
+    min-height: 80vh;
+}
