@@ -9,8 +9,8 @@ export default {
           url : '/#/localidades/list'
         },
         {
-          name : 'Sitios',
-          url : '/#/localidades/sitios'
+          name : 'Silos',
+          url : '/#/localidades/silos'
         },
         {
           name : 'Traffic Control',

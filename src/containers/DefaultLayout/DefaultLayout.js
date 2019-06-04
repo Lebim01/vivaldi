@@ -4,8 +4,7 @@ import * as router from 'react-router-dom';
 import { Container } from 'reactstrap';
 
 import {
-  AppFooter,
-  AppBreadcrumb2 as AppBreadcrumb,
+  AppFooter
 } from '@coreui/react';
 // sidebar nav config
 import navigation from '../../_nav';
@@ -38,7 +37,8 @@ class DefaultLayout extends Component {
         </Suspense>
         <div className="page-wrapper" style={{display: 'block'}}>
           <main className="main">
-            <AppBreadcrumb appRoutes={routes} router={router}/>
+            <br />
+            <br />
             <Container fluid>
               <Suspense fallback={this.loading()}>
                 <Switch>
