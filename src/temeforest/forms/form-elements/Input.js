@@ -15,7 +15,8 @@ class Input extends React.Component {
 
 Input.defaultProps = {
     type : 'text',
-    helperText : ''
+    helperText : '',
+    className : ''
 }
 
 export default Input

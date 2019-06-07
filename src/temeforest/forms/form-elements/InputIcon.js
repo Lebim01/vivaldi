@@ -6,8 +6,8 @@ class InputIcon extends React.Component {
         const { type, icon, className, ...otherProps } = this.props
         return (
             <InputGroup>
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">
+                <div className="input-group-prepend">
+                    <span className="input-group-text" id="basic-addon1">
                         {icon}
                     </span>
                 </div>

@@ -1,12 +1,8 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
 import { Card, CardBody, CardTitle, InputIcon, Button } from './../../temeforest'
-
-const data = [
-    {id : 1, nombre : 'Cooperativa 1', gremio : 'FTTG'},
-    {id : 2, nombre : 'Cooperativa 2', gremio : 'Unión de Cooperativas'},
-    {id : 3, nombre : 'Cooperativa 3', gremio : 'FTTG'},
-]
+import axios from 'axios'
+import { baseurl } from './../../utils/url'
 
 class _Row extends React.Component {
 
@@ -17,11 +13,11 @@ class _Row extends React.Component {
     }
 
     render(){
-        const { nombre, gremio } = this.props
+        const { nombre, establecimiento } = this.props
         return (
             <tr onDoubleClick={this.onRowDoubleClick.bind(this)}>
                 <td>{nombre}</td>
-                <td>{gremio}</td>
+                <td>{establecimiento}</td>
             </tr>
         )
     }
@@ -29,9 +25,22 @@ class _Row extends React.Component {
 
 class Cooperativas extends React.Component {
 
+    state = { data:[] }
+
     constructor(props){
         super(props)
         this.onRowDoubleClick = this.onRowDoubleClick.bind(this)
+    }
+
+    loadList = async () => {
+        let { data } = await axios.get(`${baseurl}/Cooperativa/`)    
+        this.setState({
+            data
+        })
+    }
+
+    componentDidMount(){
+        this.loadList()
     }
 
     onRowDoubleClick(id){
@@ -39,6 +48,7 @@ class Cooperativas extends React.Component {
     }
 
     render(){
+        const { data } = this.state
         return (
             <div className="animated fadeIn">
                 <Row>
