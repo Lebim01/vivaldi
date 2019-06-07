@@ -6,6 +6,10 @@ const TrafficControl = React.lazy(() => import('./views/Localidades/TrafficContr
 /** USUARIOS */
 const Usuarios = React.lazy(() => import('./views/Usuarios/Usuarios'))
 const Roles = React.lazy(() => import('./views/Usuarios/Roles'))
+const EditRoles = React.lazy(() => import('./views/Usuarios/EditRoles'))
+/** COOPERTIVAS */
+const Cooperativas = React.lazy(() => import('./views/Cooperativas/Cooperativas'))
+const EditCooperativas = React.lazy(() => import('./views/Cooperativas/EditCooperativas'))
 
 const Dashboard = React.lazy(() => import('./views/Pages/Dashboard'))
 const Page404 = React.lazy(() => import('./views/Pages/Page404'))
@@ -20,8 +24,11 @@ const routes = [
   { path: '/localidades/traffic-control', name: 'Traffic Control', component: TrafficControl },
 
   { path: '/usuarios/usuarios', name: 'Base', component: Usuarios },
-  { path: '/usuarios/roles', name: 'Cards', component: Roles },
-  { path: '/cooperativas/cooperativas', name: 'Forms', component: Page404 },
+  { path: '/usuarios/roles', name: 'Roles', component: Roles },
+  { path: '/usuarios/roles/edit', name: 'Crear/Editar Rol', component: EditRoles },
+
+  { path: '/cooperativas/cooperativas', name: 'Cooperativas', component: Cooperativas, exact : true },
+  { path: '/cooperativas/cooperativas/edit', name: 'Crear/Editar Cooperativas', component: EditCooperativas, exact : true },
   { path: '/cooperativas/gremios', name: 'Switches', component: Page404 },
   { path: '/cooperativas/buses', name: 'Tables', component: Page404 },
   { path: '/cooperativas/conductores', name: 'Tabs', component: Page404 },
