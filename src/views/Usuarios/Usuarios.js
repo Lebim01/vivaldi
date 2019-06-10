@@ -1,19 +1,21 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
 import { Card, CardBody, CardTitle, InputIcon, Button } from './../../temeforest'
-
-const data = [
-    {usuario : 'usuario1', nombre : 'Joel', cooperativas : ['Cooperativa 1']},
-    {usuario : 'usuario2', nombre : 'Juan', cooperativas : ['Cooperativa 2']},
-    {usuario : 'usuario3', nombre : 'Julio', cooperativas : ['Cooperativa 3']},
-    {usuario : 'usuario4', nombre : 'Javier', cooperativas : ['Cooperativa 1', 'Cooperativa 2']},
-]
+import axios from 'axios'
+import { baseurl } from './../../utils/url'
 
 class _Row extends React.Component {
+
+    onRowDoubleClick(){
+        if(this.props.onDoubleClick){
+            this.props.onDoubleClick(this.props.id)
+        }
+    }
+
     render(){
         const { usuario, nombre, cooperativas } = this.props
         return (
-            <tr>
+            <tr onDoubleClick={this.onRowDoubleClick.bind(this)}>
                 <td>{usuario}</td>
                 <td>{nombre}</td>
                 <td>
@@ -27,7 +29,31 @@ class _Row extends React.Component {
 }
 
 class Usuarios extends React.Component {
+
+    state = { data:[] }
+
+    constructor(props){
+        super(props)
+        this.onRowDoubleClick = this.onRowDoubleClick.bind(this)
+    }
+
+    loadList = async () => {
+        let { data } = await axios.get(`${baseurl}/Usuario/`)    
+        this.setState({
+            data
+        })
+    }
+
+    componentDidMount(){
+        this.loadList()
+    }
+
+    onRowDoubleClick(id){
+        this.props.history.push('/usuarios/usuarios/edit?id='+id)
+    }
+
     render(){
+        const { data } = this.state
         return (
             <div className="animated fadeIn">
                 <Row>
@@ -58,7 +84,7 @@ class Usuarios extends React.Component {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {data.map((row, i) => <_Row {...row} key={i} />)}
+                                                    {data.map((row, i) => <_Row {...row} key={i} onDoubleClick={this.onRowDoubleClick} />)}
                                                 </tbody>
                                             </table>
                                         </div>

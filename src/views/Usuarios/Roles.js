@@ -1,13 +1,9 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
 import { Card, CardBody, CardTitle, InputIcon, Button } from './../../temeforest'
+import axios from 'axios'
+import { baseurl } from './../../utils/url'
 
-const data = [
-    {rol : 'Boletero', descripcion : ''},
-    {rol : 'Financiero', descripcion : ''},
-    {rol : 'Recaudaciones', descripcion : ''},
-    {rol : 'Gerencia', descripcion : ''},
-]
 
 class _Row extends React.Component {
 
@@ -30,16 +26,30 @@ class _Row extends React.Component {
 
 class Roles extends React.Component {
 
+    state = { data:[] }
+
     constructor(props){
         super(props)
         this.onRowDoubleClick = this.onRowDoubleClick.bind(this)
     }
 
-    onRowDoubleClick(){
-        this.props.history.push('/usuarios/roles/edit')
+    loadList = async () => {
+        let { data } = await axios.get(`${baseurl}/Rol/`)    
+        this.setState({
+            data
+        })
+    }
+
+    componentDidMount(){
+        this.loadList()
+    }
+
+    onRowDoubleClick(id){
+        this.props.history.push('/usuarios/roles/edit?id='+id)
     }
 
     render(){
+        const { data } = this.state
         return (
             <div className="animated fadeIn">
                 <Row>
