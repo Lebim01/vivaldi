@@ -1,10 +1,13 @@
 import React from 'react';
 /** LOCALIDADES */
 const Localidades = React.lazy(() => import('./views/Localidades/Localidades'))
+const EditLocalidades = React.lazy(() => import('./views/Localidades/EditLocalidades'))
 const Silos = React.lazy(() => import('./views/Localidades/Silos'))
+const EditSilos = React.lazy(() => import('./views/Localidades/EditSilos'))
 const TrafficControl = React.lazy(() => import('./views/Localidades/TrafficControl'))
 /** USUARIOS */
 const Usuarios = React.lazy(() => import('./views/Usuarios/Usuarios'))
+const EditUsuarios = React.lazy(() => import('./views/Usuarios/EditUsuarios'))
 const Roles = React.lazy(() => import('./views/Usuarios/Roles'))
 const EditRoles = React.lazy(() => import('./views/Usuarios/EditRoles'))
 /** COOPERTIVAS */
@@ -19,13 +22,16 @@ const routes = [
   { path: '/', name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', component: Page404 },
 
-  { path: '/localidades/list', name: 'Localidades', component: Localidades },
-  { path: '/localidades/silos', name: 'Silos', component: Silos },
+  { path: '/localidades/localidades', name: 'Localidades', component: Localidades, exact : true },
+  { path: '/localidades/localidades/edit', name: 'Crear/Editar Localidades', component: EditLocalidades, exact : true },
+  { path: '/localidades/silos', name: 'Silos', component: Silos, exact : true },
+  { path: '/localidades/silos/Edit', name: 'Crear/Editar Silos', component: EditSilos, exact : true },
   { path: '/localidades/traffic-control', name: 'Traffic Control', component: TrafficControl },
 
-  { path: '/usuarios/usuarios', name: 'Base', component: Usuarios },
-  { path: '/usuarios/roles', name: 'Roles', component: Roles },
-  { path: '/usuarios/roles/edit', name: 'Crear/Editar Rol', component: EditRoles },
+  { path: '/usuarios/usuarios', name: 'Usuarios', component: Usuarios, exact : true },
+  { path: '/usuarios/usuarios/edit', name: 'Crear/Editar Usuarios', component: EditUsuarios, exact : true },
+  { path: '/usuarios/roles', name: 'Roles', component: Roles, exact : true },
+  { path: '/usuarios/roles/edit', name: 'Crear/Editar Rol', component: EditRoles, exact : true },
 
   { path: '/cooperativas/cooperativas', name: 'Cooperativas', component: Cooperativas, exact : true },
   { path: '/cooperativas/cooperativas/edit', name: 'Crear/Editar Cooperativas', component: EditCooperativas, exact : true },

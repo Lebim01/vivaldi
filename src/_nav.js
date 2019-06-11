@@ -6,7 +6,7 @@ export default {
       children : [
         {
           name : 'Localidades',
-          url : '/#/localidades/list'
+          url : '/#/localidades/localidades'
         },
         {
           name : 'Silos',

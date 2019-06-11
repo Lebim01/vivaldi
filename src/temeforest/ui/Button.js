@@ -10,7 +10,6 @@ class Button extends React.Component {
         classes.push(rounded ? 'btn-rounded' : '')
         classes.push(size ? `btn-${size}` : '')
         classes.push(circle ? 'btn-cirlce' : '')
-        
         return (
             <button 
                 type="button" 
