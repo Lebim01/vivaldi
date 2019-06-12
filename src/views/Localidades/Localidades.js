@@ -35,7 +35,7 @@ class Localidades extends React.Component {
     }
 
     loadList = async () => {
-        let { data } = await axios.get(`${baseurl}/Localidad/`)    
+        let { data } = await axios.get(`${baseurl}/localidad/`)    
         this.setState({
             data
         })

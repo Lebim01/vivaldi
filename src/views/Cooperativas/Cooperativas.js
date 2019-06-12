@@ -33,7 +33,7 @@ class Cooperativas extends React.Component {
     }
 
     loadList = async () => {
-        let { data } = await axios.get(`${baseurl}/Cooperativa/`)    
+        let { data } = await axios.get(`${baseurl}/cooperativa/`)
         this.setState({
             data
         })

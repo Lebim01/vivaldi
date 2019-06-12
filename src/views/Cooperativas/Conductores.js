@@ -8,22 +8,23 @@ class _Row extends React.Component {
 
     onRowDoubleClick(){
         if(this.props.onDoubleClick){
-            this.props.onDoubleClick()
+            this.props.onDoubleClick(this.props.id)
         }
     }
 
     render(){
-        const { rol, descripcion } = this.props
+        const { cooperativa, apellidos, nombres } = this.props
         return (
             <tr onDoubleClick={this.onRowDoubleClick.bind(this)}>
-                <td>{rol}</td>
-                <td>{descripcion}</td>
+                <td>{cooperativa}</td>
+                <td>{apellidos}</td>
+                <td>{nombres}</td>
             </tr>
         )
     }
 }
 
-class Roles extends React.Component {
+class Conductores extends React.Component {
 
     state = { data:[] }
 
@@ -33,7 +34,7 @@ class Roles extends React.Component {
     }
 
     loadList = async () => {
-        let { data } = await axios.get(`${baseurl}/rol/`)    
+        let { data } = await axios.get(`${baseurl}/coductor/`)    
         this.setState({
             data
         })
@@ -44,21 +45,21 @@ class Roles extends React.Component {
     }
 
     onRowDoubleClick(id){
-        this.props.history.push('/usuarios/roles/edit?id='+id)
+        this.props.history.push('/cooperativas/conductores/edit?id='+id)
     }
 
     render(){
-        const { data } = this.props
+        const { data } = this.state
         return (
             <div className="animated fadeIn">
                 <Row>
                     <Col xs="12" md="12">
                         <Card>
                             <CardBody>
-                                <CardTitle>Listado de Roles</CardTitle>
+                                <CardTitle>Listado de Conductores</CardTitle>
                                 <Row>
                                     <Col xs="12" md="6">
-                                        <InputIcon placeholder="Buscar... Rol, Descripción" icon={<i className="fa fa-search"></i>} />
+                                        <InputIcon placeholder="Buscar... Cooperativa, Apellidos, Nombres" icon={<i className="fa fa-search"></i>} />
                                     </Col>
                                     <Col xs="12" md="6">
                                         <Button style={{'float': 'right'}}>
@@ -73,8 +74,9 @@ class Roles extends React.Component {
                                             <table className="table table-hover table-striped">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col">Rol</th>
-                                                        <th scope="col">Descripción</th>
+                                                        <th scope="col">Cooperativa</th>
+                                                        <th scope="col">Apellidos</th>
+                                                        <th scope="col">Nombres</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -93,4 +95,4 @@ class Roles extends React.Component {
     }
 }
 
-export default Roles
+export default Conductores

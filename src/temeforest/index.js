@@ -1,5 +1,5 @@
 import { Card, CardTitle, CardBody, CardSubtitle } from './base'
-import { Input, FormGroup, InputIcon, Select, Label, Tabs, DualList } from './forms'
+import { Input, FormGroup, InputIcon, Select, Label, Tabs, DualList, TextArea } from './forms'
 import { Button, ListGroup, ListItem, ListItemButton } from './ui'
 
 export {
@@ -16,6 +16,7 @@ export {
     Label,
     Tabs,
     DualList,
+    TextArea,
     /** UI */
     Button,
     ListGroup,

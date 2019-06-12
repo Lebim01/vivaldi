@@ -5,6 +5,7 @@ import Select from './Select'
 import Label from './Label'
 import Tabs from './Tabs'
 import DualList from './DualList'
+import TextArea from './TextArea'
 
 export {
     Input,
@@ -13,5 +14,6 @@ export {
     Select,
     Label,
     Tabs,
-    DualList
+    DualList,
+    TextArea
 }

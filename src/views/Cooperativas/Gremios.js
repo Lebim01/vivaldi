@@ -8,22 +8,22 @@ class _Row extends React.Component {
 
     onRowDoubleClick(){
         if(this.props.onDoubleClick){
-            this.props.onDoubleClick()
+            this.props.onDoubleClick(this.props.id)
         }
     }
 
     render(){
-        const { rol, descripcion } = this.props
+        const { nombre, descripcion } = this.props
         return (
             <tr onDoubleClick={this.onRowDoubleClick.bind(this)}>
-                <td>{rol}</td>
+                <td>{nombre}</td>
                 <td>{descripcion}</td>
             </tr>
         )
     }
 }
 
-class Roles extends React.Component {
+class Gremios extends React.Component {
 
     state = { data:[] }
 
@@ -33,7 +33,7 @@ class Roles extends React.Component {
     }
 
     loadList = async () => {
-        let { data } = await axios.get(`${baseurl}/rol/`)    
+        let { data } = await axios.get(`${baseurl}/gremio/`)    
         this.setState({
             data
         })
@@ -44,21 +44,21 @@ class Roles extends React.Component {
     }
 
     onRowDoubleClick(id){
-        this.props.history.push('/usuarios/roles/edit?id='+id)
+        this.props.history.push('/cooperativas/gremios/edit?id='+id)
     }
 
     render(){
-        const { data } = this.props
+        const { data } = this.state
         return (
             <div className="animated fadeIn">
                 <Row>
                     <Col xs="12" md="12">
                         <Card>
                             <CardBody>
-                                <CardTitle>Listado de Roles</CardTitle>
+                                <CardTitle>Listado de Gremios</CardTitle>
                                 <Row>
                                     <Col xs="12" md="6">
-                                        <InputIcon placeholder="Buscar... Rol, Descripción" icon={<i className="fa fa-search"></i>} />
+                                        <InputIcon placeholder="Buscar... Nombre" icon={<i className="fa fa-search"></i>} />
                                     </Col>
                                     <Col xs="12" md="6">
                                         <Button style={{'float': 'right'}}>
@@ -73,7 +73,7 @@ class Roles extends React.Component {
                                             <table className="table table-hover table-striped">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col">Rol</th>
+                                                        <th scope="col">Nombre</th>
                                                         <th scope="col">Descripción</th>
                                                     </tr>
                                                 </thead>
@@ -93,4 +93,4 @@ class Roles extends React.Component {
     }
 }
 
-export default Roles
+export default Gremios

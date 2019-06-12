@@ -13,6 +13,12 @@ const EditRoles = React.lazy(() => import('./views/Usuarios/EditRoles'))
 /** COOPERTIVAS */
 const Cooperativas = React.lazy(() => import('./views/Cooperativas/Cooperativas'))
 const EditCooperativas = React.lazy(() => import('./views/Cooperativas/EditCooperativas'))
+const Gremios = React.lazy(() => import('./views/Cooperativas/Gremios'))
+const EditGremios = React.lazy(() => import('./views/Cooperativas/EditGremios'))
+const Buses = React.lazy(() => import('./views/Cooperativas/Buses'))
+const EditBuses = React.lazy(() => import('./views/Cooperativas/EditBuses'))
+const Conductores = React.lazy(() => import('./views/Cooperativas/Conductores'))
+const EditConductores = React.lazy(() => import('./views/Cooperativas/EditConductores'))
 
 const Dashboard = React.lazy(() => import('./views/Pages/Dashboard'))
 const Page404 = React.lazy(() => import('./views/Pages/Page404'))
@@ -35,9 +41,12 @@ const routes = [
 
   { path: '/cooperativas/cooperativas', name: 'Cooperativas', component: Cooperativas, exact : true },
   { path: '/cooperativas/cooperativas/edit', name: 'Crear/Editar Cooperativas', component: EditCooperativas, exact : true },
-  { path: '/cooperativas/gremios', name: 'Switches', component: Page404 },
-  { path: '/cooperativas/buses', name: 'Tables', component: Page404 },
-  { path: '/cooperativas/conductores', name: 'Tabs', component: Page404 },
+  { path: '/cooperativas/gremios', name: 'Gremios', component: Gremios, exact : true },
+  { path: '/cooperativas/gremios/edit', name: 'Crear/Editar Gremios', component: EditGremios, exact : true },
+  { path: '/cooperativas/buses', name: 'Buses', component: Buses, exact : true },
+  { path: '/cooperativas/buses/edit', name: 'Crear/Editar Buses', component: EditBuses, exact : true },
+  { path: '/cooperativas/conductores', name: 'Conductores', component: Conductores, exact : true },
+  { path: '/cooperativas/conductores/edit', name: 'Crear/Editar Conductores', component: EditConductores, exact : true },
   { path: '/operaciones/rutas', name: 'Breadcrumbs', component: Page404 },
   { path: '/operaciones/viajes', name: 'Carousel', component: Page404 },
   { path: '/operaciones/viajes-planificados', name: 'Collapse', component: Page404 },

@@ -1,4 +1,4 @@
-const baseurl = 'http://localhost:8000/base/api/v1'
+const baseurl = 'http://localhost:8000/api/v1'
 
 function getParameter(_name){
     let url_string = window.location.href

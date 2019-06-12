@@ -257,7 +257,7 @@ class EditCooperativas extends React.Component {
     }
 
     getData = async (id) => {
-        const { data } = await axios.get(`${baseurl}/Cooperativa/${id}/`)
+        const { data } = await axios.get(`${baseurl}/cooperativa/${id}/`)
         this.setState({
             id,
             data
@@ -284,7 +284,7 @@ class EditCooperativas extends React.Component {
             showCancelButton: true,
             showLoaderOnConfirm: true,
             preConfirm: () => {
-                return axios.put(`${baseurl}/Cooperativa/${id}/`, data)
+                return axios.put(`${baseurl}/cooperativa/${id}/`, data)
                 .then(response => {
                     if (response.status !== 200) {
                         throw new Error(response.statusText)

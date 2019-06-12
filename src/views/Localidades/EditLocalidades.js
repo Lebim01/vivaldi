@@ -1,7 +1,6 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
 import { Card, CardBody, CardTitle, Button, FormGroup, Input, Select, Label, ListGroup, ListItem, Tabs } from './../../temeforest'
-import 'react-dual-listbox/lib/react-dual-listbox.css';
 import { baseurl, getParameter } from './../../utils/url'
 import axios from 'axios';
 import Swal from 'sweetalert2'
@@ -27,10 +26,6 @@ class MainView extends React.Component {
         { value : 'si', label : 'Si' },
         { value : 'no', label : 'No' }
     ]
-
-    changeTab(tab){
-        this.setState({ tabAndenes : tab })
-    }
 
     onChange = name => (e) => {
         if(this.props.onChange){
@@ -194,7 +189,7 @@ class EditLocalidades extends React.Component {
     }
 
     getData = async (id) => {
-        const { data } = await axios.get(`${baseurl}/Localidad/${id}/`)
+        const { data } = await axios.get(`${baseurl}/localidad/${id}/`)
         this.setState({
             id,
             data
@@ -221,7 +216,7 @@ class EditLocalidades extends React.Component {
             showCancelButton: true,
             showLoaderOnConfirm: true,
             preConfirm: () => {
-                return axios.put(`${baseurl}/Localidad/${id}/`, data)
+                return axios.put(`${baseurl}/localidad/${id}/`, data)
                 .then(response => {
                     if (response.status !== 200) {
                         throw new Error(response.statusText)

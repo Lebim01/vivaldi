@@ -34,7 +34,7 @@ class Silos extends React.Component {
     }
 
     loadList = async () => {
-        let { data } = await axios.get(`${baseurl}/Silo/`)    
+        let { data } = await axios.get(`${baseurl}/silo/`)    
         this.setState({
             data
         })
