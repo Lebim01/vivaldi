@@ -79,7 +79,11 @@ class MainView extends React.Component {
 
     onChange = name => (e) => {
         if(this.props.onChange){
-            this.props.onChange(name, e.target.value)
+            let value = e.target.value
+            if(e.target.type === 'checkbox'){
+                value = !this.props[name]
+            }
+            this.props.onChange(name, value)
         }
     }
 
@@ -98,7 +102,7 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Tipo</Label>
                         <div className="col-sm-5">
-                            <Select options={tipos} />
+                            <Select options={tipos} onChange={this.onChange('tipo')} value={this.props.tipo} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
@@ -128,9 +132,9 @@ class MainView extends React.Component {
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
-                            <Label className="col-sm-3">RU</Label>
+                            <Label className="col-sm-3">RUC</Label>
                             <div className="col-sm-5">
-                                <Input />
+                                <Input onChange={this.onChange('ruc')} value={this.props.ruc} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
@@ -154,16 +158,16 @@ class MainView extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-4">Obligado a llevar contabilidad</Label>
                             <div className="col-sm-1">
-                                <Select options={sino} />
+                                <Select options={sino} value={this.props.obligado_contabilidad} onChange={this.onChange('obligado_contabilidad')} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-4">Contribuyente Especial</Label>
                             <div className="col-sm-1">
-                                <Select options={sino} />
+                                <Select options={sino} value={this.props.contribuyente_especial} onChange={this.onChange('contribuyente_especial')} />
                             </div>
                             <div className="col-sm-3">
-                                <Input onChange={this.onChange('contribuyente_especial_desc')} value={this.props.contribuyente_especial_desc} />
+                                <Input onChange={this.onChange('contribuyente_especial_detalle')} value={this.props.contribuyente_especial_detalle} />
                             </div>
                         </FormGroup>
                     </fieldset>
@@ -171,29 +175,32 @@ class MainView extends React.Component {
                         <legend>Venta</legend>
                         <FormGroup className="row">
                             <div className="col-sm-2"></div>
-                            <div className="col-sm-4">
+                            <div className="col-sm-2">
                                 <div className="custom-control custom-checkbox">
-                                    <input type="checkbox" className="custom-control-input" />
-                                    <Label onlyClassName="custom-control-label">Asume tasa</Label>
+                                    <input type="checkbox" className="custom-control-input" id="asume_tasa" name="asume_tasa" checked={this.props.asume_tasa} onChange={this.onChange('asume_tasa')} />
+                                    <Label onlyClassName="custom-control-label" htmlFor="asume_tasa">Asume tasa</Label>
                                 </div>
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <div className="col-sm-2"></div>
-                            <div className="col-sm-4">
+                            <div className="col-sm-2">
                                 <div className="custom-control custom-checkbox">
-                                    <input type="checkbox" className="custom-control-input" />
-                                    <Label onlyClassName="custom-control-label">Anulación Boleto</Label>
+                                    <input type="checkbox" className="custom-control-input" id="puede_anular" name="puede_anular" checked={this.props.puede_anular} onChange={this.onChange('puede_anular')} />
+                                    <Label onlyClassName="custom-control-label" htmlFor="puede_anular">Anulación Boleto</Label>
                                 </div>
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <div className="col-sm-2"></div>
-                            <div className="col-sm-4">
+                            <div className="col-sm-2">
                                 <div className="custom-control custom-checkbox">
-                                    <input type="checkbox" className="custom-control-input" />
-                                    <Label onlyClassName="custom-control-label">Usa API</Label>
+                                    <input type="checkbox" className="custom-control-input" id="usa_api" name="usa_api" checked={this.props.usa_api} onChange={this.onChange('usa_api')} />
+                                    <Label onlyClassName="custom-control-label" htmlFor="usa_api">Usa API</Label>
                                 </div>
+                            </div>
+                            <div className="col-sm-3">
+                                { this.props.usa_api && <Input onChange={this.onChange('api_key')} value={this.props.api_key} /> }
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
@@ -223,7 +230,11 @@ class EditCooperativas extends React.Component {
     state = {
         id : null,
         tab : 'main',
-        data : {},
+        data : {
+            asume_tasa : false,
+            puede_anular : false,
+            usa_api : false
+        },
         showConfirmSave : false
     }
 
@@ -284,7 +295,7 @@ class EditCooperativas extends React.Component {
             showCancelButton: true,
             showLoaderOnConfirm: true,
             preConfirm: () => {
-                return axios.put(`${baseurl}/cooperativa/${id}/`, data)
+                return axios.post(`${baseurl}/cooperativa/${id ? `${id}/` : ``}`, data)
                 .then(response => {
                     if (response.status !== 200) {
                         throw new Error(response.statusText)

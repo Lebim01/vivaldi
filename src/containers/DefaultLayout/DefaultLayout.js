@@ -39,7 +39,6 @@ class DefaultLayout extends Component {
         <div className="page-wrapper" style={{display: 'block'}}>
           <main className="main">
             <br />
-            <AppBreadcrumb appRoutes={routes} router={router}/>
             <Container fluid>
               <Suspense fallback={this.loading()}>
                 <Switch>

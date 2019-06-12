@@ -47,6 +47,7 @@ const routes = [
   { path: '/cooperativas/buses/edit', name: 'Crear/Editar Buses', component: EditBuses, exact : true },
   { path: '/cooperativas/conductores', name: 'Conductores', component: Conductores, exact : true },
   { path: '/cooperativas/conductores/edit', name: 'Crear/Editar Conductores', component: EditConductores, exact : true },
+  
   { path: '/operaciones/rutas', name: 'Breadcrumbs', component: Page404 },
   { path: '/operaciones/viajes', name: 'Carousel', component: Page404 },
   { path: '/operaciones/viajes-planificados', name: 'Collapse', component: Page404 },
