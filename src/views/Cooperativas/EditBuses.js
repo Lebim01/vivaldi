@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label, TextArea } from './../../temeforest'
+import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label, Select } from './../../temeforest'
 import { baseurl, getParameter } from './../../utils/url'
 import axios from 'axios';
 import Swal from 'sweetalert2'
@@ -14,19 +14,56 @@ class MainView extends React.Component {
     }
 
     render(){
+        const { cooperativas, marcas, distribucion } = this.props
         return (
             <div>
                 <form className="mt-4 form-horizontal">
                     <FormGroup className="row">
-                        <Label className="col-sm-3">Nombre</Label>
+                        <Label className="col-sm-3">Número</Label>
                         <div className="col-sm-5">
-                            <Input onChange={this.onChange('nombre')} value={this.props.nombre} />
+                            <Input onChange={this.onChange('numero')} value={this.props.numero} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
-                        <Label className="col-sm-3">Descripción</Label>
+                        <Label className="col-sm-3">Placa</Label>
                         <div className="col-sm-5">
-                            <TextArea onChange={this.onChange('descripcion')} rows="6"></TextArea>
+                            <Input onChange={this.onChange('placa')} value={this.props.placa} />
+                        </div>
+                    </FormGroup>
+                    <FormGroup className="row">
+                        <Label className="col-sm-3">Cooperativa</Label>
+                        <div className="col-sm-5">
+                            <Select options={cooperativas} onChange={this.onChange('cooperativa')} value={this.props.cooperativa} />
+                        </div>
+                    </FormGroup>
+                    <FormGroup className="row">
+                        <Label className="col-sm-3">Marca</Label>
+                        <div className="col-sm-5">
+                            <Select options={marcas} onChange={this.onChange('marca')} value={this.props.marca} />
+                        </div>
+                    </FormGroup>
+                    <FormGroup className="row">
+                        <Label className="col-sm-3">Propietario</Label>
+                        <div className="col-sm-5">
+                            <Input onChange={this.onChange('propietario')} value={this.props.propietario} />
+                        </div>
+                    </FormGroup>
+                    <FormGroup className="row">
+                        <Label className="col-sm-3">Capacidad</Label>
+                        <div className="col-sm-5">
+                            <Input type="number" onChange={this.onChange('capacidad')} value={this.props.capacidad} />
+                        </div>
+                    </FormGroup>
+                    <FormGroup className="row">
+                        <Label className="col-sm-3">Distribución</Label>
+                        <div className="col-sm-5">
+                            <Select options={distribucion} onChange={this.onChange('distribucion')} value={this.props.distribucion} />
+                        </div>
+                    </FormGroup>
+                    <FormGroup className="row">
+                        <Label className="col-sm-3">Año Fabricación</Label>
+                        <div className="col-sm-5">
+                            <Input type="number" onChange={this.onChange('anio_fabricacion')} value={this.props.anio_fabricacion} />
                         </div>
                     </FormGroup>
                 </form>
@@ -37,15 +74,18 @@ class MainView extends React.Component {
 
 class EditBuses extends React.Component {
 
-    state = {data:{}}
+    seleccione = [{label:'Seleccione', value:''}]
+    state = {data:{}, cooperativas: [], distribucion:this.seleccione, marcas:this.seleccione}
 
     constructor(props){
         super(props)
         this.onChange = this.onChange.bind(this)
         this.confirmSave = this.confirmSave.bind(this)
+        this.getCooperativas = this.getCooperativas.bind(this)
     }
 
     componentDidMount(){
+        this.getCooperativas()
         let id = getParameter('id')
         if(id){
             this.getData(id)
@@ -57,6 +97,14 @@ class EditBuses extends React.Component {
         this.setState({
             id,
             data
+        })
+    }
+
+    getCooperativas = async () => {
+        const { data } = await axios.get(`${baseurl}/cooperativa/`)
+        let options = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : r.nombre } })]
+        this.setState({
+            cooperativas : options
         })
     }
 
@@ -76,7 +124,7 @@ class EditBuses extends React.Component {
             showCancelButton: true,
             showLoaderOnConfirm: true,
             preConfirm: () => {
-                return axios.put(`${baseurl}/bus/${id}/`, data)
+                return axios.post(`${baseurl}/bus/${id ? `${id}/` : ``}`, data)
                 .then(response => {
                     if (response.status !== 200) {
                         throw new Error(response.statusText)
@@ -102,7 +150,7 @@ class EditBuses extends React.Component {
     }
 
     render(){
-        const { data } = this.state
+        const { data, cooperativas, marcas, distribucion } = this.state
         return (
             <div className="animated fadeIn">
                 <Row>
@@ -111,7 +159,7 @@ class EditBuses extends React.Component {
                             <CardBody>
                                 <CardTitle>Crear/Editar Bus</CardTitle>
                                 <CardBody>
-                                    <MainView {...data} onChange={this.onChange} />
+                                    <MainView {...data} onChange={this.onChange} cooperativas={cooperativas} marcas={marcas} distribucion={distribucion} />
                                 </CardBody>
                                 <div className="row">
                                     <div className="col-sm-12 text-center">

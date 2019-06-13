@@ -90,6 +90,7 @@ class MainView extends React.Component {
     render(){
         const tipos = this.tipos, sino = this.sino
         const { tabAndenes } = this.state
+        const { gremios } = this.props
         return (
             <div>
                 <form className="mt-4 form-horizontal">
@@ -108,7 +109,7 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Gremio</Label>
                         <div className="col-sm-5">
-                            <Input onChange={this.onChange('establecimiento')} value={this.props.establecimiento} />
+                            <Select options={gremios} onChange={this.onChange('gremio')} value={this.props.gremio} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
@@ -167,7 +168,7 @@ class MainView extends React.Component {
                                 <Select options={sino} value={this.props.contribuyente_especial} onChange={this.onChange('contribuyente_especial')} />
                             </div>
                             <div className="col-sm-3">
-                                <Input onChange={this.onChange('contribuyente_especial_detalle')} value={this.props.contribuyente_especial_detalle} />
+                                { this.props.contribuyente_especial == 'si' && <Input onChange={this.onChange('contribuyente_especial_detalle')} value={this.props.contribuyente_especial_detalle} /> }
                             </div>
                         </FormGroup>
                     </fieldset>
@@ -233,7 +234,9 @@ class EditCooperativas extends React.Component {
         data : {
             asume_tasa : false,
             puede_anular : false,
-            usa_api : false
+            usa_api : false,
+            contribuyente_especial : 'no',
+            obligado_contabilidad : 'no'
         },
         showConfirmSave : false
     }
@@ -258,9 +261,11 @@ class EditCooperativas extends React.Component {
         this.onChange = this.onChange.bind(this)
         this.changeTab = this.changeTab.bind(this)
         this.confirmSave = this.confirmSave.bind(this)
+        this.getGremios = this.getGremios.bind(this)
     }
 
     componentDidMount(){
+        this.getGremios()
         let id = getParameter('id')
         if(id){
             this.getData(id)
@@ -272,6 +277,14 @@ class EditCooperativas extends React.Component {
         this.setState({
             id,
             data
+        })
+    }
+
+    getGremios = async () => {
+        const { data } = await axios.get(`${baseurl}/gremio/`)
+        let options = [{ value: '', label : 'Seleccione' }, ...data.map((r) => { return { value : r.id, label : r.nombre } })]
+        this.setState({
+            gremios : options
         })
     }
 
@@ -289,6 +302,10 @@ class EditCooperativas extends React.Component {
 
     confirmSave(){
         const { id, data } = this.state
+        // Bool
+        data.obligado_contabilidad = data.obligado_contabilidad == 'Si'
+        data.contribuyente_especial = data.contribuyente_especial == 'Si'
+
         Swal.fire({
             title: 'Confirmar Guardar',
             text : '¿Seguro de guardar?',
@@ -321,7 +338,7 @@ class EditCooperativas extends React.Component {
     }
 
     render(){
-        const { tab, data } = this.state
+        const { tab, data, gremios } = this.state
         return (
             <div className="animated fadeIn">
                 <Row>
@@ -331,7 +348,7 @@ class EditCooperativas extends React.Component {
                                 <CardTitle>Crear/Editar Cooperativas</CardTitle>
                                 <Tabs tab={tab} tabs={this.tabs} onClickTab={this.changeTab}/>
                                 <CardBody>
-                                    { tab === 'main' && <MainView {...data} onChange={this.onChange} />}
+                                    { tab === 'main' && <MainView {...data} onChange={this.onChange} gremios={gremios} />}
                                 </CardBody>
                                 <div className="row">
                                     <div className="col-sm-12 text-center">

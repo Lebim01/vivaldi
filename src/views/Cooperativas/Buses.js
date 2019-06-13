@@ -1,7 +1,7 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
 import { Card, CardBody, CardTitle, InputIcon, Button } from './../../temeforest'
-import axios from 'axios'
+import axios from 'utils/axios'
 import { baseurl } from './../../utils/url'
 
 class _Row extends React.Component {
@@ -62,7 +62,7 @@ class Buses extends React.Component {
                                         <InputIcon placeholder="Buscar... Placa, Disco, Cooperativa" icon={<i className="fa fa-search"></i>} />
                                     </Col>
                                     <Col xs="12" md="6">
-                                        <Button style={{'float': 'right'}}>
+                                        <Button style={{'float': 'right'}} onClick={() => this.onRowDoubleClick('')}>
                                             <i className="fa fa-plus"></i>
                                         </Button>
                                     </Col>

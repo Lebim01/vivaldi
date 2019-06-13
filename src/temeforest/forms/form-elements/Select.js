@@ -4,11 +4,11 @@ import FormGroup from './FormGroup'
 
 class Select extends React.Component {
     render(){
-        const { options, helperText, className, ...otherProps } = this.props
+        const { options, helperText, className, value, ...otherProps } = this.props
         return (
             <FormGroup>
                 <select className={`form-control ${className}`} {...otherProps}>
-                    { options.map(o => <option value={o.value}>{o.label}</option>) }
+                    { options.map(o => <option value={o.value} selected={value == o.value}>{o.label}</option>) }
                 </select>
                 { helperText && <small class="form-text text-muted"> {helperText} </small> }
             </FormGroup>
