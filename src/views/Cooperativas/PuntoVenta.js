@@ -1,7 +1,7 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
 import { Card, CardBody, CardTitle, InputIcon, Button } from './../../temeforest'
-import axios from './../../utils/axios'
+import axios from 'axios'
 import { baseurl } from './../../utils/url'
 
 class _Row extends React.Component {
@@ -13,20 +13,20 @@ class _Row extends React.Component {
     }
 
     render(){
-        const { cooperativa, placa, disco } = this.props
+        const { descripcion, cooperativa_nombre, localidad_nombre } = this.props
         return (
             <tr onDoubleClick={this.onRowDoubleClick.bind(this)}>
-                <td>{cooperativa}</td>
-                <td>{placa}</td>
-                <td>{disco}</td>
+                <td>{descripcion}</td>
+                <td>{cooperativa_nombre}</td>
+                <td>{localidad_nombre}</td>
             </tr>
         )
     }
 }
 
-class Buses extends React.Component {
+class PuntoVenta extends React.Component {
 
-    state = { data:[], filtered: [], filtro : '' }
+    state = { data:[], filtered:[], filtro: '' }
 
     constructor(props){
         super(props)
@@ -35,12 +35,13 @@ class Buses extends React.Component {
     }
 
     loadList = async () => {
-        let { data } = await axios.get(`${baseurl}/bus/`)
-        let filtered = data
-        this.setState({
-            data,
-            filtered
-        })
+        let { data } = await axios.get(`${baseurl}/puntoventa/`)
+        if(Array.isArray(data)){
+            this.setState({
+                data,
+                filtered : data
+            })
+        }
     }
 
     componentDidMount(){
@@ -48,7 +49,7 @@ class Buses extends React.Component {
     }
 
     onRowDoubleClick(id){
-        this.props.history.push('/cooperativas/buses/edit?id='+id)
+        this.props.history.push('/cooperativas/punto-venta/edit?id='+id)
     }
 
     onChange = name => (e) => {
@@ -58,7 +59,7 @@ class Buses extends React.Component {
         }
         if(name === 'filtro'){
             let compare = (v1, v2) => (v1 || '').toUpperCase().includes((v2 || '').toUpperCase())
-            newState.filtered = this.state.data.filter((row) => compare(row.placa, value) || compare(row.disco, value) || compare(row.cooperativa_nombre, value))
+            newState.filtered = this.state.data.filter((row) => compare(row.descripcion, value) || compare(row.cooperativa_nombre, value) || compare(row.localidad_nombre, value))
         }
         this.setState({
             ...newState
@@ -73,10 +74,10 @@ class Buses extends React.Component {
                     <Col xs="12" md="12">
                         <Card>
                             <CardBody>
-                                <CardTitle>Listado de Buses</CardTitle>
+                                <CardTitle>Listado de Punto de venta</CardTitle>
                                 <Row>
                                     <Col xs="12" md="6">
-                                        <InputIcon placeholder="Buscar... Placa, Disco, Cooperativa" icon={<i className="fa fa-search"></i>} onChange={this.onChange('filtro')} />
+                                        <InputIcon placeholder="Buscar... Descripción, Cooperativa, Localidad" onChange={this.onChange('filtro')} icon={<i className="fa fa-search"></i>} />
                                     </Col>
                                     <Col xs="12" md="6">
                                         <Button style={{'float': 'right'}} onClick={() => this.onRowDoubleClick('')}>
@@ -91,9 +92,9 @@ class Buses extends React.Component {
                                             <table className="table table-hover table-striped">
                                                 <thead>
                                                     <tr>
+                                                        <th scope="col">Descripción</th>
                                                         <th scope="col">Cooperativa</th>
-                                                        <th scope="col">Placa</th>
-                                                        <th scope="col">Disco</th>
+                                                        <th scope="col">Localidad</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -112,4 +113,4 @@ class Buses extends React.Component {
     }
 }
 
-export default Buses
+export default PuntoVenta

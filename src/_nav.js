@@ -49,8 +49,16 @@ export default {
           url : '/#/cooperativas/buses'
         },
         {
+          name : 'Distribución de Asientos',
+          url : '/#/cooperativas/distribucion-asientos'
+        },
+        {
           name : 'Conductores',
           url : '/#/cooperativas/conductores'
+        },
+        {
+          name : 'Punto de Venta',
+          url : '/#/cooperativas/punto-venta'
         }
       ]
     },

@@ -19,6 +19,8 @@ const Buses = React.lazy(() => import('./views/Cooperativas/Buses'))
 const EditBuses = React.lazy(() => import('./views/Cooperativas/EditBuses'))
 const Conductores = React.lazy(() => import('./views/Cooperativas/Conductores'))
 const EditConductores = React.lazy(() => import('./views/Cooperativas/EditConductores'))
+const PuntoVenta = React.lazy(() => import('./views/Cooperativas/PuntoVenta'))
+const EditPuntoVenta = React.lazy(() => import('./views/Cooperativas/EditPuntoVenta'))
 
 const Dashboard = React.lazy(() => import('./views/Pages/Dashboard'))
 const Page404 = React.lazy(() => import('./views/Pages/Page404'))
@@ -45,8 +47,12 @@ const routes = [
   { path: '/cooperativas/gremios/edit', name: 'Crear/Editar Gremios', component: EditGremios, exact : true },
   { path: '/cooperativas/buses', name: 'Buses', component: Buses, exact : true },
   { path: '/cooperativas/buses/edit', name: 'Crear/Editar Buses', component: EditBuses, exact : true },
+  { path: '/cooperativas/distribucion-asientos', name: 'Distribución Asientos', component: Page404, exact : true },
+  { path: '/cooperativas/distribucion-asientos/edit', name: 'Crear/Editar Distribución', component: Page404, exact : true },
   { path: '/cooperativas/conductores', name: 'Conductores', component: Conductores, exact : true },
   { path: '/cooperativas/conductores/edit', name: 'Crear/Editar Conductores', component: EditConductores, exact : true },
+  { path: '/cooperativas/punto-venta', name: 'Punto de Venta', component: PuntoVenta, exact : true },
+  { path: '/cooperativas/punto-venta/edit', name: 'Crear/Editar Punto de Venta', component: EditPuntoVenta, exact : true },
   
   { path: '/operaciones/rutas', name: 'Breadcrumbs', component: Page404 },
   { path: '/operaciones/viajes', name: 'Carousel', component: Page404 },
