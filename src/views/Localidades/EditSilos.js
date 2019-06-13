@@ -124,8 +124,7 @@ class EditSilo extends React.Component {
     state = {
         id : null,
         tab : 'main',
-        data : {},
-        showConfirmSave : false
+        data : {}
     }
 
     tabs = [

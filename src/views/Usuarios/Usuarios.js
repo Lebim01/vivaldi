@@ -13,11 +13,12 @@ class _Row extends React.Component {
     }
 
     render(){
-        const { usuario, nombre, cooperativas } = this.props
+        console.log(this.props)
+        const { username, first_name, cooperativas } = this.props
         return (
             <tr onDoubleClick={this.onRowDoubleClick.bind(this)}>
-                <td>{usuario}</td>
-                <td>{nombre}</td>
+                <td>{username}</td>
+                <td>{first_name}</td>
                 <td>
                     <ul>
                         { (cooperativas || []).map((c) => <li>{c}</li> ) }
@@ -30,7 +31,7 @@ class _Row extends React.Component {
 
 class Usuarios extends React.Component {
 
-    state = { data:[] }
+    state = { data:[], filtered : [], filtro : '' }
 
     constructor(props){
         super(props)
@@ -39,8 +40,10 @@ class Usuarios extends React.Component {
 
     loadList = async () => {
         let { data } = await axios.get(`${baseurl}/usuario/`)
+        let filtered = data
         this.setState({
-            data
+            data,
+            filtered
         })
     }
 
@@ -52,8 +55,22 @@ class Usuarios extends React.Component {
         this.props.history.push('/usuarios/usuarios/edit?id='+id)
     }
 
+    onChange = name => (e) => {
+        let value = e.target.value
+        let newState = {
+            [name] : value
+        }
+        if(name === 'filtro'){
+            let compare = (v1, v2) => (v1 || '').toUpperCase().includes((v2 || '').toUpperCase())
+            newState.filtered = this.state.data.filter((row) => compare(row.usuario, value) || compare(row.nombre, value))
+        }
+        this.setState({
+            ...newState
+        })
+    }
+
     render(){
-        const { data } = this.state
+        const { filtered } = this.state
         return (
             <div className="animated fadeIn">
                 <Row>
@@ -63,10 +80,10 @@ class Usuarios extends React.Component {
                                 <CardTitle>Listado de Usuarios</CardTitle>
                                 <Row>
                                     <Col xs="12" md="6">
-                                        <InputIcon placeholder="Buscar... Usuario, Nombre, Cooperativa" icon={<i className="fa fa-search"></i>} />
+                                        <InputIcon placeholder="Buscar... Usuario, Nombre, Cooperativa" icon={<i className="fa fa-search"></i>} onChange={this.onChange('filtro')} />
                                     </Col>
                                     <Col xs="12" md="6">
-                                        <Button style={{'float': 'right'}}>
+                                        <Button style={{'float': 'right'}} onClick={() => this.onRowDoubleClick('')}>
                                             <i className="fa fa-plus"></i>
                                         </Button>
                                     </Col>
@@ -84,7 +101,7 @@ class Usuarios extends React.Component {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {data.map((row, i) => <_Row {...row} key={i} onDoubleClick={this.onRowDoubleClick} />)}
+                                                    {filtered.map((row, i) => <_Row {...row} key={i} onDoubleClick={this.onRowDoubleClick} />)}
                                                 </tbody>
                                             </table>
                                         </div>
