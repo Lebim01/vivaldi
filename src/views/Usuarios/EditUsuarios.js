@@ -38,7 +38,7 @@ class EditUsuarios extends React.Component {
     }
 
     loadList = async () => {
-        let { data } = await axios.get(`${baseurl}/Usuario/`)    
+        let { data } = await axios.get(`${baseurl}/usuario/`)
         this.setState({
             data
         })

@@ -34,7 +34,7 @@ class Roles extends React.Component {
     }
 
     loadList = async () => {
-        let { data } = await axios.get(`${baseurl}/Rol/`)    
+        let { data } = await axios.get(`${baseurl}/rol/`)
         this.setState({
             data
         })
