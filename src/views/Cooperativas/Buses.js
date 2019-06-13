@@ -1,7 +1,7 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
 import { Card, CardBody, CardTitle, InputIcon, Button } from './../../temeforest'
-import axios from 'utils/axios'
+import axios from './../../utils/axios'
 import { baseurl } from './../../utils/url'
 
 class _Row extends React.Component {

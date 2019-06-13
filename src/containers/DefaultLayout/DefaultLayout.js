@@ -25,6 +25,7 @@ class DefaultLayout extends Component {
     }
 
     render() {
+        const { auth } = this.props
         return (
             <div className="app">
                 <header className="topbar" data-navbarbg="skin1">
@@ -41,6 +42,7 @@ class DefaultLayout extends Component {
                         <Container fluid>
                             <Suspense fallback={this.loading()}>
                                 <Switch>
+                                    {!auth && <Redirect to="/login" />}
                                     {routes.map((route, idx) => {
                                         return route.component ? (
                                             <Route

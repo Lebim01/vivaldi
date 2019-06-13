@@ -9,7 +9,7 @@ function reducer(state = initialState, action) {
     switch(action.type) {
         case 'LOGIN':
             return {
-                login : true
+                auth : true
             }
     }
     return state

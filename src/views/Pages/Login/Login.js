@@ -1,8 +1,39 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import './Login.css'
+import store from './../../../store/auth'
+import axios from 'axios'
 
 class Login extends Component {
+
+    state = {
+        user : '',
+        pass : ''
+    }
+
+    constructor(props){
+        super(props)
+        this.login = this.login.bind(this)
+    }
+
+    login(e){
+        e.preventDefault()
+        const { user, pass } = this.state
+        if(!user || !pass){
+            this.setState({ noValid : true })
+        }else{
+            this.setState({ noValid : false })
+        }
+    }
+
+    onChange = name => (e) => {
+        this.setState({
+            noValid : false,
+            [name] : e.target.value
+        })
+    }
+
     render() {
+        const { user, pass, noValid } = this.state
         return (
             <div className="auth-wrapper d-flex no-block justify-content-center align-items-center" 
                 style={{background:'url(../../assets/images/big/auth-bg.jpg) no-repeat center center'}}>
@@ -10,25 +41,27 @@ class Login extends Component {
                     <div id="loginform">
                         <div className="logo">
                             <span className="db"><img src="../../assets/images/logo-icon.png" alt="logo" /></span>
-                            <h5 className="font-medium m-b-20">Sign In to Admin</h5>
+                            <h5 className="font-medium m-b-20">Ingresar al Administrador</h5>
                         </div>
                         <div className="row">
                             <div className="col-12">
-                                <form className="form-horizontal m-t-20" id="loginform" action="index.html">
+                                <form className="form-horizontal m-t-20" id="loginform">
                                     <div className="input-group mb-3">
                                         <div className="input-group-prepend">
                                             <span className="input-group-text" id="basic-addon1"><i className="ti-user"></i></span>
                                         </div>
-                                        <input type="text" className="form-control form-control-lg" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
+                                        <input type="text" className="form-control form-control-lg" placeholder="Usuario" aria-label="Usuario" aria-describedby="basic-addon1" onChange={this.onChange('user')} value={user} />
                                     </div>
+                                    { noValid && !user && <span className="form-text text-danger">Campo requerido</span> }
                                     <div className="input-group mb-3">
                                         <div className="input-group-prepend">
                                             <span className="input-group-text" id="basic-addon2"><i className="ti-pencil"></i></span>
                                         </div>
-                                        <input type="text" className="form-control form-control-lg" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" />
+                                        <input type="password" className="form-control form-control-lg" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="basic-addon1" onChange={this.onChange('pass')} value={pass} />
                                     </div>
+                                    { noValid && !pass && <span className="form-text text-danger">Campo requerido</span> }
                                     
-                                    <div className="form-group row">
+                                    <div className="form-group row hide">
                                         <div className="col-md-12">
                                             <div className="custom-control custom-checkbox">
                                                 <input type="checkbox" className="custom-control-input" id="customCheck1" />
@@ -39,45 +72,11 @@ class Login extends Component {
                                     </div>
                                     <div className="form-group text-center">
                                         <div className="col-xs-12 p-b-20">
-                                            <button className="btn btn-block btn-lg btn-info" type="submit">Log In</button>
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center">
-                                            <div className="social">
-                                                <a href="javascript:void(0)" className="btn  btn-facebook" data-toggle="tooltip" title="" data-original-title="Login with Facebook"> <i aria-hidden="true" className="fab  fa-facebook"></i> </a>
-                                                <a href="javascript:void(0)" className="btn btn-googleplus" data-toggle="tooltip" title="" data-original-title="Login with Google"> <i aria-hidden="true" className="fab  fa-google-plus"></i> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="form-group m-b-0 m-t-10">
-                                        <div className="col-sm-12 text-center">
-                                            Don't have an account? <a href="authentication-register1.html" className="text-info m-l-5"><b>Sign Up</b></a>
+                                            <button className="btn btn-block btn-lg btn-info" onClick={(e) => this.login(e)}>Ingresar</button>
                                         </div>
                                     </div>
                                 </form>
                             </div>
-                        </div>
-                    </div>
-                    <div id="recoverform">
-                        <div className="logo">
-                            <span className="db"><img src="../../assets/images/logo-icon.png" alt="logo" /></span>
-                            <h5 className="font-medium m-b-20">Recover Password</h5>
-                            <span>Enter your Email and instructions will be sent to you!</span>
-                        </div>
-                        <div className="row m-t-20">
-                            <form className="col-12" action="index.html">
-                                <div className="form-group row">
-                                    <div className="col-12">
-                                        <input className="form-control form-control-lg" type="email" required="" placeholder="Username" />
-                                    </div>
-                                </div>
-                                <div className="row m-t-20">
-                                    <div className="col-12">
-                                        <button className="btn btn-block btn-lg btn-danger" type="submit" name="action">Reset</button>
-                                    </div>
-                                </div>
-                            </form>
                         </div>
                     </div>
                 </div>
