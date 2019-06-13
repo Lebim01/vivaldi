@@ -9,16 +9,16 @@ class _Row extends React.Component {
 
     onRowDoubleClick(){
         if(this.props.onDoubleClick){
-            this.props.onDoubleClick()
+            this.props.onDoubleClick(this.props.id)
         }
     }
 
     render(){
-        const { rol, descripcion } = this.props
+        const { name, description } = this.props
         return (
             <tr onDoubleClick={this.onRowDoubleClick.bind(this)}>
-                <td>{rol}</td>
-                <td>{descripcion}</td>
+                <td>{name}</td>
+                <td>{description}</td>
             </tr>
         )
     }

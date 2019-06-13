@@ -97,9 +97,9 @@ class EditRoles extends React.Component {
             showCancelButton: true,
             showLoaderOnConfirm: true,
             preConfirm: () => {
-                return axios.put(`${baseurl}/rol/${id ? `${id}/` : ``}`, data)
+                return axios.post(`${baseurl}/rol/${id ? `${id}/` : ``}`, data)
                 .then(response => {
-                    if (response.status !== 200) {
+                    if (response.status !== 200 && response.status !== 201) {
                         throw new Error(response.statusText)
                     }
                     return response
