@@ -26,17 +26,20 @@ class _Row extends React.Component {
 
 class Roles extends React.Component {
 
-    state = { data:[] }
+    state = { data:[], filtered : [], filtro : '' }
 
     constructor(props){
         super(props)
         this.onRowDoubleClick = this.onRowDoubleClick.bind(this)
+        this.onChange = this.onChange.bind(this)
     }
 
     loadList = async () => {
         let { data } = await axios.get(`${baseurl}/rol/`)
+        let filtered = data
         this.setState({
-            data
+            data,
+            filtered
         })
     }
 
@@ -48,8 +51,22 @@ class Roles extends React.Component {
         this.props.history.push('/usuarios/roles/edit?id='+id)
     }
 
+    onChange = name => (e) => {
+        let value = e.target.value
+        let newState = {
+            [name] : value
+        }
+        if(name === 'filtro'){
+            let compare = (v1, v2) => (v1 || '').toUpperCase().includes((v2 || '').toUpperCase())
+            newState.filtered = this.state.data.filter((row) => compare(row.name, value) || compare(row.description, value))
+        }
+        this.setState({
+            ...newState
+        })
+    }
+
     render(){
-        const { data } = this.state
+        const { filtered } = this.state
         return (
             <div className="animated fadeIn">
                 <Row>
@@ -59,7 +76,7 @@ class Roles extends React.Component {
                                 <CardTitle>Listado de Roles</CardTitle>
                                 <Row>
                                     <Col xs="12" md="6">
-                                        <InputIcon placeholder="Buscar... Rol, Descripción" icon={<i className="fa fa-search"></i>} />
+                                        <InputIcon placeholder="Buscar... Rol, Descripción" icon={<i className="fa fa-search"></i>} onChange={this.onChange('filtro')} />
                                     </Col>
                                     <Col xs="12" md="6">
                                         <Button style={{'float': 'right'}} onClick={()=> this.onRowDoubleClick('')}>
@@ -79,7 +96,7 @@ class Roles extends React.Component {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {data.map((row, i) => <_Row {...row} key={i} onDoubleClick={this.onRowDoubleClick} />)}
+                                                    {filtered.map((row, i) => <_Row {...row} key={i} onDoubleClick={this.onRowDoubleClick} />)}
                                                 </tbody>
                                             </table>
                                         </div>

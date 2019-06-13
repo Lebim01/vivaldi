@@ -36,6 +36,7 @@ class Usuarios extends React.Component {
     constructor(props){
         super(props)
         this.onRowDoubleClick = this.onRowDoubleClick.bind(this)
+        this.onChange = this.onChange.bind(this)
     }
 
     loadList = async () => {
