@@ -20,7 +20,7 @@ class _Row extends React.Component {
                 <td>{nombre}</td>
                 <td>
                     <ul>
-                        { cooperativas.map((c) => <li>{c}</li> ) }
+                        { (cooperativas || []).map((c) => <li>{c}</li> ) }
                     </ul>
                 </td>
             </tr>

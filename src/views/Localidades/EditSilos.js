@@ -2,7 +2,7 @@ import React from 'react'
 import { Col, Row } from 'reactstrap'
 import { Card, CardBody, CardTitle, Button, FormGroup, Input, Select, Label, ListGroup, ListItem, Tabs } from './../../temeforest'
 import { baseurl, getParameter } from './../../utils/url'
-import axios from 'axios';
+import axios from 'axios'
 import Swal from 'sweetalert2'
 
 class MainView extends React.Component {

@@ -443,6 +443,7 @@ class DefaultHeader extends Component {
                                     <p className=" m-b-0">varun@gmail.com</p>
                                 </div>
                             </div>
+                            {/*
                             <a className="dropdown-item" href="javascript:void(0)">
                                 <i className="ti-user m-r-5 m-l-5"></i> My Profile
                             </a>
@@ -457,13 +458,16 @@ class DefaultHeader extends Component {
                                 <i className="ti-settings m-r-5 m-l-5"></i> Account Setting
                             </a>
                             <div className="dropdown-divider"></div>
-                            <a className="dropdown-item" href="javascript:void(0)">
-                                <i className="fa fa-power-off m-r-5 m-l-5"></i> Logout
+                            */}
+                            <a className="dropdown-item" onClick={(e) => this.props.onLogout(e)}>
+                                <i className="fa fa-power-off m-r-5 m-l-5"></i> Salir
                             </a>
+                            {/*
                             <div className="dropdown-divider"></div>
                             <div className="p-l-30 p-10">
                                 <a href="javascript:void(0)" className="btn btn-sm btn-success btn-rounded">View Profile</a>
                             </div>
+                            */}
                         </div>
                     </li>
                     {/*

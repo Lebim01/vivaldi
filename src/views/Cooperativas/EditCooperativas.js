@@ -3,7 +3,7 @@ import { Col, Row } from 'reactstrap'
 import { Card, CardBody, CardTitle, Button, FormGroup, Input, Select, Label, Tabs, DualList } from './../../temeforest'
 import 'react-dual-listbox/lib/react-dual-listbox.css';
 import { baseurl, getParameter } from './../../utils/url'
-import axios from 'axios';
+import axios from 'axios'
 import Swal from 'sweetalert2'  
 
 class ListTTG extends React.Component {

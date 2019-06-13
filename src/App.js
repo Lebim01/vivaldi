@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
-// import { renderRoutes } from 'react-router-config';
-import './App.scss';
+import './App.scss'
 import store from './store/auth'
 
 const loading = () => <div className="animated fadeIn pt-3 text-center">Cargando...</div>;
@@ -17,18 +16,36 @@ const Page500 = React.lazy(() => import('./views/Pages/Page500'));
 
 class App extends Component {
 
-    state = {auth: false}
+    state = { auth : false }
 
-    componentDidMount(){
+    reload(){
+
+    }
+
+    makeAuth(){
+        let state = store.getState()
+        if(state.token){
+            store.dispatch({
+                type: 'AUTH-MAKE'
+            })
+        }
+    }
+
+    componentWillMount(){
         let self = this
-        store.subscribe(() => {
+        this.unsubscribe = store.subscribe(() => {
             let state = store.getState()
             if(self.state.auth != state.auth){
                 self.setState({
                     auth: state.auth
                 })
+                self.reload()
             }
         })
+    }
+
+    componentWillUnmount(){
+        this.unsubscribe()
     }
 
     render() {

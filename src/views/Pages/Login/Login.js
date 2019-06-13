@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './Login.css'
-import store from './../../../store/auth'
+import { store } from './../../../store/auth'
 import axios from 'axios'
+import { baseurl } from './../../../utils/url'
 
 class Login extends Component {
 
@@ -15,25 +16,42 @@ class Login extends Component {
         this.login = this.login.bind(this)
     }
 
-    login(e){
+    login = async (e) => {
         e.preventDefault()
         const { user, pass } = this.state
         if(!user || !pass){
             this.setState({ noValid : true })
         }else{
             this.setState({ noValid : false })
+            try {
+                let { data } = await axios.post(`${baseurl}/token-auth/`, { username: user, password: pass })
+                if(data.token){
+                    store.dispatch({
+                        type : 'LOGIN',
+                        token : data.token
+                    })
+                    this.props.history.push('/#/cooperativas')
+                }
+            }
+            catch(e){
+                this.setState({
+                    error : 'Usuario o Contraseña invalidos',
+                    noValid : true
+                })
+            }
         }
     }
 
     onChange = name => (e) => {
         this.setState({
             noValid : false,
+            error : '',
             [name] : e.target.value
         })
     }
 
     render() {
-        const { user, pass, noValid } = this.state
+        const { user, pass, noValid, error } = this.state
         return (
             <div className="auth-wrapper d-flex no-block justify-content-center align-items-center" 
                 style={{background:'url(../../assets/images/big/auth-bg.jpg) no-repeat center center'}}>
@@ -42,6 +60,7 @@ class Login extends Component {
                         <div className="logo">
                             <span className="db"><img src="../../assets/images/logo-icon.png" alt="logo" /></span>
                             <h5 className="font-medium m-b-20">Ingresar al Administrador</h5>
+                            { error && <div className="alert alert-danger" role="alert">{error}</div> }
                         </div>
                         <div className="row">
                             <div className="col-12">
@@ -65,7 +84,7 @@ class Login extends Component {
                                         <div className="col-md-12">
                                             <div className="custom-control custom-checkbox">
                                                 <input type="checkbox" className="custom-control-input" id="customCheck1" />
-                                                <label className="custom-control-label" for="customCheck1">Remember me</label>
+                                                <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
                                                 <a href="javascript:void(0)" id="to-recover" className="text-dark float-right"><i className="fa fa-lock m-r-5"></i> Forgot pwd?</a>
                                             </div>
                                         </div>

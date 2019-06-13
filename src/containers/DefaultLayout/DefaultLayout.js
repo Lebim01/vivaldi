@@ -2,6 +2,7 @@ import React, { Component, Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import * as router from 'react-router-dom';
 import { Container } from 'reactstrap';
+import store from './../../store/auth'
 
 import {
   AppFooter
@@ -21,7 +22,25 @@ class DefaultLayout extends Component {
 
     signOut(e) {
         e.preventDefault()
-        this.props.history.push('/login')
+        store.dispatch({
+            type: 'LOGOUT'
+        })
+    }
+
+    makeAuth(){
+        let state = store.getState()
+        if(state.token){
+            store.dispatch({
+                type: 'AUTH-MAKE'
+            })
+        }
+    }
+
+    componentDidMount(){
+        this.makeAuth()
+    }
+    componentWillUpdate(){
+        this.makeAuth()
     }
 
     render() {
