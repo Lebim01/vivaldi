@@ -13,14 +13,17 @@ class MainView extends React.Component {
             this.props.onChange(name, e.target.value)
         }
     }
-    searchPersona = identificacion => (e) => {
-        if(this.props.searchPersona){
-            this.props.searchPersona(e.target.value)
+    searchPersona = (e) => {
+        if (e.key === "Tab") {
+          e.preventDefault();
+          if(this.props.searchPersona && this.props.identificacion!=undefined){
+            this.props.searchPersona()
+          }
         }
     }
 
     render(){
-        const { cooperativas, tipos } = this.props
+        const { cooperativas, tipos, persona } = this.props
         const icon = 'Buscar'
         return (
             <div>
@@ -32,12 +35,19 @@ class MainView extends React.Component {
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
-                      <Label className="col-sm-3">C&eacute;dula/RUC</Label>
+                      <Label className="col-sm-3">Buscar</Label>
                         <div className="col-sm-5">
-                          <InputIcon onChange={this.searchPersona()} value={this.props.identificacion} icon={"Buscar"} />
+                          <InputIcon onKeyDown={this.searchPersona} onChange={this.onChange('identificacion')} value={this.props.identificacion} icon={"Buscar"} placeholder="Escribe una identifacion"/>
                         </div>
                     </FormGroup>
-                    <EditPersona />
+                    <EditPersona persona={persona} />
+                    <FormGroup className="row">
+                      <Label className="col-sm-3">Tipo</Label>
+                        <div className="col-sm-5">
+                          <Select options={tipos} onChange={this.onChange('tipo')} value={this.props.tipo} />
+                        </div>
+                    </FormGroup>
+
                     <FormGroup className="row">
                       <div className="col-sm-12 text-center">
                         <Button type="success" style={{marginRight:5}}>Subir Documentaci&oacute;n</Button>
@@ -54,14 +64,14 @@ class EditConductor extends React.Component {
 
     seleccione = [{label:'Seleccione', value:''}]
     tipos = [{label:'Conductor', value:'2'},{label:'Asistente',value:'1'}]
-    state = {data:{}, tipos: this.tipos, cooperativas: []}
+    state = {data:{}, tipos: this.tipos, cooperativas: [], persona:{}}
 
     constructor(props){
         super(props)
         this.onChange = this.onChange.bind(this)
         this.confirmSave = this.confirmSave.bind(this)
         this.getCooperativas = this.getCooperativas.bind(this)
-        this.searchPersona = this.onChange.bind(this)
+        this.searchPersona = this.searchPersona.bind(this)
     }
 
 
@@ -74,7 +84,8 @@ class EditConductor extends React.Component {
     }
 
 
-    searchPersona = async (identificacion) => {
+    searchPersona = async () => {
+        const identificacion =  this.state.data['identificacion']
         const { data } = await axios.get(`${baseurl}/persona/?identificacion=${identificacion}`)
         this.setState({
           persona:data
@@ -161,7 +172,7 @@ class EditConductor extends React.Component {
                             <CardBody>
                                 <CardTitle>Crear/Editar Conductor</CardTitle>
                                 <CardBody>
-                                    <MainView {...data} tipos={tipos} cooperativas={cooperativas} persona={persona} onChange={this.onChange} />
+                                    <MainView {...data} tipos={tipos} cooperativas={cooperativas} persona={persona} onChange={this.onChange} searchPersona={this.searchPersona} />
                                 </CardBody>
                                 <div className="row">
                                     <div className="col-sm-12 text-center">
