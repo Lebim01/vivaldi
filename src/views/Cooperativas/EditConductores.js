@@ -40,7 +40,7 @@ class MainView extends React.Component {
                           <InputIcon onKeyDown={this.searchPersona} onChange={this.onChange('identificacion')} value={this.props.identificacion} icon={"Buscar"} placeholder="Escribe una identifacion"/>
                         </div>
                     </FormGroup>
-                    <EditPersona persona={persona} />
+                    <EditPersona data={persona} />
                     <FormGroup className="row">
                       <Label className="col-sm-3">Tipo</Label>
                         <div className="col-sm-5">
@@ -83,12 +83,11 @@ class EditConductor extends React.Component {
         }
     }
 
-
     searchPersona = async () => {
         const identificacion =  this.state.data['identificacion']
         const { data } = await axios.get(`${baseurl}/persona/?identificacion=${identificacion}`)
         this.setState({
-          persona:data
+          persona:data[0]
         })
     }
 
@@ -172,7 +171,9 @@ class EditConductor extends React.Component {
                             <CardBody>
                                 <CardTitle>Crear/Editar Conductor</CardTitle>
                                 <CardBody>
-                                    <MainView {...data} tipos={tipos} cooperativas={cooperativas} persona={persona} onChange={this.onChange} searchPersona={this.searchPersona} />
+                                  <MainView {...data} tipos={tipos} cooperativas={cooperativas}
+                                    persona={persona} onChange={this.onChange} searchPersona={this.searchPersona}
+                                  />
                                 </CardBody>
                                 <div className="row">
                                     <div className="col-sm-12 text-center">

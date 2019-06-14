@@ -12,7 +12,6 @@ class MainView extends React.Component {
     }
 
     render(){
-        const { } = this.props
         return (
             <div>
                 <form className="mt-4 form-horizontal">
@@ -52,11 +51,9 @@ class EditPersona extends React.Component {
 
     constructor(props){
         super(props)
+        console.log(props)
         this.onChange = this.onChange.bind(this)
         this.confirmSave = this.confirmSave.bind(this)
-        if(props.persona){
-          this.data = props.persona
-        }
     }
 
     componentDidMount(){
@@ -117,7 +114,7 @@ class EditPersona extends React.Component {
     }
 
     render(){
-        const { data } = this.state
+        const { data } = this.props
 
         return (
             <div className="animated fadeIn">
