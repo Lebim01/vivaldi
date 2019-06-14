@@ -39,14 +39,10 @@ class MainView extends React.Component {
                     </FormGroup>
                     <EditPersona />
                     <FormGroup className="row">
-                        <div className="col-sm-1"/>
-                        <div className="col-sm-3">
-                          <Button type="success" style={{marginRight:0}}>Subir Documentaci&oacute;n</Button>
-                        </div>
-                        <div className="col-sm-3">
-                          <Button type="success" style={{marginRight:0}}>Ver Documentaci&oacute;n</Button>
-                        </div>
-                        <div className="col-sm-1"/>
+                      <div className="col-sm-12 text-center">
+                        <Button type="success" style={{marginRight:5}}>Subir Documentaci&oacute;n</Button>
+                        <Button type="success" style={{marginLeft:5}}>Ver Documentaci&oacute;n</Button>
+                      </div>
                     </FormGroup>
                 </form>
             </div>

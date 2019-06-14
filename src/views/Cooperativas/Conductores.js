@@ -62,7 +62,7 @@ class Conductores extends React.Component {
                                         <InputIcon placeholder="Buscar... Cooperativa, Apellidos, Nombres" icon={<i className="fa fa-search"></i>} />
                                     </Col>
                                     <Col xs="12" md="6">
-                                        <Button style={{'float': 'right'}}>
+                                        <Button style={{'float': 'right'}} onClick={() => this.onRowDoubleClick('')}>
                                             <i className="fa fa-plus"></i>
                                         </Button>
                                     </Col>
