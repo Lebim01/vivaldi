@@ -7,10 +7,27 @@ import Swal from 'sweetalert2'
 import AddCooperativaPuntoVentaModal from './AddCooperativaPuntoVentaModal'
 
 class _Row extends React.Component {
+
+    constructor(props){
+        super(props)
+        this.delete = this.delete.bind(this)
+    }
+
+    delete(){
+        if(this.props.delete){
+            this.props.delete()
+        }
+    }
+
     render(){
         return (
             <tr>
-                <td>{this.props.cooperativa_nombre}</td>
+                <td>
+                    <Button outline={true} type="danger" size="sm" rounded={true} onClick={this.delete}>
+                        <i className="fa fa-times"></i>
+                    </Button>{' '}
+                    {this.props.cooperativa_nombre}
+                </td>
                 <td>{this.props.punto_emision_tasa}</td>
                 <td>{this.props.secuencia_tasa}</td>
                 <td>{this.props.punto_emision_boleto}</td>
@@ -33,6 +50,7 @@ class MainView extends React.Component {
         super(props)
         this.addCooperativa = this.addCooperativa.bind(this)
         this.agregarCooperativa = this.agregarCooperativa.bind(this)
+        this.deleteCooperativa = this.deleteCooperativa.bind(this)
     }
 
     onChange = name => (e) => {
@@ -63,6 +81,19 @@ class MainView extends React.Component {
         puntoventa_cooperativas.push(data)
         this.props.onChange('puntoventa_cooperativas', puntoventa_cooperativas)
         this.toggleModal()
+    }
+
+    deleteCooperativa = async (index) => {
+        const {value} = await Swal.fire({
+            title: 'Confirmar',
+            text : '¿Seguro de borrar?',
+            showCancelButton: true,
+        })
+        if(value){
+            let puntoventa_cooperativas = this.props.puntoventa_cooperativas
+            puntoventa_cooperativas.splice(index, 1)
+            this.props.onChange('puntoventa_cooperativas', puntoventa_cooperativas)
+        }
     }
 
     render(){
@@ -119,7 +150,7 @@ class MainView extends React.Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        { puntoventa_cooperativas.map((r, i) => <_Row {...r} key={i} />) }
+                                        { puntoventa_cooperativas.map((r, i) => <_Row {...r} key={i} delete={() => this.deleteCooperativa(i)} />) }
                                     </tbody>
                                 </table>
                             </div>

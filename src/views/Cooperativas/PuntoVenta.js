@@ -13,11 +13,15 @@ class _Row extends React.Component {
     }
 
     render(){
-        const { descripcion, cooperativa_nombre, localidad_nombre } = this.props
+        const { descripcion, puntoventa_cooperativas, localidad_nombre } = this.props
         return (
             <tr onDoubleClick={this.onRowDoubleClick.bind(this)}>
                 <td>{descripcion}</td>
-                <td>{cooperativa_nombre}</td>
+                <td>
+                    <ul>
+                        {puntoventa_cooperativas.map((r) => <li>{r.cooperativa_nombre}</li>)}
+                    </ul>
+                </td>
                 <td>{localidad_nombre}</td>
             </tr>
         )
@@ -59,7 +63,16 @@ class PuntoVenta extends React.Component {
         }
         if(name === 'filtro'){
             let compare = (v1, v2) => (v1 || '').toUpperCase().includes((v2 || '').toUpperCase())
-            newState.filtered = this.state.data.filter((row) => compare(row.descripcion, value) || compare(row.cooperativa_nombre, value) || compare(row.localidad_nombre, value))
+            let compareArray = (array, name, value) => {
+                for(let i in array){
+                    let row = array[i]
+                    if(compare(row[name], value)){
+                        return true
+                    }
+                }
+                return false
+            }
+            newState.filtered = this.state.data.filter((row) => compare(row.descripcion, value) || compareArray(row.puntoventa_cooperativas, 'cooperativa_nombre', value) || compare(row.localidad_nombre, value))
         }
         this.setState({
             ...newState
