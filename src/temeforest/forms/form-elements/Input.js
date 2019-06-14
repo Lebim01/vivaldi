@@ -3,10 +3,10 @@ import FormGroup from './FormGroup'
 
 class Input extends React.Component {
     render(){
-        const { type, helperText, className, ...otherProps } = this.props
+        const { type, helperText, error, className, ...otherProps } = this.props
         return (
             <FormGroup>
-                <input type={type} className={`form-control ${className}`} {...otherProps}/>
+                <input type={type} className={`form-control ${className} ${error ?'is-invalid':''}`} {...otherProps}/>
                 { helperText && <small class="form-text text-muted"> {helperText} </small> }
             </FormGroup>
         )
@@ -16,7 +16,8 @@ class Input extends React.Component {
 Input.defaultProps = {
     type : 'text',
     helperText : '',
-    className : ''
+    className : '',
+    error : false
 }
 
 export default Input

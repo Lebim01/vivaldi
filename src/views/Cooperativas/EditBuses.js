@@ -126,7 +126,7 @@ class EditBuses extends React.Component {
             preConfirm: () => {
                 return axios.post(`${baseurl}/bus/${id ? `${id}/` : ``}`, data)
                 .then(response => {
-                    if (response.status !== 200) {
+                    if (response.status !== 200 && response.status !== 201) {
                         throw new Error(response.statusText)
                     }
                     return response

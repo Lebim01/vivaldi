@@ -4,8 +4,36 @@ import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label, Select } fr
 import { baseurl, getParameter } from './../../utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import AddCooperativaPuntoVentaModal from './AddCooperativaPuntoVentaModal'
+
+class _Row extends React.Component {
+    render(){
+        return (
+            <tr>
+                <td>{this.props.cooperativa_nombre}</td>
+                <td>{this.props.punto_emision_tasa}</td>
+                <td>{this.props.secuencia_tasa}</td>
+                <td>{this.props.punto_emision_boleto}</td>
+                <td>{this.props.secuencia_boleto}</td>
+                <td>{this.props.punto_emision_nota_credito}</td>
+                <td>{this.props.secuencia_nota_credito}</td>
+            </tr>
+        )
+    }
+}
 
 class MainView extends React.Component {
+
+    state = {
+        modal : {
+            show : false
+        }
+    }
+    constructor(props){
+        super(props)
+        this.addCooperativa = this.addCooperativa.bind(this)
+        this.agregarCooperativa = this.agregarCooperativa.bind(this)
+    }
 
     onChange = name => (e) => {
         if(this.props.onChange){
@@ -13,8 +41,32 @@ class MainView extends React.Component {
         }
     }
 
+    addCooperativa(){
+        this.setState({
+            modal : {
+                ...this.state.modal,
+                show : true
+            }
+        })
+    }
+
+    toggleModal = () => {
+        let _modal = this.state.modal
+        _modal.show = !_modal.show
+        this.setState({
+            modal : _modal
+        })
+    }
+
+    agregarCooperativa(data){
+        let puntoventa_cooperativas = this.props.puntoventa_cooperativas
+        puntoventa_cooperativas.push(data)
+        this.props.onChange('puntoventa_cooperativas', puntoventa_cooperativas)
+        this.toggleModal()
+    }
+
     render(){
-        const { localidades } = this.props
+        const { localidades, puntoventa_cooperativas } = this.props
         return (
             <div>
                 <form className="mt-4 form-horizontal">
@@ -45,7 +97,36 @@ class MainView extends React.Component {
                             <Input onChange={this.onChange('ip')} value={this.props.ip} />
                         </div>
                     </FormGroup>
+                    <FormGroup className="row">
+                        <Label className="col-sm-4">
+                            Cooperativas e Información tribunaria
+                            <Button size="sm" style={{marginLeft:5}} onClick={this.addCooperativa}>
+                                <i className="fa fa-plus"></i>
+                            </Button>
+                        </Label>
+                        <div className="col-sm-12">
+                            <div className="table-responsive">
+                                <table className="table table-hover table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Cooperativa</th>
+                                            <th scope="col">Punto<br/>(tasa)</th>
+                                            <th scope="col">Secuencia<br/>(tasa)</th>
+                                            <th scope="col">Punto<br/>(boleto)</th>
+                                            <th scope="col">Secuencia<br/>(boleto)</th>
+                                            <th scope="col">Punto<br/>(nota de crédito)</th>
+                                            <th scope="col">Secuencia<br/>(nota de crédito)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        { puntoventa_cooperativas.map((r, i) => <_Row {...r} key={i} />) }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </FormGroup>
                 </form>
+                <AddCooperativaPuntoVentaModal guardar={this.agregarCooperativa} {...this.state.modal} toggle={this.toggleModal} />
             </div>
         )
     }
@@ -54,7 +135,12 @@ class MainView extends React.Component {
 class EditPuntoVenta extends React.Component {
 
     seleccione = [{label:'Seleccione', value:''}]
-    state = {data:{}, localidades:[]}
+    state = {
+        data:{
+            puntoventa_cooperativas : []
+        }, 
+        localidades:[]
+    }
 
     constructor(props){
         super(props)
@@ -96,6 +182,7 @@ class EditPuntoVenta extends React.Component {
 
     confirmSave(){
         const { id, data } = this.state
+        data.cooperativas = data.puntoventa_cooperativas.map((r) => r.cooperativa)
         Swal.fire({
             title: 'Confirmar Guardar',
             text : '¿Seguro de guardar?',
@@ -104,7 +191,7 @@ class EditPuntoVenta extends React.Component {
             preConfirm: () => {
                 return axios.post(`${baseurl}/venta/puntoventa/${id ? `${id}/` : ``}`, data)
                 .then(response => {
-                    if (response.status !== 200) {
+                    if (response.status !== 200 && response.status !== 201) {
                         throw new Error(response.statusText)
                     }
                     return response
