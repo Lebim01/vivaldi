@@ -160,7 +160,7 @@ class EditBuses extends React.Component {
 
     getConductores = async () => {
         const { data } = await axios.get(`${baseurl}/conductor/`)
-        let options = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : `${r.persona}` } })]
+        let options = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : `${r.nombres} ${r.apellidos}` } })]
         this.setState({
             conductores : options
         })
