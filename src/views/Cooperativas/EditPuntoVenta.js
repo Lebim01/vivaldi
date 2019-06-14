@@ -72,7 +72,7 @@ class EditPuntoVenta extends React.Component {
     }
 
     getData = async (id) => {
-        const { data } = await axios.get(`${baseurl}/puntoventa/${id}/`)
+        const { data } = await axios.get(`${baseurl}/venta/puntoventa/${id}/`)
         this.setState({
             id,
             data
@@ -102,7 +102,7 @@ class EditPuntoVenta extends React.Component {
             showCancelButton: true,
             showLoaderOnConfirm: true,
             preConfirm: () => {
-                return axios.post(`${baseurl}/puntoventa/${id ? `${id}/` : ``}`, data)
+                return axios.post(`${baseurl}/venta/puntoventa/${id ? `${id}/` : ``}`, data)
                 .then(response => {
                     if (response.status !== 200) {
                         throw new Error(response.statusText)

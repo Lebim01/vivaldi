@@ -35,7 +35,7 @@ class PuntoVenta extends React.Component {
     }
 
     loadList = async () => {
-        let { data } = await axios.get(`${baseurl}/puntoventa/`)
+        let { data } = await axios.get(`${baseurl}/venta/puntoventa/`)
         if(Array.isArray(data)){
             this.setState({
                 data,
