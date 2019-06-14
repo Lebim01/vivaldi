@@ -14,7 +14,7 @@ class MainView extends React.Component {
     }
 
     render(){
-        const { cooperativas, marcas, distribucion } = this.props
+        const { cooperativas, marcas, distribucion, busTipos, busTiposServicios, conductores, propietarios } = this.props
         return (
             <div>
                 <form className="mt-4 form-horizontal">
@@ -37,6 +37,18 @@ class MainView extends React.Component {
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
+                        <Label className="col-sm-3">Tipo</Label>
+                        <div className="col-sm-5">
+                            <Select options={busTipos} onChange={this.onChange('bus_tipo')} value={this.props.bus_tipo} />
+                        </div>
+                    </FormGroup>
+                    <FormGroup className="row">
+                        <Label className="col-sm-3">Tipo servicio</Label>
+                        <div className="col-sm-5">
+                            <Select options={busTiposServicios} onChange={this.onChange('bus_tipo_servicio')} value={this.props.bus_tipo_servicio} />
+                        </div>
+                    </FormGroup>
+                    <FormGroup className="row">
                         <Label className="col-sm-3">Marca</Label>
                         <div className="col-sm-5">
                             <Select options={marcas} onChange={this.onChange('marca')} value={this.props.marca} />
@@ -45,13 +57,25 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Propietario</Label>
                         <div className="col-sm-5">
-                            <Input onChange={this.onChange('propietario')} value={this.props.propietario} />
+                            <Select options={propietarios} onChange={this.onChange('propietario')} value={this.props.propietario} />
+                        </div>
+                    </FormGroup>
+                    <FormGroup className="row">
+                        <Label className="col-sm-3">Conductor</Label>
+                        <div className="col-sm-5">
+                            <Select options={conductores} onChange={this.onChange('conductor')} value={this.props.conductor} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
                         <Label className="col-sm-3">Capacidad</Label>
                         <div className="col-sm-5">
                             <Input type="number" onChange={this.onChange('capacidad')} value={this.props.capacidad} />
+                        </div>
+                    </FormGroup>
+                    <FormGroup className="row">
+                        <Label className="col-sm-3">Precio</Label>
+                        <div className="col-sm-5">
+                            <Input type="number" onChange={this.onChange('precio_boleto')} value={this.props.precio_boleto} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
@@ -75,17 +99,28 @@ class MainView extends React.Component {
 class EditBuses extends React.Component {
 
     seleccione = [{label:'Seleccione', value:''}]
-    state = {data:{}, cooperativas: [], distribucion:this.seleccione, marcas:this.seleccione}
+    state = {data:{}, cooperativas: [], distribucion:this.seleccione, marcas:[],
+             conductores:[], propietarios:[], busTipos:[], busTiposServicios:[]}
 
     constructor(props){
         super(props)
         this.onChange = this.onChange.bind(this)
         this.confirmSave = this.confirmSave.bind(this)
         this.getCooperativas = this.getCooperativas.bind(this)
+        this.getMarcas = this.getMarcas.bind(this)
+        this.getBusTipoServicios = this.getBusTipoServicios.bind(this)
+        this.getBusTipos = this.getBusTipos.bind(this)
+        this.getPropietarios = this.getPropietarios.bind(this)
+        this.getConductores = this.getConductores.bind(this)
     }
 
     componentDidMount(){
         this.getCooperativas()
+        this.getMarcas()
+        this.getBusTipos()
+        this.getBusTipoServicios()
+        this.getPropietarios()
+        this.getConductores()
         let id = getParameter('id')
         if(id){
             this.getData(id)
@@ -105,6 +140,45 @@ class EditBuses extends React.Component {
         let options = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : r.nombre } })]
         this.setState({
             cooperativas : options
+        })
+    }
+
+    getMarcas = async () => {
+        const { data } = await axios.get(`${baseurl}/marca/`)
+        let options = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : r.nombre } })]
+        this.setState({
+            marcas : options
+        })
+    }
+    getPropietarios = async () => {
+        const { data } = await axios.get(`${baseurl}/persona/`)
+        let options = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : r.nombres } })]
+        this.setState({
+            propietarios : options
+        })
+    }
+
+    getConductores = async () => {
+        const { data } = await axios.get(`${baseurl}/conductor/`)
+        let options = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : `${r.persona}` } })]
+        this.setState({
+            conductores : options
+        })
+    }
+
+    getBusTipos = async () => {
+        const { data } = await axios.get(`${baseurl}/busTipo/`)
+        let options = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : r.nombre } })]
+        this.setState({
+            busTipos : options
+        })
+    }
+
+    getBusTipoServicios = async () => {
+        const { data } = await axios.get(`${baseurl}/busTipoServicio/`)
+        let options = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : r.nombre } })]
+        this.setState({
+            busTiposServicios : options
         })
     }
 
@@ -150,7 +224,7 @@ class EditBuses extends React.Component {
     }
 
     render(){
-        const { data, cooperativas, marcas, distribucion } = this.state
+        const { data, cooperativas, marcas, distribucion, busTiposServicios, busTipos, propietarios, conductores } = this.state
         return (
             <div className="animated fadeIn">
                 <Row>
@@ -159,7 +233,7 @@ class EditBuses extends React.Component {
                             <CardBody>
                                 <CardTitle>Crear/Editar Bus</CardTitle>
                                 <CardBody>
-                                    <MainView {...data} onChange={this.onChange} cooperativas={cooperativas} marcas={marcas} distribucion={distribucion} />
+                                    <MainView {...data} onChange={this.onChange} cooperativas={cooperativas} marcas={marcas} distribucion={distribucion} busTiposServicios={busTiposServicios} busTipos={busTipos} propietarios={propietarios} conductores={conductores} />
                                 </CardBody>
                                 <div className="row">
                                     <div className="col-sm-12 text-center">
