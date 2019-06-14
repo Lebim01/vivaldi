@@ -1,68 +1,52 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label, Select } from './../../temeforest'
+import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label, TextArea, InputIcon, Select } from './../../temeforest'
 import { baseurl, getParameter } from './../../utils/url'
-import axios from 'axios';
+import axios from 'axios'
 import Swal from 'sweetalert2'
+import EditPersona from './EditPersona'
 
 class MainView extends React.Component {
-
-    tipos = [
-        {
-            value : 1,
-            label : 'Conductor'
-        },
-        {
-            value : 2,
-            label : 'Asistente'
-        }
-    ]
 
     onChange = name => (e) => {
         if(this.props.onChange){
             this.props.onChange(name, e.target.value)
         }
     }
+    searchPersona = identificacion => (e) => {
+        if(this.props.searchPersona){
+            this.props.searchPersona(e.target.value)
+        }
+    }
 
     render(){
+        const { cooperativas, tipos } = this.props
+        const icon = 'Buscar'
         return (
             <div>
                 <form className="mt-4 form-horizontal">
                     <FormGroup className="row">
                         <Label className="col-sm-3">Cooperativa</Label>
                         <div className="col-sm-5">
-                            <Select options={this.props.cooperativas} onChange={this.onChange('cooperativa')} />
+                            <Select options={cooperativas} onChange={this.onChange('cooperativa')} value={this.props.cooperativa} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
-                        <Label className="col-sm-3">Cédula/RUC</Label>
+                      <Label className="col-sm-3">C&eacute;dula/RUC</Label>
                         <div className="col-sm-5">
-                            <Input onChange={this.onChange('descripcion')}/>
+                          <InputIcon onChange={this.searchPersona()} value={this.props.identificacion} icon={"Buscar"} />
                         </div>
                     </FormGroup>
+                    <EditPersona />
                     <FormGroup className="row">
-                        <Label className="col-sm-3">Apellidos</Label>
-                        <div className="col-sm-5">
-                            <Input onChange={this.onChange('apellidos')}/>
+                        <div className="col-sm-1"/>
+                        <div className="col-sm-3">
+                          <Button type="success" style={{marginRight:0}}>Subir Documentaci&oacute;n</Button>
                         </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Nombres</Label>
-                        <div className="col-sm-5">
-                            <Input onChange={this.onChange('nombres')}/>
+                        <div className="col-sm-3">
+                          <Button type="success" style={{marginRight:0}}>Ver Documentaci&oacute;n</Button>
                         </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Tipo</Label>
-                        <div className="col-sm-5">
-                            <Select options={this.tipos} onChange={this.onChange('tipo')} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Correo</Label>
-                        <div className="col-sm-5">
-                            <Input onChange={this.onChange('correo')}/>
-                        </div>
+                        <div className="col-sm-1"/>
                     </FormGroup>
                 </form>
             </div>
@@ -70,31 +54,52 @@ class MainView extends React.Component {
     }
 }
 
-class EditConductores extends React.Component {
+class EditConductor extends React.Component {
 
-    state = {
-        id : null,
-        data : {},
-        cooperativas : []
-    }
+    seleccione = [{label:'Seleccione', value:''}]
+    tipos = [{label:'Conductor', value:'2'},{label:'Asistente',value:'1'}]
+    state = {data:{}, tipos: this.tipos, cooperativas: []}
 
     constructor(props){
         super(props)
         this.onChange = this.onChange.bind(this)
         this.confirmSave = this.confirmSave.bind(this)
+        this.getCooperativas = this.getCooperativas.bind(this)
+        this.searchPersona = this.onChange.bind(this)
     }
 
+
     componentDidMount(){
+        this.getCooperativas()
         let id = getParameter('id')
         if(id){
             this.getData(id)
         }
-        this.getCooperativas()
+    }
+
+
+    searchPersona = async (identificacion) => {
+        const { data } = await axios.get(`${baseurl}/persona/?identificacion=${identificacion}`)
+        this.setState({
+          persona:data
+        })
+    }
+
+    getPersona = async (id) => {
+        const { data } = await axios.get(`${baseurl}/persona/${id}/`)
+    }
+
+    getCooperativa = async (id) => {
+        const { data } = await axios.get(`${baseurl}/cooperativa/${id}/`)
+        this.setState({
+            id,
+            data
+        })
+
     }
 
     getData = async (id) => {
         const { data } = await axios.get(`${baseurl}/conductor/${id}/`)
-
         this.setState({
             id,
             data
@@ -103,9 +108,9 @@ class EditConductores extends React.Component {
 
     getCooperativas = async () => {
         const { data } = await axios.get(`${baseurl}/cooperativa/`)
-        let _cooperativas = data.map((c) => { return { label : c.nombre, value : c.id } })
+        let options = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : r.nombre } })]
         this.setState({
-            cooperativas : _cooperativas
+            cooperativas : options
         })
     }
 
@@ -151,7 +156,7 @@ class EditConductores extends React.Component {
     }
 
     render(){
-        const { data, cooperativas } = this.state
+        const { data, tipos, cooperativas, persona } = this.state
         return (
             <div className="animated fadeIn">
                 <Row>
@@ -160,7 +165,7 @@ class EditConductores extends React.Component {
                             <CardBody>
                                 <CardTitle>Crear/Editar Conductor</CardTitle>
                                 <CardBody>
-                                    <MainView {...data} onChange={this.onChange} cooperativas={cooperativas} />
+                                    <MainView {...data} tipos={tipos} cooperativas={cooperativas} persona={persona} onChange={this.onChange} />
                                 </CardBody>
                                 <div className="row">
                                     <div className="col-sm-12 text-center">
@@ -177,4 +182,4 @@ class EditConductores extends React.Component {
     }
 }
 
-export default EditConductores
+export default EditConductor

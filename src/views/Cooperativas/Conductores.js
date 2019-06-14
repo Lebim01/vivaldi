@@ -13,10 +13,10 @@ class _Row extends React.Component {
     }
 
     render(){
-        const { cooperativa, apellidos, nombres } = this.props
+        const { cooperativa_nombre, apellidos, nombres } = this.props
         return (
             <tr onDoubleClick={this.onRowDoubleClick.bind(this)}>
-                <td>{cooperativa}</td>
+                <td>{cooperativa_nombre}</td>
                 <td>{apellidos}</td>
                 <td>{nombres}</td>
             </tr>
@@ -34,7 +34,7 @@ class Conductores extends React.Component {
     }
 
     loadList = async () => {
-        let { data } = await axios.get(`${baseurl}/coductor/`)    
+        let { data } = await axios.get(`${baseurl}/conductor/`)
         this.setState({
             data
         })
