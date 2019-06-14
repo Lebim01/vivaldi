@@ -7,18 +7,12 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 
 class ListAdenes extends React.Component {
-    andenes = [
-        { label : '4', value : 1},
-        { label : '5', value : 2},
-        { label : '6', value : 3},
-        { label : '7', value : 4}
-    ]
-    
     render(){
+        const { andenes } = this.props
         return (
             <FormGroup className="row">
                 <div className="col-sm-10">
-                    <DualList options={this.andenes} />
+                    <DualList options={andenes} onChange={this.props.onChange} selected={this.props.selected} />
                 </div>
             </FormGroup>
         )
@@ -28,7 +22,11 @@ class ListAdenes extends React.Component {
 class MainView extends React.Component {
 
     state = {
-        tabAndenes : 0
+        tab : 0
+    }
+    constructor(props){
+        super(props)
+        this.toggleAndenes = this.toggleAndenes.bind(this)
     }
 
     tipos = [
@@ -44,7 +42,7 @@ class MainView extends React.Component {
     ]
 
     changeTab(tab){
-        this.setState({ tabAndenes : tab })
+        this.setState({ tab })
     }
 
     onChange = name => (e) => {
@@ -57,10 +55,16 @@ class MainView extends React.Component {
         }
     }
 
+    toggleAndenes(selected){
+        let localidades_andenes = this.props.localidades_andenes
+        localidades_andenes[this.state.tab] = selected
+        this.props.onChange('localidades_andenes', localidades_andenes)
+    }
+
     render(){
         const tipos = this.tipos, sino = this.sino
-        const { tabAndenes } = this.state
-        const { gremios, tabsLocalidades } = this.props
+        const { tab } = this.state
+        const { gremios, localidades, tabsLocalidades } = this.props
         return (
             <div>
                 <form className="mt-4 form-horizontal">
@@ -185,8 +189,12 @@ class MainView extends React.Component {
                     <div className="row">
                         <div className="col-sm-1"></div>
                         <div className="col-sm-10">
-                            <Tabs tab={tabAndenes} tabs={tabsLocalidades} onClickTab={this.changeTab.bind(this)} />
-                            <ListAdenes />
+                            <Tabs tab={tab} tabs={tabsLocalidades} onClickTab={this.changeTab.bind(this)} />
+                            <ListAdenes 
+                                selected={this.props.localidades_andenes[tab]} 
+                                onChange={this.toggleAndenes}
+                                andenes={localidades[tab] ? localidades[tab].andenes : []} 
+                            />
                         </div>
                     </div>
                 </form>
@@ -201,6 +209,8 @@ class EditCooperativas extends React.Component {
         id : null,
         tab : 'main',
         data : {
+            andenes: [],
+            localidades_andenes : {},
             asume_tasa : false,
             puede_anular : false,
             usa_api : false,
@@ -208,7 +218,8 @@ class EditCooperativas extends React.Component {
             obligado_contabilidad : 'no'
         },
         showConfirmSave : false,
-        localidades : [],
+        localidades : {},
+        tabsLocalidades : [],
         gremios : []
     }
 
@@ -231,8 +242,8 @@ class EditCooperativas extends React.Component {
         super(props)
         this.onChange = this.onChange.bind(this)
         this.changeTab = this.changeTab.bind(this)
-        this.confirmSave = this.confirmSave.bind(this)
         this.getGremios = this.getGremios.bind(this)
+        this.confirmSave = this.confirmSave.bind(this)
     }
 
     componentDidMount(){
@@ -246,17 +257,67 @@ class EditCooperativas extends React.Component {
 
     getData = async (id) => {
         const { data } = await axios.get(`${baseurl}/cooperativa/${id}/`)
+        data.usa_api = data.api_key != ''
+        data.localidades_andenes = {}
         this.setState({
             id,
             data
-        })
+        }, () => this.setAndenesLocalidades())
+    }
+
+    getAndendes(localidad){
+        let andenes = []
+        for(let i in localidad.niveles){
+            let nivel = localidad.niveles[i]
+            for(let j in nivel.andenes){
+                let anden = nivel.andenes[j]
+                andenes.push({ value : anden.id, label : anden.descripcion })
+            }
+        }
+        return andenes
     }
 
     getLocalidades = async () => {
         const { data } = await axios.get(`${baseurl}/localidad/`)
-        let options = [...data.map((r) => { return { link : r.id, text : r.nombre } })]
+        let tabs = [...data.map((r) => { return { link : r.id, text : r.nombre } })]
+        let localidades = {}
+        for(let i in data){
+            localidades[data[i].id] = {
+                ...data[i],
+                andenes : this.getAndendes(data[i])
+            }
+        }
         this.setState({
-            localidades : options
+            tabsLocalidades : tabs,
+            localidades : localidades
+        }, () => this.setAndenesLocalidades())
+    }
+
+    setAndenesLocalidades(){
+        const { localidades } = this.state
+        let data = this.state.data
+        if(localidades && data.andenes){
+            data.localidades_andenes = {}
+            for(let i in data.andenes){
+                let anden = data.andenes[i]
+                let _id_localidad = 0
+                for(let id_localidad in localidades){
+                    let andenes = localidades[id_localidad].andenes
+                    for(let j in andenes){
+                        let _anden = andenes[j]
+                        if(_anden.value == anden){
+                            _id_localidad = id_localidad
+                            break
+                        }
+                    }
+                }
+
+                if(!data.localidades_andenes[_id_localidad]) data.localidades_andenes[_id_localidad] = []
+                data.localidades_andenes[_id_localidad].push(anden)
+            }
+        }
+        this.setState({
+            data
         })
     }
 
@@ -285,6 +346,7 @@ class EditCooperativas extends React.Component {
         // Bool
         data.obligado_contabilidad = data.obligado_contabilidad == 'Si'
         data.contribuyente_especial = data.contribuyente_especial == 'Si'
+        data.andenes = Object.keys(data.localidades_andenes).map((r) => data.localidades_andenes[r]).flat()
 
         Swal.fire({
             title: 'Confirmar Guardar',
@@ -294,7 +356,7 @@ class EditCooperativas extends React.Component {
             preConfirm: () => {
                 return axios.post(`${baseurl}/cooperativa/${id ? `${id}/` : ``}`, data)
                 .then(response => {
-                    if (response.status !== 200) {
+                    if (response.status !== 200 && response.status !== 201) {
                         throw new Error(response.statusText)
                     }
                     return response
@@ -318,7 +380,7 @@ class EditCooperativas extends React.Component {
     }
 
     render(){
-        const { tab, data, gremios, localidades } = this.state
+        const { tab, data, gremios, localidades, tabsLocalidades } = this.state
         return (
             <div className="animated fadeIn">
                 <Row>
@@ -328,7 +390,15 @@ class EditCooperativas extends React.Component {
                                 <CardTitle>Crear/Editar Cooperativas</CardTitle>
                                 <Tabs tab={tab} tabs={this.tabs} onClickTab={this.changeTab}/>
                                 <CardBody>
-                                    { tab === 'main' && <MainView {...data} onChange={this.onChange} gremios={gremios} tabsLocalidades={localidades} />}
+                                    { tab === 'main' && 
+                                        <MainView 
+                                            {...data} 
+                                            onChange={this.onChange} 
+                                            gremios={gremios} 
+                                            tabsLocalidades={tabsLocalidades} 
+                                            localidades={localidades} 
+                                        />
+                                    }
                                 </CardBody>
                                 <div className="row">
                                     <div className="col-sm-12 text-center">

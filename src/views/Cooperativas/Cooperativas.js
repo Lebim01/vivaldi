@@ -13,11 +13,11 @@ class _Row extends React.Component {
     }
 
     render(){
-        const { nombre, establecimiento } = this.props
+        const { nombre, gremio_nombre } = this.props
         return (
             <tr onDoubleClick={this.onRowDoubleClick.bind(this)}>
                 <td>{nombre}</td>
-                <td>{establecimiento}</td>
+                <td>{gremio_nombre}</td>
             </tr>
         )
     }
@@ -56,7 +56,7 @@ class Cooperativas extends React.Component {
         }
         if(name === 'filtro'){
             let compare = (v1, v2) => (v1 || '').toUpperCase().includes((v2 || '').toUpperCase())
-            newState.filtered = this.state.data.filter((row) => compare(row.nombre, value) || compare(row.establecimiento, value))
+            newState.filtered = this.state.data.filter((row) => compare(row.nombre, value) || compare(row.gremio_nombre, value))
         }
         this.setState({
             ...newState

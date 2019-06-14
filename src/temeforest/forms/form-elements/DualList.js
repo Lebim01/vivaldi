@@ -7,7 +7,11 @@ class DualList extends React.Component {
     };
 
     onChange = (selected) => {
-        this.setState({ selected });
+        if(this.props.onChange){
+            this.props.onChange(selected)
+        }else{
+            this.setState({ selected });
+        }
     };
 
     render() {
@@ -17,7 +21,7 @@ class DualList extends React.Component {
         return (
             <DualListBox
                 options={options}
-                selected={selected}
+                selected={this.props.selected ? this.props.selected : selected}
                 onChange={this.onChange}
             />
         );
