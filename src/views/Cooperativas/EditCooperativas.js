@@ -4,28 +4,9 @@ import { Card, CardBody, CardTitle, Button, FormGroup, Input, Select, Label, Tab
 import 'react-dual-listbox/lib/react-dual-listbox.css';
 import { baseurl, getParameter } from './../../utils/url'
 import axios from 'axios'
-import Swal from 'sweetalert2'  
+import Swal from 'sweetalert2'
 
-class ListTTG extends React.Component {
-    andenes = [
-        { label : '1', value : 1},
-        { label : '2', value : 2},
-        { label : '3', value : 3},
-        { label : '4', value : 4}
-    ]
-
-    render(){
-        return (
-            <FormGroup className="row">
-                <div className="col-sm-10">
-                    <DualList options={this.andenes} />
-                </div>
-            </FormGroup>
-        )
-    }
-}
-
-class ListTTMP extends React.Component {
+class ListAdenes extends React.Component {
     andenes = [
         { label : '4', value : 1},
         { label : '5', value : 2},
@@ -47,7 +28,7 @@ class ListTTMP extends React.Component {
 class MainView extends React.Component {
 
     state = {
-        tabAndenes : 'ttg'
+        tabAndenes : 0
     }
 
     tipos = [
@@ -60,17 +41,6 @@ class MainView extends React.Component {
     sino = [
         { value : 'si', label : 'Si' },
         { value : 'no', label : 'No' }
-    ]
-
-    tabsAndenes = [
-        {
-            link : 'ttg',
-            text : 'TTG'
-        },
-        {
-            link : 'ttmp',
-            text : 'TTMP'
-        }
     ]
 
     changeTab(tab){
@@ -90,7 +60,7 @@ class MainView extends React.Component {
     render(){
         const tipos = this.tipos, sino = this.sino
         const { tabAndenes } = this.state
-        const { gremios } = this.props
+        const { gremios, tabsLocalidades } = this.props
         return (
             <div>
                 <form className="mt-4 form-horizontal">
@@ -215,9 +185,8 @@ class MainView extends React.Component {
                     <div className="row">
                         <div className="col-sm-1"></div>
                         <div className="col-sm-10">
-                            <Tabs tab={tabAndenes} tabs={this.tabsAndenes} onClickTab={this.changeTab.bind(this)} />
-                            { tabAndenes === 'ttg' && <ListTTG /> }
-                            { tabAndenes === 'ttmp' && <ListTTMP/> }
+                            <Tabs tab={tabAndenes} tabs={tabsLocalidades} onClickTab={this.changeTab.bind(this)} />
+                            <ListAdenes />
                         </div>
                     </div>
                 </form>
@@ -238,7 +207,9 @@ class EditCooperativas extends React.Component {
             contribuyente_especial : 'no',
             obligado_contabilidad : 'no'
         },
-        showConfirmSave : false
+        showConfirmSave : false,
+        localidades : [],
+        gremios : []
     }
 
     tabs = [
@@ -266,6 +237,7 @@ class EditCooperativas extends React.Component {
 
     componentDidMount(){
         this.getGremios()
+        this.getLocalidades()
         let id = getParameter('id')
         if(id){
             this.getData(id)
@@ -277,6 +249,14 @@ class EditCooperativas extends React.Component {
         this.setState({
             id,
             data
+        })
+    }
+
+    getLocalidades = async () => {
+        const { data } = await axios.get(`${baseurl}/localidad/`)
+        let options = [...data.map((r) => { return { link : r.id, text : r.nombre } })]
+        this.setState({
+            localidades : options
         })
     }
 
@@ -338,7 +318,7 @@ class EditCooperativas extends React.Component {
     }
 
     render(){
-        const { tab, data, gremios } = this.state
+        const { tab, data, gremios, localidades } = this.state
         return (
             <div className="animated fadeIn">
                 <Row>
@@ -348,7 +328,7 @@ class EditCooperativas extends React.Component {
                                 <CardTitle>Crear/Editar Cooperativas</CardTitle>
                                 <Tabs tab={tab} tabs={this.tabs} onClickTab={this.changeTab}/>
                                 <CardBody>
-                                    { tab === 'main' && <MainView {...data} onChange={this.onChange} gremios={gremios} />}
+                                    { tab === 'main' && <MainView {...data} onChange={this.onChange} gremios={gremios} tabsLocalidades={localidades} />}
                                 </CardBody>
                                 <div className="row">
                                     <div className="col-sm-12 text-center">
