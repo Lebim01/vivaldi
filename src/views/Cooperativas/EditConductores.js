@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label, TextArea, InputIcon, Select } from './../../temeforest'
+import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label, TextArea, InputIcon, Select, InputAutocomplete } from './../../temeforest'
 import { baseurl, getParameter } from './../../utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
@@ -15,16 +15,15 @@ class MainView extends React.Component {
     }
     searchPersona = (e) => {
         if (e.key === "Tab") {
-          e.preventDefault();
-          if(this.props.searchPersona && this.props.identificacion!=undefined){
-            this.props.searchPersona()
-          }
+            e.preventDefault();
+            if(this.props.searchPersona && this.props.identificacion!=undefined){
+                this.props.searchPersona()
+            }
         }
     }
 
     render(){
         const { cooperativas, tipos, persona } = this.props
-        const icon = 'Buscar'
         return (
             <div>
                 <form className="mt-4 form-horizontal">
@@ -37,22 +36,32 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                       <Label className="col-sm-3">Buscar</Label>
                         <div className="col-sm-5">
-                          <InputIcon onKeyDown={this.searchPersona} onChange={this.onChange('identificacion')} value={this.props.identificacion} icon={"Buscar"} placeholder="Escribe una identifacion"/>
+                            <InputAutocomplete 
+                                icon={<i className="fa fa-search"/>}
+                                onSelect={(val) => console.log(val)}
+                                items={
+                                    [
+                                        { label: 'victor', id:1 },
+                                        { label: 'joaquin', id:2 },
+                                        { label: 'xochilt', id:3 }
+                                    ]
+                                }
+                            />
                         </div>
                     </FormGroup>
-                    <EditPersona data={persona} />
+                    <EditPersona data={persona} readOnly />
                     <FormGroup className="row">
                       <Label className="col-sm-3">Tipo</Label>
                         <div className="col-sm-5">
-                          <Select options={tipos} onChange={this.onChange('tipo')} value={this.props.tipo} />
+                            <Select options={tipos} onChange={this.onChange('tipo')} value={this.props.tipo} />
                         </div>
                     </FormGroup>
 
                     <FormGroup className="row">
-                      <div className="col-sm-12 text-center">
-                        <Button type="success" style={{marginRight:5}}>Subir Documentaci&oacute;n</Button>
-                        <Button type="success" style={{marginLeft:5}}>Ver Documentaci&oacute;n</Button>
-                      </div>
+                        <div className="col-sm-12 text-center">
+                            <Button type="success" style={{marginRight:5}}>Subir Documentación</Button>
+                            <Button type="success" style={{marginLeft:5}}>Ver Documentación</Button>
+                        </div>
                     </FormGroup>
                 </form>
             </div>
@@ -87,12 +96,8 @@ class EditConductor extends React.Component {
         const identificacion =  this.state.data['identificacion']
         const { data } = await axios.get(`${baseurl}/persona/?identificacion=${identificacion}`)
         this.setState({
-          persona:data[0]
+            persona:data[0]
         })
-    }
-
-    getPersona = async (id) => {
-        const { data } = await axios.get(`${baseurl}/persona/${id}/`)
     }
 
     getCooperativa = async (id) => {
@@ -171,9 +176,9 @@ class EditConductor extends React.Component {
                             <CardBody>
                                 <CardTitle>Crear/Editar Conductor</CardTitle>
                                 <CardBody>
-                                  <MainView {...data} tipos={tipos} cooperativas={cooperativas}
-                                    persona={persona} onChange={this.onChange} searchPersona={this.searchPersona}
-                                  />
+                                    <MainView {...data} tipos={tipos} cooperativas={cooperativas}
+                                        persona={persona} onChange={this.onChange} searchPersona={this.searchPersona}
+                                    />
                                 </CardBody>
                                 <div className="row">
                                     <div className="col-sm-12 text-center">

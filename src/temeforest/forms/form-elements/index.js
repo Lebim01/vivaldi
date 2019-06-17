@@ -6,6 +6,7 @@ import Label from './Label'
 import Tabs from './Tabs'
 import DualList from './DualList'
 import TextArea from './TextArea'
+import InputAutocomplete from './InputAutocomplete'
 
 export {
     Input,
@@ -15,5 +16,6 @@ export {
     Label,
     Tabs,
     DualList,
-    TextArea
+    TextArea,
+    InputAutocomplete
 }
