@@ -22,6 +22,35 @@ class MainView extends React.Component {
         }
     }
 
+    UploadFile = (e) => {
+        var el = document.getElementById("documentation");
+        if (el) {
+            el.click();
+        }
+    }
+
+    onChangeFile = (e) => {
+        if(this.props.onChangeFile){
+            this.props.onChangeFile(e.target.files[0])
+        }
+    }
+
+    DownloadFile = (e) => {
+      return false;
+        if (e){
+          console.log(e)
+            var file_path = e;
+            var a = document.createElement('A');
+            a.href = file_path;
+            if(file_path){
+                a.download = file_path.substr(file_path.lastIndexOf('/') + 1);
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            }
+        }
+    }
+
     render(){
         const { cooperativas, tipos, persona } = this.props
         const icon = 'Buscar'
@@ -50,8 +79,9 @@ class MainView extends React.Component {
 
                     <FormGroup className="row">
                       <div className="col-sm-12 text-center">
-                        <Button type="success" style={{marginRight:5}}>Subir Documentaci&oacute;n</Button>
-                        <Button type="success" style={{marginLeft:5}}>Ver Documentaci&oacute;n</Button>
+                        <Input id="documentation" type="file" style={{display:'none'}} onChange={this.onChangeFile}/>
+                        <Button type="success" style={{marginRight:5}} onClick={this.UploadFile}>Subir Documentaci&oacute;n</Button>
+                        <Button type="success" style={{marginLeft:5}} onClick={this.DownloadFile(this.props.documentacion)}>Ver Documentaci&oacute;n</Button>
                       </div>
                     </FormGroup>
                 </form>
@@ -69,6 +99,7 @@ class EditConductor extends React.Component {
     constructor(props){
         super(props)
         this.onChange = this.onChange.bind(this)
+        this.onChangeFile = this.onChangeFile.bind(this)
         this.confirmSave = this.confirmSave.bind(this)
         this.getCooperativas = this.getCooperativas.bind(this)
         this.searchPersona = this.searchPersona.bind(this)
@@ -86,13 +117,22 @@ class EditConductor extends React.Component {
     searchPersona = async () => {
         const identificacion =  this.state.data['identificacion']
         const { data } = await axios.get(`${baseurl}/persona/?identificacion=${identificacion}`)
+        const local = this.state.data
+        local['persona'] = data[0].id
         this.setState({
-          persona:data[0]
+          persona:data[0],
+          data:local,
         })
     }
 
     getPersona = async (id) => {
         const { data } = await axios.get(`${baseurl}/persona/${id}/`)
+        const local = this.state.data
+        local['identificacion'] = data.identificacion
+        this.setState({
+            persona:data,
+            data:local,
+        })
     }
 
     getCooperativa = async (id) => {
@@ -109,6 +149,8 @@ class EditConductor extends React.Component {
         this.setState({
             id,
             data
+        }, ()=> {
+            this.getPersona(data.persona)
         })
     }
 
@@ -123,6 +165,14 @@ class EditConductor extends React.Component {
     onChange(name, value){
         let data = this.state.data
         data[name] = value
+        this.setState({
+            data
+        })
+    }
+
+    onChangeFile(value){
+        let data = this.state.data
+        data['documentacion'] = value
         this.setState({
             data
         })
@@ -173,6 +223,7 @@ class EditConductor extends React.Component {
                                 <CardBody>
                                   <MainView {...data} tipos={tipos} cooperativas={cooperativas}
                                     persona={persona} onChange={this.onChange} searchPersona={this.searchPersona}
+                                    onChangeFile={this.onChangeFile}
                                   />
                                 </CardBody>
                                 <div className="row">
