@@ -8,21 +8,38 @@ import EditPersona from './EditPersona'
 
 class MainView extends React.Component {
 
+    state = {
+        buscar : '',
+        personas : []
+    }
+    constructor(props){
+        super(props)
+        this.searchPersona = this.searchPersona.bind(this)
+    }
+
     onChange = name => (e) => {
-        if(this.props.onChange){
+        console.log(name, e.target.value)
+        if(name === 'buscar'){
+            this.setState({
+                buscar : e.target.value
+            })
+        }
+        else if(this.props.onChange){
             this.props.onChange(name, e.target.value)
         }
     }
+
     searchPersona = (e) => {
         if (e.key === "Tab") {
             e.preventDefault();
-            if(this.props.searchPersona && this.props.identificacion!=undefined){
-                this.props.searchPersona()
+            if(this.props.searchPersona && this.state.buscar){
+                this.props.searchPersona(this.state.buscar)
             }
         }
     }
 
     render(){
+        const { personas, buscar } = this.state
         const { cooperativas, tipos, persona } = this.props
         return (
             <div>
@@ -39,13 +56,12 @@ class MainView extends React.Component {
                             <InputAutocomplete 
                                 icon={<i className="fa fa-search"/>}
                                 onSelect={(val) => console.log(val)}
-                                items={
-                                    [
-                                        { label: 'victor', id:1 },
-                                        { label: 'joaquin', id:2 },
-                                        { label: 'xochilt', id:3 }
-                                    ]
-                                }
+                                items={personas}
+                                onChange={this.onChange('buscar')}
+                                inputProps={{
+                                    onKeyDown : this.searchPersona
+                                }}
+                                value={buscar}
                             />
                         </div>
                     </FormGroup>
@@ -92,8 +108,7 @@ class EditConductor extends React.Component {
         }
     }
 
-    searchPersona = async () => {
-        const identificacion =  this.state.data['identificacion']
+    searchPersona = async (identificacion) => {
         const { data } = await axios.get(`${baseurl}/persona/?identificacion=${identificacion}`)
         this.setState({
             persona:data[0]

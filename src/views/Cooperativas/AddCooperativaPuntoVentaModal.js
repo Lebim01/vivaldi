@@ -25,6 +25,15 @@ class AddCooperativaPuntoVentaModal extends React.Component {
         this.getCooperativas()
     }
 
+    componentWillReceiveProps(props){
+        const { id, cooperativa, cooperativa_nombre, punto_emision_tasa, secuencia_tasa, punto_emision_boleto, secuencia_boleto, punto_emision_nota_credito, secuencia_nota_credito } = props
+        this.setState({
+            data : {
+                id, cooperativa, cooperativa_nombre, punto_emision_tasa, secuencia_tasa, punto_emision_boleto, secuencia_boleto, punto_emision_nota_credito, secuencia_nota_credito
+            }
+        })
+    }
+
     getCooperativas = async () => {
         const { data } = await axios.get(`${baseurl}/cooperativa/`)
         let options = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : r.nombre } })]
@@ -137,9 +146,7 @@ class AddCooperativaPuntoVentaModal extends React.Component {
 }
 
 AddCooperativaPuntoVentaModal.defaultProps = {
-    show : false,
-    id_localidad : null,
-    id_nivel : null
+    show : false
 }
 
 export default AddCooperativaPuntoVentaModal

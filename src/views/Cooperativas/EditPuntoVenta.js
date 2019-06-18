@@ -21,7 +21,7 @@ class _Row extends React.Component {
 
     render(){
         return (
-            <tr>
+            <tr onDoubleClick={this.props.onDoubleClick}>
                 <td>
                     <Button outline={true} type="danger" size="sm" rounded={true} onClick={this.delete}>
                         <i className="fa fa-times"></i>
@@ -51,6 +51,7 @@ class MainView extends React.Component {
         this.addCooperativa = this.addCooperativa.bind(this)
         this.agregarCooperativa = this.agregarCooperativa.bind(this)
         this.deleteCooperativa = this.deleteCooperativa.bind(this)
+        this.editCooperativa = this.editCooperativa.bind(this)
     }
 
     onChange = name => (e) => {
@@ -78,7 +79,16 @@ class MainView extends React.Component {
 
     agregarCooperativa(data){
         let puntoventa_cooperativas = this.props.puntoventa_cooperativas
-        puntoventa_cooperativas.push(data)
+        if(data.id){
+            for(let i = 0; i < puntoventa_cooperativas.length; i++){
+                if(puntoventa_cooperativas[i].id === data.id){
+                    puntoventa_cooperativas[i] = data
+                    break
+                }
+            }
+        }else{
+            puntoventa_cooperativas.push(data)
+        }
         this.props.onChange('puntoventa_cooperativas', puntoventa_cooperativas)
         this.toggleModal()
     }
@@ -94,6 +104,16 @@ class MainView extends React.Component {
             puntoventa_cooperativas.splice(index, 1)
             this.props.onChange('puntoventa_cooperativas', puntoventa_cooperativas)
         }
+    }
+
+    editCooperativa = (row) => {
+        let modal = {
+            show : true,
+            ...row
+        }
+        this.setState({
+            modal,
+        })
     }
 
     render(){
@@ -150,14 +170,18 @@ class MainView extends React.Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        { puntoventa_cooperativas.map((r, i) => <_Row {...r} key={i} delete={() => this.deleteCooperativa(i)} />) }
+                                        { puntoventa_cooperativas.map((r, i) => <_Row {...r} onDoubleClick={() => this.editCooperativa(r)} key={i} delete={() => this.deleteCooperativa(i)} />) }
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </FormGroup>
                 </form>
-                <AddCooperativaPuntoVentaModal guardar={this.agregarCooperativa} {...this.state.modal} toggle={this.toggleModal} />
+                <AddCooperativaPuntoVentaModal 
+                    guardar={this.agregarCooperativa} 
+                    {...this.state.modal} 
+                    toggle={this.toggleModal} 
+                />
             </div>
         )
     }
