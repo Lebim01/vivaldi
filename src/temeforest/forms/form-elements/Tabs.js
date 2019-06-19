@@ -5,7 +5,7 @@ class Tab extends React.Component {
         const { link, text, tab, ...otherProps } = this.props
         return (
             <li className="nav-item">
-                <a className={`nav-link pointer ${tab == link ? 'active' : ''}`} {...otherProps}>{text}</a>
+                <a className={`nav-link pointer ${tab === link ? 'active' : ''}`} {...otherProps}>{text}</a>
             </li>
         )
     }

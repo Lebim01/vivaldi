@@ -8,7 +8,7 @@ class Select extends React.Component {
         return (
             <FormGroup>
                 <select className={`form-control ${className} ${error ?'is-invalid':''}`} {...otherProps}>
-                    { options.map(o => <option value={o.value} selected={value == o.value}>{o.label}</option>) }
+                    { options.map((o, i) => <option value={o.value} selected={value == o.value} key={i}>{o.label}</option>) }
                 </select>
                 { helperText && <small class="form-text text-muted"> {helperText} </small> }
             </FormGroup>

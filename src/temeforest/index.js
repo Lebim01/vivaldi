@@ -1,5 +1,5 @@
 import { Card, CardTitle, CardBody, CardSubtitle } from './base'
-import { Input, FormGroup, InputIcon, Select, Label, Tabs, DualList, TextArea } from './forms'
+import { Input, FormGroup, InputIcon, Select, Label, Tabs, DualList, TextArea, InputAutocomplete } from './forms'
 import { Button, ListGroup, ListItem, ListItemButton } from './ui'
 
 export {
@@ -17,6 +17,7 @@ export {
     Tabs,
     DualList,
     TextArea,
+    InputAutocomplete,
     /** UI */
     Button,
     ListGroup,

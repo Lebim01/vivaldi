@@ -3,7 +3,6 @@ import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { Button, FormGroup, Input, Label, Select } from './../../temeforest'
 import axios from 'axios'
 import { baseurl } from './../../utils/url'
-import { tsThisType } from '@babel/types';
 
 class AddCooperativaPuntoVentaModal extends React.Component {
 
@@ -24,6 +23,15 @@ class AddCooperativaPuntoVentaModal extends React.Component {
 
     componentDidMount(){
         this.getCooperativas()
+    }
+
+    componentWillReceiveProps(props){
+        const { id, cooperativa, cooperativa_nombre, punto_emision_tasa, secuencia_tasa, punto_emision_boleto, secuencia_boleto, punto_emision_nota_credito, secuencia_nota_credito } = props
+        this.setState({
+            data : {
+                id, cooperativa, cooperativa_nombre, punto_emision_tasa, secuencia_tasa, punto_emision_boleto, secuencia_boleto, punto_emision_nota_credito, secuencia_nota_credito
+            }
+        })
     }
 
     getCooperativas = async () => {
@@ -138,9 +146,7 @@ class AddCooperativaPuntoVentaModal extends React.Component {
 }
 
 AddCooperativaPuntoVentaModal.defaultProps = {
-    show : false,
-    id_localidad : null,
-    id_nivel : null
+    show : false
 }
 
 export default AddCooperativaPuntoVentaModal
