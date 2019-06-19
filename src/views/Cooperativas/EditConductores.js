@@ -1,7 +1,8 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label, TextArea, InputIcon, Select } from './../../temeforest'
+import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label, InputIcon, Select } from './../../temeforest'
 import { baseurl, getParameter } from './../../utils/url'
+import { fileToBase64 } from './../../utils/file'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import EditPersona from './EditPersona'
@@ -23,7 +24,7 @@ class MainView extends React.Component {
     }
 
     UploadFile = (e) => {
-        var el = document.getElementById("documentation");
+        let el = document.getElementById("documentation");
         if (el) {
             el.click();
         }
@@ -36,11 +37,9 @@ class MainView extends React.Component {
     }
 
     DownloadFile = (e) => {
-      return false;
         if (e){
-          console.log(e)
-            var file_path = e;
-            var a = document.createElement('A');
+            let file_path = e;
+            let a = document.createElement('A');
             a.href = file_path;
             if(file_path){
                 a.download = file_path.substr(file_path.lastIndexOf('/') + 1);
@@ -78,11 +77,11 @@ class MainView extends React.Component {
                     </FormGroup>
 
                     <FormGroup className="row">
-                      <div className="col-sm-12 text-center">
-                        <Input id="documentation" type="file" style={{display:'none'}} onChange={this.onChangeFile}/>
-                        <Button type="success" style={{marginRight:5}} onClick={this.UploadFile}>Subir Documentaci&oacute;n</Button>
-                        <Button type="success" style={{marginLeft:5}} onClick={this.DownloadFile(this.props.documentacion)}>Ver Documentaci&oacute;n</Button>
-                      </div>
+                        <div className="col-sm-12 text-center">
+                            <Input id="documentation" type="file" style={{display:'none'}} onChange={this.onChangeFile}/>
+                            <Button type="success" style={{marginRight:5}} onClick={this.UploadFile}>Subir Documentación</Button>
+                            <Button type="success" style={{marginLeft:5}} onClick={() => this.DownloadFile(this.props.documentacion)}>Ver Documentación</Button>
+                        </div>
                     </FormGroup>
                 </form>
             </div>
@@ -170,12 +169,16 @@ class EditConductor extends React.Component {
         })
     }
 
-    onChangeFile(value){
-        let data = this.state.data
-        data['documentacion'] = value
-        this.setState({
-            data
-        })
+    onChangeFile = async (value) => {
+        try {
+            let data = this.state.data
+            data.documentacion = await fileToBase64(value)
+            this.setState({
+                data
+            })
+        }catch(e){
+            Swal.fire('Subir archivo', 'Hubo algún problema al querer subir el archivo', 'error')
+        }
     }
 
     confirmSave(){
