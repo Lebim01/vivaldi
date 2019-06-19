@@ -248,16 +248,10 @@ class EditConductor extends React.Component {
                             <CardBody>
                                 <CardTitle>Crear/Editar Conductor</CardTitle>
                                 <CardBody>
-<<<<<<< HEAD
-                                  <MainView {...data} tipos={tipos} cooperativas={cooperativas}
-                                    persona={persona} onChange={this.onChange} searchPersona={this.searchPersona}
-                                    onChangeFile={this.onChangeFile}
-                                  />
-=======
                                     <MainView {...data} tipos={tipos} cooperativas={cooperativas}
                                         persona={persona} onChange={this.onChange} searchPersona={this.searchPersona}
+                                        onChangeFile={this.onChangeFile}
                                     />
->>>>>>> master
                                 </CardBody>
                                 <div className="row">
                                     <div className="col-sm-12 text-center">
