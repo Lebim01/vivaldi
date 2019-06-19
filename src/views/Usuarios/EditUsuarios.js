@@ -4,8 +4,52 @@ import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label } from './..
 import { baseurl, getParameter } from './../../utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import AddRolUsuario from './AddRolUsuario'
+
+
+class _Row extends React.Component {
+
+    constructor(props){
+        super(props)
+        this.delete = this.delete.bind(this)
+    }
+
+    delete(){
+        if(this.props.delete){
+            this.props.delete()
+        }
+    }
+
+    render(){
+        return (
+            <tr>
+                <td>
+                    <Button outline={true} type="danger" size="sm" rounded={true} onClick={this.delete}>
+                        <i className="fa fa-times"></i>
+                    </Button>{' '}
+                     {/*this.props.cooperativa_nombre*/}
+                    {this.props.name}
+                </td>
+                <td>{this.props.name}</td>
+            </tr>
+        )
+    }
+}
 
 class MainView extends React.Component {
+
+    state = {
+        modal : {
+            show : false
+        }
+    }
+
+    constructor(props){
+        super(props)
+        this.addRol = this.addRol.bind(this)
+        this.agregarRol = this.agregarRol.bind(this)
+        this.deleteRol = this.deleteRol.bind(this)
+    }
 
     onChange = name => (e) => {
         if(this.props.onChange){
@@ -13,7 +57,46 @@ class MainView extends React.Component {
         }
     }
 
+    addRol(){
+        this.setState({
+            modal : {
+                ...this.state.modal,
+                show : true
+            }
+        })
+    }
+
+    toggleModal = () => {
+        let _modal = this.state.modal
+        _modal.show = !_modal.show
+        this.setState({
+            modal : _modal
+        })
+    }
+
+    agregarRol(data){
+        debugger;
+        let roles = this.props.roles
+        roles.push(data)
+        this.props.onChange('roles', roles)
+        this.toggleModal()
+    }
+
+    deleteRol = async (index) => {
+        const {value} = await Swal.fire({
+            title: 'Confirmar',
+            text : '¿Seguro de borrar?',
+            showCancelButton: true,
+        })
+        if(value){
+            let roles = this.props.roles
+            roles.splice(index, 1)
+            this.props.onChange('roles', roles)
+        }
+    }
+
     render(){
+        const { roles } = this.props
         return (
             <div>
                 <form className="mt-4 form-horizontal">
@@ -47,7 +130,35 @@ class MainView extends React.Component {
                             <Input onChange={this.onChange('email')} value={this.props.email} />
                         </div>
                     </FormGroup>
+                    <FormGroup className="row">
+                        <div class="col-sm-1">&nbsp;</div>
+                        <Label className="col-sm-3 col-sm-offset-3">
+                            Roles
+                            <Button size="sm" style={{marginLeft:5}} onClick={this.addRol}>
+                                <i className="fa fa-plus"></i>
+                            </Button>
+                        </Label>
+                    </FormGroup>
+                    <FormGroup className="row">
+                        <div class="col-sm-3">&nbsp;</div>
+                        <div className="col-sm-6 col-sm-offset-3">
+                            <div className="table-responsive">
+                                <table className="table table-hover table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Cooperativa</th>
+                                            <th scope="col">Rol</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        { roles.map((r, i) => <_Row {...r} key={i} delete={() => this.deleteRol(i)} />) }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </FormGroup>
                 </form>
+                <AddRolUsuario guardar={this.agregarRol} {...this.state.modal} toggle={this.toggleModal} />
             </div>
         )
     }
@@ -57,7 +168,9 @@ class EditUsuarios extends React.Component {
 
     state = {
         id : null,
-        data : {}
+        data : {
+            roles: []
+        }
     }
 
     constructor(props){
