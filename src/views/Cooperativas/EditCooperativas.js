@@ -24,9 +24,16 @@ class MainView extends React.Component {
     state = {
         tab : 0
     }
+
     constructor(props){
         super(props)
         this.toggleAndenes = this.toggleAndenes.bind(this)
+    }
+
+    optionsGremios = {
+        url : `${baseurl}/gremio/`,
+        labelName: 'nombre',
+        valueName: 'id'
     }
 
     tipos = [
@@ -83,7 +90,7 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Gremio</Label>
                         <div className="col-sm-5">
-                            <Select options={gremios} onChange={this.onChange('gremio')} value={this.props.gremio} />
+                            <Select options={gremios} onChange={this.onChange('gremio')} value={this.props.gremio} asyncOptions={this.optionsGremios} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
@@ -242,12 +249,10 @@ class EditCooperativas extends React.Component {
         super(props)
         this.onChange = this.onChange.bind(this)
         this.changeTab = this.changeTab.bind(this)
-        this.getGremios = this.getGremios.bind(this)
         this.confirmSave = this.confirmSave.bind(this)
     }
 
     componentDidMount(){
-        this.getGremios()
         this.getLocalidades()
         let id = getParameter('id')
         if(id){
@@ -321,14 +326,6 @@ class EditCooperativas extends React.Component {
         })
     }
 
-    getGremios = async () => {
-        const { data } = await axios.get(`${baseurl}/gremio/`)
-        let options = [{ value: '', label : 'Seleccione' }, ...data.map((r) => { return { value : r.id, label : r.nombre } })]
-        this.setState({
-            gremios : options
-        })
-    }
-
     changeTab(tab){
         this.setState({ tab })
     }
@@ -380,7 +377,7 @@ class EditCooperativas extends React.Component {
     }
 
     render(){
-        const { tab, data, gremios, localidades, tabsLocalidades } = this.state
+        const { tab, data, localidades, tabsLocalidades } = this.state
         return (
             <div className="animated fadeIn">
                 <Row>
@@ -393,8 +390,7 @@ class EditCooperativas extends React.Component {
                                     { tab === 'main' && 
                                         <MainView 
                                             {...data} 
-                                            onChange={this.onChange} 
-                                            gremios={gremios} 
+                                            onChange={this.onChange}
                                             tabsLocalidades={tabsLocalidades} 
                                             localidades={localidades} 
                                         />

@@ -19,7 +19,6 @@ class MainView extends React.Component {
     }
 
     onChange = name => (e) => {
-        console.log(name, e.target.value)
         if(name === 'buscar'){
             this.setState({
                 buscar : e.target.value
@@ -79,7 +78,7 @@ class MainView extends React.Component {
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
-                      <Label className="col-sm-3">Buscar</Label>
+                        <Label className="col-sm-3">Buscar</Label>
                         <div className="col-sm-5">
                             <InputAutocomplete 
                                 icon={<i className="fa fa-search"/>}
@@ -143,8 +142,8 @@ class EditConductor extends React.Component {
         const local = this.state.data
         local['persona'] = data[0].id
         this.setState({
-            persona:data[0],
-            data:local,
+            persona: data[0],
+            data: local,
         })
     }
 

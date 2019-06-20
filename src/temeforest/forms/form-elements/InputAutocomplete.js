@@ -5,7 +5,7 @@ import Autocomplete from 'react-autocomplete'
 class InputAutocomplete extends React.Component {
 
     render(){
-        const { items, className, onSelect, renderItem, value, icon, getItemValue, onChange, ...otherProps } = this.props
+        const { items, className, onSelect, renderItem, value, icon, getItemValue, ...otherProps } = this.props
         return (
             <InputGroup>
                 { icon &&
@@ -19,7 +19,12 @@ class InputAutocomplete extends React.Component {
                     getItemValue={getItemValue}
                     items={items}
                     value={value}
-                    renderInput={({className, value, ...otherProps}) => <input type="text" className={`form-control ${className}`} onChange={onChange} {...otherProps} />}
+                    renderInput={({className, value, ...otherProps}) => {
+                        console.log(otherProps)
+                        return ( 
+                            <input type="text" className={`form-control ${className}`} {...otherProps} /> 
+                        )
+                    }}
                     renderItem={renderItem}
                     menuStyle={{
                         borderRadius: '3px',

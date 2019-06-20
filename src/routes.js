@@ -25,6 +25,7 @@ const PuntoVenta = React.lazy(() => import('./views/Cooperativas/PuntoVenta'))
 const EditPuntoVenta = React.lazy(() => import('./views/Cooperativas/EditPuntoVenta'))
 /** OPERACIONES */
 const Rutas = React.lazy(() => import('./views/Operaciones/Rutas'))
+const EditRutas = React.lazy(() => import('./views/Operaciones/EditRutas'))
 
 const Dashboard = React.lazy(() => import('./views/Pages/Dashboard'))
 const Page404 = React.lazy(() => import('./views/Pages/Page404'))
@@ -58,7 +59,8 @@ const routes = [
   { path: '/cooperativas/punto-venta', name: 'Punto de Venta', component: PuntoVenta, exact : true },
   { path: '/cooperativas/punto-venta/edit', name: 'Crear/Editar Punto de Venta', component: EditPuntoVenta, exact : true },
   
-  { path: '/operaciones/rutas', name: 'Rutas', component: Rutas },
+  { path: '/operaciones/rutas', name: 'Rutas', component: Rutas, exact: true },
+  { path: '/operaciones/rutas/edit', name: 'Crear/Editar Rutas', component: EditRutas, exact: true },
   { path: '/operaciones/viajes', name: 'Carousel', component: Page404 },
   { path: '/operaciones/viajes-planificados', name: 'Collapse', component: Page404 },
   { path: '/operaciones/frecuencias', name: 'Dropdowns', component: Page404 },

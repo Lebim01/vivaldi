@@ -75,7 +75,6 @@ class MainView extends React.Component {
     }
 
     agregarRol(data){
-        debugger;
         let roles = this.props.roles
         roles.push(data)
         this.props.onChange('roles', roles)

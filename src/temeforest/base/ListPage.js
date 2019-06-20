@@ -94,7 +94,7 @@ class ListPage extends React.Component {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {filtered.map((record, i) => <RecordRow record={record} fields={fields} key={i} onDoubleClick={this.onRowDoubleClick} />)}
+                                                    {[{id:1,descripcion:'ruta 1'}].map((record, i) => <RecordRow record={record} fields={fields} key={i} onDoubleClick={() => this.onRowDoubleClick(record.id)} />)}
                                                 </tbody>
                                             </table>
                                         </div>
