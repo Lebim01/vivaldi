@@ -17,7 +17,7 @@ function getParameter(_name){
 }
 
 function objectToUrl(_obj){
-    return `?${Object.keys(_obj).map((key) => `${key}=${_obj[key]}`).join('&')}`
+    return `?${Object.keys(_obj).filter(key => _obj[key]).map((key) => `${key}=${_obj[key]}`).join('&')}`
 }
 
 export {

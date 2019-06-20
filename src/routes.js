@@ -27,6 +27,7 @@ const EditPuntoVenta = React.lazy(() => import('./views/Cooperativas/EditPuntoVe
 const Rutas = React.lazy(() => import('./views/Operaciones/Rutas'))
 const EditRutas = React.lazy(() => import('./views/Operaciones/EditRutas'))
 const Viajes = React.lazy(() => import('./views/Operaciones/Viajes'))
+const Frecuencias = React.lazy(() => import('./views/Operaciones/Frecuencias'))
 
 const Dashboard = React.lazy(() => import('./views/Pages/Dashboard'))
 const Page404 = React.lazy(() => import('./views/Pages/Page404'))
@@ -64,7 +65,7 @@ const routes = [
   { path: '/operaciones/rutas/edit', name: 'Crear/Editar Rutas', component: EditRutas, exact: true },
   { path: '/operaciones/viajes', name: 'Viajes', component: Viajes, exact: true },
   { path: '/operaciones/viajes-planificados', name: 'Collapse', component: Page404 },
-  { path: '/operaciones/frecuencias', name: 'Dropdowns', component: Page404 },
+  { path: '/operaciones/frecuencias', name: 'Frecuencias', component: Frecuencias, exact: true },
   { path: '/operaciones/frecuencias-extra', name: 'Jumbotrons', component: Page404 },
   { path: '/operaciones/frecuencias-lote', name: 'List Groups', component: Page404 },
   { path: '/operaciones/tasas-contingencia', name: 'Navbars', component: Page404 },
