@@ -62,7 +62,7 @@ class AddRolUsuario extends React.Component {
         for(let i in this.state.roles){
             let row = this.state.roles[i]
             if(row.value == id)
-                return row.label + '_'
+                return row.label
         }
         return ''
     }
