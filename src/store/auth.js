@@ -11,7 +11,7 @@ const persistConfig = {
 
 const initialState = {
     loading : false,
-    auth : true,
+    auth : false,
     token : ''
 };
 

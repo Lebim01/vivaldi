@@ -1,8 +1,8 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, InputIcon, Button } from './../../temeforest'
+import { CardTitle, InputIcon, Button } from './../../temeforest'
 import axios from 'axios'
-import { baseurl } from './../../utils/url'
+import { baseurl, objectToUrl } from './../../utils/url'
 
 class RecordRow extends React.Component {
 
@@ -33,20 +33,25 @@ class ListPage extends React.Component {
         this.onFilterChange = this.onFilterChange.bind(this)
     }
 
-    loadList = async () => {
-        let { data } = await axios.get(`${baseurl}/${this.props.url}/`)
+    loadList = async (parameters = {}) => {
+        let { data } = await axios.get(`${baseurl}/${this.props.url}/${objectToUrl(parameters)}`)
         this.setState({
             data,
             filtered : data
         })
     }
 
+    componentWillReceiveProps(props){
+        this.loadList(props.parameters)
+    }
     componentDidMount(){
-        this.loadList()
+        this.loadList(this.props.parameters)
     }
 
     onRowDoubleClick(id){
-        this.props.history.push(`/${this.props.menu}/${this.props.submenu}/edit?id=${id}`)
+        if(this.props.menu){
+            this.props.history.push(`/${this.props.menu}/${this.props.submenu}/edit?id=${id}`)
+        }
     }
 
     onFilterChange = name => (e) => {
@@ -64,49 +69,47 @@ class ListPage extends React.Component {
     }
 
     render(){
-        const { title, searchPlaceholder, fieldNames, fields } = this.props
+        const { title, searchPlaceholder, fieldNames, fields, searchable } = this.props
         const { filtered } = this.state
         return (
-            <div className="animated fadeIn">
+            <div>
+                { title && <CardTitle>Listado de { title }</CardTitle> }
+                { searchable &&
+                    <Row>
+                        <Col xs="12" md="6">
+                            <InputIcon placeholder={`Buscar... ${searchPlaceholder}`} onChange={this.onFilterChange()} icon={<i className="fa fa-search"></i>} />
+                        </Col>
+                        <Col xs="12" md="6">
+                            <Button style={{'float': 'right'}} onClick={() => this.onRowDoubleClick('')}>
+                                <i className="fa fa-plus"></i>
+                            </Button>
+                        </Col>
+                    </Row>
+                }
+                <br/>
                 <Row>
                     <Col xs="12" md="12">
-                        <Card>
-                            <CardBody>
-                                <CardTitle>Listado de { title }</CardTitle>
-                                <Row>
-                                    <Col xs="12" md="6">
-                                        <InputIcon placeholder={`Buscar... ${searchPlaceholder}`} onChange={this.onFilterChange()} icon={<i className="fa fa-search"></i>} />
-                                    </Col>
-                                    <Col xs="12" md="6">
-                                        <Button style={{'float': 'right'}} onClick={() => this.onRowDoubleClick('')}>
-                                            <i className="fa fa-plus"></i>
-                                        </Button>
-                                    </Col>
-                                </Row>
-                                <br/>
-                                <Row>
-                                    <Col xs="12" md="12">
-                                        <div className="table-responsive">
-                                            <table className="table table-hover table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        {fieldNames.map((fieldName) => <th scope="col">{fieldName}</th>)}
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {[{id:1,descripcion:'ruta 1'}].map((record, i) => <RecordRow record={record} fields={fields} key={i} onDoubleClick={() => this.onRowDoubleClick(record.id)} />)}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </Col>
-                                </Row>
-                            </CardBody>
-                        </Card>
+                        <div className="table-responsive">
+                            <table className="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        {fieldNames.map((fieldName) => <th scope="col">{fieldName}</th>)}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {filtered.map((record, i) => <RecordRow record={record} fields={fields} key={i} onDoubleClick={() => this.onRowDoubleClick(record.id)} />)}
+                                </tbody>
+                            </table>
+                        </div>
                     </Col>
                 </Row>
             </div>
         )
     }
+}
+
+ListPage.defaultProps = {
+    parameters : {}
 }
 
 export default ListPage

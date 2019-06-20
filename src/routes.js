@@ -26,6 +26,7 @@ const EditPuntoVenta = React.lazy(() => import('./views/Cooperativas/EditPuntoVe
 /** OPERACIONES */
 const Rutas = React.lazy(() => import('./views/Operaciones/Rutas'))
 const EditRutas = React.lazy(() => import('./views/Operaciones/EditRutas'))
+const Viajes = React.lazy(() => import('./views/Operaciones/Viajes'))
 
 const Dashboard = React.lazy(() => import('./views/Pages/Dashboard'))
 const Page404 = React.lazy(() => import('./views/Pages/Page404'))
@@ -61,7 +62,7 @@ const routes = [
   
   { path: '/operaciones/rutas', name: 'Rutas', component: Rutas, exact: true },
   { path: '/operaciones/rutas/edit', name: 'Crear/Editar Rutas', component: EditRutas, exact: true },
-  { path: '/operaciones/viajes', name: 'Carousel', component: Page404 },
+  { path: '/operaciones/viajes', name: 'Viajes', component: Viajes, exact: true },
   { path: '/operaciones/viajes-planificados', name: 'Collapse', component: Page404 },
   { path: '/operaciones/frecuencias', name: 'Dropdowns', component: Page404 },
   { path: '/operaciones/frecuencias-extra', name: 'Jumbotrons', component: Page404 },
@@ -73,6 +74,7 @@ const routes = [
   { path: '/operaciones/solicitudes/buses', name: 'Progress Bar', component: Page404 },
   { path: '/operaciones/solicitudes/modificaciones-buses', name: 'Tooltips', component: Page404 },
   { path: '/operaciones/solicitudes/choferes', name: 'Buttons', component: Page404 },
+
   { path: '/facturacion/clientes', name: 'Buttons', component: Page404 },
   { path: '/facturacion/documentos', name: 'Button Dropdowns', component: Page404 },
   { path: '/recaudaciones/panel', name: 'Button Groups', component: Page404 },

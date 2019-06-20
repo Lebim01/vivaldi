@@ -16,8 +16,13 @@ function getParameter(_name){
     return null
 }
 
+function objectToUrl(_obj){
+    return `?${Object.keys(_obj).map((key) => `${key}=${_obj[key]}`).join('&')}`
+}
+
 export {
     baseurl,
     baseMediaUrl,
-    getParameter
+    getParameter,
+    objectToUrl
 }

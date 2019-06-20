@@ -16,17 +16,29 @@ class AddParadaModal extends React.Component {
     onChange = name => (e) => {
         let data = this.state.data
         data[name] = e.target.value
-        if(name === 'parada') data.cooperativa_nombre = e.target.text
+        if(name === 'parada') data.parada_nombre = e.target.options[e.target.selectedIndex].text
         this.setState({
             data
         })
     }
 
+    toggle() {
+        if(this.props.toggle){
+            this.props.toggle()
+        }
+    }
+
+    guardar(){
+        if(this.props.guardar){
+            this.props.guardar(this.state.data)
+        }
+    }
+
     render(){
         const { errors } = this.state
         return (
-            <Modal isOpen={this.props.show} toggle={this.toggle}>
-                <ModalHeader toggle={this.toggle}>Agregar Parada</ModalHeader>
+            <Modal isOpen={this.props.show} toggle={this.toggle.bind(this)}>
+                <ModalHeader toggle={this.toggle.bind(this)}>Agregar Parada</ModalHeader>
                 <ModalBody>
                     <form className="mt-4 form-horizontal">
                         <FormGroup className="row">
@@ -62,8 +74,8 @@ class AddParadaModal extends React.Component {
                     </form>
                 </ModalBody>
                 <ModalFooter>
-                    <Button type="success" onClick={this.guardar}>Aceptar</Button>{' '}
-                    <Button type="secondary" onClick={this.toggle}>Cancelar</Button>
+                    <Button type="success" onClick={this.guardar.bind(this)}>Aceptar</Button>{' '}
+                    <Button type="secondary" onClick={this.toggle.bind(this)}>Cancelar</Button>
                 </ModalFooter>
             </Modal>
         )

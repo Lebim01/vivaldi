@@ -1,19 +1,30 @@
 import React from 'react'
-import { ListPage } from './../../temeforest'
+import { ListPage, Card, CardBody } from './../../temeforest'
 
 function Rutas(props) {
     return (
-        <ListPage
-            title="Rutas"
-            searchPlaceholder="Nombre"
-            fieldNames={['Nombre']}
-            fields={['descripcion']}
-            searchFields={['descripcion']}
-            url='ruta'
-            menu='operaciones'
-            submenu='rutas'
-            history={props.history}
-        />
+        <div className="animated fadeIn">
+            <div className="row">
+                <div className="col-sm-12">
+                    <Card>
+                        <CardBody>
+                            <ListPage
+                                title="Rutas"
+                                searchable={true}
+                                searchPlaceholder="Nombre"
+                                searchFields={['descripcion']}
+                                fieldNames={['Nombre']}
+                                fields={['descripcion']}
+                                url='ruta'
+                                menu='operaciones'
+                                submenu='rutas'
+                                history={props.history}
+                            />
+                        </CardBody>
+                    </Card>
+                </div>
+            </div>
+        </div>
     )
 }
 

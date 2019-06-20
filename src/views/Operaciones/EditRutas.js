@@ -7,16 +7,32 @@ import Swal from 'sweetalert2'
 import AddParadaModal from './AddParadaModal'
 
 class RecordRow extends React.Component {
+
+    constructor(props){
+        super(props)
+        this.onChange = this.onChange.bind(this)
+    }
+
+    onChange(){
+        if(this.props.onChange){
+            this.props.onChange(this.props)
+        }
+    }
+
     render(){
+        const name_input = `activa_${this.props.parada}`
         return (
             <tr>
                 <td>{this.props.parada_nombre}</td>
                 <td>{this.props.llegada}</td>
                 <td>{this.props.tarifa_normal}</td>
                 <td>{this.props.tarifa_media}</td>
-                <td>{this.props.tiempo}</td>
+                <td>{this.props.horas}h</td>
                 <td>
-                    <Input type="checkbox" />
+                    <div className="custom-control custom-checkbox">
+                        <input type="checkbox" className="custom-control-input" id={name_input} name={name_input} checked={this.props.activa} onChange={this.onChange('activa')} />
+                        <Label onlyClassName="custom-control-label" htmlFor={name_input}></Label>
+                    </div>
                 </td>
             </tr>
         )
@@ -46,6 +62,7 @@ class MainView extends React.Component {
     constructor(props){
         super(props)
         this.toggleModal = this.toggleModal.bind(this)
+        this.agregarParada = this.agregarParada.bind(this)
     }
     
     onChange = name => (e) => {
@@ -62,8 +79,23 @@ class MainView extends React.Component {
         })
     }
 
-    agregarParada(){
+    agregarParada({ onChange, ...data }){
+        let paradas = this.props.paradas
 
+        paradas.push(data)
+        /*if(!data.id && !paradas.some((record) => record.parada == data.parada)){
+            paradas.push(data)
+        }
+        else if(paradas.some((record) => record.parada == data.parada)){
+            for(let i = 0; i < paradas.length; i++){
+                if(paradas[i].parada === data.parada){
+                    paradas[i] = data
+                    break
+                }
+            }
+        }*/
+        //this.props.onChange('paradas', paradas)
+        //this.toggleModal()
     }
 
     render(){
@@ -108,13 +140,13 @@ class MainView extends React.Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    { (this.props.paradas || []).map((record) => <RecordRow {...record} />)}
+                                    { this.props.paradas.map((record, i) => <RecordRow key={i} {...record} onChange={this.agregarParada} />)}
                                 </tbody>
                             </table>
                         </div>
                     </FormGroup>
                     <AddParadaModal 
-                        guardar={this.agregarParada} 
+                        guardar={this.agregarParada}
                         {...this.state.modal} 
                         toggle={this.toggleModal} 
                     />
@@ -128,7 +160,9 @@ class EditRutas extends React.Component {
 
     state = {
         id : null,
-        data : {}
+        data : {
+            paradas: []
+        }
     }
 
     constructor(props){
@@ -203,7 +237,7 @@ class EditRutas extends React.Component {
                             <CardBody>
                                 <CardTitle>Crear/Editar Rutas</CardTitle>
                                 <CardBody>
-                                    <MainView id_localidad={id} {...data} onChange={this.onChange} />
+                                    <MainView {...data} onChange={this.onChange} />
                                 </CardBody>
                                 <div className="row">
                                     <div className="col-sm-12 text-center">
