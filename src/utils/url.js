@@ -1,4 +1,5 @@
 const baseurl = 'http://localhost:8000/api/v1'
+const baseMediaUrl = 'http://localhost:8000'
 
 function getParameter(_name){
     let url_string = window.location.href
@@ -17,5 +18,6 @@ function getParameter(_name){
 
 export {
     baseurl,
+    baseMediaUrl,
     getParameter
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
 import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label, Select, InputAutocomplete } from './../../temeforest'
-import { baseurl, getParameter } from './../../utils/url'
+import { baseurl, baseMediaUrl, getParameter } from './../../utils/url'
 import { fileToBase64 } from './../../utils/file'
 import axios from 'axios'
 import Swal from 'sweetalert2'
@@ -54,7 +54,7 @@ class MainView extends React.Component {
 
     DownloadFile = (e) => {
         if (e){
-            let file_path = e;
+            let file_path = baseMediaUrl + e;
             let a = document.createElement('A');
             a.href = file_path;
             if(file_path){
