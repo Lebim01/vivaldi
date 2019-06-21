@@ -16,6 +16,13 @@ class DividerAsiento extends React.Component {
     }
 }
 class Asiento extends React.Component {
+
+    toggleActivate(){
+        if(this.props.toggleActivate){
+            this.props.toggleActivate(this.props.index)
+        }
+    }
+
     render(){
         const { type, lado, activate } = this.props
         let activateCss = {}
@@ -28,7 +35,7 @@ class Asiento extends React.Component {
         }
         return (
             <div style={{display:'inline-block', marginLeft:3, marginRight:3}}>
-                <Button outline={true} type={type} style={{height:40, width:40, ...activateCss}}>
+                <Button type={type} style={{height:40, width:40, ...activateCss}} onClick={this.toggleActivate.bind(this)}>
                     {lado}
                 </Button>
             </div>
@@ -37,8 +44,27 @@ class Asiento extends React.Component {
 }
 
 class Piso extends React.Component {
+
+    constructor(props){
+        super(props)
+        this.toggleActivate = this.toggleActivate.bind(this)
+    }
+
+    toggleActivate(indexAsiento){
+        const { asientos_desactivados } = this.props
+        if(asientos_desactivados.includes(indexAsiento)){
+            let indexDesactivado = asientos_desactivados.indexOf(indexAsiento)
+            asientos_desactivados.splice(indexDesactivado, 1)
+        }else{
+            asientos_desactivados.push(indexAsiento)
+        }
+        this.props.onChange('asientos_desactivados', asientos_desactivados)
+    }
+
     render(){
-        const { filas } = this.props
+        const { filas, asientos, asientos_desactivados } = this.props
+
+        console.log(asientos_desactivados)
 
         let _filas = []
         for(let i = 0; i < filas; i++) { _filas.push(1) }
@@ -48,17 +74,18 @@ class Piso extends React.Component {
                 <FormGroup className="row">
                     <Label className="col-sm-3">Filas</Label>
                     <div className="col-sm-5">
-                        <Input type="number" min="1" onChange={this.props.onChange} value={filas} />
+                        <Input type="number" min="1" onChange={(e) => this.props.onChange('filas', e.target.value)} value={filas} />
                     </div>
                 </FormGroup>
                 <div style={{width:234, border:'1px solid black', margin:'10px auto'}}>
-                    { _filas.map(() => 
+                    { _filas.map((j, index) => 
                         <div className="fila">
-                            <Asiento type="info" lado={'V'} />
-                            <Asiento type="info" lado={'P'} />
-                            <DividerAsiento />
-                            <Asiento type="info" lado={'P'} />
-                            <Asiento type="info" lado={'V'} />
+                            { asientos.slice(index*4, index*4+4).map((a,i) => (
+                                <div style={{display:'inline-block'}}>
+                                    <Asiento type={!asientos_desactivados.includes(a.index) ? 'info' : 'danger'} {...a} toggleActivate={this.toggleActivate} />
+                                    { i == 1 && <DividerAsiento /> }
+                                </div>
+                            ))}
                         </div>
                     )}
                 </div>
@@ -74,6 +101,7 @@ class MainView extends React.Component {
     }
     constructor(props){
         super(props)
+        this.onChange = this.onChange.bind(this)
         this.changeFilas = this.changeFilas.bind(this)
         this.changeTab = this.changeTab.bind(this)
     }
@@ -84,11 +112,42 @@ class MainView extends React.Component {
         }
     }
 
-    changeFilas = (e) => {
+    onChange2 = (name, value) => {
+        if(name == 'filas') this.changeFilas(value)
+        else {
+            this.props.onChange(name, value)
+        }
+    }
+
+    changeFilas = (filas) => {
         let niveles = this.props.niveles
         let piso = this.state.tab
-        niveles[piso].filas = Number(e.target.value)
+        niveles[piso].asientos = this.getAsientos(niveles[piso], Number(filas))
+        niveles[piso].filas = Number(filas)
         this.props.onChange('niveles', niveles)
+    }
+
+    getAsientos(nivel, _filas){
+        const { filas, asientos } = nivel
+        let _asientos = asientos
+        // agregar filas
+        if(filas < _filas){
+            let filasNuevas = _filas - filas
+            for(let i  = 0; i < filasNuevas; i++){
+                _asientos = _asientos.concat([
+                    { index : _asientos.length, lado : 'V' },
+                    { index : _asientos.length+1, lado : 'P' },
+                    { index : _asientos.length+2, lado : 'P' },
+                    { index : _asientos.length+3, lado : 'V' }
+                ])
+            }
+        }
+        // menos filas
+        else if(filas > _filas){
+            let filasMenos = filas-_filas
+            _asientos.splice(_asientos.length-(4*filasMenos), (4*filasMenos))
+        }
+        return _asientos
     }
 
     changeTab(tab){
@@ -114,7 +173,7 @@ class MainView extends React.Component {
                         <div className="col-sm-8">
                             <Tabs tab={tab} tabs={pisos} onClickTab={this.changeTab} />
                             <br />
-                            <Piso {...niveles[tab]} onChange={this.changeFilas} />
+                            <Piso {...niveles[tab]} onChange={this.onChange2} />
                         </div>
                     </FormGroup>
                 </form>
@@ -132,11 +191,15 @@ class EditDistribucionAsientos extends React.Component {
             niveles : [
                 {
                     nombre : '',
-                    filas : 1,
+                    filas : 0,
+                    asientos:[],
+                    asientos_desactivados:[]
                 },
                 {
                     nombre : '',
                     filas : 0,
+                    asientos:[],
+                    asientos_desactivados:[]
                 }
             ]
         }, 
