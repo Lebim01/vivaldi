@@ -16,7 +16,7 @@ function Frecuencias(props) {
                                 searchFields={['cooperativa_nombre', 'ruta', 'tipo']}
 
                                 fieldNames={['Hora', 'Cooperativa', 'Ruta', 'Tipo']}
-                                fields={['hora', 'cooperativa_nombre', 'ruta', 'tipo']}
+                                fields={['hora_salida', 'cooperativa_nombre', 'ruta', 'tipo']}
 
                                 url='frecuencia'
                                 menu='operaciones'

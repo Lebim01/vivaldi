@@ -8,29 +8,18 @@ import AddParadaModal from './AddParadaModal'
 
 class RecordRow extends React.Component {
 
-    constructor(props){
-        super(props)
-        this.onChange = this.onChange.bind(this)
-    }
-
-    onChange(){
-        if(this.props.onChange){
-            this.props.onChange(this.props)
-        }
-    }
-
     render(){
-        const name_input = `activa_${this.props.parada}`
+        const name_input = `activa_${this.props.ciudad}`
         return (
             <tr>
-                <td>{this.props.parada_nombre}</td>
-                <td>{this.props.llegada}</td>
+                <td>{this.props.ciudad_nombre}</td>
+                <td>{this.props.orden_llegada}</td>
                 <td>{this.props.tarifa_normal}</td>
                 <td>{this.props.tarifa_media}</td>
-                <td>{this.props.horas}h</td>
+                <td>{this.props.duracion}h</td>
                 <td>
                     <div className="custom-control custom-checkbox">
-                        <input type="checkbox" className="custom-control-input" id={name_input} name={name_input} checked={this.props.activa} onChange={this.onChange('activa')} />
+                        <input type="checkbox" className="custom-control-input" id={name_input} name={name_input} checked={this.props.is_enable} onChange={this.props.onChange('is_enable')} />
                         <Label onlyClassName="custom-control-label" htmlFor={name_input}></Label>
                     </div>
                 </td>
@@ -67,8 +56,17 @@ class MainView extends React.Component {
     
     onChange = name => (e) => {
         if(this.props.onChange){
-            this.props.onChange(name, e.target.value)
+            let value = e.target.value
+            this.props.onChange(name, value)
         }
+    }
+
+    onChangeParada = index => name => (e) => {
+        let paradas = this.props.paradas
+        let value = e.target.value
+        if(name == 'is_enable') value = e.target.checked
+        paradas[index][name] = value
+        this.props.onChange('paradas', paradas)
     }
 
     toggleModal = () => {
@@ -81,13 +79,13 @@ class MainView extends React.Component {
 
     agregarParada({ onChange, ...data }){
         let paradas = this.props.paradas
-
-        if(!data.id && !paradas.some((record) => record.parada == data.parada)){
-            paradas.push(data)
+        
+        if(!data.id && !paradas.some((record) => record.ciudad == data.ciudad)){
+            paradas.push({ ...data, is_enable: true })
         }
-        else if(paradas.some((record) => record.parada == data.parada)){
+        else if(paradas.some((record) => record.ciudad == data.ciudad)){
             for(let i = 0; i < paradas.length; i++){
-                if(paradas[i].parada === data.parada){
+                if(paradas[i].ciudad === data.ciudad){
                     paradas[i] = data
                     break
                 }
@@ -110,13 +108,13 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Destino</Label>
                         <div className="col-sm-5">
-                            <Select onChange={this.onChange('destino')} value={this.props.destino} asyncOptions={this.optionsDestinos} />
+                            <Select onChange={this.onChange('ciudad_destino')} value={this.props.ciudad_destino} asyncOptions={this.optionsDestinos} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
                         <Label className="col-sm-3">Via</Label>
                         <div className="col-sm-5">
-                            <Input onChange={this.onChange('representante_legal')} value={this.props.representante_legal} />
+                            <Input onChange={this.onChange('via')} value={this.props.via} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
@@ -139,7 +137,7 @@ class MainView extends React.Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    { this.props.paradas.map((record, i) => <RecordRow key={i} {...record} />)}
+                                    { this.props.paradas.map((record, i) => <RecordRow key={i} {...record} onChange={this.onChangeParada(i)} />)}
                                 </tbody>
                             </table>
                         </div>
@@ -201,7 +199,7 @@ class EditRutas extends React.Component {
             showCancelButton: true,
             showLoaderOnConfirm: true,
             preConfirm: () => {
-                return axios.put(`${baseurl}/ruta/${id}/`, data)
+                return axios.post(`${baseurl}/ruta/${id ? `${id}/` : ''}`, data)
                 .then(response => {
                     if (response.status !== 200 && response.status !== 201) {
                         throw new Error(response.statusText)

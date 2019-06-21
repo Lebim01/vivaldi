@@ -11,10 +11,12 @@ function Rutas(props) {
                             <ListPage
                                 title="Rutas"
                                 searchable={true}
-                                searchPlaceholder="Nombre"
-                                searchFields={['descripcion']}
-                                fieldNames={['Nombre']}
-                                fields={['descripcion']}
+                                searchPlaceholder="Cooperativa, Ruta, Destino"
+                                searchFields={['cooperativa_nombre', 'via', 'ciudad_destino_nombre']}
+
+                                fieldNames={['Cooperativa', 'Ruta', 'Destino']}
+                                fields={['cooperativa_nombre', 'via', 'ciudad_destino_nombre']}
+                                
                                 url='ruta'
                                 menu='operaciones'
                                 submenu='rutas'

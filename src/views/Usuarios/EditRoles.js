@@ -10,7 +10,7 @@ class _Row extends React.Component {
         const { type, view, add, change, permissions } = this.props
         return (
             <tr>
-                <td>{type}</td>
+                <td style={{paddingLeft: 50}}>{type}</td>
                 <td className="text-center">
                     { view &&
                         <div className="custom-control custom-checkbox">
@@ -68,7 +68,7 @@ class MainView extends React.Component {
     }
 
     render(){
-        const { permisos, permissions } = this.props
+        const { categories, permissions } = this.props
         return (
             <div>
                 <form className="mt-4 form-horizontal">
@@ -97,7 +97,14 @@ class MainView extends React.Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    { Object.keys(permisos).map((key, i) => <_Row {...permisos[key]} key={i} permissions={permissions} toggle={this.toggle} />)}
+                                    { categories.map((record, i) => 
+                                        [
+                                            <tr key={i}>
+                                                <th colSpan="5">{record.name}</th>
+                                            </tr>,
+                                            ...Object.keys(record.permisos).map((key, i) => <_Row {...record.permisos[key]} key={i} permissions={permissions} toggle={this.toggle} />)
+                                        ]
+                                    )}
                                 </tbody>
                             </table>
                         </div>
@@ -131,7 +138,7 @@ class EditRoles extends React.Component {
     state = {
         id : null,
         data : { permissions : [] },
-        permisos : {}
+        categories : []
     }
 
     constructor(props){
@@ -160,24 +167,58 @@ class EditRoles extends React.Component {
 
     getPermisos = async () => {
         const { data } = await axios.get(`${baseurl}/permiso/`)
-        let permisos = {}
+        let categories = []
 
+        // crear array de categorias ordenadas
         for(let i in data){
-            let { id, content_type, name, codename } = data[i]
-            if(!permisos[content_type]) permisos[content_type] = {}
+            let { category, category_name } = data[i]
 
+            if(category){
+                if(!categories.some(r => r.id == category)){
+                    categories.push({
+                        id : category,
+                        name : category_name,
+                        permisos: {}
+                    })
+                }
+            }
+        }
+        categories.push({
+            id: null,
+            name: 'Otros',
+            permisos : []
+        })
+
+        // setear permisos por categoria
+        for(let i in data){
+            let { id, content_type, name, codename, category } = data[i]
             let type = ''
             if(codename.includes('view')) type = 'view'
             if(codename.includes('add')) type = 'add'
             if(codename.includes('change')) type = 'change'
             if(codename.includes('delete')) type = 'delete'
 
-            permisos[content_type].type = name.split(' ')[name.split(' ').length-1]
-            permisos[content_type][type] = id
+            /* 
+                permisos['localidad'].type = 'nombre del contenido'
+                permisos['localidad'].add = ?id
+                permisos['localidad'].delete = ?id
+                permisos['localidad'].change = ?id
+                permisos['localidad'].view = ?id
+            */
+            let indexCategory = categories.findIndex(r => r.id == category)
+            console.log(categories, indexCategory, content_type)
+
+            if(!categories[indexCategory].permisos[content_type]){
+                categories[indexCategory].permisos[content_type] = {}
+            }
+
+            categories[indexCategory].permisos[content_type].type = name.split(' ').splice(2, name.split(' ').length-1).join(' ')
+            categories[indexCategory].permisos[content_type][type] = id
         }
 
+        console.log(categories)
         this.setState({
-            permisos : permisos
+            categories
         })
     }
 
@@ -240,7 +281,7 @@ class EditRoles extends React.Component {
     }
 
     render(){
-        const { data, permisos } = this.state
+        const { data, categories } = this.state
         return (
             <div className="animated fadeIn">
                 <Row>
@@ -249,7 +290,7 @@ class EditRoles extends React.Component {
                             <CardBody>
                                 <CardTitle>Crear/Editar Rol</CardTitle>
                                 <CardBody>
-                                    <MainView {...data} permisos={permisos} onChange={this.onChange} togglePermission={this.togglePermission} />
+                                    <MainView {...data} categories={categories} onChange={this.onChange} togglePermission={this.togglePermission} />
                                 </CardBody>
                                 <div className="row">
                                     <div className="col-sm-12 text-center">

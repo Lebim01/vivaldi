@@ -24,7 +24,7 @@ class Select extends React.Component {
         let _options = [{value:'',label:'Seleccione'}, ...data.map((record) => {
             return {
                 value: record[valueName],
-                label: record[labelName]
+                label: typeof labelName === 'function' ? labelName(record) : record[labelName]
             }
         })]
         this.setState({

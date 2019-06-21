@@ -14,7 +14,7 @@ class MainView extends React.Component {
     }
     optionsRutas = {
         url : `${baseurl}/ruta/`,
-        labelName: 'nombre',
+        labelName: (record) => `${record.origen.ciudad_nombre}-${record.destino.ciudad_nombre}`,
         valueName: 'id'
     }
     optionsDestinos = {
@@ -53,13 +53,13 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Ruta</Label>
                         <div className="col-sm-5">
-                            <Select onChange={this.onChange('ruta')} value={this.props.ruta} asyncOptions={this.optionsRutas} />
+                            <Select onChange={this.onChange('ruta')} value={this.props.ruta} asyncOptions={this.optionsRutas} id="cmb_ruta" />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
                         <Label className="col-sm-3">Destino</Label>
                         <div className="col-sm-5">
-                            <Select onChange={this.onChange('destino')} value={this.props.destino} asyncOptions={this.optionsDestinos} />
+                            <Input readOnly value={this.props.destino} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
@@ -68,12 +68,14 @@ class MainView extends React.Component {
                             <Select onChange={this.onChange('tipo')} value={this.props.tipo} options={this.tipos} />
                         </div>
                     </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Fecha</Label>
-                        <div className="col-sm-5">
-                            <Input onChange={this.onChange('fecha')} value={this.props.fecha} type="date" />
-                        </div>
-                    </FormGroup>
+                    { this.props.tipo == 2 &&
+                        <FormGroup className="row">
+                            <Label className="col-sm-3">Fecha</Label>
+                            <div className="col-sm-5">
+                                <Input onChange={this.onChange('fecha_validez')} value={this.props.fecha_validez} type="date" />
+                            </div>
+                        </FormGroup>
+                    }
                 </form>
             </div>
         )
@@ -84,9 +86,7 @@ class EditFrecuencias extends React.Component {
 
     state = {
         id : null,
-        data : {
-            paradas: []
-        }
+        data : {}
     }
 
     constructor(props){
@@ -103,19 +103,35 @@ class EditFrecuencias extends React.Component {
     }
 
     getData = async (id) => {
-        const { data } = await axios.get(`${baseurl}/frecuencia/${id}/`)
+        const { data } = await axios.get(`${baseurl}/frecuencia/${id}`)
         this.setState({
             id,
             data
-        })
+        }, ()=> this.setDestino())
     }
 
     onChange(name, value){
         let data = this.state.data
         data[name] = value
+        if(name == 'ruta') this.setDestino()
+        if(name == 'tipo') if(value == 1) data.fecha_validez = null
         this.setState({
             data
         })
+    }
+
+    setDestino(){
+        setTimeout(() => {
+            let select = document.getElementById('cmb_ruta')
+            let index = select.selectedIndex
+            if(index > 0){
+                let text = select.options[index].text
+                let destino = text.split('-')[1].trim()
+                this.onChange('destino', destino)
+            }else{
+                this.onChange('destino', '')
+            }
+        }, 500)
     }
 
     confirmSave(){
@@ -126,7 +142,7 @@ class EditFrecuencias extends React.Component {
             showCancelButton: true,
             showLoaderOnConfirm: true,
             preConfirm: () => {
-                return axios.put(`${baseurl}/frecuencia/${id}/`, data)
+                return axios.post(`${baseurl}/frecuencia/${id ? `${id}/` : ''}`, data)
                 .then(response => {
                     if (response.status !== 200 && response.status !== 201) {
                         throw new Error(response.statusText)
