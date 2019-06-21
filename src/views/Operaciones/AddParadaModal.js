@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
-import { Button, FormGroup, Input, InputIcon, Label, Select } from './../../temeforest'
+import { Button, FormGroup, InputIcon, Label, Select } from './../../temeforest'
 import { baseurl } from './../../utils/url'
 
 class AddParadaModal extends React.Component {
@@ -13,10 +13,19 @@ class AddParadaModal extends React.Component {
         valueName: 'id'
     }
 
+    componentWillReceiveProps(props){
+        const { show, ...data } = props
+        this.setState({
+            ...data
+        })
+    }
+
     onChange = name => (e) => {
         let data = this.state.data
         data[name] = e.target.value
-        if(name === 'ciudad') data.ciudad_nombre = e.target.options[e.target.selectedIndex].text
+        if(name === 'ciudad'){
+            data.ciudad_nombre = e.target.options[e.target.selectedIndex].text
+        }
         this.setState({
             data
         })

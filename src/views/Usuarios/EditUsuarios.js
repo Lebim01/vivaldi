@@ -27,7 +27,6 @@ class _Row extends React.Component {
                     <Button outline={true} type="danger" size="sm" rounded={true} onClick={this.delete}>
                         <i className="fa fa-times"></i>
                     </Button>{' '}
-                     {/*this.props.cooperativa_nombre*/}
                     {this.props.name}
                 </td>
                 <td>{this.props.name}</td>

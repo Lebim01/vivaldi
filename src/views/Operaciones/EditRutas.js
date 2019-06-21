@@ -8,11 +8,22 @@ import AddParadaModal from './AddParadaModal'
 
 class RecordRow extends React.Component {
 
+    delete(){
+        if(this.props.delete){
+            this.props.delete(this.props.index)
+        }
+    }
+
     render(){
         const name_input = `activa_${this.props.ciudad}`
         return (
-            <tr>
-                <td>{this.props.ciudad_nombre}</td>
+            <tr onDoubleClick={this.props.edit}>
+                <td>
+                    <Button outline={true} type="danger" size="sm" rounded={true} onClick={this.delete.bind(this)}>
+                        <i className="fa fa-times"></i>
+                    </Button>{' '}
+                    {this.props.ciudad_nombre}
+                </td>
                 <td>{this.props.orden_llegada}</td>
                 <td>{this.props.tarifa_normal}</td>
                 <td>{this.props.tarifa_media}</td>
@@ -52,6 +63,7 @@ class MainView extends React.Component {
         super(props)
         this.toggleModal = this.toggleModal.bind(this)
         this.agregarParada = this.agregarParada.bind(this)
+        this.deleteParada = this.deleteParada.bind(this)
     }
     
     onChange = name => (e) => {
@@ -69,9 +81,10 @@ class MainView extends React.Component {
         this.props.onChange('paradas', paradas)
     }
 
-    toggleModal = () => {
+    toggleModal = (data = {}) => {
         let _modal = this.state.modal
         _modal.show = !_modal.show
+        _modal.data = data
         this.setState({
             modal : _modal
         })
@@ -80,19 +93,36 @@ class MainView extends React.Component {
     agregarParada({ onChange, ...data }){
         let paradas = this.props.paradas
         
-        if(!data.id && !paradas.some((record) => record.ciudad == data.ciudad)){
-            paradas.push({ ...data, is_enable: true })
-        }
-        else if(paradas.some((record) => record.ciudad == data.ciudad)){
-            for(let i = 0; i < paradas.length; i++){
-                if(paradas[i].ciudad === data.ciudad){
+        if(data.id){
+            for(let i in paradas){
+                if(paradas[i].id == data.id){
                     paradas[i] = data
                     break
                 }
             }
         }
+        else if(!data.id && !paradas.some((record) => record.ciudad == data.ciudad)){
+            paradas.push({ ...data, is_enable: true })
+        }
         this.props.onChange('paradas', paradas)
         this.toggleModal()
+    }
+
+    deleteParada = async (index) => {
+        const { value } = await Swal.fire({
+            title: 'Borrar parada',
+            text: '¿Esta seguro de eliminar?',
+            showCancelButton: true
+        })
+        if(value){
+            let paradas = this.props.paradas
+            paradas.splice(index, 1)
+            this.props.onChange('paradas', paradas)
+        }
+    }
+
+    editParada(data){
+        this.toggleModal({ ...data })
     }
 
     render(){
@@ -137,7 +167,16 @@ class MainView extends React.Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    { this.props.paradas.map((record, i) => <RecordRow key={i} {...record} onChange={this.onChangeParada(i)} />)}
+                                    { this.props.paradas.map((record, i) => 
+                                        <RecordRow 
+                                            key={i}
+                                            index={i}
+                                            {...record}
+                                            onChange={this.onChangeParada(i)} 
+                                            delete={this.deleteParada} 
+                                            edit={() => this.editParada(record)}
+                                        />
+                                    )}
                                 </tbody>
                             </table>
                         </div>
