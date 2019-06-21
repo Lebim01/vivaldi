@@ -102,7 +102,7 @@ class Viajes extends React.Component {
                                     <ListPage
                                         searchable={false}
                                         fieldNames={['Frecuencia','Cooperativa', 'Disco', 'Ruta', 'Salida']}
-                                        fields={['frecuencia', 'cooperativa_nombre', 'disco', 'ruta_nombre', 'salida']}
+                                        fields={['frecuencia_nombre', 'cooperativa_nombre', 'bus_nombre', 'ruta_nombre', 'hora_salida']}
 
                                         url='viaje'
                                         parameters={this.state}
