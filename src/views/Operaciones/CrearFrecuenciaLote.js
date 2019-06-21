@@ -48,7 +48,17 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Intervalo</Label>
                         <div className="col-sm-5">
-                            <Input className="no-ampm" min="00:01" max="12:00" onChange={this.onChange('intervalo')} value={this.props.intervalo} type="time" />
+                            <div className="row">
+                                <div className="col-sm-4">
+                                    <input type="number" className="form-control" min="0" max="12" placeholder="00" value={this.props.intervalo_hora} onChange={this.onChange('intervalo_hora')} title="horas" />
+                                </div>
+                                <div className="col-sm-1">
+                                    :
+                                </div>
+                                <div className="col-sm-4">
+                                    <input type="number" className="form-control" min="0" max="59" placeholder="00" value={this.props.intervalo_minuto} onChange={this.onChange('intervalo_minuto')} title="minutos" />
+                                </div>
+                            </div>
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
@@ -100,7 +110,8 @@ class CrearFrecuenciaLote extends React.Component {
     state = {
         id : null,
         data : {
-            intervalo: '01:00'
+            intervalo_hora: 0,
+            intervalo_minuto: 10
         }
     }
 
@@ -153,9 +164,9 @@ class CrearFrecuenciaLote extends React.Component {
     confirmSave = async () => {
         const { data } = this.state
         try {
-            if(!data.hora_inicio || !data.intervalo || !data.hora_fin) throw 'Favor de llenar todos los campos'
+            if(!data.hora_inicio || (!data.intervalo_hora && !data.intervalo_minuto) || !data.hora_fin) throw 'Favor de llenar todos los campos'
             let cantidad_registros_por_crear = 1
-            let intervalo = moment.duration(data.intervalo);
+            let intervalo = moment.duration(`${data.intervalo_hora}:${data.intervalo_minuto}`);
             let fecha_fin = moment(`${moment().format('YYYY-MM-DD')} ${data.hora_fin}`)
             let fecha_temp = moment(`${moment().format('YYYY-MM-DD')} ${data.hora_inicio}`)
 
@@ -179,8 +190,8 @@ class CrearFrecuenciaLote extends React.Component {
     guardarFrecuencias = async () => {
         try {
             const { data } = this.state
-            const { hora_fin, hora_inicio, intervalo, ...frecuenciaData } = this.state.data
-            let _intervalo = moment.duration(data.intervalo)
+            const { hora_fin, hora_inicio, intervalo_hora, intervalo_minuto, ...frecuenciaData } = this.state.data
+            let _intervalo = moment.duration(`${data.intervalo_hora}:${data.intervalo_minuto}`);
             let fecha_fin = moment(`${moment().format('YYYY-MM-DD')} ${data.hora_fin}`)
             let fecha_temp = moment(`${moment().format('YYYY-MM-DD')} ${data.hora_inicio}`)
 
