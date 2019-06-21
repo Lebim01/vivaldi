@@ -31,6 +31,9 @@ class AddParadaModal extends React.Component {
     guardar(){
         if(this.props.guardar){
             this.props.guardar(this.state.data)
+            this.setState({
+                data : {}
+            })
         }
     }
 

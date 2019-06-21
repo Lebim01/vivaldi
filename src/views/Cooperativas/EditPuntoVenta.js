@@ -2,6 +2,7 @@ import React from 'react'
 import { Col, Row } from 'reactstrap'
 import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label, Select } from './../../temeforest'
 import { baseurl, getParameter } from './../../utils/url'
+import { generateHexadecimal } from './../../utils/string'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import AddCooperativaPuntoVentaModal from './AddCooperativaPuntoVentaModal'
@@ -116,6 +117,10 @@ class MainView extends React.Component {
         })
     }
 
+    generateHexadecimal(){
+        this.props.onChange('api_key', generateHexadecimal(32))
+    }
+
     render(){
         const { localidades, puntoventa_cooperativas } = this.props
         return (
@@ -130,10 +135,10 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Api Key</Label>
                         <div className="col-sm-5">
-                            <Input onChange={this.onChange('api_key')} value={this.props.api_key} />
+                            <Input onChange={this.onChange('api_key')} value={this.props.api_key} readOnly />
                         </div>
                         <div className="col-sm-3">
-                            <Button>Generar</Button>
+                            <Button onClick={this.generateHexadecimal.bind(this)}>Generar</Button>
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
