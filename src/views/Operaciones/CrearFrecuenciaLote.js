@@ -165,15 +165,17 @@ class CrearFrecuenciaLote extends React.Component {
         const { data } = this.state
         try {
             if(!data.hora_inicio || (!data.intervalo_hora && !data.intervalo_minuto) || !data.hora_fin) throw 'Favor de llenar todos los campos'
-            let cantidad_registros_por_crear = 1
+            let cantidad_registros_por_crear = 0
             let intervalo = moment.duration(`${data.intervalo_hora}:${data.intervalo_minuto}`);
             let fecha_fin = moment(`${moment().format('YYYY-MM-DD')} ${data.hora_fin}`)
             let fecha_temp = moment(`${moment().format('YYYY-MM-DD')} ${data.hora_inicio}`)
 
-            while(fecha_fin.isAfter(fecha_temp)){
+            do {
                 cantidad_registros_por_crear++
                 fecha_temp.add(intervalo)
             }
+            while(fecha_fin.isAfter(fecha_temp) || fecha_fin.isSame(fecha_temp))
+
             const {value} = await Swal.fire({
                 title: 'Confirmar Guardar',
                 text : `Usted va a crear ${cantidad_registros_por_crear} cantidad de frecuencias`,
@@ -195,12 +197,12 @@ class CrearFrecuenciaLote extends React.Component {
             let fecha_fin = moment(`${moment().format('YYYY-MM-DD')} ${data.hora_fin}`)
             let fecha_temp = moment(`${moment().format('YYYY-MM-DD')} ${data.hora_inicio}`)
 
-            await this.guardarFrecuencia({ ...frecuenciaData, hora_salida: hora_inicio })
-
-            while(fecha_fin.isAfter(fecha_temp)){
-                fecha_temp.add(_intervalo)
+            do{
                 await this.guardarFrecuencia({ ...frecuenciaData, hora_salida: fecha_temp.format('HH:mm:ss') })
+                fecha_temp.add(_intervalo)
             }
+            while(fecha_fin.isAfter(fecha_temp) || fecha_fin.isSame(fecha_temp))
+
             this.props.history.push('/operaciones/frecuencias')
         }catch(e){
             Swal.fire('Error', 'contacte a soporte', 'error')
