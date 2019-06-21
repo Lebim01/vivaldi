@@ -87,18 +87,8 @@ export default {
           icon: 'icon-puzzle',
         },
         {
-          name: 'Frecuencias extra',
-          url: '/#/operaciones/frecuencias-extra',
-          icon: 'icon-puzzle',
-        },
-        {
           name: 'Frecuencias por lote',
           url: '/#/operaciones/frecuencias-lote',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: ' Tasas Contingencia',
-          url: '/#/operaciones/tasas-contingencia',
           icon: 'icon-puzzle',
         },
         {
@@ -129,7 +119,11 @@ export default {
             {
               name : 'Choferes',
               url : '/#/operaciones/solicitudes/choferes'
-            }
+            },
+            {
+              name : 'Tasas de contigencia',
+              url : '/#/operaciones/solicitudes/tasas-contingencia'
+            },
           ]
         },
       ],
