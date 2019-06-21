@@ -5,6 +5,31 @@ import { baseurl, getParameter } from './../../utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 
+function getAsientos(nivel, _filas, init = false){
+    const { filas, asientos } = nivel
+    let _asientos = asientos
+
+    // agregar filas
+    if(filas < _filas || init){
+        let filasNuevas = _filas - (init ? 0 : filas)
+        for(let i  = 0; i < filasNuevas; i++){
+            _asientos = _asientos.concat([
+                { index : _asientos.length, lado : 'V' },
+                { index : _asientos.length+1, lado : 'P' },
+                { index : _asientos.length+2, lado : 'P' },
+                { index : _asientos.length+3, lado : 'V' }
+            ])
+        }
+    }
+    // menos filas
+    else if(filas > _filas){
+        let filasMenos = filas-_filas
+        _asientos.splice(_asientos.length-(4*filasMenos), (4*filasMenos))
+    }
+    return _asientos
+}
+
+
 class DividerAsiento extends React.Component {
     render(){
         return (
@@ -64,8 +89,6 @@ class Piso extends React.Component {
     render(){
         const { filas, asientos, asientos_desactivados } = this.props
 
-        console.log(asientos_desactivados)
-
         let _filas = []
         for(let i = 0; i < filas; i++) { _filas.push(1) }
 
@@ -122,32 +145,9 @@ class MainView extends React.Component {
     changeFilas = (filas) => {
         let niveles = this.props.niveles
         let piso = this.state.tab
-        niveles[piso].asientos = this.getAsientos(niveles[piso], Number(filas))
+        niveles[piso].asientos = getAsientos(niveles[piso], Number(filas))
         niveles[piso].filas = Number(filas)
         this.props.onChange('niveles', niveles)
-    }
-
-    getAsientos(nivel, _filas){
-        const { filas, asientos } = nivel
-        let _asientos = asientos
-        // agregar filas
-        if(filas < _filas){
-            let filasNuevas = _filas - filas
-            for(let i  = 0; i < filasNuevas; i++){
-                _asientos = _asientos.concat([
-                    { index : _asientos.length, lado : 'V' },
-                    { index : _asientos.length+1, lado : 'P' },
-                    { index : _asientos.length+2, lado : 'P' },
-                    { index : _asientos.length+3, lado : 'V' }
-                ])
-            }
-        }
-        // menos filas
-        else if(filas > _filas){
-            let filasMenos = filas-_filas
-            _asientos.splice(_asientos.length-(4*filasMenos), (4*filasMenos))
-        }
-        return _asientos
     }
 
     changeTab(tab){
@@ -221,6 +221,11 @@ class EditDistribucionAsientos extends React.Component {
 
     getData = async (id) => {
         const { data } = await axios.get(`${baseurl}/busTipo/${id}/`)
+        for(let i in data.niveles){
+            data.niveles[i].asientos = []
+            data.niveles[i].asientos = getAsientos(data.niveles[i], data.niveles[i].filas, true)
+        }
+        console.log(data)
         this.setState({
             id,
             data
