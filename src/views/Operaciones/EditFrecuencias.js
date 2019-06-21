@@ -4,97 +4,34 @@ import { Card, CardBody, CardTitle, Button, FormGroup, Input, Select, Label } fr
 import { baseurl, getParameter } from './../../utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
-import AddParadaModal from './AddParadaModal'
-
-class RecordRow extends React.Component {
-
-    constructor(props){
-        super(props)
-        this.onChange = this.onChange.bind(this)
-    }
-
-    onChange(){
-        if(this.props.onChange){
-            this.props.onChange(this.props)
-        }
-    }
-
-    render(){
-        const name_input = `activa_${this.props.parada}`
-        return (
-            <tr>
-                <td>{this.props.parada_nombre}</td>
-                <td>{this.props.llegada}</td>
-                <td>{this.props.tarifa_normal}</td>
-                <td>{this.props.tarifa_media}</td>
-                <td>{this.props.horas}h</td>
-                <td>
-                    <div className="custom-control custom-checkbox">
-                        <input type="checkbox" className="custom-control-input" id={name_input} name={name_input} checked={this.props.activa} onChange={this.onChange('activa')} />
-                        <Label onlyClassName="custom-control-label" htmlFor={name_input}></Label>
-                    </div>
-                </td>
-            </tr>
-        )
-    }
-}
 
 class MainView extends React.Component {
-
-    state = {
-        modal : {
-            show : false
-        }
-    }
 
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
         labelName: 'nombre',
         valueName: 'id'
     }
-
+    optionsRutas = {
+        url : `${baseurl}/ruta/`,
+        labelName: 'nombre',
+        valueName: 'id'
+    }
     optionsDestinos = {
         url : `${baseurl}/ciudad/`,
         labelName: 'nombre',
         valueName: 'id'
     }
+    tipos = [
+        { value: '', label : 'Seleccione' },
+        { value: 1, label : 'Normal' },
+        { value: 2, label : 'Extraordinaria' },
+    ]
 
-    constructor(props){
-        super(props)
-        this.toggleModal = this.toggleModal.bind(this)
-        this.agregarParada = this.agregarParada.bind(this)
-    }
-    
     onChange = name => (e) => {
         if(this.props.onChange){
             this.props.onChange(name, e.target.value)
         }
-    }
-
-    toggleModal = () => {
-        let _modal = this.state.modal
-        _modal.show = !_modal.show
-        this.setState({
-            modal : _modal
-        })
-    }
-
-    agregarParada({ onChange, ...data }){
-        let paradas = this.props.paradas
-
-        if(!data.id && !paradas.some((record) => record.parada == data.parada)){
-            paradas.push(data)
-        }
-        else if(paradas.some((record) => record.parada == data.parada)){
-            for(let i = 0; i < paradas.length; i++){
-                if(paradas[i].parada === data.parada){
-                    paradas[i] = data
-                    break
-                }
-            }
-        }
-        this.props.onChange('paradas', paradas)
-        this.toggleModal()
     }
 
     render(){
@@ -102,9 +39,21 @@ class MainView extends React.Component {
             <div>
                 <form className="mt-4 form-horizontal">
                     <FormGroup className="row">
+                        <Label className="col-sm-3">Hora salida</Label>
+                        <div className="col-sm-5">
+                            <Input onChange={this.onChange('hora_salida')} value={this.props.hora_salida} type="time" />
+                        </div>
+                    </FormGroup>
+                    <FormGroup className="row">
                         <Label className="col-sm-3">Cooperativa</Label>
                         <div className="col-sm-5">
                             <Select onChange={this.onChange('cooperativa')} value={this.props.cooperativa} asyncOptions={this.optionsCooperativa} />
+                        </div>
+                    </FormGroup>
+                    <FormGroup className="row">
+                        <Label className="col-sm-3">Ruta</Label>
+                        <div className="col-sm-5">
+                            <Select onChange={this.onChange('ruta')} value={this.props.ruta} asyncOptions={this.optionsRutas} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
@@ -114,48 +63,24 @@ class MainView extends React.Component {
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
-                        <Label className="col-sm-3">Via</Label>
+                        <Label className="col-sm-3">Tipo</Label>
                         <div className="col-sm-5">
-                            <Input onChange={this.onChange('representante_legal')} value={this.props.representante_legal} />
+                            <Select onChange={this.onChange('tipo')} value={this.props.tipo} options={this.tipos} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
-                        <h4>
-                            Paradas
-                            <Button style={{marginLeft: 10}} onClick={this.toggleModal}>
-                                <i className="fa fa-plus"></i>
-                            </Button>
-                        </h4>
-                        <div className="col-sm-12">
-                            <table className="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Parada</th>
-                                        <th>Llegada</th>
-                                        <th>Tarifa Normal</th>
-                                        <th>Tarifa Media</th>
-                                        <th>Tiempo</th>
-                                        <th>Activa</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    { this.props.paradas.map((record, i) => <RecordRow key={i} {...record} />)}
-                                </tbody>
-                            </table>
+                        <Label className="col-sm-3">Fecha</Label>
+                        <div className="col-sm-5">
+                            <Input onChange={this.onChange('fecha')} value={this.props.fecha} type="date" />
                         </div>
                     </FormGroup>
-                    <AddParadaModal 
-                        guardar={(data) => this.agregarParada(data)}
-                        {...this.state.modal} 
-                        toggle={this.toggleModal} 
-                    />
                 </form>
             </div>
         )
     }
 }
 
-class EditRutas extends React.Component {
+class EditFrecuencias extends React.Component {
 
     state = {
         id : null,
@@ -178,7 +103,7 @@ class EditRutas extends React.Component {
     }
 
     getData = async (id) => {
-        const { data } = await axios.get(`${baseurl}/ruta/${id}/`)
+        const { data } = await axios.get(`${baseurl}/frecuencia/${id}/`)
         this.setState({
             id,
             data
@@ -201,7 +126,7 @@ class EditRutas extends React.Component {
             showCancelButton: true,
             showLoaderOnConfirm: true,
             preConfirm: () => {
-                return axios.put(`${baseurl}/ruta/${id}/`, data)
+                return axios.put(`${baseurl}/frecuencia/${id}/`, data)
                 .then(response => {
                     if (response.status !== 200 && response.status !== 201) {
                         throw new Error(response.statusText)
@@ -221,7 +146,7 @@ class EditRutas extends React.Component {
                     text : `Guardado`,
                     type : 'success'
                 })
-                this.props.history.push('/operaciones/rutas/')
+                this.props.history.push('/operaciones/frecuencias/')
             }
         })
     }
@@ -234,7 +159,7 @@ class EditRutas extends React.Component {
                     <Col xs="12" md="12">
                         <Card>
                             <CardBody>
-                                <CardTitle>Crear/Editar Rutas</CardTitle>
+                                <CardTitle>Crear/Editar Frecuencias</CardTitle>
                                 <CardBody>
                                     <MainView {...data} onChange={this.onChange} />
                                 </CardBody>
@@ -253,4 +178,4 @@ class EditRutas extends React.Component {
     }
 }
 
-export default EditRutas
+export default EditFrecuencias
