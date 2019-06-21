@@ -34,7 +34,7 @@ class DistribucionAsientos extends React.Component {
     }
 
     loadList = async () => {
-        let { data } = await axios.get(`${baseurl}/distribucion/`)
+        let { data } = await axios.get(`${baseurl}/busTipo/`)
         let filtered = data
         this.setState({
             data,

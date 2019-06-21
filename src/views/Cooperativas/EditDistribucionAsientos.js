@@ -70,7 +70,7 @@ class Piso extends React.Component {
 class MainView extends React.Component {
 
     state = {
-        tab : 'piso1'
+        tab : 0
     }
     constructor(props){
         super(props)
@@ -85,10 +85,10 @@ class MainView extends React.Component {
     }
 
     changeFilas = (e) => {
-        let pisosData = this.props.pisosData
+        let niveles = this.props.niveles
         let piso = this.state.tab
-        pisosData[piso].filas = Number(e.target.value)
-        this.props.onChange('pisosData', pisosData)
+        niveles[piso].filas = Number(e.target.value)
+        this.props.onChange('niveles', niveles)
     }
 
     changeTab(tab){
@@ -99,7 +99,7 @@ class MainView extends React.Component {
 
     render(){
         const { tab } = this.state
-        const { pisos, pisosData } = this.props
+        const { pisos, niveles } = this.props
         return (
             <div>
                 <form className="mt-4 form-horizontal">
@@ -114,7 +114,7 @@ class MainView extends React.Component {
                         <div className="col-sm-8">
                             <Tabs tab={tab} tabs={pisos} onClickTab={this.changeTab} />
                             <br />
-                            <Piso {...pisosData[tab]} onChange={this.changeFilas} />
+                            <Piso {...niveles[tab]} onChange={this.changeFilas} />
                         </div>
                     </FormGroup>
                 </form>
@@ -128,16 +128,19 @@ class EditDistribucionAsientos extends React.Component {
     seleccione = [{label:'Seleccione', value:''}]
     state = {
         data:{
-            pisosData : {
-                piso1 : {
-                    filas : 1
+            nombre: '',
+            niveles : [
+                {
+                    nombre : '',
+                    filas : 1,
                 },
-                piso2 : {
-                    filas : 2
+                {
+                    nombre : '',
+                    filas : 0,
                 }
-            }
+            ]
         }, 
-        pisos:[{ link:'piso1', text:'Piso 1' }, { link:'piso2', text:'Piso 2' }]
+        pisos:[{ link:'0', text:'Piso 1' }, { link:'1', text:'Piso 2' }]
     }
 
     constructor(props){
@@ -154,7 +157,7 @@ class EditDistribucionAsientos extends React.Component {
     }
 
     getData = async (id) => {
-        const { data } = await axios.get(`${baseurl}/bus/${id}/`)
+        const { data } = await axios.get(`${baseurl}/busTipo/${id}/`)
         this.setState({
             id,
             data
@@ -177,7 +180,7 @@ class EditDistribucionAsientos extends React.Component {
             showCancelButton: true,
             showLoaderOnConfirm: true,
             preConfirm: () => {
-                return axios.post(`${baseurl}/bus/${id ? `${id}/` : ``}`, data)
+                return axios.post(`${baseurl}/busTipo/${id ? `${id}/` : ``}`, data)
                 .then(response => {
                     if (response.status !== 200 && response.status !== 201) {
                         throw new Error(response.statusText)
