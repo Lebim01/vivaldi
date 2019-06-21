@@ -48,7 +48,7 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Intervalo</Label>
                         <div className="col-sm-5">
-                            <Input onChange={this.onChange('intervalo')} value={this.props.intervalo} type="time" />
+                            <Input className="no-ampm" min="00:01" max="12:00" onChange={this.onChange('intervalo')} value={this.props.intervalo} type="time" />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
@@ -99,7 +99,9 @@ class CrearFrecuenciaLote extends React.Component {
 
     state = {
         id : null,
-        data : {}
+        data : {
+            intervalo: '01:00'
+        }
     }
 
     constructor(props){
