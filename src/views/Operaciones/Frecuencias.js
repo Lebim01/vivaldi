@@ -13,10 +13,10 @@ function Frecuencias(props) {
 
                                 searchable={true}
                                 searchPlaceholder="Cooperativa, Ruta, Tipo"
-                                searchFields={['cooperativa_nombre', 'ruta', 'tipo']}
+                                searchFields={['cooperativa_nombre', 'ruta_nombre', 'tipo_nombre']}
 
                                 fieldNames={['Hora', 'Cooperativa', 'Ruta', 'Tipo']}
-                                fields={['hora_salida', 'cooperativa_nombre', 'ruta', 'tipo']}
+                                fields={['hora_salida', 'cooperativa_nombre', 'ruta_nombre', 'tipo_nombre']}
 
                                 url='frecuencia'
                                 menu='operaciones'
