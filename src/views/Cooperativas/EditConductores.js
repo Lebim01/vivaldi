@@ -11,11 +11,13 @@ class MainView extends React.Component {
 
     state = {
         buscar : '',
-        personas : []
+        personas : [],
+        descargar: true,
     }
     constructor(props){
         super(props)
         this.searchPersona = this.searchPersona.bind(this)
+        this.canDownload = this.canDownload.bind(this)
     }
 
     onChange = name => (e) => {
@@ -57,12 +59,21 @@ class MainView extends React.Component {
             let a = document.createElement('A');
             a.href = file_path;
             if(file_path){
-                a.download = file_path.substr(file_path.lastIndexOf('/') + 1);
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
+                if(!file_path.includes('none')){
+                    a.download = file_path.substr(file_path.lastIndexOf('/') + 1);
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                }
             }
         }
+    }
+
+    canDownload = (url) => {
+      if(url && url.includes('none')){
+        return true
+      }
+      return false
     }
 
     render(){
@@ -104,7 +115,7 @@ class MainView extends React.Component {
                         <div className="col-sm-12 text-center">
                             <Input id="documentation" type="file" style={{display:'none'}} onChange={this.onChangeFile}/>
                             <Button type="success" style={{marginRight:5}} onClick={this.UploadFile}>Subir Documentación</Button>
-                            <Button type="success" style={{marginLeft:5}} onClick={() => this.DownloadFile(this.props.documentacion)}>Ver Documentación</Button>
+                            <Button type="success" style={{marginLeft:5}} onClick={() => this.DownloadFile(this.props.documentacion)} disabled={this.canDownload(this.props.documentacion)}>Ver Documentación</Button>
                         </div>
                     </FormGroup>
                 </form>
