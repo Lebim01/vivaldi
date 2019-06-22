@@ -13,12 +13,12 @@ class _Row extends React.Component {
     }
 
     render(){
-        const { cooperativa_nombre, placa, disco } = this.props
+        const { cooperativa_nombre, placa, numero } = this.props
         return (
             <tr onDoubleClick={this.onRowDoubleClick.bind(this)}>
                 <td>{cooperativa_nombre}</td>
                 <td>{placa}</td>
-                <td>{disco}</td>
+                <td>{numero}</td>
             </tr>
         )
     }

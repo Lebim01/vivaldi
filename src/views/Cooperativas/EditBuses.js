@@ -1,7 +1,8 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
 import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label, Select } from './../../temeforest'
-import { baseurl, getParameter } from './../../utils/url'
+import { baseurl, baseMediaUrl, getParameter } from './../../utils/url'
+import { fileToBase64 } from './../../utils/file'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 
@@ -10,6 +11,33 @@ class MainView extends React.Component {
     onChange = name => (e) => {
         if(this.props.onChange){
             this.props.onChange(name, e.target.value)
+        }
+    }
+
+    UploadFile = (e) => {
+        let el = document.getElementById("documentation");
+        if (el) {
+            el.click();
+        }
+    }
+
+    onChangeFile = (e) => {
+        if(this.props.onChangeFile){
+            this.props.onChangeFile(e.target.files[0])
+        }
+    }
+
+    DownloadFile = (e) => {
+        if (e){
+            let file_path = baseMediaUrl + e;
+            let a = document.createElement('A');
+            a.href = file_path;
+            if(file_path){
+                a.download = file_path.substr(file_path.lastIndexOf('/') + 1);
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            }
         }
     }
 
@@ -90,6 +118,13 @@ class MainView extends React.Component {
                             <Input type="number" onChange={this.onChange('anio_fabricacion')} value={this.props.anio_fabricacion} />
                         </div>
                     </FormGroup>
+                    <FormGroup className="row">
+                        <div className="col-sm-12 text-center">
+                            <Input id="documentation" type="file" style={{display:'none'}} onChange={this.onChangeFile}/>
+                            <Button type="success" style={{marginRight:5}} onClick={this.UploadFile}>Subir Documentación</Button>
+                            <Button type="success" style={{marginLeft:5}} onClick={() => this.DownloadFile(this.props.documentacion)}>Ver Documentación</Button>
+                        </div>
+                    </FormGroup>
                 </form>
             </div>
         )
@@ -112,6 +147,7 @@ class EditBuses extends React.Component {
         this.getBusTipos = this.getBusTipos.bind(this)
         this.getPropietarios = this.getPropietarios.bind(this)
         this.getConductores = this.getConductores.bind(this)
+        this.onChangeFile = this.onChangeFile.bind(this)
     }
 
     componentDidMount(){
@@ -190,6 +226,18 @@ class EditBuses extends React.Component {
         })
     }
 
+    onChangeFile = async (value) => {
+        try {
+            let data = this.state.data
+            data.documentacion = await fileToBase64(value)
+            this.setState({
+                data
+            })
+        }catch(e){
+            Swal.fire('Subir archivo', 'Hubo algún problema al querer subir el archivo', 'error')
+        }
+    }
+
     confirmSave(){
         const { id, data } = this.state
         Swal.fire({
@@ -233,7 +281,7 @@ class EditBuses extends React.Component {
                             <CardBody>
                                 <CardTitle>Crear/Editar Bus</CardTitle>
                                 <CardBody>
-                                    <MainView {...data} onChange={this.onChange} cooperativas={cooperativas} marcas={marcas} distribucion={distribucion} busTiposServicios={busTiposServicios} busTipos={busTipos} propietarios={propietarios} conductores={conductores} />
+                                    <MainView {...data} onChange={this.onChange} cooperativas={cooperativas} marcas={marcas} distribucion={distribucion} busTiposServicios={busTiposServicios} busTipos={busTipos} propietarios={propietarios} conductores={conductores} onChangeFile={this.onChangeFile}/>
                                 </CardBody>
                                 <div className="row">
                                     <div className="col-sm-12 text-center">
