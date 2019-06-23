@@ -6,6 +6,10 @@ import { baseurl } from './../../utils/url'
 class AddParadaModal extends React.Component {
 
     state = { errors: [], data: {} }
+    constructor(props){
+        super(props)
+        this.guardar = this.guardar.bind(this)
+    }
 
     optionsParada = {
         url : `${baseurl}/ciudad/`,
@@ -38,11 +42,18 @@ class AddParadaModal extends React.Component {
     }
 
     guardar(){
+        const { ciudad, ciudad_nombre, orden_llegada, tarifa_normal, tarifa_media, duracion, index, id } = this.state.data
         if(this.props.guardar){
-            this.props.guardar(this.state.data)
-            this.setState({
-                data : {}
-            })
+            let _exito = this.props.guardar({ ciudad, ciudad_nombre, orden_llegada, tarifa_media, tarifa_normal, duracion, index, id})
+            if(_exito){
+                this.setState({
+                    data : {}
+                })
+            }else{
+                this.setState({
+                    errors : ['repetido']
+                })
+            }
         }
     }
 
@@ -53,6 +64,11 @@ class AddParadaModal extends React.Component {
                 <ModalHeader toggle={this.toggle.bind(this)}>Agregar Parada</ModalHeader>
                 <ModalBody>
                     <form className="mt-4 form-horizontal">
+                        { errors.includes('repetido') &&
+                            <div className="alert alert-danger">
+                                No se puede duplicar paradas
+                            </div>
+                        }
                         <FormGroup className="row">
                             <Label className="col-sm-4">Parada</Label>
                             <div className="col-sm-6">
@@ -86,7 +102,7 @@ class AddParadaModal extends React.Component {
                     </form>
                 </ModalBody>
                 <ModalFooter>
-                    <Button type="success" onClick={this.guardar.bind(this)}>Aceptar</Button>{' '}
+                    <Button type="success" onClick={this.guardar}>Aceptar</Button>{' '}
                     <Button type="secondary" onClick={this.toggle.bind(this)}>Cancelar</Button>
                 </ModalFooter>
             </Modal>

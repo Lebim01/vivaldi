@@ -30,6 +30,8 @@ const Viajes = React.lazy(() => import('./views/Operaciones/Viajes'))
 const Frecuencias = React.lazy(() => import('./views/Operaciones/Frecuencias'))
 const EditFrecuencias = React.lazy(() => import('./views/Operaciones/EditFrecuencias'))
 const CrearFrecuenciaLote = React.lazy(() => import('./views/Operaciones/CrearFrecuenciaLote'))
+/** SOLICITUDES */
+const SolicitudUsuario = React.lazy(() => import('./views/Operaciones/Solicitudes/SolicitudUsuario'))
 /** RECAUDACIONES */
 const PanelRecaudaciones = React.lazy(() => import('./views/Recaudaciones/PanelRecaudaciones'))
 
@@ -75,7 +77,7 @@ const routes = [
   { path: '/operaciones/frecuencias-lote', name: 'Crear Frecuencias por Lote', component: CrearFrecuenciaLote },
   { path: '/operaciones/tasas-contingencia', name: 'Navbars', component: Page404 },
   { path: '/operaciones/consulta-tasa', name: 'Navs', component: Page404 },
-  { path: '/operaciones/solicitudes/usuario', name: 'Paginations', component: Page404 },
+  { path: '/operaciones/solicitudes/usuario', name: 'Solicitud de Usuario', component: SolicitudUsuario, exact: true },
   { path: '/operaciones/solicitudes/frecuencias', name: 'Popovers', component: Page404 },
   { path: '/operaciones/solicitudes/buses', name: 'Progress Bar', component: Page404 },
   { path: '/operaciones/solicitudes/modificaciones-buses', name: 'Tooltips', component: Page404 },

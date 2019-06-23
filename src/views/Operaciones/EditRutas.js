@@ -92,7 +92,11 @@ class MainView extends React.Component {
 
     agregarParada({ onChange, ...data }){
         let paradas = this.props.paradas
-        
+        let _continue = !paradas.some((r, i) => r.ciudad == data.ciudad && r.id != data.id && i != data.index)
+        if(!_continue){
+            return false
+        }
+
         if(data.id){
             for(let i in paradas){
                 if(paradas[i].id == data.id){
@@ -101,11 +105,15 @@ class MainView extends React.Component {
                 }
             }
         }
-        else if(!data.id && !paradas.some((record) => record.ciudad == data.ciudad)){
+        else if(data.index){
+            paradas[data.index] = data
+        }
+        else {
             paradas.push({ ...data, is_enable: true })
         }
         this.props.onChange('paradas', paradas)
         this.toggleModal()
+        return true
     }
 
     deleteParada = async (index) => {
@@ -174,7 +182,7 @@ class MainView extends React.Component {
                                             {...record}
                                             onChange={this.onChangeParada(i)} 
                                             delete={this.deleteParada} 
-                                            edit={() => this.editParada(record)}
+                                            edit={() => this.editParada({ ...record, index: i })}
                                         />
                                     )}
                                 </tbody>
