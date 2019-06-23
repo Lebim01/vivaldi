@@ -6,6 +6,7 @@ import { fileToBase64 } from './../../utils/file'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import EditPersona from './EditPersona'
+import { isUndefined } from 'util';
 
 class MainView extends React.Component {
 
@@ -17,7 +18,6 @@ class MainView extends React.Component {
     constructor(props){
         super(props)
         this.searchPersona = this.searchPersona.bind(this)
-        this.canDownload = this.canDownload.bind(this)
     }
 
     onChange = name => (e) => {
@@ -53,29 +53,6 @@ class MainView extends React.Component {
         }
     }
 
-    DownloadFile = (e) => {
-        if (e){
-            let file_path = baseMediaUrl + e;
-            let a = document.createElement('A');
-            a.href = file_path;
-            if(file_path){
-                if(!file_path.includes('none')){
-                    a.download = file_path.substr(file_path.lastIndexOf('/') + 1);
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
-                }
-            }
-        }
-    }
-
-    canDownload = (url) => {
-      if(url && url.includes('none')){
-        return true
-      }
-      return false
-    }
-
     render(){
         const { personas, buscar } = this.state
         const { cooperativas, tipos, persona } = this.props
@@ -93,7 +70,6 @@ class MainView extends React.Component {
                         <div className="col-sm-5">
                             <InputAutocomplete 
                                 icon={<i className="fa fa-search"/>}
-                                onSelect={(val) => console.log(val)}
                                 items={personas}
                                 onChange={this.onChange('buscar')}
                                 inputProps={{
@@ -115,7 +91,7 @@ class MainView extends React.Component {
                         <div className="col-sm-12 text-center">
                             <Input id="documentation" type="file" style={{display:'none'}} onChange={this.onChangeFile}/>
                             <Button type="success" style={{marginRight:5}} onClick={this.UploadFile}>Subir Documentación</Button>
-                            <Button type="success" style={{marginLeft:5}} onClick={() => this.DownloadFile(this.props.documentacion)} disabled={this.canDownload(this.props.documentacion)}>Ver Documentación</Button>
+                            <Button type="success" style={{marginLeft:5}} download={this.props.documentacion}>Ver Documentación</Button>
                         </div>
                     </FormGroup>
                 </form>
@@ -128,7 +104,7 @@ class EditConductor extends React.Component {
 
     seleccione = [{label:'Seleccione', value:''}]
     tipos = [{label:'Conductor', value:'2'},{label:'Asistente',value:'1'}]
-    state = {data:{}, tipos: this.tipos, cooperativas: [], persona:{}}
+    state = {data:{documentacion:'none'}, tipos: this.tipos, cooperativas: [], persona:{}}
 
     constructor(props){
         super(props)
@@ -150,12 +126,14 @@ class EditConductor extends React.Component {
 
     searchPersona = async (identificacion) => {
         const { data } = await axios.get(`${baseurl}/persona/?identificacion=${identificacion}`)
-        const local = this.state.data
-        local['persona'] = data[0].id
-        this.setState({
-            persona: data[0],
-            data: local,
-        })
+        if(data.length > 0){
+            const local = this.state.data
+            local['persona'] = data[0].id
+            this.setState({
+                persona: data[0],
+                data: local,
+            })
+        }
     }
 
     getPersona = async (id) => {
