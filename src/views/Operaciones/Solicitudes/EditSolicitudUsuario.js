@@ -152,7 +152,7 @@ class EditSolicitudUsuario extends React.Component {
     }
 
     getData = async (id) => {
-        const { data } = await axios.get(`${baseurl}/gremio/${id}/`)
+        const { data } = await axios.get(`${baseurl}/venta/solicitud_usuario/${id}/`)
         this.setState({
             id,
             data
@@ -176,7 +176,7 @@ class EditSolicitudUsuario extends React.Component {
             showCancelButton: true,
             showLoaderOnConfirm: true,
             preConfirm: () => {
-                return axios.post(`${baseurl}/gremio/${id ? `${id}/` : ``}`, data)
+                return axios.post(`${baseurl}/venta/solicitud_usuario/${id ? `${id}/` : ``}`, data)
                 .then(response => {
                     if (response.status !== 200 && response.status !== 201) {
                         throw new Error(response.statusText)
@@ -196,7 +196,7 @@ class EditSolicitudUsuario extends React.Component {
                     text : `Guardado`,
                     type : 'success'
                 })
-                this.props.history.push('/cooperativas/gremios/')
+                this.props.history.push('/operaciones/solicitudes/usuario/')
             }
         })
     }
