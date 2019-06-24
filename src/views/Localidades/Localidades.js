@@ -13,11 +13,11 @@ class RowLocalidades extends React.Component {
     }
 
     render(){
-        const { nombre, ciudad, puertas, andenes } = this.props
+        const { nombre, ciudad_nombre, puertas, andenes } = this.props
         return (
             <tr onDoubleClick={this.onRowDoubleClick.bind(this)}>
                 <td>{nombre}</td>
-                <td>{ciudad}</td>
+                <td>{ciudad_nombre}</td>
                 <td>{puertas}</td>
                 <td>{andenes}</td>
             </tr>
