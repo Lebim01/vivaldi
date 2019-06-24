@@ -32,6 +32,10 @@ const EditFrecuencias = React.lazy(() => import('./views/Operaciones/EditFrecuen
 const CrearFrecuenciaLote = React.lazy(() => import('./views/Operaciones/CrearFrecuenciaLote'))
 /** SOLICITUDES */
 const SolicitudUsuario = React.lazy(() => import('./views/Operaciones/Solicitudes/SolicitudUsuario'))
+const EditSolicitudUsuario = React.lazy(() => import('./views/Operaciones/Solicitudes/EditSolicitudUsuario'))
+const SolicitudBuses = React.lazy(() => import('./views/Operaciones/Solicitudes/SolicitudBuses'))
+const SolicitudFrecuencias = React.lazy(() => import('./views/Operaciones/Solicitudes/SolicitudFrecuencias'))
+const SolicitudConductores = React.lazy(() => import('./views/Operaciones/Solicitudes/SolicitudConductores'))
 /** RECAUDACIONES */
 const PanelRecaudaciones = React.lazy(() => import('./views/Recaudaciones/PanelRecaudaciones'))
 
@@ -77,11 +81,13 @@ const routes = [
   { path: '/operaciones/frecuencias-lote', name: 'Crear Frecuencias por Lote', component: CrearFrecuenciaLote },
   { path: '/operaciones/tasas-contingencia', name: 'Navbars', component: Page404 },
   { path: '/operaciones/consulta-tasa', name: 'Navs', component: Page404 },
+
   { path: '/operaciones/solicitudes/usuario', name: 'Solicitud de Usuario', component: SolicitudUsuario, exact: true },
-  { path: '/operaciones/solicitudes/frecuencias', name: 'Popovers', component: Page404 },
-  { path: '/operaciones/solicitudes/buses', name: 'Progress Bar', component: Page404 },
+  { path: '/operaciones/solicitudes/usuario/edit', name: 'Crear/Edita solicitud de Usuario', component: EditSolicitudUsuario, exact: true },
+  { path: '/operaciones/solicitudes/buses', name: 'Solicitud de Buses', component: SolicitudBuses, exact: true },
+  { path: '/operaciones/solicitudes/frecuencias', name: 'Progress Bar', component: SolicitudFrecuencias, exact: true },
   { path: '/operaciones/solicitudes/modificaciones-buses', name: 'Tooltips', component: Page404 },
-  { path: '/operaciones/solicitudes/choferes', name: 'Buttons', component: Page404 },
+  { path: '/operaciones/solicitudes/conductores', name: 'Buttons', component: SolicitudConductores, exact: true },
 
   { path: '/facturacion/clientes', name: 'Buttons', component: Page404 },
   { path: '/facturacion/documentos', name: 'Button Dropdowns', component: Page404 },

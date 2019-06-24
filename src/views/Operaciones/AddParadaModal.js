@@ -20,7 +20,8 @@ class AddParadaModal extends React.Component {
     componentWillReceiveProps(props){
         const { show, ...data } = props
         this.setState({
-            ...data
+            ...data,
+            errors: []
         })
     }
 
@@ -47,7 +48,8 @@ class AddParadaModal extends React.Component {
             let _exito = this.props.guardar({ ciudad, ciudad_nombre, orden_llegada, tarifa_media, tarifa_normal, duracion, index, id})
             if(_exito){
                 this.setState({
-                    data : {}
+                    data : {},
+                    errors: []
                 })
             }else{
                 this.setState({

@@ -112,7 +112,7 @@ class MainView extends React.Component {
             paradas.push({ ...data, is_enable: true })
         }
         this.props.onChange('paradas', paradas)
-        this.toggleModal()
+        this.toggleModal({})
         return true
     }
 

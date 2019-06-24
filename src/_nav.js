@@ -117,8 +117,8 @@ export default {
               url : '/#/operaciones/solicitudes/modificaciones-buses'
             },
             {
-              name : 'Choferes',
-              url : '/#/operaciones/solicitudes/choferes'
+              name : 'Conductores',
+              url : '/#/operaciones/solicitudes/conductores'
             },
             {
               name : 'Tasas de contigencia',
