@@ -23,9 +23,25 @@ class MainView extends React.Component {
         { value:2, label: 'Inhabilitar' },
     ]
 
+    getCooperativas = async () => {
+        const {data} = await axios.get(`${baseurl}/cooperativa/`)
+        this.setState({
+            optionsCooperativa : data.map((r) => { return { value: r.id, label: r.nombre } })
+        })
+    }
+
     componentDidMount(){
         this.getCooperativas = this.getCooperativas.bind(this)
         this.getCooperativas()
+    }
+
+    onChange = name => (e) => {
+        if(name === 'cooperativas'){
+            this.props.onChange(name, e)
+        }
+        else if(this.props.onChange){
+            this.props.onChange(name, e.target.value)
+        }
     }
 
     render(){
@@ -36,13 +52,13 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Cooperativa</Label>
                         <div className="col-sm-5">
-                            <Input readOnly value={this.props.cooperativa_nombre} readOnly />
+                            <Input value={this.props.cooperativa_nombre} readOnly />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
                         <Label className="col-sm-3">Tipo de cooperativa</Label>
                         <div className="col-sm-5">
-                            <Input readOnly value={this.props.tipo_cooperativa} readOnly />
+                            <Input value={this.props.tipo_cooperativa} readOnly />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
@@ -75,37 +91,37 @@ class MainView extends React.Component {
                             <Input value={this.props.observaciones} readOnly />
                         </div>
                     </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Motivo</Label>
-                        <div className="col-sm-5">
-                            <Input value={this.props.motivo} readOnly />
-                        </div>
-                    </FormGroup>
-                    { this.props.usuario_afectado &&
+                    { this.props.frecuencia &&
                         <fieldset>
-                            <legend>Usuario afectado</legend>
+                            <legend>Datos de la frecuencia</legend>
                             <FormGroup className="row">
-                                <Label className="col-sm-3">Usuario</Label>
+                                <Label className="col-sm-3">Fecha salida</Label>
                                 <div className="col-sm-5">
-                                    <Input value={this.props.usuario_afectado.usuario} readOnly />
+                                    <Input value={this.props.frecuencia.fecha_salida} readOnly />
                                 </div>
                             </FormGroup>
                             <FormGroup className="row">
-                                <Label className="col-sm-3">Cédula</Label>
+                                <Label className="col-sm-3">Hora salida</Label>
                                 <div className="col-sm-5">
-                                    <Input value={this.props.usuario_afectado.cedula} readOnly />
+                                    <Input value={this.props.frecuencia.hora_salida} readOnly />
                                 </div>
                             </FormGroup>
                             <FormGroup className="row">
-                                <Label className="col-sm-3">Nombre</Label>
+                                <Label className="col-sm-3">Cooperativa</Label>
                                 <div className="col-sm-5">
-                                    <Input value={this.props.usuario_afectado.nombre} readOnly />
+                                    <Input value={this.props.frecuencia.cooperativa_nombre} readOnly />
                                 </div>
                             </FormGroup>
                             <FormGroup className="row">
-                                <Label className="col-sm-3">Correo</Label>
+                                <Label className="col-sm-3">Ruta</Label>
                                 <div className="col-sm-5">
-                                    <Input value={this.props.usuario_afectado.correo} readOnly />
+                                    <Input value={this.props.frecuencia.ruta} readOnly />
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <Label className="col-sm-3">Destino</Label>
+                                <div className="col-sm-5">
+                                    <Input value={this.props.frecuencia.destino} readOnly />
                                 </div>
                             </FormGroup>
                         </fieldset>
@@ -116,7 +132,7 @@ class MainView extends React.Component {
     }
 }
 
-class EditSolicitudUsuario extends React.Component {
+class EditSolicitudFrecuencia extends React.Component {
 
     state = {
         data:{
@@ -139,7 +155,7 @@ class EditSolicitudUsuario extends React.Component {
     }
 
     getData = async (id) => {
-        const { data } = await axios.get(`${baseurl}/venta/solicitud_usuario/${id}/`)
+        const { data } = await axios.get(`${baseurl}/venta/solicitud_frecuencia/${id}/`)
         this.setState({
             id,
             data
@@ -163,7 +179,7 @@ class EditSolicitudUsuario extends React.Component {
             showCancelButton: true,
             showLoaderOnConfirm: true,
             preConfirm: () => {
-                return axios.post(`${baseurl}/venta/solicitud_usuario/${id ? `${id}/` : ``}`, data)
+                return axios.post(`${baseurl}/venta/solicitud_frecuencia/${id ? `${id}/` : ``}`, data)
                 .then(response => {
                     if (response.status !== 200 && response.status !== 201) {
                         throw new Error(response.statusText)
@@ -183,7 +199,7 @@ class EditSolicitudUsuario extends React.Component {
                     text : `Guardado`,
                     type : 'success'
                 })
-                this.props.history.push('/operaciones/solicitudes/usuario/')
+                this.props.history.push('/operaciones/solicitudes/frecuencias/')
             }
         })
     }
@@ -196,7 +212,7 @@ class EditSolicitudUsuario extends React.Component {
                     <Col xs="12" md="12">
                         <Card>
                             <CardBody>
-                                <CardTitle>Crear/Editar Solicitud de usuario</CardTitle>
+                                <CardTitle>Crear/Editar Solicitud de frecuencias</CardTitle>
                                 <CardBody>
                                     <MainView {...data} onChange={this.onChange} />
                                 </CardBody>
@@ -215,4 +231,4 @@ class EditSolicitudUsuario extends React.Component {
     }
 }
 
-export default EditSolicitudUsuario
+export default EditSolicitudFrecuencia

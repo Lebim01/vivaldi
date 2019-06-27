@@ -34,7 +34,9 @@ const CrearFrecuenciaLote = React.lazy(() => import('./views/Operaciones/CrearFr
 const SolicitudUsuario = React.lazy(() => import('./views/Operaciones/Solicitudes/SolicitudUsuario'))
 const EditSolicitudUsuario = React.lazy(() => import('./views/Operaciones/Solicitudes/EditSolicitudUsuario'))
 const SolicitudBuses = React.lazy(() => import('./views/Operaciones/Solicitudes/SolicitudBuses'))
+const EditSolicitudBus = React.lazy(() => import('./views/Operaciones/Solicitudes/EditSolicitudBus'))
 const SolicitudFrecuencias = React.lazy(() => import('./views/Operaciones/Solicitudes/SolicitudFrecuencias'))
+const EditSolicitudFrecuencia = React.lazy(() => import('./views/Operaciones/Solicitudes/EditSolicitudFrecuencia'))
 const SolicitudConductores = React.lazy(() => import('./views/Operaciones/Solicitudes/SolicitudConductores'))
 /** RECAUDACIONES */
 const PanelRecaudaciones = React.lazy(() => import('./views/Recaudaciones/PanelRecaudaciones'))
@@ -83,9 +85,11 @@ const routes = [
   { path: '/operaciones/consulta-tasa', name: 'Navs', component: Page404 },
 
   { path: '/operaciones/solicitudes/usuario', name: 'Solicitud de Usuario', component: SolicitudUsuario, exact: true },
-  { path: '/operaciones/solicitudes/usuario/edit', name: 'Crear/Edita solicitud de Usuario', component: EditSolicitudUsuario, exact: true },
+  { path: '/operaciones/solicitudes/usuario/edit', name: 'Crear/Edita solicitud de usuario', component: EditSolicitudUsuario, exact: true },
   { path: '/operaciones/solicitudes/buses', name: 'Solicitud de Buses', component: SolicitudBuses, exact: true },
-  { path: '/operaciones/solicitudes/frecuencias', name: 'Progress Bar', component: SolicitudFrecuencias, exact: true },
+  { path: '/operaciones/solicitudes/buses/edit', name: 'Crear/Edita Solicitud de Buses', component: EditSolicitudBus, exact: true },
+  { path: '/operaciones/solicitudes/frecuencias', name: 'Solicitud de Frecuencia', component: SolicitudFrecuencias, exact: true },
+  { path: '/operaciones/solicitudes/frecuencias/edit', name: 'Crear/Edita solicitud de frecuencia', component: EditSolicitudFrecuencia, exact: true },
   { path: '/operaciones/solicitudes/modificaciones-buses', name: 'Tooltips', component: Page404 },
   { path: '/operaciones/solicitudes/conductores', name: 'Buttons', component: SolicitudConductores, exact: true },
 

@@ -28,6 +28,15 @@ class MainView extends React.Component {
         this.getCooperativas()
     }
 
+    onChange = name => (e) => {
+        if(name === 'cooperativas'){
+            this.props.onChange(name, e)
+        }
+        else if(this.props.onChange){
+            this.props.onChange(name, e.target.value)
+        }
+    }
+
     render(){
         const { optionsCooperativa } = this.state
         return (
@@ -36,13 +45,13 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Cooperativa</Label>
                         <div className="col-sm-5">
-                            <Input readOnly value={this.props.cooperativa_nombre} readOnly />
+                            <Input value={this.props.cooperativa_nombre} readOnly />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
                         <Label className="col-sm-3">Tipo de cooperativa</Label>
                         <div className="col-sm-5">
-                            <Input readOnly value={this.props.tipo_cooperativa} readOnly />
+                            <Input value={this.props.tipo_cooperativa} readOnly />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
@@ -75,37 +84,55 @@ class MainView extends React.Component {
                             <Input value={this.props.observaciones} readOnly />
                         </div>
                     </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Motivo</Label>
-                        <div className="col-sm-5">
-                            <Input value={this.props.motivo} readOnly />
-                        </div>
-                    </FormGroup>
-                    { this.props.usuario_afectado &&
+                    { this.props.bus &&
                         <fieldset>
-                            <legend>Usuario afectado</legend>
+                            <legend>Bus</legend>
                             <FormGroup className="row">
-                                <Label className="col-sm-3">Usuario</Label>
+                                <Label className="col-sm-3">Bus</Label>
                                 <div className="col-sm-5">
-                                    <Input value={this.props.usuario_afectado.usuario} readOnly />
+                                    <Input value={this.props.bus.bus} readOnly />
                                 </div>
                             </FormGroup>
                             <FormGroup className="row">
-                                <Label className="col-sm-3">Cédula</Label>
+                                <Label className="col-sm-3">Placa</Label>
                                 <div className="col-sm-5">
-                                    <Input value={this.props.usuario_afectado.cedula} readOnly />
+                                    <Input value={this.props.bus.placa} readOnly />
                                 </div>
                             </FormGroup>
                             <FormGroup className="row">
-                                <Label className="col-sm-3">Nombre</Label>
+                                <Label className="col-sm-3">Marca</Label>
                                 <div className="col-sm-5">
-                                    <Input value={this.props.usuario_afectado.nombre} readOnly />
+                                    <Input value={this.props.bus.marca} readOnly />
                                 </div>
                             </FormGroup>
                             <FormGroup className="row">
-                                <Label className="col-sm-3">Correo</Label>
+                                <Label className="col-sm-3">Propietario</Label>
                                 <div className="col-sm-5">
-                                    <Input value={this.props.usuario_afectado.correo} readOnly />
+                                    <Input value={this.props.bus.propietario} readOnly />
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <Label className="col-sm-3">Capacidad</Label>
+                                <div className="col-sm-5">
+                                    <Input value={this.props.bus.capacidad} readOnly />
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <Label className="col-sm-3">Distribución</Label>
+                                <div className="col-sm-5">
+                                    <Input value={this.props.bus.distribucion} readOnly />
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <Label className="col-sm-3">F. emisión matricula</Label>
+                                <div className="col-sm-5">
+                                    <Input value={this.props.bus.fecha_emision_matricula} readOnly />
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <Label className="col-sm-3">F. vencimiento matricula</Label>
+                                <div className="col-sm-5">
+                                    <Input value={this.props.bus.fecha_vensimiento_matricula} readOnly />
                                 </div>
                             </FormGroup>
                         </fieldset>
@@ -116,7 +143,7 @@ class MainView extends React.Component {
     }
 }
 
-class EditSolicitudUsuario extends React.Component {
+class EditSolicitudBus extends React.Component {
 
     state = {
         data:{
@@ -139,7 +166,7 @@ class EditSolicitudUsuario extends React.Component {
     }
 
     getData = async (id) => {
-        const { data } = await axios.get(`${baseurl}/venta/solicitud_usuario/${id}/`)
+        const { data } = await axios.get(`${baseurl}/venta/solicitud_bus/${id}/`)
         this.setState({
             id,
             data
@@ -163,7 +190,7 @@ class EditSolicitudUsuario extends React.Component {
             showCancelButton: true,
             showLoaderOnConfirm: true,
             preConfirm: () => {
-                return axios.post(`${baseurl}/venta/solicitud_usuario/${id ? `${id}/` : ``}`, data)
+                return axios.post(`${baseurl}/venta/solicitud_bus/${id ? `${id}/` : ``}`, data)
                 .then(response => {
                     if (response.status !== 200 && response.status !== 201) {
                         throw new Error(response.statusText)
@@ -183,7 +210,7 @@ class EditSolicitudUsuario extends React.Component {
                     text : `Guardado`,
                     type : 'success'
                 })
-                this.props.history.push('/operaciones/solicitudes/usuario/')
+                this.props.history.push('/operaciones/solicitudes/buses/')
             }
         })
     }
@@ -196,7 +223,7 @@ class EditSolicitudUsuario extends React.Component {
                     <Col xs="12" md="12">
                         <Card>
                             <CardBody>
-                                <CardTitle>Crear/Editar Solicitud de usuario</CardTitle>
+                                <CardTitle>Crear/Editar Solicitud de buses</CardTitle>
                                 <CardBody>
                                     <MainView {...data} onChange={this.onChange} />
                                 </CardBody>
@@ -215,4 +242,4 @@ class EditSolicitudUsuario extends React.Component {
     }
 }
 
-export default EditSolicitudUsuario
+export default EditSolicitudBus

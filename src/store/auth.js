@@ -16,6 +16,9 @@ const initialState = {
 };
 
 function reducer(state = initialState, action) {
+    if(state.token && !axios.defaults.headers.common['Authorization']){
+        axios.defaults.headers.common['Authorization'] = `JWT ${state.token}`
+    }
     switch(action.type) {
         case 'LOGIN':
             axios.defaults.headers.common['Authorization'] = `JWT ${action.token}`
