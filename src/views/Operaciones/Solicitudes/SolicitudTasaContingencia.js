@@ -1,19 +1,7 @@
 import React from 'react'
-import { ListPage, Card, CardBody, CardTitle, Button } from './../../../temeforest'
+import { ListPage, Card, CardBody } from './../../../temeforest'
 
-class SolicitudConductores extends React.Component {
-    state = {}
-
-    onChange = name => (e) => {
-        this.setState({
-            [name]: e.target.value
-        })
-    }
-
-    onRowDoubleClick = () => {
-        this.props.history.push('/operaciones/solicitudes/conductores/edit')
-    }
-
+class SolicitudTasaContingencia extends React.Component {
     render(){
         return (
             <div className="animated fadeIn">
@@ -21,21 +9,18 @@ class SolicitudConductores extends React.Component {
                     <div className="col-sm-12">
                         <Card>
                             <CardBody>
-                                <CardTitle>
-                                    Listado de Solicitud de conductores
-                                </CardTitle>
-                                <br />
                                 <ListPage
+                                    title="Solicitud de tasa de contingencia"
+
                                     searchable={false}
 
                                     fieldNames={['Cooperativa', 'Fecha', 'Descripión', 'Tipo de Solicitud']}
                                     fields={['cooperativa_nombre', 'fecha', 'descripcion', 'tipo_solicitud']}
 
-                                    url='venta/solicitud_conductor'
+                                    url='venta/solicitud_tasacontingencia'
 
                                     menu='operaciones'
-                                    submenu='solicitudes/conductores'
-                                    parameters={this.state}
+                                    submenu='solicitudes/tasas-contingencia'
                                     
                                     history={this.props.history}
                                 />
@@ -48,4 +33,4 @@ class SolicitudConductores extends React.Component {
     }
 }
 
-export default SolicitudConductores
+export default SolicitudTasaContingencia
