@@ -212,7 +212,7 @@ class EditSolicitudConductor extends React.Component {
                     <Col xs="12" md="12">
                         <Card>
                             <CardBody>
-                                <CardTitle>Crear/Editar Solicitud de usuario</CardTitle>
+                                <CardTitle>Crear/Editar Solicitud de conductor</CardTitle>
                                 <CardBody>
                                     <MainView {...data} onChange={this.onChange} />
                                 </CardBody>
