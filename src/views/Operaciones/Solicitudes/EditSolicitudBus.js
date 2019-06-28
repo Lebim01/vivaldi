@@ -1,44 +1,12 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label, TextArea, Select as SingleSelect } from './../../../temeforest'
+import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label } from './../../../temeforest'
 import { baseurl, getParameter } from './../../../utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
-import Select from 'react-select'
-import moment from 'moment';
 
 class MainView extends React.Component {
-
-    state = { optionsCooperativa: [] }
-
-    optionTipoCooperativa = {
-        url: `${baseurl}/tipoCooperativa/`,
-        labelName: `nombre`,
-        valueName: 'id'
-    }
-    
-    tipoSolicitud = [
-        { value:'', label: 'Seleccione' },
-        { value:1, label: 'Habilitar' },
-        { value:2, label: 'Inhabilitar' },
-    ]
-
-    componentDidMount(){
-        //this.getCooperativas = this.getCooperativas.bind(this)
-        this.getCooperativas()
-    }
-
-    onChange = name => (e) => {
-        if(name === 'cooperativas'){
-            this.props.onChange(name, e)
-        }
-        else if(this.props.onChange){
-            this.props.onChange(name, e.target.value)
-        }
-    }
-
     render(){
-        const { optionsCooperativa } = this.state
         return (
             <div>
                 <form className="mt-4 form-horizontal">
@@ -51,19 +19,25 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Tipo de cooperativa</Label>
                         <div className="col-sm-5">
-                            <Input value={this.props.tipo_cooperativa} readOnly />
+                            <Input value={this.props.tipo_cooperativa_nombre} readOnly />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
                         <Label className="col-sm-3">Usuario solicitante</Label>
                         <div className="col-sm-5">
-                            <Input value={this.props.usuario_solicitante} readOnly />
+                            <Input value={this.props.solicitante_nombre} readOnly />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
                         <Label className="col-sm-3">Tipo solicitud</Label>
                         <div className="col-sm-5">
                             <Input value={this.props.tipo_solicitud} readOnly />
+                        </div>
+                    </FormGroup>
+                    <FormGroup className="row">
+                        <Label className="col-sm-3">Motivo</Label>
+                        <div className="col-sm-5">
+                            <Input value={this.props.motivo} readOnly />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
@@ -84,59 +58,57 @@ class MainView extends React.Component {
                             <Input value={this.props.observaciones} readOnly />
                         </div>
                     </FormGroup>
-                    { this.props.bus &&
-                        <fieldset>
-                            <legend>Bus</legend>
-                            <FormGroup className="row">
-                                <Label className="col-sm-3">Bus</Label>
-                                <div className="col-sm-5">
-                                    <Input value={this.props.bus.bus} readOnly />
-                                </div>
-                            </FormGroup>
-                            <FormGroup className="row">
-                                <Label className="col-sm-3">Placa</Label>
-                                <div className="col-sm-5">
-                                    <Input value={this.props.bus.placa} readOnly />
-                                </div>
-                            </FormGroup>
-                            <FormGroup className="row">
-                                <Label className="col-sm-3">Marca</Label>
-                                <div className="col-sm-5">
-                                    <Input value={this.props.bus.marca} readOnly />
-                                </div>
-                            </FormGroup>
-                            <FormGroup className="row">
-                                <Label className="col-sm-3">Propietario</Label>
-                                <div className="col-sm-5">
-                                    <Input value={this.props.bus.propietario} readOnly />
-                                </div>
-                            </FormGroup>
-                            <FormGroup className="row">
-                                <Label className="col-sm-3">Capacidad</Label>
-                                <div className="col-sm-5">
-                                    <Input value={this.props.bus.capacidad} readOnly />
-                                </div>
-                            </FormGroup>
-                            <FormGroup className="row">
-                                <Label className="col-sm-3">Distribución</Label>
-                                <div className="col-sm-5">
-                                    <Input value={this.props.bus.distribucion} readOnly />
-                                </div>
-                            </FormGroup>
-                            <FormGroup className="row">
-                                <Label className="col-sm-3">F. emisión matricula</Label>
-                                <div className="col-sm-5">
-                                    <Input value={this.props.bus.fecha_emision_matricula} readOnly />
-                                </div>
-                            </FormGroup>
-                            <FormGroup className="row">
-                                <Label className="col-sm-3">F. vencimiento matricula</Label>
-                                <div className="col-sm-5">
-                                    <Input value={this.props.bus.fecha_vensimiento_matricula} readOnly />
-                                </div>
-                            </FormGroup>
-                        </fieldset>
-                    }
+                    <fieldset>
+                        <legend>Bus</legend>
+                        <FormGroup className="row">
+                            <Label className="col-sm-3">Bus</Label>
+                            <div className="col-sm-5">
+                                <Input value={this.props.bus_numero} readOnly />
+                            </div>
+                        </FormGroup>
+                        <FormGroup className="row">
+                            <Label className="col-sm-3">Placa</Label>
+                            <div className="col-sm-5">
+                                <Input value={this.props.bus_placa} readOnly />
+                            </div>
+                        </FormGroup>
+                        <FormGroup className="row">
+                            <Label className="col-sm-3">Marca</Label>
+                            <div className="col-sm-5">
+                                <Input value={this.props.bus_marca} readOnly />
+                            </div>
+                        </FormGroup>
+                        <FormGroup className="row">
+                            <Label className="col-sm-3">Propietario</Label>
+                            <div className="col-sm-5">
+                                <Input value={this.props.bus_propietario} readOnly />
+                            </div>
+                        </FormGroup>
+                        <FormGroup className="row">
+                            <Label className="col-sm-3">Capacidad</Label>
+                            <div className="col-sm-5">
+                                <Input value={this.props.bus_capacidad} readOnly />
+                            </div>
+                        </FormGroup>
+                        <FormGroup className="row">
+                            <Label className="col-sm-3">Distribución</Label>
+                            <div className="col-sm-5">
+                                <Input value={this.props.bus_distribucion} readOnly />
+                            </div>
+                        </FormGroup>
+                        <FormGroup className="row">
+                            <Label className="col-sm-3">F. emisión matricula</Label>
+                            <div className="col-sm-5">
+                                <Input value={this.props.bus_fecha_emision} readOnly />
+                            </div>
+                        </FormGroup>
+                        <FormGroup className="row">
+                            <Label className="col-sm-3">F. vencimiento matricula</Label>
+                            <div className="col-sm-5">
+                                <Input value={this.props.bus_fecha_vencimiento} readOnly />
+                            </div>
+                        </FormGroup>
+                    </fieldset>
                 </form>
             </div>
         )
@@ -146,16 +118,13 @@ class MainView extends React.Component {
 class EditSolicitudBus extends React.Component {
 
     state = {
-        data:{
-            fecha: moment().format('YYYY-MM-DD'),
-            usuario_afectado: {}
-        }
+        data: {}
     }
 
     constructor(props){
         super(props)
-        this.onChange = this.onChange.bind(this)
-        this.confirmSave = this.confirmSave.bind(this)
+        this.rechazar = this.rechazar.bind(this)
+        this.aprobar = this.aprobar.bind(this)
     }
 
     componentDidMount(){
@@ -173,24 +142,48 @@ class EditSolicitudBus extends React.Component {
         })
     }
 
-    onChange(name, value){
-        let data = this.state.data
-        data[name] = value
-        this.setState({
-            data
-        })
-    }
-
-    confirmSave(){
+    aprobar(){
         const { id, data } = this.state
-        data.cooperativas = data.cooperativas.map((record) => record.value)
         Swal.fire({
             title: 'Confirmar Guardar',
             text : '¿Seguro de guardar?',
             showCancelButton: true,
             showLoaderOnConfirm: true,
             preConfirm: () => {
-                return axios.post(`${baseurl}/venta/solicitud_bus/${id ? `${id}/` : ``}`, data)
+                return axios.post(`${baseurl}/venta/solicitud_bus/${id ? `${id}/` : ``}`, { id, estado: 1 })
+                .then(response => {
+                    if (response.status !== 200 && response.status !== 201) {
+                        throw new Error(response.statusText)
+                    }
+                    return response
+                })
+                .catch(error => {
+                    Swal.showValidationMessage(
+                        `Petición fallida: ${error}`
+                    )
+                })
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+        }).then((result) => {
+            if (result.value) {
+                Swal.fire({
+                    text : `Guardado`,
+                    type : 'success'
+                })
+                this.props.history.push('/operaciones/solicitudes/buses/')
+            }
+        })
+    }
+
+    rechazar(){
+        const { id, data } = this.state
+        Swal.fire({
+            title: 'Confirmar Guardar',
+            text : '¿Seguro de guardar?',
+            showCancelButton: true,
+            showLoaderOnConfirm: true,
+            preConfirm: () => {
+                return axios.post(`${baseurl}/venta/solicitud_bus/${id ? `${id}/` : ``}`, { id, estado: 2 })
                 .then(response => {
                     if (response.status !== 200 && response.status !== 201) {
                         throw new Error(response.statusText)
@@ -229,8 +222,8 @@ class EditSolicitudBus extends React.Component {
                                 </CardBody>
                                 <div className="row">
                                     <div className="col-sm-12 text-center">
-                                        <Button type="success" style={{marginRight:5}} onClick={() => this.confirmSave() }>Aceptar</Button>
-                                        <Button type="danger" style={{marginLeft:5}}>Rechazar</Button>
+                                        <Button type="success" style={{marginRight:5}} onClick={() => this.aprobar() }>Aprobar</Button>
+                                        <Button type="danger" style={{marginLeft:5}} onClick={() => this.rechazar() }>Rechazar</Button>
                                     </div>
                                 </div>
                             </CardBody>
