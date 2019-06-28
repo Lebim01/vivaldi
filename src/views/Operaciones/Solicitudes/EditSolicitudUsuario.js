@@ -24,8 +24,7 @@ class MainView extends React.Component {
     ]
 
     componentDidMount(){
-        this.getCooperativas = this.getCooperativas.bind(this)
-        this.getCooperativas()
+        
     }
 
     render(){
