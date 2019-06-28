@@ -1,8 +1,27 @@
 import React from 'react'
-import { ListPage, Card, CardBody, CardTitle, Button } from './../../../temeforest'
+import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button } from './../../../temeforest'
+import moment from 'moment'
+import { baseurl } from './../../../utils/url'
 
 class SolicitudConductores extends React.Component {
-    state = {}
+    state = {
+        fecha : moment().format('YYYY-MM-DD')
+    }
+    optionsCooperativa = {
+        url : `${baseurl}/cooperativa/`,
+        labelName: 'nombre',
+        valueName: 'id' 
+    }
+    optionsEstado = [
+        { value:'', label:'Seleccione' },
+    ]
+    optionsRazon = [
+        { value:'', label:'Seleccione' },
+    ]
+    estados = [
+        { value:'', label: 'Todos' },
+        { value:1, label: 'Finalizados' }
+    ]
 
     onChange = name => (e) => {
         this.setState({
@@ -10,11 +29,14 @@ class SolicitudConductores extends React.Component {
         })
     }
 
-    onRowDoubleClick = () => {
-        this.props.history.push('/operaciones/solicitudes/conductores/edit')
+    buscar(){
+        this.setState({
+            refresh: true
+        })
     }
 
     render(){
+        const { refresh } = this.state
         return (
             <div className="animated fadeIn">
                 <div className="row">
@@ -25,6 +47,43 @@ class SolicitudConductores extends React.Component {
                                     Listado de Solicitud de conductores
                                 </CardTitle>
                                 <br />
+                                <div className="row">
+                                    <div className="col-sm-6">
+                                        <FormGroup className="row">
+                                            <Label className="col-sm-3">Cooperativa</Label>
+                                            <div className="col-sm-8">
+                                                <Select asyncOptions={this.optionsCooperativa} onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
+                                            </div>
+                                        </FormGroup>
+                                        <FormGroup className="row">
+                                            <Label className="col-sm-3">Fecha</Label>
+                                            <div className="col-sm-8">
+                                                <Input type="date" onChange={this.onChange('fecha')} value={this.state.fecha} />
+                                            </div>
+                                        </FormGroup>
+                                    </div>
+                                    <div className="col-sm-6">
+                                        <FormGroup className="row">
+                                            <Label className="col-sm-3">Razón</Label>
+                                            <div className="col-sm-8">
+                                                <Select options={this.optionsRazon} onChange={this.onChange('razon')} value={this.state.razon}/>
+                                            </div>
+                                        </FormGroup>
+                                        <FormGroup className="row">
+                                            <Label className="col-sm-3">Estado</Label>
+                                            <div className="col-sm-8">
+                                                <Select options={this.optionsEstado} onChange={this.onChange('estado')} value={this.state.estado} />
+                                            </div>
+                                        </FormGroup>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-sm-12 text-center">
+                                        <Button onClick={this.buscar.bind(this)}>
+                                            Buscar
+                                        </Button>
+                                    </div>
+                                </div>
                                 <ListPage
                                     searchable={false}
 
@@ -38,6 +97,7 @@ class SolicitudConductores extends React.Component {
                                     parameters={this.state}
                                     
                                     history={this.props.history}
+                                    refresh={refresh}
                                 />
                             </CardBody>
                         </Card>

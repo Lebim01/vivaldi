@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input } from './../../../temeforest'
+import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button } from './../../../temeforest'
 import moment from 'moment'
 import { baseurl } from './../../../utils/url'
 
@@ -30,7 +30,14 @@ class SolicitudUsuario extends React.Component {
         })
     }
 
+    buscar(){
+        this.setState({
+            refresh: true
+        })
+    }
+
     render(){
+        const { refresh } = this.state
         return (
             <div className="animated fadeIn">
                 <div className="row">
@@ -69,6 +76,13 @@ class SolicitudUsuario extends React.Component {
                                         </FormGroup>
                                     </div>
                                 </div>
+                                <div className="row">
+                                    <div className="col-sm-12 text-center">
+                                        <Button onClick={this.buscar.bind(this)}>
+                                            Buscar
+                                        </Button>
+                                    </div>
+                                </div>
                                 <ListPage
                                     searchable={false}
 
@@ -82,6 +96,7 @@ class SolicitudUsuario extends React.Component {
                                     parameters={this.state}
                                     
                                     history={this.props.history}
+                                    refresh={refresh}
                                 />
                             </CardBody>
                         </Card>
