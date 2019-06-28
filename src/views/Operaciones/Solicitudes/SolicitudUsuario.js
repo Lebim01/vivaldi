@@ -6,7 +6,8 @@ import { baseurl } from './../../../utils/url'
 class SolicitudUsuario extends React.Component {
 
     state = {
-        fecha : moment().format('YYYY-MM-DD')
+        fecha : moment().format('YYYY-MM-DD'),
+        estado: 0
     }
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
@@ -14,14 +15,17 @@ class SolicitudUsuario extends React.Component {
         valueName: 'id' 
     }
     optionsEstado = [
-        { value:'', label:'Seleccione' },
+        { value:0, label: 'Pendiente' },
+        { value:1, label: 'Aprobado' },
+        { value:2, label: 'Rechazado' },
     ]
     optionsRazon = [
         { value:'', label:'Seleccione' },
     ]
     estados = [
-        { value:'', label: 'Todos' },
-        { value:1, label: 'Finalizados' }
+        { value:0, label: 'Pendiente' },
+        { value:1, label: 'Aprobado' },
+        { value:2, label: 'Rechazado' },
     ]
 
     onChange = name => (e) => {
