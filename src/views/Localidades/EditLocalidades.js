@@ -18,13 +18,14 @@ class MainView extends React.Component {
 
     constructor(props){
         super(props)
+        console.log(props)
         this.openModalNivel = this.openModalNivel.bind(this)
         this.toggleModalNivel = this.toggleModalNivel.bind(this)
     }
-    
+
     sino = [
-        { value : 'si', label : 'Si' },
-        { value : 'no', label : 'No' }
+        { value : false, label : 'No' },
+        { value : true, label : 'Si' }
     ]
 
     onChange = name => (e) => {
@@ -76,6 +77,13 @@ class MainView extends React.Component {
                             <Input onChange={this.onChange('representante_legal')} value={this.props.representante_legal} />
                         </div>
                     </FormGroup>
+                    <FormGroup className="row">
+                      <Label className="col-sm-3">Ciudad</Label>
+                      <div className="col-sm-5">
+                        <Select options={this.props.ciudades}  value={this.props.ciudad}  onChange={this.onChange('ciudad')} />
+                      </div>
+                    </FormGroup>
+
                     <fieldset>
                         <legend>Información tribunaria</legend>
                         <FormGroup className="row">
@@ -117,28 +125,28 @@ class MainView extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-4">Obligado a llevar contabilidad</Label>
                             <div className="col-sm-1">
-                                <Select options={this.sino} />
+                                <Select options={this.sino}  value={this.props.obligado_contabilidad}  onChange={this.onChange('obligado_contabilidad')}/>
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-4">Contribuyente Especial</Label>
                             <div className="col-sm-1">
-                                <Select options={this.sino} />
+                                <Select options={this.sino}  value={this.props.contribuyente_especial}  onChange={this.onChange('contribuyente_especial')}/>
                             </div>
                             <div className="col-sm-3">
-                                <Input onChange={this.onChange('contribuyente_especial_desc')} value={this.props.contribuyente_especial_desc} />
+                                { this.props.contribuyente_especial ===  true && <Input onChange={this.onChange('contribuyente_especial_detalle')} value={this.props.contribuyente_especial_detalle} /> }
                             </div>
                         </FormGroup>
                     </fieldset>
                     <fieldset>
                         <legend>
-                            Niveles 
+                            Niveles
                             <Button style={{marginLeft: 10}} onClick={() => this.openModalNivel()}>
                                 <i className="fa fa-plus"></i>
                             </Button>
                         </legend>
                         <ListGroup>
-                            { (niveles || []).map((nivel) => 
+                            { (niveles || []).map((nivel) =>
                                 <ListItem>{nivel.nombre}</ListItem>
                             )}
                         </ListGroup>
@@ -152,11 +160,14 @@ class MainView extends React.Component {
 
 class EditLocalidades extends React.Component {
 
+    seleccione = [{label:'Seleccione', value:''}]
     state = {
         id : null,
         tab : 'main',
         data : {},
-        showConfirmSave : false
+        showConfirmSave : false,
+        ciudades: [],
+        niveles: [],
     }
 
     tabs = [
@@ -182,6 +193,7 @@ class EditLocalidades extends React.Component {
     }
 
     componentDidMount(){
+        this.getCiudades()
         let id = getParameter('id')
         if(id){
             this.getData(id)
@@ -193,6 +205,15 @@ class EditLocalidades extends React.Component {
         this.setState({
             id,
             data
+        })
+    }
+
+    getCiudades = async () => {
+        const { data } = await axios.get(`${baseurl}/ciudad/`)
+        console.log(data)
+        let ciudades = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : r.nombre } })]
+        this.setState({
+          ciudades:ciudades
         })
     }
 
@@ -216,7 +237,7 @@ class EditLocalidades extends React.Component {
             showCancelButton: true,
             showLoaderOnConfirm: true,
             preConfirm: () => {
-                return axios.put(`${baseurl}/localidad/${id}/`, data)
+                return axios.post(`${baseurl}/localidad/${id ? `${id}/` : ``}`, data)
                 .then(response => {
                     if (response.status !== 200 && response.status !== 201) {
                         throw new Error(response.statusText)
@@ -242,7 +263,7 @@ class EditLocalidades extends React.Component {
     }
 
     render(){
-        const { tab, data, id } = this.state
+        const { tab, data, id, ciudades } = this.state
         return (
             <div className="animated fadeIn">
                 <Row>
@@ -252,7 +273,7 @@ class EditLocalidades extends React.Component {
                                 <CardTitle>Crear/Editar Localidades</CardTitle>
                                 <Tabs tab={tab} tabs={this.tabs} onClickTab={this.changeTab}/>
                                 <CardBody>
-                                    { tab === 'main' && <MainView id_localidad={id} {...data} onChange={this.onChange} />}
+                                    { tab === 'main' && <MainView id_localidad={id} {...data} onChange={this.onChange} ciudades={ciudades} />}
                                 </CardBody>
                                 <div className="row">
                                     <div className="col-sm-12 text-center">

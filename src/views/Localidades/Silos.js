@@ -13,12 +13,11 @@ class _Row extends React.Component {
     }
 
     render(){
-        const { descripcion, ip, localidad } = this.props
+        const { descripcion, ip} = this.props
         return (
             <tr onDoubleClick={this.onRowDoubleClick.bind(this)}>
                 <td>{descripcion}</td>
                 <td>{ip}</td>
-                <td>{localidad}</td>
             </tr>
         )
     }
@@ -34,7 +33,7 @@ class Silos extends React.Component {
     }
 
     loadList = async () => {
-        let { data } = await axios.get(`${baseurl}/silo/`)    
+        let { data } = await axios.get(`${baseurl}/silo/`)
         this.setState({
             data
         })
@@ -59,7 +58,7 @@ class Silos extends React.Component {
                                 <CardTitle>Listado de Silos</CardTitle>
                                 <Row>
                                     <Col xs="12" md="6">
-                                        <InputIcon placeholder="Buscar... Descripción, IP, Localidad" icon={<i className="fa fa-search"></i>} />
+                                        <InputIcon placeholder="Buscar... Descripción, IP" icon={<i className="fa fa-search"></i>} />
                                     </Col>
                                     <Col xs="12" md="6">
                                         <Button style={{'float': 'right'}} onClick={() => this.onRowDoubleClick('')}>
@@ -76,7 +75,6 @@ class Silos extends React.Component {
                                                     <tr>
                                                         <th scope="col">Descripción</th>
                                                         <th scope="col">Dirección IP</th>
-                                                        <th scope="col">Localidad</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
