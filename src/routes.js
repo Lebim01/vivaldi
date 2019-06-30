@@ -46,6 +46,11 @@ const PanelRecaudaciones = React.lazy(() => import('./views/Recaudaciones/PanelR
 
 const Dashboard = React.lazy(() => import('./views/Pages/Dashboard'))
 const Page404 = React.lazy(() => import('./views/Pages/Page404'))
+/** DEMOGRAFIA */
+const Provincia = React.lazy(() => import('./views/Localidades/Provincia'))
+const EditProvincia = React.lazy(() => import('./views/Localidades/EditProvincia'))
+const Ciudad = React.lazy(() => import('./views/Localidades/Ciudad'))
+const EditCiudad = React.lazy(() => import('./views/Localidades/EditCiudad'))
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
@@ -58,6 +63,11 @@ const routes = [
   { path: '/localidades/silos/edit', name: 'Crear/Editar Silos', component: EditSilos, exact : true },
   { path: '/localidades/traffic-control', name: 'Traffic Control', component: TrafficControl, exact : true },
   { path: '/localidades/traffic-control/edit', name: 'Crear/Eeditar Traffic Control', component: EditTrafficControl, exact : true },
+  { path: '/localidades/ciudad', name: 'Ciudad', component: Ciudad, exact : true },
+  { path: '/localidades/ciudad/edit', name: 'Crear/Editar Ciudad', component: EditCiudad, exact : true },
+  { path: '/localidades/provincia', name: 'Provincia', component: Provincia, exact : true },
+  { path: '/localidades/provincia/edit', name: 'Crear/Editar Provincia', component: EditProvincia, exact : true },
+
 
   { path: '/usuarios/usuarios', name: 'Usuarios', component: Usuarios, exact : true },
   { path: '/usuarios/usuarios/edit', name: 'Crear/Editar Usuarios', component: EditUsuarios, exact : true },
@@ -76,7 +86,7 @@ const routes = [
   { path: '/cooperativas/conductores/edit', name: 'Crear/Editar Conductores', component: EditConductores, exact : true },
   { path: '/cooperativas/punto-venta', name: 'Punto de Venta', component: PuntoVenta, exact : true },
   { path: '/cooperativas/punto-venta/edit', name: 'Crear/Editar Punto de Venta', component: EditPuntoVenta, exact : true },
-  
+
   { path: '/operaciones/rutas', name: 'Rutas', component: Rutas, exact: true },
   { path: '/operaciones/rutas/edit', name: 'Crear/Editar Rutas', component: EditRutas, exact: true },
   { path: '/operaciones/viajes', name: 'Viajes', component: Viajes, exact: true },
