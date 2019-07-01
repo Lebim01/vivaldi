@@ -42,6 +42,7 @@ const EditSolicitudConductor = React.lazy(() => import('./views/Operaciones/Soli
 const SolicitudTasaContingencia = React.lazy(() => import('./views/Operaciones/Solicitudes/SolicitudTasaContingencia'))
 /** RECAUDACIONES */
 const PanelRecaudaciones = React.lazy(() => import('./views/Recaudaciones/PanelRecaudaciones'))
+const ReporteClientesFrecuentes = React.lazy(() => import('./views/Recaudaciones/ReporteClientesFrecuentes'))
 
 const Dashboard = React.lazy(() => import('./views/Pages/Dashboard'))
 const Page404 = React.lazy(() => import('./views/Pages/Page404'))
@@ -101,7 +102,7 @@ const routes = [
   { path: '/facturacion/documentos', name: 'Button Dropdowns', component: Page404 },
 
   { path: '/recaudaciones/panel', name: 'Panel de Recaudaciones', component: PanelRecaudaciones, exact: true },
-  { path: '/recaudaciones/clientes-frecuentes', name: 'Brand Buttons', component: Page404 },
+  { path: '/recaudaciones/clientes-frecuentes', name: 'Brand Buttons', component: ReporteClientesFrecuentes, exact: true },
   { path: '/recaudaciones/reporte-boletos-tasas',  name: 'Icons', component: Page404 },
   { path: '/recaudaciones/turnos-cooperativa', name: 'CoreUI Icons', component: Page404 },
   { path: '/recaudaciones/tasas-emitidas-vs-usadas', name: 'Flags', component: Page404 },
