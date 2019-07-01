@@ -22,9 +22,9 @@ class NivelModal extends React.Component {
     }
 
     onChange = name => (e) => {
-        if(this.props.onChange){
-            this.props.onChange(name, e.target.value)
-        }
+        this.setState({
+            [name] : e.target.value
+        })
     }
 
     guardar(){

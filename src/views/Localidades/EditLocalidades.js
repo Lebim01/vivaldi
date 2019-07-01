@@ -18,7 +18,6 @@ class MainView extends React.Component {
 
     constructor(props){
         super(props)
-        console.log(props)
         this.openModalNivel = this.openModalNivel.bind(this)
         this.toggleModalNivel = this.toggleModalNivel.bind(this)
     }
