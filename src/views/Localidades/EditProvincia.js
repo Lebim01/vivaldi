@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Button, FormGroup, Input, Select, Label, ListGroup, ListItem, Tabs } from './../../temeforest'
+import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label, TextArea } from './../../temeforest'
 import { baseurl, getParameter } from './../../utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
@@ -18,15 +18,9 @@ class MainView extends React.Component {
             <div>
                 <form className="mt-4 form-horizontal">
                     <FormGroup className="row">
-                        <Label className="col-sm-3">Descripci&oacute;n</Label>
+                        <Label className="col-sm-3">Nombre</Label>
                         <div className="col-sm-5">
-                            <Input onChange={this.onChange('descripcion')} value={this.props.descripcion} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Ip</Label>
-                        <div className="col-sm-5">
-                            <Input onChange={this.onChange('ip')} value={this.props.ip} />
+                            <Input onChange={this.onChange('nombre')} value={this.props.nombre} />
                         </div>
                     </FormGroup>
                 </form>
@@ -35,12 +29,9 @@ class MainView extends React.Component {
     }
 }
 
-class EditSilo extends React.Component {
+class EditProvincia extends React.Component {
 
-    state = {
-        id : null,
-        data : {}
-    }
+    state = {data:{}}
 
     constructor(props){
         super(props)
@@ -56,7 +47,7 @@ class EditSilo extends React.Component {
     }
 
     getData = async (id) => {
-        const { data } = await axios.get(`${baseurl}/silo/${id}/`)
+        const { data } = await axios.get(`${baseurl}/provincia/${id}/`)
         this.setState({
             id,
             data
@@ -79,7 +70,7 @@ class EditSilo extends React.Component {
             showCancelButton: true,
             showLoaderOnConfirm: true,
             preConfirm: () => {
-                return axios.post(`${baseurl}/silo/${id ? `${id}/` : ``}`, data)
+                return axios.post(`${baseurl}/provincia/${id ? `${id}/` : ``}`, data)
                 .then(response => {
                     if (response.status !== 200 && response.status !== 201) {
                         throw new Error(response.statusText)
@@ -99,22 +90,22 @@ class EditSilo extends React.Component {
                     text : `Guardado`,
                     type : 'success'
                 })
-                this.props.history.push('/localidades/silos/')
+                this.props.history.push('/localidades/provincia/')
             }
         })
     }
 
     render(){
-        const { data, id } = this.state
+        const { data } = this.state
         return (
             <div className="animated fadeIn">
                 <Row>
                     <Col xs="12" md="12">
                         <Card>
                             <CardBody>
-                                <CardTitle>Crear/Editar Silos</CardTitle>
+                                <CardTitle>Crear/Editar Provincia</CardTitle>
                                 <CardBody>
-                                  <MainView  {...data} onChange={this.onChange} />
+                                    <MainView {...data} onChange={this.onChange} />
                                 </CardBody>
                                 <div className="row">
                                     <div className="col-sm-12 text-center">
@@ -131,4 +122,4 @@ class EditSilo extends React.Component {
     }
 }
 
-export default EditSilo
+export default EditProvincia

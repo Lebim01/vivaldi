@@ -13,29 +13,31 @@ class _Row extends React.Component {
     }
 
     render(){
-        const { descripcion, ip} = this.props
+        const { nombre, descripcion } = this.props
         return (
             <tr onDoubleClick={this.onRowDoubleClick.bind(this)}>
-                <td>{descripcion}</td>
-                <td>{ip}</td>
+                <td>{nombre}</td>
             </tr>
         )
     }
 }
 
-class Silos extends React.Component {
+class Provincia extends React.Component {
 
-    state = { data:[] }
+    state = { data:[], filtered: [], filtro : '' }
 
     constructor(props){
         super(props)
         this.onRowDoubleClick = this.onRowDoubleClick.bind(this)
+        this.onChange = this.onChange.bind(this)
     }
 
     loadList = async () => {
-        let { data } = await axios.get(`${baseurl}/silo/`)
+        let { data } = await axios.get(`${baseurl}/provincia/`)
+        let filtered = data
         this.setState({
-            data
+            data,
+            filtered
         })
     }
 
@@ -44,24 +46,38 @@ class Silos extends React.Component {
     }
 
     onRowDoubleClick(id){
-        this.props.history.push('/localidades/silos/edit?id='+id)
+        this.props.history.push('/localidades/provincia/edit?id='+id)
+    }
+
+    onChange = name => (e) => {
+        let value = e.target.value
+        let newState = {
+            [name] : value
+        }
+        if(name === 'filtro'){
+            let compare = (v1, v2) => (v1 || '').toUpperCase().includes((v2 || '').toUpperCase())
+            newState.filtered = this.state.data.filter((row) => compare(row.nombre, value))
+        }
+        this.setState({
+            ...newState
+        })
     }
 
     render(){
-        const { data } = this.state
+        const { filtered } = this.state
         return (
             <div className="animated fadeIn">
                 <Row>
                     <Col xs="12" md="12">
                         <Card>
                             <CardBody>
-                                <CardTitle>Listado de Silos</CardTitle>
+                                <CardTitle>Listado de Provincia</CardTitle>
                                 <Row>
                                     <Col xs="12" md="6">
-                                        <InputIcon placeholder="Buscar... Descripción, IP" icon={<i className="fa fa-search"></i>} />
+                                        <InputIcon placeholder="Buscar... Nombre" icon={<i className="fa fa-search"></i>} onChange={this.onChange('filtro')} />
                                     </Col>
                                     <Col xs="12" md="6">
-                                        <Button style={{'float': 'right'}} onClick={() => this.onRowDoubleClick('')}>
+                                        <Button style={{'float': 'right'}} onClick={ () => this.onRowDoubleClick('')}>
                                             <i className="fa fa-plus"></i>
                                         </Button>
                                     </Col>
@@ -70,15 +86,14 @@ class Silos extends React.Component {
                                 <Row>
                                     <Col xs="12" md="12">
                                         <div className="table-responsive">
-                                            <table className="table">
+                                            <table className="table table-hover table-striped">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col">Descripción</th>
-                                                        <th scope="col">Dirección IP</th>
+                                                        <th scope="col">Nombre</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {data.map((row, i) => <_Row {...row} key={i} onDoubleClick={this.onRowDoubleClick} />)}
+                                                    {filtered.map((row, i) => <_Row {...row} key={i} onDoubleClick={this.onRowDoubleClick} />)}
                                                 </tbody>
                                             </table>
                                         </div>
@@ -93,4 +108,4 @@ class Silos extends React.Component {
     }
 }
 
-export default Silos
+export default Provincia

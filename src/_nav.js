@@ -15,7 +15,16 @@ export default {
         {
           name : 'Traffic Control',
           url : '/#/localidades/traffic-control'
+        },
+        {
+          name : 'Provincia',
+          url : '/#/localidades/provincia'
+        },
+        {
+          name : 'Ciudad',
+          url : '/#/localidades/ciudad'
         }
+
       ]
     },
     {
@@ -255,6 +264,6 @@ export default {
           url : '/#/auditoria-sri/totalizados'
         }
       ]
-    }
+    },
   ],
 };

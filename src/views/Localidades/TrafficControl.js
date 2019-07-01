@@ -1,28 +1,52 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
 import { Card, CardBody, CardTitle, InputIcon, Button } from './../../temeforest'
-
-const data = [
-    {descripcion : '1', ip : '192.168.0.100', localidad: 'TTG'},
-    {descripcion : '2', ip : '192.168.0.101', localidad: 'TTG'},
-    {descripcion : '100', ip : '192.168.0.102', localidad: 'TTMP'},
-]
+import axios from 'axios'
+import { baseurl } from './../../utils/url'
 
 class _Row extends React.Component {
+
+    onRowDoubleClick(){
+        if(this.props.onDoubleClick){
+            this.props.onDoubleClick(this.props.id)
+        }
+    }
+
     render(){
-        const { descripcion, ip, localidad } = this.props
+        const { descripcion, ip, localidad_nombre } = this.props
         return (
-            <tr>
+            <tr onDoubleClick={this.onRowDoubleClick.bind(this)}>
                 <td>{descripcion}</td>
                 <td>{ip}</td>
-                <td>{localidad}</td>
+                <td>{localidad_nombre}</td>
             </tr>
         )
     }
 }
 
-class Silos extends React.Component {
+class TrafficControl extends React.Component {
+    state = { data:[] }
+    constructor(props){
+        super(props)
+        this.onRowDoubleClick = this.onRowDoubleClick.bind(this)
+    }
+    loadList = async () => {
+        let { data } = await axios.get(`${baseurl}/trafficControl/`)
+        this.setState({
+            data
+        })
+    }
+
+    componentDidMount(){
+        this.loadList()
+    }
+
+    onRowDoubleClick(id){
+        this.props.history.push('/localidades/traffic-control/edit?id='+id)
+    }
+
     render(){
+        const { data } = this.state
         return (
             <div className="animated fadeIn">
                 <Row>
@@ -35,7 +59,7 @@ class Silos extends React.Component {
                                         <InputIcon placeholder="Buscar... Descripción, IP, Localidad" icon={<i className="fa fa-search"></i>} />
                                     </Col>
                                     <Col xs="12" md="6">
-                                        <Button style={{'float': 'right'}}>
+                                        <Button style={{'float': 'right'}}  onClick={() => this.onRowDoubleClick('')}>
                                             <i className="fa fa-plus"></i>
                                         </Button>
                                     </Col>
@@ -53,7 +77,7 @@ class Silos extends React.Component {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {data.map((row, i) => <_Row {...row} key={i} />)}
+                                                    {data.map((row, i) => <_Row {...row} key={i} onDoubleClick={this.onRowDoubleClick} />)}
                                                 </tbody>
                                             </table>
                                         </div>
@@ -68,4 +92,4 @@ class Silos extends React.Component {
     }
 }
 
-export default Silos
+export default TrafficControl 
