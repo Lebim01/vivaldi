@@ -158,6 +158,18 @@ export default {
       //icon: 'icon-wallet',
       children : [
         {
+          name : 'Tasas contingencia',
+          url : '/#/recaudaciones/tasas-contingencia'
+        },
+        {
+          name : 'Venta de tasas',
+          url : '/#/recaudaciones/venta-tasas'
+        },
+        {
+          name : 'Tasas vendidas',
+          url : '/#/recaudaciones/tasas-vendidas'
+        },
+        {
           name : 'Panel de recaudación',
           url : '/#/recaudaciones/panel'
         },

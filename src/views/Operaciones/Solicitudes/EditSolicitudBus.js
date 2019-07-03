@@ -191,7 +191,7 @@ class EditSolicitudBus extends React.Component {
                     return response
                 })
                 .catch(error => {
-                    Swal.showValidationMessage(
+                    Swal.showValidationMessage( 
                         `Petición fallida: ${error}`
                     )
                 })

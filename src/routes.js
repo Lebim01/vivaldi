@@ -43,7 +43,10 @@ const EditSolicitudConductor = React.lazy(() => import('./views/Operaciones/Soli
 const SolicitudTasaContingencia = React.lazy(() => import('./views/Operaciones/Solicitudes/SolicitudTasaContingencia'))
 /** RECAUDACIONES */
 const PanelRecaudaciones = React.lazy(() => import('./views/Recaudaciones/PanelRecaudaciones'))
+const TasasContingencia = React.lazy(() => import('./views/Recaudaciones/TasasContingencia'))
 const ReporteClientesFrecuentes = React.lazy(() => import('./views/Recaudaciones/ReporteClientesFrecuentes'))
+const VentaTasas = React.lazy(() => import('./views/Recaudaciones/VentaTasas'))
+const ReporteTasasVendidas = React.lazy(() => import('./views/Recaudaciones/ReporteTasasVendidas'))
 
 const Dashboard = React.lazy(() => import('./views/Pages/Dashboard'))
 const Page404 = React.lazy(() => import('./views/Pages/Page404'))
@@ -114,6 +117,9 @@ const routes = [
   { path: '/facturacion/documentos', name: 'Button Dropdowns', component: Page404 },
 
   { path: '/recaudaciones/panel', name: 'Panel de Recaudaciones', component: PanelRecaudaciones, exact: true },
+  { path: '/recaudaciones/tasas-contingencia', name: 'Tasas contingencia', component: TasasContingencia, exact: true },
+  { path: '/recaudaciones/venta-tasas', name: 'Tasas contingencia', component: VentaTasas, exact: true },
+  { path: '/recaudaciones/tasas-vendidas', name: 'Tasas vendidas', component: ReporteTasasVendidas, exact: true },
   { path: '/recaudaciones/clientes-frecuentes', name: 'Brand Buttons', component: ReporteClientesFrecuentes, exact: true },
   { path: '/recaudaciones/reporte-boletos-tasas',  name: 'Icons', component: Page404 },
   { path: '/recaudaciones/turnos-cooperativa', name: 'CoreUI Icons', component: Page404 },
@@ -127,6 +133,7 @@ const routes = [
   { path: '/recaudaciones/viajes-diario', name: 'Widgets', component: Page404 },
   { path: '/recaudaciones/viajes-semanales', name: 'Charts', component: Page404 },
   { path: '/recaudaciones/viajes-por-liquidar',  name: 'Users', component: Page404 },
+
   { path: '/cobranza/diarios', name: 'User Details', component: Page404 },
   { path: '/cobranza/pendientes', name: 'User Details', component: Page404 },
   { path: '/cobranza/consultas', name: 'User Details', component: Page404 },

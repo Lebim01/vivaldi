@@ -53,7 +53,7 @@ class Button extends React.Component {
                 type="button" 
                 {...othersProps}
                 {...downloadProps}
-                className={`btn waves-effect waves-${waves} btn${clss_outline}-${type} ${classes.join(' ')}`}>
+                className={`btn waves-effect waves-${waves} btn${clss_outline}-${type} ${classes.join(' ')} ${className}`}>
                 {children}
             </button>
         )
