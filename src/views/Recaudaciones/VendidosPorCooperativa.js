@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button } from './../../temeforest'
+import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, InputIcon, Button } from './../../temeforest'
 import moment from 'moment'
 import { baseurl } from './../../utils/url'
 
@@ -18,6 +18,16 @@ class ReporteTasasVendidas extends React.Component {
         labelName: 'nombre',
         valueName: 'id' 
     }
+    optionsDestino = {
+        url : `${baseurl}/ciudad/`,
+        labelName: 'nombre',
+        valueName: 'id' 
+    }
+    medioPago = [
+        {label:'Todos', value:''},
+        {label:'Efectivo', value:1},
+        {label:'Tarjeta', value:2}
+    ]
     onChange = name => (e) => {
         this.setState({
             [name]: e.target.value
@@ -42,7 +52,7 @@ class ReporteTasasVendidas extends React.Component {
                                 </CardTitle>
                                 <br/>
                                 <div className="row">
-                                    <div className="col-sm-6">
+                                    <div className="col-sm-4">
                                         <FormGroup className="row">
                                             <Label className="col-sm-3">Cooperativa</Label>
                                             <div className="col-sm-8">
@@ -56,7 +66,7 @@ class ReporteTasasVendidas extends React.Component {
                                             </div>
                                         </FormGroup>
                                     </div>
-                                    <div className="col-sm-6">
+                                    <div className="col-sm-4">
                                         <FormGroup className="row">
                                             <Label className="col-sm-3">Fecha inicio</Label>
                                             <div className="col-sm-8">
@@ -70,29 +80,55 @@ class ReporteTasasVendidas extends React.Component {
                                             </div>
                                         </FormGroup>
                                     </div>
+                                    <div className="col-sm-4">
+                                        <FormGroup className="row">
+                                            <Label className="col-sm-3">Medio de pago</Label>
+                                            <div className="col-sm-8">
+                                                <Select options={this.medioPago} onChange={this.onChange('medio_pago')} value={this.state.medio_pago} />
+                                            </div>
+                                        </FormGroup>
+                                        <FormGroup className="row">
+                                            <Label className="col-sm-3">Destino</Label>
+                                            <div className="col-sm-8">
+                                                <Select asyncOptions={this.optionsDestino} onChange={this.onChange('destino')} value={this.state.destino}/>
+                                            </div>
+                                        </FormGroup>
+                                    </div>
                                 </div>
                                 <div className="row">
-                                    <div className="col-sm-12 text-center">
-                                        <Button onClick={this.buscar.bind(this)}>
-                                            Buscar
-                                        </Button>
+                                    <div className="col-sm-3">
+                                        
+                                    </div>
+                                    <div className="col-sm-3 text-center">
+                                        <InputIcon icon={<i className="fa fa-search"/>} placeholder="Bus" />
+                                    </div>
+                                    <div className="col-sm-3 text-center">
+                                        <InputIcon icon={<i className="fa fa-search"/>} placeholder="Viaje" />
+                                    </div>
+                                    <div className="col-sm-3">
+                                        
                                     </div>
                                 </div>
                                 <ListPage
                                     searchable={false}
 
-                                    fieldNames={['Fecha', 'Cooperativa', 'Silo', 'Tipo', 'Cant.', 'Cantidad', 'Precio', 'Total', 'Localidad', '', '']}
-                                    fields={['fecha', 'cooperativa_nombre', 'silo', 'tipo', 'cant', 'cantidad', 'precio', 'total', 'localidad_nombre', '', '']}
+                                    fieldNames={['Tipo', 'Cantidad', 'Valor unitario', 'Subtotal']}
+                                    fields={['tipo', 'cantidad', 'valor_unitario', 'subtotal']}
 
-                                    url='recaudaciones/venta_tasas'
+                                    url='recaudaciones/vendidos_cooperativa'
 
                                     menu='recaudaciones'
-                                    submenu='reporte-tasas-vendidas'
+                                    submenu='vendidos-cooperativa'
                                     parameters={this.state}
                                     
                                     history={this.props.history}
-                                    refresh={refresh}
                                 />
+                                <div className="row">
+                                    <div className="col-sm-12 text-center">
+                                        <Button type="success" style={{marginRight:5}}>Imprimir</Button>
+                                        <Button type="info" style={{marginLeft:5}}>Exportar</Button>
+                                    </div>
+                                </div>
                             </CardBody>
                         </Card>
                     </div>

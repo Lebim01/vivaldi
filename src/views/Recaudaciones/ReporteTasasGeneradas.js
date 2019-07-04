@@ -3,7 +3,7 @@ import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, B
 import moment from 'moment'
 import { baseurl } from './../../utils/url'
 
-class ReporteTasasVendidas extends React.Component {
+class ReporteTasasGeneradas extends React.Component {
     state = {
         fecha_inicio : moment().format('YYYY-MM-DD'),
         fecha_fin : moment().format('YYYY-MM-DD'),
@@ -38,21 +38,33 @@ class ReporteTasasVendidas extends React.Component {
                         <Card>
                             <CardBody>
                                 <CardTitle>
-                                    Reporte de Tasas Vendidas
+                                    Reporte de Tasas Generadas
                                 </CardTitle>
                                 <br/>
                                 <div className="row">
                                     <div className="col-sm-6">
                                         <FormGroup className="row">
-                                            <Label className="col-sm-3">Cooperativa</Label>
+                                            <Label className="col-sm-3">Fecha</Label>
                                             <div className="col-sm-8">
-                                                <Select asyncOptions={this.optionsCooperativa} onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
+                                                <Input type="date" onChange={this.onChange('fecha')} value={this.state.fecha} />
+                                            </div>
+                                        </FormGroup>
+                                        <FormGroup className="row">
+                                            <Label className="col-sm-3">Creador</Label>
+                                            <div className="col-sm-8">
+                                                <Select asyncOptions={this.optionsCreador} onChange={this.onChange('creador')} value={this.state.creador}/>
                                             </div>
                                         </FormGroup>
                                         <FormGroup className="row">
                                             <Label className="col-sm-3">Localidad</Label>
                                             <div className="col-sm-8">
                                                 <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad}/>
+                                            </div>
+                                        </FormGroup>
+                                        <FormGroup className="row">
+                                            <Label className="col-sm-3">Tipo</Label>
+                                            <div className="col-sm-8">
+                                                <Select asyncOptions={this.optionsTipo} onChange={this.onChange('tipo')} value={this.state.tipo}/>
                                             </div>
                                         </FormGroup>
                                     </div>
@@ -81,13 +93,13 @@ class ReporteTasasVendidas extends React.Component {
                                 <ListPage
                                     searchable={false}
 
-                                    fieldNames={['Fecha', 'Cooperativa', 'Silo', 'Tipo', 'Cant.', 'Cantidad', 'Precio', 'Total', 'Localidad', '', '']}
-                                    fields={['fecha', 'cooperativa_nombre', 'silo', 'tipo', 'cant', 'cantidad', 'precio', 'total', 'localidad_nombre', '', '']}
+                                    fieldNames={['Silo', '# De Bloques', 'Bloque inicial', 'Bloque final', 'Total tasas', 'Fecha creación', 'Nombre creador', 'Localidad']}
+                                    fields={['silo', 'numero_bloques', 'bloque_inicial', 'bloque_final', 'total_tasas', 'fecha_creacion', 'nombre_creador', 'localidad_nombre']}
 
-                                    url='recaudaciones/venta_tasas'
+                                    url='recaudaciones/reporte-tasas-generadas'
 
                                     menu='recaudaciones'
-                                    submenu='reporte-tasas-vendidas'
+                                    submenu='reporte-tasas-generadas'
                                     parameters={this.state}
                                     
                                     history={this.props.history}
@@ -102,4 +114,4 @@ class ReporteTasasVendidas extends React.Component {
     }
 }
 
-export default ReporteTasasVendidas
+export default ReporteTasasGeneradas

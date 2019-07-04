@@ -166,12 +166,20 @@ export default {
           url : '/#/recaudaciones/venta-tasas'
         },
         {
-          name : 'Tasas vendidas',
-          url : '/#/recaudaciones/tasas-vendidas'
+          name : 'Reporte Tasas Vendidas',
+          url : '/#/recaudaciones/reporte-tasas-vendidas'
+        },
+        {
+          name : 'Reporte Tasas Generadas',
+          url : '/#/recaudaciones/reporte-tasas-generadas'
         },
         {
           name : 'Panel de recaudación',
           url : '/#/recaudaciones/panel'
+        },
+        {
+          name : 'Vendidos por cooperativa',
+          url : '/#/recaudaciones/vendidos-cooperativa'
         },
         {
           name : 'Reporte de clientes frecuentes',
