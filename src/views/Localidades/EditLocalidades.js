@@ -20,6 +20,7 @@ class MainView extends React.Component {
         super(props)
         this.openModalNivel = this.openModalNivel.bind(this)
         this.toggleModalNivel = this.toggleModalNivel.bind(this)
+        this.agregarNivel = this.agregarNivel.bind(this)
     }
 
     sino = [
@@ -51,6 +52,33 @@ class MainView extends React.Component {
             modalNivel : _modal
         })
     }
+
+    agregarNivel({ onChange, ...data }){
+        let niveles = this.props.niveles
+        let _continue = !niveles.some((r, i) => r.nombre == data.nombre && r.id != data.id && i != data.index)
+        if(!_continue){
+            return false
+        }
+
+        if(data.id){
+            for(let i in niveles){
+                if(niveles[i].id == data.id){
+                    niveles[i] = data
+                    break
+                }
+            }
+        }
+        else if(data.index){
+            niveles[data.index] = data
+        }
+        else {
+            niveles.push({ ...data, is_enable: true })
+        }
+        this.props.onChange('niveles', niveles)
+        this.toggleModalNivel({})
+        return true
+    }
+
 
     render(){
         const { niveles } = this.props
@@ -151,7 +179,7 @@ class MainView extends React.Component {
                         </ListGroup>
                     </fieldset>
                 </form>
-                <NivelModal {...modalNivel} toggle={this.toggleModalNivel} />
+                <NivelModal {...modalNivel} toggle={this.toggleModalNivel} guardar={(data) => this.agregarNivel(data)}/>
             </div>
         )
     }

@@ -13,6 +13,10 @@ export default {
           url : '/#/localidades/silos'
         },
         {
+          name : 'Andenes',
+          url : '/#/localidades/andenes'
+        },
+        {
           name : 'Traffic Control',
           url : '/#/localidades/traffic-control'
         },
@@ -24,7 +28,6 @@ export default {
           name : 'Ciudad',
           url : '/#/localidades/ciudad'
         }
-
       ]
     },
     {

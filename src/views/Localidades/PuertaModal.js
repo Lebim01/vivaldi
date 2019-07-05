@@ -2,10 +2,10 @@ import React from 'react'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { Button, FormGroup, Input, Label } from './../../temeforest'
 
-class NivelModal extends React.Component {
+class PuertaModal extends React.Component {
 
     state = {
-        nombre : ''
+        numero : ''
     }
 
     constructor(props){
@@ -45,16 +45,16 @@ class NivelModal extends React.Component {
 
 
     render(){
-        const { nombre } = this.state
+        const { numero } = this.state
         return (
             <Modal isOpen={this.props.show} toggle={this.toggle}>
-                <ModalHeader toggle={this.toggle}>Crear/Editar Nivel</ModalHeader>
+                <ModalHeader toggle={this.toggle}>Crear/Editar Puerta</ModalHeader>
                 <ModalBody>
                     <form className="mt-4 form-horizontal">
                         <FormGroup className="row">
-                            <Label className="col-sm-3">Nombre</Label>
+                            <Label className="col-sm-3">N&uacute;mero</Label>
                             <div className="col-sm-6">
-                                <Input onChange={this.onChange('nombre')} value={nombre} />
+                                <Input onChange={this.onChange('numero')} value={numero} />
                             </div>
                         </FormGroup>
                     </form>
@@ -68,10 +68,9 @@ class NivelModal extends React.Component {
     }
 }
 
-NivelModal.defaultProps = {
+PuertaModal.defaultProps = {
     show : false,
-    id_localidad : null,
-    id_nivel : null
+    id_localidad_nivel : null,
 }
 
-export default NivelModal
+export default PuertaModal

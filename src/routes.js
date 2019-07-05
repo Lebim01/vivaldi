@@ -6,6 +6,9 @@ const Silos = React.lazy(() => import('./views/Localidades/Silos'))
 const EditSilos = React.lazy(() => import('./views/Localidades/EditSilos'))
 const TrafficControl = React.lazy(() => import('./views/Localidades/TrafficControl'))
 const EditTrafficControl = React.lazy(() => import('./views/Localidades/EditTrafficControl'))
+const Andenes = React.lazy(() => import('./views/Localidades/Andenes'))
+const EditAndenes = React.lazy(() => import('./views/Localidades/EditAndenes'))
+
 /** USUARIOS */
 const Usuarios = React.lazy(() => import('./views/Usuarios/Usuarios'))
 const EditUsuarios = React.lazy(() => import('./views/Usuarios/EditUsuarios'))
@@ -67,8 +70,10 @@ const routes = [
 
   { path: '/localidades/localidades', name: 'Localidades', component: Localidades, exact : true },
   { path: '/localidades/localidades/edit', name: 'Crear/Editar Localidades', component: EditLocalidades, exact : true },
-  { path: '/localidades/silos', name: 'Silos', component: Silos, exact : true },
-  { path: '/localidades/silos/edit', name: 'Crear/Editar Silos', component: EditSilos, exact : true },
+  { path: '/localidades/silos', name: 'silos', component: Silos, exact : true },
+  { path: '/localidades/silos/edit', name: 'crear/editar silos', component: EditSilos, exact : true },
+  { path: '/localidades/andenes', name: 'andenes', component: Andenes, exact : true },
+  { path: '/localidades/andenes/edit', name: 'crear/editar andenes', component: EditAndenes, exact : true },
   { path: '/localidades/traffic-control', name: 'Traffic Control', component: TrafficControl, exact : true },
   { path: '/localidades/traffic-control/edit', name: 'Crear/Eeditar Traffic Control', component: EditTrafficControl, exact : true },
   { path: '/localidades/ciudad', name: 'Ciudad', component: Ciudad, exact : true },

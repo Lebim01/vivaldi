@@ -1,6 +1,5 @@
 import React from 'react'
 import { ListPage, Card, CardBody } from './../../temeforest'
-
 function Rutas(props) {
     return (
         <div className="animated fadeIn">
@@ -13,10 +12,8 @@ function Rutas(props) {
                                 searchable={true}
                                 searchPlaceholder="Cooperativa, Ruta, Destino"
                                 searchFields={['cooperativa_nombre', 'via', 'ciudad_destino_nombre']}
-
                                 fieldNames={['Cooperativa', 'Ruta', 'Destino']}
                                 fields={['cooperativa_nombre', 'via', 'ciudad_destino_nombre']}
-                                
                                 url='ruta'
                                 menu='operaciones'
                                 submenu='rutas'
@@ -29,5 +26,4 @@ function Rutas(props) {
         </div>
     )
 }
-
 export default Rutas

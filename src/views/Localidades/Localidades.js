@@ -13,13 +13,13 @@ class RowLocalidades extends React.Component {
     }
 
     render(){
-        const { nombre, ciudad_nombre, puertas, andenes } = this.props
+        const { nombre, ciudad_nombre, puertas, andenes, puertas_nombre, andenes_nombre } = this.props
         return (
             <tr onDoubleClick={this.onRowDoubleClick.bind(this)}>
                 <td>{nombre}</td>
                 <td>{ciudad_nombre}</td>
-                <td>{puertas}</td>
-                <td>{andenes}</td>
+                <td>{puertas_nombre}</td>
+                <td>{andenes_nombre}</td>
             </tr>
         )
     }
@@ -35,7 +35,7 @@ class Localidades extends React.Component {
     }
 
     loadList = async () => {
-        let { data } = await axios.get(`${baseurl}/localidad/`)    
+        let { data } = await axios.get(`${baseurl}/localidad/`)
         this.setState({
             data
         })
