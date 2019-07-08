@@ -1,19 +1,32 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Button, FormGroup, Input, Select, Label } from './../../temeforest'
+import { Card, CardBody, CardTitle, Button, FormGroup, Input, Select, Label, ListGroup, ListItem, DualList } from './../../temeforest'
 import { baseurl, getParameter } from './../../utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import AddPuertaModal from './PuertaModal'
+import 'react-dual-listbox/lib/react-dual-listbox.css';
 
 /*
  * Traer localidades
  * onchangelocalidades
  * traerniveles, filtrar por id localidad
  * traersilos filtrar por id localidad
- * crear puertas
+ * crear puertas_acceso
  *
 */
+class ListSilos extends React.Component {
+    render(){
+        const { silos } = this.props
+        return (
+            <FormGroup className="row">
+                <div className="col-sm-10">
+                    <DualList options={silos} onChange={this.props.onChange} selected={this.props.selected} />
+                </div>
+            </FormGroup>
+        )
+    }
+}
 
 
 class RecordRow extends React.Component {
@@ -25,7 +38,6 @@ class RecordRow extends React.Component {
     }
 
     render(){
-        const name_input = `activa_${this.props.ciudad}`
         return (
             <tr onDoubleClick={this.props.edit}>
                 <td>{this.props.numero}</td>
@@ -33,13 +45,6 @@ class RecordRow extends React.Component {
                     <Button outline={true} type="danger" size="sm" rounded={true} onClick={this.delete.bind(this)}>
                         <i className="fa fa-times"></i>
                     </Button>{' '}
-                    {this.props.numero}
-                </td>
-                <td>
-                    <div className="custom-control custom-checkbox">
-                        <input type="checkbox" className="custom-control-input" id={name_input} name={name_input} checked={this.props.is_enable} onChange={this.props.onChange('is_enable')} />
-                        <Label onlyClassName="custom-control-label" htmlFor={name_input}></Label>
-                    </div>
                 </td>
             </tr>
         )
@@ -77,9 +82,11 @@ class MainView extends React.Component {
     constructor(props){
         super(props)
         this.toggleModal = this.toggleModal.bind(this)
-        this.agregarParada = this.agregarParada.bind(this)
+        this.agregarPuerta = this.agregarPuerta.bind(this)
         this.getNiveles = this.getNiveles.bind(this)
-        this.deleteParada = this.deleteParada.bind(this)
+        this.deletePuerta = this.deletePuerta.bind(this)
+        this.getSilos = this.getSilos.bind(this)
+        this.toggleSilos = this.toggleSilos.bind(this)
     }
 
     onChange = name => (e) => {
@@ -104,13 +111,25 @@ class MainView extends React.Component {
 
     }
 
+    getSilos = async ()  => {
+        const { data } = await axios.get(`${baseurl}/silo/`)
+        let options = [...data.map((r) => { return { value : r.id, label : r.descripcion } })]
+        this.setState({
+          silos : options
+        })
+    }
 
-    onChangeParada = index => name => (e) => {
-        let paradas = this.props.paradas
+    componentDidMount(){
+      this.getSilos()
+    }
+
+
+    onChangePuerta = index => name => (e) => {
+        let puertas_acceso = this.props.puertas_acceso
         let value = e.target.value
         if(name == 'is_enable') value = e.target.checked
-        paradas[index][name] = value
-        this.props.onChange('paradas', paradas)
+        puertas_acceso[index][name] = value
+        this.props.onChange('puertas_acceso', puertas_acceso)
     }
 
     toggleModal = (data = {}) => {
@@ -122,58 +141,63 @@ class MainView extends React.Component {
         })
     }
 
-    agregarParada({ onChange, ...data }){
-        let paradas = this.props.paradas
-        let _continue = !paradas.some((r, i) => r.ciudad == data.ciudad && r.id != data.id && i != data.index)
+    agregarPuerta({ onChange, ...data }){
+        let puertas_acceso = this.props.puertas_acceso
+        let _continue = !puertas_acceso.some((r, i) => r.numero == data.numero && r.id != data.id && i != data.index)
         if(!_continue){
             return false
         }
 
         if(data.id){
-            for(let i in paradas){
-                if(paradas[i].id == data.id){
-                    paradas[i] = data
+            for(let i in puertas_acceso){
+                if(puertas_acceso[i].id == data.id){
+                    puertas_acceso[i] = data
                     break
                 }
             }
         }
         else if(data.index){
-            paradas[data.index] = data
+            puertas_acceso[data.index] = data
         }
         else {
-            paradas.push({ ...data, is_enable: true })
+            puertas_acceso.push({ ...data, is_enable: true })
         }
-        this.props.onChange('paradas', paradas)
+        this.props.onChange('puertas_acceso', puertas_acceso)
         this.toggleModal({})
         return true
     }
 
-    deleteParada = async (index) => {
+    deletePuerta = async (index) => {
         const { value } = await Swal.fire({
-            title: 'Borrar parada',
+            title: 'Borrar puerta',
             text: '¿Esta seguro de eliminar?',
             showCancelButton: true
         })
         if(value){
-            let paradas = this.props.paradas
-            paradas.splice(index, 1)
-            this.props.onChange('paradas', paradas)
+            let puertas_acceso = this.props.puertas_acceso
+            puertas_acceso.splice(index, 1)
+            this.props.onChange('puertas_acceso', puertas_acceso)
         }
     }
 
-    editParada(data){
+    editPuerta(data){
         this.toggleModal({ ...data })
     }
 
+    toggleSilos(selected){
+        this.props.onChange('silos', selected)
+    }
+
     render(){
-        const { niveles } = this.state
+        const { niveles, silos } = this.state
+        const { puertas_acceso }  = this.props
         return (
             <div>
                 <form className="mt-4 form-horizontal">
                     <FormGroup className="row">
                         <Label className="col-sm-3">Descripcion</Label>
                         <div className="col-sm-5">
-                            <Input onChange={this.onChange('descripcion')} value={this.props.via} />
+                            <Input onChange={this.onChange('descripcion')} value={this.props.descripcion} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
@@ -190,13 +214,19 @@ class MainView extends React.Component {
                     </FormGroup>
                     <FormGroup className="row">
                         <Label className="col-sm-3">Silos</Label>
-                        <div className="col-sm-5">
-                            <Select onChange={this.onChange('silos')} value={this.props.silos} asyncOptions={this.optionsSilos} />
+                    </FormGroup>
+                    <FormGroup className="row">
+                        <div className="col-sm-1"></div>
+                        <div className="col-sm-10">
+                            <ListSilos
+                                selected={this.props.silos}
+                                onChange={this.toggleSilos}
+                                silos={silos}
+                            />
                         </div>
                     </FormGroup>
-
                     <AddPuertaModal
-                        guardar={(data) => this.agregarParada(data)}
+                        guardar={(data) => this.agregarPuerta(data)}
                         {...this.state.modal}
                         toggle={this.toggleModal}
                     />
@@ -215,6 +245,16 @@ class MainView extends React.Component {
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    { this.props.puertas_acceso.map((record, i) =>
+                                        <RecordRow
+                                            key={i}
+                                            index={i}
+                                            {...record}
+                                            onChange={this.onChangePuerta(i)}
+                                            delete={this.deletePuerta}
+                                            edit={() => this.editPuerta({ ...record, index: i })}
+                                        />
+                                    )}
                                 </tbody>
                             </table>
                         </div>
@@ -225,12 +265,12 @@ class MainView extends React.Component {
     }
 }
 
-class EditRutas extends React.Component {
+class EditAndenes extends React.Component {
 
     state = {
         id : null,
         data : {
-            paradas: []
+            puertas_acceso: []
         }
     }
 
@@ -323,4 +363,4 @@ class EditRutas extends React.Component {
     }
 }
 
-export default EditRutas
+export default EditAndenes
