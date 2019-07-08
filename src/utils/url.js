@@ -1,8 +1,8 @@
-/*const baseurl = 'http://45.55.250.4:8000/api/v1'
+const baseurl = 'http://45.55.250.4:8000/api/v1'
 const baseMediaUrl = 'http://45.55.250.4:8000'
-*/
-const baseurl = 'http://localhost:8000/api/v1'
-const baseMediaUrl = 'http://localhost:8000'
+
+/*const baseurl = 'http://localhost:8000/api/v1'
+const baseMediaUrl = 'http://localhost:8000'*/
 
 
 function getParameter(_name){

@@ -195,7 +195,7 @@ class MainView extends React.Component {
             <div>
                 <form className="mt-4 form-horizontal">
                     <FormGroup className="row">
-                        <Label className="col-sm-3">Descripcion</Label>
+                        <Label className="col-sm-3">Descripción</Label>
                         <div className="col-sm-5">
                             <Input onChange={this.onChange('descripcion')} value={this.props.descripcion} />
                         </div>
@@ -241,11 +241,11 @@ class MainView extends React.Component {
                             <table className="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>N&uacute;mero</th>
+                                        <th>Número</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    { this.props.puertas_acceso.map((record, i) =>
+                                    { puertas_acceso.map((record, i) =>
                                         <RecordRow
                                             key={i}
                                             index={i}

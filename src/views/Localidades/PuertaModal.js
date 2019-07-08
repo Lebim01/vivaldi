@@ -28,9 +28,9 @@ class PuertaModal extends React.Component {
     }
 
     guardar(){
-        const { nombre, index, id } = this.state
+        const { numero, index, id } = this.state
         if(this.props.guardar){
-            let _exito = this.props.guardar({nombre, index, id})
+            let _exito = this.props.guardar({numero, index, id})
             if(_exito){
                 this.setState({
                     errors: []
@@ -52,7 +52,7 @@ class PuertaModal extends React.Component {
                 <ModalBody>
                     <form className="mt-4 form-horizontal">
                         <FormGroup className="row">
-                            <Label className="col-sm-3">N&uacute;mero</Label>
+                            <Label className="col-sm-3">Número</Label>
                             <div className="col-sm-6">
                                 <Input onChange={this.onChange('numero')} value={numero} />
                             </div>
