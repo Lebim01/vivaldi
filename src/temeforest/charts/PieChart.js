@@ -8,14 +8,20 @@ class SimplePieChart extends React.Component {
         const { data } = this.props
         return (
             <div style={{width:'100%', height:320}}>
-                <ResponsiveContainer>
-                    <PieChart>
-                        <Pie dataKey="value" isAnimationActive={true} data={data} outerRadius={80} fill="#8884d8" label>
-                            { data.map((entry, index) => <Cell fill={COLORS[index % COLORS.length]}/>) }
-                        </Pie>
-                        <Tooltip />
-                    </PieChart>
-                </ResponsiveContainer>
+                { data.length > 0
+                    ? (
+                        <ResponsiveContainer>
+                            <PieChart>
+                                <Pie dataKey="value" isAnimationActive={true} data={data} outerRadius={80} fill="#8884d8" label>
+                                    { data.map((entry, index) => <Cell fill={COLORS[index % COLORS.length]}/>) }
+                                </Pie>
+                                <Tooltip />
+                            </PieChart>
+                        </ResponsiveContainer>
+                    ) : (
+                        <h4>No hay datos</h4>
+                    )
+                }
             </div>
         );
     }
