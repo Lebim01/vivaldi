@@ -1,9 +1,7 @@
-const baseurl = 'http://45.55.250.4:8000/api/v1'
-const baseMediaUrl = 'http://45.55.250.4:8000'
+import { config } from '../config';
 
-/*const baseurl = 'http://localhost:8000/api/v1'
-const baseMediaUrl = 'http://localhost:8000'*/
-
+const baseurl = config.baseurl
+const baseMediaUrl = config.baseMediaUrl
 
 function getParameter(_name){
     let url_string = window.location.href
