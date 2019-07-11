@@ -70,7 +70,6 @@ class PuertaModal extends React.Component {
 
 PuertaModal.defaultProps = {
     show : false,
-    id_localidad_nivel : null,
 }
 
 export default PuertaModal

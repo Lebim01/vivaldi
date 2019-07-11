@@ -6,6 +6,29 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import NivelModal from './NivelModal'
 
+class NivelRecordRow extends React.Component {
+
+    delete(){
+        if(this.props.delete){
+            this.props.delete(this.props.index)
+        }
+    }
+
+    render(){
+        return (
+            <tr onDoubleClick={this.props.edit}>
+                <td>{this.props.nombre}</td>
+                <td>
+                    <Button outline={true} type="danger" size="sm" rounded={true} onClick={this.delete.bind(this)}>
+                        <i className="fa fa-times"></i>
+                    </Button>{' '}
+                </td>
+            </tr>
+        )
+    }
+}
+
+
 class MainView extends React.Component {
 
     state = {
@@ -21,6 +44,8 @@ class MainView extends React.Component {
         this.openModalNivel = this.openModalNivel.bind(this)
         this.toggleModalNivel = this.toggleModalNivel.bind(this)
         this.agregarNivel = this.agregarNivel.bind(this)
+        this.editNivel = this.editNivel.bind(this)
+        this.deleteNivel = this.deleteNivel.bind(this)
     }
 
     sino = [
@@ -52,6 +77,14 @@ class MainView extends React.Component {
             modalNivel : _modal
         })
     }
+    onChangeNivel = index => name => (e) => {
+        let niveles = this.props.niveles
+        let value = e.target.value
+        if(name == 'is_enable') value = e.target.checked
+        niveles[index][name] = value
+        this.props.onChange('niveles', niveles)
+    }
+
 
     agregarNivel({ onChange, ...data }){
         let niveles = this.props.niveles
@@ -74,9 +107,27 @@ class MainView extends React.Component {
         else {
             niveles.push({ ...data, is_enable: true })
         }
+        niveles.puertas = data.puertas
         this.props.onChange('niveles', niveles)
         this.toggleModalNivel({})
         return true
+    }
+
+    deleteNivel = async (index) => {
+        const { value } = await Swal.fire({
+            title: 'Borrar puerta',
+            text: '¿Esta seguro de eliminar?',
+            showCancelButton: true
+        })
+        if(value){
+            let niveles = this.props.niveles
+            niveles.splice(index, 1)
+            this.props.onChange('niveles', niveles)
+        }
+    }
+
+    editNivel(data){
+        this.toggleModalNivel({ ...data })
     }
 
 
@@ -166,17 +217,36 @@ class MainView extends React.Component {
                         </FormGroup>
                     </fieldset>
                     <fieldset>
-                        <legend>
-                            Niveles
-                            <Button style={{marginLeft: 10}} onClick={() => this.openModalNivel()}>
-                                <i className="fa fa-plus"></i>
-                            </Button>
-                        </legend>
-                        <ListGroup>
-                            { (niveles || []).map((nivel) =>
-                                <ListItem>{nivel.nombre}</ListItem>
-                            )}
-                        </ListGroup>
+                      <FormGroup className="row">
+                          <h4>
+                              N&iacute;veles
+                              <Button style={{marginLeft: 10}} onClick={this.openModalNivel}>
+                                  <i className="fa fa-plus"></i>
+                              </Button>
+                          </h4>
+                          <div className="col-sm-12">
+                              <table className="table table-striped">
+                                  <thead>
+                                      <tr>
+                                          <th>N&uacute;mero</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      { niveles &&  niveles.map((record, i) =>
+                                          <NivelRecordRow
+                                              key={i}
+                                              index={i}
+                                              {...record}
+                                              onChange={this.onChangeNivel(i)}
+                                              delete={this.deleteNivel}
+                                              edit={() => this.editNivel({ ...record, index: i })}
+                                          />
+                                      )}
+                                  </tbody>
+                              </table>
+                          </div>
+                      </FormGroup>
+
                     </fieldset>
                 </form>
                 <NivelModal {...modalNivel} toggle={this.toggleModalNivel} guardar={(data) => this.agregarNivel(data)}/>

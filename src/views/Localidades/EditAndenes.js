@@ -28,6 +28,19 @@ class ListSilos extends React.Component {
     }
 }
 
+class ListPuertas extends React.Component {
+    render(){
+        const { puertas } = this.props
+        return (
+            <FormGroup className="row">
+                <div className="col-sm-10">
+                    <DualList options={puertas} onChange={this.props.onChange} selected={this.props.selected} />
+                </div>
+            </FormGroup>
+        )
+    }
+}
+
 
 class RecordRow extends React.Component {
 
@@ -58,25 +71,8 @@ class MainView extends React.Component {
         modal : {
             show : false
         },
-        niveles : []
-    }
-    optionsLocalidad = {
-        url : `${baseurl}/localidad/`,
-        labelName: 'nombre',
-        valueName: 'id'
-    }
-
-
-    optionsNivel = {
-        url : `${baseurl}/localidad_nivel/?localidad=${this.props.localidad_id ? `${this.props.localidad_id}/` : ''}`,
-        labelName: 'nombre',
-        valueName: 'id'
-    }
-
-    optionsSilos = {
-        url : `${baseurl}/silo/`,
-        labelName: 'descripcion',
-        valueName: 'id'
+        niveles : [],
+        localidades :[]
     }
 
     constructor(props){
@@ -87,6 +83,9 @@ class MainView extends React.Component {
         this.deletePuerta = this.deletePuerta.bind(this)
         this.getSilos = this.getSilos.bind(this)
         this.toggleSilos = this.toggleSilos.bind(this)
+        this.getPuertas = this.getPuertas.bind(this)
+        this.togglePuertas = this.togglePuertas.bind(this)
+        this.getLocalidades = this.getLocalidades.bind(this)
     }
 
     onChange = name => (e) => {
@@ -99,6 +98,7 @@ class MainView extends React.Component {
     onChangeLocalidad = name => (e) => {
         if(this.props.onChange){
           this.getNiveles(e.target.value)
+          this.props.onChange('localidad', e.target.value)
         }
     }
 
@@ -108,8 +108,25 @@ class MainView extends React.Component {
         this.setState({
           niveles : options
         })
-
     }
+
+    getLocalidades = async (id)  => {
+        const { data } = await axios.get(`${baseurl}/localidad/`)
+        let options = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : r.nombre } })]
+        this.setState({
+          localidades : options
+        }, ()=>{
+          if(this.props.localidad == undefined){
+          console.log(this.state.localidades[1])
+          console.log(this.state.localidades[1].value)
+            this.props.onChange('localidad', this.state.localidades[1].value)
+            this.getNiveles(this.state.localidades[1].value)
+          }else{
+            this.getNiveles(this.props.localidad)
+          }
+        })
+    }
+
 
     getSilos = async ()  => {
         const { data } = await axios.get(`${baseurl}/silo/`)
@@ -119,8 +136,19 @@ class MainView extends React.Component {
         })
     }
 
+    getPuertas = async ()  => {
+        const { data } = await axios.get(`${baseurl}/puerta/`)
+        let options = [...data.map((r) => { return { value : r.id, label : r.numero } })]
+        this.setState({
+          puertas : options
+        })
+    }
+
+
     componentDidMount(){
       this.getSilos()
+      this.getPuertas()
+      this.getLocalidades()
     }
 
 
@@ -188,9 +216,13 @@ class MainView extends React.Component {
         this.props.onChange('silos', selected)
     }
 
+    togglePuertas(selected){
+        this.props.onChange('puertas_acceso', selected)
+    }
+
+
     render(){
-        const { niveles, silos } = this.state
-        const { puertas_acceso }  = this.props
+        const { niveles, silos, puertas } = this.state
         return (
             <div>
                 <form className="mt-4 form-horizontal">
@@ -203,7 +235,7 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Localidad</Label>
                         <div className="col-sm-5">
-                            <Select onChange={this.onChangeLocalidad('localidad')} value={this.props.localidad} asyncOptions={this.optionsLocalidad} />
+                            <Select onChange={this.onChangeLocalidad('localidad')} value={this.props.localidad} options={this.state.localidades} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
@@ -225,38 +257,17 @@ class MainView extends React.Component {
                             />
                         </div>
                     </FormGroup>
-                    <AddPuertaModal
-                        guardar={(data) => this.agregarPuerta(data)}
-                        {...this.state.modal}
-                        toggle={this.toggleModal}
-                    />
                     <FormGroup className="row">
-                        <h4>
-                            Puertas
-                            <Button style={{marginLeft: 10}} onClick={this.toggleModal}>
-                                <i className="fa fa-plus"></i>
-                            </Button>
-                        </h4>
-                        <div className="col-sm-12">
-                            <table className="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Número</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    { puertas_acceso.map((record, i) =>
-                                        <RecordRow
-                                            key={i}
-                                            index={i}
-                                            {...record}
-                                            onChange={this.onChangePuerta(i)}
-                                            delete={this.deletePuerta}
-                                            edit={() => this.editPuerta({ ...record, index: i })}
-                                        />
-                                    )}
-                                </tbody>
-                            </table>
+                        <Label className="col-sm-3">Puertas</Label>
+                    </FormGroup>
+                    <FormGroup className="row">
+                        <div className="col-sm-1"></div>
+                        <div className="col-sm-10">
+                            <ListPuertas
+                                selected={this.props.puertas_acceso}
+                                onChange={this.togglePuertas}
+                                puertas={puertas}
+                            />
                         </div>
                     </FormGroup>
                 </form>
