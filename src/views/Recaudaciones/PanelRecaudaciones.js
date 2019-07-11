@@ -1,7 +1,8 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Select, FormGroup, Label, Input, BarChart, PieChart, Table } from './../../temeforest'
+import { Card, CardBody, CardTitle, Select, FormGroup, Label, Input, BarChart, PieChart, Table, Button } from './../../temeforest'
 import { config } from './../../config'
+import { objectToUrl } from './../../utils/url'
 import moment from 'moment'
 import axios from '../../utils/axios';
 
@@ -16,6 +17,11 @@ class FormularioFiltros extends React.Component {
     }
     optionsLocalidad = {
         url : `${baseurl}/localidad/`,
+        labelName: 'nombre',
+        valueName: 'id'
+    }
+    optionsFormapago = {
+        url : `${baseurl}/formaDePago/`,
         labelName: 'nombre',
         valueName: 'id'
     }
@@ -51,7 +57,7 @@ class FormularioFiltros extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-4">Forma pago</Label>
                             <div className="col-sm-8">
-                                <Select onChange={this.onChange('cooperativa')} value={this.props.cooperativa} />
+                                <Select onChange={this.onChange('cooperativa')} value={this.props.cooperativa} asyncOptions={this.optionsFormapago} />
                             </div>
                         </FormGroup>
                     </Col>
@@ -70,6 +76,9 @@ class FormularioFiltros extends React.Component {
                                 <Input onChange={this.onChange('fecha_fin')} value={this.props.fecha_fin} type="date" />
                             </div>
                         </FormGroup>
+                    </Col>
+                    <Col xs="4">
+                        <Button onClick={this.onChange('refresh')}>Actualizar</Button>
                     </Col>
                 </Row>
             </form>
@@ -147,10 +156,19 @@ class PanelRecaudaciones extends React.Component {
     }
 
     load = async () => {
-        const { data } = await axios.get(`${baseurl}/venta/panel-recaudaciones/`)
+        const { data } = await axios.get(`${baseurl}/venta/panel-recaudaciones/${objectToUrl(this.state.filtros)}`)
         this.setState({
             ...data
         })
+    }
+
+    onChange = (name, value) => {
+        this.setState({
+            filtros: {
+                ...this.state.filtros,
+                [name] : value
+            }
+        }, this.load)
     }
 
     render(){
@@ -161,7 +179,7 @@ class PanelRecaudaciones extends React.Component {
                         <Card>
                             <CardBody>
                                 <CardTitle>Panel de Recaudaciones</CardTitle>
-                                <FormularioFiltros {...this.state.filtros} />
+                                <FormularioFiltros {...this.state.filtros} onChange={this.onChange} />
                                 <GraficasBarras {...this.state.horario} />
                                 <br />
                                 <GraficasPie {...this.state.graficasPie} />
