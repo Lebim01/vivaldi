@@ -36,6 +36,25 @@ class MainView extends React.Component {
                             <Input onChange={this.onChange('ip')} value={this.props.ip} />
                         </div>
                     </FormGroup>
+                    <FormGroup className="row">
+                        <Label className="col-sm-3">URL</Label>
+                        <div className="col-sm-5">
+                            <Input onChange={this.onChange('url')} value={this.props.url} />
+                        </div>
+                    </FormGroup>
+                    <FormGroup className="row">
+                        <Label className="col-sm-3">Usuario</Label>
+                        <div className="col-sm-5">
+                            <Input onChange={this.onChange('user')} value={this.props.user} />
+                        </div>
+                    </FormGroup>
+                    <FormGroup className="row">
+                        <Label className="col-sm-3">Contraseña</Label>
+                        <div className="col-sm-5">
+                            <Input onChange={this.onChange('password')} value={this.props.password} />
+                        </div>
+                    </FormGroup>
+
                 </form>
             </div>
         )
