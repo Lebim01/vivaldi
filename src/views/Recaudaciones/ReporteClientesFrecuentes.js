@@ -25,6 +25,11 @@ class ReporteClientesFrecuentes extends React.Component {
         labelName: 'nombre',
         valueName: 'id' 
     }
+    optionsFormapago = {
+        url : `${baseurl}/formaDePago/`,
+        labelName: 'nombre',
+        valueName: 'id' 
+    }
     optionsReporte = [
         { value: 1, label: 'Pasajero' },
         { value: 2, label: 'Comprado' },
@@ -68,7 +73,7 @@ class ReporteClientesFrecuentes extends React.Component {
                                     <FormGroup className="row col-sm-4">
                                         <Label className="col-sm-4">Metodo de pago</Label>
                                         <div className="col-sm-8">
-                                            <Select options={this.optionsMetodoPago} onChange={this.onChange('metodo_pago')} value={this.state.metodo_pago}/>
+                                            <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('metodo_pago')} value={this.state.metodo_pago}/>
                                         </div>
                                     </FormGroup>
                                     <FormGroup className="row col-sm-4">

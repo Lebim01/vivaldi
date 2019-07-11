@@ -23,9 +23,11 @@ class ReporteTurnosCooperativa extends React.Component {
         labelName: 'nombre',
         valueName: 'id' 
     }
-    optionsFormaPago = [
-        {label:'Todas', value:''}
-    ]
+    optionsFormapago = {
+        url : `${baseurl}/formaDePago/`,
+        labelName: 'nombre',
+        valueName: 'id' 
+    }
 
     onChange = name => (e) => {
         this.setState({
@@ -84,7 +86,7 @@ class ReporteTurnosCooperativa extends React.Component {
                                         <FormGroup className="row">
                                             <Label className="col-sm-3">Forma de pago</Label>
                                             <div className="col-sm-8">
-                                                <Select options={this.optionsFormaPago} onChange={this.onChange('forma_pago')} value={this.state.forma_pago} />
+                                                <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('forma_pago')} value={this.state.forma_pago} />
                                             </div>
                                         </FormGroup>
                                         <FormGroup className="row">

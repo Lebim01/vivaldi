@@ -23,11 +23,11 @@ class ReporteTasasVendidas extends React.Component {
         labelName: 'nombre',
         valueName: 'id' 
     }
-    medioPago = [
-        {label:'Todos', value:''},
-        {label:'Efectivo', value:1},
-        {label:'Tarjeta', value:2}
-    ]
+    optionsFormapago = {
+        url : `${baseurl}/formaDePago/`,
+        labelName: 'nombre',
+        valueName: 'id' 
+    }
     onChange = name => (e) => {
         this.setState({
             [name]: e.target.value
@@ -84,7 +84,7 @@ class ReporteTasasVendidas extends React.Component {
                                         <FormGroup className="row">
                                             <Label className="col-sm-3">Medio de pago</Label>
                                             <div className="col-sm-8">
-                                                <Select options={this.medioPago} onChange={this.onChange('medio_pago')} value={this.state.medio_pago} />
+                                                <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('medio_pago')} value={this.state.medio_pago} />
                                             </div>
                                         </FormGroup>
                                         <FormGroup className="row">
