@@ -376,8 +376,43 @@ class EditCooperativas extends React.Component {
         })
     }
 
+    confirmDelete(){
+        const { id, data } = this.state
+        if(id){
+            Swal.fire({
+                title: 'Confirmar Eliminar',
+                text : '¿Seguro de eliminar?',
+                showCancelButton: true,
+                showLoaderOnConfirm: true,
+                preConfirm: () => {
+                    return axios.delete(`${baseurl}/cooperativa/${id}`, data)
+                    .then(response => {
+                        if (response.status !== 200 && response.status !== 201) {
+                            throw new Error(response.statusText)
+                        }
+                        return response
+                    })
+                    .catch(error => {
+                        Swal.showValidationMessage(
+                            `Petición fallida: ${error}`
+                        )
+                    })
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                if (result.value) {
+                    Swal.fire({
+                        text : `Eliminado`,
+                        type : 'success'
+                    })
+                    this.props.history.push('/cooperativas/cooperativas/')
+                }
+            })
+        }
+    }
+
     render(){
-        const { tab, data, localidades, tabsLocalidades } = this.state
+        const { id, tab, data, localidades, tabsLocalidades } = this.state
         return (
             <div className="animated fadeIn">
                 <Row>
@@ -399,7 +434,7 @@ class EditCooperativas extends React.Component {
                                 <div className="row">
                                     <div className="col-sm-12 text-center">
                                         <Button type="success" style={{marginRight:5}} onClick={() => this.confirmSave() }>Guardar</Button>
-                                        <Button type="danger" style={{marginLeft:5}}>Eliminar</Button>
+                                        <Button type="danger" style={{marginLeft:5}} disabled={!id} onClick={() => this.confirmDelete()}>Eliminar</Button>
                                     </div>
                                 </div>
                             </CardBody>
