@@ -63,7 +63,7 @@ class Usuarios extends React.Component {
         }
         if(name === 'filtro'){
             let compare = (v1, v2) => (v1 || '').toUpperCase().includes((v2 || '').toUpperCase())
-            newState.filtered = this.state.data.filter((row) => compare(row.usuario, value) || compare(row.nombre, value))
+            newState.filtered = this.state.data.filter((row) => compare(row.username, value) || compare(row.last_name, value) || compare(row.first_name, value))
         }
         this.setState({
             ...newState

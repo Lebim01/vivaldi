@@ -77,7 +77,7 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Tipo</Label>
                         <div className="col-sm-5">
-                            <Select options={busTipos} onChange={this.onChange('bus_tipo')} value={this.props.bus_tipo} />
+                            <Select onChange={this.onChange('bus_tipo')} value={this.props.bus_tipo} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
@@ -119,7 +119,7 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Distribución</Label>
                         <div className="col-sm-5">
-                            <Select options={distribucion} onChange={this.onChange('distribucion')} value={this.props.distribucion} />
+                            <Select options={busTipos} onChange={this.onChange('distribucion')} value={this.props.distribucion} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">

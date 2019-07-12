@@ -12,7 +12,8 @@ const persistConfig = {
 const initialState = {
     loading : false,
     auth : false,
-    token : ''
+    token : '',
+    user_info: {}
 };
 
 function reducer(state = initialState, action) {
@@ -31,6 +32,13 @@ function reducer(state = initialState, action) {
             return initialState
         case 'AUTH-SUCCECSS':
             axios.defaults.headers.common['Authorization'] = `JWT ${state.token}`
+            axios.get(`${baseurl}/user-info/`)
+            .then(({ data }) => {
+                store.dispatch({
+                    type: 'GET-USER-INFO',
+                    user_info: data
+                })
+            })
             return {
                 ...state,
                 auth: true
@@ -46,7 +54,7 @@ function reducer(state = initialState, action) {
             .then(() => {
                 store.dispatch({
                     type: 'AUTH-SUCCECSS'
-                })
+                }) 
             })
             .catch(() => {
                 store.dispatch({
@@ -54,6 +62,11 @@ function reducer(state = initialState, action) {
                 })
             })
             break
+        case 'GET-USER-INFO':
+            return {
+                ...state,
+                user_info : action.user_info
+            }
         default:
             break
     }

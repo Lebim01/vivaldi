@@ -233,6 +233,7 @@ class MainView extends React.Component {
                                   <thead>
                                       <tr>
                                           <th>N&uacute;mero</th>
+                                          <th></th>
                                       </tr>
                                   </thead>
                                   <tbody>

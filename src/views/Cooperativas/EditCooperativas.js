@@ -22,7 +22,7 @@ class ListAdenes extends React.Component {
 class MainView extends React.Component {
 
     state = {
-        tab : 0
+        tab : 1
     }
 
     constructor(props){
@@ -185,12 +185,14 @@ class MainView extends React.Component {
                                 { this.props.usa_api && <Input onChange={this.onChange('api_key')} value={this.props.api_key} /> }
                             </div>
                         </FormGroup>
-                        <FormGroup className="row">
-                            <Label className="col-sm-3">Sistema externo</Label>
-                            <div className="col-sm-3">
-                                <Select options={[{label:'Boleteria3000',value:''}]} />
-                            </div>
-                        </FormGroup>
+                        { this.props.usa_api &&
+                            <FormGroup className="row">
+                                <Label className="col-sm-3">Sistema externo</Label>
+                                <div className="col-sm-3">
+                                    <Select options={[{label:'Boleteria3000',value:''}]} />
+                                </div>
+                            </FormGroup>
+                        }
                     </fieldset>
 
                     <div className="row">
