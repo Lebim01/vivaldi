@@ -86,7 +86,7 @@ class ReporteTurnosCooperativa extends React.Component {
                                         <FormGroup className="row">
                                             <Label className="col-sm-3">Forma de pago</Label>
                                             <div className="col-sm-8">
-                                                <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('forma_pago')} value={this.state.forma_pago} />
+                                                <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('forma_de_pago')} value={this.state.forma_de_pago} />
                                             </div>
                                         </FormGroup>
                                         <FormGroup className="row">
@@ -101,9 +101,9 @@ class ReporteTurnosCooperativa extends React.Component {
                                     searchable={false}
 
                                     fieldNames={['Boletero', 'Destino', 'Tipo', 'Cantidad', 'Valor unidad', 'Total']}
-                                    fields={['', '', '', '', '', '']}
+                                    fields={['boletero', 'destino', 'tipo', 'cantidad', 'valor_unidad', 'total']}
 
-                                    url='recaudaciones/turnos_cooperativa'
+                                    url='recaudaciones/turnos-cooperativa'
 
                                     menu='recaudaciones'
                                     submenu='turnos-cooperativa'

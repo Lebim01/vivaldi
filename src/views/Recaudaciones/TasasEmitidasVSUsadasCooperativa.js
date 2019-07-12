@@ -28,6 +28,10 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
         labelName: 'nombre',
         valueName: 'id' 
     }
+    optionsReporte = [
+        { value: 1, label: 'Boletero' },
+        { value: 2, label: 'Viaje' },
+    ]
 
     onChange = name => (e) => {
         this.setState({
@@ -86,13 +90,13 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
                                         <FormGroup className="row">
                                             <Label className="col-sm-3">Forma de pago</Label>
                                             <div className="col-sm-8">
-                                                <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('forma_pago')} value={this.state.forma_pago} />
+                                                <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('forma_de_pago')} value={this.state.forma_de_pago} />
                                             </div>
                                         </FormGroup>
                                         <FormGroup className="row">
                                             <Label className="col-sm-3">Reporte</Label>
                                             <div className="col-sm-8">
-                                                <Select onChange={this.onChange('destino')} value={this.state.reporte} />
+                                                <Select options={this.optionsReporte} onChange={this.onChange('reporte')} value={this.state.reporte} />
                                             </div>
                                         </FormGroup>
                                     </div>
@@ -100,11 +104,11 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
                                 <ListPage
                                     searchable={false}
 
-                                    fieldNames={['Boletero', 'Destino', 'Tipo', 'Cantidad', 'Valor unidad', 'Total']}
-                                    fields={['', '', '', '', '', '']}
+                                    fieldNames={[(this.state.reporte == 2) ? 'Viaje' : 'Boletero' , 'Emitidas', 'Usadas']}
+                                    fields={[(this.state.reporte == 2) ? 'viaje' : 'boletero', 'tasas_emitidas', 'tasas_usadas']}
 
                                     //url del endpoint
-                                    url='recaudaciones/tasas_emitidas_vs_usadas_cooperativa'
+                                    url='recaudaciones/tasas-emitidas-usadas'
 
                                     // url del frontend
                                     menu='recaudaciones'

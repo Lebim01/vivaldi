@@ -81,7 +81,7 @@ class ReporteBoletosTasas extends React.Component {
                                         <FormGroup className="row">
                                             <Label className="col-sm-3">Forma de pago</Label>
                                             <div className="col-sm-8">
-                                                <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('forma_pago')} value={this.state.forma_pago} />
+                                                <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('forma_de_pago')} value={this.state.forma_de_pago} />
                                             </div>
                                         </FormGroup>
                                     </div>
@@ -90,9 +90,9 @@ class ReporteBoletosTasas extends React.Component {
                                     searchable={false}
 
                                     fieldNames={['Boleto normal', 'Boleto especial', 'Normal anulado', 'Especial anulado', 'Total boleto', 'Total tasa']}
-                                    fields={['', '', '', '', '', '']}
+                                    fields={['boleto_normal', 'boleto_especial', 'normal_anulado', 'especial_anulado', 'total_boleto', 'total_tasa']}
 
-                                    url='recaudaciones/boletos_tasas'
+                                    url='recaudaciones/boletos-tasas'
 
                                     menu='recaudaciones'
                                     submenu='reporte-boletos-tasas'

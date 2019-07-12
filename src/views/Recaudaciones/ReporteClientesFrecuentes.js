@@ -32,7 +32,7 @@ class ReporteClientesFrecuentes extends React.Component {
     }
     optionsReporte = [
         { value: 1, label: 'Pasajero' },
-        { value: 2, label: 'Comprado' },
+        { value: 2, label: 'Comprador' },
     ]
 
     onChange = name => (e) => {
@@ -73,7 +73,7 @@ class ReporteClientesFrecuentes extends React.Component {
                                     <FormGroup className="row col-sm-4">
                                         <Label className="col-sm-4">Metodo de pago</Label>
                                         <div className="col-sm-8">
-                                            <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('metodo_pago')} value={this.state.metodo_pago}/>
+                                            <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('forma_de_pago')} value={this.state.forma_de_pago}/>
                                         </div>
                                     </FormGroup>
                                     <FormGroup className="row col-sm-4">
@@ -111,10 +111,10 @@ class ReporteClientesFrecuentes extends React.Component {
                                 <ListPage
                                     searchable={false}
 
-                                    fieldNames={['Pasajero', 'Viajes']}
-                                    fields={['pasajero_nombre', 'viajes']}
+                                    fieldNames={this.state.reporte == 1 ?  ['Pasajero', 'Viajes'] : ['Cliente', 'Cédula/RUC', 'Viajes']}
+                                    fields={this.state.reporte == 1 ? ['nombre', 'viajes'] : ['nombre', 'identificacion', 'viajes']}
 
-                                    url='venta/solicitud_usuario'
+                                    url='venta/clientes-frecuentes'
 
                                     menu='recaudaciones'
                                     submenu='clientes-frecuentes'
