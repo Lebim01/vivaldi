@@ -70,9 +70,13 @@ class MainView extends React.Component {
         })
     }
 
-    toggleModalNivel = () => {
+    toggleModalNivel = (data = {}) => {
         let _modal = this.state.modalNivel
-        _modal.show = !_modal.show
+        _modal = {
+            ..._modal,
+            ...data,
+            show : !_modal.show
+        }
         this.setState({
             modalNivel : _modal
         })

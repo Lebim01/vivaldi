@@ -116,14 +116,12 @@ class MainView extends React.Component {
         this.setState({
           localidades : options
         }, ()=>{
-          if(this.props.localidad == undefined){
-          console.log(this.state.localidades[1])
-          console.log(this.state.localidades[1].value)
-            this.props.onChange('localidad', this.state.localidades[1].value)
-            this.getNiveles(this.state.localidades[1].value)
-          }else{
-            this.getNiveles(this.props.localidad)
-          }
+            if(this.props.localidad == undefined){
+                this.props.onChange('localidad', this.state.localidades[1].value)
+                this.getNiveles(this.state.localidades[1].value)
+            }else{
+                this.getNiveles(this.props.localidad)
+            }
         })
     }
 
@@ -132,7 +130,7 @@ class MainView extends React.Component {
         const { data } = await axios.get(`${baseurl}/silo/`)
         let options = [...data.map((r) => { return { value : r.id, label : r.descripcion } })]
         this.setState({
-          silos : options
+            silos : options
         })
     }
 
@@ -140,7 +138,7 @@ class MainView extends React.Component {
         const { data } = await axios.get(`${baseurl}/puerta/`)
         let options = [...data.map((r) => { return { value : r.id, label : r.numero } })]
         this.setState({
-          puertas : options
+            puertas : options
         })
     }
 
