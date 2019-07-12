@@ -182,7 +182,7 @@ class PanelRecaudaciones extends React.Component {
                                 <FormularioFiltros {...this.state.filtros} onChange={this.onChange} />
                                 <GraficasBarras {...this.state.horario} />
                                 <br />
-                                <GraficasPie {...this.state.graficasPie} />
+                                <GraficasPie {...this.state.conteo} />
                                 <br />
                                 <Tablas {...this.state.top} />
                             </CardBody>

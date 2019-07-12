@@ -179,8 +179,10 @@ class TasasContingencia extends React.Component {
                                     fieldNames={['Fecha', 'Tipo', 'Cooperativa', 'Cantidad', 'Acción']}
                                     fields={['fecha', 'tipo', 'cooperativa_nombre', 'cantidad', '']}
 
+                                    //url del endpoint
                                     url='recaudaciones/tasas_contingencia'
-
+                                    
+                                    // url del frontend
                                     menu='recaudaciones'
                                     submenu='tasas-contingencia'
                                     parameters={this.state}

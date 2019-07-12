@@ -54,6 +54,7 @@ const ReporteTasasGeneradas = React.lazy(() => import('./views/Recaudaciones/Rep
 const VendidosPorCooperativa = React.lazy(() => import('./views/Recaudaciones/VendidosPorCooperativa'))
 const ReporteBoletosTasas = React.lazy(() => import('./views/Recaudaciones/ReporteBoletosTasas'))
 const ReporteTurnosCooperativa = React.lazy(() => import('./views/Recaudaciones/ReporteTurnosCooperativa'))
+const TasasEmitidasVSUsadasCooperativa = React.lazy(() => import('./views/Recaudaciones/TasasEmitidasVSUsadasCooperativa'))
 
 const Dashboard = React.lazy(() => import('./views/Pages/Dashboard'))
 const Page404 = React.lazy(() => import('./views/Pages/Page404'))
@@ -134,7 +135,7 @@ const routes = [
   { path: '/recaudaciones/clientes-frecuentes', name: 'Brand Buttons', component: ReporteClientesFrecuentes, exact: true },
   { path: '/recaudaciones/reporte-boletos-tasas',  name: 'Reporte Boletos y tasas', component: ReporteBoletosTasas, exact: true },
   { path: '/recaudaciones/turnos-cooperativa', name: 'Reporte Turnos cooperativa', component: ReporteTurnosCooperativa, exact: true },
-  { path: '/recaudaciones/tasas-emitidas-vs-usadas', name: 'Flags', component: Page404 },
+  { path: '/recaudaciones/tasas-emitidas-vs-usadas', name: 'Tasas emitidas VS Usuadas por cooperativa', component: TasasEmitidasVSUsadasCooperativa, exact: true },
   { path: '/recaudaciones/tasas-usadas-por-viaje', name: 'Font Awesome', component: Page404 },
   { path: '/recaudaciones/recaudacion', name: 'Simple Line Icons', component: Page404 },
   { path: '/recaudaciones/ventas-por-turno', name: 'Notifications', component: Page404 },
