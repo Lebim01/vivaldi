@@ -389,7 +389,7 @@ class EditCooperativas extends React.Component {
                 preConfirm: () => {
                     return axios.delete(`${baseurl}/cooperativa/${id}`, data)
                     .then(response => {
-                        if (response.status !== 200 && response.status !== 201) {
+                        if (response.status !== 204) {
                             throw new Error(response.statusText)
                         }
                         return response
@@ -401,14 +401,12 @@ class EditCooperativas extends React.Component {
                     })
                 },
                 allowOutsideClick: () => !Swal.isLoading()
-            }).then((result) => {
-                if (result.value) {
-                    Swal.fire({
-                        text : `Eliminado`,
-                        type : 'success'
-                    })
-                    this.props.history.push('/cooperativas/cooperativas/')
-                }
+            }).then(() => {
+                Swal.fire({
+                    text : `Eliminado`,
+                    type : 'success'
+                })
+                this.props.history.push('/cooperativas/cooperativas/')
             })
         }
     }

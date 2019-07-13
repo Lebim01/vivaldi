@@ -225,7 +225,6 @@ class EditDistribucionAsientos extends React.Component {
             data.niveles[i].asientos = []
             data.niveles[i].asientos = getAsientos(data.niveles[i], data.niveles[i].filas, true)
         }
-        console.log(data)
         this.setState({
             id,
             data
@@ -284,7 +283,7 @@ class EditDistribucionAsientos extends React.Component {
                 preConfirm: () => {
                     return axios.delete(`${baseurl}/busTipo/${id}`, data)
                     .then(response => {
-                        if (response.status !== 200 && response.status !== 201) {
+                        if (response.status !== 204) {
                             throw new Error(response.statusText)
                         }
                         return response
@@ -296,14 +295,12 @@ class EditDistribucionAsientos extends React.Component {
                     })
                 },
                 allowOutsideClick: () => !Swal.isLoading()
-            }).then((result) => {
-                if (result.value) {
-                    Swal.fire({
-                        text : `Eliminado`,
-                        type : 'success'
-                    })
-                    this.props.history.push('/cooperativas/distribucion-asientos/')
-                }
+            }).then(() => {
+                Swal.fire({
+                    text : `Eliminado`,
+                    type : 'success'
+                })
+                this.props.history.push('/cooperativas/distribucion-asientos/')
             })
         }
     }

@@ -244,7 +244,7 @@ class EditUsuarios extends React.Component {
                 preConfirm: () => {
                     return axios.delete(`${baseurl}/usuario/${id}`, data)
                     .then(response => {
-                        if (response.status !== 200 && response.status !== 201) {
+                        if (response.status !== 204) {
                             throw new Error(response.statusText)
                         }
                         return response
@@ -256,14 +256,12 @@ class EditUsuarios extends React.Component {
                     })
                 },
                 allowOutsideClick: () => !Swal.isLoading()
-            }).then((result) => {
-                if (result.value) {
-                    Swal.fire({
-                        text : `Eliminado`,
-                        type : 'success'
-                    })
-                    this.props.history.push('/usuarios/usuarios/')
-                }
+            }).then(() => {
+                Swal.fire({
+                    text : `Eliminado`,
+                    type : 'success'
+                })
+                this.props.history.push('/usuarios/usuarios/')
             })
         }
     }
