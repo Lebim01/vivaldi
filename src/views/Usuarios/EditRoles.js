@@ -1,9 +1,10 @@
 import React from 'react'
-import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label } from './../../temeforest'
+import { EditPage, FormGroup, Input, Label } from './../../temeforest'
 import { baseurl, getParameter } from './../../utils/url'
 import axios from 'axios'
-import Swal from 'sweetalert2'
+
+const endpoint = 'rol'
+const urlFront = '/usuarios/roles'
 
 class _Row extends React.Component {
     render(){
@@ -68,7 +69,7 @@ class MainView extends React.Component {
     }
 
     render(){
-        const { categories, permissions } = this.props
+        const { categories, permissions, all_view, all_edit, } = this.props
         return (
             <div>
                 <form className="mt-4 form-horizontal">
@@ -85,15 +86,40 @@ class MainView extends React.Component {
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
-                        <div className="col-sm-12" style={{height:300, overflowY:'auto'}}>
-                            <table className="table table-hover table-striped">
+                        <div className="col-sm-12">
+                            <table id="header-fixed" className="table" style={{marginBottom:0}}>
                                 <thead>
                                     <tr>
-                                        <th scope="col">Permisos disponibles</th>
-                                        <th scope="col" className="text-center">Visualización</th>
-                                        <th scope="col" className="text-center">Creación</th>
-                                        <th scope="col" className="text-center">Edición</th>
-                                        <th scope="col" className="text-center">Eliminación</th>
+                                        <th width="50%" scope="col">Permisos disponibles</th>
+                                        <th width="12.5%" scope="col" className="text-center">Visualización</th>
+                                        <th width="12.5%" scope="col" className="text-center">Creación</th>
+                                        <th width="12.5%" scope="col" className="text-center">Edición</th>
+                                        <th width="12.5%" scope="col" className="text-center">Eliminación</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Seleccionar todo</td>
+                                        <td className="text-center">
+                                            <div className="custom-control custom-checkbox">
+                                                <input type="checkbox" className="custom-control-input" name={`all_view`} id={`all_view`} checked={all_view} />
+                                                <Label onlyClassName="custom-control-label" htmlFor={`all_view`}></Label>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div id="table-container" className="col-sm-12" style={{height:300, overflowY:'auto'}}>
+                            <table className="table table-hover table-striped header-fixed" id="table">
+                                <thead>
+                                    <tr>
+                                        <th width="50%" scope="col"></th>
+                                        <th width="12.5%" scope="col"></th>
+                                        <th width="12.5%" scope="col"></th>
+                                        <th width="12.5%" scope="col"></th>
+                                        <th width="12.5%" scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -144,7 +170,6 @@ class EditRoles extends React.Component {
     constructor(props){
         super(props)
         this.onChange = this.onChange.bind(this)
-        this.confirmSave = this.confirmSave.bind(this)
         this.getPermisos = this.getPermisos.bind(this)
         this.togglePermission = this.togglePermission.bind(this)
     }
@@ -198,15 +223,7 @@ class EditRoles extends React.Component {
             if(codename.includes('change')) type = 'change'
             if(codename.includes('delete')) type = 'delete'
 
-            /* 
-                permisos['localidad'].type = 'nombre del contenido'
-                permisos['localidad'].add = ?id
-                permisos['localidad'].delete = ?id
-                permisos['localidad'].change = ?id
-                permisos['localidad'].view = ?id
-            */
             let indexCategory = categories.findIndex(r => r.id == category)
-            console.log(categories, indexCategory, content_type)
 
             if(!categories[indexCategory].permisos[content_type]){
                 categories[indexCategory].permisos[content_type] = {}
@@ -216,7 +233,6 @@ class EditRoles extends React.Component {
             categories[indexCategory].permisos[content_type][type] = id
         }
 
-        console.log(categories)
         this.setState({
             categories
         })
@@ -228,74 +244,6 @@ class EditRoles extends React.Component {
         this.setState({
             data
         })
-    }
-
-    confirmSave(){
-        const { id, data } = this.state
-        Swal.fire({
-            title: 'Confirmar Guardar',
-            text : '¿Seguro de guardar?',
-            showCancelButton: true,
-            showLoaderOnConfirm: true,
-            preConfirm: () => {
-                return axios.post(`${baseurl}/rol/${id ? `${id}/` : ``}`, data)
-                .then(response => {
-                    if (response.status !== 200 && response.status !== 201) {
-                        throw new Error(response.statusText)
-                    }
-                    return response
-                })
-                .catch(error => {
-                    Swal.showValidationMessage(
-                        `Petición fallida: ${error}`
-                    )
-                })
-            },
-            allowOutsideClick: () => !Swal.isLoading()
-        }).then((result) => {
-            if (result.value) {
-                Swal.fire({
-                    text : `Guardado`,
-                    type : 'success'
-                })
-                this.props.history.push('/usuarios/roles/')
-            }
-        })
-    }
-
-    confirmDelete(){
-        const { id, data } = this.state
-        if(id){
-            Swal.fire({
-                title: 'Confirmar Eliminar',
-                text : '¿Seguro de eliminar?',
-                showCancelButton: true,
-                showLoaderOnConfirm: true,
-                preConfirm: () => {
-                    return axios.delete(`${baseurl}/rol/${id}`, data)
-                    .then(response => {
-                        if (response.status !== 200 && response.status !== 201) {
-                            throw new Error(response.statusText)
-                        }
-                        return response
-                    })
-                    .catch(error => {
-                        Swal.showValidationMessage(
-                            `Petición fallida: ${error}`
-                        )
-                    })
-                },
-                allowOutsideClick: () => !Swal.isLoading()
-            }).then((result) => {
-                if (result.value) {
-                    Swal.fire({
-                        text : `Eliminado`,
-                        type : 'success'
-                    })
-                    this.props.history.push('/usuarios/roles/')
-                }
-            })
-        }
     }
 
     togglePermission(id){
@@ -318,26 +266,9 @@ class EditRoles extends React.Component {
     render(){
         const { data, categories, id } = this.state
         return (
-            <div className="animated fadeIn">
-                <Row>
-                    <Col xs="12" md="12">
-                        <Card>
-                            <CardBody>
-                                <CardTitle>Crear/Editar Rol</CardTitle>
-                                <CardBody>
-                                    <MainView {...data} categories={categories} onChange={this.onChange} togglePermission={this.togglePermission} />
-                                </CardBody>
-                                <div className="row">
-                                    <div className="col-sm-12 text-center">
-                                        <Button type="success" style={{marginRight:5}} onClick={() => this.confirmSave() }>Guardar</Button>
-                                        <Button type="danger" style={{marginLeft:5}} disabled={!id} onClick={() => this.confirmDelete()}>Eliminar</Button>
-                                    </div>
-                                </div>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                </Row>
-            </div>
+            <EditPage title={`${id ? 'Editar' : 'Crear'} Rol`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
+                <MainView {...data} categories={categories} onChange={this.onChange} togglePermission={this.togglePermission} />
+            </EditPage>
         )
     }
 }
