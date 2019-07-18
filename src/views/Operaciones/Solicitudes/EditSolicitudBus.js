@@ -176,14 +176,14 @@ class EditSolicitudBus extends React.Component {
     }
 
     rechazar(){
-        const { id, data } = this.state
+        const { id } = this.state
         Swal.fire({
-            title: 'Confirmar Guardar',
-            text : '¿Seguro de guardar?',
+            title: 'Confirmar rechazar, escribe el motivo',
+            input : 'textarea',
             showCancelButton: true,
             showLoaderOnConfirm: true,
-            preConfirm: () => {
-                return axios.post(`${baseurl}/venta/solicitud_bus/${id ? `${id}/` : ``}`, { id, estado: 2 })
+            preConfirm: (motivo) => {
+                return axios.post(`${baseurl}/venta/solicitud_bus/${id ? `${id}/` : ``}`, { id, estado: 2, motivo })
                 .then(response => {
                     if (response.status !== 200 && response.status !== 201) {
                         throw new Error(response.statusText)
@@ -220,12 +220,14 @@ class EditSolicitudBus extends React.Component {
                                 <CardBody>
                                     <MainView {...data} onChange={this.onChange} />
                                 </CardBody>
-                                <div className="row">
-                                    <div className="col-sm-12 text-center">
-                                        <Button type="success" style={{marginRight:5}} onClick={() => this.aprobar() }>Aprobar</Button>
-                                        <Button type="danger" style={{marginLeft:5}} onClick={() => this.rechazar() }>Rechazar</Button>
+                                { data.estado === 0 &&
+                                    <div className="row">
+                                        <div className="col-sm-12 text-center">
+                                            <Button type="success" style={{marginRight:5}} onClick={() => this.aprobar() }>Aprobar</Button>
+                                            <Button type="danger" style={{marginLeft:5}} onClick={() => this.rechazar() }>Rechazar</Button>
+                                        </div>
                                     </div>
-                                </div>
+                                }
                             </CardBody>
                         </Card>
                     </Col>

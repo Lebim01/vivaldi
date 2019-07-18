@@ -200,12 +200,14 @@ class EditSolicitudDistribucionBus extends React.Component {
                                 <CardBody>
                                     <MainView {...data} onChange={this.onChange} />
                                 </CardBody>
-                                <div className="row">
-                                    <div className="col-sm-12 text-center">
-                                        <Button type="success" style={{marginRight:5}} onClick={() => this.confirmSave() }>Aceptar</Button>
-                                        <Button type="danger" style={{marginLeft:5}}>Rechazar</Button>
+                                { data.estado === 0 &&
+                                    <div className="row">
+                                        <div className="col-sm-12 text-center">
+                                            <Button type="success" style={{marginRight:5}} onClick={() => this.confirmSave() }>Aceptar</Button>
+                                            <Button type="danger" style={{marginLeft:5}}>Rechazar</Button>
+                                        </div>
                                     </div>
-                                </div>
+                                }
                             </CardBody>
                         </Card>
                     </Col>
