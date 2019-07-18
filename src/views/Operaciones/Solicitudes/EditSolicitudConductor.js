@@ -224,8 +224,8 @@ class EditSolicitudConductor extends React.Component {
                                                 <Button type="danger" style={{marginLeft:5}} onClick={() => this.rechazar() }>Rechazar</Button>
                                             </div>
                                         }
-                                        { data.estado === 1 && <Button type="success">Aprobado</Button> }
-                                        { data.estado === 2 && <Button type="danger">Rechazado</Button> }
+                                        { data.estado === 1 && <div className="alert alert-success">Aprobado</div> }
+                                        { data.estado === 2 && <div className="alert alert-danger">Rechazado</div> }
                                     </div>
                                 </div>
                             </CardBody>

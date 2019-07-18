@@ -58,7 +58,7 @@ class MainView extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-3">Fecha salida</Label>
                             <div className="col-sm-5">
-                                <Input value={this.props.frecuencia_fecha_salida} readOnly />
+                                <Input value={this.props.frecuencia_fecha_validez} readOnly />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
@@ -70,19 +70,19 @@ class MainView extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-3">Cooperativa</Label>
                             <div className="col-sm-5">
-                                <Input value={this.props.frecuencia_cooperativa} readOnly />
+                                <Input value={this.props.cooperativa_nombre} readOnly />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-3">Ruta</Label>
                             <div className="col-sm-5">
-                                <Input value={this.props.frecuencia_ruta} readOnly />
+                                <Input value={this.props.frecuencia_ruta_nombre} readOnly />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-3">Destino</Label>
                             <div className="col-sm-5">
-                                <Input value={this.props.frecuencia_destino} readOnly />
+                                <Input value={this.props.frecuencia_ruta_destino_nombre} readOnly />
                             </div>
                         </FormGroup>
                     </fieldset>
@@ -205,8 +205,8 @@ class EditSolicitudFrecuencia extends React.Component {
                                                 <Button type="danger" style={{marginLeft:5}} onClick={() => this.rechazar() }>Rechazar</Button>
                                             </div>
                                         }
-                                        { data.estado === 1 && <Button type="success">Aprobado</Button> }
-                                        { data.estado === 2 && <Button type="danger">Rechazado</Button> }
+                                        { data.estado === 1 && <div className="alert alert-success">Aprobado</div> }
+                                        { data.estado === 2 && <div className="alert alert-danger">Rechazado</div> }
                                     </div>
                                 </div>
                             </CardBody>
