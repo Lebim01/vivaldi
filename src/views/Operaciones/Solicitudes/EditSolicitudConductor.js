@@ -25,7 +25,7 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Usuario solicitante</Label>
                         <div className="col-sm-5">
-                            <Input value={this.props.solicitante_nombre} readOnly />
+                            <Input value={this.props.usuario_solicitante_nombre} readOnly />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
@@ -87,13 +87,13 @@ class MainView extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-3">F. emisión licencia</Label>
                             <div className="col-sm-5">
-                                <Input value={this.props.conductor_fecha_emision} readOnly />
+                                <Input value={this.props.conductor_fecha_emision_licencia} readOnly />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-3">F. validez licencia</Label>
                             <div className="col-sm-5">
-                                <Input value={this.props.conductor_fecha_vencimiento} readOnly />
+                                <Input value={this.props.conductor_fecha_vencimiento_licencia} readOnly />
                             </div>
                         </FormGroup>
                     </fieldset>
