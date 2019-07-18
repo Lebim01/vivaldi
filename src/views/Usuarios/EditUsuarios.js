@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, FormGroup, Input, Label, EditPage } from './../../temeforest'
+import { Button, FormGroup, Input, Label, EditPage, Select } from './../../temeforest'
 import { baseurl, getParameter } from './../../utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
@@ -31,7 +31,35 @@ class _Row extends React.Component {
                     </Button>{' '}
                     {this.props.name}
                 </td>
+            </tr>
+        )
+    }
+}
+
+class _RowCooperativa extends React.Component {
+
+    constructor(props){
+        super(props)
+        this.delete = this.delete.bind(this)
+    }
+
+    delete(){
+        if(this.props.delete){
+            this.props.delete()
+        }
+    }
+
+    render(){
+        return (
+            <tr>
+                <td>
+                    <Button outline={true} type="danger" size="sm" rounded={true} onClick={this.delete}>
+                        <i className="fa fa-times"></i>
+                    </Button>{' '}
+                    {this.props.name}
+                </td>
                 <td>{this.props.name}</td>
+                <td>{this.props.rol}</td>
             </tr>
         )
     }
@@ -42,12 +70,22 @@ class EditUsuarios extends React.Component {
     state = {
         id : null,
         data : {
-            roles: []
+            roles: [],
+            cooperativas: [],
+            tipo : 1
         },
-        modal : {
+        modal_rol : {
+            show : false
+        },
+        modal_cooperativa : {
             show : false
         }
     }
+
+    tipos = [
+        {value:1, label:'Administrativo'},
+        {value:2, label:'Cooperativa'},
+    ]
 
     constructor(props){
         super(props)
@@ -68,7 +106,11 @@ class EditUsuarios extends React.Component {
         const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/`)
         this.setState({
             id,
-            data
+            data : {
+                ...data,
+                tipo : 1,
+                cooperativas: []
+            }
         })
     }
 
@@ -87,18 +129,18 @@ class EditUsuarios extends React.Component {
 
     addRol(){
         this.setState({
-            modal : {
-                ...this.state.modal,
+            modal_rol : {
+                ...this.state.modal_rol,
                 show : true
             }
         })
     }
 
     toggleModal = () => {
-        let _modal = this.state.modal
+        let _modal = this.state.modal_rol
         _modal.show = !_modal.show
         this.setState({
-            modal : _modal
+            modal_rol : _modal
         })
     }
 
@@ -119,6 +161,44 @@ class EditUsuarios extends React.Component {
             let roles = this.state.data.roles
             roles.splice(index, 1)
             this.setValue('roles', roles)
+        }
+    }
+
+    addRol(){
+        this.setState({
+            modal_cooperativa : {
+                ...this.state.modal_cooperativa,
+                show : true
+            }
+        })
+    }
+
+
+    toggleModalCooperativa = () => {
+        let _modal = this.state.modal_cooperativa
+        _modal.show = !_modal.show
+        this.setState({
+            modal_cooperativa : _modal
+        })
+    }
+
+    agregarCooperativa(data){
+        let cooperativas = this.state.data.cooperativas
+        cooperativas.push(data)
+        this.setValue('cooperativas', cooperativas)
+        this.toggleModalCooperativa()
+    }
+
+    deleteCooperativa = async (index) => {
+        const {value} = await Swal.fire({
+            title: 'Confirmar',
+            text : '¿Seguro de borrar?',
+            showCancelButton: true,
+        })
+        if(value){
+            let cooperativas = this.state.data.cooperativas
+            cooperativas.splice(index, 1)
+            this.setValue('cooperativas', cooperativas)
         }
     }
 
@@ -159,32 +239,91 @@ class EditUsuarios extends React.Component {
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
-                            <div class="col-sm-1">&nbsp;</div>
-                            <Label className="col-sm-3 col-sm-offset-3">
-                                Roles
-                                <Button size="sm" style={{marginLeft:5}} onClick={this.addRol}>
-                                    <i className="fa fa-plus"></i>
-                                </Button>
-                            </Label>
-                        </FormGroup>
-                        <FormGroup className="row">
-                            <div class="col-sm-3">&nbsp;</div>
-                            <div className="col-sm-6 col-sm-offset-3">
-                                <div className="table-responsive">
-                                    <table className="table table-hover table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Cooperativa</th>
-                                                <th scope="col">Rol</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            { data.roles.map((r, i) => <_Row {...r} key={i} delete={() => this.deleteRol(i)} />) }
-                                        </tbody>
-                                    </table>
-                                </div>
+                            <Label className="col-sm-3">Contraseña</Label>
+                            <div className="col-sm-5">
+                                
                             </div>
                         </FormGroup>
+                        <FormGroup className="row">
+                            <Label className="col-sm-3">Tipo</Label>
+                            <div className="col-sm-5">
+                                <Select onChange={this.onChange('tipo')} value={data.tipo} options={this.tipos} />
+                            </div>
+                        </FormGroup>
+                        { data.tipo == 1 &&
+                            <div>
+                                <FormGroup className="row">
+                                    <div class="col-sm-1">&nbsp;</div>
+                                    <Label className="col-sm-3 col-sm-offset-3">
+                                        Roles
+                                        <Button size="sm" style={{marginLeft:5}} onClick={this.addRol}>
+                                            <i className="fa fa-plus"></i>
+                                        </Button>
+                                    </Label>
+                                </FormGroup>
+                                <FormGroup className="row">
+                                    <div class="col-sm-3">&nbsp;</div>
+                                    <div className="col-sm-6 col-sm-offset-3">
+                                        <div className="table-responsive">
+                                            <table className="table table-hover table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Rol</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    { data.roles.map((r, i) => <_Row {...r} key={i} delete={() => this.deleteRol(i)} />) }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </FormGroup>
+                            </div>
+                        }
+                        { data.tipo == 2 &&
+                            <div>
+                                <FormGroup className="row">
+                                    <div class="col-sm-1">&nbsp;</div>
+                                    <Label className="col-sm-3 col-sm-offset-3">
+                                        Cooperativas
+                                        <Button size="sm" style={{marginLeft:5}} onClick={this.addCooperativa}>
+                                            <i className="fa fa-plus"></i>
+                                        </Button>
+                                    </Label>
+                                </FormGroup>
+                                <FormGroup className="row">
+                                    <div class="col-sm-3">&nbsp;</div>
+                                    <div className="col-sm-6 col-sm-offset-3">
+                                        <div className="table-responsive">
+                                            <table className="table table-hover table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Cooperativas</th>
+                                                        <th scope="col">Rol</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    { data.cooperativas.map((r, i) => <_RowCooperativa {...r} key={i} delete={() => this.deleteCooperativa(i)} />) }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </FormGroup>
+                                <FormGroup className="row">
+                                    <div className="col-sm-3"></div>
+                                    <div className="col-sm-3">
+                                        <Button size="md">
+                                            Subir Documentación
+                                        </Button>
+                                    </div>
+                                    <div className="col-sm-3" style={{marginLeft: 5}}>
+                                        <Button size="md">
+                                            Descargar Documentación
+                                        </Button>
+                                    </div>
+                                </FormGroup>
+                            </div>
+                        }
                     </form>
                     <AddRolUsuario guardar={this.agregarRol} {...this.state.modal} toggle={this.toggleModal} />
                 </div>

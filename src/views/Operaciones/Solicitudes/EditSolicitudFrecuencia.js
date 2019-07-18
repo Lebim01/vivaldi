@@ -26,13 +26,13 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Usuario solicitante</Label>
                         <div className="col-sm-5">
-                            <Input value={this.props.solicitante_nombre} readOnly />
+                            <Input value={this.props.usuario_solicitante_nombre} readOnly />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
                         <Label className="col-sm-3">Tipo solicitud</Label>
                         <div className="col-sm-5">
-                            <Input value={this.props.tipo_solicitud} readOnly />
+                            <Input value={this.props.tipo_solicitud_nombre} readOnly />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
