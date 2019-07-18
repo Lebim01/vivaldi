@@ -54,6 +54,7 @@ class ListPage extends React.Component {
 
     onRowDoubleClick(id){
         if(this.props.menu){
+            console.log(`/${this.props.menu}/${this.props.submenu}/edit?id=${id}`)
             this.props.history.push(`/${this.props.menu}/${this.props.submenu}/edit?id=${id}`)
         }
     }
@@ -97,7 +98,7 @@ class ListPage extends React.Component {
                             <table className="table table-hover table-striped">
                                 <thead>
                                     <tr>
-                                        {fieldNames.map((fieldName) => <th scope="col">{fieldName}</th>)}
+                                        {fieldNames.map((fieldName, i) => <th key={i} scope="col">{fieldName}</th>)}
                                     </tr>
                                 </thead>
                                 <tbody>
