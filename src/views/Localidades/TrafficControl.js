@@ -1,92 +1,35 @@
 import React from 'react'
-import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, InputIcon, Button } from './../../temeforest'
-import axios from 'axios'
-import { baseurl } from './../../utils/url'
-
-class _Row extends React.Component {
-
-    onRowDoubleClick(){
-        if(this.props.onDoubleClick){
-            this.props.onDoubleClick(this.props.id)
-        }
-    }
-
-    render(){
-        const { descripcion, ip, localidad_nombre } = this.props
-        return (
-            <tr onDoubleClick={this.onRowDoubleClick.bind(this)}>
-                <td>{descripcion}</td>
-                <td>{ip}</td>
-                <td>{localidad_nombre}</td>
-            </tr>
-        )
-    }
-}
+import { Card, CardBody, ListPage } from './../../temeforest'
 
 class TrafficControl extends React.Component {
-    state = { data:[] }
-    constructor(props){
-        super(props)
-        this.onRowDoubleClick = this.onRowDoubleClick.bind(this)
-    }
-    loadList = async () => {
-        let { data } = await axios.get(`${baseurl}/trafficControl/`)
-        this.setState({
-            data
-        })
-    }
-
-    componentDidMount(){
-        this.loadList()
-    }
-
-    onRowDoubleClick(id){
-        this.props.history.push('/localidades/traffic-control/edit?id='+id)
-    }
-
     render(){
-        const { data } = this.state
-        return (
+        return(
             <div className="animated fadeIn">
-                <Row>
-                    <Col xs="12" md="12">
+                <div className="row">
+                    <div className="col-sm-12">
                         <Card>
                             <CardBody>
-                                <CardTitle>Traffic Control</CardTitle>
-                                <Row>
-                                    <Col xs="12" md="6">
-                                        <InputIcon placeholder="Buscar... Descripción, IP, Localidad" icon={<i className="fa fa-search"></i>} />
-                                    </Col>
-                                    <Col xs="12" md="6">
-                                        <Button style={{'float': 'right'}}  onClick={() => this.onRowDoubleClick('')}>
-                                            <i className="fa fa-plus"></i>
-                                        </Button>
-                                    </Col>
-                                </Row>
-                                <br/>
-                                <Row>
-                                    <Col xs="12" md="12">
-                                        <div className="table-responsive">
-                                            <table className="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">Descripción</th>
-                                                        <th scope="col">Dirección IP</th>
-                                                        <th scope="col">Localidad</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {data.map((row, i) => <_Row {...row} key={i} onDoubleClick={this.onRowDoubleClick} />)}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </Col>
-                                </Row>
+                                <ListPage
+                                    title="Traffic Control"
+
+                                    searchable={true}
+                                    searchPlaceholder="Descripción, IP, Localidad"
+                                    searchFields={['descripcion', 'ip', 'localidad_nombre']}
+
+                                    fieldNames={['Descripción', 'Dirección IP', 'Localidad']}
+                                    fields={['descripcion', 'ip', 'localidad_nombre']}
+
+                                    url='trafficControl'
+
+                                    menu='localidades'
+                                    submenu='traffic-control'
+
+                                    history={this.props.history}
+                                />
                             </CardBody>
                         </Card>
-                    </Col>
-                </Row>
+                    </div>
+                </div>
             </div>
         )
     }
