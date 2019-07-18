@@ -71,7 +71,7 @@ class EditUsuarios extends React.Component {
         id : null,
         data : {
             roles: [],
-            cooperativas: [],
+            roles_cooperativa: [],
             tipo : 1
         },
         modal_rol : {
@@ -106,11 +106,7 @@ class EditUsuarios extends React.Component {
         const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/`)
         this.setState({
             id,
-            data : {
-                ...data,
-                tipo : 1,
-                cooperativas: []
-            }
+            data
         })
     }
 
@@ -183,9 +179,9 @@ class EditUsuarios extends React.Component {
     }
 
     agregarCooperativa(data){
-        let cooperativas = this.state.data.cooperativas
-        cooperativas.push(data)
-        this.setValue('cooperativas', cooperativas)
+        let roles_cooperativa = this.state.data.roles_cooperativa
+        roles_cooperativa.push(data)
+        this.setValue('roles_cooperativa', roles_cooperativa)
         this.toggleModalCooperativa()
     }
 
@@ -196,9 +192,9 @@ class EditUsuarios extends React.Component {
             showCancelButton: true,
         })
         if(value){
-            let cooperativas = this.state.data.cooperativas
-            cooperativas.splice(index, 1)
-            this.setValue('cooperativas', cooperativas)
+            let roles_cooperativa = this.state.data.roles_cooperativa
+            roles_cooperativa.splice(index, 1)
+            this.setValue('roles_cooperativa', roles_cooperativa)
         }
     }
 
@@ -303,7 +299,7 @@ class EditUsuarios extends React.Component {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    { data.cooperativas.map((r, i) => <_RowCooperativa {...r} key={i} delete={() => this.deleteCooperativa(i)} />) }
+                                                    { data.roles_cooperativa.map((r, i) => <_RowCooperativa {...r} key={i} delete={() => this.deleteCooperativa(i)} />) }
                                                 </tbody>
                                             </table>
                                         </div>

@@ -13,7 +13,7 @@ class _Row extends React.Component {
     }
 
     render(){
-        const { username, last_name, first_name, cooperativas } = this.props
+        const { username, last_name, first_name, roles_cooperativa } = this.props
         return (
             <tr onDoubleClick={this.onRowDoubleClick.bind(this)}>
                 <td>{username}</td>
@@ -21,7 +21,11 @@ class _Row extends React.Component {
                 <td>{first_name}</td>
                 <td>
                     <ul>
-                        { (cooperativas || []).map((c) => <li>{c}</li> ) }
+                    {
+                        roles_cooperativa.map((r) => 
+                            <li>{r.cooperativa_nombre}</li>
+                        )
+                    }
                     </ul>
                 </td>
             </tr>
