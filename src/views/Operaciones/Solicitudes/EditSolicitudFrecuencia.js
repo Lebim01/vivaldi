@@ -197,14 +197,18 @@ class EditSolicitudFrecuencia extends React.Component {
                                 <CardBody>
                                     <MainView {...data} onChange={this.onChange} />
                                 </CardBody>
-                                { data.estado === 0 &&
-                                    <div className="row">
-                                        <div className="col-sm-12 text-center">
-                                            <Button type="success" style={{marginRight:5}} onClick={() => this.aprobar() }>Aprobar</Button>
-                                            <Button type="danger" style={{marginLeft:5}} onClick={() => this.rechazar() }>Rechazar</Button>
-                                        </div>
+                                <div className="row">
+                                    <div className="col-sm-12 text-center">
+                                        { data.estado === 0 && 
+                                            <div>
+                                                <Button type="success" style={{marginRight:5}} onClick={() => this.aprobar() }>Aprobar</Button>
+                                                <Button type="danger" style={{marginLeft:5}} onClick={() => this.rechazar() }>Rechazar</Button>
+                                            </div>
+                                        }
+                                        { data.estado === 1 && <Button type="success">Aprobado</Button> }
+                                        { data.estado === 2 && <Button type="danger">Rechazado</Button> }
                                     </div>
-                                }
+                                </div>
                             </CardBody>
                         </Card>
                     </Col>
