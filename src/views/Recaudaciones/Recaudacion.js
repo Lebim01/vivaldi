@@ -3,7 +3,7 @@ import { ListPage, Label, FormGroup, Select, Input, ReportPage } from './../../t
 import moment from 'moment'
 import { baseurl } from './../../utils/url'
 
-class TasasEmitidasVSUsadasCooperativa extends React.Component {
+class Recaudacion extends React.Component {
     state = {
         fecha_inicio : moment().format('YYYY-MM-DD'),
         fecha_fin : moment().format('YYYY-MM-DD')
@@ -28,10 +28,6 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
         labelName: 'nombre',
         valueName: 'id' 
     }
-    optionsReporte = [
-        { value: 1, label: 'Boletero' },
-        { value: 2, label: 'Viaje' },
-    ]
 
     onChange = name => (e) => {
         this.setState({
@@ -48,17 +44,17 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
     render(){
         const { refresh } = this.state
         return (
-            <ReportPage title="Tasas emitidas VS Usadas por cooperativa">
+            <ReportPage title="Recaudación">
                 <div className="row">
                     <div className="col-sm-4">
                         <FormGroup className="row">
-                            <Label className="col-sm-3">Cooperativa</Label>
+                            <Label className="col-sm-4">Cooperativa</Label>
                             <div className="col-sm-8">
                                 <Select asyncOptions={this.optionsCooperativa} onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
-                            <Label className="col-sm-3">Localidad</Label>
+                            <Label className="col-sm-4">Localidad</Label>
                             <div className="col-sm-8">
                                 <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad}/>
                             </div>
@@ -66,13 +62,13 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
                     </div>
                     <div className="col-sm-4">
                         <FormGroup className="row">
-                            <Label className="col-sm-3">Fecha inicio</Label>
+                            <Label className="col-sm-4">Fecha inicio</Label>
                             <div className="col-sm-8">
                                 <Input type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
-                            <Label className="col-sm-3">Fecha fin</Label>
+                            <Label className="col-sm-4">Fecha fin</Label>
                             <div className="col-sm-8">
                                 <Input type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
                             </div>
@@ -80,27 +76,61 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
                     </div>
                     <div className="col-sm-4">
                         <FormGroup className="row">
-                            <Label className="col-sm-3">Forma de pago</Label>
+                            <Label className="col-sm-4">Forma de pago</Label>
                             <div className="col-sm-8">
-                                <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('forma_de_pago')} value={this.state.forma_de_pago} />
+                                <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('forma_pago')} value={this.state.forma_pago} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
-                            <Label className="col-sm-3">Reporte</Label>
+                            <Label className="col-sm-4">Viaje</Label>
                             <div className="col-sm-8">
-                                <Select options={this.optionsReporte} onChange={this.onChange('reporte')} value={this.state.reporte} />
+                                <Select onChange={this.onChange('viaje')} value={this.state.viaje} />
                             </div>
                         </FormGroup>
                     </div>
                 </div>
+                <br/>
+                <div className="row">
+                    <div className="col-sm-2"></div>
+                    <div className="col-sm-4">
+                        <FormGroup className="row">
+                            <Label className="col-sm-4">Viaje</Label>
+                            <div className="col-sm-8">
+                                <Input />
+                            </div>
+                        </FormGroup>
+                        <FormGroup className="row">
+                            <Label className="col-sm-4">Salida</Label>
+                            <div className="col-sm-8">
+                                <Input />
+                            </div>
+                        </FormGroup>
+                    </div>
+                    <div className="col-sm-4">
+                        <FormGroup className="row">
+                            <Label className="col-sm-4">Destino</Label>
+                            <div className="col-sm-8">
+                                <Input />
+                            </div>
+                        </FormGroup>
+                        <FormGroup className="row">
+                            <Label className="col-sm-4">Disco/Placa</Label>
+                            <div className="col-sm-8">
+                                <Input />
+                            </div>
+                        </FormGroup>
+                    
+                    </div>
+                    <div className="col-sm-2"></div>
+                </div>
                 <ListPage
                     searchable={false}
 
-                    fieldNames={[(this.state.reporte == 2) ? 'Viaje' : 'Boletero' , 'Emitidas', 'Usadas']}
-                    fields={[(this.state.reporte == 2) ? 'viaje' : 'boletero', 'tasas_emitidas', 'tasas_usadas']}
+                    fieldNames={['Tasa (Código)', 'Usada', '# Asiento']}
+                    fields={['', '', '']}
 
                     //url del endpoint
-                    url='recaudaciones/tasas-emitidas-usadas'
+                    url='recaudaciones/tasas_emitidas_vs_usadas_cooperativa'
 
                     // url del frontend
                     menu='recaudaciones'
@@ -115,4 +145,4 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
     }
 }
 
-export default TasasEmitidasVSUsadasCooperativa
+export default Recaudacion

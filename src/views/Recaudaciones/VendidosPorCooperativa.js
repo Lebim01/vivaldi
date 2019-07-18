@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, InputIcon, Button } from './../../temeforest'
+import { ListPage, Label, FormGroup, Select, Input, InputIcon, ReportPage } from './../../temeforest'
 import moment from 'moment'
 import { baseurl } from './../../utils/url'
 
@@ -42,98 +42,80 @@ class ReporteTasasVendidas extends React.Component {
     render(){
         const { refresh } = this.state
         return (
-            <div className="animated fadeIn">
+            <ReportPage title="Reporte de Tasas Vendidas">
                 <div className="row">
-                    <div className="col-sm-12">
-                        <Card>
-                            <CardBody>
-                                <CardTitle>
-                                    Reporte de Tasas Vendidas
-                                </CardTitle>
-                                <br/>
-                                <div className="row">
-                                    <div className="col-sm-4">
-                                        <FormGroup className="row">
-                                            <Label className="col-sm-3">Cooperativa</Label>
-                                            <div className="col-sm-8">
-                                                <Select asyncOptions={this.optionsCooperativa} onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
-                                            </div>
-                                        </FormGroup>
-                                        <FormGroup className="row">
-                                            <Label className="col-sm-3">Localidad</Label>
-                                            <div className="col-sm-8">
-                                                <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad}/>
-                                            </div>
-                                        </FormGroup>
-                                    </div>
-                                    <div className="col-sm-4">
-                                        <FormGroup className="row">
-                                            <Label className="col-sm-3">Fecha inicio</Label>
-                                            <div className="col-sm-8">
-                                                <Input type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
-                                            </div>
-                                        </FormGroup>
-                                        <FormGroup className="row">
-                                            <Label className="col-sm-3">Fecha fin</Label>
-                                            <div className="col-sm-8">
-                                                <Input type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
-                                            </div>
-                                        </FormGroup>
-                                    </div>
-                                    <div className="col-sm-4">
-                                        <FormGroup className="row">
-                                            <Label className="col-sm-3">Medio de pago</Label>
-                                            <div className="col-sm-8">
-                                                <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('medio_pago')} value={this.state.medio_pago} />
-                                            </div>
-                                        </FormGroup>
-                                        <FormGroup className="row">
-                                            <Label className="col-sm-3">Destino</Label>
-                                            <div className="col-sm-8">
-                                                <Select asyncOptions={this.optionsDestino} onChange={this.onChange('destino')} value={this.state.destino}/>
-                                            </div>
-                                        </FormGroup>
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="col-sm-3">
-                                        
-                                    </div>
-                                    <div className="col-sm-3 text-center">
-                                        <InputIcon icon={<i className="fa fa-search"/>} placeholder="Bus" />
-                                    </div>
-                                    <div className="col-sm-3 text-center">
-                                        <InputIcon icon={<i className="fa fa-search"/>} placeholder="Viaje" />
-                                    </div>
-                                    <div className="col-sm-3">
-                                        
-                                    </div>
-                                </div>
-                                <ListPage
-                                    searchable={false}
-
-                                    fieldNames={['Tipo', 'Cantidad', 'Valor unitario', 'Subtotal']}
-                                    fields={['tipo', 'cantidad', 'valor_unitario', 'subtotal']}
-
-                                    url='recaudaciones/vendidos_cooperativa'
-
-                                    menu='recaudaciones'
-                                    submenu='vendidos-cooperativa'
-                                    parameters={this.state}
-                                    
-                                    history={this.props.history}
-                                />
-                                <div className="row">
-                                    <div className="col-sm-12 text-center">
-                                        <Button type="success" style={{marginRight:5}}>Imprimir</Button>
-                                        <Button type="info" style={{marginLeft:5}}>Exportar</Button>
-                                    </div>
-                                </div>
-                            </CardBody>
-                        </Card>
+                    <div className="col-sm-4">
+                        <FormGroup className="row">
+                            <Label className="col-sm-3">Cooperativa</Label>
+                            <div className="col-sm-8">
+                                <Select asyncOptions={this.optionsCooperativa} onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
+                            </div>
+                        </FormGroup>
+                        <FormGroup className="row">
+                            <Label className="col-sm-3">Localidad</Label>
+                            <div className="col-sm-8">
+                                <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad}/>
+                            </div>
+                        </FormGroup>
+                    </div>
+                    <div className="col-sm-4">
+                        <FormGroup className="row">
+                            <Label className="col-sm-3">Fecha inicio</Label>
+                            <div className="col-sm-8">
+                                <Input type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
+                            </div>
+                        </FormGroup>
+                        <FormGroup className="row">
+                            <Label className="col-sm-3">Fecha fin</Label>
+                            <div className="col-sm-8">
+                                <Input type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
+                            </div>
+                        </FormGroup>
+                    </div>
+                    <div className="col-sm-4">
+                        <FormGroup className="row">
+                            <Label className="col-sm-3">Medio de pago</Label>
+                            <div className="col-sm-8">
+                                <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('medio_pago')} value={this.state.medio_pago} />
+                            </div>
+                        </FormGroup>
+                        <FormGroup className="row">
+                            <Label className="col-sm-3">Destino</Label>
+                            <div className="col-sm-8">
+                                <Select asyncOptions={this.optionsDestino} onChange={this.onChange('destino')} value={this.state.destino}/>
+                            </div>
+                        </FormGroup>
                     </div>
                 </div>
-            </div>
+                <div className="row">
+                    <div className="col-sm-3">
+                        
+                    </div>
+                    <div className="col-sm-3 text-center">
+                        <InputIcon icon={<i className="fa fa-search"/>} placeholder="Bus" />
+                    </div>
+                    <div className="col-sm-3 text-center">
+                        <InputIcon icon={<i className="fa fa-search"/>} placeholder="Viaje" />
+                    </div>
+                    <div className="col-sm-3">
+                        
+                    </div>
+                </div>
+                <ListPage
+                    searchable={false}
+
+                    fieldNames={['Tipo', 'Cantidad', 'Valor unitario', 'Subtotal']}
+                    fields={['tipo', 'cantidad', 'valor_unitario', 'subtotal']}
+
+                    url='recaudaciones/vendidos_cooperativa'
+
+                    menu='recaudaciones'
+                    submenu='vendidos-cooperativa'
+                    parameters={this.state}
+                    
+                    history={this.props.history}
+                />
+            </ReportPage>
         )
     }
 }

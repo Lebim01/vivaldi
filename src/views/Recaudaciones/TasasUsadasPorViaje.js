@@ -5,7 +5,6 @@ import { baseurl } from './../../utils/url'
 import store from './../../store/auth'
 
 const { user_info } = store.getState()
-const { name } = user_info
 
 class TasasUsadasPorViaje extends React.Component {
     state = {
@@ -61,13 +60,13 @@ class TasasUsadasPorViaje extends React.Component {
                                 <div className="row">
                                     <div className="col-sm-4">
                                         <FormGroup className="row">
-                                            <Label className="col-sm-3">Cooperativa</Label>
+                                            <Label className="col-sm-4">Cooperativa</Label>
                                             <div className="col-sm-8">
                                                 <Select asyncOptions={this.optionsCooperativa} onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
                                             </div>
                                         </FormGroup>
                                         <FormGroup className="row">
-                                            <Label className="col-sm-3">Localidad</Label>
+                                            <Label className="col-sm-4">Localidad</Label>
                                             <div className="col-sm-8">
                                                 <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad}/>
                                             </div>
@@ -75,13 +74,13 @@ class TasasUsadasPorViaje extends React.Component {
                                     </div>
                                     <div className="col-sm-4">
                                         <FormGroup className="row">
-                                            <Label className="col-sm-3">Fecha inicio</Label>
+                                            <Label className="col-sm-4">Fecha inicio</Label>
                                             <div className="col-sm-8">
                                                 <Input type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
                                             </div>
                                         </FormGroup>
                                         <FormGroup className="row">
-                                            <Label className="col-sm-3">Fecha fin</Label>
+                                            <Label className="col-sm-4">Fecha fin</Label>
                                             <div className="col-sm-8">
                                                 <Input type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
                                             </div>
@@ -89,18 +88,52 @@ class TasasUsadasPorViaje extends React.Component {
                                     </div>
                                     <div className="col-sm-4">
                                         <FormGroup className="row">
-                                            <Label className="col-sm-3">Forma de pago</Label>
+                                            <Label className="col-sm-4">Forma de pago</Label>
                                             <div className="col-sm-8">
                                                 <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('forma_pago')} value={this.state.forma_pago} />
                                             </div>
                                         </FormGroup>
                                         <FormGroup className="row">
-                                            <Label className="col-sm-3">Viaje</Label>
+                                            <Label className="col-sm-4">Viaje</Label>
                                             <div className="col-sm-8">
                                                 <Select onChange={this.onChange('viaje')} value={this.state.viaje} />
                                             </div>
                                         </FormGroup>
                                     </div>
+                                </div>
+                                <br/>
+                                <div className="row">
+                                    <div className="col-sm-2"></div>
+                                    <div className="col-sm-4">
+                                        <FormGroup className="row">
+                                            <Label className="col-sm-4">Viaje</Label>
+                                            <div className="col-sm-8">
+                                                <Input />
+                                            </div>
+                                        </FormGroup>
+                                        <FormGroup className="row">
+                                            <Label className="col-sm-4">Salida</Label>
+                                            <div className="col-sm-8">
+                                                <Input />
+                                            </div>
+                                        </FormGroup>
+                                    </div>
+                                    <div className="col-sm-4">
+                                        <FormGroup className="row">
+                                            <Label className="col-sm-4">Destino</Label>
+                                            <div className="col-sm-8">
+                                                <Input />
+                                            </div>
+                                        </FormGroup>
+                                        <FormGroup className="row">
+                                            <Label className="col-sm-4">Disco/Placa</Label>
+                                            <div className="col-sm-8">
+                                                <Input />
+                                            </div>
+                                        </FormGroup>
+                                    
+                                    </div>
+                                    <div className="col-sm-2"></div>
                                 </div>
                                 <ListPage
                                     searchable={false}
@@ -122,7 +155,7 @@ class TasasUsadasPorViaje extends React.Component {
                                 <br/>
                                 <div className="row">
                                     <div className="col-sm-12 text-center">
-                                        Consultado {timestamp} por {user_info}
+                                        Consultado {timestamp} por {user_info.name}
                                     </div>
                                 </div>
                                 <br/>
