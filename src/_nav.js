@@ -243,8 +243,12 @@ export default {
       icon : '',
       children : [
         {
+          name : 'Recaudacion',
+          url : '/#/cobranza/recaudacion'
+        },
+        {
           name : 'Diarios',
-          url : '/#/cobranza/diarios'
+          url : '/#/cobranza/diario'
         },
         {
           name : 'Pendientes',

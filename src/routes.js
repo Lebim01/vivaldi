@@ -58,6 +58,11 @@ const TasasEmitidasVSUsadasCooperativa = React.lazy(() => import('./views/Recaud
 const TasasUsadasPorViaje = React.lazy(() => import('./views/Recaudaciones/TasasUsadasPorViaje'))
 const Recaudacion = React.lazy(() => import('./views/Recaudaciones/Recaudacion'))
 
+/** COBRANZA */
+const CobranzaRecaudacion = React.lazy(() => import('./views/Cobranza/Recaudacion'))
+const Diario = React.lazy(() => import('./views/Cobranza/Diario'))
+const Pendientes = React.lazy(() => import('./views/Cobranza/Pendientes'))
+
 const Dashboard = React.lazy(() => import('./views/Pages/Dashboard'))
 const Page404 = React.lazy(() => import('./views/Pages/Page404'))
 /** DEMOGRAFIA */
@@ -148,9 +153,11 @@ const routes = [
   { path: '/recaudaciones/viajes-semanales', name: 'Charts', component: Page404 },
   { path: '/recaudaciones/viajes-por-liquidar',  name: 'Users', component: Page404 },
 
-  { path: '/cobranza/diarios', name: 'User Details', component: Page404 },
-  { path: '/cobranza/pendientes', name: 'User Details', component: Page404 },
+  { path: '/cobranza/recaudacion', name: 'Recaudacion', component: CobranzaRecaudacion, exact: true },
+  { path: '/cobranza/diario', name: 'Diario', component: Diario, exact: true },
+  { path: '/cobranza/pendientes', name: 'Pendientes', component: Pendientes, exact: true },
   { path: '/cobranza/consultas', name: 'User Details', component: Page404 },
+
   { path: '/auditoria/reportes-detallados', name: 'User Details', component: Page404 },
   { path: '/auditoria/tipo-emision-cooperativas', name: 'User Details', component: Page404 },
   { path: '/auditoria/permisos-roles', name: 'User Details', component: Page404 },
