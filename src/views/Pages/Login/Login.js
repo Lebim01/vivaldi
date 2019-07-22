@@ -18,7 +18,6 @@ class Login extends Component {
 
     login = async (e) => {
         e.preventDefault()
-        console.log(this.state)
         const { user, pass } = this.state
         if(!user || !pass){
             this.setState({ noValid : true })

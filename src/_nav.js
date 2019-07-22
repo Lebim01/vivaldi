@@ -250,10 +250,10 @@ export default {
           name : 'Diarios',
           url : '/#/cobranza/diario'
         },
-        {
+        /*{
           name : 'Pendientes',
           url : '/#/cobranza/pendientes'
-        },
+        },*/
         {
           name : 'Consultas',
           url : '/#/cobranza/consultas'

@@ -1,12 +1,12 @@
 import React from 'react'
-import { ListPage, Label, FormGroup, Select, Input, ReportPage, Button } from './../../temeforest'
+import { ListPage, Label, FormGroup, Select, Input, InputIcon, ReportPage } from './../../temeforest'
 import moment from 'moment'
 import { baseurl } from './../../utils/url'
 
-class Diario extends React.Component {
+class VentasPorTurno extends React.Component {
     state = {
         fecha_inicio : moment().format('YYYY-MM-DD'),
-        fecha_fin : moment().format('YYYY-MM-DD')
+        fecha_fin : moment().format('YYYY-MM-DD'),
     }
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
@@ -28,7 +28,6 @@ class Diario extends React.Component {
         labelName: 'nombre',
         valueName: 'id' 
     }
-
     onChange = name => (e) => {
         this.setState({
             [name]: e.target.value
@@ -40,17 +39,16 @@ class Diario extends React.Component {
             refresh: true
         })
     }
-    
     render(){
         const { refresh } = this.state
         return (
-            <ReportPage title="Cobros Diarios">
+            <ReportPage title="Ventas totales por turno">
                 <div className="row">
                     <div className="col-sm-4">
                         <FormGroup className="row">
-                            <Label className="col-sm-4">Dia</Label>
+                            <Label className="col-sm-4">Cooperativa</Label>
                             <div className="col-sm-8">
-                                <Input type="date" onChange={this.onChange('dia')} value={this.state.dia}/>
+                                <Select asyncOptions={this.optionsCooperativa} onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
@@ -62,16 +60,29 @@ class Diario extends React.Component {
                     </div>
                     <div className="col-sm-4">
                         <FormGroup className="row">
-                            <Label className="col-sm-4">Cooperativa</Label>
+                            <Label className="col-sm-4">Fecha inicio</Label>
                             <div className="col-sm-8">
-                                <Select asyncOptions={this.optionsCooperativa} onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
+                                <Input type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
-                            <div className="col-sm-12">
-                                <Button onClick={this.onChange('refresh')}>
-                                    Generar
-                                </Button>
+                            <Label className="col-sm-4">Fecha fin</Label>
+                            <div className="col-sm-8">
+                                <Input type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
+                            </div>
+                        </FormGroup>
+                    </div>
+                    <div className="col-sm-4">
+                        <FormGroup className="row">
+                            <Label className="col-sm-4">Medio de pago</Label>
+                            <div className="col-sm-8">
+                                <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('medio_pago')} value={this.state.medio_pago} />
+                            </div>
+                        </FormGroup>
+                        <FormGroup className="row">
+                            <Label className="col-sm-4">Boletero</Label>
+                            <div className="col-sm-8">
+                                
                             </div>
                         </FormGroup>
                     </div>
@@ -79,23 +90,20 @@ class Diario extends React.Component {
                 <ListPage
                     searchable={false}
 
-                    fieldNames={['Cooperativa', 'Localidad', 'Fecha', 'Cobrar', 'Saldo', 'Emitido', 'Cobrado', 'N.C', 'Acción']}
-                    fields={['', '', '', '', '', '']}
+                    fieldNames={['Destino', 'Tipo', 'Cantidad', 'v/u', 'Subtotal']}
+                    fields={['destino_nombre', 'tipo', 'cantidad', '', 'subtotal']}
 
-                    //url del endpoint
-                    url='cobranza/diario'
+                    url=''
 
-                    // url del frontend
-                    menu='cobranza'
-                    submenu='diario'
+                    menu='recaudaciones'
+                    submenu='ventas-por-turno'
                     parameters={this.state}
                     
                     history={this.props.history}
-                    refresh={refresh}
                 />
             </ReportPage>
         )
     }
 }
 
-export default Diario
+export default VentasPorTurno

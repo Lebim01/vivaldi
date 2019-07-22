@@ -52,6 +52,7 @@ const VentaTasas = React.lazy(() => import('./views/Recaudaciones/VentaTasas'))
 const ReporteTasasVendidas = React.lazy(() => import('./views/Recaudaciones/ReporteTasasVendidas'))
 const ReporteTasasGeneradas = React.lazy(() => import('./views/Recaudaciones/ReporteTasasGeneradas'))
 const VendidosPorCooperativa = React.lazy(() => import('./views/Recaudaciones/VendidosPorCooperativa'))
+const VendidosPorTurno = React.lazy(() => import('./views/Recaudaciones/VendidosPorTurno'))
 const ReporteBoletosTasas = React.lazy(() => import('./views/Recaudaciones/ReporteBoletosTasas'))
 const ReporteTurnosCooperativa = React.lazy(() => import('./views/Recaudaciones/ReporteTurnosCooperativa'))
 const TasasEmitidasVSUsadasCooperativa = React.lazy(() => import('./views/Recaudaciones/TasasEmitidasVSUsadasCooperativa'))
@@ -62,6 +63,7 @@ const Recaudacion = React.lazy(() => import('./views/Recaudaciones/Recaudacion')
 const CobranzaRecaudacion = React.lazy(() => import('./views/Cobranza/Recaudacion'))
 const Diario = React.lazy(() => import('./views/Cobranza/Diario'))
 const Pendientes = React.lazy(() => import('./views/Cobranza/Pendientes'))
+const Consultas = React.lazy(() => import('./views/Cobranza/Consultas'))
 
 const Dashboard = React.lazy(() => import('./views/Pages/Dashboard'))
 const Page404 = React.lazy(() => import('./views/Pages/Page404'))
@@ -145,7 +147,7 @@ const routes = [
   { path: '/recaudaciones/tasas-emitidas-vs-usadas', name: 'Tasas emitidas VS Usuadas por cooperativa', component: TasasEmitidasVSUsadasCooperativa, exact: true },
   { path: '/recaudaciones/tasas-usadas-por-viaje', name: 'Tasas usadas por viaje', component: TasasUsadasPorViaje, exact: true },
   { path: '/recaudaciones/recaudacion', name: 'Recaudación', component: Recaudacion, exact: true },
-  { path: '/recaudaciones/ventas-por-turno', name: 'Notifications', component: Page404 },
+  { path: '/recaudaciones/ventas-por-turno', name: 'Ventas por turnos', component: VendidosPorTurno, exact: true },
   { path: '/recaudaciones/salida-de-viajes', name: 'Alerts', component: Page404 },
   { path: '/recaudaciones/pasajeros-por-viaje', name: 'Badges', component: Page404 },
   { path: '/recaudaciones/viajes-por-bus', name: 'Modals', component: Page404 },
@@ -156,7 +158,7 @@ const routes = [
   { path: '/cobranza/recaudacion', name: 'Recaudacion', component: CobranzaRecaudacion, exact: true },
   { path: '/cobranza/diario', name: 'Diario', component: Diario, exact: true },
   { path: '/cobranza/pendientes', name: 'Pendientes', component: Pendientes, exact: true },
-  { path: '/cobranza/consultas', name: 'User Details', component: Page404 },
+  { path: '/cobranza/consultas', name: 'Consultas', component: Consultas, exact: true },
 
   { path: '/auditoria/reportes-detallados', name: 'User Details', component: Page404 },
   { path: '/auditoria/tipo-emision-cooperativas', name: 'User Details', component: Page404 },
