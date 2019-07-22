@@ -6,9 +6,7 @@ import { baseurl } from './../../utils/url'
 
 class RegistroTasa extends React.Component {
 
-    state = {
-        
-    }
+    state = {}
 
     constructor(props){
         super(props)
@@ -24,6 +22,11 @@ class RegistroTasa extends React.Component {
     }
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
+        labelName: 'nombre',
+        valueName: 'id' 
+    }
+    optionsSupervisor = {
+        url : `${baseurl}/supervisor/`,
         labelName: 'nombre',
         valueName: 'id' 
     }
@@ -72,19 +75,19 @@ class RegistroTasa extends React.Component {
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
-                            <Label className="col-sm-3">Motivo de modificación</Label>
+                            <Label className="col-sm-3">Turno</Label>
                             <div className="col-sm-6">
-                                <Input onChange={this.onChange('motivo')} value={this.state.motivo} />
+                                <Input type="number" onChange={this.onChange('turno')} value={this.state.turno} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
-                            <Label className="col-sm-3">Tipo de venta</Label>
+                            <Label className="col-sm-3">Supervisor</Label>
                             <div className="col-sm-6">
-                                <Select options={this.optionsVenta} onChange={this.onChange('tipo_venta')} value={this.state.tipo_venta} />
+                                <Select asyncOptions={this.optionsSuperviso} onChange={this.onChange('supervisor')} value={this.state.supervisor} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
-                            <Label className="col-sm-3">Cantidad</Label>
+                            <Label className="col-sm-3">Cantidad (unidades)</Label>
                             <div className="col-sm-6">
                                 <Input type="number" onChange={this.onChange('cantidad')} value={this.state.cantidad} />
                             </div>
@@ -99,6 +102,12 @@ class RegistroTasa extends React.Component {
                             <Label className="col-sm-3">Total</Label>
                             <div className="col-sm-6">
                                 <Input type="number" onChange={this.onChange('total')} value={this.state.total} />
+                            </div>
+                        </FormGroup>
+                        <FormGroup className="row">
+                            <Label className="col-sm-3">Motivo de modificación</Label>
+                            <div className="col-sm-6">
+                                <Input onChange={this.onChange('motivo')} value={this.state.motivo} />
                             </div>
                         </FormGroup>
                     </form>
@@ -212,8 +221,8 @@ class VentaTasas extends React.Component {
                                 <ListPage
                                     searchable={false}
 
-                                    fieldNames={['Fecha', 'Cooperativa', 'Silo', 'Tipo', 'Cant.', 'Cantidad', 'Precio', 'Total', 'Localidad', '', '']}
-                                    fields={['fecha', 'cooperativa_nombre', 'silo', 'tipo', 'cant', 'cantidad', 'precio', 'total', 'localidad_nombre', '', '']}
+                                    fieldNames={['Fecha venta', 'Turno', 'Localidad', 'Cooperativa', 'Cantidad', 'Valor unitario', 'Valor total', 'Acción']}
+                                    fields={['', '', '', '', '', '', '' , '']}
 
                                     url='recaudaciones/venta_tasas'
 

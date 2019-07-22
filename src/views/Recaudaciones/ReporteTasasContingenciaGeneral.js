@@ -1,84 +1,9 @@
 import React from 'react'
 import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button } from './../../temeforest'
-import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import moment from 'moment'
 import { baseurl } from './../../utils/url'
 
-class RegistroTasa extends React.Component {
-
-    state = {
-        cantidad : '',
-        bloques : '',
-        localidad: 0
-    }
-
-    constructor(props){
-        super(props)
-        this.toggle = this.toggle.bind(this)
-        this.onChange = this.onChange.bind(this)
-        this.guardar = this.guardar.bind(this)
-    }
-
-    optionsLocalidad = {
-        url : `${baseurl}/localidad/`,
-        labelName: 'nombre',
-        valueName: 'id' 
-    }
-
-    toggle() {
-        if(this.props.toggle){
-            this.props.toggle()
-        }
-    }
-
-    onChange = name => (e) => {
-        let value = e.target.value
-        this.setState({
-            [name]: value,
-            ...(name === 'bloques' ? { cantidad: value*10 } : {})
-        })
-    }
-
-    guardar(){
-
-    }
-
-    render(){
-        return (
-            <Modal isOpen={this.props.show} toggle={this.toggle}>
-                <ModalHeader toggle={this.toggle}>Registro tasas contingencia general</ModalHeader>
-                <ModalBody>
-                    <form className="mt-4 form-horizontal">
-                        <FormGroup className="row">
-                            <Label className="col-sm-3">Bloques</Label>
-                            <div className="col-sm-6">
-                                <Input type="number" onChange={this.onChange('bloques')} value={this.state.bloques} />
-                            </div>
-                        </FormGroup>
-                        <FormGroup className="row">
-                            <Label className="col-sm-3">Cantidad</Label>
-                            <div className="col-sm-6">
-                                <Input type="number" value={this.state.cantidad} readOnly />
-                            </div>
-                        </FormGroup>
-                        <FormGroup className="row">
-                            <Label className="col-sm-3">Localidad</Label>
-                            <div className="col-sm-6">
-                                <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad} />
-                            </div>
-                        </FormGroup>
-                    </form>
-                </ModalBody>
-                <ModalFooter>
-                    <Button type="success" onClick={this.guardar}>Aceptar</Button>{' '}
-                    <Button type="secondary" onClick={this.toggle}>Cancelar</Button>
-                </ModalFooter>
-            </Modal>
-        )
-    }
-}
-
-class TasasContingencia extends React.Component {
+class ReporteTasasContingenciaGeneral extends React.Component {
     state = {
         fecha_inicio : moment().format('YYYY-MM-DD'),
         fecha_fin : moment().format('YYYY-MM-DD'),
@@ -123,23 +48,22 @@ class TasasContingencia extends React.Component {
         const { refresh } = this.state
         return (
             <div className="animated fadeIn">
-                <RegistroTasa 
-                    show={this.state.openModal}
-                    toggle={this.toggle}
-                />
                 <div className="row">
                     <div className="col-sm-12">
                         <Card>
                             <CardBody>
                                 <CardTitle>
-                                    Tasas contingencia
-                                    <Button className="pull-right" onClick={this.toggle}>
-                                        <i className="fa fa-plus" /> Contingencia general
-                                    </Button>
+                                    Reporte de tasas de contingencia general
                                 </CardTitle>
                                 <br/>
                                 <div className="row">
                                     <div className="col-sm-6">
+                                        <FormGroup className="row">
+                                            <Label className="col-sm-3">Cooperativa</Label>
+                                            <div className="col-sm-8">
+                                                <Select asyncOptions={this.optionsCooperativa} onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
+                                            </div>
+                                        </FormGroup>
                                         <FormGroup className="row">
                                             <Label className="col-sm-3">Localidad</Label>
                                             <div className="col-sm-8">
@@ -172,15 +96,13 @@ class TasasContingencia extends React.Component {
                                 <ListPage
                                     searchable={false}
 
-                                    fieldNames={['Fecha', 'Localidad', 'Cantidad', 'Acción']}
-                                    fields={['fecha', 'licalidad_nombre', 'cantidad', '']}
+                                    fieldNames={['Fecha', 'Concepto', 'Cooperativa', 'Cantidad', 'Total', 'Cantidad', 'Total', 'Cantidad', 'Total']}
+                                    fields={['', '', '', '', '', '', '' , '', '']}
 
-                                    //url del endpoint
-                                    url='recaudaciones/tasas_contingencia'
-                                    
-                                    // url del frontend
+                                    url='recaudaciones/tasas_general'
+
                                     menu='recaudaciones'
-                                    submenu='tasas-contingencia'
+                                    submenu='venta-tasas'
                                     parameters={this.state}
                                     
                                     history={this.props.history}
@@ -195,4 +117,4 @@ class TasasContingencia extends React.Component {
     }
 }
 
-export default TasasContingencia
+export default ReporteTasasContingenciaGeneral

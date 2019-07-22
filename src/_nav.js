@@ -177,6 +177,10 @@ export default {
           url : '/#/recaudaciones/reporte-tasas-vendidas'
         },
         {
+          name : 'Reporte Tasas Contingencia General',
+          url : '/#/recaudaciones/tasas-contingencia-general'
+        },
+        {
           name : 'Reporte Tasas Generadas',
           url : '/#/recaudaciones/reporte-tasas-generadas'
         },

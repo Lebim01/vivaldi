@@ -60,6 +60,7 @@ const ReporteTurnosCooperativa = React.lazy(() => import('./views/Recaudaciones/
 const TasasEmitidasVSUsadasCooperativa = React.lazy(() => import('./views/Recaudaciones/TasasEmitidasVSUsadasCooperativa'))
 const TasasUsadasPorViaje = React.lazy(() => import('./views/Recaudaciones/TasasUsadasPorViaje'))
 const Recaudacion = React.lazy(() => import('./views/Recaudaciones/Recaudacion'))
+const ReporteTasasContingenciaGeneral = React.lazy(() => import('./views/Recaudaciones/ReporteTasasContingenciaGeneral'))
 
 /** COBRANZA */
 const CobranzaRecaudacion = React.lazy(() => import('./views/Cobranza/Recaudacion'))
@@ -142,6 +143,7 @@ const routes = [
   { path: '/recaudaciones/panel', name: 'Panel de Recaudaciones', component: PanelRecaudaciones, exact: true },
   { path: '/recaudaciones/tasas-contingencia', name: 'Tasas contingencia', component: TasasContingencia, exact: true },
   { path: '/recaudaciones/venta-tasas', name: 'Tasas contingencia', component: VentaTasas, exact: true },
+  { path: '/recaudaciones/tasas-contingencia-general', name: 'Reporte tasas contingencia general', component: ReporteTasasContingenciaGeneral, exact: true },
   { path: '/recaudaciones/reporte-tasas-vendidas', name: 'Tasas vendidas', component: ReporteTasasVendidas, exact: true },
   { path: '/recaudaciones/reporte-tasas-generadas', name: 'Tasas generadas', component: ReporteTasasGeneradas, exact: true },
   { path: '/recaudaciones/vendidos-cooperativa', name: 'Tasas vendidas', component: VendidosPorCooperativa, exact: true },
