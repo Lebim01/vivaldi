@@ -47,7 +47,7 @@ class SolicitudBuses extends React.Component {
                     <div className="col-sm-12">
                         <Card>
                             <CardBody>
-                                <CardTitle>Solicitud de usuario</CardTitle>
+                                <CardTitle>Solicitud de buses</CardTitle>
                                 <br/>
                                 <div className="row">
                                     <div className="col-sm-6">
