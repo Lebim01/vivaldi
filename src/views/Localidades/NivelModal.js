@@ -155,40 +155,6 @@ class NivelModal extends React.Component {
                                 <Input onChange={this.onChange('nombre')} value={nombre} />
                             </div>
                         </FormGroup>
-                        <AddPuertaModal
-                            guardar={(data) => this.agregarPuerta(data)}
-                            {...this.state.modal}
-                            toggle={this.toggleModal}
-                        />
-                        <FormGroup className="row">
-                            <h4>
-                                Puertas
-                                <Button style={{marginLeft: 10}} onClick={this.toggleModal}>
-                                    <i className="fa fa-plus"></i>
-                                </Button>
-                            </h4>
-                            <div className="col-sm-12">
-                                <table className="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>N&uacute;mero</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        { puertas && puertas.map((record, i) =>
-                                            <RecordRow
-                                                key={i}
-                                                index={i}
-                                                {...record}
-                                                onChange={this.onChangePuerta(i)}
-                                                delete={this.deletePuerta}
-                                                edit={() => this.editPuerta({ ...record, index: i })}
-                                            />
-                                        )}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </FormGroup>
                     </form>
                 </ModalBody>
                 <ModalFooter>

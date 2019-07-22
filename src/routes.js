@@ -8,6 +8,8 @@ const TrafficControl = React.lazy(() => import('./views/Localidades/TrafficContr
 const EditTrafficControl = React.lazy(() => import('./views/Localidades/EditTrafficControl'))
 const Andenes = React.lazy(() => import('./views/Localidades/Andenes'))
 const EditAndenes = React.lazy(() => import('./views/Localidades/EditAndenes'))
+const Puertas = React.lazy(() => import('./views/Localidades/Puertas'))
+const EditPuertas = React.lazy(() => import('./views/Localidades/EditPuertas'))
 
 /** USUARIOS */
 const Usuarios = React.lazy(() => import('./views/Usuarios/Usuarios'))
@@ -84,6 +86,8 @@ const routes = [
   { path: '/localidades/silos/edit', name: 'crear/editar silos', component: EditSilos, exact : true },
   { path: '/localidades/andenes', name: 'andenes', component: Andenes, exact : true },
   { path: '/localidades/andenes/edit', name: 'crear/editar andenes', component: EditAndenes, exact : true },
+  { path: '/localidades/puertas', name: 'puertas', component: Puertas, exact : true },
+  { path: '/localidades/puertas/edit', name: 'crear/editar puertas', component: EditPuertas, exact : true },
   { path: '/localidades/traffic-control', name: 'Traffic Control', component: TrafficControl, exact : true },
   { path: '/localidades/traffic-control/edit', name: 'Crear/Eeditar Traffic Control', component: EditTrafficControl, exact : true },
   { path: '/localidades/ciudad', name: 'Ciudad', component: Ciudad, exact : true },

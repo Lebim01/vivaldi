@@ -242,33 +242,7 @@ class MainView extends React.Component {
                             <Select onChange={this.onChange('localidad_nivel')} value={this.props.localidad_nivel} options={niveles} />
                         </div>
                     </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Silos</Label>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <div className="col-sm-1"></div>
-                        <div className="col-sm-10">
-                            <ListSilos
-                                selected={this.props.silos}
-                                onChange={this.toggleSilos}
-                                silos={silos}
-                            />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Puertas</Label>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <div className="col-sm-1"></div>
-                        <div className="col-sm-10">
-                            <ListPuertas
-                                selected={this.props.puertas_acceso}
-                                onChange={this.togglePuertas}
-                                puertas={puertas}
-                            />
-                        </div>
-                    </FormGroup>
-                </form>
+                  </form>
             </div>
         )
     }

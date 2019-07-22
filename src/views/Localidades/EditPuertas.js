@@ -20,21 +20,23 @@ class ListAndenes extends React.Component {
 }
 
 class MainView extends React.Component {
-    state = {}
-    optionsLocalidades = {
-        url : `${baseurl}/localidad/`,
-        labelName: 'nombre',
-        valueName: 'id'
+    seleccione = [{label:'Seleccione', value:''}]
+    state = {
+        niveles : [],
+        localidades :[]
     }
 
     constructor(props){
         super(props)
         this.getAndenes = this.getAndenes.bind(this)
         this.toggleAndenes = this.toggleAndenes.bind(this)
+        this.getLocalidades = this.getLocalidades.bind(this)
+        this.getNiveles = this.getNiveles.bind(this)
     }
 
     componentDidMount(){
         this.getAndenes()
+        this.getLocalidades()
     }
 
 
@@ -56,46 +58,58 @@ class MainView extends React.Component {
         this.props.onChange('andenes', selected)
     }
 
+    onChangeLocalidad = name => (e) => {
+        if(this.props.onChange){
+          this.getNiveles(e.target.value)
+          this.props.onChange('localidad', e.target.value)
+        }
+    }
+
+    getNiveles = async (id)  => {
+        const { data } = await axios.get(`${baseurl}/localidadnivel/?localidad=${id}`)
+        let options = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : r.nombre } })]
+        this.setState({
+          niveles : options
+        })
+    }
+
+    getLocalidades = async (id)  => {
+        const { data } = await axios.get(`${baseurl}/localidad/`)
+        let options = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : r.nombre } })]
+        this.setState({
+          localidades : options
+        }, ()=>{
+            if(this.props.localidad == undefined){
+                this.props.onChange('localidad', this.state.localidades[1].value)
+                this.getNiveles(this.state.localidades[1].value)
+            }else{
+                this.getNiveles(this.props.localidad)
+            }
+        })
+    }
+
 
     render(){
-        const { andenes } = this.state
+        const { andenes, niveles } = this.state
         return (
             <div>
                 <form className="mt-4 form-horizontal">
                     <FormGroup className="row">
                         <Label className="col-sm-3">Localidad</Label>
                         <div className="col-sm-5">
-                            <Select onChange={this.onChange('localidad')} value={this.props.localidad} asyncOptions={this.optionsLocalidades} />
+                            <Select onChange={this.onChangeLocalidad('localidad')} value={this.props.localidad} options={this.state.localidades} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
-                        <Label className="col-sm-3">Descripci&oacute;n</Label>
+                        <Label className="col-sm-3">Nivel</Label>
                         <div className="col-sm-5">
-                            <Input onChange={this.onChange('descripcion')} value={this.props.descripcion} />
+                            <Select onChange={this.onChange('localidad_nivel')} value={this.props.localidad_nivel} options={niveles} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
-                        <Label className="col-sm-3">Ip</Label>
+                        <Label className="col-sm-3">N&uacute;mero</Label>
                         <div className="col-sm-5">
-                            <Input onChange={this.onChange('ip')} value={this.props.ip} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">URL</Label>
-                        <div className="col-sm-5">
-                            <Input onChange={this.onChange('url')} value={this.props.url} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Usuario</Label>
-                        <div className="col-sm-5">
-                            <Input onChange={this.onChange('user')} value={this.props.user} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Contraseña</Label>
-                        <div className="col-sm-5">
-                            <Input onChange={this.onChange('password')} value={this.props.password} />
+                            <Input onChange={this.onChange('numero')} value={this.props.numero} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
@@ -139,7 +153,7 @@ class EditSilo extends React.Component {
     }
 
     getData = async (id) => {
-        const { data } = await axios.get(`${baseurl}/silo/${id}/`)
+        const { data } = await axios.get(`${baseurl}/puerta/${id}/`)
         this.setState({
             id,
             data
@@ -162,7 +176,7 @@ class EditSilo extends React.Component {
             showCancelButton: true,
             showLoaderOnConfirm: true,
             preConfirm: () => {
-                return axios.post(`${baseurl}/silo/${id ? `${id}/` : ``}`, data)
+                return axios.post(`${baseurl}/puerta/${id ? `${id}/` : ``}`, data)
                 .then(response => {
                     if (response.status !== 200 && response.status !== 201) {
                         throw new Error(response.statusText)
@@ -182,7 +196,7 @@ class EditSilo extends React.Component {
                     text : `Guardado`,
                     type : 'success'
                 })
-                this.props.history.push('/localidades/silos/')
+                this.props.history.push('/localidades/puertas/')
             }
         })
     }
@@ -196,7 +210,7 @@ class EditSilo extends React.Component {
                 showCancelButton: true,
                 showLoaderOnConfirm: true,
                 preConfirm: () => {
-                    return axios.delete(`${baseurl}/silo/${id}`, data)
+                    return axios.delete(`${baseurl}/puerta/${id}`, data)
                     .then(response => {
                         if (response.status !== 204) {
                             throw new Error(response.statusText)
@@ -215,7 +229,7 @@ class EditSilo extends React.Component {
                     text : `Eliminado`,
                     type : 'success'
                 })
-                this.props.history.push('/localidades/silos/')
+                this.props.history.push('/localidades/puertas/')
             })
         }
     }
@@ -228,7 +242,7 @@ class EditSilo extends React.Component {
                     <Col xs="12" md="12">
                         <Card>
                             <CardBody>
-                                <CardTitle>Crear/Editar Silos</CardTitle>
+                                <CardTitle>Crear/Editar Puertas</CardTitle>
                                 <CardBody>
                                   <MainView  {...data} onChange={this.onChange} />
                                 </CardBody>

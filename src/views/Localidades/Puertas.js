@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, CardBody, ListPage } from './../../temeforest'
 
-class Silos extends React.Component {
+class Puertas extends React.Component {
     render(){
         return (
             <div className="animated fadeIn">
@@ -10,19 +10,19 @@ class Silos extends React.Component {
                         <Card>
                             <CardBody>
                                 <ListPage
-                                    title="Listado de Silos"
+                                    title="Listado de Puertas"
 
                                     searchable={true}
-                                    searchPlaceholder="Nombre, Dirección IP, localidad"
-                                    searchFields={['descripcion', 'ip', 'localidad']}
+                                    searchPlaceholder="Nombre, Localidad, Nivel"
+                                    searchFields={['numero', 'localidad_nivel_nombre', 'localidad_nombre' ]}
 
-                                    fieldNames={['Nombre', 'Dirección IP', 'Localidad']}
-                                    fields={['descripcion', 'ip', 'localidad_nombre']}
+                                    fieldNames={['Nombre', 'Localidad','Nivel']}
+                                    fields={['numero', 'localidad_nivel_nombre', 'localidad_nombre']}
 
-                                    url='silo'
+                                    url='puerta'
 
                                     menu='localidades'
-                                    submenu='silos'
+                                    submenu='puertas'
 
                                     history={this.props.history}
                                 />
@@ -35,4 +35,4 @@ class Silos extends React.Component {
     }
 }
 
-export default Silos
+export default Puertas

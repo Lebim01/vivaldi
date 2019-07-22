@@ -17,6 +17,10 @@ export default {
           url : '/#/localidades/andenes'
         },
         {
+          name : 'Puertas',
+          url : '/#/localidades/puertas'
+        },
+        {
           name : 'Traffic Control',
           url : '/#/localidades/traffic-control'
         },
