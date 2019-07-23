@@ -77,7 +77,13 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Tipo</Label>
                         <div className="col-sm-5">
-                            <Select onChange={this.onChange('bus_tipo')} value={this.props.bus_tipo} />
+                            <Select options={busTipos} onChange={this.onChange('bus_tipo')} value={this.props.bus_tipo} />
+                        </div>
+                    </FormGroup>
+                    <FormGroup className="row">
+                        <Label className="col-sm-3">Capacidad</Label>
+                        <div className="col-sm-5">
+                            <Input readOnly value={this.props.capacidad} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
@@ -105,24 +111,6 @@ class MainView extends React.Component {
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
-                        <Label className="col-sm-3">Capacidad</Label>
-                        <div className="col-sm-5">
-                            <Input type="number" onChange={this.onChange('capacidad')} value={this.props.capacidad} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Precio</Label>
-                        <div className="col-sm-5">
-                            <Input type="number" onChange={this.onChange('precio_boleto')} value={this.props.precio_boleto} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Distribución</Label>
-                        <div className="col-sm-5">
-                            <Select options={busTipos} onChange={this.onChange('distribucion')} value={this.props.distribucion} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
                         <Label className="col-sm-3">Año Fabricación</Label>
                         <div className="col-sm-5">
                             <Input type="number" onChange={this.onChange('anio_fabricacion')} value={this.props.anio_fabricacion} />
@@ -132,7 +120,7 @@ class MainView extends React.Component {
                         <div className="col-sm-12 text-center">
                             <Input id="documentation" type="file" style={{display:'none'}} onChange={this.onChangeFile}/>
                             <Button type="success" style={{marginRight:5}} onClick={this.UploadFile}>Subir Documentación</Button>
-                            <Button type="success" style={{marginLeft:5}} onClick={() => this.DownloadFile(this.props.documentacion)}  disabled={this.canDownload(this.props.documentacion)}>Ver Documentación</Button>
+                            <Button type="success" style={{marginLeft:5}} onClick={() => this.DownloadFile(this.props.documentacion_url)}  disabled={this.canDownload(this.props.documentacion_url)}>Ver Documentación</Button>
                         </div>
                     </FormGroup>
                 </form>
