@@ -27,27 +27,22 @@ class MainView extends React.Component {
         }
     }
 
-    DownloadFile = (e) => {
-        if (e){
-            let file_path = baseMediaUrl + e;
+    DownloadFile = (url) => {
+        if (url){
+            let file_path = baseMediaUrl + url;
             let a = document.createElement('A');
+            a.target = '_blank';
+            a.download = true;
             a.href = file_path;
-            if(file_path){
-                if(!file_path.includes('none')){
-                    a.download = file_path.substr(file_path.lastIndexOf('/') + 1);
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
-                }
-            }
+            a.click()
         }
     }
 
     canDownload = (url) => {
-      if(url && url.includes('none')){
-        return true
-      }
-      return false
+        if(url && url.includes('none')){
+            return true
+        }
+        return false
     }
 
 
@@ -77,7 +72,7 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Tipo</Label>
                         <div className="col-sm-5">
-                            <Select onChange={this.onChange('bus_tipo')} value={this.props.bus_tipo} />
+                            <Select options={busTipos} onChange={this.onChange('bus_tipo')} value={this.props.bus_tipo} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
@@ -119,7 +114,7 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Distribución</Label>
                         <div className="col-sm-5">
-                            <Select options={busTipos} onChange={this.onChange('distribucion')} value={this.props.distribucion} />
+                            { /* <Select options={busTipos} onChange={this.onChange('distribucion')} value={this.props.distribucion} /> */ }
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
@@ -131,8 +126,14 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <div className="col-sm-12 text-center">
                             <Input id="documentation" type="file" style={{display:'none'}} onChange={this.onChangeFile}/>
-                            <Button type="success" style={{marginRight:5}} onClick={this.UploadFile}>Subir Documentación</Button>
-                            <Button type="success" style={{marginLeft:5}} onClick={() => this.DownloadFile(this.props.documentacion)}  disabled={this.canDownload(this.props.documentacion)}>Ver Documentación</Button>
+                            <Button type="success" style={{marginRight:5}} onClick={this.UploadFile}>
+                                <i class="fa fa-upload"/> Subir Documentación
+                            </Button>
+                            { this.props.documentacion_url &&
+                                <Button type="success" style={{marginLeft:5}} onClick={() => this.DownloadFile(this.props.documentacion_url)} disabled={this.canDownload(this.props.documentacion_url)}>
+                                    <i class="fa fa-download"/> Ver Documentación
+                                </Button>
+                            }
                         </div>
                     </FormGroup>
                 </form>

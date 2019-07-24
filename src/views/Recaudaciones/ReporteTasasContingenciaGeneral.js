@@ -95,7 +95,7 @@ class ReporteTasasContingenciaGeneral extends React.Component {
                                 </div>
                                 <ListPage
                                     searchable={false}
-
+                                    
                                     fieldNames={['Fecha', 'Concepto', 'Cooperativa', 'Cantidad', 'Total', 'Cantidad', 'Total', 'Cantidad', 'Total']}
                                     fields={['', '', '', '', '', '', '' , '', '']}
 
