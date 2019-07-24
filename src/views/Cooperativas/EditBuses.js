@@ -45,7 +45,6 @@ class MainView extends React.Component {
         return false
     }
 
-
     render(){
         const { cooperativas, marcas, distribucion, busTipos, busTiposServicios, conductores, propietarios } = this.props
         return (

@@ -47,6 +47,24 @@ class MainView extends React.Component {
         }
     }
 
+    DownloadFile = (url) => {
+        if (url){
+            let file_path = baseMediaUrl + url;
+            let a = document.createElement('A');
+            a.target = '_blank';
+            a.download = true;
+            a.href = file_path;
+            a.click()
+        }
+    }
+
+    canDownload = (url) => {
+        if(url && url.includes('none')){
+            return true
+        }
+        return false
+    }
+
     onChangeFile = (e) => {
         if(this.props.onChangeFile){
             this.props.onChangeFile(e.target.files[0])
@@ -91,7 +109,9 @@ class MainView extends React.Component {
                         <div className="col-sm-12 text-center">
                             <Input id="documentation" type="file" style={{display:'none'}} onChange={this.onChangeFile}/>
                             <Button type="success" style={{marginRight:5}} onClick={this.UploadFile}>Subir Documentación</Button>
-                            <Button type="success" style={{marginLeft:5}} download={this.props.documentacion}>Ver Documentación</Button>
+                            { this.props.documentacion_url &&
+                                <Button type="success" style={{marginLeft:5}} onClick={() => this.DownloadFile(this.props.documentacion_url)} disabled={this.canDownload(this.props.documentacion_url)}>Ver Documentación</Button>
+                            }
                         </div>
                     </FormGroup>
                 </form>
