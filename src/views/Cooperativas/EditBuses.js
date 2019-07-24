@@ -76,6 +76,12 @@ class MainView extends React.Component {
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
+                        <Label className="col-sm-3">Capacidad</Label>
+                        <div className="col-sm-5">
+                            <Input readOnly value={this.props.capacidad} />
+                        </div>
+                    </FormGroup>
+                    <FormGroup className="row">
                         <Label className="col-sm-3">Tipo servicio</Label>
                         <div className="col-sm-5">
                             <Select options={busTiposServicios} onChange={this.onChange('bus_tipo_servicio')} value={this.props.bus_tipo_servicio} />
@@ -97,24 +103,6 @@ class MainView extends React.Component {
                         <Label className="col-sm-3">Conductor</Label>
                         <div className="col-sm-5">
                             <Select options={conductores} onChange={this.onChange('conductor')} value={this.props.conductor} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Capacidad</Label>
-                        <div className="col-sm-5">
-                            <Input type="number" onChange={this.onChange('capacidad')} value={this.props.capacidad} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Precio</Label>
-                        <div className="col-sm-5">
-                            <Input type="number" onChange={this.onChange('precio_boleto')} value={this.props.precio_boleto} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Distribución</Label>
-                        <div className="col-sm-5">
-                            { /* <Select options={busTipos} onChange={this.onChange('distribucion')} value={this.props.distribucion} /> */ }
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
