@@ -4,47 +4,6 @@ import { FormGroup, Input, Label } from './../../temeforest'
 import { baseurl, getParameter } from './../../utils/url'
 import axios from 'axios'
 
-class MainView extends React.Component {
-    onChange = name => (e) => {
-        if(this.props.onChange){
-            this.props.onChange(name, e.target.value)
-        }
-    }
-
-    render(){
-        return (
-            <div>
-                <form className="mt-4 form-horizontal">
-                    <FormGroup className="row">
-                      <Label className="col-sm-3">Cédula/RUC</Label>
-                        <div className="col-sm-5">
-                            <Input readOnly={this.props.readOnly} onChange={this.onChange('identificacion')} value={this.props.identificacion}  />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Apellidos</Label>
-                        <div className="col-sm-5">
-                            <Input readOnly={this.props.readOnly} onChange={this.onChange('apellidos')} value={this.props.apellidos} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Nombres</Label>
-                        <div className="col-sm-5">
-                            <Input readOnly={this.props.readOnly} onChange={this.onChange('nombres')} value={this.props.nombres} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Correo</Label>
-                        <div className="col-sm-5">
-                            <Input readOnly={this.props.readOnly} onChange={this.onChange('correo')} value={this.props.correo} />
-                        </div>
-                    </FormGroup>
-                </form>
-            </div>
-        )
-    }
-}
-
 class EditPersona extends React.Component {
 
     state = {data:{}}
@@ -54,19 +13,23 @@ class EditPersona extends React.Component {
         this.onChange = this.onChange.bind(this)
     }
 
-    componentDidMount(){
+    /*componentDidMount(){
         let id = getParameter('id')
         if(id){
             this.getData(id)
         }
-    }
+    }*/
 
-    onChange(name, value){
+    onChange = name => (e) => {
         let data = this.state.data
-        data[name] = value
+        data[name] = e.target.value
         this.setState({
             data
         })
+
+        if(this.props.onChange){
+            this.props.onChange(data)
+        }
     }
 
     getData = async (id) => {
@@ -78,13 +41,39 @@ class EditPersona extends React.Component {
     }
 
     render(){
-        const { data } = this.props
-
+        const { data, readOnly } = this.props
         return (
             <div className="animated fadeIn">
                 <Row>
                     <Col xs="12" md="12">
-                        <MainView {...data} onChange={this.onChange} readOnly={this.props.readOnly} />
+                        <div>
+                            <form className="mt-4 form-horizontal">
+                                <FormGroup className="row">
+                                <Label className="col-sm-3">Cédula/RUC</Label>
+                                    <div className="col-sm-5">
+                                        <Input readOnly={readOnly} value={data.identificacion} onChange={this.onChange('identificacion')} />
+                                    </div>
+                                </FormGroup>
+                                <FormGroup className="row">
+                                    <Label className="col-sm-3">Apellidos</Label>
+                                    <div className="col-sm-5">
+                                        <Input readOnly={readOnly} value={data.apellidos} onChange={this.onChange('apellidos')} />
+                                    </div>
+                                </FormGroup>
+                                <FormGroup className="row">
+                                    <Label className="col-sm-3">Nombres</Label>
+                                    <div className="col-sm-5">
+                                        <Input readOnly={readOnly} value={data.nombres} onChange={this.onChange('nombres')} />
+                                    </div>
+                                </FormGroup>
+                                <FormGroup className="row">
+                                    <Label className="col-sm-3">Correo</Label>
+                                    <div className="col-sm-5">
+                                        <Input readOnly={readOnly} value={data.correo} onChange={this.onChange('correo')} />
+                                    </div>
+                                </FormGroup>
+                            </form>
+                        </div>
                     </Col>
                 </Row>
             </div>

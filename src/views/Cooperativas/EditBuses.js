@@ -46,7 +46,7 @@ class MainView extends React.Component {
     }
 
     render(){
-        const { cooperativas, marcas, distribucion, busTipos, busTiposServicios, conductores, propietarios } = this.props
+        const { cooperativas, marcas, busTipos, busTiposServicios, conductores, propietarios } = this.props
         return (
             <div>
                 <form className="mt-4 form-horizontal">

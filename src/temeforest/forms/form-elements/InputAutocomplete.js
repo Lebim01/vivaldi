@@ -20,7 +20,6 @@ class InputAutocomplete extends React.Component {
                     items={items}
                     value={value}
                     renderInput={({className, value, ...otherProps}) => {
-                        console.log(otherProps)
                         return ( 
                             <input type="text" className={`form-control ${className}`} {...otherProps} /> 
                         )

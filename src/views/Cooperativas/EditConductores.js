@@ -6,7 +6,6 @@ import { fileToBase64 } from './../../utils/file'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import EditPersona from './EditPersona'
-import { isUndefined } from 'util';
 
 class MainView extends React.Component {
 
@@ -14,10 +13,13 @@ class MainView extends React.Component {
         buscar : '',
         personas : [],
         descargar: true,
+        readOnlyPersona : true
     }
     constructor(props){
         super(props)
         this.searchPersona = this.searchPersona.bind(this)
+        this.editPersona = this.editPersona.bind(this)
+        this.onChangePersona = this.onChangePersona.bind(this)
     }
 
     onChange = name => (e) => {
@@ -71,9 +73,21 @@ class MainView extends React.Component {
         }
     }
 
+    editPersona(){
+        this.setState({
+            readOnlyPersona : false,
+        }, () => {
+            this.props.onChange('persona', {})
+        })
+    }
+
+    onChangePersona(data){
+        this.props.onChange('persona', data)
+    }
+
     render(){
         const { personas, buscar } = this.state
-        const { cooperativas, tipos, persona } = this.props
+        const { cooperativas, tipos } = this.props
         return (
             <div>
                 <form className="mt-4 form-horizontal">
@@ -85,6 +99,11 @@ class MainView extends React.Component {
                     </FormGroup>
                     <FormGroup className="row">
                         <Label className="col-sm-3">Buscar</Label>
+                        <div className="col-sm-1">
+                            <Button onClick={this.editPersona}>
+                                <i className="fa fa-plus"/>
+                            </Button>
+                        </div>
                         <div className="col-sm-5">
                             <InputAutocomplete 
                                 icon={<i className="fa fa-search"/>}
@@ -97,7 +116,7 @@ class MainView extends React.Component {
                             />
                         </div>
                     </FormGroup>
-                    <EditPersona data={persona} readOnly />
+                    <EditPersona data={this.props.persona} readOnly={this.state.readOnlyPersona} onChange={this.onChangePersona} />
                     <FormGroup className="row">
                       <Label className="col-sm-3">Tipo</Label>
                         <div className="col-sm-5">
@@ -194,11 +213,17 @@ class EditConductor extends React.Component {
     }
 
     onChange(name, value){
-        let data = this.state.data
-        data[name] = value
-        this.setState({
-            data
-        })
+        if(name === 'persona'){
+            this.setState({
+                persona: value
+            })
+        }else{
+            let data = this.state.data
+            data[name] = value
+            this.setState({
+                data
+            })
+        }
     }
 
     onChangeFile = async (value) => {
@@ -214,7 +239,8 @@ class EditConductor extends React.Component {
     }
 
     confirmSave(){
-        const { id, data } = this.state
+        const { id, data, persona } = this.state
+        data['persona_obj'] = persona
         Swal.fire({
             title: 'Confirmar Guardar',
             text : '¿Seguro de guardar?',
