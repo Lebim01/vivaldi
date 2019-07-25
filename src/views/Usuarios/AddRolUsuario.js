@@ -30,11 +30,6 @@ class AddRolUsuario extends React.Component {
         this.getCooperativaName = this.getCooperativaName.bind(this)
     }
 
-    componentDidMount(){
-        this.getCooperativas()
-        this.getRoles()
-    }
-
     toggle() {
         if(this.props.toggle){
             this.props.toggle()

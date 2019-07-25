@@ -1,10 +1,13 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Button, FormGroup, Input, Select, Label, Tabs, DualList } from './../../temeforest'
+import { Card, CardBody, CardTitle, Button, FormGroup, Input, Select, Label, Tabs, DualList, FormElementValidate, FormValidate, EditPage } from './../../temeforest'
 import 'react-dual-listbox/lib/react-dual-listbox.css';
 import { baseurl, getParameter } from './../../utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+
+const endpoint = 'cooperativa'
+const urlFront = '/cooperativas/cooperativas'
 
 class ListAdenes extends React.Component {
     render(){
@@ -28,6 +31,7 @@ class MainView extends React.Component {
     constructor(props){
         super(props)
         this.toggleAndenes = this.toggleAndenes.bind(this)
+        this.isValidationError = this.isValidationError.bind(this)
     }
 
     optionsGremios = {
@@ -68,13 +72,19 @@ class MainView extends React.Component {
         this.props.onChange('localidades_andenes', localidades_andenes)
     }
 
+    isValidationError(flag){
+        this.setState({
+            isFormValidationErrors: flag
+        });
+    }
+
     render(){
         const tipos = this.tipos, sino = this.sino
         const { tab } = this.state
         const { gremios, localidades, tabsLocalidades } = this.props
         return (
             <div>
-                <form className="mt-4 form-horizontal">
+                <FormValidate className="mt-4 form-horizontal">
                     <FormGroup className="row">
                         <Label className="col-sm-3">Nombre</Label>
                         <div className="col-sm-5">
@@ -101,24 +111,39 @@ class MainView extends React.Component {
                     </FormGroup>
                     <fieldset>
                         <legend>Información tribunaria</legend>
-                        <FormGroup className="row">
-                            <Label className="col-sm-3">Representante legal</Label>
-                            <div className="col-sm-5">
-                                <Input onChange={this.onChange('representante_legal')} value={this.props.representante_legal} />
-                            </div>
-                        </FormGroup>
-                        <FormGroup className="row">
-                            <Label className="col-sm-3">Razón Social</Label>
-                            <div className="col-sm-5">
-                                <Input onChange={this.onChange('razon_social')} value={this.props.razon_social} />
-                            </div>
-                        </FormGroup>
-                        <FormGroup className="row">
-                            <Label className="col-sm-3">RUC</Label>
-                            <div className="col-sm-5">
-                                <Input onChange={this.onChange('ruc')} value={this.props.ruc} />
-                            </div>
-                        </FormGroup>
+                        <FormElementValidate
+                            label={{text:'Representante legal'}}
+                            input={{
+                                name : 'representante_legal',
+                                element: <Input onChange={this.onChange('representante_legal')} value={this.props.representante_legal} />
+                            }}
+                            validator={{
+                                validationRules: {required:true},
+                                validationMessages: {required:"El campo es requerido"}
+                            }}
+                        />
+                        <FormElementValidate
+                            label={{text:'Razón Social'}}
+                            input={{
+                                name : 'razon_social',
+                                element: <Input onChange={this.onChange('razon_social')} value={this.props.razon_social} />
+                            }}
+                            validator={{
+                                validationRules: {required:true},
+                                validationMessages: {required:"El campo es requerido"}
+                            }}
+                        />
+                        <FormElementValidate
+                            label={{text:'RUC'}}
+                            input={{
+                                name : 'ruc',
+                                element: <Input onChange={this.onChange('ruc')} value={this.props.ruc} />
+                            }}
+                            validator={{
+                                validationRules: {required:true, minLength:13, maxLength:13},
+                                validationMessages: {required:"El campo es requerido", minLength:'El valor debe ser de 13 dígitos', maxLength:'El valor debe ser de 13 dígitos'}
+                            }}
+                        />
                         <FormGroup className="row">
                             <Label className="col-sm-3">Nombre Comercial</Label>
                             <div className="col-sm-5">
@@ -206,7 +231,7 @@ class MainView extends React.Component {
                             />
                         </div>
                     </div>
-                </form>
+                </FormValidate>
             </div>
         )
     }
@@ -229,7 +254,8 @@ class EditCooperativas extends React.Component {
         showConfirmSave : false,
         localidades : {},
         tabsLocalidades : [],
-        gremios : []
+        gremios : [],
+        submmited : false
     }
 
     tabs = [
@@ -251,7 +277,6 @@ class EditCooperativas extends React.Component {
         super(props)
         this.onChange = this.onChange.bind(this)
         this.changeTab = this.changeTab.bind(this)
-        this.confirmSave = this.confirmSave.bind(this)
     }
 
     componentDidMount(){
@@ -340,108 +365,35 @@ class EditCooperativas extends React.Component {
         })
     }
 
-    confirmSave(){
-        const { id, data } = this.state
-        // Bool
+    parseData(data){
         data.obligado_contabilidad = data.obligado_contabilidad == 'Si'
         data.contribuyente_especial = data.contribuyente_especial == 'Si'
         data.andenes = Object.keys(data.localidades_andenes).map((r) => data.localidades_andenes[r]).flat()
-
-        Swal.fire({
-            title: 'Confirmar Guardar',
-            text : '¿Seguro de guardar?',
-            showCancelButton: true,
-            showLoaderOnConfirm: true,
-            preConfirm: () => {
-                return axios.post(`${baseurl}/cooperativa/${id ? `${id}/` : ``}`, data)
-                .then(response => {
-                    if (response.status !== 200 && response.status !== 201) {
-                        throw new Error(response.statusText)
-                    }
-                    return response
-                })
-                .catch(error => {
-                    Swal.showValidationMessage(
-                        `Petición fallida: ${error}`
-                    )
-                })
-            },
-            allowOutsideClick: () => !Swal.isLoading()
-        }).then((result) => {
-            if (result.value) {
-                Swal.fire({
-                    text : `Guardado`,
-                    type : 'success'
-                })
-                this.props.history.push('/cooperativas/cooperativas/')
-            }
-        })
-    }
-
-    confirmDelete(){
-        const { id, data } = this.state
-        if(id){
-            Swal.fire({
-                title: 'Confirmar Eliminar',
-                text : '¿Seguro de eliminar?',
-                showCancelButton: true,
-                showLoaderOnConfirm: true,
-                preConfirm: () => {
-                    return axios.delete(`${baseurl}/cooperativa/${id}`, data)
-                    .then(response => {
-                        if (response.status !== 204) {
-                            throw new Error(response.statusText)
-                        }
-                        return response
-                    })
-                    .catch(error => {
-                        Swal.showValidationMessage(
-                            `Petición fallida: ${error}`
-                        )
-                    })
-                },
-                allowOutsideClick: () => !Swal.isLoading()
-            }).then(() => {
-                Swal.fire({
-                    text : `Eliminado`,
-                    type : 'success'
-                })
-                this.props.history.push('/cooperativas/cooperativas/')
-            })
-        }
+        return data
     }
 
     render(){
-        const { id, tab, data, localidades, tabsLocalidades } = this.state
-        return (
-            <div className="animated fadeIn">
-                <Row>
-                    <Col xs="12" md="12">
-                        <Card>
-                            <CardBody>
-                                <CardTitle>Crear/Editar Cooperativas</CardTitle>
-                                <Tabs tab={tab} tabs={this.tabs} onClickTab={this.changeTab}/>
-                                <CardBody>
-                                    { tab === 'main' && 
-                                        <MainView 
-                                            {...data} 
-                                            onChange={this.onChange}
-                                            tabsLocalidades={tabsLocalidades} 
-                                            localidades={localidades} 
-                                        />
-                                    }
-                                </CardBody>
-                                <div className="row">
-                                    <div className="col-sm-12 text-center">
-                                        <Button type="success" style={{marginRight:5}} onClick={() => this.confirmSave() }>Guardar</Button>
-                                        <Button type="danger" style={{marginLeft:5}} disabled={!id} onClick={() => this.confirmDelete()}>Eliminar</Button>
-                                    </div>
-                                </div>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                </Row>
-            </div>
+        const { id, data, tab, tabsLocalidades, localidades } = this.state
+        return(
+            <EditPage 
+                title={`${id ? 'Editar' : 'Crear'} Cooperativas`} 
+                data={data} 
+                id={id} 
+                urlFront={urlFront} 
+                endpoint={endpoint} 
+                history={this.props.history}
+                parseData={this.parseData}
+            >
+                <Tabs tab={tab} tabs={this.tabs} onClickTab={this.changeTab}/>
+                { tab === 'main' && 
+                    <MainView 
+                        {...data} 
+                        onChange={this.onChange}
+                        tabsLocalidades={tabsLocalidades} 
+                        localidades={localidades} 
+                    />
+                }
+            </EditPage>
         )
     }
 }

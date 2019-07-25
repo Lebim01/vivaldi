@@ -15,13 +15,19 @@ class EditPage extends React.Component {
 
     confirmSave(){
         const { id, data, urlFront, endpoint } = this.props
+        let parsed_data = data
+
+        if(this.props.parseData){
+            parsed_data = this.props.parseData(parsed_data)
+        }
+
         Swal.fire({
             title: 'Confirmar Guardar',
             text : '¿Seguro de guardar?',
             showCancelButton: true,
             showLoaderOnConfirm: true,
             preConfirm: () => {
-                return axios.post(`${baseurl}/${endpoint}/${id ? `${id}/` : ''}`, data)
+                return axios.post(`${baseurl}/${endpoint}/${id ? `${id}/` : ''}`, parsed_data)
                 .then(response => {
                     if (response.status !== 200 && response.status !== 201) {
                         throw new Error(response.statusText)
