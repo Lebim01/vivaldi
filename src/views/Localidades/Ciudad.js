@@ -20,7 +20,6 @@ class Ciudades extends React.Component {
                                     fields={['nombre', 'provincia_nombre']}
 
                                     url='ciudad'
-
                                     menu='localidades'
                                     submenu='ciudad'
 
