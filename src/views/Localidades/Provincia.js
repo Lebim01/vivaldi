@@ -22,7 +22,7 @@ class Provincias extends React.Component {
                                     url='provincia'
 
                                     menu='localidades'
-                                    submenu='provincias'
+                                    submenu='provincia'
 
                                     history={this.props.history}
                                 />
