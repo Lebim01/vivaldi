@@ -21,17 +21,20 @@ class ListAndenes extends React.Component {
 
 class MainView extends React.Component {
     seleccione = [{label:'Seleccione', value:''}]
-    state = {
-        niveles : [],
-        localidades :[]
+    state = {}
+
+    optionsLocalidades = {
+        url : `${baseurl}/localidad/`,
+        labelName: 'nombre',
+        valueName: 'id'
     }
 
     constructor(props){
         super(props)
-        this.getAndenes = this.getAndenes.bind(this)
         this.toggleAndenes = this.toggleAndenes.bind(this)
         this.getLocalidades = this.getLocalidades.bind(this)
         this.getNiveles = this.getNiveles.bind(this)
+        this.getAndenes = this.getAndenes.bind(this)
     }
 
     componentDidMount(){
@@ -97,7 +100,7 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Localidad</Label>
                         <div className="col-sm-5">
-                            <Select onChange={this.onChangeLocalidad('localidad')} value={this.props.localidad} options={this.state.localidades} />
+                            <Select onChange={this.onChangeLocalidad('localidad')} value={this.props.localidad} asyncOptions={this.optionsLocalidades} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">

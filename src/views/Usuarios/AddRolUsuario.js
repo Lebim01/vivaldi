@@ -9,9 +9,17 @@ class AddRolUsuario extends React.Component {
     seleccione = [{label:'Seleccione', value:''}]
     state = {
         errors : [],
-        cooperativas : [],
-        roles : [],
         data : {}
+    }
+    optionsCooperativa = {
+        url : `${baseurl}/cooperativa/`,
+        labelName: 'nombre',
+        valueName: 'id' 
+    }
+    optionsRol = {
+        url : `${baseurl}/rol/`,
+        labelName : 'name',
+        valueName : 'id'
     }
 
     constructor(props){
@@ -25,22 +33,6 @@ class AddRolUsuario extends React.Component {
     componentDidMount(){
         this.getCooperativas()
         this.getRoles()
-    }
-
-    getCooperativas = async () => {
-        const { data } = await axios.get(`${baseurl}/cooperativa/`)
-        let options = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : r.nombre } })]
-        this.setState({
-            cooperativas : options
-        })
-    }
-
-    getRoles = async () => {
-        const { data } = await axios.get(`${baseurl}/rol/`)
-        let options = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : r.name } })]
-        this.setState({
-            roles : options
-        })
     }
 
     toggle() {
@@ -111,13 +103,13 @@ class AddRolUsuario extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-6">Cooperativa</Label>
                             <div className="col-sm-6">
-                                <Select options={this.state.cooperativas} onChange={this.onChange('cooperativa')} value={this.state.data.cooperativa} error={errors.includes('cooperativa')} />
+                                <Select asyncOptions={this.optionsCooperativa} onChange={this.onChange('cooperativa')} value={this.state.data.cooperativa} error={errors.includes('cooperativa')} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-6">Rol</Label>
                             <div className="col-sm-6">
-                                <Select options={this.state.roles} onChange={this.onChange('rol')} value={this.state.data.rol} error={errors.includes('rol')} />
+                                <Select asyncOptions={this.optionsRol} onChange={this.onChange('rol')} value={this.state.data.rol} error={errors.includes('rol')} />
                             </div>
                         </FormGroup>
                     </form>

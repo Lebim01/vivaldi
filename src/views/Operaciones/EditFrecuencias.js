@@ -1,9 +1,10 @@
 import React from 'react'
-import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Button, FormGroup, Input, Select, Label } from './../../temeforest'
+import { FormGroup, Input, Select, Label, EditPage } from './../../temeforest'
 import { baseurl, getParameter } from './../../utils/url'
 import axios from 'axios'
-import Swal from 'sweetalert2'
+
+const endpoint = 'frecuencia'
+const urlFront = '/operaciones/frecuencias'
 
 class MainView extends React.Component {
 
@@ -92,7 +93,6 @@ class EditFrecuencias extends React.Component {
     constructor(props){
         super(props)
         this.onChange = this.onChange.bind(this)
-        this.confirmSave = this.confirmSave.bind(this)
     }
 
     componentDidMount(){
@@ -103,11 +103,11 @@ class EditFrecuencias extends React.Component {
     }
 
     getData = async (id) => {
-        const { data } = await axios.get(`${baseurl}/frecuencia/${id}`)
+        const { data } = await axios.get(`${baseurl}/${endpoint}/${id}`)
         this.setState({
             id,
             data
-        }, ()=> this.setDestino())
+        }, () => this.setDestino())
     }
 
     onChange(name, value){
@@ -134,62 +134,12 @@ class EditFrecuencias extends React.Component {
         }, 500)
     }
 
-    confirmSave(){
-        const { id, data } = this.state
-        Swal.fire({
-            title: 'Confirmar Guardar',
-            text : '¿Seguro de guardar?',
-            showCancelButton: true,
-            showLoaderOnConfirm: true,
-            preConfirm: () => {
-                return axios.post(`${baseurl}/frecuencia/${id ? `${id}/` : ''}`, data)
-                .then(response => {
-                    if (response.status !== 200 && response.status !== 201) {
-                        throw new Error(response.statusText)
-                    }
-                    return response
-                })
-                .catch(error => {
-                    Swal.showValidationMessage(
-                        `Petición fallida: ${error}`
-                    )
-                })
-            },
-            allowOutsideClick: () => !Swal.isLoading()
-        }).then((result) => {
-            if (result.value) {
-                Swal.fire({
-                    text : `Guardado`,
-                    type : 'success'
-                })
-                this.props.history.push('/operaciones/frecuencias/')
-            }
-        })
-    }
-
     render(){
         const { data, id } = this.state
         return (
-            <div className="animated fadeIn">
-                <Row>
-                    <Col xs="12" md="12">
-                        <Card>
-                            <CardBody>
-                                <CardTitle>Crear/Editar Frecuencias</CardTitle>
-                                <CardBody>
-                                    <MainView {...data} onChange={this.onChange} />
-                                </CardBody>
-                                <div className="row">
-                                    <div className="col-sm-12 text-center">
-                                        <Button type="success" style={{marginRight:5}} onClick={() => this.confirmSave() }>Guardar</Button>
-                                        <Button type="danger" style={{marginLeft:5}}>Eliminar</Button>
-                                    </div>
-                                </div>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                </Row>
-            </div>
+            <EditPage title={`${id ? 'Editar' : 'Crear'} Frecuencias`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
+                <MainView {...data} onChange={this.onChange} />
+            </EditPage>
         )
     }
 }

@@ -242,7 +242,6 @@ class CrearFrecuenciaLote extends React.Component {
                                 <div className="row">
                                     <div className="col-sm-12 text-center">
                                         <Button type="success" style={{marginRight:5}} onClick={() => this.confirmSave() }>Guardar</Button>
-                                        <Button type="danger" style={{marginLeft:5}}>Eliminar</Button>
                                     </div>
                                 </div>
                             </CardBody>

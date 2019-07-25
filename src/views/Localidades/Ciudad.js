@@ -22,7 +22,7 @@ class Ciudades extends React.Component {
                                     url='ciudad'
 
                                     menu='localidades'
-                                    submenu='ciudades'
+                                    submenu='ciudad'
 
                                     history={this.props.history}
                                 />
