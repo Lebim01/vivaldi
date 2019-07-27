@@ -140,28 +140,34 @@ class MainView extends React.Component {
                                 element: <Input onChange={this.onChange('ruc')} value={this.props.ruc} />
                             }}
                             validator={{
-                                validationRules: {required:true, minLength:13, maxLength:13},
-                                validationMessages: {required:"El campo es requerido", minLength:'El valor debe ser de 13 dígitos', maxLength:'El valor debe ser de 13 dígitos'}
+                                validationRules: {required:true, number : true, minLength:13, maxLength:13},
+                                validationMessages: {required:"El campo es requerido", minLength:'El valor debe ser de 13 dígitos', maxLength:'El valor debe ser de 13 dígitos', number : 'Solo se aceptan números'}
                             }}
                         />
-                        <FormGroup className="row">
-                            <Label className="col-sm-3">Nombre Comercial</Label>
-                            <div className="col-sm-5">
-                                <Input onChange={this.onChange('nombre_comercial')} value={this.props.nombre_comercial} />
-                            </div>
-                        </FormGroup>
+                        <FormElementValidate
+                            label={{text:'Nombre Comercial'}}
+                            input={{
+                                name : 'nombre_comercial',
+                                element: <Input onChange={this.onChange('nombre_comercial')} value={this.props.nombre_comercial} />
+                            }}
+                        />
                         <FormGroup className="row">
                             <Label className="col-sm-3">Dirección Matriz</Label>
                             <div className="col-sm-5">
                                 <Input onChange={this.onChange('direccion_matriz')} value={this.props.direccion_matriz} />
                             </div>
                         </FormGroup>
-                        <FormGroup className="row">
-                            <Label className="col-sm-3">Correo</Label>
-                            <div className="col-sm-5">
-                                <Input onChange={this.onChange('correo')} value={this.props.correo} />
-                            </div>
-                        </FormGroup>
+                        <FormElementValidate
+                            label={{text:'Correo'}}
+                            input={{
+                                name : 'correo',
+                                element: <Input onChange={this.onChange('correo')} value={this.props.correo} />
+                            }}
+                            validator={{
+                                validationRules: { email: true },
+                                validationMessages : { email: "El valor debe ser un correo" }
+                            }}
+                        />
                         <FormGroup className="row">
                             <Label className="col-sm-4">Obligado a llevar contabilidad</Label>
                             <div className="col-sm-1">

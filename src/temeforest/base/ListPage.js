@@ -54,7 +54,6 @@ class ListPage extends React.Component {
 
     onRowDoubleClick(id){
         if(this.props.menu){
-            console.log(`/${this.props.menu}/${this.props.submenu}/edit?id=${id}`)
             this.props.history.push(`/${this.props.menu}/${this.props.submenu}/edit?id=${id}`)
         }
     }
