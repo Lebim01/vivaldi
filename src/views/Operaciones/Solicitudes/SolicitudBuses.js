@@ -90,7 +90,7 @@ class SolicitudBuses extends React.Component {
                                     searchable={false}
 
                                     fieldNames={['Cooperativa', 'Fecha', 'Descripión', 'Tipo de Solicitud']}
-                                    fields={['cooperativa_nombre', 'fecha', 'descripcion', 'tipo_solicitud']}
+                                    fields={['cooperativa_nombre', 'fecha', 'descripcion', 'tipo_solicitud_nombre']}
 
                                     url='venta/solicitud_bus'
 
