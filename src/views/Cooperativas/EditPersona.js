@@ -67,6 +67,18 @@ class EditPersona extends React.Component {
                                     </div>
                                 </FormGroup>
                                 <FormGroup className="row">
+                                    <Label className="col-sm-3">Telefono</Label>
+                                    <div className="col-sm-5">
+                                        <Input readOnly={readOnly} value={data.telefono} onChange={this.onChange('telefono')} />
+                                    </div>
+                                </FormGroup>
+                                <FormGroup className="row">
+                                    <Label className="col-sm-3">Dirección</Label>
+                                    <div className="col-sm-5">
+                                        <Input readOnly={readOnly} value={data.direccion} onChange={this.onChange('direccion')} />
+                                    </div>
+                                </FormGroup>
+                                <FormGroup className="row">
                                     <Label className="col-sm-3">Correo</Label>
                                     <div className="col-sm-5">
                                         <Input readOnly={readOnly} value={data.correo} onChange={this.onChange('correo')} />

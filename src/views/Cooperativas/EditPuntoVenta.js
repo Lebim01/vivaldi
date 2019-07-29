@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label, Select } from './../../temeforest'
+import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label, Select, FormValidate, FormElementValidate } from './../../temeforest'
 import { baseurl, getParameter } from './../../utils/url'
 import { generateHexadecimal } from './../../utils/string'
 import axios from 'axios'
@@ -125,7 +125,7 @@ class MainView extends React.Component {
         const { localidades, puntoventa_cooperativas } = this.props
         return (
             <div>
-                <form className="mt-4 form-horizontal">
+                <FormValidate className="mt-4 form-horizontal">
                     <FormGroup className="row">
                         <Label className="col-sm-3">Descripción</Label>
                         <div className="col-sm-5">
@@ -147,12 +147,17 @@ class MainView extends React.Component {
                             <Select options={localidades} onChange={this.onChange('localidad')} value={this.props.localidad} />
                         </div>
                     </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Dirección IP</Label>
-                        <div className="col-sm-5">
-                            <Input onChange={this.onChange('ip')} value={this.props.ip} />
-                        </div>
-                    </FormGroup>
+                    <FormElementValidate
+                        label={{text:'Dirección IP'}}
+                        input={{
+                            name : 'ip',
+                            element: <Input onChange={this.onChange('ip')} value={this.props.ip} />
+                        }}
+                        validator={{
+                            validationRules: {ip:true},
+                            validationMessages: {ip:'El valor debe ser un ip valida'}
+                        }}
+                    />
                     <FormGroup className="row">
                         <Label className="col-sm-4">
                             Cooperativas e Información tribunaria
@@ -181,7 +186,7 @@ class MainView extends React.Component {
                             </div>
                         </div>
                     </FormGroup>
-                </form>
+                </FormValidate>
                 <AddCooperativaPuntoVentaModal 
                     guardar={this.agregarCooperativa} 
                     {...this.state.modal} 

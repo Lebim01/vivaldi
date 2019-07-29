@@ -1,10 +1,8 @@
 import React from 'react'
-import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Button, FormGroup, Input, Select, Label, Tabs, DualList, FormElementValidate, FormValidate, EditPage } from './../../temeforest'
+import { FormGroup, Input, Select, Label, Tabs, DualList, FormElementValidate, FormValidate, EditPage } from './../../temeforest'
 import 'react-dual-listbox/lib/react-dual-listbox.css';
 import { baseurl, getParameter } from './../../utils/url'
 import axios from 'axios'
-import Swal from 'sweetalert2'
 
 const endpoint = 'cooperativa'
 const urlFront = '/cooperativas/cooperativas'
