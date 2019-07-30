@@ -12,14 +12,7 @@ class EditPersona extends React.Component {
         super(props)
         this.onChange = this.onChange.bind(this)
     }
-
-    /*componentDidMount(){
-        let id = getParameter('id')
-        if(id){
-            this.getData(id)
-        }
-    }*/
-
+    
     onChange = name => (e) => {
         let data = this.state.data
         data[name] = e.target.value
@@ -52,7 +45,7 @@ class EditPersona extends React.Component {
                                     label={{text:'Cédula/RUC'}}
                                     input={{
                                         name : 'identificacion',
-                                        element: <Input readOnly={readOnly} value={data.identificacion} onChange={this.onChange('identificacion')} /> 
+                                        element: <Input value={data.identificacion} onChange={this.onChange('identificacion')} /> 
                                     }}
                                     validator={{
                                         validationRules: {required:true, number : true, minLength:13, maxLength:13},
@@ -62,20 +55,20 @@ class EditPersona extends React.Component {
                                 <FormGroup className="row">
                                     <Label className="col-sm-3">Apellidos</Label>
                                     <div className="col-sm-5">
-                                        <Input readOnly={readOnly} value={data.apellidos} onChange={this.onChange('apellidos')} />
+                                        <Input readOnly={readOnly && !data.id} value={data.apellidos} onChange={this.onChange('apellidos')} />
                                     </div>
                                 </FormGroup>
                                 <FormGroup className="row">
                                     <Label className="col-sm-3">Nombres</Label>
                                     <div className="col-sm-5">
-                                        <Input readOnly={readOnly} value={data.nombres} onChange={this.onChange('nombres')} />
+                                        <Input readOnly={readOnly && !data.id} value={data.nombres} onChange={this.onChange('nombres')} />
                                     </div>
                                 </FormGroup>
                                 <FormElementValidate
                                     label={{text:'Correo'}}
                                     input={{
                                         name : 'correo',
-                                        element: <Input placeholder="example@gmail.com" readOnly={readOnly} value={data.correo} onChange={this.onChange('correo')} />
+                                        element: <Input placeholder="example@gmail.com" readOnly={readOnly && !data.id} value={data.correo} onChange={this.onChange('correo')} />
                                     }}
                                     validator={{
                                         validationRules: { email: true },

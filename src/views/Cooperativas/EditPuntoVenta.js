@@ -1,11 +1,14 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label, Select, FormElementValidate, FormValidate } from './../../temeforest'
+import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label, Select, FormElementValidate, FormValidate, ValidateContext, EditPage } from './../../temeforest'
 import { baseurl, getParameter } from './../../utils/url'
 import { generateHexadecimal } from './../../utils/string'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import AddCooperativaPuntoVentaModal from './AddCooperativaPuntoVentaModal'
+
+const endpoint = 'venta/puntoventa'
+const urlFront = '/cooperativas/punto-venta'
 
 class _Row extends React.Component {
 
@@ -137,15 +140,18 @@ class MainView extends React.Component {
                             validationMessages: {required:"El campo es requerido"}
                         }}
                     />
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Api Key</Label>
-                        <div className="col-sm-5">
-                            <Input onChange={this.onChange('api_key')} value={this.props.api_key} readOnly />
-                        </div>
-                        <div className="col-sm-3">
-                            <Button onClick={this.generateHexadecimal.bind(this)}>Generar</Button>
-                        </div>
-                    </FormGroup>
+                    <FormElementValidate
+                        label={{text:'Api Key'}}
+                        input={{
+                            name : 'api_key',
+                            element: <Input onChange={this.onChange('api_key')} value={this.props.api_key} readOnly />,
+                            button : <Button onClick={this.generateHexadecimal.bind(this)}>Generar</Button>
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
                     <FormElementValidate
                         label={{text:'Localidad'}}
                         input={{
@@ -161,7 +167,7 @@ class MainView extends React.Component {
                         label={{text:'Dirección IP'}}
                         input={{
                             name : 'ip',
-                            element: <Input onChange={this.onChange('ip')} value={this.props.ip} />
+                            element: <Input onChange={this.onChange('ip')} value={this.props.ip} placeholder="0.0.0.0" />
                         }}
                         validator={{
                             validationRules: { required:true, ip : true },
@@ -220,7 +226,6 @@ class EditPuntoVenta extends React.Component {
     constructor(props){
         super(props)
         this.onChange = this.onChange.bind(this)
-        this.confirmSave = this.confirmSave.bind(this)
         this.getLocalidades = this.getLocalidades.bind(this)
     }
 
@@ -255,96 +260,19 @@ class EditPuntoVenta extends React.Component {
         })
     }
 
-    confirmSave(){
-        const { id, data } = this.state
-        data.cooperativas = data.puntoventa_cooperativas.map((r) => r.cooperativa)
-        Swal.fire({
-            title: 'Confirmar Guardar',
-            text : '¿Seguro de guardar?',
-            showCancelButton: true,
-            showLoaderOnConfirm: true,
-            preConfirm: () => {
-                return axios.post(`${baseurl}/venta/puntoventa/${id ? `${id}/` : ``}`, data)
-                .then(response => {
-                    if (response.status !== 200 && response.status !== 201) {
-                        throw new Error(response.statusText)
-                    }
-                    return response
-                })
-                .catch(error => {
-                    Swal.showValidationMessage(
-                        `Petición fallida: ${error}`
-                    )
-                })
-            },
-            allowOutsideClick: () => !Swal.isLoading()
-        }).then((result) => {
-            if (result.value) {
-                Swal.fire({
-                    text : `Guardado`,
-                    type : 'success'
-                })
-                this.props.history.push('/cooperativas/punto-venta/')
-            }
-        })
-    }
-
-    confirmDelete(){
-        const { id, data } = this.state
-        if(id){
-            Swal.fire({
-                title: 'Confirmar Eliminar',
-                text : '¿Seguro de eliminar?',
-                showCancelButton: true,
-                showLoaderOnConfirm: true,
-                preConfirm: () => {
-                    return axios.delete(`${baseurl}/venta/puntoventa/${id}`, data)
-                    .then(response => {
-                        if (response.status !== 204) {
-                            throw new Error(response.statusText)
-                        }
-                        return response
-                    })
-                    .catch(error => {
-                        Swal.showValidationMessage(
-                            `Petición fallida: ${error}`
-                        )
-                    })
-                },
-                allowOutsideClick: () => !Swal.isLoading()
-            }).then(() => {
-                Swal.fire({
-                    text : `Eliminado`,
-                    type : 'success'
-                })
-                this.props.history.push('/cooperativas/punto-venta/')
-            })
-        }
-    }
-
     render(){
         const { id, data, localidades } = this.state
         return (
-            <div className="animated fadeIn">
-                <Row>
-                    <Col xs="12" md="12">
-                        <Card>
-                            <CardBody>
-                                <CardTitle>Crear/Editar Punto de Venta</CardTitle>
-                                <CardBody>
-                                    <MainView {...data} localidades={localidades} onChange={this.onChange} />
-                                </CardBody>
-                                <div className="row">
-                                    <div className="col-sm-12 text-center">
-                                        <Button type="success" style={{marginRight:5}} onClick={() => this.confirmSave() }>Guardar</Button>
-                                        <Button type="danger" style={{marginLeft:5}} disabled={!id} onClick={() => this.confirmDelete()}>Eliminar</Button>
-                                    </div>
-                                </div>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                </Row>
-            </div>
+            <EditPage 
+                title={`${id ? 'Editar' : 'Crear'} Conductores`} 
+                data={data} 
+                id={id} 
+                urlFront={urlFront} 
+                endpoint={endpoint} 
+                history={this.props.history}
+            >
+                <MainView {...data} localidades={localidades} onChange={this.onChange} />
+            </EditPage>
         )
     }
 }

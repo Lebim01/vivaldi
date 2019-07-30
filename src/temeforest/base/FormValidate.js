@@ -1,42 +1,18 @@
 import React from 'react'
-import ValidateContext from './ValidateContext'
+import { ValidateContext } from '../index'
 
 class FormValidate extends React.Component {
-
-    state = {
-        isFormValidationErrors : true,
-        submitted : false
-    }
-
-    onSubmit(e){
-        e.preventDefault()
-        this.setState( { submitted:true } );
-        let { isFormValidationErrors } = this.state;
-        if ( !isFormValidationErrors ){
-            if(this.props.onSubmit){
-                this.props.onSubmit()
-            }
-        }
-    }
-
-    onChangeFlagValidate(flag){
-        this.setState({
-            submitted: false,
-            isFormValidationErrors: flag
-        });
-    }
-
     render(){
         return (
-            <form onSubmit={this.onSubmit.bind(this)} className={this.props.className}>
-                <ValidateContext.Provider 
-                    value={{
-                        onChangeFlagValidate : this.onChangeFlagValidate.bind(this),
-                        submitted : this.state.submitted
-                    }}>
-                    {this.props.children}
-                </ValidateContext.Provider>
-            </form>
+            <ValidateContext.Consumer>
+                {({onSubmit}) => {
+                    return (
+                        <form noValidate onSubmit={onSubmit} className={this.props.className}>
+                            {this.props.children}
+                        </form>
+                    )
+                }}
+            </ValidateContext.Consumer>
         )
     }
 }

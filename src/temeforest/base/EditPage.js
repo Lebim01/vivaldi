@@ -1,11 +1,27 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Button } from './../../temeforest'
+import { Card, CardBody, CardTitle, Button, ValidateContext } from './../../temeforest'
 import { baseurl } from './../../utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 
+const defaultBtnDelete = {
+    show : true,
+    text : 'Eliminar',
+    type : 'danger'
+}
+const defaultBtnSave = {
+    show : true,
+    text : 'Guardar',
+    type : 'success'
+}
+
 class EditPage extends React.Component {
+
+    state = {
+        isFormValidationErrors : true,
+        submitted : false
+    }
 
     constructor(props){
         super(props)
@@ -85,37 +101,72 @@ class EditPage extends React.Component {
         }
     }
 
+    onChangeFlagValidate(flag){
+        this.setState({
+            isFormValidationErrors: flag,
+            submitted: true
+        });
+    }
+
+    onSubmit(e){
+        e.preventDefault();
+        const { isFormValidationErrors, submitted } = this.state;
+        if (!isFormValidationErrors && submitted){
+            this.confirmSave()
+        }
+    }
+
     render(){
         const { id, title, btnDelete, btnSave } = this.props
+
+        const _btnSave = {
+            ...defaultBtnSave,
+            ...btnSave,
+            ...{
+                disabled : this.state.isFormValidationErrors === true
+            }
+        }
+        const _btnDelete = {
+            ...defaultBtnDelete,
+            ...btnDelete
+        }
         return (
-            <div className="animated fadeIn">
-                <Row>
-                    <Col xs="12" md="12">
-                        <Card>
-                            <CardBody>
-                                { title && <CardTitle>{title}</CardTitle> }
+            <ValidateContext.Provider
+                value={{
+                    onChangeFlagValidate : this.onChangeFlagValidate.bind(this),
+                    submitted : this.state.submitted,
+                    isFormValidationErrors: this.state.isFormValidationErrors,
+                    onSubmit : this.onSubmit.bind(this)
+                }}>
+                <div className="animated fadeIn">
+                    <Row>
+                        <Col xs="12" md="12">
+                            <Card>
                                 <CardBody>
-                                    {this.props.children}
-                                </CardBody>
-                                <div className="row">
-                                    <div className="col-sm-12 text-center">
-                                        { btnSave.show &&
-                                            <Button type={btnSave.type} style={{marginRight:5}} onClick={() => this.confirmSave() }>
-                                                {btnSave.text}
-                                            </Button>
-                                        }
-                                        { btnDelete.show &&
-                                            <Button type={btnDelete.type} style={{marginLeft:5}} disabled={!id} onClick={() => this.confirmDelete()}>
-                                                { btnDelete.text }
-                                            </Button>
-                                        }
+                                    { title && <CardTitle>{title}</CardTitle> }
+                                    <CardBody>
+                                        {this.props.children}
+                                    </CardBody>
+                                    <div className="row">
+                                        <div className="col-sm-12 text-center">
+                                            { _btnSave.show &&
+                                                <Button style={{marginRight:5}} onClick={this.onSubmit.bind(this)} {..._btnSave}>
+                                                    {_btnSave.text}
+                                                </Button>
+                                            }
+                                            { _btnDelete.show &&
+                                                <Button style={{marginLeft:5}} disabled={!id} onClick={() => this.confirmDelete()} {..._btnDelete}>
+                                                    { _btnDelete.text }
+                                                </Button>
+                                            }
+                                        </div>
                                     </div>
-                                </div>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                </Row>
-            </div>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                    </Row>
+                </div>
+            </ValidateContext.Provider>
         )
     }
 }
@@ -125,16 +176,8 @@ EditPage.defaultProps = {
     title: '',
     urlFront : '',
     endpoint: '',
-    btnSave : {
-        show : true,
-        text : 'Guardar',
-        type : 'success'
-    },
-    btnDelete : {
-        show : true,
-        text : 'Eliminar',
-        type : 'danger'
-    }
+    btnSave : {},
+    btnDelete : {}
 }
 
 export default EditPage

@@ -13,13 +13,15 @@ const defaultProps = {
     }
 }
 
+const styles = {
+    required : {
+        color: 'red'
+    }
+}
+
 class FormElementValidate extends React.Component {
 
     static contextType = ValidateContext;
-
-    isValidationError(flag){
-        
-    }
 
     render(){
         const { label, input, validator } = this.props
@@ -33,25 +35,35 @@ class FormElementValidate extends React.Component {
             ...defaultProps.input,
             ...input
         }
-
+        
         return (
             <ValidateContext.Consumer>
                 {({onChangeFlagValidate, submitted}) => {
                     return (
                         <FormGroup className="row">
-                            <Label className="col-sm-3">{_label.text}</Label>
+                            <Label className="col-sm-3">
+                                {_label.text} 
+                                <span style={styles.required}>
+                                    {validator.validationRules.required ? '*' : ''}
+                                </span>
+                            </Label>
                             <div className="col-sm-5">
                                 {_input.element}
+                                <Validator 
+                                    isValidationError={onChangeFlagValidate}
+                                    isFormSubmitted={submitted}
+                                    reference={{
+                                        [_input.name] : _input.element.props.value,
+                                        ...validator.reference
+                                    }}
+                                    {...validator}
+                                />
                             </div>
-                            <Validator 
-                                isValidationError={onChangeFlagValidate}
-                                isFormSubmitted={submitted}
-                                reference={{
-                                    [_input.name] : _input.element.props.value,
-                                    ...validator.reference
-                                }}
-                                {...validator}
-                            />
+                            { _input.button &&
+                                <div className="col-sm-3">
+                                    {_input.button}
+                                </div>
+                            }
                         </FormGroup>
                     )}
                 }
