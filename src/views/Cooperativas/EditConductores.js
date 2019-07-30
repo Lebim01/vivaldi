@@ -1,11 +1,13 @@
 import React from 'react'
-import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label, Select, InputAutocomplete } from './../../temeforest'
+import { Button, FormGroup, Input, Label, Select, InputAutocomplete, FormValidate, EditPage } from './../../temeforest'
 import { baseurl, baseMediaUrl, getParameter } from './../../utils/url'
 import { fileToBase64 } from './../../utils/file'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import EditPersona from './EditPersona'
+
+const endpoint = 'conductor'
+const urlFront = '/cooperativas/conductores'
 
 class MainView extends React.Component {
 
@@ -90,7 +92,7 @@ class MainView extends React.Component {
         const { cooperativas, tipos } = this.props
         return (
             <div>
-                <form className="mt-4 form-horizontal">
+                <FormValidate className="mt-4 form-horizontal">
                     <FormGroup className="row">
                         <Label className="col-sm-3">Cooperativa</Label>
                         <div className="col-sm-5">
@@ -133,7 +135,7 @@ class MainView extends React.Component {
                             }
                         </div>
                     </FormGroup>
-                </form>
+                </FormValidate>
             </div>
         )
     }
@@ -149,7 +151,6 @@ class EditConductor extends React.Component {
         super(props)
         this.onChange = this.onChange.bind(this)
         this.onChangeFile = this.onChangeFile.bind(this)
-        this.confirmSave = this.confirmSave.bind(this)
         this.getCooperativas = this.getCooperativas.bind(this)
         this.searchPersona = this.searchPersona.bind(this)
     }
@@ -238,99 +239,29 @@ class EditConductor extends React.Component {
         }
     }
 
-    confirmSave(){
-        const { id, data, persona } = this.state
+    parseData(data){
+        const { persona } = this.state
         data['persona_obj'] = persona
-        Swal.fire({
-            title: 'Confirmar Guardar',
-            text : '¿Seguro de guardar?',
-            showCancelButton: true,
-            showLoaderOnConfirm: true,
-            preConfirm: () => {
-                return axios.post(`${baseurl}/conductor/${id ? `${id}/` : ``}`, data)
-                .then(response => {
-                    if (response.status !== 204) {
-                        throw new Error(response.statusText)
-                    }
-                    return response
-                })
-                .catch(error => {
-                    Swal.showValidationMessage(
-                        `Petición fallida: ${error}`
-                    )
-                })
-            },
-            allowOutsideClick: () => !Swal.isLoading()
-        }).then(() => {
-            Swal.fire({
-                text : `Guardado`,
-                type : 'success'
-            })
-            this.props.history.push('/cooperativas/conductores/')
-        })
-    }
-
-    confirmDelete(){
-        const { id, data } = this.state
-        if(id){
-            Swal.fire({
-                title: 'Confirmar Eliminar',
-                text : '¿Seguro de eliminar?',
-                showCancelButton: true,
-                showLoaderOnConfirm: true,
-                preConfirm: () => {
-                    return axios.delete(`${baseurl}/conductor/${id}`, data)
-                    .then(response => {
-                        if (response.status !== 200 && response.status !== 201) {
-                            throw new Error(response.statusText)
-                        }
-                        return response
-                    })
-                    .catch(error => {
-                        Swal.showValidationMessage(
-                            `Petición fallida: ${error}`
-                        )
-                    })
-                },
-                allowOutsideClick: () => !Swal.isLoading()
-            }).then((result) => {
-                if (result.value) {
-                    Swal.fire({
-                        text : `Eliminado`,
-                        type : 'success'
-                    })
-                    this.props.history.push('/cooperativas/conductores/')
-                }
-            })
-        }
+        return data
     }
 
     render(){
         const { id, data, tipos, cooperativas, persona } = this.state
         return (
-            <div className="animated fadeIn">
-                <Row>
-                    <Col xs="12" md="12">
-                        <Card>
-                            <CardBody>
-                                <CardTitle>Crear/Editar Conductor</CardTitle>
-                                <CardBody>
-                                    <MainView {...data} tipos={tipos} cooperativas={cooperativas}
-                                        persona={persona} onChange={this.onChange} searchPersona={this.searchPersona}
-                                        onChangeFile={this.onChangeFile}
-                                    />
-                                </CardBody>
-                                <div className="row">
-                                    <div className="col-sm-12 text-center">
-                                        <Button type="success" style={{marginRight:5}} onClick={() => this.confirmSave() }>Guardar</Button>
-                                        <Button type="danger" style={{marginLeft:5}} disabled={!id} onClick={() => this.confirmDelete()}>Eliminar</Button>
-                                    </div>
-                                </div>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                </Row>
-            </div>
+            <EditPage 
+                title={`${id ? 'Editar' : 'Crear'} Conductores`} 
+                data={data} 
+                id={id} 
+                urlFront={urlFront} 
+                endpoint={endpoint} 
+                history={this.props.history}
+                parseData={this.parseData.bind(this)}
+            >
+                <MainView {...data} tipos={tipos} cooperativas={cooperativas}
+                    persona={persona} onChange={this.onChange} searchPersona={this.searchPersona}
+                    onChangeFile={this.onChangeFile}
+                />
+            </EditPage>
         )
     }
 }

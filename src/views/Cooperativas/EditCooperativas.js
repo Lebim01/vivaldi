@@ -159,7 +159,7 @@ class MainView extends React.Component {
                             label={{text:'Correo'}}
                             input={{
                                 name : 'correo',
-                                element: <Input onChange={this.onChange('correo')} value={this.props.correo} />
+                                element: <Input placeholder="example@gmail.com" onChange={this.onChange('correo')} value={this.props.correo} />
                             }}
                             validator={{
                                 validationRules: { email: true },

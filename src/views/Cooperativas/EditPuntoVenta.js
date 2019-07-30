@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label, Select, FormValidate, FormElementValidate } from './../../temeforest'
+import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label, Select, FormElementValidate, FormValidate } from './../../temeforest'
 import { baseurl, getParameter } from './../../utils/url'
 import { generateHexadecimal } from './../../utils/string'
 import axios from 'axios'
@@ -126,12 +126,17 @@ class MainView extends React.Component {
         return (
             <div>
                 <FormValidate className="mt-4 form-horizontal">
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Descripción</Label>
-                        <div className="col-sm-5">
-                            <Input onChange={this.onChange('descripcion')} value={this.props.descripcion} />
-                        </div>
-                    </FormGroup>
+                    <FormElementValidate
+                        label={{text:'Descripción'}}
+                        input={{
+                            name : 'descripcion',
+                            element: <Input onChange={this.onChange('descripcion')} value={this.props.descripcion} />
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
                     <FormGroup className="row">
                         <Label className="col-sm-3">Api Key</Label>
                         <div className="col-sm-5">
@@ -141,12 +146,17 @@ class MainView extends React.Component {
                             <Button onClick={this.generateHexadecimal.bind(this)}>Generar</Button>
                         </div>
                     </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Localidad</Label>
-                        <div className="col-sm-5">
-                            <Select options={localidades} onChange={this.onChange('localidad')} value={this.props.localidad} />
-                        </div>
-                    </FormGroup>
+                    <FormElementValidate
+                        label={{text:'Localidad'}}
+                        input={{
+                            name : 'localidad',
+                            element: <Select options={localidades} onChange={this.onChange('localidad')} value={this.props.localidad} />
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
                     <FormElementValidate
                         label={{text:'Dirección IP'}}
                         input={{
@@ -154,8 +164,8 @@ class MainView extends React.Component {
                             element: <Input onChange={this.onChange('ip')} value={this.props.ip} />
                         }}
                         validator={{
-                            validationRules: {ip:true},
-                            validationMessages: {ip:'El valor debe ser un ip valida'}
+                            validationRules: { required:true, ip : true },
+                            validationMessages: { required:"El campo es requerido", ip:"El campo debe ser una IP"}
                         }}
                     />
                     <FormGroup className="row">

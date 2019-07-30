@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label, Select } from './../../temeforest'
+import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label, Select, FormElementValidate, FormValidate } from './../../temeforest'
 import { baseurl, baseMediaUrl, getParameter } from './../../utils/url'
 import { fileToBase64 } from './../../utils/file'
 import axios from 'axios'
@@ -49,19 +49,29 @@ class MainView extends React.Component {
         const { cooperativas, marcas, busTipos, busTiposServicios, conductores, propietarios } = this.props
         return (
             <div>
-                <form className="mt-4 form-horizontal">
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Número</Label>
-                        <div className="col-sm-5">
-                            <Input onChange={this.onChange('numero')} value={this.props.numero} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Placa</Label>
-                        <div className="col-sm-5">
-                            <Input onChange={this.onChange('placa')} value={this.props.placa} />
-                        </div>
-                    </FormGroup>
+                <FormValidate className="mt-4 form-horizontal">
+                    <FormElementValidate
+                        label={{text:'Número'}}
+                        input={{
+                            name : 'numero',
+                            element: <Input onChange={this.onChange('numero')} value={this.props.numero} />
+                        }}
+                        validator={{
+                            validationRules: { required : true, number: true, minRangeNumber : 1, maxRangeNumber : 1000 },
+                            validationMessages : { number : "El valor debe ser un número" }
+                        }}
+                    />
+                    <FormElementValidate
+                        label={{text:'Placa'}}
+                        input={{
+                            name : 'placa',
+                            element: <Input onChange={this.onChange('placa')} value={this.props.placa} />
+                        }}
+                        validator={{
+                            validationRules: { required : true, minRangeNumber : 1, maxRangeNumber : 4 },
+                            validationMessages : { }
+                        }}
+                    />
                     <FormGroup className="row">
                         <Label className="col-sm-3">Cooperativa</Label>
                         <div className="col-sm-5">
@@ -74,12 +84,17 @@ class MainView extends React.Component {
                             <Select options={busTipos} onChange={this.onChange('bus_tipo')} value={this.props.bus_tipo} />
                         </div>
                     </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Capacidad</Label>
-                        <div className="col-sm-5">
-                            <Input readOnly value={this.props.capacidad} />
-                        </div>
-                    </FormGroup>
+                    <FormElementValidate
+                        label={{text:'Capacidad'}}
+                        input={{
+                            name : 'capacidad',
+                            element: <Input readOnly value={this.props.capacidad} />
+                        }}
+                        validator={{
+                            validationRules: { required : true, number: true, minRangeNumber : 1, maxRangeNumber : 200 },
+                            validationMessages : { number : "El valor debe ser un número" }
+                        }}
+                    />
                     <FormGroup className="row">
                         <Label className="col-sm-3">Tipo servicio</Label>
                         <div className="col-sm-5">
@@ -104,12 +119,17 @@ class MainView extends React.Component {
                             <Select options={conductores} onChange={this.onChange('conductor')} value={this.props.conductor} />
                         </div>
                     </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Año Fabricación</Label>
-                        <div className="col-sm-5">
-                            <Input type="number" onChange={this.onChange('anio_fabricacion')} value={this.props.anio_fabricacion} />
-                        </div>
-                    </FormGroup>
+                    <FormElementValidate
+                        label={{text:'Año Fabricación'}}
+                        input={{
+                            name : 'anio_fabricacion',
+                            element: <Input type="number" onChange={this.onChange('anio_fabricacion')} value={this.props.anio_fabricacion} />
+                        }}
+                        validator={{
+                            validationRules: { required : true, number: true, minRangeDate : '1950-01-01' },
+                            validationMessages : { number : "El valor debe ser un número" }
+                        }}
+                    />
                     <FormGroup className="row">
                         <div className="col-sm-12 text-center">
                             <Input id="documentation" type="file" style={{display:'none'}} onChange={this.onChangeFile}/>
@@ -123,7 +143,7 @@ class MainView extends React.Component {
                             }
                         </div>
                     </FormGroup>
-                </form>
+                </FormValidate>
             </div>
         )
     }

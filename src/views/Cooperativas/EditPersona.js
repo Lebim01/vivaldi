@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { FormGroup, Input, Label } from './../../temeforest'
+import { FormGroup, Input, Label, FormElementValidate, FormValidate } from './../../temeforest'
 import { baseurl, getParameter } from './../../utils/url'
 import axios from 'axios'
 
@@ -47,13 +47,18 @@ class EditPersona extends React.Component {
                 <Row>
                     <Col xs="12" md="12">
                         <div>
-                            <form className="mt-4 form-horizontal">
-                                <FormGroup className="row">
-                                <Label className="col-sm-3">Cédula/RUC</Label>
-                                    <div className="col-sm-5">
-                                        <Input readOnly={readOnly} value={data.identificacion} onChange={this.onChange('identificacion')} />
-                                    </div>
-                                </FormGroup>
+                            <FormValidate className="mt-4 form-horizontal">
+                                <FormElementValidate
+                                    label={{text:'Cédula/RUC'}}
+                                    input={{
+                                        name : 'identificacion',
+                                        element: <Input readOnly={readOnly} value={data.identificacion} onChange={this.onChange('identificacion')} /> 
+                                    }}
+                                    validator={{
+                                        validationRules: {required:true, number : true, minLength:13, maxLength:13},
+                                        validationMessages: {required:"El campo es requerido", minLength:'El valor debe ser de 13 dígitos', maxLength:'El valor debe ser de 13 dígitos', number : 'Solo se aceptan números'}
+                                    }}
+                                />
                                 <FormGroup className="row">
                                     <Label className="col-sm-3">Apellidos</Label>
                                     <div className="col-sm-5">
@@ -66,25 +71,18 @@ class EditPersona extends React.Component {
                                         <Input readOnly={readOnly} value={data.nombres} onChange={this.onChange('nombres')} />
                                     </div>
                                 </FormGroup>
-                                <FormGroup className="row">
-                                    <Label className="col-sm-3">Telefono</Label>
-                                    <div className="col-sm-5">
-                                        <Input readOnly={readOnly} value={data.telefono} onChange={this.onChange('telefono')} />
-                                    </div>
-                                </FormGroup>
-                                <FormGroup className="row">
-                                    <Label className="col-sm-3">Dirección</Label>
-                                    <div className="col-sm-5">
-                                        <Input readOnly={readOnly} value={data.direccion} onChange={this.onChange('direccion')} />
-                                    </div>
-                                </FormGroup>
-                                <FormGroup className="row">
-                                    <Label className="col-sm-3">Correo</Label>
-                                    <div className="col-sm-5">
-                                        <Input readOnly={readOnly} value={data.correo} onChange={this.onChange('correo')} />
-                                    </div>
-                                </FormGroup>
-                            </form>
+                                <FormElementValidate
+                                    label={{text:'Correo'}}
+                                    input={{
+                                        name : 'correo',
+                                        element: <Input placeholder="example@gmail.com" readOnly={readOnly} value={data.correo} onChange={this.onChange('correo')} />
+                                    }}
+                                    validator={{
+                                        validationRules: { email: true },
+                                        validationMessages : { email: "El valor debe ser un correo válido" }
+                                    }}
+                                />
+                            </FormValidate>
                         </div>
                     </Col>
                 </Row>
