@@ -84,7 +84,7 @@ class SolicitudTasaContingencia extends React.Component {
                                     searchable={false}
 
                                     fieldNames={['Cooperativa', 'Fecha', 'Descripión', 'Tipo de Solicitud', 'Cantidad']}
-                                    fields={['cooperativa_nombre', 'fecha', 'descripcion', 'tipo_solicitud', 'cantidad']}
+                                    fields={['cooperativa_nombre', 'fecha', 'descripcion', 'tipo_solicitud_nombre', 'cantidad']}
 
                                     url='venta/solicitud_tasacontingencia'
 
