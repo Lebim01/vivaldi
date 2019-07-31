@@ -1,6 +1,5 @@
 import React from 'react'
-import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label, Select, FormElementValidate, FormValidate, ValidateContext, EditPage } from './../../temeforest'
+import { Button, FormGroup, Input, Label, Select, FormElementValidate, FormValidate, EditPage } from './../../temeforest'
 import { baseurl, getParameter } from './../../utils/url'
 import { generateHexadecimal } from './../../utils/string'
 import axios from 'axios'

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, FormGroup, Input, Label, Select, InputAutocomplete, FormValidate, EditPage } from './../../temeforest'
+import { Button, FormGroup, Input, Label, Select, FormValidate, EditPage } from './../../temeforest'
 import { baseurl, baseMediaUrl, getParameter } from './../../utils/url'
 import { fileToBase64 } from './../../utils/file'
 import axios from 'axios'
@@ -53,19 +53,6 @@ class EditConductor extends React.Component {
             return true
         }
         return false
-    }
-
-    getPersona = async (id) => {
-        const { data } = await axios.get(`${baseurl}/persona/${id}/`)
-        const local = this.state.data
-        local['identificacion'] = data.identificacion
-        this.setState({
-            data : {
-                ...this.state.data,
-                persona:data
-            },
-            data:local,
-        })
     }
 
     getCooperativa = async (id) => {

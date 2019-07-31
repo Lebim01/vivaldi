@@ -140,8 +140,8 @@ class CrearFrecuenciaLote extends React.Component {
     onChange(name, value){
         let data = this.state.data
         data[name] = value
-        if(name == 'ruta') this.setDestino()
-        if(name == 'tipo') if(value == 1) data.fecha_validez = null
+        if(name === 'ruta') this.setDestino()
+        if(name === 'tipo') if(value == 1) data.fecha_validez = null
         this.setState({
             data
         })

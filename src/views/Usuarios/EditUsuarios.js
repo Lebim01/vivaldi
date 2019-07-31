@@ -9,7 +9,7 @@ const endpoint = 'usuario'
 const urlFront = '/usuarios/usuarios'
 
 
-class _Row extends React.Component {
+class RowRol extends React.Component {
 
     constructor(props){
         super(props)
@@ -36,7 +36,7 @@ class _Row extends React.Component {
     }
 }
 
-class _RowCooperativa extends React.Component {
+class RowCooperativa extends React.Component {
 
     constructor(props){
         super(props)
@@ -288,7 +288,7 @@ class EditUsuarios extends React.Component {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    { data.roles.map((r, i) => <_Row {...r} key={i} delete={() => this.deleteRol(i)} />) }
+                                                    { data.roles.map((r, i) => <RowRol {...r} key={i} delete={() => this.deleteRol(i)} />) }
                                                 </tbody>
                                             </table>
                                         </div>
@@ -319,7 +319,7 @@ class EditUsuarios extends React.Component {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    { data.roles_cooperativa.map((r, i) => <_RowCooperativa {...r} key={i} delete={() => this.deleteCooperativa(i)} />) }
+                                                    { data.roles_cooperativa.map((r, i) => <RowCooperativa {...r} key={i} delete={() => this.deleteCooperativa(i)} />) }
                                                 </tbody>
                                             </table>
                                         </div>

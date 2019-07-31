@@ -96,8 +96,8 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
                 <ListPage
                     searchable={false}
 
-                    fieldNames={[(this.state.reporte == 2) ? 'Viaje' : 'Boletero' , 'Emitidas', 'Usadas']}
-                    fields={[(this.state.reporte == 2) ? 'viaje' : 'boletero', 'tasas_emitidas', 'tasas_usadas']}
+                    fieldNames={[(this.state.reporte === 2) ? 'Viaje' : 'Boletero' , 'Emitidas', 'Usadas']}
+                    fields={[(this.state.reporte === 2) ? 'viaje' : 'boletero', 'tasas_emitidas', 'tasas_usadas']}
 
                     //url del endpoint
                     url='recaudaciones/tasas-emitidas-usadas'
