@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, FormGroup, Input, Label, EditPage, Select, FormElementValidate, FormValidate } from './../../temeforest'
+import EditPersona from './../Cooperativas/EditPersona'
 import { baseurl, getParameter } from './../../utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
@@ -72,7 +73,9 @@ class EditUsuarios extends React.Component {
         data : {
             roles: [],
             roles_cooperativa: [],
-            tipo : 1
+            tipo : 1,
+            persona : {},
+            readOnlyPersona : true
         },
         modal_rol : {
             show : false
@@ -93,6 +96,7 @@ class EditUsuarios extends React.Component {
         this.addRol = this.addRol.bind(this)
         this.agregarRol = this.agregarRol.bind(this)
         this.deleteRol = this.deleteRol.bind(this)
+        this.onChangePersona = this.onChangePersona.bind(this)
     }
 
     componentDidMount(){
@@ -121,6 +125,53 @@ class EditUsuarios extends React.Component {
 
     onChange = name => (e) => {
         this.setValue(name, e.target.value)
+    }
+    onChangeData = (name, value) => {
+        this.setState({
+            data : {
+                ...this.state.data,
+                [name]: value
+            }
+        })
+    }
+
+    searchPersona = async (identificacion) => {
+        const { data } = await axios.get(`${baseurl}/persona/?identificacion=${identificacion}`)
+        if(data.length > 0){
+            this.setState({
+                data : {
+                    ...this.state.data,
+                    persona: data[0],
+                }
+            })
+            return true
+        }
+        return false
+    }
+
+    editPersona(data = {}){
+        this.onChangeData('readOnlyPersona', false)
+        this.onChangeData('persona', data)
+    }
+
+    readOnlyPersona(){
+        this.onChangeData('readOnlyPersona', true)
+    }
+
+    async onChangePersona(data){
+        this.onChangeData('persona', data)
+        if(data.identificacion !== this.state.data.persona.identificacion){
+            let success = await this.searchPersona(data.identificacion)
+            if(!success){
+                this.onChangeData('persona', { identificacion: data.identificacion })
+
+                if(data.identificacion.length === 13){
+                    this.editPersona({ identificacion: data.identificacion })
+                }else{
+                    this.readOnlyPersona()
+                }
+            }
+        }
     }
 
     addRol(){
@@ -169,7 +220,6 @@ class EditUsuarios extends React.Component {
         })
     }
 
-
     toggleModalCooperativa = () => {
         let _modal = this.state.modal_cooperativa
         _modal.show = !_modal.show
@@ -210,50 +260,7 @@ class EditUsuarios extends React.Component {
                                 <Input onChange={this.onChange('username')} value={data.username} />
                             </div>
                         </FormGroup>
-                        <FormElementValidate
-                            label={{text:'Identificación'}}
-                            input={{
-                                name : 'cedula',
-                                element: <Input onChange={this.onChange('cedula')} value={data.cedula} />
-                            }}
-                            validator={{
-                                validationRules: {required:true, minLength:10, maxLength:10},
-                                validationMessages: {required:"El campo es requerido", minLength:'El valor debe ser de 10 dígitos', maxLength:'El valor debe ser de 10 dígitos'}
-                            }}
-                        />
-                        <FormElementValidate
-                            label={{text:'Nombre'}}
-                            input={{
-                                name : 'first_name',
-                                element: <Input onChange={this.onChange('first_name')} value={data.first_name} />
-                            }}
-                            validator={{
-                                validationRules: {required:true, minLength:30, maxLength:30},
-                                validationMessages: {required:"El campo es requerido", minLength:'', maxLength:'El valor debe ser máximo de 30 dígitos'}
-                            }}
-                        />
-                        <FormElementValidate
-                            label={{text:'Apellidos'}}
-                            input={{
-                                name : 'last_name',
-                                element: <Input onChange={this.onChange('last_name')} value={data.last_name} />
-                            }}
-                            validator={{
-                                validationRules: {required:true, minLength:30, maxLength:30},
-                                validationMessages: {required:"El campo es requerido", minLength:'', maxLength:'El valor debe ser máximo de 150 dígitos'}
-                            }}
-                        />
-                        <FormElementValidate
-                            label={{text:'Correo'}}
-                            input={{
-                                name : 'correo',
-                                element: <Input placeholder="example@gmail.com" onChange={this.onChange('email')} value={data.email} />
-                            }}
-                            validator={{
-                                validationRules: { email: true },
-                                validationMessages : { email: "El valor debe ser un correo" }
-                            }}
-                        />
+                        <EditPersona data={this.state.data.persona} readOnly={this.state.data.readOnlyPersona} onChange={this.onChangePersona} />
                         <FormGroup className="row">
                             <Label className="col-sm-3">Contraseña</Label>
                             <div className="col-sm-5">

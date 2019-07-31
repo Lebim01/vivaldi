@@ -126,15 +126,21 @@ class EditConductor extends React.Component {
         this.onChange('readOnlyPersona', false)
         this.onChange('persona', data)
     }
+    readOnlyPersona(){
+        this.onChange('readOnlyPersona', true)
+    }
     async onChangePersona(data){
         this.onChange('persona', data)
         if(data.identificacion !== this.state.data.persona.identificacion){
             let success = await this.searchPersona(data.identificacion)
             if(!success){
                 this.onChange('persona', { identificacion: data.identificacion })
-            }
-            if(data.identificacion.length === 13){
-                this.editPersona({ identificacion: data.identificacion })
+
+                if(data.identificacion.length === 13){
+                    this.editPersona({ identificacion: data.identificacion })
+                }else{
+                    this.readOnlyPersona()
+                }
             }
         }
     }
