@@ -22,6 +22,17 @@ class SolicitudTasaContingencia extends React.Component {
     optionsRazon = [
         { value:'', label:'Seleccione' },
     ]
+
+    refresh(){
+        this.setState({
+            refresh: true
+        })
+    }
+
+    componentDidMount(){
+        setInterval(this.refresh.bind(this), 5000)
+    }
+
     onChange = name => (e) => {
         this.setState({
             [name]: e.target.value
@@ -71,13 +82,6 @@ class SolicitudTasaContingencia extends React.Component {
                                                 <Select options={this.optionsEstado} onChange={this.onChange('estado')} value={this.state.estado} />
                                             </div>
                                         </FormGroup>
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="col-sm-12 text-center">
-                                        <Button onClick={this.buscar.bind(this)}>
-                                            Buscar
-                                        </Button>
                                     </div>
                                 </div>
                                 <ListPage
