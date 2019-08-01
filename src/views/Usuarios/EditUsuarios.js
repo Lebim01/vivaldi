@@ -4,7 +4,8 @@ import EditPersona from './../Cooperativas/EditPersona'
 import { baseurl, getParameter } from './../../utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
-import AddRolUsuario from './AddRolUsuario'
+import AddRol from './AddRol'
+import AddRolCooperativa from './AddRolCooperativa'
 
 const endpoint = 'usuario'
 const urlFront = '/usuarios/usuarios'
@@ -30,7 +31,7 @@ class RowRol extends React.Component {
                     <Button outline={true} type="danger" size="sm" rounded={true} onClick={this.delete}>
                         <i className="fa fa-times"></i>
                     </Button>{' '}
-                    {this.props.name}
+                    {this.props.rol_nombre}
                 </td>
             </tr>
         )
@@ -57,10 +58,9 @@ class RowCooperativa extends React.Component {
                     <Button outline={true} type="danger" size="sm" rounded={true} onClick={this.delete}>
                         <i className="fa fa-times"></i>
                     </Button>{' '}
-                    {this.props.name}
+                    {this.props.cooperativa_nombre}
                 </td>
-                <td>{this.props.name}</td>
-                <td>{this.props.rol}</td>
+                <td>{this.props.rol_nombre}</td>
             </tr>
         )
     }
@@ -92,11 +92,13 @@ class EditUsuarios extends React.Component {
 
     constructor(props){
         super(props)
-        this.onChange = this.onChange.bind(this)
         this.addRol = this.addRol.bind(this)
-        this.agregarRol = this.agregarRol.bind(this)
+        this.onChange = this.onChange.bind(this)
         this.deleteRol = this.deleteRol.bind(this)
+        this.agregarRol = this.agregarRol.bind(this)
+        this.addCooperativa = this.addCooperativa.bind(this)
         this.onChangePersona = this.onChangePersona.bind(this)
+        this.agregarCooperativa = this.agregarCooperativa.bind(this)
     }
 
     componentDidMount(){
@@ -183,11 +185,12 @@ class EditUsuarios extends React.Component {
         })
     }
 
-    toggleModal = () => {
-        let _modal = this.state.modal_rol
-        _modal.show = !_modal.show
+    toggleModal = (show = null) => {
         this.setState({
-            modal_rol : _modal
+            modal_rol : {
+                ...this.state.modal_rol,
+                show : show !== null ? show : !this.state.modal_rol.show
+            }
         })
     }
 
@@ -195,7 +198,7 @@ class EditUsuarios extends React.Component {
         let roles = this.state.data.roles
         roles.push(data)
         this.setValue('roles', roles)
-        this.toggleModal()
+        this.toggleModal(false)
     }
 
     deleteRol = async (index) => {
@@ -211,7 +214,7 @@ class EditUsuarios extends React.Component {
         }
     }
 
-    addRol(){
+    addCooperativa(){
         this.setState({
             modal_cooperativa : {
                 ...this.state.modal_cooperativa,
@@ -231,7 +234,7 @@ class EditUsuarios extends React.Component {
     agregarCooperativa(data){
         let roles_cooperativa = this.state.data.roles_cooperativa
         roles_cooperativa.push(data)
-        this.setValue('roles_cooperativa', roles_cooperativa)
+        this.onChangeData('roles_cooperativa', roles_cooperativa)
         this.toggleModalCooperativa()
     }
 
@@ -244,7 +247,7 @@ class EditUsuarios extends React.Component {
         if(value){
             let roles_cooperativa = this.state.data.roles_cooperativa
             roles_cooperativa.splice(index, 1)
-            this.setValue('roles_cooperativa', roles_cooperativa)
+            this.onChangeData('roles_cooperativa', roles_cooperativa)
         }
     }
 
@@ -295,7 +298,7 @@ class EditUsuarios extends React.Component {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    { data.roles.map((r, i) => <RowRol {...r} key={i} delete={() => this.deleteRol(i)} />) }
+                                                    { data.roles.map((r, i) => <RowRol {...r} key={`rol_${i}`} delete={() => this.deleteRol(i)} />) }
                                                 </tbody>
                                             </table>
                                         </div>
@@ -347,7 +350,8 @@ class EditUsuarios extends React.Component {
                                 </FormGroup>
                             </div>
                         }
-                        <AddRolUsuario guardar={this.agregarRol} {...this.state.modal} toggle={this.toggleModal} />
+                        <AddRol guardar={this.agregarRol} {...this.state.modal_rol} toggle={this.toggleModal} />
+                        <AddRolCooperativa guardar={this.agregarCooperativa} {...this.state.modal_cooperativa} toggle={this.toggleModalCooperativa} />
                     </FormValidate>
                 </div>
             </EditPage>

@@ -53,7 +53,7 @@ class ListPage extends React.Component {
     }
 
     onRowDoubleClick(id){
-        if(this.props.menu){
+        if(this.props.menu && this.props.redirect){
             this.props.history.push(`/${this.props.menu}/${this.props.submenu}/edit?id=${id}`)
         }
     }
@@ -113,7 +113,8 @@ class ListPage extends React.Component {
 }
 
 ListPage.defaultProps = {
-    parameters : {}
+    parameters : {},
+    redirect: true
 }
 
 export default ListPage

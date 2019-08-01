@@ -135,7 +135,7 @@ const routes = [
   { path: '/operaciones/solicitudes/modificaciones-buses', name: 'Tooltips', component: Page404 },
   { path: '/operaciones/solicitudes/conductores', name: 'Solicutud de Conductores', component: SolicitudConductores, exact: true },
   { path: '/operaciones/solicitudes/conductores/edit', name: 'Crear/Editar Solicutud de Conductores', component: EditSolicitudConductor, exact: true },
-  { path: '/operaciones/solicitudes/tasas-contingencia', name: 'Buttons', component: SolicitudTasaContingencia, exact: true },
+  { path: '/operaciones/solicitudes/tasas-contingencia', name: 'Solicitud de Tasas de Contingencia', component: SolicitudTasaContingencia, exact: true },
 
   { path: '/facturacion/clientes', name: 'Buttons', component: Page404 },
   { path: '/facturacion/documentos', name: 'Button Dropdowns', component: Page404 },

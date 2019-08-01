@@ -4,7 +4,7 @@ import { Button, FormGroup, Label, Select } from './../../temeforest'
 import axios from 'axios'
 import { baseurl } from './../../utils/url'
 
-class AddRolUsuario extends React.Component {
+class AddRolCooperativa extends React.Component {
 
     seleccione = [{label:'Seleccione', value:''}]
     state = {
@@ -36,33 +36,32 @@ class AddRolUsuario extends React.Component {
         }
     }
 
-    getCooperativaName(id){
-        for(let i in this.state.cooperativas){
-            let row = this.state.cooperativas[i]
-            if(row.value == id)
-                return row.label
+    async getCooperativaName(id){
+        const { data } = await axios.get(`${baseurl}/cooperativa/${id}`)
+        if(data.id){
+            return data.nombre
         }
         return ''
     }
 
-    getRolName(id){
-        for(let i in this.state.roles){
-            let row = this.state.roles[i]
-            if(row.value == id)
-                return row.label
+    async getRolName(id){
+        const { data } = await axios.get(`${baseurl}/rol/${id}`)
+        if(data.id){
+            return data.name
         }
         return ''
     }
 
-    onChange = name => (e) => {
+    onChange = name => async (e) => {
         let data = this.state.data
         data[name] = e.target.value
         if (name === 'cooperativa') {
-            data.cooperativa_nombre = this.getCooperativaName(e.target.value)
+            data.cooperativa_nombre = await this.getCooperativaName(e.target.value)
+
         }
         if (name === 'rol') {
             data.id = e.target.value
-            data.name = this.getRolName(e.target.value)
+            data.rol_nombre = await this.getRolName(e.target.value)
         }
         this.setState({
             data
@@ -80,6 +79,9 @@ class AddRolUsuario extends React.Component {
         if(errors.length == 0){
             if(this.props.guardar){
                 this.props.guardar(this.state.data)
+                this.setState({
+                    data : {}
+                })
             }
         }else{
             this.setState({
@@ -118,10 +120,10 @@ class AddRolUsuario extends React.Component {
     }
 }
 
-AddRolUsuario.defaultProps = {
+AddRolCooperativa.defaultProps = {
     show : false,
     id_localidad : null,
     id_nivel : null
 }
 
-export default AddRolUsuario
+export default AddRolCooperativa

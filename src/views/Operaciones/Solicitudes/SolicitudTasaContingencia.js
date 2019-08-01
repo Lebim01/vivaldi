@@ -94,6 +94,7 @@ class SolicitudTasaContingencia extends React.Component {
 
                                     menu='operaciones'
                                     submenu='solicitudes/tasas-contingencia'
+                                    redirect={false}
                                     
                                     history={this.props.history}
                                     parameters={this.state}
