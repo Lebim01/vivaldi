@@ -40,7 +40,7 @@ class EditPersona extends React.Component {
                 <Row>
                     <Col xs="12" md="12">
                         <div>
-                            <FormValidate className="mt-4 form-horizontal">
+                            <FormValidate className="mt-4 form-horizontal" style={{marginTop: 0}}>
                                 <FormElementValidate
                                     label={{text:'Cédula/RUC'}}
                                     input={{

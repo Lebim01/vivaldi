@@ -42,7 +42,7 @@ class AddRol extends React.Component {
         data[name] = e.target.value
         if (name === 'rol') {
             data.id = e.target.value
-            data.rol_nombre = await this.getRolName(e.target.value)
+            data.name = await this.getRolName(e.target.value)
         }
         this.setState({
             data

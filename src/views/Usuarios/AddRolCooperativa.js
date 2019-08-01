@@ -8,6 +8,7 @@ class AddRolCooperativa extends React.Component {
 
     seleccione = [{label:'Seleccione', value:''}]
     state = {
+        loading: false,
         errors : [],
         data : {}
     }
@@ -56,15 +57,21 @@ class AddRolCooperativa extends React.Component {
         let data = this.state.data
         data[name] = e.target.value
         if (name === 'cooperativa') {
+            this.setState({
+                loading: true
+            })
             data.cooperativa_nombre = await this.getCooperativaName(e.target.value)
-
         }
         if (name === 'rol') {
+            this.setState({
+                loading: true
+            })
             data.id = e.target.value
             data.rol_nombre = await this.getRolName(e.target.value)
         }
         this.setState({
-            data
+            data,
+            loading: false
         })
     }
 
@@ -112,7 +119,7 @@ class AddRolCooperativa extends React.Component {
                     </form>
                 </ModalBody>
                 <ModalFooter>
-                    <Button type="success" onClick={this.guardar}>Aceptar</Button>{' '}
+                    <Button type="success" onClick={this.guardar} disabled={this.state.loading}>Aceptar</Button>{' '}
                     <Button type="secondary" onClick={this.toggle}>Cancelar</Button>
                 </ModalFooter>
             </Modal>

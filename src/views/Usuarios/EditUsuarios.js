@@ -1,7 +1,8 @@
 import React from 'react'
 import { Button, FormGroup, Input, Label, EditPage, Select, FormElementValidate, FormValidate } from './../../temeforest'
 import EditPersona from './../Cooperativas/EditPersona'
-import { baseurl, getParameter } from './../../utils/url'
+import { baseurl, baseMediaUrl, getParameter } from './../../utils/url'
+import { fileToBase64 } from './../../utils/file'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import AddRol from './AddRol'
@@ -31,7 +32,7 @@ class RowRol extends React.Component {
                     <Button outline={true} type="danger" size="sm" rounded={true} onClick={this.delete}>
                         <i className="fa fa-times"></i>
                     </Button>{' '}
-                    {this.props.rol_nombre}
+                    {this.props.name}
                 </td>
             </tr>
         )
@@ -75,7 +76,8 @@ class EditUsuarios extends React.Component {
             roles_cooperativa: [],
             tipo : 1,
             persona : {},
-            readOnlyPersona : true
+            readOnlyPersona : true,
+            documentacion : 'none'
         },
         modal_rol : {
             show : false
@@ -96,9 +98,9 @@ class EditUsuarios extends React.Component {
         this.onChange = this.onChange.bind(this)
         this.deleteRol = this.deleteRol.bind(this)
         this.agregarRol = this.agregarRol.bind(this)
+        this.onChangeFile = this.onChangeFile.bind(this)
         this.addCooperativa = this.addCooperativa.bind(this)
         this.onChangePersona = this.onChangePersona.bind(this)
-        this.agregarCooperativa = this.agregarCooperativa.bind(this)
     }
 
     componentDidMount(){
@@ -126,7 +128,21 @@ class EditUsuarios extends React.Component {
     }
 
     onChange = name => (e) => {
-        this.setValue(name, e.target.value)
+        let data = {
+            [name] : e.target.value
+        }
+        if(name === 'tipo'){
+            data.roles = []
+            if(e.target.value === 1){
+                data.documentacion = 'none'
+            }
+        }
+        this.setState({ 
+            data : {
+                ...this.state.data,
+                ...data
+            }
+        })
     }
     onChangeData = (name, value) => {
         this.setState({
@@ -197,7 +213,7 @@ class EditUsuarios extends React.Component {
     agregarRol(data){
         let roles = this.state.data.roles
         roles.push(data)
-        this.setValue('roles', roles)
+        this.onChangeData('roles', roles)
         this.toggleModal(false)
     }
 
@@ -210,7 +226,7 @@ class EditUsuarios extends React.Component {
         if(value){
             let roles = this.state.data.roles
             roles.splice(index, 1)
-            this.setValue('roles', roles)
+            this.onChangeData('roles', roles)
         }
     }
 
@@ -231,25 +247,45 @@ class EditUsuarios extends React.Component {
         })
     }
 
-    agregarCooperativa(data){
-        let roles_cooperativa = this.state.data.roles_cooperativa
-        roles_cooperativa.push(data)
-        this.onChangeData('roles_cooperativa', roles_cooperativa)
-        this.toggleModalCooperativa()
-    }
-
-    deleteCooperativa = async (index) => {
-        const {value} = await Swal.fire({
-            title: 'Confirmar',
-            text : '¿Seguro de borrar?',
-            showCancelButton: true,
-        })
-        if(value){
-            let roles_cooperativa = this.state.data.roles_cooperativa
-            roles_cooperativa.splice(index, 1)
-            this.onChangeData('roles_cooperativa', roles_cooperativa)
+    onChangeFile = async (value) => {
+        try {
+            let data = this.state.data
+            data.documentacion = await fileToBase64(value)
+            this.setState({
+                data
+            })
+        }catch(e){
+            Swal.fire('Subir archivo', 'Hubo algún problema al querer subir el archivo', 'error')
         }
     }
+    _onChangeFile = (e) => {
+        if(this.onChangeFile){
+            this.onChangeFile(e.target.files[0])
+        }
+    }
+    UploadFile = (e) => {
+        let el = document.getElementById("documentation");
+        if (el) {
+            el.click();
+        }
+    }
+    DownloadFile = (url) => {
+        if (url){
+            let file_path = baseMediaUrl + url;
+            let a = document.createElement('A');
+            a.target = '_blank';
+            a.download = true;
+            a.href = file_path;
+            a.click()
+        }
+    }
+    canDownload = (url) => {
+        if(url && url.includes('none')){
+            return true
+        }
+        return false
+    }
+
 
     render(){
         const { data, id } = this.state
@@ -257,12 +293,17 @@ class EditUsuarios extends React.Component {
             <EditPage title={`${id ? 'Editar' : 'Crear'} Usuario`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
                 <div>
                     <FormValidate className="mt-4 form-horizontal">
-                        <FormGroup className="row">
-                            <Label className="col-sm-3">Usuario</Label>
-                            <div className="col-sm-5">
-                                <Input onChange={this.onChange('username')} value={data.username} />
-                            </div>
-                        </FormGroup>
+                        <FormElementValidate
+                            label={{text:'Usuario'}}
+                            input={{
+                                name : 'username',
+                                element: <Input onChange={this.onChange('username')} value={data.username} />
+                            }}
+                            validator={{
+                                validationRules: {required:true},
+                                validationMessages: {required:"El campo es requerido"}
+                            }}
+                        />
                         <EditPersona data={this.state.data.persona} readOnly={this.state.data.readOnlyPersona} onChange={this.onChangePersona} />
                         <FormGroup className="row">
                             <Label className="col-sm-3">Contraseña</Label>
@@ -329,7 +370,7 @@ class EditUsuarios extends React.Component {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    { data.roles_cooperativa.map((r, i) => <RowCooperativa {...r} key={i} delete={() => this.deleteCooperativa(i)} />) }
+                                                    { data.roles.map((r, i) => <RowCooperativa {...r} key={i} delete={() => this.deleteRol(i)} />) }
                                                 </tbody>
                                             </table>
                                         </div>
@@ -338,20 +379,19 @@ class EditUsuarios extends React.Component {
                                 <FormGroup className="row">
                                     <div className="col-sm-3"></div>
                                     <div className="col-sm-3">
-                                        <Button size="md">
-                                            Subir Documentación
-                                        </Button>
+                                        <Input id="documentation" type="file" style={{display:'none'}} onChange={this._onChangeFile}/>
+                                        <Button type="success" style={{marginRight:5}} onClick={this.UploadFile}>Subir Documentación</Button>
                                     </div>
                                     <div className="col-sm-3" style={{marginLeft: 5}}>
-                                        <Button size="md">
-                                            Descargar Documentación
-                                        </Button>
+                                        { this.state.data.documentacion_url &&
+                                            <Button type="success" style={{marginLeft:5}} onClick={() => this.DownloadFile(this.state.data.documentacion_url)} disabled={this.canDownload(this.state.data.documentacion_url)}>Ver Documentación</Button>
+                                        }
                                     </div>
                                 </FormGroup>
                             </div>
                         }
                         <AddRol guardar={this.agregarRol} {...this.state.modal_rol} toggle={this.toggleModal} />
-                        <AddRolCooperativa guardar={this.agregarCooperativa} {...this.state.modal_cooperativa} toggle={this.toggleModalCooperativa} />
+                        <AddRolCooperativa guardar={this.agregarRol} {...this.state.modal_cooperativa} toggle={this.toggleModalCooperativa} />
                     </FormValidate>
                 </div>
             </EditPage>
