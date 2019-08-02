@@ -3,6 +3,8 @@ import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, B
 import moment from 'moment'
 import { baseurl } from './../../utils/url'
 
+const style_text_center = { textAlign: 'center' }
+
 class ReporteTasasContingenciaGeneral extends React.Component {
     state = {
         fecha_inicio : moment().format('YYYY-MM-DD'),
@@ -96,7 +98,10 @@ class ReporteTasasContingenciaGeneral extends React.Component {
                                 <ListPage
                                     searchable={false}
                                     
-                                    fieldNames={['Fecha', 'Concepto', 'Cooperativa', 'Cantidad', 'Total', 'Cantidad', 'Total', 'Cantidad', 'Total']}
+                                    head={[
+                                        [{colSpan:3,title:''},{colspan:2,title:'Generado',style:style_text_center},{colspan:2,title:'Asignado',style:style_text_center},{colspan:2,title:'Saldo',style:style_text_center}],
+                                        ['Fecha', 'Concepto', 'Cooperativa', 'Cantidad', 'Total', 'Cantidad', 'Total', 'Cantidad', 'Total']
+                                    ]}
                                     fields={['', '', '', '', '', '', '' , '', '']}
 
                                     url='recaudaciones/tasas_general'

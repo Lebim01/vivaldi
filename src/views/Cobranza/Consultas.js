@@ -97,7 +97,9 @@ class Reporte1 extends React.Component {
                 <ListPage
                     searchable={false}
 
-                    fieldNames={['Cooperativa', 'Valor', 'Dia Corresponde', 'Localidad', 'Estado']}
+                    fieldNames={[
+                        ['Cooperativa', 'Valor', 'Dia Corresponde', 'Localidad', 'Estado']
+                    ]}
                     fields={['', '', '', '', '', '']}
 
                     //url del endpoint
@@ -179,7 +181,9 @@ class Reporte2 extends React.Component {
                 <ListPage
                     searchable={false}
 
-                    fieldNames={['Cooperativa', 'Valor', 'Día Correspondente', 'Localidad']}
+                    fieldNames={[
+                        ['Cooperativa', 'Valor', 'Día Correspondente', 'Localidad']
+                    ]}
                     fields={['', '', '', '', '', '']}
 
                     //url del endpoint

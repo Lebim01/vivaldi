@@ -73,7 +73,7 @@ class ListPage extends React.Component {
     }
 
     render(){
-        const { title, searchPlaceholder, fieldNames, fields, searchable } = this.props
+        const { title, searchPlaceholder, fieldNames, fields, searchable, head } = this.props
         const { filtered } = this.state
         return (
             <div>
@@ -96,9 +96,36 @@ class ListPage extends React.Component {
                         <div className="table-responsive">
                             <table className="table table-hover table-striped">
                                 <thead>
-                                    <tr>
-                                        {fieldNames.map((fieldName, i) => <th key={i} scope="col">{fieldName}</th>)}
-                                    </tr>
+                                    { (fieldNames.length > 0) &&
+                                        <tr>
+                                            {fieldNames.map((fieldName, i) => <th key={i} scope="col">{fieldName}</th>)}
+                                        </tr>
+                                    }
+                                    { (head.length > 0) &&
+                                        head.map((r,i) => {
+                                            let row = head[i]
+                                            return (
+                                                <tr key={i}>
+                                                    {row.map((col, j) => {
+                                                        let _title = '', 
+                                                            _props = {}
+
+                                                        if(typeof col === 'string'){
+                                                            _title = col
+                                                        }else{
+                                                            const { title, ...props } = col
+                                                            _title = title
+                                                            _props = props
+                                                        }
+
+                                                        return (
+                                                            <th key={j} {..._props} scope="col">{_title}</th>
+                                                        )
+                                                    })}
+                                                </tr>
+                                            )
+                                        })
+                                    }
                                 </thead>
                                 <tbody>
                                     {filtered.map((record, i) => <RecordRow record={record} fields={fields} key={i} onDoubleClick={() => this.onRowDoubleClick(record.id)} />)}
@@ -114,7 +141,9 @@ class ListPage extends React.Component {
 
 ListPage.defaultProps = {
     parameters : {},
-    redirect: true
+    redirect: true,
+    fieldNames : [],
+    head : []
 }
 
 export default ListPage
