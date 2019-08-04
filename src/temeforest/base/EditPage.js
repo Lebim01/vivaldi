@@ -111,19 +111,20 @@ class EditPage extends React.Component {
     onSubmit(e){
         e.preventDefault();
         const { isFormValidationErrors, submitted } = this.state;
-        if (!isFormValidationErrors && submitted){
+        const { noValidate } = this.props
+        if ((!isFormValidationErrors && submitted) || noValidate){
             this.confirmSave()
         }
     }
 
     render(){
-        const { id, title, btnDelete, btnSave } = this.props
+        const { id, title, btnDelete, btnSave, noValidate } = this.props
 
         const _btnSave = {
             ...defaultBtnSave,
             ...btnSave,
             ...{
-                disabled : this.state.isFormValidationErrors === true
+                disabled : this.state.isFormValidationErrors === true && !noValidate
             }
         }
         const _btnDelete = {
@@ -177,7 +178,8 @@ EditPage.defaultProps = {
     urlFront : '',
     endpoint: '',
     btnSave : {},
-    btnDelete : {}
+    btnDelete : {},
+    noValidate : false
 }
 
 export default EditPage
