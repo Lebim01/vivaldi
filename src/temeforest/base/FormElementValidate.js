@@ -49,15 +49,17 @@ class FormElementValidate extends React.Component {
                             </Label>
                             <div className="col-sm-5">
                                 {_input.element}
-                                <Validator 
-                                    isValidationError={onChangeFlagValidate}
-                                    isFormSubmitted={submitted}
-                                    reference={{
-                                        [_input.name] : _input.element.props.value,
-                                        ...validator.reference
-                                    }}
-                                    {...validator}
-                                />
+                                { validator &&
+                                    <Validator 
+                                        isValidationError={onChangeFlagValidate}
+                                        isFormSubmitted={submitted}
+                                        reference={{
+                                            [_input.name] : _input.element.props.value,
+                                            ...validator.reference
+                                        }}
+                                        {...validator}
+                                    />
+                                }
                             </div>
                             { _input.button &&
                                 <div className="col-sm-3">

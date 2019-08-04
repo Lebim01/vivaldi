@@ -105,9 +105,6 @@ class ReporteTasasContingenciaGeneral extends React.Component {
                                     fields={['', '', '', '', '', '', '' , '', '']}
 
                                     url='recaudaciones/tasas_general'
-
-                                    menu='recaudaciones'
-                                    submenu='venta-tasas'
                                     parameters={this.state}
                                     
                                     history={this.props.history}
