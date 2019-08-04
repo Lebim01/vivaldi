@@ -235,7 +235,7 @@ class CrearFrecuenciaLote extends React.Component {
                     <Col xs="12" md="12">
                         <Card>
                             <CardBody>
-                                <CardTitle>Crear Frecuencias por Lote</CardTitle>
+                                <CardTitle>Creación Masiva de Frecuencias</CardTitle>
                                 <CardBody>
                                     <MainView {...data} onChange={this.onChange} />
                                 </CardBody>
