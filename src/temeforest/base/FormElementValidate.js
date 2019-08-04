@@ -44,7 +44,7 @@ class FormElementValidate extends React.Component {
                             <Label className="col-sm-3">
                                 {_label.text} 
                                 <span style={styles.required}>
-                                    {validator.validationRules.required ? '*' : ''}
+                                    {validator.validationRules && validator.validationRules.required ? '*' : ''}
                                 </span>
                             </Label>
                             <div className="col-sm-5">

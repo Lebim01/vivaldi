@@ -122,7 +122,7 @@ const routes = [
   { path: '/operaciones/frecuencias', name: 'Frecuencias', component: Frecuencias, exact: true },
   { path: '/operaciones/frecuencias/edit', name: 'Crear/Editar Frecuencias', component: EditFrecuencias, exact: true },
   { path: '/operaciones/frecuencias-extra', name: 'Jumbotrons', component: Page404 },
-  { path: '/operaciones/frecuencias-lote', name: 'Crear Frecuencias por Lote', component: CrearFrecuenciaLote },
+  { path: '/operaciones/frecuencias-lote', name: 'Creación Masiva de Frecuencias', component: CrearFrecuenciaLote },
   { path: '/operaciones/tasas-contingencia', name: 'Navbars', component: Page404 },
   { path: '/operaciones/consulta-tasa', name: 'Navs', component: Page404 },
 
