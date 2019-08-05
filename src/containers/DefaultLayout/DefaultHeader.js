@@ -65,7 +65,7 @@ class DefaultHeader extends Component {
             <!-- End Logo -->
             <!-- ============================================================== -->
             */}
-            <div className="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin1">
+            <div className="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin6">
                 {/*
                 <!-- ============================================================== -->
                 <!-- toggle and nav items -->

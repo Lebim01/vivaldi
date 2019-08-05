@@ -17,7 +17,7 @@ class MenuItem extends React.Component {
         else if(level == 2) level_name = 'second'
 
         return (
-            <NavItem className="sidebar-item">
+            <NavItem className={`sidebar-item`}>
                 <NavLink className={`sidebar-link waves-effect waves-dark ${children?'has-arrow':''}`} aria-expanded="false" href={url}>
                     { icon && <i className={icon}></i> }
                     { children ? <span className="hide-menu"> {name} </span> : name }
@@ -43,9 +43,9 @@ class Aside extends React.Component {
         return (
             <aside className="left-sidebar" data-sidebarbg="skin6">
                 {/*<!-- Sidebar scroll-->*/}
-                <div className="scroll-sidebar">
+                <div className="scroll-sidebar ps-container ps-theme-default ps-active-y">
                     {/*<!-- Sidebar navigation-->*/}
-                    <Nav tabs>
+                    <Nav>
                         <nav className="sidebar-nav">
                             <ul id="sidebarnav" className="in">
                                 { navConfig.items.map((menu, i) =>

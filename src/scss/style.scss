@@ -12,33 +12,3 @@
 
 // ie fixes
 @import "ie-fix";
-
-
-#main-wrapper[data-layout=horizontal] .left-sidebar .scroll-sidebar {
-    height : auto;
-}
-#main-wrapper[data-layout=horizontal] .sidebar-nav #sidebarnav .badge, #main-wrapper[data-layout=horizontal] .sidebar-nav #sidebarnav .nav-small-cap, #main-wrapper[data-layout=horizontal] .sidebar-nav #sidebarnav .sidebar-footer, #main-wrapper[data-layout=horizontal] .sidebar-nav #sidebarnav .user-pro, #main-wrapper[data-layout=horizontal] .sidebar-nav #sidebarnav>.sidebar-item>.has-arrow:after {
-    display: unset;
-}
-.sidebar-nav .has-arrow::after {
-    position: unset;
-}
-main {
-    min-height: 80vh;
-}
-.app {
-    min-height: 100vh;
-}
-.pointer {
-    cursor: pointer;
-}
-
-input[type=date]::-webkit-clear-button {
-    display: none;
-}
-input[type=time]::-webkit-clear-button {
-    display: none;
-}
-input[type=time].no-ampm::-webkit-datetime-edit-ampm-field {
-    display: none;
-}

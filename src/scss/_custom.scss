@@ -2,3 +2,25 @@
 .pull-right {
     float: right;
 }
+.sidebar-nav .has-arrow::after {
+    position: unset;
+}
+main {
+    min-height: 80vh;
+}
+.app {
+    min-height: 100vh;
+}
+.pointer {
+    cursor: pointer;
+}
+
+input[type=date]::-webkit-clear-button {
+    display: none;
+}
+input[type=time]::-webkit-clear-button {
+    display: none;
+}
+input[type=time].no-ampm::-webkit-datetime-edit-ampm-field {
+    display: none;
+}

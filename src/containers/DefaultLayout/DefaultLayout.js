@@ -47,7 +47,7 @@ class DefaultLayout extends Component {
         const { auth } = this.props
         return (
             <div className="app">
-                <header className="topbar" data-navbarbg="skin1">
+                <header className="topbar" data-navbarbg="skin6">
                     <Suspense  fallback={this.loading()}>
                         <DefaultHeader onLogout={e=>this.signOut(e)}/>
                     </Suspense>
