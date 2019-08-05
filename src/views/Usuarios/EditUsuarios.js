@@ -61,7 +61,7 @@ class RowCooperativa extends React.Component {
                     </Button>{' '}
                     {this.props.cooperativa_nombre}
                 </td>
-                <td>{this.props.rol_nombre}</td>
+                <td>{this.props.tipo_usuario_puntoventa_nombre}</td>
             </tr>
         )
     }
@@ -101,6 +101,9 @@ class EditUsuarios extends React.Component {
         this.onChangeFile = this.onChangeFile.bind(this)
         this.addCooperativa = this.addCooperativa.bind(this)
         this.onChangePersona = this.onChangePersona.bind(this)
+        this.deleteRolCooperativa = this.deleteRolCooperativa.bind(this)
+        this.agregarRolCooperativa = this.agregarRolCooperativa.bind(this)
+        this.toggleModalCooperativa = this.toggleModalCooperativa.bind(this)
     }
 
     componentDidMount(){
@@ -201,6 +204,7 @@ class EditUsuarios extends React.Component {
         })
     }
 
+    // rol
     toggleModal = (show = null) => {
         this.setState({
             modal_rol : {
@@ -230,6 +234,7 @@ class EditUsuarios extends React.Component {
         }
     }
 
+    // cooperativa
     addCooperativa(){
         this.setState({
             modal_cooperativa : {
@@ -239,12 +244,33 @@ class EditUsuarios extends React.Component {
         })
     }
 
-    toggleModalCooperativa = () => {
+    toggleModalCooperativa = (show = null) => {
         let _modal = this.state.modal_cooperativa
         _modal.show = !_modal.show
         this.setState({
-            modal_cooperativa : _modal
+            modal_cooperativa : _modal,
+            show : show !== null ? show : !this.state.modal_cooperativa.show
         })
+    }
+
+    agregarRolCooperativa(data){
+        let roles = this.state.data.roles_cooperativa
+        roles.push(data)
+        this.onChangeData('roles_cooperativa', roles)
+        this.toggleModalCooperativa(false)
+    }
+
+    deleteRolCooperativa = async (index) => {
+        const {value} = await Swal.fire({
+            title: 'Confirmar',
+            text : '¿Seguro de borrar?',
+            showCancelButton: true,
+        })
+        if(value){
+            let roles = this.state.data.roles_cooperativa
+            roles.splice(index, 1)
+            this.onChangeData('roles_cooperativa', roles)
+        }
     }
 
     onChangeFile = async (value) => {
@@ -304,7 +330,7 @@ class EditUsuarios extends React.Component {
                                 validationMessages: {required:"El campo es requerido"}
                             }}
                         />
-                        <EditPersona data={this.state.data.persona} readOnly={this.state.data.readOnlyPersona} onChange={this.onChangePersona} />
+                        <EditPersona lengthCedula={10} data={this.state.data.persona} readOnly={this.state.data.readOnlyPersona} onChange={this.onChangePersona} />
                         <FormGroup className="row">
                             <Label className="col-sm-3">Contraseña</Label>
                             <div className="col-sm-5">
@@ -370,7 +396,7 @@ class EditUsuarios extends React.Component {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    { data.roles.map((r, i) => <RowCooperativa {...r} key={i} delete={() => this.deleteRol(i)} />) }
+                                                    { data.roles_cooperativa.map((r, i) => <RowCooperativa {...r} key={i} delete={() => this.deleteRolCooperativa(i)} />) }
                                                 </tbody>
                                             </table>
                                         </div>
@@ -391,7 +417,7 @@ class EditUsuarios extends React.Component {
                             </div>
                         }
                         <AddRol guardar={this.agregarRol} {...this.state.modal_rol} toggle={this.toggleModal} />
-                        <AddRolCooperativa guardar={this.agregarRol} {...this.state.modal_cooperativa} toggle={this.toggleModalCooperativa} />
+                        <AddRolCooperativa guardar={this.agregarRolCooperativa} {...this.state.modal_cooperativa} toggle={this.toggleModalCooperativa} />
                     </FormValidate>
                 </div>
             </EditPage>

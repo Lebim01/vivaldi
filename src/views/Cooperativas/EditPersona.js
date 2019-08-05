@@ -48,8 +48,8 @@ class EditPersona extends React.Component {
                                         element: <Input value={data.identificacion} onChange={this.onChange('identificacion')} /> 
                                     }}
                                     validator={{
-                                        validationRules: {required:true, number : true, minLength:13, maxLength:13},
-                                        validationMessages: {required:"El campo es requerido", minLength:'El valor debe ser de 13 dígitos', maxLength:'El valor debe ser de 13 dígitos', number : 'Solo se aceptan números'}
+                                        validationRules: {required:true, number : true, minLength:this.props.lengthCedula, maxLength:this.props.lengthCedula},
+                                        validationMessages: {required:"El campo es requerido", minLength:`El valor debe ser de ${this.props.lengthCedula} dígitos`, maxLength:`El valor debe ser de ${this.props.lengthCedula} dígitos`, number : 'Solo se aceptan números'}
                                     }}
                                 />
                                 <FormGroup className="row">
@@ -71,7 +71,7 @@ class EditPersona extends React.Component {
                                         element: <Input placeholder="example@gmail.com" readOnly={readOnly && !data.id} value={data.correo} onChange={this.onChange('correo')} />
                                     }}
                                     validator={{
-                                        validationRules: { email: true },
+                                        validationRules: { required : true, email: true },
                                         validationMessages : { email: "El valor debe ser un correo válido" }
                                     }}
                                 />
@@ -85,7 +85,8 @@ class EditPersona extends React.Component {
 }
 
 EditPersona.defaultProps = {
-    readOnly : false
+    readOnly : false,
+    lengthCedula : 13
 }
 
 export default EditPersona

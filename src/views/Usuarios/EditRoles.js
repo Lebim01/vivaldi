@@ -50,6 +50,13 @@ class _Row extends React.Component {
 }
 
 class MainView extends React.Component {
+    
+    state = {
+        all_add : false,
+        all_edit : false,
+        all_view : false,
+        all_delete : false
+    }
 
     constructor(props){
         super(props)
@@ -100,13 +107,28 @@ class MainView extends React.Component {
                                         <td>Seleccionar todo</td>
                                         <td className="text-center">
                                             <div className="custom-control custom-checkbox">
-                                                <input type="checkbox" className="custom-control-input" name={`all_view`} id={`all_view`} checked={all_view} />
+                                                <input type="checkbox" className="custom-control-input" name={`all_view`} id={`all_view`} value={this.props.all_view} onChange={this.props.onChangeSelectAll('view')} />
                                                 <Label onlyClassName="custom-control-label" htmlFor={`all_view`}></Label>
                                             </div>
                                         </td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td className="text-center">
+                                            <div className="custom-control custom-checkbox">
+                                                <input type="checkbox" className="custom-control-input" name={`all_add`} id={`all_add`} value={this.props.all_add} onChange={this.props.onChangeSelectAll('add')} />
+                                                <Label onlyClassName="custom-control-label" htmlFor={`all_add`}></Label>
+                                            </div>
+                                        </td>
+                                        <td className="text-center">
+                                            <div className="custom-control custom-checkbox">
+                                                <input type="checkbox" className="custom-control-input" name={`all_edit`} id={`all_edit`} value={this.props.all_edit} onChange={this.props.onChangeSelectAll('edit')} />
+                                                <Label onlyClassName="custom-control-label" htmlFor={`all_edit`}></Label>
+                                            </div>
+                                        </td>
+                                        <td className="text-center">
+                                            <div className="custom-control custom-checkbox">
+                                                <input type="checkbox" className="custom-control-input" name={`all_delete`} id={`all_delete`} value={this.props.all_delete} onChange={this.props.onChangeSelectAll('delete')} />
+                                                <Label onlyClassName="custom-control-label" htmlFor={`all_delete`}></Label>
+                                            </div>
+                                        </td>
                                     </tr>
                                 </thead>
                             </table>
@@ -263,11 +285,29 @@ class EditRoles extends React.Component {
         })
     }
 
+    onChangeSelectAll = type => (e) => {
+        let value = e.target.value
+        this.selectAll(type)
+    }
+
+    selectAll(type){
+        let data = this.state.data
+        let permissions = data.permissions
+
+        for(let i in permissions){
+
+        }
+        data.permissions = permissions
+        this.setState({
+            data
+        })
+    }
+
     render(){
         const { data, categories, id } = this.state
         return (
             <EditPage noValidate title={`${id ? 'Editar' : 'Crear'} Rol`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
-                <MainView {...data} categories={categories} onChange={this.onChange} togglePermission={this.togglePermission} />
+                <MainView {...data} categories={categories} onChange={this.onChange} togglePermission={this.togglePermission} onChangeSelectAll={this.onChangeSelectAll} />
             </EditPage>
         )
     }

@@ -46,6 +46,7 @@ const EditSolicitudFrecuencia = React.lazy(() => import('./views/Operaciones/Sol
 const SolicitudConductores = React.lazy(() => import('./views/Operaciones/Solicitudes/SolicitudConductores'))
 const EditSolicitudConductor = React.lazy(() => import('./views/Operaciones/Solicitudes/EditSolicitudConductor'))
 const SolicitudTasaContingencia = React.lazy(() => import('./views/Operaciones/Solicitudes/SolicitudTasaContingencia'))
+const EditSolicitudTasaContingencia = React.lazy(() => import('./views/Operaciones/Solicitudes/EditSolicitudTasaContingencia'))
 /** RECAUDACIONES */
 const PanelRecaudaciones = React.lazy(() => import('./views/Recaudaciones/PanelRecaudaciones'))
 const TasasContingencia = React.lazy(() => import('./views/Recaudaciones/TasasContingencia'))
@@ -136,6 +137,7 @@ const routes = [
   { path: '/operaciones/solicitudes/conductores', name: 'Solicutud de Conductores', component: SolicitudConductores, exact: true },
   { path: '/operaciones/solicitudes/conductores/edit', name: 'Crear/Editar Solicutud de Conductores', component: EditSolicitudConductor, exact: true },
   { path: '/operaciones/solicitudes/tasas-contingencia', name: 'Solicitud de Tasas de Contingencia', component: SolicitudTasaContingencia, exact: true },
+  { path: '/operaciones/solicitudes/tasas-contingencia/edit', name: 'Crear/Editar Solicitud de Tasas de Contingencia', component: EditSolicitudTasaContingencia, exact: true },
 
   { path: '/facturacion/clientes', name: 'Buttons', component: Page404 },
   { path: '/facturacion/documentos', name: 'Button Dropdowns', component: Page404 },

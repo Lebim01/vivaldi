@@ -17,11 +17,11 @@ class AddRolCooperativa extends React.Component {
         labelName: 'nombre',
         valueName: 'id' 
     }
-    optionsRol = {
-        url : `${baseurl}/rol/`,
-        labelName : 'name',
-        valueName : 'id'
-    }
+    optionsRol = [
+        ...this.seleccione,
+        { value : 1, label : 'Boletero' },
+        { value : 2, label : 'Supervisor' },
+    ]
 
     constructor(props){
         super(props)
@@ -46,9 +46,9 @@ class AddRolCooperativa extends React.Component {
     }
 
     async getRolName(id){
-        const { data } = await axios.get(`${baseurl}/rol/${id}`)
-        if(data.id){
-            return data.name
+        for(let i in this.optionsRol){
+            if(Number(this.optionsRol[i].value) === Number(id))
+                return this.optionsRol[i].label
         }
         return ''
     }
@@ -62,12 +62,9 @@ class AddRolCooperativa extends React.Component {
             })
             data.cooperativa_nombre = await this.getCooperativaName(e.target.value)
         }
-        if (name === 'rol') {
-            this.setState({
-                loading: true
-            })
-            data.id = e.target.value
-            data.rol_nombre = await this.getRolName(e.target.value)
+        if (name === 'tipo_usuario_puntoventa') {
+            data.tipo_usuario_puntoventa = e.target.value
+            data.tipo_usuario_puntoventa_nombre = await this.getRolName(data.tipo_usuario_puntoventa)
         }
         this.setState({
             data,
@@ -76,7 +73,7 @@ class AddRolCooperativa extends React.Component {
     }
 
     guardar(){
-        const required = ['cooperativa', 'rol']
+        const required = ['cooperativa', 'tipo_usuario_puntoventa']
         let errors = []
         for(let i in required){
             if(!this.state.data[required[i]]){
@@ -113,7 +110,7 @@ class AddRolCooperativa extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-6">Rol</Label>
                             <div className="col-sm-6">
-                                <Select asyncOptions={this.optionsRol} onChange={this.onChange('rol')} value={this.state.data.rol} error={errors.includes('rol')} />
+                                <Select options={this.optionsRol} onChange={this.onChange('tipo_usuario_puntoventa')} value={this.state.data.tipo_usuario_puntoventa} error={errors.includes('tipo_usuario_puntoventa')} />
                             </div>
                         </FormGroup>
                     </form>

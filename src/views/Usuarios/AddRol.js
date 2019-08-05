@@ -8,6 +8,7 @@ class AddRol extends React.Component {
 
     seleccione = [{label:'Seleccione', value:''}]
     state = {
+        loading: false,
         errors : [],
         data : {}
     }
@@ -41,11 +42,15 @@ class AddRol extends React.Component {
         let data = this.state.data
         data[name] = e.target.value
         if (name === 'rol') {
+            this.setState({
+                loading: true
+            })
             data.id = e.target.value
             data.name = await this.getRolName(e.target.value)
         }
         this.setState({
-            data
+            data,
+            loading: false
         })
     }
 
@@ -87,7 +92,7 @@ class AddRol extends React.Component {
                     </form>
                 </ModalBody>
                 <ModalFooter>
-                    <Button type="success" onClick={this.guardar}>Aceptar</Button>{' '}
+                    <Button type="success" onClick={this.guardar} disabled={this.state.loading}>Aceptar</Button>{' '}
                     <Button type="secondary" onClick={this.toggle}>Cancelar</Button>
                 </ModalFooter>
             </Modal>
