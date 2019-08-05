@@ -186,7 +186,7 @@ class EditUsuarios extends React.Component {
             if(!success){
                 this.onChangeData('persona', { identificacion: data.identificacion })
 
-                if(data.identificacion.length === 13){
+                if(data.identificacion.length === 10){
                     this.editPersona({ identificacion: data.identificacion })
                 }else{
                     this.readOnlyPersona()

@@ -32,9 +32,9 @@ class DefaultHeader extends Component {
                         <!--You can put here icon as well // <i className="wi wi-sunset"></i> //-->
                         <!-- Dark Logo icon -->
                         */}
-                        <img src="../../assets/images/logo-icon.png" alt="homepage" className="dark-logo" />
+                        <img src="../../assets/img/LOGO-ICONpng" alt="homepage" className="dark-logo" height="20" />
                         {/*<!-- Light Logo icon -->*/}
-                        <img src="../../assets/images/logo-light-icon.png" alt="homepage" className="light-logo" />
+                        <img src="../../assets/img/LOGO-ICON.png" alt="homepage" className="light-logo" height="20" />
                     </b>
                     {/*
                     <!--End Logo icon -->
@@ -42,9 +42,9 @@ class DefaultHeader extends Component {
                     */}
                     <span className="logo-text">
                         {/*<!-- dark Logo text -->*/}
-                        <img src="../../assets/images/logo-text.png" alt="homepage" className="dark-logo" />
+                        <img src="../../assets/img/LOGO-TEXTO.png" alt="homepage" className="dark-logo" height="20" />
                         {/*<!-- Light Logo text -->*/}
-                        <img src="../../assets/images/logo-light-text.png" className="light-logo" alt="homepage" />
+                        <img src="../../assets/img/LOGO-TEXTO.png" className="light-logo" alt="homepage" height="20" />
                     </span>
                 </a>
                 {/*
