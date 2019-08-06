@@ -6,7 +6,7 @@ export default {
       children : [
         {
           name : 'Localidades',
-          url : '/#/localidades/localidades'
+          url : '/#/localidades/localidades',
         },
         {
           name : 'Silos',
@@ -84,37 +84,30 @@ export default {
       children: [
         {
           name: 'Rutas',
-          url: '/#/operaciones/rutas',
-          icon: 'icon-puzzle',
+          url: '/#/operaciones/rutas'
         },
         {
           name: 'Viajes',
-          url: '/#/operaciones/viajes',
-          icon: 'icon-puzzle',
+          url: '/#/operaciones/viajes'
         },
         {
           name: 'Viajes Planificados',
-          url: '/#/operaciones/viajes-planificados',
-          icon: 'icon-puzzle',
+          url: '/#/operaciones/viajes-planificados'
         },
         {
           name: 'Frecuencias',
-          url: '/#/operaciones/frecuencias',
-          icon: 'icon-puzzle',
+          url: '/#/operaciones/frecuencias'
         },
         {
           name: 'Frecuencias por lote',
           url: '/#/operaciones/frecuencias-lote',
-          icon: 'icon-puzzle',
         },
         {
           name: 'Consulta Tasa',
           url: '/#/operaciones/consulta-tasa',
-          icon: 'icon-puzzle',
         },
         {
           name: 'Solicitudes',
-          icon: 'icon-puzzle',
           children : [
             {
               name : 'Usuario',
@@ -150,13 +143,11 @@ export default {
       children: [
         {
           name: 'Clientes',
-          url: '/#/facturacion/clientes',
-          icon: 'icon-cursor',
+          url: '/#/facturacion/clientes'
         },
         {
           name: 'Documentos',
-          url: '/#/facturacion/documentos',
-          icon: 'icon-cursor',
+          url: '/#/facturacion/documentos'
         },
       ],
     },

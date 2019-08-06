@@ -35,13 +35,15 @@ class MenuItem extends React.Component {
     render(){
         const { name, icon, children, badge, url, level } = this.props
 
+        let margin = (level-1) * 35
         let level_name = ''
-        if(level == 1) level_name = 'first'
-        else if(level == 2) level_name = 'second'
+        if(level === 1) level_name = 'first'
+        else if(level === 2) level_name = 'second'
+        else if(level === 3) level_name = 'third'
 
         return (
             <NavItem className={`sidebar-item`}>
-                <NavLink className={`sidebar-link waves-effect waves-dark ${children?'has-arrow':''}`} aria-expanded="false" href={url} onClick={this.onClick}>
+                <NavLink className={`sidebar-link waves-effect waves-dark ${children?'has-arrow':''}`} aria-expanded="false" href={url} onClick={this.onClick} style={{marginLeft: margin}}>
                     { icon && <i className={icon}></i> }
                     { children ? <span className="hide-menu"> {name} </span> : name }
                     { badge && <span class={`badge badge-pill badge-${badge.variant} float-right`}>{badge.text}</span> }

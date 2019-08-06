@@ -330,6 +330,13 @@ class EditUsuarios extends React.Component {
                                 validationMessages: {required:"El campo es requerido"}
                             }}
                         />
+                        <FormElementValidate
+                            label={{text:'Contraseña'}}
+                            input={{
+                                name : 'password',
+                                element: <Input onChange={this.onChange('password')} value={data.password} />
+                            }}
+                        />
                         <EditPersona lengthCedula={10} data={this.state.data.persona} readOnly={this.state.data.readOnlyPersona} onChange={this.onChangePersona} />
                         <FormGroup className="row">
                             <Label className="col-sm-3">Contraseña</Label>
