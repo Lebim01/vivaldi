@@ -14,11 +14,8 @@ class EditPersona extends React.Component {
     }
     
     onChange = name => (e) => {
-        let data = this.state.data
+        let { data } = this.props
         data[name] = e.target.value
-        this.setState({
-            data
-        })
 
         if(this.props.onChange){
             this.props.onChange(data)

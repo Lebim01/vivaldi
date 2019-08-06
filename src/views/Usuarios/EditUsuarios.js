@@ -69,6 +69,7 @@ class RowCooperativa extends React.Component {
 
 class EditUsuarios extends React.Component {
 
+    _data = {}
     state = {
         id : null,
         data : {
@@ -84,7 +85,8 @@ class EditUsuarios extends React.Component {
         },
         modal_cooperativa : {
             show : false
-        }
+        },
+        reset : false
     }
 
     tipos = [
@@ -115,6 +117,7 @@ class EditUsuarios extends React.Component {
 
     getData = async (id) => {
         const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/`)
+        this._data = data
         this.setState({
             id,
             data
@@ -181,6 +184,7 @@ class EditUsuarios extends React.Component {
 
     async onChangePersona(data){
         this.onChangeData('persona', data)
+
         if(data.identificacion !== this.state.data.persona.identificacion){
             let success = await this.searchPersona(data.identificacion)
             if(!success){
@@ -312,9 +316,41 @@ class EditUsuarios extends React.Component {
         return false
     }
 
+    resetPassword(){
+        console.log(this._data)
+        Swal.fire({
+            title: 'Confirmar Restablecer contraseña',
+            text : '¿Seguro de restablecer?',
+            showCancelButton: true,
+            showLoaderOnConfirm: true,
+            preConfirm: () => {
+                return axios.post(`${baseurl}/password_reset/`, { email: this._data.persona.correo })
+                .then(response => {
+                    if (response.status !== 200 && response.status !== 201) {
+                        throw new Error(response.statusText)
+                    }
+                    return response
+                })
+                .catch(error => {
+                    Swal.showValidationMessage(
+                        `Petición fallida: ${error}`
+                    )
+                })
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+        }).then((result) => {
+            if (result.value) {
+                Swal.fire({
+                    text : `Contraseña restablecida`,
+                    type : 'success'
+                })
+            }
+        })
+    }
 
     render(){
         const { data, id } = this.state
+        
         return (
             <EditPage title={`${id ? 'Editar' : 'Crear'} Usuario`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
                 <div>
@@ -334,7 +370,12 @@ class EditUsuarios extends React.Component {
                             label={{text:'Contraseña'}}
                             input={{
                                 name : 'password',
-                                element: <Input onChange={this.onChange('password')} value={data.password} />
+                                element: (
+                                    <div>
+                                        <Input onChange={this.onChange('password')} value={data.password} />
+                                        { id && <Button onClick={this.resetPassword.bind(this)} disabled={!id || this.state.reset || !this.state.data.persona.correo}>Restablecer contraseña</Button> }
+                                    </div>
+                                )
                             }}
                         />
                         <EditPersona lengthCedula={10} data={this.state.data.persona} readOnly={this.state.data.readOnlyPersona} onChange={this.onChangePersona} />
