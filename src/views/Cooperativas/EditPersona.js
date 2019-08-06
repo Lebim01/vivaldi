@@ -1,12 +1,14 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
 import { FormGroup, Input, Label, FormElementValidate, FormValidate } from './../../temeforest'
-import { baseurl, getParameter } from './../../utils/url'
+import { baseurl } from './../../utils/url'
 import axios from 'axios'
 
 class EditPersona extends React.Component {
 
-    state = {data:{}}
+    state = {
+        data:{}
+    }
 
     constructor(props){
         super(props)
@@ -14,11 +16,28 @@ class EditPersona extends React.Component {
     }
     
     onChange = name => (e) => {
-        let { data } = this.props
-        data[name] = e.target.value
+        let { data } = this.state
 
         if(this.props.onChange){
-            this.props.onChange(data)
+            this.props.onChange({
+                ...data,
+                [name] : e.target.value
+            })
+        }
+
+        this.setState({
+            data : {
+                ...data,
+                [name] : e.target.value
+            }
+        })
+    }
+
+    componentWillReceiveProps(props){
+        if(props.readOnly !== this.props.readOnly){
+            this.setState({
+                ...props
+            })
         }
     }
 
@@ -31,7 +50,8 @@ class EditPersona extends React.Component {
     }
 
     render(){
-        const { data, readOnly } = this.props
+        const { readOnly } = this.props
+        const { data } = this.state
         return (
             <div className="animated fadeIn">
                 <Row>

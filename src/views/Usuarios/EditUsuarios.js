@@ -183,18 +183,17 @@ class EditUsuarios extends React.Component {
     }
 
     async onChangePersona(data){
-        this.onChangeData('persona', data)
-
         if(data.identificacion !== this.state.data.persona.identificacion){
-            let success = await this.searchPersona(data.identificacion)
-            if(!success){
-                this.onChangeData('persona', { identificacion: data.identificacion })
-
-                if(data.identificacion.length === 10){
-                    this.editPersona({ identificacion: data.identificacion })
-                }else{
+            if(data.identificacion.length === 10){
+                let success = await this.searchPersona(data.identificacion)
+                if(!success){
+                    this.onChangeData('persona', { identificacion: data.identificacion })
                     this.readOnlyPersona()
+                }else{
+                    this.editPersona({ identificacion: data.identificacion })
                 }
+            }else{
+                this.readOnlyPersona()
             }
         }
     }
@@ -317,7 +316,6 @@ class EditUsuarios extends React.Component {
     }
 
     resetPassword(){
-        console.log(this._data)
         Swal.fire({
             title: 'Confirmar Restablecer contraseña',
             text : '¿Seguro de restablecer?',
