@@ -36,6 +36,7 @@
     "react-dom": "^16.8.6",
     "react-dual-listbox": "^2.0.0",
     "react-forms-validator": "https://github.com/Lebim01/react-forms-validator.git",
+    "react-perfect-scrollbar": "^1.5.3",
     "react-router-config": "^5.0.0",
     "react-router-dom": "^5.0.0",
     "react-select": "^3.0.4",

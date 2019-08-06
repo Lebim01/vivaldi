@@ -32,9 +32,9 @@ class DefaultHeader extends Component {
                         <!--You can put here icon as well // <i className="wi wi-sunset"></i> //-->
                         <!-- Dark Logo icon -->
                         */}
-                        <img src="../../assets/img/LOGO-ICONpng" alt="homepage" className="dark-logo" height="20" />
+                        <img src="../../assets/img/LOGO-ICONpng" alt="homepage" className="dark-logo" height="30" />
                         {/*<!-- Light Logo icon -->*/}
-                        <img src="../../assets/img/LOGO-ICON.png" alt="homepage" className="light-logo" height="20" />
+                        <img src="../../assets/img/LOGO-ICON.png" alt="homepage" className="light-logo" height="30" />
                     </b>
                     {/*
                     <!--End Logo icon -->

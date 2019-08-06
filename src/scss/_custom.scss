@@ -2,8 +2,8 @@
 .pull-right {
     float: right;
 }
-.sidebar-nav .has-arrow::after {
-    position: unset;
+.sidebar-nav {
+    width : 100%;
 }
 main {
     min-height: 80vh;
