@@ -58,7 +58,7 @@ class Login extends Component {
                 <div className="auth-box">
                     <div id="loginform">
                         <div className="logo">
-                            <span className="db"><img src="../../assets/images/logo-icon.png" alt="logo" /></span>
+                            <span className="db"><img src="../../assets/img/LOGO-ICON-TEXTO.png" alt="logo" height="40"/></span>
                             <h5 className="font-medium m-b-20">Ingresar al Administrador</h5>
                             { error && <div className="alert alert-danger" role="alert">{error}</div> }
                         </div>
