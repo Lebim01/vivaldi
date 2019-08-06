@@ -137,7 +137,7 @@ class EditFrecuencias extends React.Component {
     render(){
         const { data, id } = this.state
         return (
-            <EditPage title={`${id ? 'Editar' : 'Crear'} Frecuencias`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
+            <EditPage title={`${id ? 'Editar' : 'Crear'} Frecuencias`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history} noValidate>
                 <MainView {...data} onChange={this.onChange} />
             </EditPage>
         )

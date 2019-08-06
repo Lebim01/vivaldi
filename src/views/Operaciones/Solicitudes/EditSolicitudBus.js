@@ -52,12 +52,6 @@ class MainView extends React.Component {
                             <Input value={this.props.fecha} readOnly />
                         </div>
                     </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Observaciones</Label>
-                        <div className="col-sm-5">
-                            <Input value={this.props.observaciones} readOnly />
-                        </div>
-                    </FormGroup>
                     <fieldset>
                         <legend>Bus</legend>
                         <FormGroup className="row">
@@ -81,13 +75,13 @@ class MainView extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-3">Propietario</Label>
                             <div className="col-sm-5">
-                                <Input value={this.props.bus_propietario_nombre} readOnly />
+                                <Input value={this.props.bus_propietario_apellidos + ' ' + this.props.bus_propietario_nombres} readOnly />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-3">Distribución</Label>
                             <div className="col-sm-5">
-                                <Input value={this.props.bus_distribucion} readOnly />
+                                <Input value={this.props.bus_distribucion_nombre} readOnly />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
