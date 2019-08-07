@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import $ from 'jquery'
+import store from './../../store/auth'
+
+const { user_info } = store.getState()
 
 const propTypes = {
   children: PropTypes.node,
@@ -192,8 +195,7 @@ class DefaultHeader extends Component {
                         <!-- ============================================================== -->
                         */}
                         <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
+                            <a className="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img src="../../assets/img/LOGO-ICON.png" alt="user" className="rounded-circle" width="31" />
                             </a>
                             <div className="dropdown-menu dropdown-menu-right user-dd animated flipInY">
@@ -205,8 +207,8 @@ class DefaultHeader extends Component {
                                         <img src="../../assets/img/LOGO-ICON.png" alt="user" className="img-circle" width="60" />
                                     </div>
                                     <div className="m-l-10">
-                                        <h4 className="m-b-0">Steave Jobs</h4>
-                                        <p className=" m-b-0">varun@gmail.com</p>
+                                        <h4 className="m-b-0">{user_info.name ? user_info.name : user_info.username}</h4>
+                                        <p className=" m-b-0">{user_info.email}</p>
                                     </div>
                                 </div>
                                 {/*

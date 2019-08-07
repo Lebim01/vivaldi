@@ -4,6 +4,9 @@ import { Nav, NavItem, NavLink } from 'reactstrap';
 import $ from 'jquery'
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import PerfectScrollbar from 'react-perfect-scrollbar'
+import store from './../../store/auth'
+
+const { user_info } = store.getState()
 
 const propTypes = {
     children: PropTypes.node,
@@ -83,6 +86,20 @@ class Aside extends React.Component {
                         <Nav>
                             <nav className="sidebar-nav">
                                 <ul id="sidebarnav">
+                                    <li style={{backgroundColor: '#eee'}}>
+                                        <div className="col-sm-12" style={{padding:15}}>
+                                            <div className="row">
+                                                <div className="col-sm-3">
+                                                    <img src="../../assets/img/avatars/default.svg" width="100%"/>
+                                                </div>
+                                                <div className="col-sm-9">
+                                                    <b style={{fontSize: 15}}>{user_info.name ? user_info.name : user_info.username}</b>
+                                                    <br/>
+                                                    <span style={{fontSize: 12}}>Terminal terrestre</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
                                     { navConfig.items.map((menu, i) =>
                                         <MenuItem {...menu} level={level} key={level+'-'+i} />
                                     )}
