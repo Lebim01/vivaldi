@@ -179,7 +179,7 @@ EditPage.defaultProps = {
     endpoint: '',
     btnSave : {},
     btnDelete : {},
-    noValidate : false
+    noValidate : true
 }
 
 export default EditPage
