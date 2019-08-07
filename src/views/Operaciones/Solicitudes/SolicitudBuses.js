@@ -89,8 +89,8 @@ class SolicitudBuses extends React.Component {
                                 <ListPage
                                     searchable={false}
 
-                                    fieldNames={['Cooperativa', 'Fecha', 'Descripión', 'Tipo de Solicitud']}
-                                    fields={['cooperativa_nombre', 'fecha', 'descripcion', 'tipo_solicitud_nombre']}
+                                    fieldNames={['Cooperativa', 'Fecha', 'Descripión', 'Tipo de Solicitud', 'Estado']}
+                                    fields={['cooperativa_nombre', 'fecha', 'descripcion', 'tipo_solicitud_nombre', 'estado']}
 
                                     url='venta/solicitud_bus'
 

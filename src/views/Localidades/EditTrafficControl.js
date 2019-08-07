@@ -18,7 +18,7 @@ class MainView extends React.Component {
         return (
             <div>
                 <form className="mt-4 form-horizontal">
-                    <FormGroup className="row">
+                    <FormGroup className="row" style={{display:'none'}}>
                         <Label className="col-sm-3">Descipción</Label>
                         <div className="col-sm-5">
                             <Input onChange={this.onChange('descripcion')} value={this.props.descripcion} />
