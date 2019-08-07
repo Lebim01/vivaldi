@@ -369,7 +369,7 @@ class EditUsuarios extends React.Component {
                                 element: (
                                     <div>
                                         <Input onChange={this.onChange('password')} value={data.password} type="password"/>
-                                        { id && <Button onClick={this.resetPassword.bind(this)} disabled={!id || this.state.reset || !this.state.data.persona.correo}>Restablecer contraseña</Button> }
+                                        { id && <Button onClick={this.resetPassword.bind(this)} disabled={!id || this.state.reset || !this.state.data.persona || (this.state.data.persona && !this.state.data.persona.correo)}>Restablecer contraseña</Button> }
                                     </div>
                                 )
                             }}
