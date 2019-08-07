@@ -23,7 +23,7 @@ class RegistroAccion extends React.Component {
   }
 
   optionsTable = {
-    url : `${baseurl}/auditcrud/`,
+    url : `${baseurl}/auditcrud`,
     labelName: 'content_type',
     valueName: 'id'
   }
@@ -100,10 +100,10 @@ class RegistroAccion extends React.Component {
                         fieldNames={['Fecha/Hora', 'Usuario', 'Nombre', 'Departamento',
                                      'Tabla', 'Evento', 'Usuario Afectado',
                                      'Área Modificada', 'Descripción']}
-                        fields = {['datetime', 'user', '', '', '',
+                        fields = {['datetime', 'user', 'object_repr', '', 'content_type',
                                    'event_type', '', '', '' ]}
 
-                        url='auditcrud/'
+                        url='auditcrud'
 
                         //menu='operaciones'
                         //submenu='solicitudes/usuario'
