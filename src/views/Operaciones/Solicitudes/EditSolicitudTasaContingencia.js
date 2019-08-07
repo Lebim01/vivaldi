@@ -141,7 +141,7 @@ class EditSolicitudTasaContigencia extends React.Component {
                     text: `Guardado`,
                     type: 'success'
                 })
-                this.props.history.push('/operaciones/solicitudes/tasas-contigencia/')
+                this.props.history.push('/operaciones/solicitudes/tasas-contingencia/')
             }
         })
     }
@@ -174,7 +174,7 @@ class EditSolicitudTasaContigencia extends React.Component {
                     text: `Guardado`,
                     type: 'success'
                 })
-                this.props.history.push('/operaciones/solicitudes/tasas-contigencia/')
+                this.props.history.push('/operaciones/solicitudes/tasas-contingencia/')
             }
         })
     }
@@ -187,7 +187,7 @@ class EditSolicitudTasaContigencia extends React.Component {
                     <Col xs="12" md="12">
                         <Card>
                             <CardBody>
-                                <CardTitle>Crear/Editar solicitud de tasas de contigencia</CardTitle>
+                                <CardTitle>Crear/Editar solicitud de tasas de contingencia</CardTitle>
                                 <CardBody>
                                     <MainView {...data} cantidad_aprobada={this.state.cantidad_aprobada} onChangeCantidadAprobada={this.onChangeCantidadAprobada} />
                                 </CardBody>
