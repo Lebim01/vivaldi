@@ -86,7 +86,7 @@ class Aside extends React.Component {
                         <Nav>
                             <nav className="sidebar-nav">
                                 <ul id="sidebarnav">
-                                    <li style={{backgroundColor: '#eee'}}>
+                                    <li style={{backgroundColor: '#eee'}} className="hide-menu">
                                         <div className="col-sm-12" style={{padding:15}}>
                                             <div className="row">
                                                 <div className="col-sm-3">
