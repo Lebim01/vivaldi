@@ -370,19 +370,13 @@ class EditUsuarios extends React.Component {
                                 name : 'password',
                                 element: (
                                     <div>
-                                        <Input onChange={this.onChange('password')} value={data.password} />
+                                        <Input onChange={this.onChange('password')} value={data.password} type="password"/>
                                         { id && <Button onClick={this.resetPassword.bind(this)} disabled={!id || this.state.reset || !this.state.data.persona.correo}>Restablecer contraseña</Button> }
                                     </div>
                                 )
                             }}
                         />
                         <EditPersona lengthCedula={10} data={this.state.data.persona} readOnly={this.state.data.readOnlyPersona} onChange={this.onChangePersona} />
-                        <FormGroup className="row">
-                            <Label className="col-sm-3">Contraseña</Label>
-                            <div className="col-sm-5">
-                                
-                            </div>
-                        </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-3">Tipo</Label>
                             <div className="col-sm-5">
