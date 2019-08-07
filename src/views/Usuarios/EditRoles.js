@@ -86,7 +86,7 @@ class MainView extends React.Component {
                             <Input onChange={this.onChange('name')} value={this.props.name} />
                         </div>
                     </FormGroup>
-                    <FormGroup className="row">
+                    <FormGroup className="row" style={{display:'none'}}>
                         <Label className="col-sm-3">Descripción</Label>
                         <div className="col-sm-5">
                             <Input onChange={this.onChange('description')} value={this.props.description} />

@@ -68,7 +68,7 @@ class MainView extends React.Component {
                             <Select onChange={this.onChange('localidad')} value={this.props.localidad} asyncOptions={this.optionsLocalidades} />
                         </div>
                     </FormGroup>
-                    <FormGroup className="row">
+                    <FormGroup className="row" style={{display:'none'}}>
                         <Label className="col-sm-3">Descripci&oacute;n</Label>
                         <div className="col-sm-5">
                             <Input onChange={this.onChange('descripcion')} value={this.props.descripcion} />

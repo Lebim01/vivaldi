@@ -23,7 +23,7 @@ class MainView extends React.Component {
                             <Input onChange={this.onChange('nombre')} value={this.props.nombre} />
                         </div>
                     </FormGroup>
-                    <FormGroup className="row">
+                    <FormGroup className="row" style={{display:'none'}}>
                         <Label className="col-sm-3">Descripción</Label>
                         <div className="col-sm-5">
                             <TextArea onChange={this.onChange('descripcion')} rows="6"></TextArea>
