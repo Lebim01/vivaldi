@@ -188,10 +188,8 @@ class EditUsuarios extends React.Component {
                 let success = await this.searchPersona(data.identificacion)
                 if(!success){
                     this.onChangeData('persona', { identificacion: data.identificacion })
-                    this.readOnlyPersona()
-                }else{
-                    this.editPersona({ identificacion: data.identificacion })
                 }
+                this.editPersona({ identificacion: data.identificacion })
             }else{
                 this.readOnlyPersona()
             }
