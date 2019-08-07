@@ -68,7 +68,7 @@ class Login2 extends React.Component {
                                         <div className="input-group-prepend">
                                             <span className="input-group-text" id="basic-addon2"><i className="ti-pencil"></i></span>
                                         </div>
-                                        <input type="text" className="form-control form-control-lg" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="basic-addon1" onChange={this.onChange('pass')} />
+                                        <input type="password" className="form-control form-control-lg" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="basic-addon1" onChange={this.onChange('pass')} />
                                     </div>
                                     
                                     <div className="form-group text-center">

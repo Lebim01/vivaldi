@@ -151,7 +151,8 @@ class MainView extends React.Component {
                             </table>
                         </div>
                     </FormGroup>
-                    <FormGroup className="row">
+		    {/*
+		    <FormGroup className="row">
                         <div className="col-sm-2"></div>
                         <div className="col-sm-4">
                             <div className="custom-control custom-checkbox">
@@ -169,6 +170,7 @@ class MainView extends React.Component {
                             </div>
                         </div>
                     </FormGroup>
+		    */}
                 </form>
             </div>
         )

@@ -45,7 +45,7 @@ class DefaultHeader extends Component {
                     <!-- Logo -->
                     <!-- ============================================================== -->
                     */}
-                    <a className="navbar-brand" href="index.html">
+                    <a className="navbar-brand" href="/#">
                         {/*<!-- Logo icon -->*/}
                         <b className="logo-icon">
                             {/*

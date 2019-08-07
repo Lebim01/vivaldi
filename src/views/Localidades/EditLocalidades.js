@@ -83,6 +83,10 @@ class MainView extends React.Component {
     }
     onChangeNivel = index => name => (e) => {
         let niveles = this.props.niveles
+        if(!niveles){
+          niveles =[]
+        }
+
         let value = e.target.value
         if(name == 'is_enable') value = e.target.checked
         niveles[index][name] = value
@@ -92,6 +96,10 @@ class MainView extends React.Component {
 
     agregarNivel({ onChange, ...data }){
         let niveles = this.props.niveles
+        if(!niveles){
+          niveles =[]
+        }
+
         let _continue = !niveles.some((r, i) => r.nombre == data.nombre && r.id != data.id && i != data.index)
         if(!_continue){
             return false

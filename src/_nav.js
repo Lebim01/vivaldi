@@ -9,28 +9,28 @@ export default {
           url : '/#/localidades/localidades',
         },
         {
-          name : 'Silos',
-          url : '/#/localidades/silos'
+          name : 'Puertas',
+          url : '/#/localidades/puertas'
         },
         {
           name : 'Andenes',
           url : '/#/localidades/andenes'
         },
         {
-          name : 'Puertas',
-          url : '/#/localidades/puertas'
-        },
-        {
           name : 'Traffic Control',
           url : '/#/localidades/traffic-control'
         },
         {
-          name : 'Provincia',
-          url : '/#/localidades/provincia'
+          name : 'Silos',
+          url : '/#/localidades/silos'
         },
         {
           name : 'Ciudad',
           url : '/#/localidades/ciudad'
+        },
+        {
+          name : 'Provincia',
+          url : '/#/localidades/provincia'
         }
       ]
     },
