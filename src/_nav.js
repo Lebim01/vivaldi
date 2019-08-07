@@ -268,6 +268,10 @@ export default {
           url : '/#/auditoria/reportes-detallados'
         },
         {
+          name : 'Registro de Acciones',
+          url : '/#/auditoria/registro-acciones'
+        },
+        {
           name : 'Tipo Emisión Cooperativas',
           url : '/#/auditoria/tipo-emision-cooperativas'
         },

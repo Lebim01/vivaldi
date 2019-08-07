@@ -12,7 +12,7 @@ class SolicitudUsuario extends React.Component {
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
         labelName: 'nombre',
-        valueName: 'id' 
+        valueName: 'id'
     }
     optionsEstado = [
         { value:0, label: 'Pendiente' },
@@ -98,7 +98,7 @@ class SolicitudUsuario extends React.Component {
                                     menu='operaciones'
                                     submenu='solicitudes/usuario'
                                     parameters={this.state}
-                                    
+
                                     history={this.props.history}
                                     refresh={refresh}
                                 />
