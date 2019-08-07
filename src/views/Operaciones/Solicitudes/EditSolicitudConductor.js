@@ -47,12 +47,6 @@ class MainView extends React.Component {
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
-                        <Label className="col-sm-3">Observaciones</Label>
-                        <div className="col-sm-5">
-                            <Input value={this.props.observaciones} readOnly />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
                         <Label className="col-sm-3">Motivo</Label>
                         <div className="col-sm-5">
                             <Input value={this.props.motivo} readOnly />

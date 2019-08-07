@@ -47,12 +47,6 @@ class MainView extends React.Component {
                             <Input value={this.props.fecha} readOnly />
                         </div>
                     </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Observaciones</Label>
-                        <div className="col-sm-5">
-                            <Input value={this.props.observaciones} readOnly />
-                        </div>
-                    </FormGroup>
                     <fieldset>
                         <legend>Datos de la frecuencia</legend>
                         <FormGroup className="row">
