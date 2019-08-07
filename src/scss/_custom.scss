@@ -24,7 +24,7 @@ input[type=time]::-webkit-clear-button {
 input[type=time].no-ampm::-webkit-datetime-edit-ampm-field {
     display: none;
 }
-.active {
+.sidebar-nav .active {
     border-radius: 60px 0 0 60px;
     background: #4798e8;
     color: #fff !important;
