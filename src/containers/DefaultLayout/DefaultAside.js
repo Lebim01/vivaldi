@@ -15,6 +15,9 @@ class MenuItem extends React.Component {
 
     onClick = (e) => {
         let _this = $(e.target)
+        if(!_this.is('a')){
+            _this = _this.parents("a:first")
+        }
         if (!_this.hasClass("active")) {
             // hide any open menus and remove all other classes
             $("ul", _this.parents("ul:first")).removeClass("in");
@@ -32,6 +35,10 @@ class MenuItem extends React.Component {
         }
     }
 
+    prevent(e){
+        e.preventDefault()
+    }
+
     render(){
         const { name, icon, children, badge, url, level } = this.props
 
@@ -45,10 +52,10 @@ class MenuItem extends React.Component {
 
         return (
             <NavItem className={`sidebar-item`}>
-                <NavLink className={`sidebar-link waves-effect waves-dark ${children?'has-arrow':''}`} aria-expanded="false" href={url} onClick={this.onClick} style={{marginLeft: margin}}>
-                    { icon && <i className={icon}></i> }
-                    { children ? <span className="hide-menu"> {name} </span> : name }
-                    { badge && <span class={`badge badge-pill badge-${badge.variant} float-right`}>{badge.text}</span> }
+                <NavLink className={`sidebar-link waves-effect waves-dark ${children?'has-arrow':''}`} aria-expanded="false" href={url} style={{marginLeft: margin}} onClick={this.onClick}>
+                    { icon && <i className={icon} onClick={this.prevent}></i> }
+                    { children ? <span className="hide-menu" onClick={this.prevent}> {name} </span> : name }
+                    { badge && <span class={`badge badge-pill badge-${badge.variant} float-right`} onClick={this.prevent}>{badge.text}</span> }
                 </NavLink>
                 { children &&
                     <ul aria-expanded="false" className={`collapse ${level_name}-level`}>

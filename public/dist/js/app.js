@@ -117,40 +117,12 @@ $.fn.AdminSettings = function (settings) {
                 };
                 $(window).ready(setsidebartype);
                 $(window).on("resize", setsidebartype);
-                //****************************
-                /* This is for sidebartoggler*/
-                //****************************
-                $('.sidebartoggler').on("click", function () {
-                    $("#main-wrapper").toggleClass("mini-sidebar");
-                    if ($("#main-wrapper").hasClass("mini-sidebar")) {
-                        $(".sidebartoggler").prop("checked", !0);
-                        $("#main-wrapper").attr("data-sidebartype", "mini-sidebar");
-                    }
-                    else {
-                        $(".sidebartoggler").prop("checked", !1);
-                        $("#main-wrapper").attr("data-sidebartype", "full");
-                    }
-                });
                 break;
                 //****************************
                 // If the sidebar type has mini-sidebar
                 //****************************       
             case 'mini-sidebar':
                 $('#' + myid).attr("data-sidebartype", "mini-sidebar");
-                //****************************
-                /* This is for sidebartoggler*/
-                //****************************
-                $('.sidebartoggler').on("click", function () {
-                    $("#main-wrapper").toggleClass("mini-sidebar");
-                    if ($("#main-wrapper").hasClass("mini-sidebar")) {
-                        $(".sidebartoggler").prop("checked", !0);
-                        $("#main-wrapper").attr("data-sidebartype", "full");
-                    }
-                    else {
-                        $(".sidebartoggler").prop("checked", !1);
-                        $("#main-wrapper").attr("data-sidebartype", "mini-sidebar");
-                    }
-                });
                 break;
                 //****************************
                 // If the sidebar type has iconbar
@@ -173,20 +145,6 @@ $.fn.AdminSettings = function (settings) {
                 };
                 $(window).ready(setsidebartype);
                 $(window).on("resize", setsidebartype);
-                //****************************
-                /* This is for sidebartoggler*/
-                //****************************
-                $('.sidebartoggler').on("click", function () {
-                    $("#main-wrapper").toggleClass("mini-sidebar");
-                    if ($("#main-wrapper").hasClass("mini-sidebar")) {
-                        $(".sidebartoggler").prop("checked", !0);
-                        $("#main-wrapper").attr("data-sidebartype", "mini-sidebar");
-                    }
-                    else {
-                        $(".sidebartoggler").prop("checked", !1);
-                        $("#main-wrapper").attr("data-sidebartype", "iconbar");
-                    }
-                });
                 break;
                 //****************************
                 // If the sidebar type has overlay
@@ -206,20 +164,6 @@ $.fn.AdminSettings = function (settings) {
                 };
                 $(window).ready(setsidebartype);
                 $(window).on("resize", setsidebartype);
-                //****************************
-                /* This is for sidebartoggler*/
-                //****************************
-                $('.sidebartoggler').on("click", function () {
-                    $("#main-wrapper").toggleClass("show-sidebar");
-                    if ($("#main-wrapper").hasClass("show-sidebar")) {
-                        //$(".sidebartoggler").prop("checked", !0);
-                        //$("#main-wrapper").attr("data-sidebartype","mini-sidebar");
-                    }
-                    else {
-                        //$(".sidebartoggler").prop("checked", !1);
-                        //$("#main-wrapper").attr("data-sidebartype","iconbar");
-                    }
-                });
                 break;
             default:
             }
