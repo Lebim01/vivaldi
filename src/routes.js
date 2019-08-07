@@ -80,7 +80,7 @@ const EditCiudad = React.lazy(() => import('./views/Localidades/EditCiudad'))
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
   { path: '/', name: 'Home' },
-  { path: '/dashboard', name: 'Dashboard', component: Page404 },
+  { path: '/dashboard', name: 'Dashboard', component: PanelRecaudaciones, exact: true  },
 
   { path: '/localidades/localidades', name: 'Localidades', component: Localidades, exact : true },
   { path: '/localidades/localidades/edit', name: 'Crear/Editar Localidades', component: EditLocalidades, exact : true },
