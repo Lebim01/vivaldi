@@ -15,7 +15,7 @@ class _Row extends React.Component {
                 <td className="text-center">
                     { view &&
                         <div className="custom-control custom-checkbox">
-                            <input type="checkbox" className="custom-control-input" name={`permiso_${view}`} id={`permiso_${view}`} checked={permissions.includes(view)} onChange={() => this.props.toggle(view)} />
+                            <input type="checkbox" className="custom-control-input" name={`permiso_${view}`} id={`permiso_${view}`} checked={permissions.includes(view)} onChange={() => this.props.toggle(view, 'view')} />
                             <Label onlyClassName="custom-control-label" htmlFor={`permiso_${view}`}></Label>
                         </div>
                     }
@@ -23,7 +23,7 @@ class _Row extends React.Component {
                 <td className="text-center">
                     { add &&
                         <div className="custom-control custom-checkbox">
-                            <input type="checkbox" className="custom-control-input" name={`permiso_${add}`} id={`permiso_${add}`} checked={permissions.includes(add)} onChange={() => this.props.toggle(add)} />
+                            <input type="checkbox" className="custom-control-input" name={`permiso_${add}`} id={`permiso_${add}`} checked={permissions.includes(add)} onChange={() => this.props.toggle(add, 'add')} />
                             <Label onlyClassName="custom-control-label" htmlFor={`permiso_${add}`}></Label>
                         </div>
                     }
@@ -31,7 +31,7 @@ class _Row extends React.Component {
                 <td className="text-center">
                     { change &&
                         <div className="custom-control custom-checkbox">
-                            <input type="checkbox" className="custom-control-input" name={`permiso_${change}`} id={`permiso_${change}`} checked={permissions.includes(change)} onChange={() => this.props.toggle(change)} />
+                            <input type="checkbox" className="custom-control-input" name={`permiso_${change}`} id={`permiso_${change}`} checked={permissions.includes(change)} onChange={() => this.props.toggle(change, 'change')} />
                             <Label onlyClassName="custom-control-label" htmlFor={`permiso_${change}`}></Label>
                         </div>
                     }
@@ -39,7 +39,7 @@ class _Row extends React.Component {
                 <td className="text-center">
                     { this.props.delete &&
                         <div className="custom-control custom-checkbox">
-                            <input type="checkbox" className="custom-control-input" name={`permiso_${this.props.delete}`} id={`permiso_${this.props.delete}`} checked={permissions.includes(this.props.delete)} onChange={() => this.props.toggle(this.props.delete)} />
+                            <input type="checkbox" className="custom-control-input" name={`permiso_${this.props.delete}`} id={`permiso_${this.props.delete}`} checked={permissions.includes(this.props.delete)} onChange={() => this.props.toggle(this.props.delete, 'delete')} />
                             <Label onlyClassName="custom-control-label" htmlFor={`permiso_${this.props.delete}`}></Label>
                         </div>
                     }
@@ -51,21 +51,14 @@ class _Row extends React.Component {
 
 class MainView extends React.Component {
     
-    state = {
-        all_add : false,
-        all_edit : false,
-        all_view : false,
-        all_delete : false
-    }
-
     constructor(props){
         super(props)
         this.toggle = this.toggle.bind(this)
     }
 
-    toggle(id){
+    toggle(id, type = ''){
         if(this.props.togglePermission){
-            this.props.togglePermission(id)
+            this.props.togglePermission(id, type)
         }
     }
 
@@ -76,7 +69,8 @@ class MainView extends React.Component {
     }
 
     render(){
-        const { categories, permissions, all_view, all_edit, } = this.props
+        const { categories, permissions } = this.props
+        console.log(this.props)
         return (
             <div>
                 <form className="mt-4 form-horizontal">
@@ -107,25 +101,25 @@ class MainView extends React.Component {
                                         <td>Seleccionar todo</td>
                                         <td className="text-center">
                                             <div className="custom-control custom-checkbox">
-                                                <input type="checkbox" className="custom-control-input" name={`all_view`} id={`all_view`} value={this.props.all_view} onChange={this.props.onChangeSelectAll('view')} />
+                                                <input type="checkbox" className="custom-control-input" name={`all_view`} id={`all_view`} checked={this.props.all_view} onChange={this.props.onChangeSelectAll('view')} />
                                                 <Label onlyClassName="custom-control-label" htmlFor={`all_view`}></Label>
                                             </div>
                                         </td>
                                         <td className="text-center">
                                             <div className="custom-control custom-checkbox">
-                                                <input type="checkbox" className="custom-control-input" name={`all_add`} id={`all_add`} value={this.props.all_add} onChange={this.props.onChangeSelectAll('add')} />
+                                                <input type="checkbox" className="custom-control-input" name={`all_add`} id={`all_add`} checked={this.props.all_add} onChange={this.props.onChangeSelectAll('add')} />
                                                 <Label onlyClassName="custom-control-label" htmlFor={`all_add`}></Label>
                                             </div>
                                         </td>
                                         <td className="text-center">
                                             <div className="custom-control custom-checkbox">
-                                                <input type="checkbox" className="custom-control-input" name={`all_edit`} id={`all_edit`} value={this.props.all_edit} onChange={this.props.onChangeSelectAll('edit')} />
-                                                <Label onlyClassName="custom-control-label" htmlFor={`all_edit`}></Label>
+                                                <input type="checkbox" className="custom-control-input" name={`all_change`} id={`all_change`} checked={this.props.all_change} onChange={this.props.onChangeSelectAll('change')} />
+                                                <Label onlyClassName="custom-control-label" htmlFor={`all_change`}></Label>
                                             </div>
                                         </td>
                                         <td className="text-center">
                                             <div className="custom-control custom-checkbox">
-                                                <input type="checkbox" className="custom-control-input" name={`all_delete`} id={`all_delete`} value={this.props.all_delete} onChange={this.props.onChangeSelectAll('delete')} />
+                                                <input type="checkbox" className="custom-control-input" name={`all_delete`} id={`all_delete`} checked={this.props.all_delete} onChange={this.props.onChangeSelectAll('delete')} />
                                                 <Label onlyClassName="custom-control-label" htmlFor={`all_delete`}></Label>
                                             </div>
                                         </td>
@@ -186,7 +180,11 @@ class EditRoles extends React.Component {
     state = {
         id : null,
         data : { permissions : [] },
-        categories : []
+        categories : [],
+        all_add : false,
+        all_view : false,
+        all_change : false,
+        all_delete : false
     }
 
     constructor(props){
@@ -194,6 +192,7 @@ class EditRoles extends React.Component {
         this.onChange = this.onChange.bind(this)
         this.getPermisos = this.getPermisos.bind(this)
         this.togglePermission = this.togglePermission.bind(this)
+        this.onChangeSelectAll = this.onChangeSelectAll.bind(this)
     }
 
     componentDidMount(){
@@ -268,13 +267,20 @@ class EditRoles extends React.Component {
         })
     }
 
-    togglePermission(id){
+    togglePermission(id, type){
         let data = this.state.data
         let permissions = data.permissions
 
         let index = permissions.indexOf(id)
         if(index !== -1){
             permissions.splice(index, 1)
+            if(type){
+                // deseleccionar
+                let _type = `all_${type}`
+                this.setState({
+                    [_type]: false 
+                })
+            }
         }else{
             permissions.push(id)
         }
@@ -286,17 +292,26 @@ class EditRoles extends React.Component {
     }
 
     onChangeSelectAll = type => (e) => {
-        let value = e.target.value
+        let _type = `all_${type}`
+        this.setState({
+            [_type]: e.target.checked
+        })
         this.selectAll(type)
     }
 
     selectAll(type){
         let data = this.state.data
         let permissions = data.permissions
-        console.log(this.state)
 
-        for(let i in permissions){
-            console.log(permissions[i])
+        for(let i in this.state.categories){
+            let category = this.state.categories[i]
+            for(let j in category.permisos){
+                let permiso = category.permisos[j]
+                let i = permiso[type]
+
+                if(!permissions.includes(i))
+                    permissions.push(i)
+            }
         }
         data.permissions = permissions
         this.setState({
@@ -305,10 +320,20 @@ class EditRoles extends React.Component {
     }
 
     render(){
-        const { data, categories, id } = this.state
+        const { data, categories, id, all_add, all_view, all_change, all_delete } = this.state
         return (
             <EditPage noValidate title={`${id ? 'Editar' : 'Crear'} Rol`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
-                <MainView {...data} categories={categories} onChange={this.onChange} togglePermission={this.togglePermission} onChangeSelectAll={this.onChangeSelectAll} />
+                <MainView 
+                    {...data} 
+                    categories={categories} 
+                    onChange={this.onChange} 
+                    togglePermission={this.togglePermission} 
+                    onChangeSelectAll={this.onChangeSelectAll} 
+                    all_add={all_add}
+                    all_view={all_view}
+                    all_change={all_change}
+                    all_delete={all_delete}
+                />
             </EditPage>
         )
     }
