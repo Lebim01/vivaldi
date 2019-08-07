@@ -2,6 +2,8 @@ import React from 'react'
 import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button } from './../../temeforest'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import moment from 'moment'
+import Swal from 'sweetalert2'
+import axios from 'axios'
 import { baseurl } from './../../utils/url'
 
 class RegistroTasa extends React.Component {
@@ -40,7 +42,34 @@ class RegistroTasa extends React.Component {
     }
 
     guardar(){
-
+        const data = this.state
+        Swal.fire({
+            title: 'Confirmar Guardar',
+            text : '¿Seguro de guardar?',
+            showCancelButton: true,
+            showLoaderOnConfirm: true,
+            preConfirm: () => {
+                return axios.post(`${baseurl}/venta/generacion_contingencia/`, data)
+                .then(response => {
+                    if (!(response.status >= 200 && response.status < 300)) {
+                        throw new Error(response.statusText)
+                    }
+                    return response
+                })
+                .catch(error => {
+                    Swal.showValidationMessage(
+                        `Petición fallida: ${error}`
+                    )
+                })
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+        }).then(() => {
+            Swal.fire({
+                text : `Guardado`,
+                type : 'success'
+            })
+            this.toggle()
+        })
     }
 
     render(){
