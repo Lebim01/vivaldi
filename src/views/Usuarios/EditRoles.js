@@ -293,9 +293,10 @@ class EditRoles extends React.Component {
     selectAll(type){
         let data = this.state.data
         let permissions = data.permissions
+        console.log(this.state)
 
         for(let i in permissions){
-
+            console.log(permissions[i])
         }
         data.permissions = permissions
         this.setState({

@@ -2,7 +2,7 @@ export default {
   items: [
     {
       name: 'Localidades',
-      //icon: 'icon-map',
+      icon: 'fas fa-home',
       children : [
         {
           name : 'Localidades',
@@ -36,7 +36,7 @@ export default {
     },
     {
       name: 'Usuarios',
-      //icon: 'icon-user',
+      icon: 'fas fa-user',
       children : [
         {
           name : 'Usuarios',
@@ -50,7 +50,7 @@ export default {
     },
     {
       name: 'Cooperativas',
-      //icon: 'icon-home',
+      icon: 'fas fa-bus',
       children : [
         {
           name : 'Cooperativas',
@@ -80,7 +80,7 @@ export default {
     },
     {
       name: 'Operaciones',
-      //icon: 'icon-desktop',
+      icon: 'fas fa-cog',
       children: [
         {
           name: 'Rutas',
@@ -139,7 +139,7 @@ export default {
     },
     {
       name: 'Facturación',
-      //icon: 'icon-calculator',
+      icon: 'fas fa-file-alt',
       children: [
         {
           name: 'Clientes',
@@ -153,7 +153,7 @@ export default {
     },
     {
       name: 'Recaudaciones',
-      //icon: 'icon-wallet',
+      icon: 'fas fa-dollar-sign',
       children : [
         {
           name : 'Tasas contingencia',
@@ -239,7 +239,7 @@ export default {
     },
     {
       name : 'Cobranza',
-      icon : '',
+      icon : 'far fa-money-bill-alt',
       children : [
         {
           name : 'Recaudacion',
@@ -261,7 +261,7 @@ export default {
     },
     {
       name : 'Auditoria',
-      icon : '',
+      icon : 'fas fa-eye',
       children : [
         {
           name : 'Reportes Detallados',
@@ -279,7 +279,7 @@ export default {
     },
     {
       name : 'Auditoria SRI',
-      icon : '',
+      icon : 'fas fa-eye',
       children : [
         {
           name : 'Registro Acciones',

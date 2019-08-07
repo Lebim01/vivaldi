@@ -36,6 +36,8 @@ class MenuItem extends React.Component {
         const { name, icon, children, badge, url, level } = this.props
 
         let margin = (level-1) * 35
+        //if(icon) margin -= 35
+
         let level_name = ''
         if(level === 1) level_name = 'first'
         else if(level === 2) level_name = 'second'
