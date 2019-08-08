@@ -8,7 +8,7 @@ function Andenes(props) {
                     <Card>
                         <CardBody>
                             <ListPage
-                                title="Andenes"
+                                title="Listado de Andenes"
                                 searchable={true}
                                 searchPlaceholder="Descripcion, silos, puertas de acceso"
                                 searchFields={['descripcion', 'silos_nombre', 'puertas_nombre', 'localidad_nombre','localidad_nivel_nombre']}

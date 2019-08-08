@@ -77,7 +77,7 @@ class ListPage extends React.Component {
         const { filtered } = this.state
         return (
             <div>
-                { title && <CardTitle>Listado de { title }</CardTitle> }
+                { title && <CardTitle>{ title }</CardTitle> }
                 { searchable &&
                     <Row>
                         <Col xs="12" md="6">
