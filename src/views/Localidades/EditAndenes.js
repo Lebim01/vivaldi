@@ -224,7 +224,7 @@ class MainView extends React.Component {
         return (
             <div>
                 <form className="mt-4 form-horizontal">
-                    <FormGroup className="row" style={{display:'none'}}>
+                    <FormGroup className="row">
                         <Label className="col-sm-3">Descripción</Label>
                         <div className="col-sm-5">
                             <Input onChange={this.onChange('descripcion')} value={this.props.descripcion} />
