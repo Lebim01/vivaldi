@@ -84,7 +84,7 @@ class AddRol extends React.Component {
                 <ModalBody>
                     <form className="mt-4 form-horizontal">
                         <FormGroup className="row">
-                            <Label className="col-sm-6">Rol</Label>
+                            <Label className="col-sm-4">Rol</Label>
                             <div className="col-sm-6">
                                 <Select asyncOptions={this.optionsRol} onChange={this.onChange('rol')} value={this.state.data.rol} error={errors.includes('rol')} />
                             </div>
