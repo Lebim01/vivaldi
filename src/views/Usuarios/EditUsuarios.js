@@ -162,6 +162,7 @@ class EditUsuarios extends React.Component {
     searchPersona = async (identificacion) => {
         const { data } = await axios.get(`${baseurl}/persona/?identificacion=${identificacion}`)
         if(data.length > 0){
+            console.log('search', data)
             this.setState({
                 data : {
                     ...this.state.data,
@@ -183,17 +184,7 @@ class EditUsuarios extends React.Component {
     }
 
     async onChangePersona(data){
-        if(data.identificacion !== this.state.data.persona.identificacion){
-            if(data.identificacion.length === 10){
-                let success = await this.searchPersona(data.identificacion)
-                if(!success){
-                    this.onChangeData('persona', { identificacion: data.identificacion })
-                }
-                this.editPersona({ identificacion: data.identificacion })
-            }else{
-                this.readOnlyPersona()
-            }
-        }
+        this.onChangeData('persona', data)
     }
 
     addRol(){
@@ -374,7 +365,7 @@ class EditUsuarios extends React.Component {
                                 )
                             }}
                         />
-                        <EditPersona lengthCedula={10} data={this.state.data.persona} readOnly={this.state.data.readOnlyPersona} onChange={this.onChangePersona} />
+                        <EditPersona lengthCedula={10} id={this.state.data.persona ? this.state.data.persona.id : null} readOnly={this.state.data.readOnlyPersona} onChange={this.onChangePersona} />
                         <FormGroup className="row">
                             <Label className="col-sm-3">Tipo</Label>
                             <div className="col-sm-5">

@@ -7,51 +7,91 @@ import axios from 'axios'
 class EditPersona extends React.Component {
 
     state = {
-        data:{}
+        id: undefined,
+        data:{},
+        readOnly : true,
+        loading : false
     }
 
     constructor(props){
         super(props)
         this.onChange = this.onChange.bind(this)
-    }
-    
-    onChange = name => (e) => {
-        let { data } = this.state
-
-        if(this.props.onChange){
-            this.props.onChange({
-                ...data,
-                [name] : e.target.value
-            })
-        }
-
-        this.setState({
-            data : {
-                ...data,
-                [name] : e.target.value
-            }
-        })
+        this.getPersona = this.getPersona.bind(this)
     }
 
     componentWillReceiveProps(props){
-        if(props.readOnly !== this.props.readOnly){
+        if(props.id !== this.state.id){
             this.setState({
-                ...props
+                id: props.id
             })
+            this.getPersona(props.id)
+        }
+    }
+    
+    onChange = name => (e) => {
+        const { data, readOnly, id } = this.state
+        let _data = data
+        let _readOnly = readOnly
+        let loading = false
+        let _id = id
+        
+        _data[name] = e.target.value
+        
+        if(name === 'identificacion'){
+            _readOnly = true
+            if(_data.identificacion.length == this.props.lengthCedula){
+                _readOnly = false
+                loading = true
+                this.searchPersona(_data.identificacion)
+            }else{
+                const { identificacion } = _data
+                _id = null
+                _data = {
+                    identificacion
+                }
+            }
+        }
+
+        if(this.props.onChange){
+            this.props.onChange(_data)
+        }
+
+        this.setState({ data: _data, readOnly: _readOnly, loading, id: _id })
+    }
+
+    searchPersona = async (identificacion) => {
+        const { data } = await axios.get(`${baseurl}/persona/?identificacion=${identificacion}`)
+        if(data.length > 0){
+            this.setState({
+                data : {
+                    ...data[0]
+                },
+                loading: false
+            })
+            return true
+        }else{
+            this.setState({
+                loading: false
+            })
+        }
+        return false
+    }
+
+    async getPersona(id){
+        if(id){
+            const { data } = await axios.get(`${baseurl}/persona/${id}`)
+            if(data){
+                this.setState({
+                    id : data.id,
+                    data : data
+                })
+            }
         }
     }
 
-    getData = async (id) => {
-        const { data } = await axios.get(`${baseurl}/persona/${id}/`)
-        this.setState({
-            id,
-            data
-        })
-    }
-
     render(){
-        const { readOnly } = this.props
-        const { data } = this.state
+        const { data, readOnly, loading } = this.state
+        let _readOnly = readOnly || loading
         return (
             <div className="animated fadeIn">
                 <Row>
@@ -72,20 +112,20 @@ class EditPersona extends React.Component {
                                 <FormGroup className="row">
                                     <Label className="col-sm-3">Apellidos</Label>
                                     <div className="col-sm-5">
-                                        <Input readOnly={readOnly && !data.id} value={data.apellidos} onChange={this.onChange('apellidos')} />
+                                        <Input readOnly={_readOnly && !data.id} value={data.apellidos} onChange={this.onChange('apellidos')} />
                                     </div>
                                 </FormGroup>
                                 <FormGroup className="row">
                                     <Label className="col-sm-3">Nombres</Label>
                                     <div className="col-sm-5">
-                                        <Input readOnly={readOnly && !data.id} value={data.nombres} onChange={this.onChange('nombres')} />
+                                        <Input readOnly={_readOnly && !data.id} value={data.nombres} onChange={this.onChange('nombres')} />
                                     </div>
                                 </FormGroup>
                                 <FormElementValidate
                                     label={{text:'Correo'}}
                                     input={{
                                         name : 'correo',
-                                        element: <Input placeholder="example@gmail.com" readOnly={readOnly && !data.id} value={data.correo} onChange={this.onChange('correo')} />
+                                        element: <Input placeholder="example@gmail.com" readOnly={_readOnly && !data.id} value={data.correo} onChange={this.onChange('correo')} />
                                     }}
                                     validator={{
                                         validationRules: { required : true, email: true },
