@@ -18,8 +18,18 @@ class Select extends React.Component {
         }
     }
 
-    loadListAsync = async () => {
-        const { url, valueName, labelName } = this.props.asyncOptions
+    componentWillReceiveProps(props){
+        if(props.asyncOptions){
+            this.loadListAsync(props)
+        }
+    }
+
+    loadListAsync = async (props = null) => {
+        const { url, valueName, labelName } = 
+            props !== null 
+                ? typeof props.asyncOptions === 'function' ? props.asyncOptions() : props.asyncOptions
+                : typeof this.props.asyncOptions === 'function' ? this.props.asyncOptions() : this.props.asyncOptions
+
         const { data } = await axios.get(url)
         let _options = [{value:'',label:'Seleccione'}, ...data.map((record) => {
             return {

@@ -410,8 +410,8 @@ class EditCooperativas extends React.Component {
                 urlFront={urlFront} 
                 endpoint={endpoint} 
                 history={this.props.history}
-                >
                 parseData={this.parseData}
+            >
                 <Tabs tab={tab} tabs={this.tabs} onClickTab={this.changeTab}/>
                 { tab === 'main' && 
                     <MainView 
