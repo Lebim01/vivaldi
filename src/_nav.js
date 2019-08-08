@@ -137,20 +137,20 @@ export default {
         },
       ],
     },
-    {
-      name: 'Facturación',
-      icon: 'fas fa-file-alt',
-      children: [
-        {
-          name: 'Clientes',
-          url: '/#/facturacion/clientes'
-        },
-        {
-          name: 'Documentos',
-          url: '/#/facturacion/documentos'
-        },
-      ],
-    },
+    // {
+    //   name: 'Facturación',
+    //   icon: 'fas fa-file-alt',
+    //   children: [
+    //     {
+    //       name: 'Clientes',
+    //       url: '/#/facturacion/clientes'
+    //     },
+    //     {
+    //       name: 'Documentos',
+    //       url: '/#/facturacion/documentos'
+    //     },
+    //   ],
+    // },
     {
       name: 'Recaudaciones',
       icon: 'fas fa-dollar-sign',
