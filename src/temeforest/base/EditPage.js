@@ -4,6 +4,7 @@ import { Card, CardBody, CardTitle, Button, ValidateContext } from './../../teme
 import { baseurl } from './../../utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import FormElementValidate from './FormElementValidate'
 
 const defaultBtnDelete = {
     show : true,
@@ -20,7 +21,8 @@ class EditPage extends React.Component {
 
     state = {
         isFormValidationErrors : true,
-        submitted : false
+        submitted : false,
+        hasValidations : false
     }
 
     constructor(props){
@@ -30,9 +32,12 @@ class EditPage extends React.Component {
     }
 
     componentDidMount(){
+        let hasElement = this.getChildrenWithType(this.props.children, FormElementValidate)
         this.setState({
-            submitted: true
+            submitted: true,
+            hasValidations : hasElement
         })
+
     }
 
     confirmSave(){
@@ -125,14 +130,32 @@ class EditPage extends React.Component {
         }
     }
 
+    typesAreEqual = (typeA, typeB) => typeA === typeB;
+
+    getChildrenWithType(children, type) {
+        let has = false;
+        React.Children.forEach(children, child => {
+            if (child && this.typesAreEqual(type, child.type)) {
+                has = true;
+            }
+            if (child && child.props && child.props.children){
+                if(this.getChildrenWithType(child.props.children, type)){
+                    has = true
+                }
+            }
+        });
+        return has;
+    }
+
     render(){
-        const { id, title, btnDelete, btnSave, noValidate } = this.props
+        const { id, title, btnDelete, btnSave } = this.props
+        const { hasValidations } = this.state
 
         const _btnSave = {
             ...defaultBtnSave,
             ...btnSave,
             ...(
-                !noValidate 
+                hasValidations 
                     ? { disabled : this.state.isFormValidationErrors }
                     : {}
             )

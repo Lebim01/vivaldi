@@ -341,7 +341,7 @@ class EditUsuarios extends React.Component {
         return (
             <EditPage title={`${id ? 'Editar' : 'Crear'} Usuario`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
                 <div>
-                    <FormValidate className="mt-4 form-horizontal" noValidate={false}>
+                    <FormValidate className="mt-4 form-horizontal">
                         <FormElementValidate
                             label={{text:'Usuario'}}
                             input={{

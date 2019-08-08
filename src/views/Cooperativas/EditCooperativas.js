@@ -31,7 +31,6 @@ class MainView extends React.Component {
     constructor(props){
         super(props)
         this.toggleAndenes = this.toggleAndenes.bind(this)
-        this.isValidationError = this.isValidationError.bind(this)
     }
 
     optionsGremios = {
@@ -70,12 +69,6 @@ class MainView extends React.Component {
         let localidades_andenes = this.props.localidades_andenes
         localidades_andenes[this.state.tab] = selected
         this.props.onChange('localidades_andenes', localidades_andenes)
-    }
-
-    isValidationError(flag){
-        this.setState({
-            isFormValidationErrors: flag
-        });
     }
 
     render(){

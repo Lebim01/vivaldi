@@ -160,7 +160,7 @@ class EditConductor extends React.Component {
                 history={this.props.history}
                 parseData={this.parseData.bind(this)}
             >
-                <FormValidate className="mt-4 form-horizontal" noValidate={false}>
+                <FormValidate className="mt-4 form-horizontal">
                     <FormGroup className="row">
                         <Label className="col-sm-3">Cooperativa</Label>
                         <div className="col-sm-5">
