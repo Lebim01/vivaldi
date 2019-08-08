@@ -201,7 +201,7 @@ class MainView extends React.Component {
                             <div className="col-sm-2"></div>
                             <div className="col-sm-2">
                                 <div className="custom-control custom-checkbox">
-                                    <input type="checkbox" className="custom-control-input" id="usa_api" name="usa_api" checked={this.props.usa_api} onChange={this.onChange('usa_api')} />
+                                    <input type="checkbox" className="custom-control-input" id="usa_api" name="usa_api" checked={this.props.usa_api === true} onChange={this.onChange('usa_api')} />
                                     <Label onlyClassName="custom-control-label" htmlFor="usa_api">Usa API</Label>
                                 </div>
                             </div>
@@ -302,7 +302,6 @@ class EditCooperativas extends React.Component {
 
     getData = async (id) => {
         const { data } = await axios.get(`${baseurl}/cooperativa/${id}/`)
-        data.usa_api = data.api_key != ''
         data.localidades_andenes = {}
         this.setState({
             id,
@@ -411,8 +410,8 @@ class EditCooperativas extends React.Component {
                 urlFront={urlFront} 
                 endpoint={endpoint} 
                 history={this.props.history}
+                >
                 parseData={this.parseData}
-            >
                 <Tabs tab={tab} tabs={this.tabs} onClickTab={this.changeTab}/>
                 { tab === 'main' && 
                     <MainView 
