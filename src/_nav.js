@@ -137,20 +137,20 @@ export default {
         },
       ],
     },
-    {
-      name: 'Facturación',
-      icon: 'fas fa-file-alt',
-      children: [
-        {
-          name: 'Clientes',
-          url: '/#/facturacion/clientes'
-        },
-        {
-          name: 'Documentos',
-          url: '/#/facturacion/documentos'
-        },
-      ],
-    },
+    // {
+    //   name: 'Facturación',
+    //   icon: 'fas fa-file-alt',
+    //   children: [
+    //     {
+    //       name: 'Clientes',
+    //       url: '/#/facturacion/clientes'
+    //     },
+    //     {
+    //       name: 'Documentos',
+    //       url: '/#/facturacion/documentos'
+    //     },
+    //   ],
+    // },
     {
       name: 'Recaudaciones',
       icon: 'fas fa-dollar-sign',
@@ -266,6 +266,10 @@ export default {
         {
           name : 'Reportes Detallados',
           url : '/#/auditoria/reportes-detallados'
+        },
+        {
+          name : 'Registro de Acciones',
+          url : '/#/auditoria/registro-acciones'
         },
         {
           name : 'Tipo Emisión Cooperativas',

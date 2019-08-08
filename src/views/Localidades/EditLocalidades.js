@@ -285,14 +285,14 @@ class EditLocalidades extends React.Component {
             link : 'main',
             text : 'Crear/Editar Localidad'
         },
-        {
-            link : 'firma',
-            text : 'Firma electronica'
-        },
-        {
-            link : 'correos',
-            text : 'Configuración de correos'
-        }
+        // {
+        //     link : 'firma',
+        //     text : 'Firma electronica'
+        // },
+        // {
+        //     link : 'correos',
+        //     text : 'Configuración de correos'
+        // }
     ]
 
     constructor(props){

@@ -7,6 +7,9 @@ import axios from 'axios'
 const endpoint = 'cooperativa'
 const urlFront = '/cooperativas/cooperativas'
 
+const FirmaElectronicaForm = React.lazy(() => import('../../utils/FirmaElectronicaForm'))
+const ConfiguracionCorreoForm = React.lazy(() => import('../../utils/ConfiguracionCorreoForm'))
+
 class ListAdenes extends React.Component {
     render(){
         const { andenes } = this.props
@@ -21,7 +24,6 @@ class ListAdenes extends React.Component {
 }
 
 class MainView extends React.Component {
-
     state = {
         tab : 1
     }
@@ -253,7 +255,19 @@ class EditCooperativas extends React.Component {
             puede_anular : false,
             usa_api : false,
             contribuyente_especial : 'no',
-            obligado_contabilidad : 'no'
+            obligado_contabilidad : 'no',
+        },
+        data_firma: {
+            file_firma : '',
+            clave_firma: '',
+            reclave_firma: '',
+        },
+        data_correo: {
+            host: '',
+            port: '',
+            usuario: '',
+            clave: '',
+            tls: false
         },
         showConfirmSave : false,
         localidades : {},
@@ -267,20 +281,22 @@ class EditCooperativas extends React.Component {
             link : 'main',
             text : 'Crear/Editar Cooperativa'
         },
-        {
-            link : 'firma',
-            text : 'Firma electronica'
-        },
-        {
-            link : 'correos',
-            text : 'Configuración de correos'
-        }
+        // {
+        //     link : 'firma',
+        //     text : 'Firma electronica'
+        // },
+        // {
+        //     link : 'correos',
+        //     text : 'Configuración de correos'
+        // }
     ]
 
     constructor(props){
         super(props)
         this.onChange = this.onChange.bind(this)
         this.changeTab = this.changeTab.bind(this)
+        this.onChangeFirma = this.onChangeFirma.bind(this)
+        this.onChangeCorreo = this.onChangeCorreo.bind(this)
     }
 
     componentDidMount(){
@@ -369,6 +385,22 @@ class EditCooperativas extends React.Component {
         })
     }
 
+    onChangeFirma(name, value){
+        let data_firma = this.state.data_firma
+        data_firma[name] = value
+        this.setState({
+            data_firma
+        })
+    }
+
+    onChangeCorreo(name, value){
+        let data_correo = this.state.data_correo
+        data_correo[name] = value
+        this.setState({
+            data_correo
+        })
+    }
+
     parseData(data){
         data.obligado_contabilidad = data.obligado_contabilidad == 'Si'
         data.contribuyente_especial = data.contribuyente_especial == 'Si'
@@ -377,7 +409,7 @@ class EditCooperativas extends React.Component {
     }
 
     render(){
-        const { id, data, tab, tabsLocalidades, localidades } = this.state
+        const { id, data, tab, tabsLocalidades, localidades, data_firma, data_correo } = this.state
         return(
             <EditPage 
                 title={`${id ? 'Editar' : 'Crear'} Cooperativas`} 
@@ -397,6 +429,16 @@ class EditCooperativas extends React.Component {
                         localidades={localidades} 
                     />
                 }
+                {/* {
+                  tab === 'firma' &&
+                    <FirmaElectronicaForm {...data_firma}
+                        onChange={this.onChangeFirma}/>
+                }
+                {
+                  tab === 'correos' &&
+                    <ConfiguracionCorreoForm {...data_correo}
+                        onChange={this.onChangeCorreo}/>
+                } */}
             </EditPage>
         )
     }

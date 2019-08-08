@@ -77,6 +77,9 @@ const EditProvincia = React.lazy(() => import('./views/Localidades/EditProvincia
 const Ciudad = React.lazy(() => import('./views/Localidades/Ciudad'))
 const EditCiudad = React.lazy(() => import('./views/Localidades/EditCiudad'))
 
+/** AUDITORIA */
+const RegistroAccion = React.lazy(() => import('./views/Auditoria/RegistroAccion'))
+
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
   { path: '/', name: 'Home' },
@@ -169,6 +172,7 @@ const routes = [
   { path: '/cobranza/consultas', name: 'Consultas', component: Consultas, exact: true },
 
   { path: '/auditoria/reportes-detallados', name: 'User Details', component: Page404 },
+  { path: '/auditoria/registro-acciones', name: 'Registro de Acciones', component: RegistroAccion },
   { path: '/auditoria/tipo-emision-cooperativas', name: 'User Details', component: Page404 },
   { path: '/auditoria/permisos-roles', name: 'User Details', component: Page404 },
   { path: '/auditoria-sri/registro-acciones', name: 'User Details', component: Page404 },
