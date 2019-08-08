@@ -21,8 +21,16 @@ input[type=time]::-webkit-clear-button {
 input[type=time].no-ampm::-webkit-datetime-edit-ampm-field {
     display: none;
 }
+
+// primer nivel del menu
 .sidebar-nav .active {
     border-radius: 60px 0 0 60px;
     background: #4798e8;
     color: #fff !important;
 }
+.sidebar-nav .first-level .active {
+    border-radius: unset;
+    background: unset;
+    color: black !important;
+    font-weight: bold;
+} 
