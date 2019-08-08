@@ -70,7 +70,6 @@ class MainView extends React.Component {
 
     render(){
         const { categories, permissions } = this.props
-        console.log(this.props)
         return (
             <div>
                 <form className="mt-4 form-horizontal">
@@ -277,7 +276,7 @@ class EditRoles extends React.Component {
         if(index !== -1){
             permissions.splice(index, 1)
             if(type){
-                // deseleccionar
+                // deseleccionar el checkbox de todos
                 let _type = `all_${type}`
                 this.setState({
                     [_type]: false 
@@ -298,7 +297,32 @@ class EditRoles extends React.Component {
         this.setState({
             [_type]: e.target.checked
         })
-        this.selectAll(type)
+        if(e.target.checked){
+            this.selectAll(type)
+        }else{
+            this.diselectAll(type)
+        }
+    }
+
+    diselectAll(type){
+        let data = this.state.data
+        let permissions = data.permissions
+
+        for(let i in this.state.categories){
+            let category = this.state.categories[i]
+            for(let j in category.permisos){
+                let permiso = category.permisos[j]
+                let id_permiso = permiso[type]
+
+                let index = permissions.indexOf(id_permiso)
+                if(index > -1)
+                    permissions.splice(index, 1)
+            }
+        }
+        data.permissions = permissions
+        this.setState({
+            data
+        })
     }
 
     selectAll(type){
@@ -309,10 +333,10 @@ class EditRoles extends React.Component {
             let category = this.state.categories[i]
             for(let j in category.permisos){
                 let permiso = category.permisos[j]
-                let i = permiso[type]
+                let id_permiso = permiso[type]
 
-                if(!permissions.includes(i))
-                    permissions.push(i)
+                if(!permissions.includes(id_permiso))
+                    permissions.push(id_permiso)
             }
         }
         data.permissions = permissions

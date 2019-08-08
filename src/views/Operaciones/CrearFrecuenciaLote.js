@@ -1,7 +1,7 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
 import { Card, CardBody, CardTitle, Button, FormGroup, Input, Select, Label } from './../../temeforest'
-import { baseurl, getParameter } from './../../utils/url'
+import { baseurl, getParameter, objectToUrl } from './../../utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import moment from 'moment'
@@ -13,10 +13,12 @@ class MainView extends React.Component {
         labelName: 'nombre',
         valueName: 'id'
     }
-    optionsRutas = {
-        url : `${baseurl}/ruta/`,
-        labelName: (record) => `${record.origen.ciudad_nombre}-${record.destino.ciudad_nombre}`,
-        valueName: 'id'
+    optionsRutas = (obj) => {
+        return {
+            url : `${baseurl}/ruta/${objectToUrl(obj)}`,
+            labelName: (record) => `${record.origen.ciudad_nombre}-${record.destino.ciudad_nombre}`,
+            valueName: 'id'
+        }
     }
     optionsDestinos = {
         url : `${baseurl}/ciudad/`,
@@ -76,7 +78,7 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Ruta</Label>
                         <div className="col-sm-5">
-                            <Select onChange={this.onChange('ruta')} value={this.props.ruta} asyncOptions={this.optionsRutas} id="cmb_ruta" />
+                            <Select onChange={this.onChange('ruta')} value={this.props.ruta} asyncOptions={this.optionsRutas({ cooperativa: this.props.cooperativa })} id="cmb_ruta" />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
