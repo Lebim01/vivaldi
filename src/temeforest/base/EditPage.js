@@ -29,6 +29,12 @@ class EditPage extends React.Component {
         this.confirmDelete = this.confirmDelete.bind(this)
     }
 
+    componentDidMount(){
+        this.setState({
+            submitted: true
+        })
+    }
+
     confirmSave(){
         const { id, data, urlFront, endpoint } = this.props
         let parsed_data = data
@@ -91,12 +97,14 @@ class EditPage extends React.Component {
                     })
                 },
                 allowOutsideClick: () => !Swal.isLoading()
-            }).then(() => {
-                Swal.fire({
-                    text : `Eliminado`,
-                    type : 'success'
-                })
-                this.props.history.push(urlFront)
+            }).then((response) => {
+                if(!response.dismiss){
+                    Swal.fire({
+                        text : `Eliminado`,
+                        type : 'success'
+                    })
+                    this.props.history.push(urlFront)
+                }
             })
         }
     }
@@ -123,14 +131,17 @@ class EditPage extends React.Component {
         const _btnSave = {
             ...defaultBtnSave,
             ...btnSave,
-            ...{
-                disabled : this.state.isFormValidationErrors === true && !noValidate
-            }
+            ...(
+                !noValidate 
+                    ? { disabled : this.state.isFormValidationErrors }
+                    : {}
+            )
         }
         const _btnDelete = {
             ...defaultBtnDelete,
             ...btnDelete
         }
+
         return (
             <ValidateContext.Provider
                 value={{

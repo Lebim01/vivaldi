@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { FormGroup, Input, Label, FormElementValidate, FormValidate } from './../../temeforest'
+import { FormGroup, Input, Label, FormElementValidate } from './../../temeforest'
 import { baseurl } from './../../utils/url'
 import axios from 'axios'
 
@@ -68,6 +68,9 @@ class EditPersona extends React.Component {
                 },
                 loading: false
             })
+            if(this.props.onChange){
+                this.props.onChange(data[0])
+            }
             return true
         }else{
             this.setState({
@@ -97,7 +100,7 @@ class EditPersona extends React.Component {
                 <Row>
                     <Col xs="12" md="12">
                         <div>
-                            <FormValidate className="mt-4 form-horizontal" style={{marginTop: 0}}>
+                            <form className="mt-4 form-horizontal" style={{marginTop: 0}}>
                                 <FormElementValidate
                                     label={{text:'Cédula/RUC'}}
                                     input={{
@@ -129,10 +132,10 @@ class EditPersona extends React.Component {
                                     }}
                                     validator={{
                                         validationRules: { required : true, email: true },
-                                        validationMessages : { email: "El valor debe ser un correo válido" }
+                                        validationMessages : { required: "El campo es requerido", email: "El valor debe ser un correo válido" }
                                     }}
                                 />
-                            </FormValidate>
+                            </form>
                         </div>
                     </Col>
                 </Row>

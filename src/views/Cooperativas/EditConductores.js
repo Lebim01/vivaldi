@@ -122,27 +122,8 @@ class EditConductor extends React.Component {
     _onChange = name => (e) => {
         this.onChange(name, e.target.value)
     }
-    editPersona(data = {}){
-        this.onChange('readOnlyPersona', false)
-        this.onChange('persona', data)
-    }
-    readOnlyPersona(){
-        this.onChange('readOnlyPersona', true)
-    }
     async onChangePersona(data){
         this.onChange('persona', data)
-        if(data.identificacion !== this.state.data.persona.identificacion){
-            let success = await this.searchPersona(data.identificacion)
-            if(!success){
-                this.onChange('persona', { identificacion: data.identificacion })
-
-                if(data.identificacion.length === 13){
-                    this.editPersona({ identificacion: data.identificacion })
-                }else{
-                    this.readOnlyPersona()
-                }
-            }
-        }
     }
     UploadFile = (e) => {
         let el = document.getElementById("documentation");
@@ -179,14 +160,14 @@ class EditConductor extends React.Component {
                 history={this.props.history}
                 parseData={this.parseData.bind(this)}
             >
-                <FormValidate className="mt-4 form-horizontal">
+                <FormValidate className="mt-4 form-horizontal" noValidate={false}>
                     <FormGroup className="row">
                         <Label className="col-sm-3">Cooperativa</Label>
                         <div className="col-sm-5">
                             <Select options={cooperativas} onChange={this._onChange('cooperativa')} value={this.state.data.cooperativa} />
                         </div>
                     </FormGroup>
-                    <EditPersona data={this.state.data.persona} readOnly={this.state.data.readOnlyPersona} onChange={this.onChangePersona} />
+                    <EditPersona lengthCedula={13} id={this.state.data.persona ? this.state.data.persona.id : null} readOnly={this.state.data.readOnlyPersona} onChange={this.onChangePersona} />
                     <FormGroup className="row">
                       <Label className="col-sm-3">Tipo</Label>
                         <div className="col-sm-5">
