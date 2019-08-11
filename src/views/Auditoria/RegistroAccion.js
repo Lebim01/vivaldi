@@ -5,10 +5,7 @@ import { baseurl } from './../../utils/url'
 
 class RegistroAccion extends React.Component {
 
-  state = {
-    //fecha : moment().format('YYYY-MM-DD'),
-    //estado: 0
-  }
+  state = {}
 
   optionsCooperativa = {
     url : `${baseurl}/cooperativa/`,
@@ -23,8 +20,8 @@ class RegistroAccion extends React.Component {
   }
 
   optionsTable = {
-    url : `${baseurl}/auditcrud`,
-    labelName: 'content_type',
+    url : `${baseurl}/tables/`,
+    labelName: 'name',
     valueName: 'id'
   }
 
@@ -42,7 +39,6 @@ class RegistroAccion extends React.Component {
 
   render() {
     const { refresh } = this.state
-    console.log(this.state)
     return (
       <div className="animated fadeIn">
       <div className="row">
@@ -84,7 +80,7 @@ class RegistroAccion extends React.Component {
                             <FormGroup className="row">
                                 <Label className="col-sm-3">Tabla</Label>
                                 <div className="col-sm-6">
-                                    <Select asyncOptions={this.optionsTable} onChange={this.onChange('content-type')} value={this.state.cooperativa}/>
+                                    <Select asyncOptions={this.optionsTable} onChange={this.onChange('content_type')} value={this.state.cooperativa}/>
                                 </div>
                             </FormGroup>
                         </div>
@@ -106,11 +102,8 @@ class RegistroAccion extends React.Component {
 
                         url='auditcrud'
 
-                        //menu='operaciones'
-                        //submenu='solicitudes/usuario'
                         parameters={this.state}
 
-                        //history={this.props.history}
                         refresh={refresh}
                     />
                   </CardBody>
