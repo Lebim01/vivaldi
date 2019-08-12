@@ -4,16 +4,21 @@ import { CardTitle, InputIcon, Button } from './../../temeforest'
 import axios from 'axios'
 import { baseurl, objectToUrl } from './../../utils/url'
 
+// numero de filas por pagina
+const RowsPerPage = 25
+// numero limite de paginas visibles en el footer
+const NumVisibleFooterPages = 5
+
 class RecordRow extends React.Component {
 
-    onRowDoubleClick(){
+    onRowDoubleClick = () => {
         this.props.onDoubleClick(this.props.record.id)
     }
 
     render(){
         const { fields, record } = this.props
         return (
-            <tr key={record.id} onDoubleClick={this.onRowDoubleClick.bind(this)}>
+            <tr key={record.id} onDoubleClick={this.onRowDoubleClick}>
                 {fields.map((field, i) => {
                     return (
                         <td key={i}>
@@ -29,30 +34,77 @@ class RecordRow extends React.Component {
 
 class ListPage extends React.Component {
 
-    state = { data:[], filtered : [] }
+    state = { 
+        loading : false,
+        // resultados completos de la peticion
+        results:[], 
+        // resultados filtrados
+        filtered : [], 
+        // numero de pagina en la que esta posicionado
+        currentPage : null, 
+        // numero de paginas en total que hay en el catalogo
+        numPages : 1,
+        // 
+        numBeginVisibleFooterPages : 1,
+        numEndVisibleFooterPages : 1
+    }
 
-    constructor(props){
-        super(props)
-        this.onRowDoubleClick = this.onRowDoubleClick.bind(this)
-        this.onFilterChange = this.onFilterChange.bind(this)
+    getVisibleFooterPages = () => {
+        const { currentPage, numPages } = this.state
+        let numBeginVisibleFooterPages = 1,
+            numEndVisibleFooterPages = 1
+
+        if(currentPage - NumVisibleFooterPages < 0) {
+            numBeginVisibleFooterPages = 1
+        }
+        else {
+            numBeginVisibleFooterPages = currentPage - NumVisibleFooterPages
+        }
+
+        if(numPages <= 5) {
+            numEndVisibleFooterPages = numPages
+        }
+        else if(numPages >= numBeginVisibleFooterPages + NumVisibleFooterPages) {
+            numEndVisibleFooterPages = numBeginVisibleFooterPages + NumVisibleFooterPages
+        }
+        else {
+            numEndVisibleFooterPages = numPages
+        }
+
+        this.setState({
+            numBeginVisibleFooterPages,
+            numEndVisibleFooterPages
+        })
     }
 
     loadList = async (parameters = {}) => {
-        let { data } = await axios.get(`${baseurl}/${this.props.url}/${objectToUrl(parameters)}`)
         this.setState({
-            data,
-            filtered : data
+            loading: true
         })
+        const { currentPage } = this.state
+        const { data } = await axios.get(`${baseurl}/${this.props.url}/${objectToUrl({ ...parameters, page : currentPage })}`)
+        const { results, count, next, previous } = data
+
+        this.setState({
+            results,
+            filtered : results,
+            count,
+            numPages : Math.ceil(count / RowsPerPage),
+            next,
+            previous,
+            loading: false
+        }, this.getVisibleFooterPages)
     }
 
     componentWillReceiveProps(props){
         this.loadList(props.parameters)
     }
+
     componentDidMount(){
-        this.loadList(this.props.parameters)
+        this.setPage(1)
     }
 
-    onRowDoubleClick(id){
+    onRowDoubleClick = (id) => {
         if(this.props.menu && this.props.redirect){
             this.props.history.push(`/${this.props.menu}/${this.props.submenu}/edit?id=${id}`)
         }
@@ -65,16 +117,63 @@ class ListPage extends React.Component {
         let newState = {}
 
         let compare = (v1, v2) => (v1 || '').toUpperCase().includes((v2 || '').toUpperCase())
-        newState.filtered = this.state.data.filter((record) => searchFields.some((field) => compare(record[field], value)))
+        newState.filtered = this.state.results.filter((record) => searchFields.some((field) => compare(record[field], value)))
 
         this.setState({
             ...newState
         })
     }
 
+    next = (e) => {
+        e.preventDefault()
+        const { currentPage, next, loading } = this.state
+        if(next && !loading){
+            let nextPage = currentPage + 1
+            this.setPage(nextPage)
+        }
+    }
+
+    previous = (e) => {
+        e.preventDefault()
+        const { currentPage, previous, loading } = this.state
+        if(previous && !loading){
+            let nextPage = currentPage - 1
+            this.setPage(nextPage)
+        }
+    }
+
+    first = (e) => {
+        e.preventDefault()
+        const { currentPage, loading } = this.state
+        if(currentPage > 1 && !loading){
+            this.setPage(1)
+        }
+    }
+
+    last = (e) => {
+        e.preventDefault()
+        const { numPages, currentPage, loading } = this.state
+        if(currentPage < numPages && !loading){
+            this.setPage(numPages)
+        }
+    }
+
+    setPage = (page) => {
+        const { currentPage } = this.state
+        if(page !== currentPage){
+            const { parameters } = this.props
+            this.setState({
+                currentPage : page
+            }, () => {
+                this.loadList({ ...parameters, page })
+            })
+        }
+    }
+
     render(){
         const { title, searchPlaceholder, fieldNames, fields, searchable, head } = this.props
-        const { filtered } = this.state
+        const { filtered, numPages, next, previous, currentPage, numBeginVisibleFooterPages, numEndVisibleFooterPages, loading } = this.state
+
         return (
             <div>
                 { title && <CardTitle>{ title }</CardTitle> }
@@ -94,7 +193,7 @@ class ListPage extends React.Component {
                 <Row>
                     <Col xs="12" md="12">
                         <div className="table-responsive">
-                            <table className="table table-hover table-striped">
+                            <table className="table table-hover table-striped footable footable-5 footable-paging footable-paging-center">
                                 <thead>
                                     { (fieldNames.length > 0) &&
                                         <tr>
@@ -130,6 +229,38 @@ class ListPage extends React.Component {
                                 <tbody>
                                     {filtered.map((record, i) => <RecordRow record={record} fields={fields} key={i} onDoubleClick={() => this.onRowDoubleClick(record.id)} />)}
                                 </tbody>
+                                <tfoot>
+                                    <tr className="footable-paging">
+                                        <td colspan="8">
+                                            <div className="footable-pagination-wrapper text-center">
+                                                <ul className="pagination justify-content-center">
+                                                    <li className={`footable-page-nav ${previous && !loading ? 'pointer' : 'link-disabled'}`} data-page="first">
+                                                        <a className="footable-page-link" onClick={this.first}>«</a>
+                                                    </li>
+                                                    <li className={`footable-page-nav ${previous && !loading ? 'pointer' : 'link-disabled'}`} data-page="prev">
+                                                        <a className="footable-page-link" onClick={this.previous}>‹</a>
+                                                    </li>
+                                                    { new Array(numEndVisibleFooterPages - numBeginVisibleFooterPages + 1).fill(1).map((z, index) => {
+                                                        let page = Number(numBeginVisibleFooterPages) + Number(index)
+                                                        return (
+                                                            <li className={`footable-page visible ${page === currentPage ? 'active' : ''}`} data-page={page}>
+                                                                <a className="footable-page-link" onClick={() => this.setPage(page)}>{ page }</a>
+                                                            </li>
+                                                        )
+                                                    })}
+                                                    <li className={`footable-page-nav ${next && !loading ? 'pointer' : 'link-disabled'}`} data-page="next">
+                                                        <a className="footable-page-link" onClick={this.next}>›</a>
+                                                    </li>
+                                                    <li className={`footable-page-nav ${next && !loading ? 'pointer' : 'link-disabled'}`} data-page="last">
+                                                        <a className="footable-page-link" onClick={this.last}>»</a>
+                                                    </li>
+                                                </ul>
+                                                <div className="divider"></div>
+                                                <span class="label label-info">{currentPage} de {numPages}</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </Col>

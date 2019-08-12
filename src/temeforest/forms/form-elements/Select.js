@@ -31,7 +31,8 @@ class Select extends React.Component {
                 : typeof this.props.asyncOptions === 'function' ? this.props.asyncOptions() : this.props.asyncOptions
 
         const { data } = await axios.get(url)
-        let _options = [{value:'',label:'Seleccione'}, ...data.map((record) => {
+        const { results } = data
+        let _options = [{value:'',label:'Seleccione'}, ...results.map((record) => {
             return {
                 value: record[valueName],
                 label: typeof labelName === 'function' ? labelName(record) : record[labelName]
