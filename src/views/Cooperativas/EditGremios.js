@@ -26,7 +26,7 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Descripción</Label>
                         <div className="col-sm-5">
-                            <TextArea onChange={this.onChange('descripcion')} rows="6">{this.props.descripcion}</TextArea>
+                          <TextArea onChange={this.onChange('descripcion')} rows="6" value={this.props.descripcion}/>
                         </div>
                     </FormGroup>
                 </form>
@@ -148,7 +148,7 @@ class EditGremio extends React.Component {
                                 </CardBody>
                                 <div className="row">
                                     <div className="col-sm-12 text-center">
-                                        <Button type="success" style={{marginRight:5}} onClick={() => this.confirmSave() }>Guardar</Button>
+ 	                                       <Button type="success" style={{marginRight:5}} onClick={() => this.confirmSave() }>Guardar</Button>
                                         <Button type="danger" style={{marginLeft:5}} disabled={!id} onClick={() => this.confirmDelete()}>Eliminar</Button>
                                     </div>
                                 </div>

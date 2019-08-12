@@ -5,10 +5,7 @@ import { baseurl } from './../../utils/url'
 
 class RegistroAccion extends React.Component {
 
-  state = {
-    fecha : moment().format('YYYY-MM-DD'),
-    estado: 0
-  }
+  state = {}
 
   optionsCooperativa = {
     url : `${baseurl}/cooperativa/`,
@@ -23,8 +20,8 @@ class RegistroAccion extends React.Component {
   }
 
   optionsTable = {
-    url : `${baseurl}/auditcrud`,
-    labelName: 'content_type',
+    url : `${baseurl}/tables/`,
+    labelName: 'name',
     valueName: 'id'
   }
 
@@ -55,13 +52,13 @@ class RegistroAccion extends React.Component {
                             <FormGroup className="row">
                                 <Label className="col-sm-5">Cooperativa</Label>
                                 <div className="col-sm-6">
-                                    <Select asyncOptions={this.optionsCooperativa} onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
+                                    <Select asyncOptions={this.optionsCooperativa} value={this.state.cooperativa}/>
                                 </div>
                             </FormGroup>
                             <FormGroup className="row">
                                 <Label className="col-sm-5">Localidad</Label>
                                 <div className="col-sm-6">
-                                    <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.cooperativa}/>
+                                    <Select asyncOptions={this.optionsLocalidad} value={this.state.cooperativa}/>
                                 </div>
                             </FormGroup>
                         </div>
@@ -69,13 +66,13 @@ class RegistroAccion extends React.Component {
                             <FormGroup className="row">
                                 <Label className="col-sm-4">Fecha Inicio</Label>
                                 <div className="col-sm-6">
-                                    <Input type="date" onChange={this.onChange('fecha')} value={this.state.fecha} />
+                                    <Input type="date" value={this.state.fecha} />
                                 </div>
                             </FormGroup>
                             <FormGroup className="row">
                                 <Label className="col-sm-4">Fecha Fin</Label>
                                 <div className="col-sm-6">
-                                <Input type="date" onChange={this.onChange('fecha')} value={this.state.fecha} />
+                                <Input type="date" value={this.state.fecha} />
                                 </div>
                             </FormGroup>
                         </div>
@@ -83,7 +80,7 @@ class RegistroAccion extends React.Component {
                             <FormGroup className="row">
                                 <Label className="col-sm-3">Tabla</Label>
                                 <div className="col-sm-6">
-                                    <Select asyncOptions={this.optionsTable} onChange={this.onChange('table')} value={this.state.cooperativa}/>
+                                    <Select asyncOptions={this.optionsTable} onChange={this.onChange('content_type')} value={this.state.cooperativa}/>
                                 </div>
                             </FormGroup>
                         </div>
@@ -105,11 +102,8 @@ class RegistroAccion extends React.Component {
 
                         url='auditcrud'
 
-                        //menu='operaciones'
-                        //submenu='solicitudes/usuario'
-                        //parameters={this.state}
+                        parameters={this.state}
 
-                        //history={this.props.history}
                         refresh={refresh}
                     />
                   </CardBody>
