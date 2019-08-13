@@ -6,11 +6,15 @@ import { baseurl } from './../../utils/url'
 
 class AddCooperativaPuntoVentaModal extends React.Component {
 
-    seleccione = [{label:'Seleccione', value:''}]
     state = {
         errors : [],
-        cooperativas : [],
         data : {}
+    }
+
+    optionsCooperativa = {
+        url : `${baseurl}/cooperativa/`,
+        labelName: 'nombre',
+        valueName: 'id'
     }
 
     constructor(props){
@@ -21,24 +25,12 @@ class AddCooperativaPuntoVentaModal extends React.Component {
         this.getCooperativaName = this.getCooperativaName.bind(this)
     }
 
-    componentDidMount(){
-        this.getCooperativas()
-    }
-
     componentWillReceiveProps(props){
         const { id, cooperativa, cooperativa_nombre, punto_emision_tasa, secuencia_tasa, punto_emision_boleto, secuencia_boleto, punto_emision_nota_credito, secuencia_nota_credito } = props
         this.setState({
             data : {
                 id, cooperativa, cooperativa_nombre, punto_emision_tasa, secuencia_tasa, punto_emision_boleto, secuencia_boleto, punto_emision_nota_credito, secuencia_nota_credito
             }
-        })
-    }
-
-    getCooperativas = async () => {
-        const { data } = await axios.get(`${baseurl}/cooperativa/`)
-        let options = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : r.nombre } })]
-        this.setState({
-            cooperativas : options
         })
     }
 
@@ -95,7 +87,7 @@ class AddCooperativaPuntoVentaModal extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-6">Cooperativa</Label>
                             <div className="col-sm-6">
-                                <Select options={this.state.cooperativas} onChange={this.onChange('cooperativa')} value={this.state.data.cooperativa} error={errors.includes('cooperativa')} />
+                                <Select asyncOptions={this.optionsCooperativas} onChange={this.onChange('cooperativa')} value={this.state.data.cooperativa} error={errors.includes('cooperativa')} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
