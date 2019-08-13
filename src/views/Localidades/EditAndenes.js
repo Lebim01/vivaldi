@@ -104,7 +104,7 @@ class MainView extends React.Component {
 
     getNiveles = async (id)  => {
         const { data } = await axios.get(`${baseurl}/localidadnivel/?localidad=${id}`)
-        let options = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : r.nombre } })]
+        let options = [...this.seleccione, ...data.results.map((r) => { return { value : r.id, label : r.nombre } })]
         this.setState({
           niveles : options
         })
@@ -112,7 +112,7 @@ class MainView extends React.Component {
 
     getLocalidades = async (id)  => {
         const { data } = await axios.get(`${baseurl}/localidad/`)
-        let options = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : r.nombre } })]
+        let options = [...this.seleccione, ...data.results.map((r) => { return { value : r.id, label : r.nombre } })]
         this.setState({
           localidades : options
         }, ()=>{
@@ -128,7 +128,7 @@ class MainView extends React.Component {
 
     getSilos = async ()  => {
         const { data } = await axios.get(`${baseurl}/silo/`)
-        let options = [...data.map((r) => { return { value : r.id, label : r.descripcion } })]
+        let options = [...data.results.map((r) => { return { value : r.id, label : r.descripcion } })]
         this.setState({
             silos : options
         })
@@ -136,7 +136,7 @@ class MainView extends React.Component {
 
     getPuertas = async ()  => {
         const { data } = await axios.get(`${baseurl}/puerta/`)
-        let options = [...data.map((r) => { return { value : r.id, label : r.numero } })]
+        let options = [...data.results.map((r) => { return { value : r.id, label : r.numero } })]
         this.setState({
             puertas : options
         })

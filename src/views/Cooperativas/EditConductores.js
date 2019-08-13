@@ -74,7 +74,7 @@ class EditConductor extends React.Component {
 
     getCooperativas = async () => {
         const { data } = await axios.get(`${baseurl}/cooperativa/`)
-        let options = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : r.nombre } })]
+        let options = [...this.seleccione, ...data.results.map((r) => { return { value : r.id, label : r.nombre } })]
         this.setState({
             cooperativas : options
         })

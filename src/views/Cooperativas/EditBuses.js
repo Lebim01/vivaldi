@@ -191,7 +191,7 @@ class EditBuses extends React.Component {
 
     getCooperativas = async () => {
         const { data } = await axios.get(`${baseurl}/cooperativa/`)
-        let options = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : r.nombre } })]
+        let options = [...this.seleccione, ...data.results.map((r) => { return { value : r.id, label : r.nombre } })]
         this.setState({
             cooperativas : options
         })
@@ -199,14 +199,14 @@ class EditBuses extends React.Component {
 
     getMarcas = async () => {
         const { data } = await axios.get(`${baseurl}/marca/`)
-        let options = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : r.nombre } })]
+        let options = [...this.seleccione, ...data.results.map((r) => { return { value : r.id, label : r.nombre } })]
         this.setState({
             marcas : options
         })
     }
     getPropietarios = async () => {
         const { data } = await axios.get(`${baseurl}/persona/`)
-        let options = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : r.nombres } })]
+        let options = [...this.seleccione, ...data.results.map((r) => { return { value : r.id, label : r.nombres } })]
         this.setState({
             propietarios : options
         })
@@ -214,7 +214,7 @@ class EditBuses extends React.Component {
 
     getConductores = async () => {
         const { data } = await axios.get(`${baseurl}/conductor/`)
-        let options = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : `${r.nombres} ${r.apellidos}` } })]
+        let options = [...this.seleccione, ...data.results.map((r) => { return { value : r.id, label : `${r.nombres} ${r.apellidos}` } })]
         this.setState({
             conductores : options
         })
@@ -222,7 +222,7 @@ class EditBuses extends React.Component {
 
     getBusTipos = async () => {
         const { data } = await axios.get(`${baseurl}/busTipo/`)
-        let options = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : r.nombre } })]
+        let options = [...this.seleccione, ...data.results.map((r) => { return { value : r.id, label : r.nombre } })]
         this.setState({
             busTipos : options
         })
@@ -230,7 +230,7 @@ class EditBuses extends React.Component {
 
     getBusTipoServicios = async () => {
         const { data } = await axios.get(`${baseurl}/busTipoServicio/`)
-        let options = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : r.nombre } })]
+        let options = [...this.seleccione, ...data.results.map((r) => { return { value : r.id, label : r.nombre } })]
         this.setState({
             busTiposServicios : options
         })

@@ -247,7 +247,7 @@ class EditPuntoVenta extends React.Component {
     getLocalidades = async () => {
         const { data } = await axios.get(`${baseurl}/localidad/`)
         this.setState({
-            localidades : [...this.seleccione, ...data.map((row) => { return { label: row.nombre, value: row.id } })]
+            localidades : [...this.seleccione, ...data.results.map((row) => { return { label: row.nombre, value: row.id } })]
         })
     }
 

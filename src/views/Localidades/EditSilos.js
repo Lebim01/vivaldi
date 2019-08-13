@@ -46,7 +46,7 @@ class MainView extends React.Component {
 
     getAndenes = async ()  => {
         const { data } = await axios.get(`${baseurl}/anden/`)
-        let options = [...data.map((r) => { return { value : r.id, label : r.descripcion } })]
+        let options = [...data.results.map((r) => { return { value : r.id, label : r.descripcion } })]
         this.setState({
             andenes : options
         })

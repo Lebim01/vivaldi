@@ -97,7 +97,7 @@ class EditSilo extends React.Component {
 
     getLocalidades = async () => {
         const { data } = await axios.get(`${baseurl}/localidad/`)
-        let options = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : r.nombre } })]
+        let options = [...this.seleccione, ...data.results.map((r) => { return { value : r.id, label : r.nombre } })]
         this.setState({
             localidades : options
         })
