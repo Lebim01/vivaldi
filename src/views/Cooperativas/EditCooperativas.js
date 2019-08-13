@@ -325,10 +325,10 @@ class EditCooperativas extends React.Component {
         const { data } = await axios.get(`${baseurl}/localidad/`)
         let tabs = [...data.results.map((r) => { return { link : r.id, text : r.nombre } })]
         let localidades = {}
-        for(let i in data){
-            localidades[data[i].id] = {
-                ...data[i],
-                andenes : this.getAndendes(data[i])
+        for(let i in data.results){
+            localidades[data.results[i].id] = {
+                ...data.results[i],
+                andenes : this.getAndendes(data.results[i])
             }
         }
         this.setState({
