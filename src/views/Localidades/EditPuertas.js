@@ -51,7 +51,7 @@ class MainView extends React.Component {
 
     getAndenes = async ()  => {
         const { data } = await axios.get(`${baseurl}/anden/`)
-        let options = [...data.map((r) => { return { value : r.id, label : r.descripcion } })]
+        let options = [...data.results.map((r) => { return { value : r.id, label : r.descripcion } })]
         this.setState({
             andenes : options
         })
@@ -70,7 +70,7 @@ class MainView extends React.Component {
 
     getNiveles = async (id)  => {
         const { data } = await axios.get(`${baseurl}/localidadnivel/?localidad=${id}`)
-        let options = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : r.nombre } })]
+        let options = [...this.seleccione, ...data.results.map((r) => { return { value : r.id, label : r.nombre } })]
         this.setState({
           niveles : options
         })
@@ -78,7 +78,7 @@ class MainView extends React.Component {
 
     getLocalidades = async (id)  => {
         const { data } = await axios.get(`${baseurl}/localidad/`)
-        let options = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : r.nombre } })]
+        let options = [...this.seleccione, ...data.results.map((r) => { return { value : r.id, label : r.nombre } })]
         this.setState({
           localidades : options
         }, ()=>{

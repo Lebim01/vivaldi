@@ -321,7 +321,7 @@ class EditLocalidades extends React.Component {
     getCiudades = async () => {
         const { data } = await axios.get(`${baseurl}/ciudad/`)
         console.log(data)
-        let ciudades = [...this.seleccione, ...data.map((r) => { return { value : r.id, label : r.nombre } })]
+        let ciudades = [...this.seleccione, ...data.results.map((r) => { return { value : r.id, label : r.nombre } })]
         this.setState({
           ciudades:ciudades
         })
