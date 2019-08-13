@@ -83,15 +83,32 @@ class ListPage extends React.Component {
         })
         const { currentPage } = this.state
         const { data } = await axios.get(`${baseurl}/${this.props.url}/${objectToUrl({ ...parameters, page : currentPage })}`)
-        const { results, count, next, previous } = data
+
+        let _results = [], 
+            _count = 0, 
+            _next = null, 
+            _previous = null,
+            _numPages = 1
+
+        if(Array.isArray(data)){
+            _results = data
+            _count = data.length
+        }else{
+            const { results, count, next, previous } = data
+            _results = results
+            _count = count
+            _next = next
+            _previous = previous
+            _numPages = Math.ceil(_count / RowsPerPage)
+        }
 
         this.setState({
-            results,
-            filtered : results,
-            count,
-            numPages : Math.ceil(count / RowsPerPage),
-            next,
-            previous,
+            results : _results,
+            filtered : _results,
+            count : _count,
+            numPages : _numPages,
+            next : _next,
+            previous : _previous,
             loading: false
         }, this.getVisibleFooterPages)
     }
@@ -193,6 +210,11 @@ class ListPage extends React.Component {
                 <Row>
                     <Col xs="12" md="12">
                         <div className="table-responsive">
+                            { loading &&
+                                <div className="spinner-border text-info spinner-center" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                            }
                             <table className="table table-hover table-striped footable footable-5 footable-paging footable-paging-center">
                                 <thead>
                                     { (fieldNames.length > 0) &&

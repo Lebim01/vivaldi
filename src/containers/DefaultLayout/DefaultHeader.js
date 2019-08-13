@@ -111,11 +111,11 @@ class DefaultHeader extends Component {
                             </a>
                             <div className="dropdown-menu mailbox animated bounceInDown">
                                 <span className="with-arrow">
-                                    <span className="bg-primary"></span>
+                                    <span className="bg-info"></span>
                                 </span>
                                 <ul className="list-style-none">
                                     <li>
-                                        <div className="drop-title bg-primary text-white">
+                                        <div className="drop-title bg-info text-white">
                                             <h4 className="m-b-0 m-t-5">4 New</h4>
                                             <span className="font-light">Notifications</span>
                                         </div>
@@ -200,10 +200,10 @@ class DefaultHeader extends Component {
                             </a>
                             <div className="dropdown-menu dropdown-menu-right user-dd animated flipInY">
                                 <span className="with-arrow">
-                                    <span className="bg-primary"></span>
+                                    <span className="bg-info"></span>
                                 </span>
-                                <div className="d-flex no-block align-items-center p-15 bg-primary text-white m-b-10">
-                                    <div className="">
+                                <div className="d-flex no-block align-items-center p-15 bg-info text-white m-b-10" style={{padding: 10}}>
+                                    <div className="" style={{padding: 10}}>
                                         <img src="../../assets/img/LOGO-ICON.png" alt="user" className="img-circle" width="60" />
                                     </div>
                                     <div className="m-l-10">

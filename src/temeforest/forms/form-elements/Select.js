@@ -1,7 +1,7 @@
 
 import React from 'react'
 import FormGroup from './FormGroup'
-import axios from '../../../utils/axios';
+import axios from 'axios';
 
 class Select extends React.Component {
 
@@ -30,9 +30,18 @@ class Select extends React.Component {
                 ? typeof props.asyncOptions === 'function' ? props.asyncOptions() : props.asyncOptions
                 : typeof this.props.asyncOptions === 'function' ? this.props.asyncOptions() : this.props.asyncOptions
 
+        // get results
+        let _results = []
         const { data } = await axios.get(url)
-        const { results } = data
-        let _options = [{value:'',label:'Seleccione'}, ...results.map((record) => {
+        if(Array.isArray(data)){
+            _results = data
+        }else{
+            const { results } = data
+            _results = results
+        }
+
+        // fill options with results
+        let _options = [{value:'',label:'Seleccione'}, ..._results.map((record) => {
             return {
                 value: record[valueName],
                 label: typeof labelName === 'function' ? labelName(record) : record[labelName]
