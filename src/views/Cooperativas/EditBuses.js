@@ -1,12 +1,46 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label, Select, FormElementValidate, FormValidate } from './../../temeforest'
+import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label, Select, FormElementValidate, FormValidate, EditPage } from './../../temeforest'
 import { baseurl, baseMediaUrl, getParameter } from './../../utils/url'
 import { fileToBase64 } from './../../utils/file'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 
+const endpoint = 'bus'
+const urlFront = '/cooperativas/buses'
+
 class MainView extends React.Component {
+
+    optionsCooperativa = {
+        url : `${baseurl}/cooperativa/`,
+        labelName: 'nombre',
+        valueName: 'id'
+    }
+    optionsBusTipos = {
+        url : `${baseurl}/busTipo/`,
+        labelName: 'nombre',
+        valueName: 'id'
+    }
+    optionsBusTiposServicios = {
+        url : `${baseurl}/busTipoServicio/`,
+        labelName : 'nombre',
+        valueName : 'id'
+    }
+    optionsMarcas = {
+        url : `${baseurl}/marca/`,
+        labelName : 'nombre',
+        valueName : 'id'
+    }
+    optionsConductores = {
+        url : `${baseurl}/conductor/`,
+        labelName : (r) => `${r.nombres} ${r.apellidos}`,
+        valueName : 'id'
+    }
+    optionsPropietarios = {
+        url : `${baseurl}/persona/`,
+        labelName : 'nombres',
+        valueName : 'id'
+    }
 
     onChange = name => (e) => {
         if(this.props.onChange){
@@ -46,7 +80,6 @@ class MainView extends React.Component {
     }
 
     render(){
-        const { cooperativas, marcas, busTipos, busTiposServicios, conductores, propietarios } = this.props
         return (
             <div>
                 <FormValidate className="mt-4 form-horizontal">
@@ -58,7 +91,7 @@ class MainView extends React.Component {
                         }}
                         validator={{
                             validationRules: { required : true, number: true, minRangeNumber : 1, maxRangeNumber : 1000 },
-                            validationMessages : { number : "El valor debe ser un número" }
+                            validationMessages : { required: 'El campo es requerido', number : "El valor debe ser un número", minRangeNumber: 'El valor debe ser entre 1 y 1000', maxRangeNumber : 'El valor debe ser entre 1 y 1000' }
                         }}
                     />
                     <FormElementValidate
@@ -68,20 +101,20 @@ class MainView extends React.Component {
                             element: <Input onChange={this.onChange('placa')} value={this.props.placa} />
                         }}
                         validator={{
-                            validationRules: { required : true, minRangeNumber : 1, maxRangeNumber : 4 },
-                            validationMessages : { }
+                            validationRules: { required : true, number: true, minLength : 1, maxLength : 4 },
+                            validationMessages : { required : 'El campo es requerido', number: 'El valor debe ser un número', minLength : 'El tamaño del valor debe ser entre 1 y 4 de largo', maxLength : 'El tamaño del valor debe ser entre 1 y 4 de largo' }
                         }}
                     />
                     <FormGroup className="row">
                         <Label className="col-sm-3">Cooperativa</Label>
                         <div className="col-sm-5">
-                            <Select options={cooperativas} onChange={this.onChange('cooperativa')} value={this.props.cooperativa} />
+                            <Select asyncOptions={this.optionsCooperativa} onChange={this.onChange('cooperativa')} value={this.props.cooperativa} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
                         <Label className="col-sm-3">Tipo</Label>
                         <div className="col-sm-5">
-                            <Select options={busTipos} onChange={this.onChange('bus_tipo')} value={this.props.bus_tipo} />
+                            <Select asyncOptions={this.optionsBusTipos} onChange={this.onChange('bus_tipo')} value={this.props.bus_tipo} />
                         </div>
                     </FormGroup>
                     <FormElementValidate
@@ -98,25 +131,25 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Tipo servicio</Label>
                         <div className="col-sm-5">
-                            <Select options={busTiposServicios} onChange={this.onChange('bus_tipo_servicio')} value={this.props.bus_tipo_servicio} />
+                            <Select asyncOptions={this.optionsBusTiposServicios} onChange={this.onChange('bus_tipo_servicio')} value={this.props.bus_tipo_servicio} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
                         <Label className="col-sm-3">Marca</Label>
                         <div className="col-sm-5">
-                            <Select options={marcas} onChange={this.onChange('marca')} value={this.props.marca} />
+                            <Select asyncOptions={this.optionsMarcas} onChange={this.onChange('marca')} value={this.props.marca} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
                         <Label className="col-sm-3">Propietario</Label>
                         <div className="col-sm-5">
-                            <Select options={propietarios} onChange={this.onChange('propietario')} value={this.props.propietario} />
+                            <Select asyncOptions={this.optionsPropietarios} onChange={this.onChange('propietario')} value={this.props.propietario} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
                         <Label className="col-sm-3">Conductor</Label>
                         <div className="col-sm-5">
-                            <Select options={conductores} onChange={this.onChange('conductor')} value={this.props.conductor} />
+                            <Select asyncOptions={this.optionsConductores} onChange={this.onChange('conductor')} value={this.props.conductor} />
                         </div>
                     </FormGroup>
                     <FormElementValidate
@@ -151,30 +184,15 @@ class MainView extends React.Component {
 
 class EditBuses extends React.Component {
 
-    seleccione = [{label:'Seleccione', value:''}]
-    state = {data:{}, cooperativas: [], distribucion:this.seleccione, marcas:[],
-             conductores:[], propietarios:[], busTipos:[], busTiposServicios:[]}
+    state = {data:{}}
 
     constructor(props){
         super(props)
         this.onChange = this.onChange.bind(this)
-        this.confirmSave = this.confirmSave.bind(this)
-        this.getCooperativas = this.getCooperativas.bind(this)
-        this.getMarcas = this.getMarcas.bind(this)
-        this.getBusTipoServicios = this.getBusTipoServicios.bind(this)
-        this.getBusTipos = this.getBusTipos.bind(this)
-        this.getPropietarios = this.getPropietarios.bind(this)
-        this.getConductores = this.getConductores.bind(this)
         this.onChangeFile = this.onChangeFile.bind(this)
     }
 
     componentDidMount(){
-        this.getCooperativas()
-        this.getMarcas()
-        this.getBusTipos()
-        this.getBusTipoServicios()
-        this.getPropietarios()
-        this.getConductores()
         let id = getParameter('id')
         if(id){
             this.getData(id)
@@ -186,53 +204,6 @@ class EditBuses extends React.Component {
         this.setState({
             id,
             data
-        })
-    }
-
-    getCooperativas = async () => {
-        const { data } = await axios.get(`${baseurl}/cooperativa/`)
-        let options = [...this.seleccione, ...data.results.map((r) => { return { value : r.id, label : r.nombre } })]
-        this.setState({
-            cooperativas : options
-        })
-    }
-
-    getMarcas = async () => {
-        const { data } = await axios.get(`${baseurl}/marca/`)
-        let options = [...this.seleccione, ...data.results.map((r) => { return { value : r.id, label : r.nombre } })]
-        this.setState({
-            marcas : options
-        })
-    }
-    getPropietarios = async () => {
-        const { data } = await axios.get(`${baseurl}/persona/`)
-        let options = [...this.seleccione, ...data.results.map((r) => { return { value : r.id, label : r.nombres } })]
-        this.setState({
-            propietarios : options
-        })
-    }
-
-    getConductores = async () => {
-        const { data } = await axios.get(`${baseurl}/conductor/`)
-        let options = [...this.seleccione, ...data.results.map((r) => { return { value : r.id, label : `${r.nombres} ${r.apellidos}` } })]
-        this.setState({
-            conductores : options
-        })
-    }
-
-    getBusTipos = async () => {
-        const { data } = await axios.get(`${baseurl}/busTipo/`)
-        let options = [...this.seleccione, ...data.results.map((r) => { return { value : r.id, label : r.nombre } })]
-        this.setState({
-            busTipos : options
-        })
-    }
-
-    getBusTipoServicios = async () => {
-        const { data } = await axios.get(`${baseurl}/busTipoServicio/`)
-        let options = [...this.seleccione, ...data.results.map((r) => { return { value : r.id, label : r.nombre } })]
-        this.setState({
-            busTiposServicios : options
         })
     }
 
@@ -256,95 +227,12 @@ class EditBuses extends React.Component {
         }
     }
 
-    confirmSave(){
-        const { id, data } = this.state
-        Swal.fire({
-            title: 'Confirmar Guardar',
-            text : '¿Seguro de guardar?',
-            showCancelButton: true,
-            showLoaderOnConfirm: true,
-            preConfirm: () => {
-                return axios.post(`${baseurl}/bus/${id ? `${id}/` : ``}`, data)
-                .then(response => {
-                    if (response.status !== 200 && response.status !== 201) {
-                        throw new Error(response.statusText)
-                    }
-                    return response
-                })
-                .catch(error => {
-                    Swal.showValidationMessage(
-                        `Petición fallida: ${error}`
-                    )
-                })
-            },
-            allowOutsideClick: () => !Swal.isLoading()
-        }).then((result) => {
-            if (result.value) {
-                Swal.fire({
-                    text : `Guardado`,
-                    type : 'success'
-                })
-                this.props.history.push('/cooperativas/buses/')
-            }
-        })
-    }
-
-    confirmDelete(){
-        const { id, data } = this.state
-        if(id){
-            Swal.fire({
-                title: 'Confirmar Eliminar',
-                text : '¿Seguro de eliminar?',
-                showCancelButton: true,
-                showLoaderOnConfirm: true,
-                preConfirm: () => {
-                    return axios.delete(`${baseurl}/bus/${id}`, data)
-                    .then(response => {
-                        if (response.status !== 204) {
-                            throw new Error(response.statusText)
-                        }
-                        return response
-                    })
-                    .catch(error => {
-                        Swal.showValidationMessage(
-                            `Petición fallida: ${error}`
-                        )
-                    })
-                },
-                allowOutsideClick: () => !Swal.isLoading()
-            }).then(() => {
-                Swal.fire({
-                    text : `Eliminado`,
-                    type : 'success'
-                })
-                this.props.history.push('/cooperativas/buses/')
-            })
-        }
-    }
-
     render(){
-        const { id, data, cooperativas, marcas, distribucion, busTiposServicios, busTipos, propietarios, conductores } = this.state
+        const { id, data } = this.state
         return (
-            <div className="animated fadeIn">
-                <Row>
-                    <Col xs="12" md="12">
-                        <Card>
-                            <CardBody>
-                                <CardTitle>Crear/Editar Bus</CardTitle>
-                                <CardBody>
-                                    <MainView {...data} onChange={this.onChange} cooperativas={cooperativas} marcas={marcas} distribucion={distribucion} busTiposServicios={busTiposServicios} busTipos={busTipos} propietarios={propietarios} conductores={conductores} onChangeFile={this.onChangeFile}/>
-                                </CardBody>
-                                <div className="row">
-                                    <div className="col-sm-12 text-center">
-                                        <Button type="success" style={{marginRight:5}} onClick={() => this.confirmSave() }>Guardar</Button>
-                                        <Button type="danger" style={{marginLeft:5}} disabled={!id} onClick={() => this.confirmDelete()}>Eliminar</Button>
-                                    </div>
-                                </div>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                </Row>
-            </div>
+            <EditPage title={`${id ? 'Editar' : 'Crear'} Bus`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
+                <MainView {...data} onChange={this.onChange} onChangeFile={this.onChangeFile}/>
+            </EditPage>
         )
     }
 }

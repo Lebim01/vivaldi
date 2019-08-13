@@ -40,11 +40,13 @@ class AddCooperativaPuntoVentaModal extends React.Component {
         }
     }
 
-    getCooperativaName(id){
-        for(let i in this.state.cooperativas){
-            let row = this.state.cooperativas[i]
-            if(row.value == id)
-                return row.label
+    getCooperativaName(e){
+        let options = e.target.options
+        for(let i in options){
+            let opt = options[i]
+            if(Number(opt.value) === Number(e.target.value)){
+                return opt.label
+            }
         }
         return ''
     }
@@ -52,7 +54,7 @@ class AddCooperativaPuntoVentaModal extends React.Component {
     onChange = name => (e) => {
         let data = this.state.data
         data[name] = e.target.value
-        if(name === 'cooperativa') data.cooperativa_nombre = this.getCooperativaName(e.target.value)
+        if(name === 'cooperativa') data.cooperativa_nombre = this.getCooperativaName(e)
         this.setState({
             data
         })
@@ -87,7 +89,7 @@ class AddCooperativaPuntoVentaModal extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-6">Cooperativa</Label>
                             <div className="col-sm-6">
-                                <Select asyncOptions={this.optionsCooperativas} onChange={this.onChange('cooperativa')} value={this.state.data.cooperativa} error={errors.includes('cooperativa')} />
+                                <Select asyncOptions={this.optionsCooperativa} onChange={this.onChange('cooperativa')} value={this.state.data.cooperativa} error={errors.includes('cooperativa')} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
