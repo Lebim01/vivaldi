@@ -1,7 +1,7 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
 import { FormGroup, Input, Label, FormElementValidate } from './../../temeforest'
-import { baseurl } from './../../utils/url'
+import { baseurl, getResults } from './../../utils/url'
 import axios from 'axios'
 
 class EditPersona extends React.Component {
@@ -60,16 +60,16 @@ class EditPersona extends React.Component {
     }
 
     searchPersona = async (identificacion) => {
-        const { data } = await axios.get(`${baseurl}/persona/?identificacion=${identificacion}`)
-        if(data.length > 0){
+        const results = await getResults(`${baseurl}/persona/?identificacion=${identificacion}`)
+        if(results.length > 0){
             this.setState({
                 data : {
-                    ...data[0]
+                    ...results[0]
                 },
                 loading: false
             })
             if(this.props.onChange){
-                this.props.onChange(data[0])
+                this.props.onChange(results[0])
             }
             return true
         }else{

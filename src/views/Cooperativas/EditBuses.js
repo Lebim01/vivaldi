@@ -1,7 +1,7 @@
 import React from 'react'
-import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label, Select, FormElementValidate, FormValidate, EditPage } from './../../temeforest'
+import { Button, FormGroup, Input, Label, Select, FormElementValidate, FormValidate, EditPage } from './../../temeforest'
 import { baseurl, baseMediaUrl, getParameter } from './../../utils/url'
+import EditPersona from './EditPersona'
 import { fileToBase64 } from './../../utils/file'
 import axios from 'axios'
 import Swal from 'sweetalert2'
@@ -45,6 +45,12 @@ class MainView extends React.Component {
     onChange = name => (e) => {
         if(this.props.onChange){
             this.props.onChange(name, e.target.value)
+        }
+    }
+
+    onChangeData = name => (value) => {
+        if(this.props.onChange){
+            this.props.onChange(name, value)
         }
     }
 
@@ -140,18 +146,6 @@ class MainView extends React.Component {
                             <Select asyncOptions={this.optionsMarcas} onChange={this.onChange('marca')} value={this.props.marca} />
                         </div>
                     </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Propietario</Label>
-                        <div className="col-sm-5">
-                            <Select asyncOptions={this.optionsPropietarios} onChange={this.onChange('propietario')} value={this.props.propietario} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Conductor</Label>
-                        <div className="col-sm-5">
-                            <Select asyncOptions={this.optionsConductores} onChange={this.onChange('conductor')} value={this.props.conductor} />
-                        </div>
-                    </FormGroup>
                     <FormElementValidate
                         label={{text:'Año Fabricación'}}
                         input={{
@@ -163,6 +157,20 @@ class MainView extends React.Component {
                             validationMessages : { number : "El valor debe ser un número" }
                         }}
                     />
+                    <div className="row">
+                        <div className="col-sm-6">
+                            <fieldset>
+                                <legend>Propietario</legend>
+                                <EditPersona lengthCedula={10} onChange={this.onChangeData('propietario')} id={this.props.propietario ? this.props.propietario.id : null} />
+                            </fieldset>
+                        </div>
+                        <div className="col-sm-6">
+                            <fieldset>
+                                <legend>Conductor</legend>
+                                <EditPersona lengthCedula={10} onChange={this.onChangeData('conductor')} id={this.props.conductor ? this.props.conductor.id : null} />
+                            </fieldset>
+                        </div>
+                    </div>
                     <FormGroup className="row">
                         <div className="col-sm-12 text-center">
                             <Input id="documentation" type="file" style={{display:'none'}} onChange={this.onChangeFile}/>
@@ -184,7 +192,12 @@ class MainView extends React.Component {
 
 class EditBuses extends React.Component {
 
-    state = {data:{}}
+    state = {
+        data:{
+            propietario : {},
+            conductor : {}
+        }
+    }
 
     constructor(props){
         super(props)

@@ -1,10 +1,11 @@
 import React from 'react'
-import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Button, FormGroup, Input, Select, Label, ListGroup, ListItem, Tabs, DualList } from './../../temeforest'
-import { baseurl, getParameter } from './../../utils/url'
+import { FormGroup, Input, Select, Label, DualList, EditPage } from './../../temeforest'
+import { baseurl, getParameter, getResults } from './../../utils/url'
 import axios from 'axios'
-import Swal from 'sweetalert2'
 import 'react-dual-listbox/lib/react-dual-listbox.css';
+
+const endpoint = 'silo'
+const urlFront = '/localidades/silos'
 
 class ListAndenes extends React.Component {
     render(){
@@ -45,8 +46,8 @@ class MainView extends React.Component {
     }
 
     getAndenes = async ()  => {
-        const { data } = await axios.get(`${baseurl}/anden/`)
-        let options = [...data.results.map((r) => { return { value : r.id, label : r.descripcion } })]
+        const results = await getResults(`${baseurl}/anden/`)
+        let options = [...results.map((r) => { return { value : r.id, label : r.descripcion } })]
         this.setState({
             andenes : options
         })
@@ -55,7 +56,6 @@ class MainView extends React.Component {
     toggleAndenes(selected){
         this.props.onChange('andenes', selected)
     }
-
 
     render(){
         const { andenes } = this.state
@@ -128,7 +128,6 @@ class EditSilo extends React.Component {
     constructor(props){
         super(props)
         this.onChange = this.onChange.bind(this)
-        this.confirmSave = this.confirmSave.bind(this)
     }
 
     componentDidMount(){
@@ -154,95 +153,12 @@ class EditSilo extends React.Component {
         })
     }
 
-    confirmSave(){
-        const { id, data } = this.state
-        Swal.fire({
-            title: 'Confirmar Guardar',
-            text : '¿Seguro de guardar?',
-            showCancelButton: true,
-            showLoaderOnConfirm: true,
-            preConfirm: () => {
-                return axios.post(`${baseurl}/silo/${id ? `${id}/` : ``}`, data)
-                .then(response => {
-                    if (response.status !== 200 && response.status !== 201) {
-                        throw new Error(response.statusText)
-                    }
-                    return response
-                })
-                .catch(error => {
-                    Swal.showValidationMessage(
-                        `Petición fallida: ${error}`
-                    )
-                })
-            },
-            allowOutsideClick: () => !Swal.isLoading()
-        }).then((result) => {
-            if (result.value) {
-                Swal.fire({
-                    text : `Guardado`,
-                    type : 'success'
-                })
-                this.props.history.push('/localidades/silos/')
-            }
-        })
-    }
-
-    confirmDelete(){
-        const { id, data } = this.state
-        if(id){
-            Swal.fire({
-                title: 'Confirmar Eliminar',
-                text : '¿Seguro de eliminar?',
-                showCancelButton: true,
-                showLoaderOnConfirm: true,
-                preConfirm: () => {
-                    return axios.delete(`${baseurl}/silo/${id}`, data)
-                    .then(response => {
-                        if (response.status !== 204) {
-                            throw new Error(response.statusText)
-                        }
-                        return response
-                    })
-                    .catch(error => {
-                        Swal.showValidationMessage(
-                            `Petición fallida: ${error}`
-                        )
-                    })
-                },
-                allowOutsideClick: () => !Swal.isLoading()
-            }).then(() => {
-                Swal.fire({
-                    text : `Eliminado`,
-                    type : 'success'
-                })
-                this.props.history.push('/localidades/silos/')
-            })
-        }
-    }
-
     render(){
         const { data, id } = this.state
         return (
-            <div className="animated fadeIn">
-                <Row>
-                    <Col xs="12" md="12">
-                        <Card>
-                            <CardBody>
-                                <CardTitle>Crear/Editar Silos</CardTitle>
-                                <CardBody>
-                                  <MainView  {...data} onChange={this.onChange} />
-                                </CardBody>
-                                <div className="row">
-                                    <div className="col-sm-12 text-center">
-                                        <Button type="success" style={{marginRight:5}} onClick={() => this.confirmSave() }>Guardar</Button>
-                                        <Button type="danger" style={{marginLeft:5}} disabled={!id} onClick={() => this.confirmDelete()}>Eliminar</Button>
-                                    </div>
-                                </div>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                </Row>
-            </div>
+            <EditPage title={`${id ? 'Editar' : 'Crear'} Silo`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
+                <MainView  {...data} onChange={this.onChange} />
+            </EditPage>
         )
     }
 }
