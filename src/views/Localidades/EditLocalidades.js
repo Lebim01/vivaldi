@@ -1,10 +1,12 @@
 import React from 'react'
-import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Button, FormGroup, Input, Select, Label, ListGroup, ListItem, Tabs } from './../../temeforest'
+import { Button, FormGroup, Input, Select, Label, EditPage, Tabs } from './../../temeforest'
 import { baseurl, getParameter } from './../../utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import NivelModal from './NivelModal'
+
+const endpoint = 'localidad'
+const urlFront = '/localidades/localidades'
 
 class NivelRecordRow extends React.Component {
 
@@ -37,6 +39,12 @@ class MainView extends React.Component {
             id_nivel : null,
             id_localidad : null
         }
+    }
+
+    optionsCiudades = {
+        url : `${baseurl}/ciudad/`,
+        labelName : 'nombre',
+        valueName : 'id'
     }
 
     constructor(props){
@@ -170,7 +178,7 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                       <Label className="col-sm-3">Ciudad</Label>
                       <div className="col-sm-5">
-                        <Select options={this.props.ciudades}  value={this.props.ciudad}  onChange={this.onChange('ciudad')} />
+                        <Select asyncOptions={this.optionsCiudades}  value={this.props.ciudad}  onChange={this.onChange('ciudad')} />
                       </div>
                     </FormGroup>
 
@@ -276,7 +284,6 @@ class EditLocalidades extends React.Component {
         tab : 'main',
         data : {},
         showConfirmSave : false,
-        ciudades: [],
         niveles: [],
     }
 
@@ -299,11 +306,9 @@ class EditLocalidades extends React.Component {
         super(props)
         this.onChange = this.onChange.bind(this)
         this.changeTab = this.changeTab.bind(this)
-        this.confirmSave = this.confirmSave.bind(this)
     }
 
     componentDidMount(){
-        this.getCiudades()
         let id = getParameter('id')
         if(id){
             this.getData(id)
@@ -315,15 +320,6 @@ class EditLocalidades extends React.Component {
         this.setState({
             id,
             data
-        })
-    }
-
-    getCiudades = async () => {
-        const { data } = await axios.get(`${baseurl}/ciudad/`)
-        console.log(data)
-        let ciudades = [...this.seleccione, ...data.results.map((r) => { return { value : r.id, label : r.nombre } })]
-        this.setState({
-          ciudades:ciudades
         })
     }
 
@@ -339,96 +335,13 @@ class EditLocalidades extends React.Component {
         })
     }
 
-    confirmSave(){
-        const { id, data } = this.state
-        Swal.fire({
-            title: 'Confirmar Guardar',
-            text : '¿Seguro de guardar?',
-            showCancelButton: true,
-            showLoaderOnConfirm: true,
-            preConfirm: () => {
-                return axios.post(`${baseurl}/localidad/${id ? `${id}/` : ``}`, data)
-                .then(response => {
-                    if (response.status !== 200 && response.status !== 201) {
-                        throw new Error(response.statusText)
-                    }
-                    return response
-                })
-                .catch(error => {
-                    Swal.showValidationMessage(
-                        `Petición fallida: ${error}`
-                    )
-                })
-            },
-            allowOutsideClick: () => !Swal.isLoading()
-        }).then((result) => {
-            if (result.value) {
-                Swal.fire({
-                    text : `Guardado`,
-                    type : 'success'
-                })
-                this.props.history.push('/localidades/localidades/')
-            }
-        })
-    }
-
-    confirmDelete(){
-        const { id, data } = this.state
-        if(id){
-            Swal.fire({
-                title: 'Confirmar Eliminar',
-                text : '¿Seguro de eliminar?',
-                showCancelButton: true,
-                showLoaderOnConfirm: true,
-                preConfirm: () => {
-                    return axios.delete(`${baseurl}/localidad/${id}`, data)
-                    .then(response => {
-                        if (response.status !== 204) {
-                            throw new Error(response.statusText)
-                        }
-                        return response
-                    })
-                    .catch(error => {
-                        Swal.showValidationMessage(
-                            `Petición fallida: ${error}`
-                        )
-                    })
-                },
-                allowOutsideClick: () => !Swal.isLoading()
-            }).then(() => {
-                Swal.fire({
-                    text : `Eliminado`,
-                    type : 'success'
-                })
-                this.props.history.push('/localidades/localidades/')
-            })
-        }
-    }
-
     render(){
-        const { tab, data, id, ciudades } = this.state
+        const { tab, data, id } = this.state
         return (
-            <div className="animated fadeIn">
-                <Row>
-                    <Col xs="12" md="12">
-                        <Card>
-                            <CardBody>
-                                <CardTitle>Crear/Editar Localidades</CardTitle>
-                                <Tabs tab={tab} tabs={this.tabs} onClickTab={this.changeTab}/>
-                                <CardBody>
-                                    { tab === 'main' && <MainView id_localidad={id} {...data} onChange={this.onChange} ciudades={ciudades} />}
-                                </CardBody>
-                                <div className="row">
-                                    <div className="col-sm-12 text-center">
-                                        <Button type="success" style={{marginRight:5}} onClick={() => this.confirmSave() }>Guardar</Button>
-                                        <Button type="danger" style={{marginLeft:5}} disabled={!id} onClick={() => this.confirmDelete()}>Eliminar</Button>
-                                    </div>
-                                </div>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                </Row>
-            </div>
+            <EditPage title={`${id ? 'Editar' : 'Crear'} Localidad`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
+                <Tabs tab={tab} tabs={this.tabs} onClickTab={this.changeTab}/>
+                { tab === 'main' && <MainView id_localidad={id} {...data} onChange={this.onChange} />}
+            </EditPage>                    
         )
     }
 }

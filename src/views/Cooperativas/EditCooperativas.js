@@ -1,7 +1,7 @@
 import React from 'react'
 import { FormGroup, Input, Select, Label, Tabs, DualList, FormElementValidate, FormValidate, EditPage } from './../../temeforest'
 import 'react-dual-listbox/lib/react-dual-listbox.css';
-import { baseurl, getParameter } from './../../utils/url'
+import { baseurl, getParameter, getResults } from './../../utils/url'
 import axios from 'axios'
 
 const endpoint = 'cooperativa'
@@ -322,13 +322,13 @@ class EditCooperativas extends React.Component {
     }
 
     getLocalidades = async () => {
-        const { data } = await axios.get(`${baseurl}/localidad/`)
-        let tabs = [...data.results.map((r) => { return { link : r.id, text : r.nombre } })]
+        const results = await getResults(`${baseurl}/localidad/`)
+        let tabs = [...results.map((r) => { return { link : r.id, text : r.nombre } })]
         let localidades = {}
-        for(let i in data.results){
-            localidades[data.results[i].id] = {
-                ...data.results[i],
-                andenes : this.getAndendes(data.results[i])
+        for(let i in results){
+            localidades[results[i].id] = {
+                ...results[i],
+                andenes : this.getAndendes(results[i])
             }
         }
         this.setState({

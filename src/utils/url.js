@@ -1,4 +1,5 @@
 import { config } from '../config';
+import axios from 'axios'
 
 const baseurl = config.baseurl
 const baseMediaUrl = config.baseMediaUrl
@@ -22,9 +23,25 @@ function objectToUrl(_obj){
     return `?${Object.keys(_obj).filter(key => _obj[key] !== undefined && _obj[key] !== null && _obj[key] !== '').map((key) => `${key}=${_obj[key]}`).join('&')}`
 }
 
+async function getResults(url){
+    try {
+        const { data } = await axios.get(url)
+        if(Array.isArray(data))
+            return data
+        else if(data.results)
+            return data.results
+        else
+            return []
+    }
+    catch(e){
+        return []
+    }
+}
+
 export {
     baseurl,
     baseMediaUrl,
     getParameter,
-    objectToUrl
+    objectToUrl,
+    getResults
 }

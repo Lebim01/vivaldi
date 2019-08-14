@@ -19,22 +19,24 @@ class EditConductor extends React.Component {
             documentacion:'none',
             readOnlyPersona : true
         }, 
-        tipos: this.tipos, 
-        cooperativas: []
+        tipos: this.tipos
+    }
+    optionsCooperativa = {
+        url : `${baseurl}/cooperativa/`,
+        labelName: 'nombre',
+        valueName: 'id'
     }
 
     constructor(props){
         super(props)
         this.onChange = this.onChange.bind(this)
         this.onChangeFile = this.onChangeFile.bind(this)
-        this.getCooperativas = this.getCooperativas.bind(this)
         this.searchPersona = this.searchPersona.bind(this)
         this.onChangePersona = this.onChangePersona.bind(this)
     }
 
 
     componentDidMount(){
-        this.getCooperativas()
         let id = getParameter('id')
         if(id){
             this.getData(id)
@@ -69,14 +71,6 @@ class EditConductor extends React.Component {
         this.setState({
             id,
             data
-        })
-    }
-
-    getCooperativas = async () => {
-        const { data } = await axios.get(`${baseurl}/cooperativa/`)
-        let options = [...this.seleccione, ...data.results.map((r) => { return { value : r.id, label : r.nombre } })]
-        this.setState({
-            cooperativas : options
         })
     }
 
@@ -122,7 +116,7 @@ class EditConductor extends React.Component {
     _onChange = name => (e) => {
         this.onChange(name, e.target.value)
     }
-    async onChangePersona(data){
+    onChangePersona(data){
         this.onChange('persona', data)
     }
     UploadFile = (e) => {
@@ -149,7 +143,7 @@ class EditConductor extends React.Component {
     }
 
     render(){
-        const { id, data, tipos, cooperativas } = this.state
+        const { id, data, tipos } = this.state
         return (
             <EditPage 
                 title={`${id ? 'Editar' : 'Crear'} Conductores`} 
@@ -164,7 +158,7 @@ class EditConductor extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Cooperativa</Label>
                         <div className="col-sm-5">
-                            <Select options={cooperativas} onChange={this._onChange('cooperativa')} value={this.state.data.cooperativa} />
+                            <Select asyncOptions={this.optionsCooperativa} onChange={this._onChange('cooperativa')} value={this.state.data.cooperativa} />
                         </div>
                     </FormGroup>
                     <EditPersona lengthCedula={13} id={this.state.data.persona ? this.state.data.persona.id : null} readOnly={this.state.data.readOnlyPersona} onChange={this.onChangePersona} />

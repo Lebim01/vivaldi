@@ -49,6 +49,11 @@ class MainView extends React.Component {
             show : false
         }
     }
+    optionsLocalidades = {
+        url : `${baseurl}/localidad/`,
+        labelName: 'nombre',
+        valueName : 'id'
+    }
     constructor(props){
         super(props)
         this.addCooperativa = this.addCooperativa.bind(this)
@@ -124,7 +129,7 @@ class MainView extends React.Component {
     }
 
     render(){
-        const { localidades, puntoventa_cooperativas } = this.props
+        const { puntoventa_cooperativas } = this.props
         return (
             <div>
                 <FormValidate className="mt-4 form-horizontal">
@@ -155,7 +160,7 @@ class MainView extends React.Component {
                         label={{text:'Localidad'}}
                         input={{
                             name : 'localidad',
-                            element: <Select options={localidades} onChange={this.onChange('localidad')} value={this.props.localidad} />
+                            element: <Select asyncOptions={this.optionsLocalidades} onChange={this.onChange('localidad')} value={this.props.localidad} />
                         }}
                         validator={{
                             validationRules: {required:true},
@@ -218,18 +223,15 @@ class EditPuntoVenta extends React.Component {
     state = {
         data:{
             puntoventa_cooperativas : []
-        }, 
-        localidades:[]
+        }
     }
 
     constructor(props){
         super(props)
         this.onChange = this.onChange.bind(this)
-        this.getLocalidades = this.getLocalidades.bind(this)
     }
 
     componentDidMount(){
-        this.getLocalidades()
         let id = getParameter('id')
         if(id){
             this.getData(id)
@@ -244,13 +246,6 @@ class EditPuntoVenta extends React.Component {
         })
     }
 
-    getLocalidades = async () => {
-        const { data } = await axios.get(`${baseurl}/localidad/`)
-        this.setState({
-            localidades : [...this.seleccione, ...data.results.map((row) => { return { label: row.nombre, value: row.id } })]
-        })
-    }
-
     onChange(name, value){
         let data = this.state.data
         data[name] = value
@@ -260,7 +255,7 @@ class EditPuntoVenta extends React.Component {
     }
 
     render(){
-        const { id, data, localidades } = this.state
+        const { id, data } = this.state
         return (
             <EditPage 
                 title={`${id ? 'Editar' : 'Crear'} Conductores`} 
@@ -270,7 +265,7 @@ class EditPuntoVenta extends React.Component {
                 endpoint={endpoint} 
                 history={this.props.history}
             >
-                <MainView {...data} localidades={localidades} onChange={this.onChange} />
+                <MainView {...data} onChange={this.onChange} />
             </EditPage>
         )
     }
