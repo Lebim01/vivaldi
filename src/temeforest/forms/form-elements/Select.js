@@ -1,7 +1,7 @@
 
 import React from 'react'
 import FormGroup from './FormGroup'
-import axios from 'axios';
+import { getResults, getAllUrlParams } from '../../../utils/url';
 
 class Select extends React.Component {
 
@@ -30,16 +30,14 @@ class Select extends React.Component {
                 ? typeof props.asyncOptions === 'function' ? props.asyncOptions() : props.asyncOptions
                 : typeof this.props.asyncOptions === 'function' ? this.props.asyncOptions() : this.props.asyncOptions
 
-        // get results
-        let _results = []
-        const { data } = await axios.get(url)
-        if(Array.isArray(data)){
-            _results = data
-        }else{
-            const { results } = data
-            _results = results
+        let _url = new URL(url)
+        // set page_size = 0
+        let page_size = _url.searchParams.get('page_size')
+        if(page_size === null){
+            _url.searchParams.append('page_size', 0)
         }
-
+        // get results
+        const _results = await getResults(_url.toString())
         // fill options with results
         let _options = [{value:'',label:'Seleccione'}, ..._results.map((record) => {
             return {
