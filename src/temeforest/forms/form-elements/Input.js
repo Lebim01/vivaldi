@@ -7,7 +7,7 @@ class Input extends React.Component {
         return (
             <FormGroup>
                 <input type={type} className={`form-control ${className} ${error ?'is-invalid':''}`} value={value} {...otherProps}/>
-                { helperText && <small class="form-text text-muted"> {helperText} </small> }
+                { helperText && <small className="form-text text-muted"> {helperText} </small> }
             </FormGroup>
         )
     }

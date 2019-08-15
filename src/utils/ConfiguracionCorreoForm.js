@@ -51,9 +51,10 @@ class ConfiguracionCorreoForm extends React.Component {
                     </FormGroup>
                     <FormGroup className="row">
                         <Label className="col-sm-3" htmlFor="tls">Tls</Label>
-                        <div className="col-sm-2">
+                        <div className="col-sm-5">
                             <div className="custom-control custom-checkbox">
-                                <input type="checkbox" className="custom-control-input" id="tls" name="asume_tasa" checked={this.props.tls} onChange={this.onChange('tls')} />
+                                <input type="checkbox" className="custom-control-input" id="tls" name="tls" checked={this.props.tls} onChange={this.onChange('tls')} />
+                                <Label onlyClassName="custom-control-label" htmlFor={`tls`}></Label>
                             </div>
                         </div>
                     </FormGroup>
