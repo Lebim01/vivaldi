@@ -1,7 +1,7 @@
 
 import React from 'react'
 import FormGroup from './FormGroup'
-import { getResults, getAllUrlParams } from '../../../utils/url';
+import { getResults } from '../../../utils/url';
 
 class Select extends React.Component {
 
@@ -25,10 +25,8 @@ class Select extends React.Component {
     }
 
     loadListAsync = async (props = null) => {
-        const { url, valueName, labelName } = 
-            props !== null 
-                ? typeof props.asyncOptions === 'function' ? props.asyncOptions() : props.asyncOptions
-                : typeof this.props.asyncOptions === 'function' ? this.props.asyncOptions() : this.props.asyncOptions
+        const _props = props !== null ? props : this.props
+        const { url, valueName, labelName } = typeof _props.asyncOptions === 'function' ? _props.asyncOptions() : _props.asyncOptions
 
         let _url = new URL(url)
         // set page_size = 0
@@ -72,7 +70,8 @@ Select.defaultProps = {
     helperText : '',
     className : '',
     error : false,
-    asyncOptions : null
+    asyncOptions : null,
+    defaultValue: ''
 }
 
 export default Select

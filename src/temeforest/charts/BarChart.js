@@ -16,7 +16,7 @@ class SimpleBarChart extends React.Component {
                         <Tooltip/>
                         <Legend />
                         { nameBars.map((name, i) => 
-                            <Bar dataKey={name} fill={colors[i]} />
+                            <Bar key={i} dataKey={name} fill={colors[i]} />
                         )}
                     </BarChart>
                 </ResponsiveContainer>

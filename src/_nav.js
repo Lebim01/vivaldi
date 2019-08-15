@@ -61,6 +61,10 @@ export default {
           url : '/#/cooperativas/gremios'
         },
         {
+          name : 'Marcas',
+          url : '/#/cooperativas/marcas'
+        },
+        {
           name : 'Buses',
           url : '/#/cooperativas/buses'
         },

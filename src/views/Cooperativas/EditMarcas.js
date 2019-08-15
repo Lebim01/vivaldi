@@ -1,10 +1,10 @@
 import React from 'react'
-import { FormGroup, Input, Label, TextArea, EditPage } from './../../temeforest'
+import { FormGroup, Input, Label, EditPage } from './../../temeforest'
 import { baseurl, getParameter } from './../../utils/url'
 import axios from 'axios'
 
-const endpoint = 'gremio'
-const urlFront = '/cooperativas/gremios'
+const endpoint = 'marca'
+const urlFront = '/cooperativas/marcas'
 
 class MainView extends React.Component {
 
@@ -24,19 +24,13 @@ class MainView extends React.Component {
                             <Input onChange={this.onChange('nombre')} value={this.props.nombre} />
                         </div>
                     </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Descripción</Label>
-                        <div className="col-sm-5">
-                          <TextArea onChange={this.onChange('descripcion')} rows="6" value={this.props.descripcion}/>
-                        </div>
-                    </FormGroup>
                 </form>
             </div>
         )
     }
 }
 
-class EditGremio extends React.Component {
+class EditMarcas extends React.Component {
 
     state = {data:{}}
 
@@ -71,11 +65,11 @@ class EditGremio extends React.Component {
     render(){
         const { id, data } = this.state
         return (
-            <EditPage title={`${id ? 'Editar' : 'Crear'} Gremio`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
+            <EditPage title={`${id ? 'Editar' : 'Crear'} Marca`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
                 <MainView {...data} onChange={this.onChange} />
             </EditPage>
         )
     }
 }
 
-export default EditGremio
+export default EditMarcas

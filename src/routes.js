@@ -29,6 +29,8 @@ const Conductores = React.lazy(() => import('./views/Cooperativas/Conductores'))
 const EditConductores = React.lazy(() => import('./views/Cooperativas/EditConductores'))
 const PuntoVenta = React.lazy(() => import('./views/Cooperativas/PuntoVenta'))
 const EditPuntoVenta = React.lazy(() => import('./views/Cooperativas/EditPuntoVenta'))
+const Marcas = React.lazy(() => import('./views/Cooperativas/Marcas'))
+const EditMarcas = React.lazy(() => import('./views/Cooperativas/EditMarcas'))
 /** OPERACIONES */
 const Rutas = React.lazy(() => import('./views/Operaciones/Rutas'))
 const EditRutas = React.lazy(() => import('./views/Operaciones/EditRutas'))
@@ -118,6 +120,8 @@ const routes = [
   { path: '/cooperativas/conductores/edit', name: 'Crear/Editar Conductores', component: EditConductores, exact : true },
   { path: '/cooperativas/punto-venta', name: 'Punto de Venta', component: PuntoVenta, exact : true },
   { path: '/cooperativas/punto-venta/edit', name: 'Crear/Editar Punto de Venta', component: EditPuntoVenta, exact : true },
+  { path: '/cooperativas/marcas', name: 'Marcas', component: Marcas, exact : true },
+  { path: '/cooperativas/marcas/edit', name: 'Crear/Editar Marca', component: EditMarcas, exact : true },
 
   { path: '/operaciones/rutas', name: 'Rutas', component: Rutas, exact: true },
   { path: '/operaciones/rutas/edit', name: 'Crear/Editar Rutas', component: EditRutas, exact: true },
