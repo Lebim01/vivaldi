@@ -406,7 +406,7 @@ class EditLocalidades extends React.Component {
     render(){
         const { tab, data, id, data_correo, data_firma } = this.state
         data.firma_electronica = data_firma
-        data.correo = data_correo
+        data.configuracion_correo = data_correo
         return (
             <EditPage title={`${id ? 'Editar' : 'Crear'} Localidad`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
                 <Tabs tab={tab} tabs={this.tabs} onClickTab={this.changeTab}/>

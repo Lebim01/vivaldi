@@ -437,7 +437,7 @@ class EditCooperativas extends React.Component {
     render(){
         const { id, data, tab, tabsLocalidades, localidades, data_firma, data_correo } = this.state
         data.firma_electronica = data_firma
-        data.correo = data_correo
+        data.configuracion_correo = data_correo
         return(
             <EditPage 
                 title={`${id ? 'Editar' : 'Crear'} Cooperativas`} 
