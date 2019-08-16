@@ -6,8 +6,6 @@ import { baseurl } from './../../utils/url'
 class ReporteClientesFrecuentes extends React.Component {
 
     state = {
-        fecha_inicio : moment().format('YYYY-MM-DD'),
-        fecha_fin : moment().format('YYYY-MM-DD'),
         reporte: 1
     }
     optionsCooperativa = {
@@ -61,7 +59,7 @@ class ReporteClientesFrecuentes extends React.Component {
                     <FormGroup className="row col-sm-4">
                         <Label className="col-sm-4">Fecha inicio</Label>
                         <div className="col-sm-8">
-                            <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
+                            <Input type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row col-sm-4">
@@ -79,7 +77,7 @@ class ReporteClientesFrecuentes extends React.Component {
                     <FormGroup className="row col-sm-4">
                         <Label className="col-sm-4">Fecha fin</Label>
                         <div className="col-sm-8">
-                            <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
+                            <Input type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row col-sm-4">
