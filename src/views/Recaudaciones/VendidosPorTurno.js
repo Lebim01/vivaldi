@@ -62,13 +62,13 @@ class VentasPorTurno extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-4">Fecha inicio</Label>
                             <div className="col-sm-8">
-                                <Input type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
+                                <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-4">Fecha fin</Label>
                             <div className="col-sm-8">
-                                <Input type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
+                                <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
                             </div>
                         </FormGroup>
                     </div>

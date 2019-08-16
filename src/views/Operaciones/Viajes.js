@@ -61,7 +61,7 @@ class Viajes extends React.Component {
                                         <FormGroup className="row">
                                             <Label className="col-sm-3">Fecha inicio</Label>
                                             <div className="col-sm-8">
-                                                <Input type="date" onChange={this.onChange('fecha_inicio')} value={fecha_inicio} />
+                                                <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={fecha_inicio} />
                                             </div>
                                         </FormGroup>
                                         <FormGroup className="row">
@@ -87,7 +87,7 @@ class Viajes extends React.Component {
                                         <FormGroup className="row">
                                             <Label className="col-sm-3">Fecha Fin</Label>
                                             <div className="col-sm-8">
-                                                <Input type="date" onChange={this.onChange('fecha_fin')} value={fecha_fin} />
+                                                <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={fecha_fin} />
                                             </div>
                                         </FormGroup>
                                         <FormGroup className="row">

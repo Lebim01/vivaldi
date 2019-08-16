@@ -57,7 +57,7 @@ class Reporte1 extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-4">Fecha</Label>
                             <div className="col-sm-8">
-                                <Input type="date" onChange={this.onChange('fecha')} value={this.state.fecha}/>
+                                <Input className="no-clear" type="date" onChange={this.onChange('fecha')} value={this.state.fecha}/>
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
@@ -158,7 +158,7 @@ class Reporte2 extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-4">Fecha salida</Label>
                             <div className="col-sm-8">
-                                <Input type="date" onChange={this.onChange('fecha')} value={this.state.fecha}/>
+                                <Input className="no-clear" type="date" onChange={this.onChange('fecha')} value={this.state.fecha}/>
                             </div>
                         </FormGroup>
                     </div>

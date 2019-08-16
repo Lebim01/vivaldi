@@ -44,7 +44,7 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Hora inicio</Label>
                         <div className="col-sm-5">
-                            <Input onChange={this.onChange('hora_inicio')} value={this.props.hora_inicio} type="time" />
+                            <Input className="no-clear" type="time" onChange={this.onChange('hora_inicio')} value={this.props.hora_inicio} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
@@ -66,7 +66,7 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Hora fin</Label>
                         <div className="col-sm-5">
-                            <Input onChange={this.onChange('hora_fin')} value={this.props.hora_fin} type="time" />
+                            <Input className="no-clear" type="time" onChange={this.onChange('hora_fin')} value={this.props.hora_fin} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
@@ -97,7 +97,7 @@ class MainView extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-3">Fecha</Label>
                             <div className="col-sm-5">
-                                <Input onChange={this.onChange('fecha_validez')} value={this.props.fecha_validez} type="date" />
+                                <Input className="no-clear" type="date" onChange={this.onChange('fecha_validez')} value={this.props.fecha_validez} />
                             </div>
                         </FormGroup>
                     }

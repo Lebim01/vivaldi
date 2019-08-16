@@ -50,7 +50,7 @@ class Diario extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-4">Dia</Label>
                             <div className="col-sm-8">
-                                <Input type="date" onChange={this.onChange('dia')} value={this.state.dia}/>
+                                <Input className="no-clear" type="date" onChange={this.onChange('dia')} value={this.state.dia}/>
                             </div>
                         </FormGroup>
                         <FormGroup className="row">

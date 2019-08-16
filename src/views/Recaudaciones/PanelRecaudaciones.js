@@ -49,7 +49,7 @@ class FormularioFiltros extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-4">Fecha inicio</Label>
                             <div className="col-sm-8">
-                                <Input onChange={this.onChange('fecha_inicio')} value={this.props.fecha_inicio} type="date" />
+                                <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.props.fecha_inicio} />
                             </div>
                         </FormGroup>
                     </Col>
@@ -73,7 +73,7 @@ class FormularioFiltros extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-4">Fecha fin</Label>
                             <div className="col-sm-8">
-                                <Input onChange={this.onChange('fecha_fin')} value={this.props.fecha_fin} type="date" />
+                                <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.props.fecha_fin} />
                             </div>
                         </FormGroup>
                     </Col>
