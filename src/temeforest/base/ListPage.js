@@ -58,7 +58,7 @@ class ListPage extends React.Component {
             numBeginVisibleFooterPages = 1
         }
         else {
-            numBeginVisibleFooterPages = currentPage - NumVisibleFooterPages
+            numBeginVisibleFooterPages = currentPage - Math.floor(NumVisibleFooterPages/2)
         }
 
         if(numPages <= 5) {
@@ -262,7 +262,7 @@ class ListPage extends React.Component {
                                                     <li className={`footable-page-nav ${previous && !loading ? 'pointer' : 'link-disabled'}`} data-page="prev">
                                                         <a className="footable-page-link" onClick={this.previous}>‹</a>
                                                     </li>
-                                                    { new Array(numEndVisibleFooterPages - numBeginVisibleFooterPages + 1).fill(1).map((z, index) => {
+                                                    { new Array(numEndVisibleFooterPages - numBeginVisibleFooterPages).fill(1).map((z, index) => {
                                                         let page = Number(numBeginVisibleFooterPages) + Number(index)
                                                         return (
                                                             <li className={`footable-page visible ${page === currentPage ? 'active' : ''}`} data-page={page}>
