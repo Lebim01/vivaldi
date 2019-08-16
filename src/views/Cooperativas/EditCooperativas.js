@@ -3,6 +3,8 @@ import { FormGroup, Input, Select, Label, Tabs, DualList, FormElementValidate, F
 import 'react-dual-listbox/lib/react-dual-listbox.css';
 import { baseurl, getParameter, getResults } from './../../utils/url'
 import axios from 'axios'
+import Swal from 'sweetalert2'
+import { fileToBase64 } from './../../utils/file'
 
 const endpoint = 'cooperativa'
 const urlFront = '/cooperativas/cooperativas'
@@ -254,6 +256,7 @@ class EditCooperativas extends React.Component {
             file_firma : '',
             clave_firma: '',
             reclave_firma: '',
+            file_firma_exist: false
         },
         data_correo: {
             host: '',
@@ -274,14 +277,14 @@ class EditCooperativas extends React.Component {
             link : 'main',
             text : 'Crear/Editar Cooperativa'
         },
-        // {
-        //     link : 'firma',
-        //     text : 'Firma electronica'
-        // },
-        // {
-        //     link : 'correos',
-        //     text : 'Configuración de correos'
-        // }
+        {
+            link : 'firma',
+            text : 'Firma electronica'
+        },
+        {
+            link : 'correos',
+            text : 'Configuración de correos'
+        }
     ]
 
     constructor(props){
@@ -289,6 +292,7 @@ class EditCooperativas extends React.Component {
         this.onChange = this.onChange.bind(this)
         this.changeTab = this.changeTab.bind(this)
         this.onChangeFirma = this.onChangeFirma.bind(this)
+        this.onChangeFile = this.onChangeFile.bind(this)
         this.onChangeCorreo = this.onChangeCorreo.bind(this)
     }
 
@@ -307,6 +311,24 @@ class EditCooperativas extends React.Component {
             id,
             data
         }, () => this.setAndenesLocalidades())
+    }
+
+    getDataFirma = async (id) => {
+        const { data } = await axios.get(`${baseurl}/cooperativa/${id}/firma`)
+        let data_firma = this.state.data_firma
+        data_firma.file_firma_exist = data.file_firma_exist
+        this.setState({
+            data_firma
+        })
+    }
+
+    getDataCorreo = async (id) => {
+        const { data } = await axios.get(`${baseurl}/cooperativa/${id}/correo`)
+        let data_correo = data
+        data_correo.clave = ''
+        this.setState({
+            data_correo
+        })
     }
 
     getAndendes(localidad){
@@ -385,6 +407,18 @@ class EditCooperativas extends React.Component {
         })
     }
 
+    onChangeFile = async (value) => {
+        try {
+            let data_firma = this.state.data_firma
+            data_firma.file_firma = await fileToBase64(value)
+            this.setState({
+                data_firma
+            })
+        }catch(e){
+            Swal.fire('Subir archivo', 'Hubo algún problema al querer subir el archivo', 'error')
+        }
+    }
+
     onChangeCorreo(name, value){
         let data_correo = this.state.data_correo
         data_correo[name] = value
@@ -402,6 +436,8 @@ class EditCooperativas extends React.Component {
 
     render(){
         const { id, data, tab, tabsLocalidades, localidades, data_firma, data_correo } = this.state
+        data.firma_electronica = data_firma
+        data.configuracion_correo = data_correo
         return(
             <EditPage 
                 title={`${id ? 'Editar' : 'Crear'} Cooperativas`} 
@@ -421,16 +457,19 @@ class EditCooperativas extends React.Component {
                         localidades={localidades} 
                     />
                 }
-                {/* {
+                {
                   tab === 'firma' &&
                     <FirmaElectronicaForm {...data_firma}
-                        onChange={this.onChangeFirma}/>
+                        onChange={this.onChangeFirma}
+                        onChangeFile={this.onChangeFile}
+                    />
                 }
                 {
                   tab === 'correos' &&
                     <ConfiguracionCorreoForm {...data_correo}
-                        onChange={this.onChangeCorreo}/>
-                } */}
+                        onChange={this.onChangeCorreo}
+                    />
+                }
             </EditPage>
         )
     }

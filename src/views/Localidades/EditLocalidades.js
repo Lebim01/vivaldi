@@ -4,6 +4,10 @@ import { baseurl, getParameter } from './../../utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import NivelModal from './NivelModal'
+import { fileToBase64 } from './../../utils/file'
+
+const FirmaElectronicaForm = React.lazy(() => import('../../utils/FirmaElectronicaForm'))
+const ConfiguracionCorreoForm = React.lazy(() => import('../../utils/ConfiguracionCorreoForm'))
 
 const endpoint = 'localidad'
 const urlFront = '/localidades/localidades'
@@ -283,6 +287,19 @@ class EditLocalidades extends React.Component {
         id : null,
         tab : 'main',
         data : {},
+        data_firma: {
+            file_firma : '',
+            clave_firma: '',
+            reclave_firma: '',
+            file_firma_exist: false
+        },
+        data_correo: {
+            host: '',
+            port: '',
+            usuario: '',
+            clave: '',
+            tls: false
+        },
         showConfirmSave : false,
         niveles: [],
     }
@@ -292,26 +309,31 @@ class EditLocalidades extends React.Component {
             link : 'main',
             text : 'Crear/Editar Localidad'
         },
-        // {
-        //     link : 'firma',
-        //     text : 'Firma electronica'
-        // },
-        // {
-        //     link : 'correos',
-        //     text : 'Configuración de correos'
-        // }
+        {
+            link : 'firma',
+            text : 'Firma electronica'
+        },
+        {
+            link : 'correos',
+            text : 'Configuración de correos'
+        }
     ]
 
     constructor(props){
         super(props)
         this.onChange = this.onChange.bind(this)
         this.changeTab = this.changeTab.bind(this)
+        this.onChangeFirma = this.onChangeFirma.bind(this)
+        this.onChangeFile = this.onChangeFile.bind(this)
+        this.onChangeCorreo = this.onChangeCorreo.bind(this)
     }
 
     componentDidMount(){
         let id = getParameter('id')
         if(id){
             this.getData(id)
+            this.getDataFirma(id)
+            this.getDataCorreo(id)
         }
     }
 
@@ -320,6 +342,24 @@ class EditLocalidades extends React.Component {
         this.setState({
             id,
             data
+        })
+    }
+
+    getDataFirma = async (id) => {
+        const { data } = await axios.get(`${baseurl}/localidad/${id}/firma`)
+        let data_firma = this.state.data_firma
+        data_firma.file_firma_exist = data.file_firma_exist
+        this.setState({
+            data_firma
+        })
+    }
+
+    getDataCorreo = async (id) => {
+        const { data } = await axios.get(`${baseurl}/localidad/${id}/correo`)
+        let data_correo = data
+        data_correo.clave = ''
+        this.setState({
+            data_correo
         })
     }
 
@@ -335,12 +375,44 @@ class EditLocalidades extends React.Component {
         })
     }
 
+    onChangeFirma(name, value){
+        let data_firma = this.state.data_firma
+        data_firma[name] = value
+        this.setState({
+            data_firma
+        })
+    }
+
+    onChangeFile = async (value) => {
+        try {
+            let data_firma = this.state.data_firma
+            data_firma.file_firma = await fileToBase64(value)
+            this.setState({
+                data_firma
+            })
+        }catch(e){
+            Swal.fire('Subir archivo', 'Hubo algún problema al querer subir el archivo', 'error')
+        }
+    }
+
+    onChangeCorreo(name, value){
+        let data_correo = this.state.data_correo
+        data_correo[name] = value
+        this.setState({
+            data_correo
+        })
+    }
+
     render(){
-        const { tab, data, id } = this.state
+        const { tab, data, id, data_correo, data_firma } = this.state
+        data.firma_electronica = data_firma
+        data.configuracion_correo = data_correo
         return (
             <EditPage title={`${id ? 'Editar' : 'Crear'} Localidad`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
                 <Tabs tab={tab} tabs={this.tabs} onClickTab={this.changeTab}/>
                 { tab === 'main' && <MainView id_localidad={id} {...data} onChange={this.onChange} />}
+                { tab === 'firma' && <FirmaElectronicaForm {...data_firma} onChange={this.onChangeFirma} onChangeFile={this.onChangeFile} /> }
+                { tab === 'correos' && <ConfiguracionCorreoForm {...data_correo} onChange={this.onChangeCorreo}/> }
             </EditPage>                    
         )
     }

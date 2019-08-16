@@ -1,5 +1,6 @@
 import React from 'react'
-import { FormGroup, Input, Select, Label, DualList, FormElementValidate, FormValidate, EditPage } from './../temeforest';
+import { Badge  } from 'reactstrap';
+import { FormGroup, Input, Label, FormValidate, Button } from './../temeforest';
 import 'react-dual-listbox/lib/react-dual-listbox.css';
 
 class FirmaElectronicaForm extends React.Component {
@@ -22,6 +23,19 @@ class FirmaElectronicaForm extends React.Component {
         }
     }
 
+    _onChangeFile = (e) => {
+        if(this.props.onChangeFile){
+            this.props.onChangeFile(e.target.files[0])
+        }
+    }
+
+    UploadFile = (e) => {
+        let el = document.getElementById("firma_electronica");
+        if (el) {
+            el.click();
+        }
+    }
+
     render(){
         return (
             <div>
@@ -29,8 +43,14 @@ class FirmaElectronicaForm extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Archivo Firma</Label>
                         <div className="col-sm-5">
-                            <Input value={this.props.file_firma} onChange={this.onChange('file_firma')} type="file" helperText="Archivo p12 o pfx"/>
+                            <Input id="firma_electronica" type="file" style={{display:'none'}} onChange={this._onChangeFile} helperText="Archivo p12 o pfx"/>
+                            <Button type="success" style={{marginRight:5}} onClick={this.UploadFile}>Subir Firma</Button>
                         </div>
+                        { this.props.file_firma_exist && 
+                        <div className="col-sm-4">
+                            <Badge className="mr-2" color="info">Ya existe una firma subida.</Badge>
+                        </div>
+                        }
                     </FormGroup>
                     <FormGroup className="row">
                         <Label className="col-sm-3">Clave firma</Label>
