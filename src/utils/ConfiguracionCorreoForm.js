@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormGroup, Input, Select, Label, DualList, FormElementValidate, FormValidate, EditPage } from './../temeforest';
+import { FormGroup, Input, Label, FormValidate } from './../temeforest';
 import 'react-dual-listbox/lib/react-dual-listbox.css';
 
 class ConfiguracionCorreoForm extends React.Component {

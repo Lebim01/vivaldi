@@ -1,6 +1,5 @@
 import React from 'react'
 import { ListPage, Label, FormGroup, Select, Input, Button, ReportPage } from './../../temeforest'
-import moment from 'moment'
 import { baseurl } from './../../utils/url'
 
 class ReporteClientesFrecuentes extends React.Component {

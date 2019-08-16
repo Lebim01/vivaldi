@@ -1,32 +1,8 @@
 import React from 'react'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { Button, FormGroup, Input, Label } from './../../temeforest'
-import AddPuertaModal from './PuertaModal'
-import axios from 'axios'
 import Swal from 'sweetalert2'
 
-
-class RecordRow extends React.Component {
-
-    delete(){
-        if(this.props.delete){
-            this.props.delete(this.props.index)
-        }
-    }
-
-    render(){
-        return (
-            <tr onDoubleClick={this.props.edit}>
-                <td>{this.props.numero}</td>
-                <td>
-                    <Button outline={true} type="danger" size="sm" rounded={true} onClick={this.delete.bind(this)}>
-                        <i className="fa fa-times"></i>
-                    </Button>{' '}
-                </td>
-            </tr>
-        )
-    }
-}
 class NivelModal extends React.Component {
 
     state = {
@@ -48,7 +24,6 @@ class NivelModal extends React.Component {
     }
 
     componentWillReceiveProps(props){
-        console.log(props)
         this.setState({
             ...props
         })
@@ -143,7 +118,7 @@ class NivelModal extends React.Component {
     }
 
     render(){
-        const { nombre, puertas } = this.state
+        const { nombre } = this.state
         return (
             <Modal isOpen={this.props.show} toggle={this.toggle}>
                 <ModalHeader toggle={this.toggle}>Crear/Editar Nivel</ModalHeader>

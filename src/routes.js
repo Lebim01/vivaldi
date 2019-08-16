@@ -71,7 +71,6 @@ const Diario = React.lazy(() => import('./views/Cobranza/Diario'))
 const Pendientes = React.lazy(() => import('./views/Cobranza/Pendientes'))
 const Consultas = React.lazy(() => import('./views/Cobranza/Consultas'))
 
-const Dashboard = React.lazy(() => import('./views/Pages/Dashboard'))
 const Page404 = React.lazy(() => import('./views/Pages/Page404'))
 /** DEMOGRAFIA */
 const Provincia = React.lazy(() => import('./views/Localidades/Provincia'))

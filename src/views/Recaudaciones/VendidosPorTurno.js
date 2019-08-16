@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListPage, Label, FormGroup, Select, Input, InputIcon, ReportPage } from './../../temeforest'
+import { ListPage, Label, FormGroup, Select, Input, ReportPage } from './../../temeforest'
 import moment from 'moment'
 import { baseurl } from './../../utils/url'
 
@@ -40,7 +40,6 @@ class VentasPorTurno extends React.Component {
         })
     }
     render(){
-        const { refresh } = this.state
         return (
             <ReportPage title="Ventas totales por turno">
                 <div className="row">

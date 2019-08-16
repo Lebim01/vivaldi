@@ -1,7 +1,6 @@
 import React from 'react'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { Button, FormGroup, Input, Label, Select } from './../../temeforest'
-import axios from 'axios'
 import { baseurl } from './../../utils/url'
 
 class AddCooperativaPuntoVentaModal extends React.Component {
