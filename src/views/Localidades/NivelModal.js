@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
-import { Button, FormGroup, Input, Label } from './../../temeforest'
+import { Button, FormGroup, Input, Label } from 'temeforest'
 import Swal from 'sweetalert2'
 
 class NivelModal extends React.Component {

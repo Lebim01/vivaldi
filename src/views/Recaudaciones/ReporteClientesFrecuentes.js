@@ -1,6 +1,6 @@
 import React from 'react'
-import { ListPage, Label, FormGroup, Select, Input, Button, ReportPage } from './../../temeforest'
-import { baseurl } from './../../utils/url'
+import { ListPage, Label, FormGroup, Select, Input, Button, ReportPage } from 'temeforest'
+import { baseurl } from 'utils/url'
 
 class ReporteClientesFrecuentes extends React.Component {
 

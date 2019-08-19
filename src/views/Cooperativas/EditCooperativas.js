@@ -1,16 +1,16 @@
 import React from 'react'
-import { FormGroup, Input, Select, Label, Tabs, DualList, FormElementValidate, FormValidate, EditPage } from './../../temeforest'
-import 'react-dual-listbox/lib/react-dual-listbox.css';
-import { baseurl, getParameter, getResults } from './../../utils/url'
+import { FormGroup, Input, Select, Label, Tabs, DualList, FormElementValidate, FormValidate, EditPage } from 'temeforest'
+import { baseurl, getParameter, getResults } from 'utils/url'
+import { fileToBase64 } from 'utils/file'
 import axios from 'axios'
 import Swal from 'sweetalert2'
-import { fileToBase64 } from './../../utils/file'
+import 'react-dual-listbox/lib/react-dual-listbox.css';
 
 const endpoint = 'cooperativa'
 const urlFront = '/cooperativas/cooperativas'
 
-const FirmaElectronicaForm = React.lazy(() => import('../../utils/FirmaElectronicaForm'))
-const ConfiguracionCorreoForm = React.lazy(() => import('../../utils/ConfiguracionCorreoForm'))
+const FirmaElectronicaForm = React.lazy(() => import('utils/FirmaElectronicaForm'))
+const ConfiguracionCorreoForm = React.lazy(() => import('utils/ConfiguracionCorreoForm'))
 
 class ListAdenes extends React.Component {
     render(){

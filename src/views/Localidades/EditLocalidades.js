@@ -1,13 +1,13 @@
 import React from 'react'
-import { Button, FormGroup, Input, Select, Label, EditPage, Tabs } from './../../temeforest'
-import { baseurl, getParameter } from './../../utils/url'
+import { Button, FormGroup, Input, Select, Label, EditPage, Tabs } from 'temeforest'
+import { baseurl, getParameter } from 'utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import NivelModal from './NivelModal'
-import { fileToBase64 } from './../../utils/file'
+import { fileToBase64 } from 'utils/file'
 
-const FirmaElectronicaForm = React.lazy(() => import('../../utils/FirmaElectronicaForm'))
-const ConfiguracionCorreoForm = React.lazy(() => import('../../utils/ConfiguracionCorreoForm'))
+const FirmaElectronicaForm = React.lazy(() => import('utils/FirmaElectronicaForm'))
+const ConfiguracionCorreoForm = React.lazy(() => import('utils/ConfiguracionCorreoForm'))
 
 const endpoint = 'localidad'
 const urlFront = '/localidades/localidades'

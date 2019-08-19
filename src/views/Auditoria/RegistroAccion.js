@@ -1,6 +1,6 @@
 import React from 'react'
-import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button } from './../../temeforest'
-import { baseurl } from './../../utils/url'
+import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button } from 'temeforest'
+import { baseurl } from 'utils/url'
 
 class RegistroAccion extends React.Component {
 

@@ -1,9 +1,10 @@
 import React from 'react'
-import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label } from './../../../temeforest'
-import { baseurl, getParameter } from './../../../utils/url'
+import { FormGroup, Input, Label, ApprovePage } from 'temeforest'
+import { baseurl, getParameter } from 'utils/url'
 import axios from 'axios'
-import Swal from 'sweetalert2'
+
+const urlFront = '/operaciones/solicitudes/frecuencias/'
+const endpoint = 'venta/solicitud_frecuencia'
 
 class MainView extends React.Component {
 
@@ -92,12 +93,6 @@ class EditSolicitudFrecuencia extends React.Component {
         data:{}
     }
 
-    constructor(props){
-        super(props)
-        this.aprobar = this.aprobar.bind(this)
-        this.rechazar = this.rechazar.bind(this)
-    }
-
     componentDidMount(){
         let id = getParameter('id')
         if(id){
@@ -106,108 +101,19 @@ class EditSolicitudFrecuencia extends React.Component {
     }
 
     getData = async (id) => {
-        const { data } = await axios.get(`${baseurl}/venta/solicitud_frecuencia/${id}/`)
+        const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/`)
         this.setState({
             id,
             data
         })
     }
 
-    aprobar(){
-        const { id, data } = this.state
-        Swal.fire({
-            title: 'Confirmar Guardar',
-            text : '¿Seguro de guardar?',
-            showCancelButton: true,
-            showLoaderOnConfirm: true,
-            preConfirm: () => {
-                return axios.post(`${baseurl}/venta/solicitud_frecuencia/${id ? `${id}/` : ``}`, { id, estado: 1 })
-                .then(response => {
-                    if (response.status !== 200 && response.status !== 201) {
-                        throw new Error(response.statusText)
-                    }
-                    return response
-                })
-                .catch(error => {
-                    Swal.showValidationMessage(
-                        `Petición fallida: ${error}`
-                    )
-                })
-            },
-            allowOutsideClick: () => !Swal.isLoading()
-        }).then((result) => {
-            if (result.value) {
-                Swal.fire({
-                    text : `Guardado`,
-                    type : 'success'
-                })
-                this.props.history.push('/operaciones/solicitudes/frecuencias/')
-            }
-        })
-    }
-
-    rechazar(){
-        const { id } = this.state
-        Swal.fire({
-            title: 'Confirmar rechazar, escribe el motivo',
-            input : 'textarea',
-            showCancelButton: true,
-            showLoaderOnConfirm: true,
-            preConfirm: (motivo) => {
-                return axios.post(`${baseurl}/venta/solicitud_frecuencia/${id ? `${id}/` : ``}`, { id, estado: 2, motivo })
-                .then(response => {
-                    if (response.status !== 200 && response.status !== 201) {
-                        throw new Error(response.statusText)
-                    }
-                    return response
-                })
-                .catch(error => {
-                    Swal.showValidationMessage(
-                        `Petición fallida: ${error}`
-                    )
-                })
-            },
-            allowOutsideClick: () => !Swal.isLoading()
-        }).then((result) => {
-            if (result.value) {
-                Swal.fire({
-                    text : `Guardado`,
-                    type : 'success'
-                })
-                this.props.history.push('/operaciones/solicitudes/frecuencias/')
-            }
-        })
-    }
-
     render(){
-        const { data } = this.state
+        const { id, data } = this.state
         return (
-            <div className="animated fadeIn">
-                <Row>
-                    <Col xs="12" md="12">
-                        <Card>
-                            <CardBody>
-                                <CardTitle>Crear/Editar Solicitud de frecuencias</CardTitle>
-                                <CardBody>
-                                    <MainView {...data} onChange={this.onChange} />
-                                </CardBody>
-                                <div className="row">
-                                    <div className="col-sm-12 text-center">
-                                        { data.estado === 0 && 
-                                            <div>
-                                                <Button type="success" style={{marginRight:5}} onClick={() => this.aprobar() }>Aprobar</Button>
-                                                <Button type="danger" style={{marginLeft:5}} onClick={() => this.rechazar() }>Rechazar</Button>
-                                            </div>
-                                        }
-                                        { data.estado === 1 && <div className="alert alert-success">Aprobado</div> }
-                                        { data.estado === 2 && <div className="alert alert-danger">Rechazado</div> }
-                                    </div>
-                                </div>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                </Row>
-            </div>
+            <ApprovePage id={id} data={data} title={'Aceptar/Rechazar Solicitud de frecuencias'} history={this.props.history} endpoint={endpoint} urlFront={urlFront}>
+                <MainView {...data} onChange={this.onChange} />
+            </ApprovePage>
         )
     }
 }

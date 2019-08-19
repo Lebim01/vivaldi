@@ -1,7 +1,7 @@
 import React from 'react'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
-import { Button, FormGroup, Input, Label, Select } from './../../temeforest'
-import { baseurl } from './../../utils/url'
+import { Button, FormGroup, Input, Label, Select } from 'temeforest'
+import { baseurl } from 'utils/url'
 
 class AddCooperativaPuntoVentaModal extends React.Component {
 

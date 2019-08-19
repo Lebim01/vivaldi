@@ -1,8 +1,8 @@
 import React from 'react'
-import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button } from './../../temeforest'
+import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button } from 'temeforest'
 import moment from 'moment'
-import { baseurl } from './../../utils/url'
-import store from './../../store/auth'
+import { baseurl } from 'utils/url'
+import store from 'store/auth'
 
 const { user_info } = store.getState()
 

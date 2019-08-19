@@ -1,6 +1,6 @@
 import React from 'react'
-import { ListPage, Select, Label, FormGroup, Card, CardBody, CardTitle, Input } from './../../temeforest'
-import { baseurl } from './../../utils/url'
+import { ListPage, Select, Label, FormGroup, Card, CardBody, CardTitle, Input } from 'temeforest'
+import { baseurl } from 'utils/url'
 import moment from 'moment'
 
 class Viajes extends React.Component {

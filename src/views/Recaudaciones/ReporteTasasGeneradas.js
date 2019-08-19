@@ -1,7 +1,7 @@
 import React from 'react'
-import { ListPage, Label, FormGroup, Select, Input, Button, ReportPage } from './../../temeforest'
+import { ListPage, Label, FormGroup, Select, Input, Button, ReportPage } from 'temeforest'
 import moment from 'moment'
-import { baseurl } from './../../utils/url'
+import { baseurl } from 'utils/url'
 
 class ReporteTasasGeneradas extends React.Component {
     state = {

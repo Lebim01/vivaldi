@@ -1,8 +1,8 @@
 import React from 'react'
-import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button } from './../../temeforest'
+import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button } from 'temeforest'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import moment from 'moment'
-import { baseurl } from './../../utils/url'
+import { baseurl } from 'utils/url'
 
 class RegistroTasa extends React.Component {
 

@@ -1,6 +1,6 @@
 import React from 'react'
-import { Button, FormGroup, Input, Select, Label, EditPage } from './../../temeforest'
-import { baseurl, getParameter } from './../../utils/url'
+import { Button, FormGroup, Input, Select, Label, EditPage } from 'temeforest'
+import { baseurl, getParameter } from 'utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import AddParadaModal from './AddParadaModal'

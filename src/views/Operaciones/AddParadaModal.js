@@ -1,7 +1,7 @@
 import React from 'react'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
-import { Button, FormGroup, InputIcon, Label, Select } from './../../temeforest'
-import { baseurl } from './../../utils/url'
+import { Button, FormGroup, InputIcon, Label, Select } from 'temeforest'
+import { baseurl } from 'utils/url'
 
 class AddParadaModal extends React.Component {
 

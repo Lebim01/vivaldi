@@ -1,7 +1,7 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { FormGroup, Input, Label, FormElementValidate } from './../../temeforest'
-import { baseurl, getResults } from './../../utils/url'
+import { FormGroup, Input, Label, FormElementValidate } from 'temeforest'
+import { baseurl, getResults } from 'utils/url'
 import axios from 'axios'
 
 class EditPersona extends React.Component {

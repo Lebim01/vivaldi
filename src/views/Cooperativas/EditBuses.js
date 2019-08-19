@@ -1,8 +1,8 @@
 import React from 'react'
-import { Button, FormGroup, Input, Label, Select, FormElementValidate, FormValidate, EditPage } from './../../temeforest'
-import { baseurl, baseMediaUrl, getParameter } from './../../utils/url'
+import { Button, FormGroup, Input, Label, Select, FormElementValidate, FormValidate, EditPage } from 'temeforest'
+import { baseurl, baseMediaUrl, getParameter } from 'utils/url'
+import { fileToBase64 } from 'utils/file'
 import EditPersona from './EditPersona'
-import { fileToBase64 } from './../../utils/file'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 

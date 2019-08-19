@@ -1,6 +1,6 @@
 import React from 'react'
-import { FormGroup, Input, Select, Label, DualList, EditPage } from './../../temeforest'
-import { baseurl, getParameter, getResults } from './../../utils/url'
+import { FormGroup, Input, Select, Label, DualList, EditPage } from 'temeforest'
+import { baseurl, getParameter, getResults } from 'utils/url'
 import axios from 'axios'
 import 'react-dual-listbox/lib/react-dual-listbox.css';
 

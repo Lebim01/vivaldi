@@ -1,5 +1,6 @@
 import React from 'react'
-import { ListPage, Card, CardBody } from './../../temeforest'
+import { ListPage, Card, CardBody } from 'temeforest'
+
 function Andenes(props) {
     return (
         <div className="animated fadeIn">

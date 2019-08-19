@@ -1,7 +1,7 @@
 import React from 'react'
-import { ListPage, Card, CardBody, CardTitle, FormGroup, Input, Label, Select } from './../../../temeforest'
+import { ListPage, Card, CardBody, CardTitle, FormGroup, Input, Label, Select } from 'temeforest'
 import moment from 'moment'
-import { baseurl } from './../../../utils/url'
+import { baseurl } from 'utils/url'
 
 class SolicitudTasaContingencia extends React.Component {
 

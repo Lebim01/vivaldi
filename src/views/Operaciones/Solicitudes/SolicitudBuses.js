@@ -1,7 +1,7 @@
 import React from 'react'
-import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button } from './../../../temeforest'
+import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button } from 'temeforest'
 import moment from 'moment'
-import { baseurl } from './../../../utils/url'
+import { baseurl } from 'utils/url'
 
 class SolicitudBuses extends React.Component {
     state = {

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './Login.css'
-import { store } from './../../../store/auth'
+import { store } from 'store/auth'
 import axios from 'axios'
-import { baseurl } from './../../../utils/url'
+import { baseurl } from 'utils/url'
 
 class Login extends Component {
 
@@ -54,11 +54,11 @@ class Login extends Component {
         const { user, pass, noValid, error } = this.state
         return (
             <div className="auth-wrapper d-flex no-block justify-content-center align-items-center" 
-                style={{background:'url(../../assets/images/big/auth-bg.jpg) no-repeat center center'}}>
+                style={{background:'url(assets/images/big/auth-bg.jpg) no-repeat center center'}}>
                 <div className="auth-box">
                     <div id="loginform">
                         <div className="logo">
-                            <span className="db"><img src="../../assets/img/LOGO-ICON-TEXTO.png" alt="logo" height="40"/></span>
+                            <span className="db"><img src="assets/img/LOGO-ICON-TEXTO.png" alt="logo" height="40"/></span>
                             <h5 className="font-medium m-b-20">Ingresar al Administrador</h5>
                             { error && <div className="alert alert-danger" role="alert">{error}</div> }
                         </div>

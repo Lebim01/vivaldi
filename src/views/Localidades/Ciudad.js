@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardBody, ListPage } from './../../temeforest'
+import { Card, CardBody, ListPage } from 'temeforest'
 
 class Ciudades extends React.Component {
     render(){

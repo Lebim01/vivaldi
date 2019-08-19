@@ -1,6 +1,6 @@
 import React from 'react'
-import { FormGroup, Input, Select, Label, EditPage } from './../../temeforest'
-import { baseurl, getParameter } from './../../utils/url'
+import { FormGroup, Input, Select, Label, EditPage } from 'temeforest'
+import { baseurl, getParameter } from 'utils/url'
 import axios from 'axios'
 
 const endpoint = 'trafficControl'

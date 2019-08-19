@@ -1,8 +1,8 @@
 import React from 'react'
 import './Login2.css'
-import { store } from './../../../store/auth'
+import { store } from 'store/auth'
+import { baseurl } from 'utils/url'
 import axios from 'axios'
-import { baseurl } from './../../../utils/url'
 
 class Login2 extends React.Component {
 
@@ -51,7 +51,7 @@ class Login2 extends React.Component {
                 <div className="auth-box on-sidebar" style={{'max-width' : 500, padding: 50, 'padding-top' : 100}}>
                     <div id="loginform">
                         <div className="logo">
-                            <span className="db"><img src="../../assets/img/LOGO-ICON-TEXTO.png" height="50" alt="logo"/></span>
+                            <span className="db"><img src="assets/img/LOGO-ICON-TEXTO.png" height="50" alt="logo"/></span>
                             <h5 className="font-medium m-b-20">Ingresa a tu cuenta</h5>
                             <h6 className="font-medium m-b-20 font-blue">El sistema contable más vendido en todo Ecuador</h6>
                         </div>
@@ -82,7 +82,7 @@ class Login2 extends React.Component {
                     </div>
                     <div id="recoverform">
                         <div className="logo">
-                            <span className="db"><img src="../../assets/images/logo-icon.png" alt="logo"/></span>
+                            <span className="db"><img src="assets/images/logo-icon.png" alt="logo"/></span>
                             <h5 className="font-medium m-b-20">Recover Password</h5>
                             <span>Enter your Email and instructions will be sent to you!</span>
                         </div>

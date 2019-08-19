@@ -1,8 +1,8 @@
 import React from 'react'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
-import { Button, FormGroup, Label, Select } from './../../temeforest'
+import { Button, FormGroup, Label, Select } from 'temeforest'
 import axios from 'axios'
-import { baseurl } from './../../utils/url'
+import { baseurl } from 'utils/url'
 
 class AddRol extends React.Component {
 

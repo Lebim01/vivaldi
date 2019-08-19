@@ -1,6 +1,6 @@
 import React from 'react'
-import { EditPage, FormGroup, Input, Label } from './../../temeforest'
-import { baseurl, getParameter } from './../../utils/url'
+import { EditPage, FormGroup, Input, Label } from 'temeforest'
+import { baseurl, getParameter } from 'utils/url'
 import axios from 'axios'
 
 const endpoint = 'rol'

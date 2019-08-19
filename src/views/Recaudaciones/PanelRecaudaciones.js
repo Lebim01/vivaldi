@@ -1,10 +1,10 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Select, FormGroup, Label, Input, BarChart, PieChart, Table, Button } from './../../temeforest'
-import { config } from './../../config'
-import { objectToUrl } from './../../utils/url'
+import { Card, CardBody, CardTitle, Select, FormGroup, Label, Input, BarChart, PieChart, Table, Button } from 'temeforest'
+import { config } from 'config'
+import { objectToUrl } from 'utils/url'
+import axios from 'axios'
 import moment from 'moment'
-import axios from '../../utils/axios';
 
 const { baseurl } = config
 
