@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { baseMediaUrl } from './../../utils/url'
+import { baseMediaUrl } from 'utils/url'
 import { isUndefined } from 'util';
 
 class Button extends React.Component {

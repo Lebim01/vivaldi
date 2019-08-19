@@ -1,7 +1,7 @@
 
 import React from 'react'
 import FormGroup from './FormGroup'
-import { getResults } from '../../../utils/url';
+import { getResults } from 'utils/url';
 
 class Select extends React.Component {
 

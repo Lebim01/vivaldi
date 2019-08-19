@@ -1,7 +1,7 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Button } from './../../temeforest'
-import store from './../../store/auth'
+import { Card, CardBody, CardTitle, Button } from 'temeforest'
+import store from 'store/auth'
 import moment from 'moment'
 
 const timestamp = moment().format('YYYY-MM-DD HH:mm:ss')

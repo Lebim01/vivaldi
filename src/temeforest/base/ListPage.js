@@ -1,8 +1,8 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { CardTitle, InputIcon, Button } from './../../temeforest'
+import { CardTitle, InputIcon, Button } from 'temeforest'
 import axios from 'axios'
-import { baseurl, objectToUrl } from './../../utils/url'
+import { baseurl, objectToUrl } from 'utils/url'
 
 // numero de filas por pagina
 const RowsPerPage = 25
