@@ -4,6 +4,8 @@ import { FormGroup, Input, Label, FormElementValidate } from 'temeforest'
 import { baseurl, getResults } from 'utils/url'
 import axios from 'axios'
 
+const endpoint = 'persona'
+
 class EditPersona extends React.Component {
 
     state = {
@@ -15,7 +17,6 @@ class EditPersona extends React.Component {
 
     constructor(props){
         super(props)
-        this.onChange = this.onChange.bind(this)
         this.getPersona = this.getPersona.bind(this)
     }
 
@@ -60,7 +61,7 @@ class EditPersona extends React.Component {
     }
 
     searchPersona = async (identificacion) => {
-        const results = await getResults(`${baseurl}/persona/?identificacion=${identificacion}`)
+        const results = await getResults(`${baseurl}/${endpoint}/?identificacion=${identificacion}`)
         if(results.length > 0){
             this.setState({
                 data : {
@@ -80,14 +81,18 @@ class EditPersona extends React.Component {
         return false
     }
 
-    async getPersona(id){
+    getPersona = async (id) => {
         if(id){
-            const { data } = await axios.get(`${baseurl}/persona/${id}`)
+            const { data } = await axios.get(`${baseurl}/${endpoint}/${id}`)
             if(data){
                 this.setState({
                     id : data.id,
                     data : data
                 })
+
+                if(this.props.onChange){
+                    this.props.onChange(data)
+                }
             }
         }
     }

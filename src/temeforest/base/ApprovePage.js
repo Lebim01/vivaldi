@@ -8,7 +8,7 @@ import Swal from 'sweetalert2'
 class ApprovePage extends React.Component {
 
     aprobar = () => {
-        const { endpoint, urlFront, id } = this.props
+        const { endpoint, urlFront, id, aprobarParams } = this.props
 
         Swal.fire({
             title: 'Confirmar Guardar',
@@ -16,7 +16,7 @@ class ApprovePage extends React.Component {
             showCancelButton: true,
             showLoaderOnConfirm: true,
             preConfirm: () => {
-                return axios.post(`${baseurl}/${endpoint}/${id ? `${id}/` : ``}`, { id, estado: 1 })
+                return axios.post(`${baseurl}/${endpoint}/${id ? `${id}/` : ``}`, { id, estado: 1, ...aprobarParams })
                 .then(response => {
                     if (response.status !== 200 && response.status !== 201) {
                         throw new Error(response.statusText)
@@ -108,6 +108,10 @@ class ApprovePage extends React.Component {
             </div>
         )
     }
+}
+
+ApprovePage.defaultProps = {
+    aprobarParams : {}
 }
 
 export default ApprovePage

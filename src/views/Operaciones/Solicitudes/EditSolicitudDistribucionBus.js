@@ -74,7 +74,7 @@ class MainView extends React.Component {
                             <Input value={this.props.observaciones} readOnly />
                         </div>
                     </FormGroup>
-		            {this.props.estado === 2 &&
+                    {this.props.estado === 2 &&
                         <FormGroup className="row">
                             <Label className="col-sm-3">Motivo</Label>
                             <div className="col-sm-5">

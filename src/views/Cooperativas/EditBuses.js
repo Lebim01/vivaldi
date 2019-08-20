@@ -49,6 +49,7 @@ class MainView extends React.Component {
     }
 
     onChangeData = name => (value) => {
+        console.log(name, value)
         if(this.props.onChange){
             this.props.onChange(name, value)
         }
@@ -199,12 +200,6 @@ class EditBuses extends React.Component {
         }
     }
 
-    constructor(props){
-        super(props)
-        this.onChange = this.onChange.bind(this)
-        this.onChangeFile = this.onChangeFile.bind(this)
-    }
-
     componentDidMount(){
         let id = getParameter('id')
         if(id){
@@ -213,14 +208,20 @@ class EditBuses extends React.Component {
     }
 
     getData = async (id) => {
-        const { data } = await axios.get(`${baseurl}/bus/${id}/`)
+        const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/`)
+        data.propietario = {
+            id: data.propietario
+        }
+        data.conductor = {
+            id: data.conductor
+        }
         this.setState({
             id,
             data
         })
     }
 
-    onChange(name, value){
+    onChange = (name, value) => {
         let data = this.state.data
         data[name] = value
         this.setState({
