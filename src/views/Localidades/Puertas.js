@@ -19,11 +19,8 @@ class Puertas extends React.Component {
                                     fieldNames={['Nombre', 'Localidad','Nivel']}
                                     fields={['numero', 'localidad_nivel_nombre', 'localidad_nombre']}
 
-                                    url='puerta'
-
-                                    menu='localidades'
-                                    submenu='puertas'
-
+                                    endpoint='puerta'
+                                    urlFront='localidades/puertas'
                                     history={this.props.history}
                                 />
                             </CardBody>

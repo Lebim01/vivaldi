@@ -141,17 +141,11 @@ class TasasUsadasPorViaje extends React.Component {
                                     fieldNames={['Tasa (Código)', 'Usada', '# Asiento']}
                                     fields={['', '', '']}
 
-                                    //url del endpoint
-                                    url='recaudaciones/tasas_emitidas_vs_usadas_cooperativa'
-
-                                    // url del frontend
-                                    menu='recaudaciones'
-                                    submenu='tasas-emitidas-vs-usadas'
+                                    endpoint='recaudaciones/tasas_emitidas_vs_usadas_cooperativa'
                                     parameters={this.state}
                                     
                                     history={this.props.history}
                                     refresh={refresh}
-                                    redirect={false}
                                 />
                                 <br/>
                                 <div className="row">

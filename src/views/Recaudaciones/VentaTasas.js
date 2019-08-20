@@ -224,15 +224,11 @@ class VentaTasas extends React.Component {
                                     fieldNames={['Fecha venta', 'Turno', 'Localidad', 'Cooperativa', 'Cantidad', 'Valor unitario', 'Valor total', 'Acción']}
                                     fields={['', '', '', '', '', '', '' , '']}
 
-                                    url='venta/venta_contingencia'
-
-                                    menu='recaudaciones'
-                                    submenu='venta-tasas'
+                                    endpoint='venta/venta_contingencia'
                                     parameters={this.state}
                                     
                                     history={this.props.history}
                                     refresh={refresh}
-                                    redirect={false}
                                 />
                             </CardBody>
                         </Card>

@@ -19,10 +19,8 @@ class Ciudades extends React.Component {
                                     fieldNames={['Nombre', 'Provincia']}
                                     fields={['nombre', 'provincia_nombre']}
 
-                                    url='ciudad'
-                                    menu='localidades'
-                                    submenu='ciudad'
-
+                                    endpoint='ciudad'
+                                    urlFront='localidades/ciudad'
                                     history={this.props.history}
                                 />
                             </CardBody>

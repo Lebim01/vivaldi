@@ -19,11 +19,8 @@ class Silos extends React.Component {
                                     fieldNames={['Nombre', 'Dirección IP', 'Localidad']}
                                     fields={['descripcion', 'ip', 'localidad_nombre']}
 
-                                    url='silo'
-
-                                    menu='localidades'
-                                    submenu='silos'
-
+                                    endpoint='silo'
+                                    urlFront='localidades/silos'
                                     history={this.props.history}
                                 />
                             </CardBody>

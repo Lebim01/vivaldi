@@ -19,11 +19,8 @@ class Conductores extends React.Component {
                                     fieldNames={['Cooperativa', 'Apellidos', 'Nombres']}
                                     fields={['cooperativa_nombre', 'apellidos', 'nombres']}
 
-                                    url='conductor'
-
-                                    menu='cooperativas'
-                                    submenu='conductores'
-
+                                    endpoint='conductor'
+                                    urlFront='cooperativas/conductores'
                                     history={this.props.history}
                                 />
                             </CardBody>

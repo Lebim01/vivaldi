@@ -14,9 +14,9 @@ function Rutas(props) {
                                 searchFields={['cooperativa_nombre', 'via', 'ciudad_destino_nombre']}
                                 fieldNames={['Cooperativa', 'Ruta', 'Destino']}
                                 fields={['cooperativa_nombre', 'via', 'ciudad_destino_nombre']}
-                                url='ruta'
-                                menu='operaciones'
-                                submenu='rutas'
+
+                                endpoint='ruta'
+                                urlFront='operaciones/rutas'
                                 history={props.history}
                             />
                         </CardBody>

@@ -92,10 +92,8 @@ class SolicitudFrecuencias extends React.Component {
                                     fieldNames={['Cooperativa', 'Fecha', 'Descripión', 'Tipo de Solicitud']}
                                     fields={['cooperativa_nombre', 'fecha', 'descripcion', 'tipo_solicitud_nombre']}
 
-                                    url='venta/solicitud_frecuencia'
-
-                                    menu='operaciones'
-                                    submenu='solicitudes/frecuencias'
+                                    endpoint='venta/solicitud_frecuencia'
+                                    urlFront='operaciones/solicitudes/frecuencias'
                                     parameters={this.state}
                                     
                                     history={this.props.history}

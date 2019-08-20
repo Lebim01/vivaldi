@@ -204,17 +204,11 @@ class TasasContingencia extends React.Component {
                                     fieldNames={['Fecha', 'Localidad', 'Cantidad', 'Acción']}
                                     fields={['fecha', 'licalidad_nombre', 'cantidad', '']}
 
-                                    //url del endpoint
-                                    url='venta/generacion_contingencia'
-                                    
-                                    // url del frontend
-                                    menu='recaudaciones'
-                                    submenu='tasas-contingencia'
+                                    endpoint='venta/generacion_contingencia'
                                     parameters={this.state}
                                     
                                     history={this.props.history}
                                     refresh={refresh}
-                                    redirect={false}
                                 />
                             </CardBody>
                         </Card>

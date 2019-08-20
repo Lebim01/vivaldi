@@ -17,11 +17,8 @@ class SolicitudDistribucionBuses extends React.Component {
                                     fieldNames={['Cooperativa', 'Fecha', 'Descripión', 'Tipo de Solicitud']}
                                     fields={['cooperativa_nombre', 'fecha', 'descripcion', 'tipo_solicitud']}
 
-                                    url='venta/solicitud_plantilla'
-
-                                    menu='operaciones'
-                                    submenu='solicitudes/distribucion-buses'
-                                    
+                                    endpoint='venta/solicitud_plantilla'
+                                    urlFront='operaciones/solicitudes/distribucion-buses'
                                     history={this.props.history}
                                 />
                             </CardBody>

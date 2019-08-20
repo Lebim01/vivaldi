@@ -92,14 +92,10 @@ class VentasPorTurno extends React.Component {
                     fieldNames={['Destino', 'Tipo', 'Cantidad', 'v/u', 'Subtotal']}
                     fields={['destino_nombre', 'tipo', 'cantidad', '', 'subtotal']}
 
-                    url=''
-
-                    menu='recaudaciones'
-                    submenu='ventas-por-turno'
+                    endpoint=''
                     parameters={this.state}
                     
                     history={this.props.history}
-                    redirect={false}
                 />
             </ReportPage>
         )

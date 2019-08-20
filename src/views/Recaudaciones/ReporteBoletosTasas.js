@@ -84,15 +84,11 @@ class ReporteBoletosTasas extends React.Component {
                     fieldNames={['Boleto normal', 'Boleto especial', 'Normal anulado', 'Especial anulado', 'Total boleto', 'Total tasa']}
                     fields={['boleto_normal', 'boleto_especial', 'normal_anulado', 'especial_anulado', 'total_boleto', 'total_tasa']}
 
-                    url='recaudaciones/boletos-tasas'
-
-                    menu='recaudaciones'
-                    submenu='reporte-boletos-tasas'
+                    endpoint='recaudaciones/boletos-tasas'
                     parameters={this.state}
                     
                     history={this.props.history}
                     refresh={refresh}
-                    redirect={false}
                 />
             </ReportPage>
         )

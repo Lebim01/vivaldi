@@ -92,10 +92,8 @@ class SolicitudBuses extends React.Component {
                                     fieldNames={['Cooperativa', 'Fecha', 'Descripión', 'Tipo de Solicitud', 'Estado']}
                                     fields={['cooperativa_nombre', 'fecha', 'descripcion', 'tipo_solicitud_nombre', 'estado']}
 
-                                    url='venta/solicitud_bus'
-
-                                    menu='operaciones'
-                                    submenu='solicitudes/buses'
+                                    endpoint='venta/solicitud_bus'
+                                    urlFront='operaciones/solicitudes/buses'
                                     parameters={this.state}
                                     
                                     history={this.props.history}

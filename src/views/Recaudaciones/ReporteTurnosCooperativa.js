@@ -95,15 +95,11 @@ class ReporteTurnosCooperativa extends React.Component {
                     fieldNames={['Boletero', 'Destino', 'Tipo', 'Cantidad', 'Valor unidad', 'Total']}
                     fields={['boletero', 'destino', 'tipo', 'cantidad', 'valor_unidad', 'total']}
 
-                    url='recaudaciones/turnos-cooperativa'
-
-                    menu='recaudaciones'
-                    submenu='turnos-cooperativa'
+                    endpoint='recaudaciones/turnos-cooperativa'
                     parameters={this.state}
                     
                     history={this.props.history}
                     refresh={refresh}
-                    redirect={false}
                 />
             </ReportPage>
         )

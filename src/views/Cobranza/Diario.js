@@ -82,12 +82,7 @@ class Diario extends React.Component {
                     fieldNames={['Cooperativa', 'Localidad', 'Fecha', 'Cobrar', 'Saldo', 'Emitido', 'Cobrado', 'N.C', 'Acción']}
                     fields={['', '', '', '', '', '']}
 
-                    //url del endpoint
-                    url='cobranza/diario'
-
-                    // url del frontend
-                    menu='cobranza'
-                    submenu='diario'
+                    endpoint='cobranza/diario'
                     parameters={this.state}
                     
                     history={this.props.history}

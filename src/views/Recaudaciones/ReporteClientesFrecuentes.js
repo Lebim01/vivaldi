@@ -105,15 +105,11 @@ class ReporteClientesFrecuentes extends React.Component {
                     fieldNames={this.state.reporte == 1 ?  ['Pasajero', 'Viajes'] : ['Cliente', 'Cédula/RUC', 'Viajes']}
                     fields={this.state.reporte == 1 ? ['nombre', 'viajes'] : ['nombre', 'identificacion', 'viajes']}
 
-                    url='venta/clientes-frecuentes'
-
-                    menu='recaudaciones'
-                    submenu='clientes-frecuentes'
+                    endpoint='venta/clientes-frecuentes'
                     parameters={this.state}
                     
                     history={this.props.history}
                     refresh={refresh}
-                    redirect={false}
                 />
             </ReportPage>
         )

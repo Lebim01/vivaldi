@@ -19,11 +19,8 @@ class TrafficControl extends React.Component {
                                     fieldNames={['Descripción', 'Dirección IP', 'Localidad']}
                                     fields={['descripcion', 'ip', 'localidad_nombre']}
 
-                                    url='trafficControl'
-
-                                    menu='localidades'
-                                    submenu='traffic-control'
-
+                                    endpoint='trafficControl'
+                                    urlFront='localidades/traffic-control'
                                     history={this.props.history}
                                 />
                             </CardBody>

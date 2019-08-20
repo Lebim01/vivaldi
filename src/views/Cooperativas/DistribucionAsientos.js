@@ -19,11 +19,8 @@ class DistribucionAsientos extends React.Component {
                                     fieldNames={['Nombre', 'Asientos']}
                                     fields={['nombre', 'asientos']}
 
-                                    url='busTipo'
-
-                                    menu='cooperativas'
-                                    submenu='distribucion-asientos'
-
+                                    endpoint='busTipo'
+                                    urlFront='cooperativas/distribucion-asientos'
                                     history={this.props.history}
                                 />
                             </CardBody>

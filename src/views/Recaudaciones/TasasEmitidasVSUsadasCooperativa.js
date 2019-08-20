@@ -99,17 +99,11 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
                     fieldNames={[(this.state.reporte === 2) ? 'Viaje' : 'Boletero' , 'Emitidas', 'Usadas']}
                     fields={[(this.state.reporte === 2) ? 'viaje' : 'boletero', 'tasas_emitidas', 'tasas_usadas']}
 
-                    //url del endpoint
-                    url='recaudaciones/tasas-emitidas-usadas'
-
-                    // url del frontend
-                    menu='recaudaciones'
-                    submenu='tasas-emitidas-vs-usadas'
+                    endpoint='recaudaciones/tasas-emitidas-usadas'
                     parameters={this.state}
                     
                     history={this.props.history}
                     refresh={refresh}
-                    redirect={false}
                 />
             </ReportPage>
         )

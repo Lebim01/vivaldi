@@ -20,11 +20,8 @@ class Roles extends React.Component {
                                     fieldNames={['Rol', 'Descripción']}
                                     fields={['name', 'description']}
 
-                                    url='rol'
-
-                                    menu='usuarios'
-                                    submenu='roles'
-
+                                    endpoint='rol'
+                                    urlFront='usuarios/roles'
                                     history={this.props.history}
                                 />
                             </CardBody>

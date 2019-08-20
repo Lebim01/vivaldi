@@ -19,11 +19,8 @@ class Cooperativas extends React.Component {
                                     fieldNames={['Nombre', 'Gremio']}
                                     fields={['nombre', 'gremio_nombre']}
 
-                                    url='cooperativa'
-
-                                    menu='cooperativas'
-                                    submenu='cooperativas'
-
+                                    endpoint='cooperativa'
+                                    urlFront='cooperativas/cooperativas'
                                     history={this.props.history}
                                 />
                             </CardBody>

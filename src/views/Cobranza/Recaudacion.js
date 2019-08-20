@@ -117,12 +117,8 @@ class Recaudacion extends React.Component {
                     fieldNames={['Cooperativa', 'Boleto normal', 'Boleto especial', 'Normal anulado', 'Total boleto', 'Total tasas']}
                     fields={['', '', '', '', '', '']}
 
-                    //url del endpoint
-                    url='cobranza/recaudacion'
-
-                    // url del frontend
-                    menu='cobranza'
-                    submenu='recaudacion'
+                    endpoint='cobranza/recaudacion'
+                    urlFront='cobranza/recaudacion'
                     parameters={this.state}
                     
                     history={this.props.history}

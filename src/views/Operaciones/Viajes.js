@@ -104,7 +104,7 @@ class Viajes extends React.Component {
                                         fieldNames={['Frecuencia','Cooperativa', 'Disco', 'Ruta', 'Salida']}
                                         fields={['frecuencia_nombre', 'cooperativa_nombre', 'bus_nombre', 'ruta_nombre', 'hora_salida']}
 
-                                        url='viaje'
+                                        endpoint='viaje'
                                         parameters={this.state}
 
                                         history={this.props.history}

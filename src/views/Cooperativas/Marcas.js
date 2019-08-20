@@ -19,11 +19,8 @@ class Provincias extends React.Component {
                                     fieldNames={['Nombre']}
                                     fields={['nombre']}
 
-                                    url='marca'
-
-                                    menu='cooperativas'
-                                    submenu='marcas'
-
+                                    endpoint='marca'
+                                    urlFront='cooperativas/marcas'
                                     history={this.props.history}
                                 />
                             </CardBody>

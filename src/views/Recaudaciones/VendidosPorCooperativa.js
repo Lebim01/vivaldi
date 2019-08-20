@@ -107,14 +107,10 @@ class ReporteTasasVendidas extends React.Component {
                     fieldNames={['Tipo', 'Cantidad', 'Valor unitario', 'Subtotal']}
                     fields={['tipo', 'cantidad', 'valor_unitario', 'subtotal']}
 
-                    url='recaudaciones/vendidos_cooperativa'
-
-                    menu='recaudaciones'
-                    submenu='vendidos-cooperativa'
+                    endpoint='recaudaciones/vendidos_cooperativa'
                     parameters={this.state}
                     
                     history={this.props.history}
-                    redirect={false}
                 />
             </ReportPage>
         )

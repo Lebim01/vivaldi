@@ -88,15 +88,11 @@ class ReporteTasasGeneradas extends React.Component {
                     fieldNames={['Silo', '# De Bloques', 'Bloque inicial', 'Bloque final', 'Total tasas', 'Fecha creación', 'Nombre creador', 'Localidad']}
                     fields={['silo', 'numero_bloques', 'bloque_inicial', 'bloque_final', 'total_tasas', 'fecha_creacion', 'nombre_creador', 'localidad_nombre']}
 
-                    url='recaudaciones/reporte-tasas-generadas'
-
-                    menu='recaudaciones'
-                    submenu='reporte-tasas-generadas'
+                    endpoint='recaudaciones/reporte-tasas-generadas'
                     parameters={this.state}
                     
                     history={this.props.history}
                     refresh={refresh}
-                    redirect={false}
                 />
             </ReportPage>
         )

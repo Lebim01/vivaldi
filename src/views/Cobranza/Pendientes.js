@@ -76,12 +76,8 @@ class Pendientes extends React.Component {
                     fieldNames={['Cooperativa', 'Localidad', 'Fecha', 'Cobrar', 'Saldo', 'Emitido', 'Cobrado', 'N.O.', 'Acción']}
                     fields={['', '', '', '', '', '']}
 
-                    //url del endpoint
-                    url='cobranza/pendiente'
-
-                    // url del frontend
-                    menu='cobranza'
-                    submenu='pendientes'
+                    endpoint='cobranza/pendiente'
+                    urlFront='cobranza/pendientes'
                     parameters={this.state}
                     
                     history={this.props.history}

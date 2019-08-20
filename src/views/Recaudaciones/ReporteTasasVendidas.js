@@ -76,15 +76,11 @@ class ReporteTasasVendidas extends React.Component {
                     fieldNames={['Fecha', 'Cooperativa', 'Silo', 'Tipo', 'Cant.', 'Cantidad', 'Precio', 'Total', 'Localidad', '', '']}
                     fields={['fecha', 'cooperativa_nombre', 'silo', 'tipo', 'cant', 'cantidad', 'precio', 'total', 'localidad_nombre', '', '']}
 
-                    url='recaudaciones/venta_tasas'
-
-                    menu='recaudaciones'
-                    submenu='reporte-tasas-vendidas'
+                    endpoint='recaudaciones/venta_tasas'
                     parameters={this.state}
                     
                     history={this.props.history}
                     refresh={refresh}
-                    redirect={false}
                 />
             </ReportPage>
         )

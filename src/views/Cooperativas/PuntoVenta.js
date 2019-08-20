@@ -19,11 +19,8 @@ class PuntoVenta extends React.Component {
                                     fieldNames={['Nombre', 'Cooperativa', 'Localidad']}
                                     fields={['descripcion', (row) => <ul>{row.puntoventa_cooperativas.map((r) => <li>{r.cooperativa_nombre}</li>)}</ul>, 'localidad_nombre']}
 
-                                    url='venta/puntoventa'
-
-                                    menu='cooperativas'
-                                    submenu='punto-venta'
-
+                                    endpoint='venta/puntoventa'
+                                    urlFront='cooperativas/punto-venta'
                                     history={this.props.history}
                                 />
                             </CardBody>

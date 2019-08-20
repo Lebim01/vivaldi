@@ -82,7 +82,7 @@ class ListPage extends React.Component {
             loading: true
         })
         const { currentPage } = this.state
-        const { data } = await axios.get(`${baseurl}/${this.props.url}/${objectToUrl({ ...parameters, page : currentPage })}`)
+        const { data } = await axios.get(`${baseurl}/${this.props.endpoint}/${objectToUrl({ ...parameters, page : currentPage })}`)
 
         let _results = [], 
             _count = 0, 
@@ -122,8 +122,8 @@ class ListPage extends React.Component {
     }
 
     onRowDoubleClick = (id) => {
-        if(this.props.menu && this.props.redirect){
-            this.props.history.push(`/${this.props.menu}/${this.props.submenu}/edit?id=${id}`)
+        if(this.props.urlFront && this.props.redirect){
+            this.props.history.push(`/${this.props.urlFront}/edit?id=${id}`)
         }
     }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, CardBody, ListPage } from 'temeforest'
 
-class Gremios extends React.Component {
+class Pasajeros extends React.Component {
     render(){
         return (
             <div className="animated fadeIn">
@@ -10,17 +10,17 @@ class Gremios extends React.Component {
                         <Card>
                             <CardBody>
                                 <ListPage
-                                    title="Listado de Gremios"
+                                    title="Listado de Pasajeros"
 
                                     searchable={true}
-                                    searchPlaceholder="Nombre, Descripcion"
-                                    searchFields={['nombre', 'descripcion']}
+                                    searchPlaceholder="Identificación, Apellidos, Nombres"
+                                    searchFields={['identificacion', 'apellidos', 'nombres']}
 
-                                    fieldNames={['Nombre', 'Descripción']}
-                                    fields={['nombre', 'descripcion']}
+                                    fieldNames={['Identificación', 'Apellidos', 'Nombres']}
+                                    fields={['identificacion', 'apellidos', 'nombres']}
 
-                                    endpoint='gremio'
-                                    urlFront='cooperativas/gremios'
+                                    endpoint='pasajero'
+                                    urlFront='facturacion/pasajeros'
                                     history={this.props.history}
                                 />
                             </CardBody>
@@ -32,4 +32,4 @@ class Gremios extends React.Component {
     }
 }
 
-export default Gremios
+export default Pasajeros

@@ -104,12 +104,11 @@ class ReporteTasasContingenciaGeneral extends React.Component {
                                     ]}
                                     fields={['', '', '', '', '', '', '' , '', '']}
 
-                                    url='recaudaciones/tasas_general'
+                                    endpoint='recaudaciones/tasas_general'
                                     parameters={this.state}
                                     
                                     history={this.props.history}
                                     refresh={refresh}
-                                    redirect={false}
                                 />
                             </CardBody>
                         </Card>

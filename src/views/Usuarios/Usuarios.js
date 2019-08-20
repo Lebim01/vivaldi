@@ -26,11 +26,8 @@ class Usuarios extends React.Component {
                                         </ul>
                                     ]}
 
-                                    url='usuario'
-
-                                    menu='usuarios'
-                                    submenu='usuarios'
-
+                                    endpoint='usuario'
+                                    urlFront='usuarios/usuarios'
                                     history={this.props.history}
                                 />
                             </CardBody>

@@ -102,12 +102,9 @@ class Reporte1 extends React.Component {
                     ]}
                     fields={['', '', '', '', '', '']}
 
-                    //url del endpoint
-                    url='cobranza/consulta'
-
-                    // url del frontend
-                    menu='cobranza'
-                    submenu='consultas'
+                    
+                    endpoint='cobranza/consulta'
+                    urlFront='cobranza/consultas'
                     parameters={this.state}
                     
                     history={this.props.history}
@@ -186,12 +183,7 @@ class Reporte2 extends React.Component {
                     ]}
                     fields={['', '', '', '', '', '']}
 
-                    //url del endpoint
-                    url='cobranza/diario'
-
-                    // url del frontend
-                    menu='cobranza'
-                    submenu='diario'
+                    endpoint='cobranza/diario'
                     parameters={this.state}
                     
                     history={this.props.history}
@@ -205,12 +197,7 @@ class Reporte2 extends React.Component {
                     fieldNames={['Cooperativa', 'Valor', 'Día Correspondente', 'Localidad']}
                     fields={['', '', '', '', '', '']}
 
-                    //url del endpoint
-                    url='cobranza/diario'
-
-                    // url del frontend
-                    menu='cobranza'
-                    submenu='diario'
+                    endpoint='cobranza/diario'
                     parameters={this.state}
                     
                     history={this.props.history}

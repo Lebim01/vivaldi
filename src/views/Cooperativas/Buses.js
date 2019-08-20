@@ -19,10 +19,8 @@ class Buses extends React.Component {
                                     fieldNames={['Cooperativa', 'Placa', 'Disco']}
                                     fields={['cooperativa_nombre', 'placa', 'numero']}
 
-                                    url='bus'
-
-                                    menu='cooperativas'
-                                    submenu='buses'
+                                    endpoint='bus'
+                                    urlFront='cooperativas/buses'
 
                                     history={this.props.history}
                                 />

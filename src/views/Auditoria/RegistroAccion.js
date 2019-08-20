@@ -99,7 +99,7 @@ class RegistroAccion extends React.Component {
                         fields = {['datetime', 'user', 'object_repr', '', 'content_type',
                                    'event_type', '', '', '' ]}
 
-                        url='auditcrud'
+                        endpoint='auditcrud'
 
                         parameters={this.state}
 

@@ -93,10 +93,8 @@ class SolicitudUsuario extends React.Component {
                                     fieldNames={['Cooperativa', 'Fecha', 'Descripión', 'Tipo de Solicitud']}
                                     fields={['cooperativa_nombre', 'fecha', 'descripcion', 'tipo_solicitud_nombre']}
 
-                                    url='venta/solicitud_usuario'
-
-                                    menu='operaciones'
-                                    submenu='solicitudes/usuario'
+                                    endpoint='venta/solicitud_usuario'
+                                    urlFront='operaciones/solicitudes/usuario'
                                     parameters={this.state}
 
                                     history={this.props.history}

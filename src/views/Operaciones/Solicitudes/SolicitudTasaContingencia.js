@@ -90,10 +90,8 @@ class SolicitudTasaContingencia extends React.Component {
                                     fieldNames={['Cooperativa', 'Fecha', 'Descripión', 'Tipo de Solicitud', 'Cantidad']}
                                     fields={['cooperativa_nombre', 'fecha', 'descripcion', 'tipo_solicitud_nombre', 'cantidad_pedida']}
 
-                                    url='venta/solicitud_tasacontingencia'
-
-                                    menu='operaciones'
-                                    submenu='solicitudes/tasas-contingencia'
+                                    endpoint='venta/solicitud_tasacontingencia'
+                                    urlFront='operaciones/solicitudes/tasas-contingencia'
                                     
                                     history={this.props.history}
                                     parameters={this.state}

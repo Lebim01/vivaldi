@@ -18,10 +18,8 @@ function Frecuencias(props) {
                                 fieldNames={['Hora', 'Cooperativa', 'Ruta', 'Tipo']}
                                 fields={['hora_salida', 'cooperativa_nombre', 'ruta_nombre', 'tipo_nombre']}
 
-                                url='frecuencia'
-                                menu='operaciones'
-                                submenu='frecuencias'
-                                
+                                endpoint='frecuencia'
+                                urlFront='operaciones/frecuencias'
                                 history={props.history}
                             />
                         </CardBody>
