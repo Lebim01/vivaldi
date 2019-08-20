@@ -64,7 +64,9 @@ const TasasEmitidasVSUsadasCooperativa = React.lazy(() => import('views/Recaudac
 const TasasUsadasPorViaje = React.lazy(() => import('views/Recaudaciones/TasasUsadasPorViaje'))
 const Recaudacion = React.lazy(() => import('views/Recaudaciones/Recaudacion'))
 const ReporteTasasContingenciaGeneral = React.lazy(() => import('views/Recaudaciones/ReporteTasasContingenciaGeneral'))
-
+/** FACTURACION */
+const Pasajeros = React.lazy(() => import('views/Facturacion/Pasajeros'))
+const EditPasajero = React.lazy(() => import('views/Facturacion/EditPasajero'))
 /** COBRANZA */
 const CobranzaRecaudacion = React.lazy(() => import('views/Cobranza/Recaudacion'))
 const Diario = React.lazy(() => import('views/Cobranza/Diario'))
@@ -145,8 +147,8 @@ const routes = [
   { path: '/operaciones/solicitudes/tasas-contingencia', name: 'Solicitud de Tasas de Contingencia', component: SolicitudTasaContingencia, exact: true },
   { path: '/operaciones/solicitudes/tasas-contingencia/edit', name: 'Crear/Editar Solicitud de Tasas de Contingencia', component: EditSolicitudTasaContingencia, exact: true },
 
-  { path: '/facturacion/clientes', name: 'Buttons', component: Page404 },
-  { path: '/facturacion/documentos', name: 'Button Dropdowns', component: Page404 },
+  { path: '/facturacion/pasajeros', name: 'Pasajeros', component: Pasajeros, exact: true },
+  { path: '/facturacion/pasajeros/edit', name: 'Crear/Editar Pasajero', component: EditPasajero, exact: true },
 
   { path: '/recaudaciones/panel', name: 'Panel de Recaudaciones', component: PanelRecaudaciones, exact: true },
   { path: '/recaudaciones/tasas-contingencia', name: 'Tasas contingencia', component: TasasContingencia, exact: true },

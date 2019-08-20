@@ -23,7 +23,7 @@ class EditCiudad extends React.Component {
     }
 
     getData = async (id) => {
-        const { data } = await axios.get(`${baseurl}/ciudad/${id}/`)
+        const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/`)
         this.setState({
             id,
             data
