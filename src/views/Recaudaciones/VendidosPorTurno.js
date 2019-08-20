@@ -99,6 +99,7 @@ class VentasPorTurno extends React.Component {
                     parameters={this.state}
                     
                     history={this.props.history}
+                    redirect={false}
                 />
             </ReportPage>
         )

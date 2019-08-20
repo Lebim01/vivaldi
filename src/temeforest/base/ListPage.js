@@ -253,7 +253,7 @@ class ListPage extends React.Component {
                                 </tbody>
                                 <tfoot>
                                     <tr className="footable-paging">
-                                        <td colspan="8">
+                                        <td colspan="10">
                                             <div className="footable-pagination-wrapper text-center">
                                                 <ul className="pagination justify-content-center">
                                                     <li className={`footable-page-nav ${previous && !loading ? 'pointer' : 'link-disabled'}`} data-page="first">

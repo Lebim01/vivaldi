@@ -23,9 +23,18 @@ function objectToUrl(_obj){
     return `?${Object.keys(_obj).filter(key => _obj[key] !== undefined && _obj[key] !== null && _obj[key] !== '').map((key) => `${key}=${_obj[key]}`).join('&')}`
 }
 
-async function getResults(url){
+async function getResults(url, no_page = false){
     try {
-        const { data } = await axios.get(url)
+        let _url = new URL(url)
+        if(no_page){
+            // set page_size = 0
+            let page_size = _url.searchParams.get('page_size')
+            if(page_size === null){
+                _url.searchParams.append('page_size', 0)
+            }
+        }
+
+        const { data } = await axios.get(_url.toString())
         if(Array.isArray(data))
             return data
         else if(data.results)

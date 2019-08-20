@@ -92,6 +92,7 @@ class ReporteBoletosTasas extends React.Component {
                     
                     history={this.props.history}
                     refresh={refresh}
+                    redirect={false}
                 />
             </ReportPage>
         )

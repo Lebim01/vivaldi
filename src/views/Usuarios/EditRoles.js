@@ -1,6 +1,6 @@
 import React from 'react'
 import { EditPage, FormGroup, Input, Label } from 'temeforest'
-import { baseurl, getParameter } from 'utils/url'
+import { baseurl, getParameter, getResults } from 'utils/url'
 import axios from 'axios'
 
 const endpoint = 'rol'
@@ -213,12 +213,12 @@ class EditRoles extends React.Component {
     }
 
     getPermisos = async () => {
-        const { data } = await axios.get(`${baseurl}/permiso/`)
+        const results = await getResults(`${baseurl}/permiso/`, true)
         let categories = []
 
         // crear array de categorias ordenadas
-        for(let i in data){
-            let { category, category_name } = data[i]
+        for(let i in results){
+            let { category, category_name } = results[i]
 
             if(category){
                 if(!categories.some(r => r.id == category)){
@@ -237,8 +237,8 @@ class EditRoles extends React.Component {
         })
 
         // setear permisos por categoria
-        for(let i in data){
-            let { id, content_type, name, codename, category } = data[i]
+        for(let i in results){
+            let { id, content_type, name, codename, category } = results[i]
             let type = ''
             if(codename.includes('view')) type = 'view'
             if(codename.includes('add')) type = 'add'

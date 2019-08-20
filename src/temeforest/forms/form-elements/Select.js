@@ -28,14 +28,8 @@ class Select extends React.Component {
         const _props = props !== null ? props : this.props
         const { url, valueName, labelName } = typeof _props.asyncOptions === 'function' ? _props.asyncOptions() : _props.asyncOptions
 
-        let _url = new URL(url)
-        // set page_size = 0
-        let page_size = _url.searchParams.get('page_size')
-        if(page_size === null){
-            _url.searchParams.append('page_size', 0)
-        }
         // get results
-        const _results = await getResults(_url.toString())
+        const _results = await getResults(url, true)
         // fill options with results
         let _options = [{value:'',label:'Seleccione'}, ..._results.map((record) => {
             return {

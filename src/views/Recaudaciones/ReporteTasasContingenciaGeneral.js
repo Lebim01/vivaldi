@@ -109,6 +109,7 @@ class ReporteTasasContingenciaGeneral extends React.Component {
                                     
                                     history={this.props.history}
                                     refresh={refresh}
+                                    redirect={false}
                                 />
                             </CardBody>
                         </Card>

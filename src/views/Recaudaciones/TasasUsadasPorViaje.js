@@ -151,6 +151,7 @@ class TasasUsadasPorViaje extends React.Component {
                                     
                                     history={this.props.history}
                                     refresh={refresh}
+                                    redirect={false}
                                 />
                                 <br/>
                                 <div className="row">
