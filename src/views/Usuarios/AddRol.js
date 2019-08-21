@@ -62,7 +62,7 @@ class AddRol extends React.Component {
                 errors.push(required[i])
             }
         }
-        if(errors.length == 0){
+        if(errors.length === 0){
             if(this.props.guardar){
                 this.props.guardar(this.state.data)
                 this.setState({

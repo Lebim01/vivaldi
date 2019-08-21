@@ -35,7 +35,7 @@ class App extends Component {
         let self = this
         this.unsubscribe = store.subscribe(() => {
             let state = store.getState()
-            if(self.state.auth != state.auth){
+            if(self.state.auth !== state.auth){
                 self.setState({
                     auth: state.auth
                 })

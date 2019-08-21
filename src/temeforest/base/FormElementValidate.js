@@ -9,7 +9,7 @@ const defaultProps = {
         class : 'col-sm-3'
     },
     input : {
-        element : <Input />
+        
     }
 }
 
@@ -48,7 +48,7 @@ class FormElementValidate extends React.Component {
                                 </span>
                             </Label>
                             <div className="col-sm-5">
-                                {_input.element}
+                                {_input.element || <Input />}
                                 { validator &&
                                     <Validator 
                                         isValidationError={onChangeFlagValidate}

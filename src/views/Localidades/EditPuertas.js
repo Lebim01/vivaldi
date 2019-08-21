@@ -1,6 +1,6 @@
 import React from 'react'
 import { FormGroup, Input, Select, Label, DualList, EditPage } from 'temeforest'
-import { baseurl, getParameter } from 'utils/url'
+import { baseurl, getParameter, getResults } from 'utils/url'
 import axios from 'axios'
 import 'react-dual-listbox/lib/react-dual-listbox.css';
 
@@ -70,20 +70,20 @@ class MainView extends React.Component {
     }
 
     getNiveles = async (id)  => {
-        const { data } = await axios.get(`${baseurl}/localidadnivel/?localidad=${id}`)
-        let options = [...this.seleccione, ...data.results.map((r) => { return { value : r.id, label : r.nombre } })]
+        const results = await getResults(`${baseurl}/localidadnivel/?localidad=${id}`)
+        let options = [...this.seleccione, ...results.map((r) => { return { value : r.id, label : r.nombre } })]
         this.setState({
           niveles : options
         })
     }
 
     getLocalidades = async (id)  => {
-        const { data } = await axios.get(`${baseurl}/localidad/`)
-        let options = [...this.seleccione, ...data.results.map((r) => { return { value : r.id, label : r.nombre } })]
+        const results = await getResults(`${baseurl}/localidad/`)
+        let options = [...this.seleccione, ...results.map((r) => { return { value : r.id, label : r.nombre } })]
         this.setState({
-          localidades : options
+            localidades : options
         }, ()=>{
-            if(this.props.localidad == undefined){
+            if(this.props.localidad === undefined){
                 this.props.onChange('localidad', this.state.localidades[1].value)
                 this.getNiveles(this.state.localidades[1].value)
             }else{

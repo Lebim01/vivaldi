@@ -23,7 +23,7 @@ class Tabs extends React.Component {
     render(){
         return (
             <ul className="nav nav-tabs">
-                {this.props.tabs.map((tab) => <Tab {...tab} tab={this.props.tab} onClick={this.changeTab(tab.link)} />)}
+                {this.props.tabs.map((tab, i) => <Tab key={i} {...tab} tab={this.props.tab} onClick={this.changeTab(tab.link)} />)}
             </ul>
         )
     }

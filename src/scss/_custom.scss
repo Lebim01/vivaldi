@@ -38,7 +38,7 @@ input[type=time].no-clear.no-ampm::-webkit-datetime-edit-ampm-field {
     font-weight: bold;
 } 
 
-.link-disabled a {
+.link-disabled a, .link-disabled button {
     cursor: not-allowed;
 }
 

@@ -71,7 +71,7 @@ class MainView extends React.Component {
                             <Select onChange={this.onChange('tipo')} value={this.props.tipo} options={this.tipos} />
                         </div>
                     </FormGroup>
-                    { this.props.tipo == 2 &&
+                    { Number(this.props.tipo) === 2 &&
                         <FormGroup className="row">
                             <Label className="col-sm-3">Fecha</Label>
                             <div className="col-sm-5">
@@ -92,11 +92,6 @@ class EditFrecuencias extends React.Component {
         data : {}
     }
 
-    constructor(props){
-        super(props)
-        this.onChange = this.onChange.bind(this)
-    }
-
     componentDidMount(){
         let id = getParameter('id')
         if(id){
@@ -112,11 +107,11 @@ class EditFrecuencias extends React.Component {
         }, () => this.setDestino())
     }
 
-    onChange(name, value){
+    onChange = (name, value) => {
         let data = this.state.data
         data[name] = value
-        if(name == 'ruta') this.setDestino()
-        if(name == 'tipo') if(value == 1) data.fecha_validez = null
+        if(name === 'ruta') this.setDestino()
+        if(name === 'tipo') if(Number(value) === 1) data.fecha_validez = null
         this.setState({
             data
         })

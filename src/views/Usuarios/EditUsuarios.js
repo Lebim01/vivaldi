@@ -372,7 +372,7 @@ class EditUsuarios extends React.Component {
                                 <Select onChange={this.onChange('tipo')} value={data.tipo} options={this.tipos} />
                             </div>
                         </FormGroup>
-                        { data.tipo == 1 &&
+                        { Number(data.tipo) === 1 &&
                             <div>
                                 <FormGroup className="row">
                                     <div class="col-sm-1">&nbsp;</div>
@@ -402,7 +402,7 @@ class EditUsuarios extends React.Component {
                                 </FormGroup>
                             </div>
                         }
-                        { data.tipo == 2 &&
+                        { Number(data.tipo) === 2 &&
                             <div>
                                 <FormGroup className="row">
                                     <div class="col-sm-1">&nbsp;</div>

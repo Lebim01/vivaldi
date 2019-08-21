@@ -55,9 +55,9 @@ class MainView extends React.Component {
         const { data } = await axios.get(`${baseurl}/localidad/`)
         let options = [...this.seleccione, ...data.results.map((r) => { return { value : r.id, label : r.nombre } })]
         this.setState({
-          localidades : options
+            localidades : options
         }, () => {
-            if(this.props.localidad == undefined){
+            if(this.props.localidad === undefined){
                 this.props.onChange('localidad', this.state.localidades[1].value)
                 this.getNiveles(this.state.localidades[1].value)
             }else{

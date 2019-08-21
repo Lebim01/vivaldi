@@ -10,9 +10,9 @@ const urlFront = '/operaciones/rutas'
 
 class RecordRow extends React.Component {
 
-    delete(){
+    delete = () => {
         if(this.props.delete){
-            this.props.delete(this.props.index)
+            this.props.delete()
         }
     }
 
@@ -21,7 +21,7 @@ class RecordRow extends React.Component {
         return (
             <tr onDoubleClick={this.props.edit}>
                 <td>
-                    <Button outline={true} type="danger" size="sm" rounded={true} onClick={this.delete.bind(this)}>
+                    <Button outline={true} type="danger" size="sm" rounded={true} onClick={this.delete}>
                         <i className="fa fa-times"></i>
                     </Button>{' '}
                     {this.props.ciudad_nombre}
@@ -60,13 +60,6 @@ class MainView extends React.Component {
         labelName: 'nombre',
         valueName: 'id'
     }
-
-    constructor(props){
-        super(props)
-        this.toggleModal = this.toggleModal.bind(this)
-        this.agregarParada = this.agregarParada.bind(this)
-        this.deleteParada = this.deleteParada.bind(this)
-    }
     
     onChange = name => (e) => {
         if(this.props.onChange){
@@ -78,7 +71,7 @@ class MainView extends React.Component {
     onChangeParada = index => name => (e) => {
         let paradas = this.props.paradas
         let value = e.target.value
-        if(name == 'is_enable') value = e.target.checked
+        if(name === 'is_enable') value = e.target.checked
         paradas[index][name] = value
         this.props.onChange('paradas', paradas)
     }
@@ -92,16 +85,21 @@ class MainView extends React.Component {
         })
     }
 
-    agregarParada({ onChange, ...data }){
+    agregarParada = ({ onChange, ...data }) => {
         let paradas = this.props.paradas
-        let _continue = !paradas.some((r, i) => r.ciudad == data.ciudad && r.id != data.id && i != data.index)
+        let _continue = !paradas.some(
+            (r, i) => 
+                Number(r.ciudad) === Number(data.ciudad) && 
+                Number(r.id) !== Number(data.id) && 
+                Number(i) !== Number(data.index)
+        )
         if(!_continue){
             return false
         }
 
         if(data.id){
             for(let i in paradas){
-                if(paradas[i].id == data.id){
+                if(Number(paradas[i].id) === Number(data.id)){
                     paradas[i] = data
                     break
                 }
@@ -183,7 +181,7 @@ class MainView extends React.Component {
                                             index={i}
                                             {...record}
                                             onChange={this.onChangeParada(i)} 
-                                            delete={this.deleteParada} 
+                                            delete={() => this.deleteParada(i)} 
                                             edit={() => this.editParada({ ...record, index: i })}
                                         />
                                     )}
@@ -211,11 +209,6 @@ class EditRutas extends React.Component {
         }
     }
 
-    constructor(props){
-        super(props)
-        this.onChange = this.onChange.bind(this)
-    }
-
     componentDidMount(){
         let id = getParameter('id')
         if(id){
@@ -224,14 +217,14 @@ class EditRutas extends React.Component {
     }
 
     getData = async (id) => {
-        const { data } = await axios.get(`${baseurl}/ruta/${id}/`)
+        const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/`)
         this.setState({
             id,
             data
         })
     }
 
-    onChange(name, value){
+    onChange = (name, value) => {
         let data = this.state.data
         data[name] = value
         this.setState({

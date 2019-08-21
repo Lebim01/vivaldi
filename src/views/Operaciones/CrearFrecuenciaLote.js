@@ -93,7 +93,7 @@ class MainView extends React.Component {
                             <Select onChange={this.onChange('tipo')} value={this.props.tipo} options={this.tipos} />
                         </div>
                     </FormGroup>
-                    { this.props.tipo == 2 &&
+                    { Number(this.props.tipo) === 2 &&
                         <FormGroup className="row">
                             <Label className="col-sm-3">Fecha</Label>
                             <div className="col-sm-5">

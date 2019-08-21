@@ -62,7 +62,7 @@ class ListPage extends React.Component {
         }
 
         if(numPages <= 5) {
-            numEndVisibleFooterPages = numPages
+            numEndVisibleFooterPages = numPages+1
         }
         else if(numPages >= numBeginVisibleFooterPages + NumVisibleFooterPages) {
             numEndVisibleFooterPages = numBeginVisibleFooterPages + NumVisibleFooterPages
@@ -257,27 +257,27 @@ class ListPage extends React.Component {
                                             <div className="footable-pagination-wrapper text-center">
                                                 <ul className="pagination justify-content-center">
                                                     <li className={`footable-page-nav ${previous && !loading ? 'pointer' : 'link-disabled'}`} data-page="first">
-                                                        <a className="footable-page-link" onClick={this.first}>«</a>
+                                                        <button className="footable-page-link" onClick={this.first}>«</button>
                                                     </li>
                                                     <li className={`footable-page-nav ${previous && !loading ? 'pointer' : 'link-disabled'}`} data-page="prev">
-                                                        <a className="footable-page-link" onClick={this.previous}>‹</a>
+                                                        <button className="footable-page-link" onClick={this.previous}>‹</button>
                                                     </li>
                                                     { numEndVisibleFooterPages > 0 ?
                                                         new Array(numEndVisibleFooterPages - numBeginVisibleFooterPages).fill(1).map((z, index) => {
                                                             let page = Number(numBeginVisibleFooterPages) + Number(index)
                                                             return (
                                                                 <li className={`footable-page visible ${page === currentPage ? 'active' : ''}`} data-page={page}>
-                                                                    <a className="footable-page-link" onClick={() => this.setPage(page)}>{ page }</a>
+                                                                    <button className="footable-page-link" onClick={() => this.setPage(page)}>{ page }</button>
                                                                 </li>
                                                             )
                                                         })
                                                         : null
                                                     }
                                                     <li className={`footable-page-nav ${next && !loading ? 'pointer' : 'link-disabled'}`} data-page="next">
-                                                        <a className="footable-page-link" onClick={this.next}>›</a>
+                                                        <button className="footable-page-link" onClick={this.next}>›</button>
                                                     </li>
                                                     <li className={`footable-page-nav ${next && !loading ? 'pointer' : 'link-disabled'}`} data-page="last">
-                                                        <a className="footable-page-link" onClick={this.last}>»</a>
+                                                        <button className="footable-page-link" onClick={this.last}>»</button>
                                                     </li>
                                                 </ul>
                                                 <div className="divider"></div>

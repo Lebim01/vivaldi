@@ -39,8 +39,8 @@ class ReporteTasasVendidas extends React.Component {
             refresh: true
         })
     }
+    
     render(){
-        const { refresh } = this.state
         return (
             <ReportPage title="Reporte de Tasas Vendidas">
                 <div className="row">

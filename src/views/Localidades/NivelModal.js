@@ -76,14 +76,19 @@ class NivelModal extends React.Component {
 
     agregarPuerta({ onChange, ...data }){
         let puertas = this.state.puertas
-        let _continue = !puertas.some((r, i) => r.numero == data.numero && r.id != data.id && i != data.index)
+        let _continue = !puertas.some(
+            (r, i) => 
+                Number(r.numero) === Number(data.numero) && 
+                Number(r.id) !== Number(data.id) && 
+                Number(i) !== Number(data.index)
+        )
         if(!_continue){
             return false
         }
 
         if(data.id){
             for(let i in puertas){
-                if(puertas[i].id == data.id){
+                if(Number(puertas[i].id) === Number(data.id)){
                     puertas[i] = data
                     break
                 }

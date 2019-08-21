@@ -12622,7 +12622,7 @@ table.footable thead tr.footable-filtering th ul.dropdown-menu li a.checkbox inp
 table.footable thead tr.footable-filtering th ul.dropdown-menu li .checkbox label::before {
   display: none; }
 
-.footable .pagination li a {
+.footable .pagination li a, .footable .pagination li button {
   position: relative;
   display: block;
   padding: .5rem .75rem;
@@ -12632,20 +12632,20 @@ table.footable thead tr.footable-filtering th ul.dropdown-menu li .checkbox labe
   background-color: #fff;
   border: 1px solid #ddd; }
 
-.footable .pagination li.active a {
+.footable .pagination li.active a, .footable .pagination li.active button {
   z-index: 2;
   color: #fff;
   background-color: #0275d8;
   border-color: #0275d8; }
 
-.footable .pagination li.disabled a {
+.footable .pagination li.disabled a, .footable .pagination li.disabled button {
   color: #636c72;
   pointer-events: none;
   cursor: not-allowed;
   background-color: #fff;
   border-color: #ddd; }
 
-.footable .pagination li:first-child a {
+.footable .pagination li:first-child a, .footable .pagination li:first-child button {
   margin-left: 0;
   border-bottom-left-radius: .25rem;
   border-top-left-radius: .25rem; }

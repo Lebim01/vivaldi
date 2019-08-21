@@ -90,7 +90,7 @@ class Aside extends React.Component {
                                         <div className="col-sm-12" style={{padding:15}}>
                                             <div className="row">
                                                 <div className="col-sm-3">
-                                                    <img src="../../assets/img/avatars/default.svg" width="100%"/>
+                                                    <img src="../../assets/img/avatars/default.svg" width="100%" alt="default"/>
                                                 </div>
                                                 <div className="col-sm-9">
                                                     <b style={{fontSize: 15}}>{user_info.name ? user_info.name : user_info.username}</b>

@@ -40,7 +40,7 @@ class EditPersona extends React.Component {
         
         if(name === 'identificacion'){
             _readOnly = true
-            if(_data.identificacion.length == this.props.lengthCedula){
+            if(_data.identificacion.length === this.props.lengthCedula){
                 _readOnly = false
                 loading = true
                 this.searchPersona(_data.identificacion)
