@@ -49,7 +49,6 @@ class MainView extends React.Component {
     }
 
     onChangeData = name => (value) => {
-        console.log(name, value)
         if(this.props.onChange){
             this.props.onChange(name, value)
         }
@@ -176,11 +175,11 @@ class MainView extends React.Component {
                         <div className="col-sm-12 text-center">
                             <Input id="documentation" type="file" style={{display:'none'}} onChange={this.onChangeFile}/>
                             <Button type="success" style={{marginRight:5}} onClick={this.UploadFile}>
-                                <i class="fa fa-upload"/> Subir Documentación
+                                <i className="fa fa-upload"/> Subir Documentación
                             </Button>
                             { this.props.documentacion_url &&
                                 <Button type="success" style={{marginLeft:5}} onClick={() => this.DownloadFile(this.props.documentacion_url)} disabled={this.canDownload(this.props.documentacion_url)}>
-                                    <i class="fa fa-download"/> Ver Documentación
+                                    <i className="fa fa-download"/> Ver Documentación
                                 </Button>
                             }
                         </div>

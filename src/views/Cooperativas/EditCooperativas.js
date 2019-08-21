@@ -76,7 +76,7 @@ class MainView extends React.Component {
     render(){
         const tipos = this.tipos, sino = this.sino
         const { tab } = this.state
-        const { gremios, localidades, tabsLocalidades } = this.props
+        const { localidades, tabsLocalidades } = this.props
         return (
             <div>
                 <FormValidate className="mt-4 form-horizontal">
@@ -95,7 +95,7 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Gremio</Label>
                         <div className="col-sm-5">
-                            <Select options={gremios} onChange={this.onChange('gremio')} value={this.props.gremio} asyncOptions={this.optionsGremios} />
+                            <Select asyncOptions={this.optionsGremios} onChange={this.onChange('gremio')} value={this.props.gremio} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
@@ -274,7 +274,6 @@ class EditCooperativas extends React.Component {
         showConfirmSave : false,
         localidades : {},
         tabsLocalidades : [],
-        gremios : [],
         submmited : false
     }
 

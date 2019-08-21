@@ -13,12 +13,7 @@ const defaultProps = {};
 
 class DefaultHeader extends Component {
 
-    state = {
-        miniMenu: false
-    }
-
     toggleMenu(){
-        const { miniMenu } = this.state
 
         $("#main-wrapper").toggleClass("mini-sidebar");
         if ($("#main-wrapper").hasClass("mini-sidebar")) {

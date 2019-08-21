@@ -375,7 +375,7 @@ class EditUsuarios extends React.Component {
                         { Number(data.tipo) === 1 &&
                             <div>
                                 <FormGroup className="row">
-                                    <div class="col-sm-1">&nbsp;</div>
+                                    <div className="col-sm-1">&nbsp;</div>
                                     <Label className="col-sm-3 col-sm-offset-3">
                                         Roles
                                         <Button size="sm" style={{marginLeft:5}} onClick={this.addRol}>
@@ -384,7 +384,7 @@ class EditUsuarios extends React.Component {
                                     </Label>
                                 </FormGroup>
                                 <FormGroup className="row">
-                                    <div class="col-sm-3">&nbsp;</div>
+                                    <div className="col-sm-3">&nbsp;</div>
                                     <div className="col-sm-6 col-sm-offset-3">
                                         <div className="table-responsive">
                                             <table className="table table-hover table-striped">
@@ -405,7 +405,7 @@ class EditUsuarios extends React.Component {
                         { Number(data.tipo) === 2 &&
                             <div>
                                 <FormGroup className="row">
-                                    <div class="col-sm-1">&nbsp;</div>
+                                    <div className="col-sm-1">&nbsp;</div>
                                     <Label className="col-sm-3 col-sm-offset-3">
                                         Cooperativas
                                         <Button size="sm" style={{marginLeft:5}} onClick={this.addCooperativa}>
@@ -414,7 +414,7 @@ class EditUsuarios extends React.Component {
                                     </Label>
                                 </FormGroup>
                                 <FormGroup className="row">
-                                    <div class="col-sm-3">&nbsp;</div>
+                                    <div className="col-sm-3">&nbsp;</div>
                                     <div className="col-sm-6 col-sm-offset-3">
                                         <div className="table-responsive">
                                             <table className="table table-hover table-striped">

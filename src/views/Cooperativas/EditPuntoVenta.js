@@ -213,7 +213,7 @@ class MainView extends React.Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        { puntoventa_cooperativas.map((r, i) => <_Row {...r} onDoubleClick={() => this.editCooperativa(r)} key={i} delete={() => this.deleteCooperativa(i)} />) }
+                                        { puntoventa_cooperativas.map((r, i) => <_Row key={i} {...r} onDoubleClick={() => this.editCooperativa(r)} key={i} delete={() => this.deleteCooperativa(i)} />) }
                                     </tbody>
                                 </table>
                             </div>
@@ -232,17 +232,11 @@ class MainView extends React.Component {
 
 class EditPuntoVenta extends React.Component {
 
-    seleccione = [{label:'Seleccione', value:''}]
     state = {
         data:{
             offline: false,
             puntoventa_cooperativas : []
         }
-    }
-
-    constructor(props){
-        super(props)
-        this.onChange = this.onChange.bind(this)
     }
 
     componentDidMount(){
@@ -253,14 +247,14 @@ class EditPuntoVenta extends React.Component {
     }
 
     getData = async (id) => {
-        const { data } = await axios.get(`${baseurl}/venta/puntoventa/${id}/`)
+        const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/`)
         this.setState({
             id,
             data
         })
     }
 
-    onChange(name, value){
+    onChange = (name, value) => {
         let data = this.state.data
         data[name] = value
         this.setState({

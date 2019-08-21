@@ -96,13 +96,13 @@ class Recaudacion extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-4">Viaje</Label>
                             <div className="col-sm-8">
-                                <Input />
+                                <Input value={this.state.viaje2} onChange={this.onChange('viaje2')} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-4">Salida</Label>
                             <div className="col-sm-8">
-                                <Input />
+                                <Input value={this.state.salida2} onChange={this.onChange('salida2')} />
                             </div>
                         </FormGroup>
                     </div>
@@ -110,13 +110,13 @@ class Recaudacion extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-4">Destino</Label>
                             <div className="col-sm-8">
-                                <Input />
+                                <Input value={this.state.destino} onChange={this.onChange('destino')} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-4">Disco/Placa</Label>
                             <div className="col-sm-8">
-                                <Input />
+                                <Input value={this.state.disco} onChange={this.onChange('disco')} />
                             </div>
                         </FormGroup>
                     

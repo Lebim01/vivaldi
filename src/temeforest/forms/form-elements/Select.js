@@ -7,11 +7,6 @@ class Select extends React.Component {
 
     state = { _options : [] }
 
-    constructor(props){
-        super(props)
-        this.loadListAsync = this.loadListAsync.bind(this)
-    }
-
     componentDidMount(){
         if(this.props.asyncOptions){
             this.loadListAsync()
@@ -19,7 +14,7 @@ class Select extends React.Component {
     }
 
     componentWillReceiveProps(props){
-        if(props.asyncOptions && props.asyncOptions.url != this.props.asyncOptions.url){
+        if(props.asyncOptions && props.asyncOptions.url !== this.props.asyncOptions.url){
             this.loadListAsync(props)
         }
     }
@@ -44,10 +39,10 @@ class Select extends React.Component {
 
     render(){
         const { _options } = this.state
-        const { options, helperText, error, className, value, asyncOptions, ...otherProps } = this.props
+        const { options, helperText, error, className, value, defaultValue, asyncOptions, ...otherProps } = this.props
         return (
             <FormGroup>
-                <select className={`form-control ${className} ${error ?'is-invalid':''}`} {...otherProps} value={value} defaultValue="">
+                <select className={`form-control ${className} ${error ?'is-invalid':''}`} {...otherProps} {...(value ? { value } : { defaultValue : defaultValue || '' })}>
                     { asyncOptions 
                         ? _options.map((o, i) => <option value={o.value} key={i}>{o.label}</option>)
                         : options.map((o, i) => <option value={o.value} key={i}>{o.label}</option>) 

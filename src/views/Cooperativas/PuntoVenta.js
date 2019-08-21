@@ -17,7 +17,7 @@ class PuntoVenta extends React.Component {
                                     searchFields={['descripcion', '', 'localidad_nombre']}
 
                                     fieldNames={['Nombre', 'Cooperativa', 'Localidad']}
-                                    fields={['descripcion', (row) => <ul>{row.puntoventa_cooperativas.map((r) => <li>{r.cooperativa_nombre}</li>)}</ul>, 'localidad_nombre']}
+                                    fields={['descripcion', (row) => <ul>{row.puntoventa_cooperativas.map((r, i) => <li key={i}>{r.cooperativa_nombre}</li>)}</ul>, 'localidad_nombre']}
 
                                     endpoint='venta/puntoventa'
                                     urlFront='cooperativas/punto-venta'

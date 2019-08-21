@@ -102,9 +102,9 @@ class Piso extends React.Component {
                 </FormGroup>
                 <div style={{width:234, border:'1px solid black', margin:'10px auto'}}>
                     { _filas.map((j, index) => 
-                        <div className="fila">
+                        <div className="fila" key={index}>
                             { asientos.slice(index*4, index*4+4).map((a,i) => (
-                                <div style={{display:'inline-block'}}>
+                                <div style={{display:'inline-block'}} key={i}>
                                     <Asiento type={!asientos_desactivados.includes(a.index) ? 'info' : 'danger'} {...a} toggleActivate={this.toggleActivate} />
                                     { i == 1 && <DividerAsiento /> }
                                 </div>

@@ -18,8 +18,7 @@ class InputIcon extends React.Component {
 }
 
 InputIcon.defaultProps = {
-    type : 'text',
-    helperText : ''
+    type : 'text'
 }
 
 export default InputIcon

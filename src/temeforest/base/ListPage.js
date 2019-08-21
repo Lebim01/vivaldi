@@ -253,7 +253,7 @@ class ListPage extends React.Component {
                                 </tbody>
                                 <tfoot>
                                     <tr className="footable-paging">
-                                        <td colspan="10">
+                                        <td colSpan="10">
                                             <div className="footable-pagination-wrapper text-center">
                                                 <ul className="pagination justify-content-center">
                                                     <li className={`footable-page-nav ${previous && !loading ? 'pointer' : 'link-disabled'}`} data-page="first">
@@ -266,7 +266,7 @@ class ListPage extends React.Component {
                                                         new Array(numEndVisibleFooterPages - numBeginVisibleFooterPages).fill(1).map((z, index) => {
                                                             let page = Number(numBeginVisibleFooterPages) + Number(index)
                                                             return (
-                                                                <li className={`footable-page visible ${page === currentPage ? 'active' : ''}`} data-page={page}>
+                                                                <li key={index} className={`footable-page visible ${page === currentPage ? 'active' : ''}`} data-page={page}>
                                                                     <button className="footable-page-link" onClick={() => this.setPage(page)}>{ page }</button>
                                                                 </li>
                                                             )
@@ -281,7 +281,7 @@ class ListPage extends React.Component {
                                                     </li>
                                                 </ul>
                                                 <div className="divider"></div>
-                                                <span class="label label-info">{currentPage} de {numPages}</span>
+                                                <span className="label label-info">{currentPage} de {numPages}</span>
                                             </div>
                                         </td>
                                     </tr>

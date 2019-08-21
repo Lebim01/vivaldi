@@ -143,33 +143,33 @@ class MainView extends React.Component {
                                             <tr key={i}>
                                                 <th colSpan="5">{record.name}</th>
                                             </tr>,
-                                            ...Object.keys(record.permisos).map((key, i) => <_Row {...record.permisos[key]} key={i} permissions={permissions} toggle={this.toggle} />)
+                                            ...Object.keys(record.permisos).map((key, i2) => <_Row {...record.permisos[key]} key={`${i}-${i2}`} permissions={permissions} toggle={this.toggle} />)
                                         ]
                                     )}
                                 </tbody>
                             </table>
                         </div>
                     </FormGroup>
-		    {/*
-		    <FormGroup className="row">
-                        <div className="col-sm-2"></div>
-                        <div className="col-sm-4">
-                            <div className="custom-control custom-checkbox">
-                                <input type="checkbox" className="custom-control-input" id="aprobacion_usuario" name="aprobacion_usuario" checked={this.props.aprobacion_usuario} onChange={this.onChange('aprobacion_usuario')} />
-                                <Label onlyClassName="custom-control-label" htmlFor="aprobacion_usuario">Aprobación Usuario</Label>
-                            </div>
-                        </div>
-                    </FormGroup>
+                    {/*
                     <FormGroup className="row">
-                        <div className="col-sm-2"></div>
-                        <div className="col-sm-4">
-                            <div className="custom-control custom-checkbox">
-                                <input type="checkbox" className="custom-control-input" id="genereacion_credenciales" name="genereacion_credenciales" checked={this.props.genereacion_credenciales} onChange={this.onChange('genereacion_credenciales')} />
-                                <Label onlyClassName="custom-control-label" htmlFor="genereacion_credenciales">Generación Credenciales Usuario</Label>
-                            </div>
-                        </div>
-                    </FormGroup>
-		    */}
+                                <div className="col-sm-2"></div>
+                                <div className="col-sm-4">
+                                    <div className="custom-control custom-checkbox">
+                                        <input type="checkbox" className="custom-control-input" id="aprobacion_usuario" name="aprobacion_usuario" checked={this.props.aprobacion_usuario} onChange={this.onChange('aprobacion_usuario')} />
+                                        <Label onlyClassName="custom-control-label" htmlFor="aprobacion_usuario">Aprobación Usuario</Label>
+                                    </div>
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <div className="col-sm-2"></div>
+                                <div className="col-sm-4">
+                                    <div className="custom-control custom-checkbox">
+                                        <input type="checkbox" className="custom-control-input" id="genereacion_credenciales" name="genereacion_credenciales" checked={this.props.genereacion_credenciales} onChange={this.onChange('genereacion_credenciales')} />
+                                        <Label onlyClassName="custom-control-label" htmlFor="genereacion_credenciales">Generación Credenciales Usuario</Label>
+                                    </div>
+                                </div>
+                            </FormGroup>
+                    */}
                 </form>
             </div>
         )
