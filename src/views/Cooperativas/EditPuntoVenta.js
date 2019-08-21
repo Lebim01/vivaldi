@@ -64,7 +64,11 @@ class MainView extends React.Component {
 
     onChange = name => (e) => {
         if(this.props.onChange){
-            this.props.onChange(name, e.target.value)
+            if(e.target.type === 'checkbox'){
+                this.props.onChange(name, e.target.checked)
+            }else{
+                this.props.onChange(name, e.target.value)
+            }
         }
     }
 
@@ -179,6 +183,15 @@ class MainView extends React.Component {
                         }}
                     />
                     <FormGroup className="row">
+                        <div className="col-sm-3"></div>
+                        <div className="col-sm-3">
+                            <div className="custom-control custom-checkbox">
+                                <input type="checkbox" className="custom-control-input" id="offline" name="offline" checked={this.props.offline} onChange={this.onChange('offline')} />
+                                <Label onlyClassName="custom-control-label" htmlFor="offline">Offline</Label>
+                            </div>
+                        </div>
+                    </FormGroup>
+                    <FormGroup className="row">
                         <Label className="col-sm-4">
                             Cooperativas e Información tribunaria
                             <Button size="sm" style={{marginLeft:5}} onClick={this.addCooperativa}>
@@ -222,6 +235,7 @@ class EditPuntoVenta extends React.Component {
     seleccione = [{label:'Seleccione', value:''}]
     state = {
         data:{
+            offline: false,
             puntoventa_cooperativas : []
         }
     }

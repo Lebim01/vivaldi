@@ -67,6 +67,7 @@ const ReporteTasasContingenciaGeneral = React.lazy(() => import('views/Recaudaci
 /** FACTURACION */
 const Pasajeros = React.lazy(() => import('views/Facturacion/Pasajeros'))
 const EditPasajero = React.lazy(() => import('views/Facturacion/EditPasajero'))
+const Documentos = React.lazy(() => import('views/Facturacion/Documentos'))
 /** COBRANZA */
 const CobranzaRecaudacion = React.lazy(() => import('views/Cobranza/Recaudacion'))
 const Diario = React.lazy(() => import('views/Cobranza/Diario'))
@@ -149,6 +150,7 @@ const routes = [
 
   { path: '/facturacion/pasajeros', name: 'Pasajeros', component: Pasajeros, exact: true },
   { path: '/facturacion/pasajeros/edit', name: 'Crear/Editar Pasajero', component: EditPasajero, exact: true },
+  { path: '/facturacion/documentos', name: 'Documentos', component: Documentos, exact: true },
 
   { path: '/recaudaciones/panel', name: 'Panel de Recaudaciones', component: PanelRecaudaciones, exact: true },
   { path: '/recaudaciones/tasas-contingencia', name: 'Tasas contingencia', component: TasasContingencia, exact: true },

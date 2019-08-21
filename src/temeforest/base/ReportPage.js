@@ -20,20 +20,24 @@ class ReportPage extends React.Component {
                                 { title && <CardTitle>{title}</CardTitle> }
                                 <CardBody>
                                     <br/>
-                                    {this.props.children}
+                                    {this.props.children}   
                                     <br/>
+                                    { this.props.timestamp &&
+                                        <div className="row">
+                                            <div className="col-sm-12 text-center">
+                                                Consultado {timestamp} por {user_info.name ? user_info.name : user_info.username}
+                                            </div>
+                                        </div>
+                                    }
+                                </CardBody>
+                                { this.props.printButtons &&
                                     <div className="row">
                                         <div className="col-sm-12 text-center">
-                                            Consultado {timestamp} por {user_info.name ? user_info.name : user_info.username}
+                                            <Button type="success" style={{marginRight:5}}>Imprimir</Button>
+                                            <Button type="info" style={{marginLeft:5}}>Exportar</Button>
                                         </div>
                                     </div>
-                                </CardBody>
-                                <div className="row">
-                                    <div className="col-sm-12 text-center">
-                                        <Button type="success" style={{marginRight:5}}>Imprimir</Button>
-                                        <Button type="info" style={{marginLeft:5}}>Exportar</Button>
-                                    </div>
-                                </div>
+                                }
                             </CardBody>
                         </Card>
                     </Col>
@@ -44,7 +48,9 @@ class ReportPage extends React.Component {
 }
 
 ReportPage.defaultProps = {
-    title: ''
+    title: '',
+    timestamp : true,
+    printButtons: true
 }
 
 export default ReportPage

@@ -180,10 +180,10 @@ class MainView extends React.Component {
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
-                      <Label className="col-sm-3">Ciudad</Label>
-                      <div className="col-sm-5">
-                        <Select asyncOptions={this.optionsCiudades}  value={this.props.ciudad}  onChange={this.onChange('ciudad')} />
-                      </div>
+                        <Label className="col-sm-3">Ciudad</Label>
+                        <div className="col-sm-5">
+                            <Select asyncOptions={this.optionsCiudades} value={this.props.ciudad} onChange={this.onChange('ciudad')} />
+                        </div>
                     </FormGroup>
 
                     <fieldset>

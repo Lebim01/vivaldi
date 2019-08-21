@@ -19,7 +19,7 @@ class Select extends React.Component {
     }
 
     componentWillReceiveProps(props){
-        if(props.asyncOptions){
+        if(props.asyncOptions && props.asyncOptions.url != this.props.asyncOptions.url){
             this.loadListAsync(props)
         }
     }

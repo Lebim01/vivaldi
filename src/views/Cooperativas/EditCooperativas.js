@@ -104,6 +104,12 @@ class MainView extends React.Component {
                             <Input onChange={this.onChange('ventanilla')} value={this.props.ventanilla} />
                         </div>
                     </FormGroup>
+                    <FormGroup className="row">
+                        <Label className="col-sm-3">Tiempo de gracias</Label>
+                        <div className="col-sm-5">
+                            <Input type="number" onChange={this.onChange('tiempo_gracias')} value={this.props.tiempo_gracias} />
+                        </div>
+                    </FormGroup>
                     <fieldset>
                         <legend>Información tribunaria</legend>
                         <FormElementValidate
