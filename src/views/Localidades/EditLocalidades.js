@@ -288,16 +288,16 @@ class EditLocalidades extends React.Component {
         tab : 'main',
         data : {},
         data_firma: {
-            file_firma : '',
-            clave_firma: '',
-            reclave_firma: '',
+            file_firma : null,
+            clave_firma: null,
+            reclave_firma: null,
             file_firma_exist: false
         },
         data_correo: {
             host: '',
             port: '',
             usuario: '',
-            clave: '',
+            clave: null,
             tls: false
         },
         showConfirmSave : false,
@@ -346,7 +346,7 @@ class EditLocalidades extends React.Component {
     }
 
     getDataFirma = async (id) => {
-        const { data } = await axios.get(`${baseurl}/localidad/${id}/firma`)
+        const { data } = await axios.get(`${baseurl}/localidad/${id}/firma/`)
         let data_firma = this.state.data_firma
         data_firma.file_firma_exist = data.file_firma_exist
         this.setState({
@@ -355,9 +355,9 @@ class EditLocalidades extends React.Component {
     }
 
     getDataCorreo = async (id) => {
-        const { data } = await axios.get(`${baseurl}/localidad/${id}/correo`)
+        const { data } = await axios.get(`${baseurl}/localidad/${id}/correo/`)
         let data_correo = data
-        data_correo.clave = ''
+        data_correo.clave = null
         this.setState({
             data_correo
         })
