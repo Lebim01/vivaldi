@@ -14,13 +14,13 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Cooperativa</Label>
                         <div className="col-sm-5">
-                            <Input readOnly value={this.props.cooperativa_nombre} readOnly />
+                            <Input readOnly value={this.props.cooperativa_nombre} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
                         <Label className="col-sm-3">Tipo de cooperativa</Label>
                         <div className="col-sm-5">
-                            <Input readOnly value={this.props.tipo_cooperativa_nombre} readOnly />
+                            <Input readOnly value={this.props.tipo_cooperativa_nombre} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">

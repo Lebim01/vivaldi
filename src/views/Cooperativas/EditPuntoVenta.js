@@ -9,7 +9,7 @@ import AddCooperativaPuntoVentaModal from './AddCooperativaPuntoVentaModal'
 const endpoint = 'venta/puntoventa'
 const urlFront = '/cooperativas/punto-venta'
 
-class _Row extends React.Component {
+class RecordRow extends React.Component {
 
     constructor(props){
         super(props)
@@ -213,7 +213,7 @@ class MainView extends React.Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        { puntoventa_cooperativas.map((r, i) => <_Row key={i} {...r} onDoubleClick={() => this.editCooperativa(r)} key={i} delete={() => this.deleteCooperativa(i)} />) }
+                                        { puntoventa_cooperativas.map((r, i) => <RecordRow {...r} onDoubleClick={() => this.editCooperativa(r)} key={i} delete={() => this.deleteCooperativa(i)} />) }
                                     </tbody>
                                 </table>
                             </div>
@@ -266,7 +266,7 @@ class EditPuntoVenta extends React.Component {
         const { id, data } = this.state
         return (
             <EditPage 
-                title={`${id ? 'Editar' : 'Crear'} Conductores`} 
+                title={`${id ? 'Editar' : 'Crear'} Punto de venta`} 
                 data={data} 
                 id={id} 
                 urlFront={urlFront} 

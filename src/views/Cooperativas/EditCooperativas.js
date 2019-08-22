@@ -181,7 +181,7 @@ class MainView extends React.Component {
                                 <Select options={sino} value={this.props.contribuyente_especial} onChange={this.onChange('contribuyente_especial')} />
                             </div>
                             <div className="col-sm-3">
-                                { this.props.contribuyente_especial == 'si' && <Input onChange={this.onChange('contribuyente_especial_detalle')} value={this.props.contribuyente_especial_detalle} /> }
+                                { this.props.contribuyente_especial === 'si' && <Input onChange={this.onChange('contribuyente_especial_detalle')} value={this.props.contribuyente_especial_detalle} /> }
                             </div>
                         </FormGroup>
                     </fieldset>
@@ -376,7 +376,7 @@ class EditCooperativas extends React.Component {
                     let andenes = localidades[id_localidad].andenes
                     for(let j in andenes){
                         let _anden = andenes[j]
-                        if(_anden.value == anden){
+                        if(Number(_anden.value) === Number(anden)){
                             _id_localidad = id_localidad
                             break
                         }
@@ -433,8 +433,8 @@ class EditCooperativas extends React.Component {
     }
 
     parseData(data){
-        data.obligado_contabilidad = data.obligado_contabilidad == 'Si'
-        data.contribuyente_especial = data.contribuyente_especial == 'Si'
+        data.obligado_contabilidad = data.obligado_contabilidad === 'Si'    
+        data.contribuyente_especial = data.contribuyente_especial === 'Si'
         data.andenes = Object.keys(data.localidades_andenes).map((r) => data.localidades_andenes[r]).flat()
         return data
     }
