@@ -160,13 +160,15 @@ class EditPage extends React.Component {
                     : {}
             )
         }
-        const { btnSaveShow, ...btnSaveProps } = _btnSave
+        const btnSaveShow = _btnSave.show
+        delete _btnSave.show
 
         const _btnDelete = {
             ...defaultBtnDelete,
             ...btnDelete
         }
-        const { btnDeleteShow, ...btnDeleteProps } = _btnDelete
+        const btnDeleteShow = _btnDelete.show
+        delete _btnDelete.show
 
         return (
             <ValidateContext.Provider
@@ -188,12 +190,12 @@ class EditPage extends React.Component {
                                     <div className="row">
                                         <div className="col-sm-12 text-center">
                                             { btnSaveShow &&
-                                                <Button style={{marginRight:5}} onClick={this.onSubmit.bind(this)} {...btnSaveProps}>
+                                                <Button style={{marginRight:5}} onClick={this.onSubmit.bind(this)} {..._btnSave}>
                                                     {_btnSave.text}
                                                 </Button>
                                             }
                                             { btnDeleteShow &&
-                                                <Button style={{marginLeft:5}} disabled={!id} onClick={() => this.confirmDelete()} {...btnDeleteProps}>
+                                                <Button style={{marginLeft:5}} disabled={!id} onClick={() => this.confirmDelete()} {..._btnDelete}>
                                                     { _btnDelete.text }
                                                 </Button>
                                             }
