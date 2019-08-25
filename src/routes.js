@@ -40,6 +40,7 @@ const ViajesPlanificadosSilo = React.lazy(() => import('views/Operaciones/Viajes
 const Frecuencias = React.lazy(() => import('views/Operaciones/Frecuencias'))
 const EditFrecuencias = React.lazy(() => import('views/Operaciones/EditFrecuencias'))
 const CrearFrecuenciaLote = React.lazy(() => import('views/Operaciones/CrearFrecuenciaLote'))
+const ConsultaTasa = React.lazy(() => import('views/Operaciones/ConsultaTasa'))
 /** SOLICITUDES */
 const SolicitudUsuario = React.lazy(() => import('views/Operaciones/Solicitudes/SolicitudUsuario'))
 const EditSolicitudUsuario = React.lazy(() => import('views/Operaciones/Solicitudes/EditSolicitudUsuario'))
@@ -136,8 +137,8 @@ const routes = [
   { path: '/operaciones/frecuencias/edit', name: 'Crear/Editar Frecuencias', component: EditFrecuencias, exact: true },
   { path: '/operaciones/frecuencias-extra', name: 'Jumbotrons', component: Page404 },
   { path: '/operaciones/frecuencias-lote', name: 'Creación Masiva de Frecuencias', component: CrearFrecuenciaLote },
-  { path: '/operaciones/tasas-contingencia', name: 'Navbars', component: Page404 },
-  { path: '/operaciones/consulta-tasa', name: 'Navs', component: Page404 },
+  { path: '/operaciones/tasas-contingencia', name: 'Tasas de contingencia', component: Page404 },
+  { path: '/operaciones/consulta-tasa', name: 'Consulta tasa', component: ConsultaTasa, exact: true },
 
   { path: '/operaciones/solicitudes/usuario', name: 'Solicitud de Usuario', component: SolicitudUsuario, exact: true },
   { path: '/operaciones/solicitudes/usuario/edit', name: 'Crear/Edita solicitud de usuario', component: EditSolicitudUsuario, exact: true },
