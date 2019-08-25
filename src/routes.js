@@ -35,6 +35,7 @@ const EditMarcas = React.lazy(() => import('views/Cooperativas/EditMarcas'))
 const Rutas = React.lazy(() => import('views/Operaciones/Rutas'))
 const EditRutas = React.lazy(() => import('views/Operaciones/EditRutas'))
 const Viajes = React.lazy(() => import('views/Operaciones/Viajes'))
+const ViajesPlanificados = React.lazy(() => import('views/Operaciones/ViajesPlanificados'))
 const Frecuencias = React.lazy(() => import('views/Operaciones/Frecuencias'))
 const EditFrecuencias = React.lazy(() => import('views/Operaciones/EditFrecuencias'))
 const CrearFrecuenciaLote = React.lazy(() => import('views/Operaciones/CrearFrecuenciaLote'))
@@ -128,7 +129,7 @@ const routes = [
   { path: '/operaciones/rutas', name: 'Rutas', component: Rutas, exact: true },
   { path: '/operaciones/rutas/edit', name: 'Crear/Editar Rutas', component: EditRutas, exact: true },
   { path: '/operaciones/viajes', name: 'Viajes', component: Viajes, exact: true },
-  { path: '/operaciones/viajes-planificados', name: 'Collapse', component: Page404 },
+  { path: '/operaciones/viajes-planificados', name: 'Viajes Planificados', component: ViajesPlanificados, exact: true },
   { path: '/operaciones/frecuencias', name: 'Frecuencias', component: Frecuencias, exact: true },
   { path: '/operaciones/frecuencias/edit', name: 'Crear/Editar Frecuencias', component: EditFrecuencias, exact: true },
   { path: '/operaciones/frecuencias-extra', name: 'Jumbotrons', component: Page404 },
