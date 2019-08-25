@@ -99,6 +99,10 @@ export default {
           url: '/#/operaciones/viajes-planificados'
         },
         {
+          name: 'Viajes Planificados Silo',
+          url: '/#/operaciones/viajes-planificados-silo'
+        },
+        {
           name: 'Frecuencias',
           url: '/#/operaciones/frecuencias'
         },
