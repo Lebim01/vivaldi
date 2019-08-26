@@ -5,6 +5,13 @@ import { baseurl, getParameter } from 'utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 
+const emptyNivel = {
+    nombre : '',
+    filas : 0,
+    asientos:[],
+    asientos_desactivados:[]
+}
+
 function getAsientos(nivel, _filas, init = false){
     const { filas, asientos } = nivel
     let _asientos = asientos
@@ -145,6 +152,12 @@ class MainView extends React.Component {
     changeFilas = (filas) => {
         let niveles = this.props.niveles
         let piso = this.state.tab
+
+        // set empty nivel
+        if(!niveles[piso]){
+            niveles[piso] = emptyNivel
+        }
+
         niveles[piso].asientos = getAsientos(niveles[piso], Number(filas))
         niveles[piso].filas = Number(filas)
         this.props.onChange('niveles', niveles)
@@ -189,18 +202,8 @@ class EditDistribucionAsientos extends React.Component {
         data:{
             nombre: '',
             niveles : [
-                {
-                    nombre : '',
-                    filas : 0,
-                    asientos:[],
-                    asientos_desactivados:[]
-                },
-                {
-                    nombre : '',
-                    filas : 0,
-                    asientos:[],
-                    asientos_desactivados:[]
-                }
+                emptyNivel,
+                emptyNivel
             ]
         }, 
         pisos:[{ link:'0', text:'Piso 1' }, { link:'1', text:'Piso 2' }]
