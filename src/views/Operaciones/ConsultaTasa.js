@@ -1,6 +1,6 @@
 import React from 'react'
 import { ListPage, Select, Label, FormGroup, Card, CardBody, CardTitle, Input } from 'temeforest'
-import { baseurl } from 'utils/url'
+import { baseurl, objectToUrl } from 'utils/url'
 import moment from 'moment'
 
 class ConsultaTasa extends React.Component {
@@ -12,9 +12,25 @@ class ConsultaTasa extends React.Component {
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
         labelName: 'nombre',
+        valueName: 'id'
+    }
+    optionsBus = {
+        url : `${baseurl}/bus/`,
+        labelName: 'numero',
         valueName: 'id' 
     }
-   
+    optionsAndenes = {
+        url : `${baseurl}/anden/`,
+        labelName: 'descripcion',
+        valueName: 'id' 
+    }
+    optionsFrecuencias = (params) => {
+        return {
+            url : `${baseurl}/frecuencia/${objectToUrl(params)}`,
+            labelName: 'hora_salida',
+            valueName: 'id' 
+        }
+    }
 
     onChange = name => (e) => {
         let value = e.target.value
@@ -64,7 +80,7 @@ class ConsultaTasa extends React.Component {
                                         <FormGroup className="row">
                                             <Label className="col-sm-3">Frecuencia</Label>
                                             <div className="col-sm-8">
-                                                <Select asyncOptions={this.optionsFrecuencias} onChange={this.onChange('frecuencia')} value={this.state.frecuencia}/>
+                                                <Select asyncOptions={this.optionsFrecuencias({ cooperativa: this.state.cooperativa })} onChange={this.onChange('frecuencia')} value={this.state.frecuencia}/>
                                             </div>
                                         </FormGroup>
                                         <FormGroup className="row">
