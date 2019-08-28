@@ -36,12 +36,6 @@ class MainView extends React.Component {
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
-                        <Label className="col-sm-3">Descripción</Label>
-                        <div className="col-sm-5">
-                            <Input value={this.props.descripcion} readOnly />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
                         <Label className="col-sm-3">Fecha y hora</Label>
                         <div className="col-sm-5">
                             <Input value={this.props.fecha} readOnly />
@@ -85,12 +79,6 @@ class MainView extends React.Component {
                             <Label className="col-sm-3">Teléfono</Label>
                             <div className="col-sm-5">
                                 <Input value={this.props.usuario_telefono} readOnly />
-                            </div>
-                        </FormGroup>
-                        <FormGroup className="row">
-                            <Label className="col-sm-3">Dirección</Label>
-                            <div className="col-sm-5">
-                                <Input value={this.props.usuario_direccion} readOnly />
                             </div>
                         </FormGroup>
                     </fieldset>

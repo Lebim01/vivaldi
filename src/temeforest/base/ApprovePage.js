@@ -50,6 +50,13 @@ class ApprovePage extends React.Component {
             showCancelButton: true,
             showLoaderOnConfirm: true,
             preConfirm: (motivo) => {
+                if(!motivo){
+                    Swal.showValidationMessage( 
+                        `El motivo es requerido`
+                    )
+                    return
+                }
+
                 return axios.post(`${baseurl}/${endpoint}/${id ? `${id}/` : ``}`, { id, estado: 2, motivo })
                 .then(response => {
                     if (response.status !== 200 && response.status !== 201) {

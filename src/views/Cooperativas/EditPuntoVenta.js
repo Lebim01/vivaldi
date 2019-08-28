@@ -186,8 +186,8 @@ class MainView extends React.Component {
                         <div className="col-sm-3"></div>
                         <div className="col-sm-3">
                             <div className="custom-control custom-checkbox">
-                                <input type="checkbox" className="custom-control-input" id="offline" name="offline" checked={this.props.offline} onChange={this.onChange('offline')} />
-                                <Label onlyClassName="custom-control-label" htmlFor="offline">Offline</Label>
+                                <input type="checkbox" className="custom-control-input" id="venta_offline" name="venta_offline" checked={this.props.venta_offline} onChange={this.onChange('venta_offline')} />
+                                <Label onlyClassName="custom-control-label" htmlFor="venta_offline">Offline</Label>
                             </div>
                         </div>
                     </FormGroup>
@@ -234,7 +234,7 @@ class EditPuntoVenta extends React.Component {
 
     state = {
         data:{
-            offline: false,
+            venta_offline: false,
             puntoventa_cooperativas : []
         }
     }
