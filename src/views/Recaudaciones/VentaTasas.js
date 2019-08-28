@@ -3,6 +3,8 @@ import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, B
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import moment from 'moment'
 import { baseurl } from 'utils/url'
+import axios from 'axios'
+import Swal from 'sweetalert2'
 
 class RegistroTasa extends React.Component {
 
@@ -26,8 +28,8 @@ class RegistroTasa extends React.Component {
         valueName: 'id' 
     }
     optionsSupervisor = {
-        url : `${baseurl}/supervisor/`,
-        labelName: 'nombre',
+        url : `${baseurl}/usuario/`,
+        labelName: 'username',
         valueName: 'id' 
     }
     optionsVenta = [
@@ -47,7 +49,9 @@ class RegistroTasa extends React.Component {
     }
 
     guardar(){
-
+        if(this.props.guardar){
+            this.props.guardar()
+        }
     }
 
     render(){
@@ -59,55 +63,55 @@ class RegistroTasa extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-3">F. Venta</Label>
                             <div className="col-sm-6">
-                                <Input className="no-clear" type="date" onChange={this.onChange('fecha_venta')} value={this.state.fecha_venta} />
+                                <Input className="no-clear" type="date" onChange={this.onChange('fecha_venta')} value={this.props.fecha_venta} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-3">Cooperativa</Label>
                             <div className="col-sm-6">
-                                <Select asyncOptions={this.optionsCooperativa} onChange={this.onChange('cooperativa')} value={this.state.cooperativa} />
+                                <Select asyncOptions={this.optionsCooperativa} onChange={this.onChange('cooperativa')} value={this.props.cooperativa} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-3">Localidad</Label>
                             <div className="col-sm-6">
-                                <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad} />
+                                <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.props.localidad} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-3">Turno</Label>
                             <div className="col-sm-6">
-                                <Input type="number" onChange={this.onChange('turno')} value={this.state.turno} />
+                                <Input type="number" onChange={this.onChange('turno')} value={this.props.turno} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-3">Supervisor</Label>
                             <div className="col-sm-6">
-                                <Select asyncOptions={this.optionsSuperviso} onChange={this.onChange('supervisor')} value={this.state.supervisor} />
+                                <Select asyncOptions={this.optionsSupervisor} onChange={this.onChange('supervisor')} value={this.props.supervisor} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-3">Cantidad (unidades)</Label>
                             <div className="col-sm-6">
-                                <Input type="number" onChange={this.onChange('cantidad')} value={this.state.cantidad} />
+                                <Input type="number" onChange={this.onChange('cantidad')} value={this.props.cantidad} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-3">Precio</Label>
                             <div className="col-sm-6">
-                                <Input type="number" onChange={this.onChange('precio')} value={this.state.precio} />
+                                <Input type="number" onChange={this.onChange('precio')} value={this.props.precio} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-3">Total</Label>
                             <div className="col-sm-6">
-                                <Input type="number" onChange={this.onChange('total')} value={this.state.total} />
+                                <Input type="number" onChange={this.onChange('total')} value={this.props.total} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-3">Motivo de modificación</Label>
                             <div className="col-sm-6">
-                                <Input onChange={this.onChange('motivo')} value={this.state.motivo} />
+                                <Input onChange={this.onChange('motivo')} value={this.props.motivo} />
                             </div>
                         </FormGroup>
                     </form>
@@ -125,7 +129,8 @@ class VentaTasas extends React.Component {
     state = {
         fecha_inicio : moment().format('YYYY-MM-DD'),
         fecha_fin : moment().format('YYYY-MM-DD'),
-        openModal: false
+        openModal: false,
+        venta : {}
     }
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
@@ -138,28 +143,69 @@ class VentaTasas extends React.Component {
         valueName: 'id' 
     }
 
-    constructor(props){
-        super(props)
-        this.toggle = this.toggle.bind(this)
-    }
-
     onChange = name => (e) => {
         this.setState({
             [name]: e.target.value
         })
     }
 
-    buscar(){
+    buscar = () => {
         this.setState({
             refresh: true
         })
     }
 
-    toggle(){
+    toggle = () => {
         let state = !this.state.openModal
         this.setState({
             openModal: state
         })
+    }
+
+    onChangeVenta = (name, value) => {
+        let venta = this.state.venta
+        venta[name] = value
+
+        this.setState({
+            venta
+        })
+    }
+
+    guardarVenta = async () => {
+        Swal.fire({
+            title: 'Confirmar Guardar',
+            text : '¿Seguro de guardar?',
+            showCancelButton: true,
+            showLoaderOnConfirm: true,
+            preConfirm: () => {
+                return axios.post(`${baseurl}/venta/venta_contingencia/`, this.state.venta)
+                .then(response => {
+                    if (response.status !== 200 && response.status !== 201) {
+                        throw new Error(response.statusText)
+                    }
+                    return response
+                })
+                .catch(error => {
+                    Swal.showValidationMessage(
+                        `Petición fallida: ${error}`
+                    )
+                })
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+        }).then((result) => {
+            if (result.value) {
+                Swal.fire('Guardado', 'Guardado exitosamente!', 'success')
+                this.toggle()
+            }
+        })
+    }
+
+    fieldEditar(row){
+        return (
+            <button>
+                Editar
+            </button>
+        )
     }
     
     render(){
@@ -167,8 +213,11 @@ class VentaTasas extends React.Component {
         return (
             <div className="animated fadeIn">
                 <RegistroTasa 
-                    show={this.state.openModal}
                     toggle={this.toggle}
+                    guardar={this.guardarVenta}
+                    show={this.state.openModal}
+                    onChange={this.onChangeVenta}
+                    {...this.state.venta}
                 />
                 <div className="row">
                     <div className="col-sm-12">
@@ -222,7 +271,7 @@ class VentaTasas extends React.Component {
                                     searchable={false}
 
                                     fieldNames={['Fecha venta', 'Turno', 'Localidad', 'Cooperativa', 'Cantidad', 'Valor unitario', 'Valor total', 'Acción']}
-                                    fields={['', '', '', '', '', '', '' , '']}
+                                    fields={['fecha', 'turno', 'localidad_nombre', 'cooperativa_nombre', 'cantidad', 'precio', 'total' , this.fieldEditar]}
 
                                     endpoint='venta/venta_contingencia'
                                     parameters={this.state}
