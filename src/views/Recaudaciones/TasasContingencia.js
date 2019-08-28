@@ -202,7 +202,7 @@ class TasasContingencia extends React.Component {
                                     searchable={false}
 
                                     fieldNames={['Fecha', 'Localidad', 'Cantidad', 'Acción']}
-                                    fields={['fecha', 'licalidad_nombre', 'cantidad', '']}
+                                    fields={['fecha', 'localidad_nombre', 'cantidad', '']}
 
                                     endpoint='venta/generacion_contingencia'
                                     parameters={this.state}
