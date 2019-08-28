@@ -105,13 +105,13 @@ class RegistroTasa extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-3">Total</Label>
                             <div className="col-sm-6">
-                                <Input type="number" onChange={this.onChange('total')} value={this.props.total} />
+                                <Input type="number" readOnly value={this.props.precio * this.props.cantidad || 0} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-3">Motivo de modificación</Label>
                             <div className="col-sm-6">
-                                <Input onChange={this.onChange('motivo')} value={this.props.motivo} />
+                                <Input onChange={this.onChange('motivo_modificacion')} value={this.props.motivo_modificacion} />
                             </div>
                         </FormGroup>
                     </form>
@@ -155,6 +155,11 @@ class VentaTasas extends React.Component {
         })
     }
 
+    nuevaVenta = () => {
+        this.setState({ venta: {} })
+        this.toggle()
+    }
+
     toggle = () => {
         let state = !this.state.openModal
         this.setState({
@@ -178,7 +183,7 @@ class VentaTasas extends React.Component {
             showCancelButton: true,
             showLoaderOnConfirm: true,
             preConfirm: () => {
-                return axios.post(`${baseurl}/venta/venta_contingencia/`, this.state.venta)
+                return axios.post(`${baseurl}/venta/venta_contingencia/${this.state.venta.id ? `${this.state.venta.id}/` : ''}`, this.state.venta)
                 .then(response => {
                     if (response.status !== 200 && response.status !== 201) {
                         throw new Error(response.statusText)
@@ -195,16 +200,22 @@ class VentaTasas extends React.Component {
         }).then((result) => {
             if (result.value) {
                 Swal.fire('Guardado', 'Guardado exitosamente!', 'success')
-                this.toggle()
+                this.nuevaVenta()
             }
         })
     }
 
-    fieldEditar(row){
+    editarVenta = (venta) => {
+        this.setState({
+            venta
+        }, this.toggle)
+    }
+
+    fieldEditar = (row) => {
         return (
-            <button>
+            <Button onClick={(e) => this.editarVenta(row)}>
                 Editar
-            </button>
+            </Button>
         )
     }
     
@@ -225,7 +236,7 @@ class VentaTasas extends React.Component {
                             <CardBody>
                                 <CardTitle>
                                     Venta de tasas
-                                    <Button className="pull-right" onClick={this.toggle}>
+                                    <Button className="pull-right" onClick={this.nuevaVenta}>
                                         <i className="fa fa-plus" /> Nueva venta
                                     </Button>
                                 </CardTitle>
