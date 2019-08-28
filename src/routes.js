@@ -68,6 +68,8 @@ const TasasUsadasPorViaje = React.lazy(() => import('views/Recaudaciones/TasasUs
 const Recaudacion = React.lazy(() => import('views/Recaudaciones/Recaudacion'))
 const ReporteTasasContingenciaGeneral = React.lazy(() => import('views/Recaudaciones/ReporteTasasContingenciaGeneral'))
 const ViajesBus = React.lazy(() => import('views/Recaudaciones/ViajesBus'))
+const ReporteSalidaViajes = React.lazy(() => import('views/Recaudaciones/ReporteSalidaViajes'))
+const ViajesSemanales = React.lazy(() => import('views/Recaudaciones/ViajesSemanales'))
 /** FACTURACION */
 const Pasajeros = React.lazy(() => import('views/Facturacion/Pasajeros'))
 const EditPasajero = React.lazy(() => import('views/Facturacion/EditPasajero'))
@@ -171,11 +173,11 @@ const routes = [
   { path: '/recaudaciones/tasas-usadas-por-viaje', name: 'Tasas usadas por viaje', component: TasasUsadasPorViaje, exact: true },
   { path: '/recaudaciones/recaudacion', name: 'Recaudación', component: Recaudacion, exact: true },
   { path: '/recaudaciones/ventas-por-turno', name: 'Ventas por turnos', component: VendidosPorTurno, exact: true },
-  { path: '/recaudaciones/salida-de-viajes', name: 'Alerts', component: Page404 },
+  { path: '/recaudaciones/salida-de-viajes', name: 'Reporte de salida de viajes', component: ReporteSalidaViajes, exact: true },
   { path: '/recaudaciones/pasajeros-por-viaje', name: 'Badges', component: Page404 },
   { path: '/recaudaciones/viajes-por-bus', name: 'Viajes por bus', component: ViajesBus, exact: true },
   { path: '/recaudaciones/viajes-diario', name: 'Widgets', component: Page404 },
-  { path: '/recaudaciones/viajes-semanales', name: 'Charts', component: Page404 },
+  { path: '/recaudaciones/viajes-semanales', name: 'Viajes semanales', component: ViajesSemanales, exact: true },
   { path: '/recaudaciones/viajes-por-liquidar',  name: 'Users', component: Page404 },
 
   { path: '/cobranza/recaudacion', name: 'Recaudacion', component: CobranzaRecaudacion, exact: true },
