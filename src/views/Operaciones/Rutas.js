@@ -9,9 +9,11 @@ function Rutas(props) {
                         <CardBody>
                             <ListPage
                                 title="Listado de Rutas"
+                                
                                 searchable={true}
                                 searchPlaceholder="Cooperativa, Ruta, Destino"
                                 searchFields={['cooperativa_nombre', 'via', 'ciudad_destino_nombre']}
+
                                 fieldNames={['Cooperativa', 'Ruta', 'Destino']}
                                 fields={['cooperativa_nombre', 'via', 'ciudad_destino_nombre']}
 

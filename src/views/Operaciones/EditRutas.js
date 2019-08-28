@@ -156,6 +156,12 @@ class MainView extends React.Component {
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
+                        <Label className="col-sm-3">Trayecto</Label>
+                        <div className="col-sm-5">
+                            <Input onChange={this.onChange('trayecto')} value={this.props.trayecto} />
+                        </div>
+                    </FormGroup>
+                    <FormGroup className="row">
                         <h4>
                             Paradas
                             <Button style={{marginLeft: 10}} onClick={this.toggleModal}>
