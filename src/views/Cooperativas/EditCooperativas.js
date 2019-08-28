@@ -105,13 +105,13 @@ class MainView extends React.Component {
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
-                        <Label className="col-sm-3">Tiempo de gracias</Label>
+                        <Label className="col-sm-3">Tiempo de gracia</Label>
                         <div className="col-sm-5">
-                            <Input type="number" onChange={this.onChange('tiempo_gracias')} value={this.props.tiempo_gracias} />
+                            <Input type="number" onChange={this.onChange('tiempo_gracia')} value={this.props.tiempo_gracia} rightLabel="Minutos" max={60} />
                         </div>
                     </FormGroup>
                     <fieldset>
-                        <legend>Información tribunaria</legend>
+                        <legend>Información tributaria</legend>
                         <FormElementValidate
                             label={{text:'Representante legal'}}
                             input={{
