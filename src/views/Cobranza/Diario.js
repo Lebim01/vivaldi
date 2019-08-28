@@ -40,6 +40,18 @@ class Diario extends React.Component {
             refresh: true
         })
     }
+
+    fieldSaldo(row){
+        return (
+            <a href="#">Cobrar</a>
+        )
+    }
+
+    fieldImprimir(row){
+        return (
+            <a href="#">Imprimir</a>
+        )
+    }
     
     render(){
         const { refresh } = this.state
@@ -79,10 +91,10 @@ class Diario extends React.Component {
                 <ListPage
                     searchable={false}
 
-                    fieldNames={['Cooperativa', 'Localidad', 'Fecha', 'Cobrar', 'Saldo', 'Emitido', 'Cobrado', 'N.C', 'Acción']}
-                    fields={['', '', '', '', '', '']}
+                    fieldNames={['Cooperativa', 'Localidad', 'Fecha venta', 'Cobrar', 'Saldo', 'Emitido', 'Cobrado', 'N.C', 'Acción']}
+                    fields={['cooperativa_nombre', 'localidad_nombre', 'fecha_recaudacion', this.fieldSaldo, '', '', '', '', this.fieldImprimir]}
 
-                    endpoint='cobranza/diario'
+                    endpoint='venta/cobro'
                     parameters={this.state}
                     
                     history={this.props.history}

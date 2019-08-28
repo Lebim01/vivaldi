@@ -250,17 +250,9 @@ export default {
       icon : 'far fa-money-bill-alt',
       children : [
         {
-          name : 'Recaudacion',
-          url : '/#/cobranza/recaudacion'
-        },
-        {
           name : 'Diarios',
           url : '/#/cobranza/diario'
         },
-        /*{
-          name : 'Pendientes',
-          url : '/#/cobranza/pendientes'
-        },*/
         {
           name : 'Consultas',
           url : '/#/cobranza/consultas'
