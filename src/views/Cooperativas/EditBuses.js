@@ -107,8 +107,8 @@ class MainView extends React.Component {
                             element: <Input onChange={this.onChange('placa')} value={this.props.placa} />
                         }}
                         validator={{
-                            validationRules: { required : true, number: true, minLength : 1, maxLength : 4 },
-                            validationMessages : { required : 'El campo es requerido', number: 'El valor debe ser un número', minLength : 'El tamaño del valor debe ser entre 1 y 4 de largo', maxLength : 'El tamaño del valor debe ser entre 1 y 4 de largo' }
+                            validationRules: { required : true },
+                            validationMessages : { required : 'El campo es requerido' }
                         }}
                     />
                     <FormGroup className="row">

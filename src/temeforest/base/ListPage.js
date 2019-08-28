@@ -121,8 +121,11 @@ class ListPage extends React.Component {
         this.setPage(1)
     }
 
-    onRowDoubleClick = (id) => {
-        if(this.props.urlFront && this.props.redirect){
+    onRowDoubleClick = (id, row) => {
+        if(this.props.onRowDoubleClick){
+            this.props.onRowDoubleClick(row)
+        }
+        else if(this.props.urlFront && this.props.redirect){
             this.props.history.push(`/${this.props.urlFront}/edit?id=${id}`)
         }
     }
@@ -200,7 +203,7 @@ class ListPage extends React.Component {
                             <InputIcon placeholder={`Buscar... ${searchPlaceholder}`} onChange={this.onFilterChange()} icon={<i className="fa fa-search"></i>} />
                         </Col>
                         <Col xs="12" md="6">
-                            <Button style={{'float': 'right'}} onClick={() => this.onRowDoubleClick('')}>
+                            <Button style={{'float': 'right'}} onClick={() => this.onRowDoubleClick('', {})}>
                                 <i className="fa fa-plus"></i>
                             </Button>
                         </Col>
@@ -249,7 +252,7 @@ class ListPage extends React.Component {
                                     }
                                 </thead>
                                 <tbody>
-                                    {filtered.map((record, i) => <RecordRow record={record} fields={fields} key={i} onDoubleClick={() => this.onRowDoubleClick(record.id)} />)}
+                                    {filtered.map((record, i) => <RecordRow record={record} fields={fields} key={i} onDoubleClick={() => this.onRowDoubleClick(record.id, record)} />)}
                                 </tbody>
                                 <tfoot>
                                     <tr className="footable-paging">

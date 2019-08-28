@@ -55,6 +55,7 @@ class RegistroTasa extends React.Component {
     }
 
     render(){
+        console.log(this.props)
         return (
             <Modal isOpen={this.props.show} toggle={this.toggle}>
                 <ModalHeader toggle={this.toggle}>Crear/Editar Venta</ModalHeader>
@@ -63,7 +64,7 @@ class RegistroTasa extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-3">F. Venta</Label>
                             <div className="col-sm-6">
-                                <Input className="no-clear" type="date" onChange={this.onChange('fecha_venta')} value={this.props.fecha_venta} />
+                                <Input className="no-clear" type="date" onChange={this.onChange('fecha')} value={this.props.fecha} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
@@ -283,6 +284,7 @@ class VentaTasas extends React.Component {
 
                                     fieldNames={['Fecha venta', 'Turno', 'Localidad', 'Cooperativa', 'Cantidad', 'Valor unitario', 'Valor total', 'Acción']}
                                     fields={['fecha', 'turno', 'localidad_nombre', 'cooperativa_nombre', 'cantidad', 'precio', 'total' , this.fieldEditar]}
+                                    onRowDoubleClick={this.editarVenta}
 
                                     endpoint='venta/venta_contingencia'
                                     parameters={this.state}
