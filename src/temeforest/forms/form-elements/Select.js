@@ -42,7 +42,7 @@ class Select extends React.Component {
         const { options, helperText, error, className, value, defaultValue, asyncOptions, ...otherProps } = this.props
         return (
             <FormGroup>
-                <select className={`form-control ${className} ${error ?'is-invalid':''}`} {...otherProps} {...(value ? { value } : { defaultValue : defaultValue || '' })}>
+                <select className={`form-control ${className} ${error ?'is-invalid':''}`} {...otherProps} {...(value !== undefined && value !== null ? { value } : { defaultValue : defaultValue || '' })}>
                     { asyncOptions 
                         ? _options.map((o, i) => <option value={o.value} key={i}>{o.label}</option>)
                         : options.map((o, i) => <option value={o.value} key={i}>{o.label}</option>) 

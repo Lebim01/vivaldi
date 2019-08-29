@@ -18,11 +18,6 @@ class Recaudacion extends React.Component {
         labelName: 'nombre',
         valueName: 'id' 
     }
-    optionsDestino = {
-        url : `${baseurl}/ciudad/`,
-        labelName: 'nombre',
-        valueName: 'id' 
-    }
     optionsFormapago = {
         url : `${baseurl}/formaDePago/`,
         labelName: 'nombre',

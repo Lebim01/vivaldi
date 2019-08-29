@@ -5,8 +5,8 @@ import moment from 'moment'
 
 class Diario extends React.Component {
     state = {
-        fecha_inicio : moment().format('YYYY-MM-DD'),
-        fecha_fin : moment().format('YYYY-MM-DD')
+        dia : moment().format('YYYY-MM-DD'),
+        tipo: 0
     }
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
@@ -18,16 +18,11 @@ class Diario extends React.Component {
         labelName: 'nombre',
         valueName: 'id' 
     }
-    optionsDestino = {
-        url : `${baseurl}/ciudad/`,
-        labelName: 'nombre',
-        valueName: 'id' 
-    }
-    optionsFormapago = {
-        url : `${baseurl}/formaDePago/`,
-        labelName: 'nombre',
-        valueName: 'id' 
-    }
+    optionsTipos = [
+        {value:'', label:'Todos'},
+        {value:0, label:'Pendientes'},
+        {value:1, label:'Cobrados'},
+    ]
 
     onChange = name => (e) => {
         this.setState({
@@ -41,7 +36,7 @@ class Diario extends React.Component {
         })
     }
 
-    fieldSaldo(row){
+    fieldCobrar(row){
         return (
             <a href="#">Cobrar</a>
         )
@@ -80,10 +75,9 @@ class Diario extends React.Component {
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
-                            <div className="col-sm-12">
-                                <Button onClick={this.onChange('refresh')}>
-                                    Generar
-                                </Button>
+                            <Label className="col-sm-4">Tipo</Label>
+                            <div className="col-sm-8">
+                                <Select options={this.optionsTipos} onChange={this.onChange('tipo')} value={this.state.tipo}/>
                             </div>
                         </FormGroup>
                     </div>
@@ -92,9 +86,9 @@ class Diario extends React.Component {
                     searchable={false}
 
                     fieldNames={['Cooperativa', 'Localidad', 'Fecha venta', 'Cobrar', 'Saldo', 'Emitido', 'Cobrado', 'N.C', 'Acción']}
-                    fields={['cooperativa_nombre', 'localidad_nombre', 'fecha_recaudacion', this.fieldSaldo, '', '', '', '', this.fieldImprimir]}
+                    fields={['cooperativa_nombre', 'localidad_nombre', 'fecha_venta', this.fieldCobrar, 'saldo', 'emitido', 'cobrado', 'nc', this.fieldImprimir]}
 
-                    endpoint='venta/cobro'
+                    endpoint='venta/cobros-diarios'
                     parameters={this.state}
                     
                     history={this.props.history}
