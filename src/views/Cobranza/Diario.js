@@ -1,7 +1,9 @@
 import React from 'react'
 import { ListPage, Label, FormGroup, Select, Input, ReportPage, Button } from 'temeforest'
 import { baseurl } from 'utils/url'
+import { confirmEndpoint } from 'utils/dialog'
 import moment from 'moment'
+import Swal from 'sweetalert2';
 
 class Diario extends React.Component {
     state = {
@@ -30,15 +32,31 @@ class Diario extends React.Component {
         })
     }
 
-    buscar(){
+    refresh = () => {
         this.setState({
             refresh: true
         })
     }
 
-    fieldCobrar(row){
+    cobrar = async ({ localidad, cooperativa, fecha_venta }) => {
+        const options = {
+            params : {
+                localidad,
+                cooperativa,
+                fecha_venta
+            },
+            text : '¿Seguro de cobrar?',
+            endpoint: 'venta/cobro/crear_cobro_por_fecha'
+        }
+        if(await confirmEndpoint(options)){
+            this.refresh()
+            Swal.fire('Cobrado', 'Exitosamente', 'success')
+        }
+    }
+
+    fieldCobrar = (row) => {
         return (
-            <a href="#">Cobrar</a>
+            <Button outline onClick={() => this.cobrar(row)}>Cobrar</Button>
         )
     }
 
