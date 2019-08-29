@@ -174,9 +174,8 @@ const routes = [
   { path: '/recaudaciones/recaudacion', name: 'Recaudación', component: Recaudacion, exact: true },
   { path: '/recaudaciones/ventas-por-turno', name: 'Ventas por turnos', component: VendidosPorTurno, exact: true },
   { path: '/recaudaciones/salida-de-viajes', name: 'Reporte de salida de viajes', component: ReporteSalidaViajes, exact: true },
-  { path: '/recaudaciones/pasajeros-por-viaje', name: 'Badges', component: Page404 },
+  { path: '/recaudaciones/pasajeros-por-viaje', name: 'Pasajaros por viaje', component: Page404 },
   { path: '/recaudaciones/viajes-por-bus', name: 'Viajes por bus', component: ViajesBus, exact: true },
-  { path: '/recaudaciones/viajes-diario', name: 'Widgets', component: Page404 },
   { path: '/recaudaciones/viajes-semanales', name: 'Viajes semanales', component: ViajesSemanales, exact: true },
   { path: '/recaudaciones/viajes-por-liquidar',  name: 'Users', component: Page404 },
 

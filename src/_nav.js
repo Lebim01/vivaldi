@@ -232,10 +232,6 @@ export default {
           url : '/#/recaudaciones/viajes-por-bus'
         },
         {
-          name : 'Viajes diario',
-          url : '/#/recaudaciones/viajes-diario'
-        },
-        {
           name : 'Viajes semanales',
           url : '/#/recaudaciones/viajes-semanales'
         },
