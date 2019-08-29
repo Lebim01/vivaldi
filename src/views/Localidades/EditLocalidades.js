@@ -14,7 +14,7 @@ const urlFront = '/localidades/localidades'
 
 class NivelRecordRow extends React.Component {
 
-    delete(){
+    delete = () => {
         if(this.props.delete){
             this.props.delete(this.props.index)
         }
@@ -25,7 +25,7 @@ class NivelRecordRow extends React.Component {
             <tr onDoubleClick={this.props.edit}>
                 <td>{this.props.nombre}</td>
                 <td>
-                    <Button outline={true} type="danger" size="sm" rounded={true} onClick={this.delete.bind(this)}>
+                    <Button outline={true} type="danger" size="sm" rounded={true} onClick={this.delete}>
                         <i className="fa fa-times"></i>
                     </Button>{' '}
                 </td>
@@ -44,22 +44,11 @@ class MainView extends React.Component {
             id_localidad : null
         }
     }
-
     optionsCiudades = {
         url : `${baseurl}/ciudad/`,
         labelName : 'nombre',
         valueName : 'id'
     }
-
-    constructor(props){
-        super(props)
-        this.openModalNivel = this.openModalNivel.bind(this)
-        this.toggleModalNivel = this.toggleModalNivel.bind(this)
-        this.agregarNivel = this.agregarNivel.bind(this)
-        this.editNivel = this.editNivel.bind(this)
-        this.deleteNivel = this.deleteNivel.bind(this)
-    }
-
     sino = [
         { value : false, label : 'No' },
         { value : true, label : 'Si' }
@@ -106,7 +95,7 @@ class MainView extends React.Component {
     }
 
 
-    agregarNivel({ onChange, ...data }){
+    agregarNivel = ({ onChange, ...data }) => {
         let niveles = this.props.niveles
         if(!niveles){
           niveles =[]
@@ -150,7 +139,7 @@ class MainView extends React.Component {
         }
     }
 
-    editNivel(data){
+    editNivel = (data) => {
         this.toggleModalNivel({ ...data })
     }
 
@@ -332,7 +321,6 @@ class MainView extends React.Component {
 
 class EditLocalidades extends React.Component {
 
-    seleccione = [{label:'Seleccione', value:''}]
     state = {
         id : null,
         tab : 'main',
@@ -369,15 +357,6 @@ class EditLocalidades extends React.Component {
         }
     ]
 
-    constructor(props){
-        super(props)
-        this.onChange = this.onChange.bind(this)
-        this.changeTab = this.changeTab.bind(this)
-        this.onChangeFirma = this.onChangeFirma.bind(this)
-        this.onChangeFile = this.onChangeFile.bind(this)
-        this.onChangeCorreo = this.onChangeCorreo.bind(this)
-    }
-
     componentDidMount(){
         let id = getParameter('id')
         if(id){
@@ -413,11 +392,11 @@ class EditLocalidades extends React.Component {
         })
     }
 
-    changeTab(tab){
+    changeTab = (tab) => {
         this.setState({ tab })
     }
 
-    onChange(name, value){
+    onChange = (name, value) => {
         let data = this.state.data
         data[name] = value
         this.setState({
@@ -425,7 +404,7 @@ class EditLocalidades extends React.Component {
         })
     }
 
-    onChangeFirma(name, value){
+    onChangeFirma = (name, value) => {
         let data_firma = this.state.data_firma
         data_firma[name] = value
         this.setState({
@@ -445,7 +424,7 @@ class EditLocalidades extends React.Component {
         }
     }
 
-    onChangeCorreo(name, value){
+    onChangeCorreo = (name, value) => {
         let data_correo = this.state.data_correo
         data_correo[name] = value
         this.setState({
