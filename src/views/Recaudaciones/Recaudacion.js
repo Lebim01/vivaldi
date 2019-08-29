@@ -28,6 +28,11 @@ class Recaudacion extends React.Component {
         labelName: 'nombre',
         valueName: 'id' 
     }
+    optionsCiudad = {
+        url : `${baseurl}/ciudad/`,
+        labelName: 'nombre',
+        valueName: 'id' 
+    }
 
     onChange = name => (e) => {
         this.setState({
@@ -62,15 +67,9 @@ class Recaudacion extends React.Component {
                     </div>
                     <div className="col-sm-4">
                         <FormGroup className="row">
-                            <Label className="col-sm-4">Fecha inicio</Label>
+                            <Label className="col-sm-4">Fecha</Label>
                             <div className="col-sm-8">
-                                <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
-                            </div>
-                        </FormGroup>
-                        <FormGroup className="row">
-                            <Label className="col-sm-4">Fecha fin</Label>
-                            <div className="col-sm-8">
-                                <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
+                                <Input className="no-clear" type="date" onChange={this.onChange('fecha')} value={this.state.fecha} />
                             </div>
                         </FormGroup>
                     </div>
@@ -82,9 +81,9 @@ class Recaudacion extends React.Component {
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
-                            <Label className="col-sm-4">Viaje</Label>
+                            <Label className="col-sm-4">Destino</Label>
                             <div className="col-sm-8">
-                                <Select onChange={this.onChange('viaje')} value={this.state.viaje} />
+                                <Select asyncOptions={this.optionsCiudad} onChange={this.onChange('destino')} value={this.state.destino} />
                             </div>
                         </FormGroup>
                     </div>
@@ -94,32 +93,19 @@ class Recaudacion extends React.Component {
                     <div className="col-sm-2"></div>
                     <div className="col-sm-4">
                         <FormGroup className="row">
-                            <Label className="col-sm-4">Viaje</Label>
+                            <Label className="col-sm-4">Bus</Label>
                             <div className="col-sm-8">
-                                <Input value={this.state.viaje2} onChange={this.onChange('viaje2')} />
-                            </div>
-                        </FormGroup>
-                        <FormGroup className="row">
-                            <Label className="col-sm-4">Salida</Label>
-                            <div className="col-sm-8">
-                                <Input value={this.state.salida2} onChange={this.onChange('salida2')} />
+                                <Input value={this.state.bus} onChange={this.onChange('bus')} />
                             </div>
                         </FormGroup>
                     </div>
                     <div className="col-sm-4">
                         <FormGroup className="row">
-                            <Label className="col-sm-4">Destino</Label>
+                            <Label className="col-sm-4">Viaje</Label>
                             <div className="col-sm-8">
-                                <Input value={this.state.destino} onChange={this.onChange('destino')} />
+                                <Input value={this.state.viaje2} onChange={this.onChange('viaje2')} />
                             </div>
                         </FormGroup>
-                        <FormGroup className="row">
-                            <Label className="col-sm-4">Disco/Placa</Label>
-                            <div className="col-sm-8">
-                                <Input value={this.state.disco} onChange={this.onChange('disco')} />
-                            </div>
-                        </FormGroup>
-                    
                     </div>
                     <div className="col-sm-2"></div>
                 </div>
