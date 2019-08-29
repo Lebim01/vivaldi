@@ -128,7 +128,7 @@ class NivelModal extends React.Component {
             <Modal isOpen={this.props.show} toggle={this.toggle}>
                 <ModalHeader toggle={this.toggle}>Crear/Editar Nivel</ModalHeader>
                 <ModalBody>
-                    <form className="mt-4 form-horizontal">
+                    <form className="mt-4 form-horizontal" onSubmit={false}>
                         <FormGroup className="row">
                             <Label className="col-sm-3">Nombre</Label>
                             <div className="col-sm-6">

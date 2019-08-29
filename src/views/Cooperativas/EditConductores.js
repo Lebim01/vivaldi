@@ -35,7 +35,6 @@ class EditConductor extends React.Component {
         this.onChangePersona = this.onChangePersona.bind(this)
     }
 
-
     componentDidMount(){
         let id = getParameter('id')
         if(id){
