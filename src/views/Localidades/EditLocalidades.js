@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, FormGroup, Input, Select, Label, EditPage, Tabs } from 'temeforest'
+import { Button, FormGroup, Input, Select, Label, EditPage, Tabs, FormElementValidate } from 'temeforest'
 import { baseurl, getParameter } from 'utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
@@ -161,69 +161,119 @@ class MainView extends React.Component {
         return (
             <div>
                 <form className="mt-4 form-horizontal">
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Nombre</Label>
-                        <div className="col-sm-5">
-                            <Input onChange={this.onChange('nombre')} value={this.props.nombre} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Tarifa tasa</Label>
-                        <div className="col-sm-5">
-                            <Input onChange={this.onChange('tarifa_tasa')} value={this.props.tarifa_tasa} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Representante legal</Label>
-                        <div className="col-sm-5">
-                            <Input onChange={this.onChange('representante_legal')} value={this.props.representante_legal} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Ciudad</Label>
-                        <div className="col-sm-5">
-                            <Select asyncOptions={this.optionsCiudades} value={this.props.ciudad} onChange={this.onChange('ciudad')} />
-                        </div>
-                    </FormGroup>
+                    <FormElementValidate
+                        label={{text:'Nombre'}}
+                        input={{
+                            name : 'nombre',
+                            element: <Input onChange={this.onChange('nombre')} value={this.props.nombre} />
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
+                    <FormElementValidate
+                        label={{text:'Tarifa tasa'}}
+                        input={{
+                            name : 'tarifa_tasa',
+                            element: <Input onChange={this.onChange('tarifa_tasa')} value={this.props.tarifa_tasa} />
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
+                    <FormElementValidate
+                        label={{text:'Representante legal'}}
+                        input={{
+                            name : 'representante_legal',
+                            element: <Input onChange={this.onChange('representante_legal')} value={this.props.representante_legal} />
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
+                    <FormElementValidate
+                        label={{text:'Ciudad'}}
+                        input={{
+                            name : 'ciudad',
+                            element: <Input onChange={this.onChange('ciudad')} value={this.props.ciudad} />
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
 
                     <fieldset>
                         <legend>Información tribunaria</legend>
-                        <FormGroup className="row">
-                            <Label className="col-sm-3">Establecimiento</Label>
-                            <div className="col-sm-5">
-                                <Input onChange={this.onChange('establecimiento')} value={this.props.establecimiento} />
-                            </div>
-                        </FormGroup>
-                        <FormGroup className="row">
-                            <Label className="col-sm-3">Razón Social</Label>
-                            <div className="col-sm-5">
-                                <Input onChange={this.onChange('razon_social')} value={this.props.razon_social} />
-                            </div>
-                        </FormGroup>
-                        <FormGroup className="row">
-                            <Label className="col-sm-3">RUC</Label>
-                            <div className="col-sm-5">
-                                <Input onChange={this.onChange('ruc')} value={this.props.ruc} />
-                            </div>
-                        </FormGroup>
-                        <FormGroup className="row">
-                            <Label className="col-sm-3">Nombre Comercial</Label>
-                            <div className="col-sm-5">
-                                <Input onChange={this.onChange('nombre_comercial')} value={this.props.nombre_comercial} />
-                            </div>
-                        </FormGroup>
-                        <FormGroup className="row">
-                            <Label className="col-sm-3">Dirección Matriz</Label>
-                            <div className="col-sm-5">
-                                <Input onChange={this.onChange('direccion_matriz')} value={this.props.direccion_matriz} />
-                            </div>
-                        </FormGroup>
-                        <FormGroup className="row">
-                            <Label className="col-sm-3">Correo</Label>
-                            <div className="col-sm-5">
-                                <Input onChange={this.onChange('correo')} value={this.props.correo} />
-                            </div>
-                        </FormGroup>
+                        <FormElementValidate
+                            label={{text:'Establecimiento'}}
+                            input={{
+                                name : 'establecimiento',
+                                element: <Input onChange={this.onChange('establecimiento')} value={this.props.establecimiento} />
+                            }}
+                            validator={{
+                                validationRules: {required:true},
+                                validationMessages: {required:"El campo es requerido"}
+                            }}
+                        />
+                        <FormElementValidate
+                            label={{text:'Razón Social'}}
+                            input={{
+                                name : 'razon_social',
+                                element: <Input onChange={this.onChange('razon_social')} value={this.props.razon_social} />
+                            }}
+                            validator={{
+                                validationRules: {required:true},
+                                validationMessages: {required:"El campo es requerido"}
+                            }}
+                        />
+                        <FormElementValidate
+                            label={{text:'RUC'}}
+                            input={{
+                                name : 'ruc',
+                                element: <Input onChange={this.onChange('ruc')} value={this.props.ruc} />
+                            }}
+                            validator={{
+                                validationRules: {required:true},
+                                validationMessages: {required:"El campo es requerido"}
+                            }}
+                        />
+                        <FormElementValidate
+                            label={{text:'Nombre Comercial'}}
+                            input={{
+                                name : 'nombre_comercial',
+                                element: <Input onChange={this.onChange('nombre_comercial')} value={this.props.nombre_comercial} />
+                            }}
+                            validator={{
+                                validationRules: {required:true},
+                                validationMessages: {required:"El campo es requerido"}
+                            }}
+                        />
+                        <FormElementValidate
+                            label={{text:'Dirección Matriz'}}
+                            input={{
+                                name : 'direccion_matriz',
+                                element: <Input onChange={this.onChange('direccion_matriz')} value={this.props.direccion_matriz} />
+                            }}
+                            validator={{
+                                validationRules: {required:true},
+                                validationMessages: {required:"El campo es requerido"}
+                            }}
+                        />
+                        <FormElementValidate
+                            label={{text:'Correo'}}
+                            input={{
+                                name : 'correo',
+                                element: <Input onChange={this.onChange('correo')} value={this.props.correo} />
+                            }}
+                            validator={{
+                                validationRules: {required:true},
+                                validationMessages: {required:"El campo es requerido"}
+                            }}
+                        />
                         <FormGroup className="row">
                             <Label className="col-sm-4">Obligado a llevar contabilidad</Label>
                             <div className="col-sm-1">
@@ -243,7 +293,7 @@ class MainView extends React.Component {
                     <fieldset>
                       <FormGroup className="row">
                           <h4>
-                              N&iacute;veles
+                              Níveles
                               <Button style={{marginLeft: 10}} onClick={this.openModalNivel}>
                                   <i className="fa fa-plus"></i>
                               </Button>
@@ -252,7 +302,7 @@ class MainView extends React.Component {
                               <table className="table table-striped">
                                   <thead>
                                       <tr>
-                                          <th>N&uacute;mero</th>
+                                          <th>Número</th>
                                           <th></th>
                                       </tr>
                                   </thead>
