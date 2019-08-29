@@ -12,7 +12,7 @@ const urlFront = '/cooperativas/conductores'
 class EditConductor extends React.Component {
 
     seleccione = [{label:'Seleccione', value:''}]
-    tipos = [{label:'Conductor', value:'2'},{label:'Asistente',value:'1'}]
+    tipos = [{label:'Conductor', value:1},{label:'Asistente',value:2}]
     state = {
         data:{
             persona:{}, 
