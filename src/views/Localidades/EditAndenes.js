@@ -1,8 +1,7 @@
 import React from 'react'
-import { FormGroup, Input, Select, Label, EditPage } from 'temeforest'
+import { FormGroup, Input, Select, Label, EditPage, FormElementValidate } from 'temeforest'
 import { baseurl, getParameter } from 'utils/url'
 import axios from 'axios'
-import 'react-dual-listbox/lib/react-dual-listbox.css';
 
 const endpoint = 'anden'
 const urlFront = '/localidades/andenes'
@@ -21,12 +20,6 @@ class MainView extends React.Component {
         url : `${baseurl}/localidad/`,
         labelName: 'nombre',
         valueName: 'id'
-    }
-
-    constructor(props){
-        super(props)
-        this.getNiveles = this.getNiveles.bind(this)
-        this.getLocalidades = this.getLocalidades.bind(this)
     }
 
     onChange = name => (e) => {
@@ -74,24 +67,39 @@ class MainView extends React.Component {
         return (
             <div>
                 <form className="mt-4 form-horizontal">
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Descripción</Label>
-                        <div className="col-sm-5">
-                            <Input onChange={this.onChange('descripcion')} value={this.props.descripcion} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Localidad</Label>
-                        <div className="col-sm-5">
-                            <Select onChange={this.onChangeLocalidad('localidad')} value={this.props.localidad} asyncOptions={this.optionsLocalidad} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Nivel</Label>
-                        <div className="col-sm-5">
-                            <Select onChange={this.onChange('localidad_nivel')} value={this.props.localidad_nivel} options={this.state.niveles} />
-                        </div>
-                    </FormGroup>
+                    <FormElementValidate
+                        label={{text:'Descripción'}}
+                        input={{
+                            name : 'descripcion',
+                            element: <Input onChange={this.onChange('descripcion')} value={this.props.descripcion} />
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
+                    <FormElementValidate
+                        label={{text:'Localidad'}}
+                        input={{
+                            name : 'localidad',
+                            element: <Select onChange={this.onChangeLocalidad('localidad')} value={this.props.localidad} asyncOptions={this.optionsLocalidad} />
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
+                    <FormElementValidate
+                        label={{text:'Nivel'}}
+                        input={{
+                            name : 'localidad_nivel',
+                            element: <Select onChange={this.onChange('localidad_nivel')} value={this.props.localidad_nivel} options={this.props.localidad ? this.state.niveles : this.seleccione} />
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
                   </form>
             </div>
         )
@@ -103,7 +111,8 @@ class EditAndenes extends React.Component {
     state = {
         id : null,
         data : {
-            puertas_acceso: []
+            localidad: '',
+            localidad_nivel : ''
         }
     }
 
