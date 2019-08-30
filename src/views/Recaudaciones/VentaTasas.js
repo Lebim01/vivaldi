@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button } from 'temeforest'
+import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button, FormValidate } from 'temeforest'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import moment from 'moment'
 import { baseurl } from 'utils/url'
@@ -60,7 +60,7 @@ class RegistroTasa extends React.Component {
             <Modal isOpen={this.props.show} toggle={this.toggle}>
                 <ModalHeader toggle={this.toggle}>Crear/Editar Venta</ModalHeader>
                 <ModalBody>
-                    <form className="mt-4 form-horizontal">
+                    <FormValidate className="mt-4 form-horizontal">
                         <FormGroup className="row">
                             <Label className="col-sm-3">F. Venta</Label>
                             <div className="col-sm-6">
@@ -115,7 +115,7 @@ class RegistroTasa extends React.Component {
                                 <Input onChange={this.onChange('motivo_modificacion')} value={this.props.motivo_modificacion} />
                             </div>
                         </FormGroup>
-                    </form>
+                    </FormValidate>
                 </ModalBody>
                 <ModalFooter>
                     <Button type="success" onClick={this.guardar}>Aceptar</Button>{' '}

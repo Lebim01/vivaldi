@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label, Tabs } from 'temeforest'
+import { Card, CardBody, CardTitle, Button, FormGroup, Input, Label, Tabs, FormValidate } from 'temeforest'
 import { baseurl, getParameter } from 'utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
@@ -174,7 +174,7 @@ class MainView extends React.Component {
         const { pisos, niveles } = this.props
         return (
             <div>
-                <form className="mt-4 form-horizontal">
+                <FormValidate className="mt-4 form-horizontal">
                     <FormGroup className="row">
                         <Label className="col-sm-3">Distribución</Label>
                         <div className="col-sm-5">
@@ -189,7 +189,7 @@ class MainView extends React.Component {
                             <Piso {...niveles[tab]} onChange={this.onChange2} />
                         </div>
                     </FormGroup>
-                </form>
+                </FormValidate>
             </div>
         )
     }

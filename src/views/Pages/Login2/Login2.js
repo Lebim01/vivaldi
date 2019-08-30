@@ -57,7 +57,7 @@ class Login2 extends React.Component {
                         </div>
                         <div className="row">
                             <div className="col-12">
-                                <form className="form-horizontal m-t-20" id="loginform" action="index.html">
+                                <form className="form-horizontal m-t-20" id="loginform" action="index.html" onSubmit={false}>
                                     <div className="input-group mb-3">
                                         <div className="input-group-prepend">
                                             <span className="input-group-text" id="basic-addon1"><i className="ti-user"></i></span>

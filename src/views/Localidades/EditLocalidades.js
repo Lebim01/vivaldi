@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, FormGroup, Input, Select, Label, EditPage, Tabs, FormElementValidate } from 'temeforest'
+import { Button, FormGroup, Input, Select, Label, EditPage, Tabs, FormElementValidate, FormValidate } from 'temeforest'
 import { baseurl, getParameter } from 'utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
@@ -149,7 +149,7 @@ class MainView extends React.Component {
         const { modalNivel } = this.state
         return (
             <div>
-                <form className="mt-4 form-horizontal">
+                <FormValidate className="mt-4 form-horizontal">
                     <FormElementValidate
                         label={{text:'Nombre'}}
                         input={{
@@ -312,7 +312,7 @@ class MainView extends React.Component {
                       </FormGroup>
 
                     </fieldset>
-                </form>
+                </FormValidate>
                 <NivelModal {...modalNivel} toggle={this.toggleModalNivel} guardar={(data) => this.agregarNivel(data)}/>
             </div>
         )

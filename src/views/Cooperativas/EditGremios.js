@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormGroup, Input, Label, TextArea, EditPage } from 'temeforest'
+import { Input, TextArea, EditPage, FormElementValidate, FormValidate } from 'temeforest'
 import { baseurl, getParameter } from 'utils/url'
 import axios from 'axios'
 
@@ -17,20 +17,30 @@ class MainView extends React.Component {
     render(){
         return (
             <div>
-                <form className="mt-4 form-horizontal">
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Nombre</Label>
-                        <div className="col-sm-5">
-                            <Input onChange={this.onChange('nombre')} value={this.props.nombre} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Descripción</Label>
-                        <div className="col-sm-5">
-                          <TextArea onChange={this.onChange('descripcion')} rows="6" value={this.props.descripcion}/>
-                        </div>
-                    </FormGroup>
-                </form>
+                <FormValidate className="mt-4 form-horizontal" onSubmit={false}>
+                    <FormElementValidate
+                        label={{text:'Nombre'}}
+                        input={{
+                            name : 'nombre',
+                            element: <Input onChange={this.onChange('nombre')} value={this.props.nombre} />
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
+                    <FormElementValidate
+                        label={{text:'Descripción'}}
+                        input={{
+                            name : 'descripcion',
+                            element: <TextArea onChange={this.onChange('descripcion')} rows="6" value={this.props.descripcion}/>
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
+                </FormValidate>
             </div>
         )
     }
@@ -39,11 +49,6 @@ class MainView extends React.Component {
 class EditGremio extends React.Component {
 
     state = {data:{}}
-
-    constructor(props){
-        super(props)
-        this.onChange = this.onChange.bind(this)
-    }
 
     componentDidMount(){
         let id = getParameter('id')
@@ -60,7 +65,7 @@ class EditGremio extends React.Component {
         })
     }
 
-    onChange(name, value){
+    onChange = (name, value) => {
         let data = this.state.data
         data[name] = value
         this.setState({

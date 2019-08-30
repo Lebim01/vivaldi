@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
-import { Button, FormGroup, Input, Label } from 'temeforest'
+import { Button, FormGroup, Input, Label, FormValidate } from 'temeforest'
 
 class NivelModal extends React.Component {
 
@@ -37,14 +37,14 @@ class NivelModal extends React.Component {
             <Modal isOpen={this.props.show} toggle={this.toggle}>
                 <ModalHeader toggle={this.toggle}>Crear/Editar Nivel</ModalHeader>
                 <ModalBody>
-                    <form className="mt-4 form-horizontal">
+                    <FormValidate className="mt-4 form-horizontal">
                         <FormGroup className="row">
                             <Label className="col-sm-3">Nombre</Label>
                             <div className="col-sm-6">
                                 <Input onChange={this.onChange('nombre')} value={nombre} />
                             </div>
                         </FormGroup>
-                    </form>
+                    </FormValidate>
                 </ModalBody>
                 <ModalFooter>
                     <Button type="success" onClick={this.guardar}>Aceptar</Button>{' '}

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
-import { Button, FormGroup, Input, Label, Select } from 'temeforest'
+import { Button, FormGroup, Input, Label, Select, FormValidate } from 'temeforest'
 import { baseurl } from 'utils/url'
 
 class AddCooperativaPuntoVentaModal extends React.Component {
@@ -84,7 +84,7 @@ class AddCooperativaPuntoVentaModal extends React.Component {
             <Modal isOpen={this.props.show} toggle={this.toggle}>
                 <ModalHeader toggle={this.toggle}>Agregar Cooperativa</ModalHeader>
                 <ModalBody>
-                    <form className="mt-4 form-horizontal">
+                    <FormValidate className="mt-4 form-horizontal">
                         <FormGroup className="row">
                             <Label className="col-sm-6">Cooperativa</Label>
                             <div className="col-sm-6">
@@ -127,7 +127,7 @@ class AddCooperativaPuntoVentaModal extends React.Component {
                                 <Input type="number" onChange={this.onChange('secuencia_nota_credito')} value={this.state.data.secuencia_nota_credito} error={errors.includes('secuencia_nota_credito')} />
                             </div>
                         </FormGroup>
-                    </form>
+                    </FormValidate>
                 </ModalBody>
                 <ModalFooter>
                     <Button type="success" onClick={this.guardar}>Aceptar</Button>{' '}

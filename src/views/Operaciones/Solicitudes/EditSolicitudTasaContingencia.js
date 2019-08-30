@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormGroup, Input, Label, ApprovePage } from 'temeforest'
+import { FormGroup, Input, Label, ApprovePage, FormValidate } from 'temeforest'
 import { baseurl, getParameter } from 'utils/url'
 import axios from 'axios'
 
@@ -15,7 +15,7 @@ class MainView extends React.Component {
     render() {
         return (
             <div>
-                <form className="mt-4 form-horizontal">
+                <FormValidate className="mt-4 form-horizontal">
                     <FormGroup className="row">
                         <Label className="col-sm-3">Cooperativa</Label>
                         <div className="col-sm-5">
@@ -67,7 +67,7 @@ class MainView extends React.Component {
                             </div>
                         </FormGroup>
                     </fieldset>
-                </form>
+                </FormValidate>
             </div>
         )
     }

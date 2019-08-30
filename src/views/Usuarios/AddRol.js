@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
-import { Button, FormGroup, Label, Select } from 'temeforest'
+import { Button, FormGroup, Label, Select, FormValidate } from 'temeforest'
 import axios from 'axios'
 import { baseurl } from 'utils/url'
 
@@ -82,14 +82,14 @@ class AddRol extends React.Component {
             <Modal isOpen={this.props.show} toggle={this.toggle}>
                 <ModalHeader toggle={this.toggle}>Agregar Rol</ModalHeader>
                 <ModalBody>
-                    <form className="mt-4 form-horizontal">
+                    <FormValidate className="mt-4 form-horizontal">
                         <FormGroup className="row">
                             <Label className="col-sm-4">Rol</Label>
                             <div className="col-sm-6">
                                 <Select asyncOptions={this.optionsRol} onChange={this.onChange('rol')} value={this.state.data.rol} error={errors.includes('rol')} />
                             </div>
                         </FormGroup>
-                    </form>
+                    </FormValidate>
                 </ModalBody>
                 <ModalFooter>
                     <Button type="success" onClick={this.guardar} disabled={this.state.loading}>Aceptar</Button>{' '}

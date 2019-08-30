@@ -1,5 +1,5 @@
 import React from 'react'
-import { EditPage, FormGroup, Input, Label } from 'temeforest'
+import { EditPage, FormGroup, Input, Label, FormValidate } from 'temeforest'
 import { baseurl, getParameter, getResults } from 'utils/url'
 import axios from 'axios'
 
@@ -72,7 +72,7 @@ class MainView extends React.Component {
         const { categories, permissions } = this.props
         return (
             <div>
-                <form className="mt-4 form-horizontal">
+                <FormValidate className="mt-4 form-horizontal">
                     <FormGroup className="row">
                         <Label className="col-sm-3">Nombre</Label>
                         <div className="col-sm-5">
@@ -86,8 +86,8 @@ class MainView extends React.Component {
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
-                        <div className="col-sm-12">
-                            <table id="header-fixed" className="table" style={{marginBottom:0}}>
+                        <div id="table-container" className="col-sm-12" style={{height:300, overflowY:'auto'}}>
+                            <table className="table table-hover table-striped header-fixed" id="table">
                                 <thead>
                                     <tr>
                                         <th width="50%" scope="col">Permisos disponibles</th>
@@ -124,19 +124,6 @@ class MainView extends React.Component {
                                         </td>
                                     </tr>
                                 </thead>
-                            </table>
-                        </div>
-                        <div id="table-container" className="col-sm-12" style={{height:300, overflowY:'auto'}}>
-                            <table className="table table-hover table-striped header-fixed" id="table">
-                                <thead>
-                                    <tr>
-                                        <th width="50%" scope="col"></th>
-                                        <th width="12.5%" scope="col"></th>
-                                        <th width="12.5%" scope="col"></th>
-                                        <th width="12.5%" scope="col"></th>
-                                        <th width="12.5%" scope="col"></th>
-                                    </tr>
-                                </thead>
                                 <tbody>
                                     { categories.map((record, i) => 
                                         [
@@ -150,27 +137,7 @@ class MainView extends React.Component {
                             </table>
                         </div>
                     </FormGroup>
-                    {/*
-                    <FormGroup className="row">
-                                <div className="col-sm-2"></div>
-                                <div className="col-sm-4">
-                                    <div className="custom-control custom-checkbox">
-                                        <input type="checkbox" className="custom-control-input" id="aprobacion_usuario" name="aprobacion_usuario" checked={this.props.aprobacion_usuario} onChange={this.onChange('aprobacion_usuario')} />
-                                        <Label onlyClassName="custom-control-label" htmlFor="aprobacion_usuario">Aprobación Usuario</Label>
-                                    </div>
-                                </div>
-                            </FormGroup>
-                            <FormGroup className="row">
-                                <div className="col-sm-2"></div>
-                                <div className="col-sm-4">
-                                    <div className="custom-control custom-checkbox">
-                                        <input type="checkbox" className="custom-control-input" id="genereacion_credenciales" name="genereacion_credenciales" checked={this.props.genereacion_credenciales} onChange={this.onChange('genereacion_credenciales')} />
-                                        <Label onlyClassName="custom-control-label" htmlFor="genereacion_credenciales">Generación Credenciales Usuario</Label>
-                                    </div>
-                                </div>
-                            </FormGroup>
-                    */}
-                </form>
+                </FormValidate>
             </div>
         )
     }

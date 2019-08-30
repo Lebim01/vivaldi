@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Select, FormGroup, Label, Input, BarChart, PieChart, Table, Button } from 'temeforest'
+import { Card, CardBody, CardTitle, Select, FormGroup, Label, Input, BarChart, PieChart, Table, Button, FormValidate } from 'temeforest'
 import { config } from 'config'
 import { objectToUrl } from 'utils/url'
 import axios from 'axios'
@@ -35,7 +35,7 @@ class FormularioFiltros extends React.Component {
 
     render(){
         return (
-            <form className="form-horizontal">
+            <FormValidate className="form-horizontal">
                 <Row>
                     <Col xs="4">
                         <FormGroup className="row">
@@ -81,7 +81,7 @@ class FormularioFiltros extends React.Component {
                         <Button onClick={this.onChange('refresh')}>Actualizar</Button>
                     </Col>
                 </Row>
-            </form>
+            </FormValidate>
         )
     }
 }

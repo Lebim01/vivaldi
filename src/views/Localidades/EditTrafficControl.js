@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormGroup, Input, Select, Label, EditPage, FormElementValidate } from 'temeforest'
+import { Input, Select, EditPage, FormElementValidate, FormValidate } from 'temeforest'
 import { baseurl, getParameter } from 'utils/url'
 import axios from 'axios'
 
@@ -23,7 +23,7 @@ class MainView extends React.Component {
     render(){
         return (
             <div>
-                <form className="mt-4 form-horizontal">
+                <FormValidate className="mt-4 form-horizontal">
                     <FormElementValidate
                         label={{text:'Localidad'}}
                         input={{
@@ -79,7 +79,7 @@ class MainView extends React.Component {
                             validationMessages: {required:"El campo es requerido"}
                         }}
                     />
-                </form>
+                </FormValidate>
             </div>
         )
     }

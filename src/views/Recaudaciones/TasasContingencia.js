@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button } from 'temeforest'
+import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button, FormValidate } from 'temeforest'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import moment from 'moment'
 import Swal from 'sweetalert2'
@@ -77,7 +77,7 @@ class RegistroTasa extends React.Component {
             <Modal isOpen={this.props.show} toggle={this.toggle}>
                 <ModalHeader toggle={this.toggle}>Registro tasas contingencia general</ModalHeader>
                 <ModalBody>
-                    <form className="mt-4 form-horizontal">
+                    <FormValidate className="mt-4 form-horizontal">
                         <FormGroup className="row">
                             <Label className="col-sm-3">Bloques</Label>
                             <div className="col-sm-6">
@@ -96,7 +96,7 @@ class RegistroTasa extends React.Component {
                                 <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad} />
                             </div>
                         </FormGroup>
-                    </form>
+                    </FormValidate>
                 </ModalBody>
                 <ModalFooter>
                     <Button type="success" onClick={this.guardar}>Aceptar</Button>{' '}

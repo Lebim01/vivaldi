@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Button, FormGroup, Input, Select, Label } from 'temeforest'
+import { Card, CardBody, CardTitle, Button, FormGroup, Input, Select, Label, FormValidate } from 'temeforest'
 import { baseurl, getParameter, objectToUrl } from 'utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
@@ -40,7 +40,7 @@ class MainView extends React.Component {
     render(){
         return (
             <div>
-                <form className="mt-4 form-horizontal">
+                <FormValidate className="mt-4 form-horizontal">
                     <FormGroup className="row">
                         <Label className="col-sm-3">Hora inicio</Label>
                         <div className="col-sm-5">
@@ -101,7 +101,7 @@ class MainView extends React.Component {
                             </div>
                         </FormGroup>
                     }
-                </form>
+                </FormValidate>
             </div>
         )
     }

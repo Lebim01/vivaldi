@@ -80,36 +80,68 @@ class MainView extends React.Component {
         return (
             <div>
                 <FormValidate className="mt-4 form-horizontal">
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Nombre</Label>
-                        <div className="col-sm-5">
-                            <Input onChange={this.onChange('nombre')} value={this.props.nombre} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Tipo</Label>
-                        <div className="col-sm-5">
-                            <Select options={tipos} onChange={this.onChange('tipo')} value={this.props.tipo} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Gremio</Label>
-                        <div className="col-sm-5">
-                            <Select asyncOptions={this.optionsGremios} onChange={this.onChange('gremio')} value={this.props.gremio} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Ventanilla</Label>
-                        <div className="col-sm-5">
-                            <Input onChange={this.onChange('ventanilla')} value={this.props.ventanilla} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Tiempo de gracia</Label>
-                        <div className="col-sm-5">
-                            <Input type="number" onChange={this.onChange('tiempo_gracia')} value={this.props.tiempo_gracia} rightLabel="Minutos" max={60} />
-                        </div>
-                    </FormGroup>
+                    <FormElementValidate
+                        label={{text:'Nombre'}}
+                        input={{
+                            name : 'nombre',
+                            element: <Input onChange={this.onChange('nombre')} value={this.props.nombre} />
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
+                    <FormElementValidate
+                        label={{text:'Tipo'}}
+                        input={{
+                            name : 'tipo',
+                            element: <Select options={tipos} onChange={this.onChange('tipo')} value={this.props.tipo} />
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
+                    <FormElementValidate
+                        label={{text:'Gremio'}}
+                        input={{
+                            name : 'gremio',
+                            element: <Select asyncOptions={this.optionsGremios} onChange={this.onChange('gremio')} value={this.props.gremio} />
+                        }}
+                    />
+                    <FormElementValidate
+                        label={{text:'Ventanilla'}}
+                        input={{
+                            name : 'ventanilla',
+                            element: <Input onChange={this.onChange('ventanilla')} value={this.props.ventanilla} />
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
+                    <FormElementValidate
+                        label={{text:'Establecimiento'}}
+                        input={{
+                            name : 'establecimiento',
+                            element: <Input onChange={this.onChange('establecimiento')} value={this.props.establecimiento} />
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
+                    <FormElementValidate
+                        label={{text:'Tiempo de gracia'}}
+                        input={{
+                            name : 'tiempo_gracia',
+                            element: <Input type="number" onChange={this.onChange('tiempo_gracia')} value={this.props.tiempo_gracia} rightLabel="Minutos" max={60} />
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
                     <fieldset>
                         <legend>Información tributaria</legend>
                         <FormElementValidate
@@ -152,12 +184,17 @@ class MainView extends React.Component {
                                 element: <Input onChange={this.onChange('nombre_comercial')} value={this.props.nombre_comercial} />
                             }}
                         />
-                        <FormGroup className="row">
-                            <Label className="col-sm-3">Dirección Matriz</Label>
-                            <div className="col-sm-5">
-                                <Input onChange={this.onChange('direccion_matriz')} value={this.props.direccion_matriz} />
-                            </div>
-                        </FormGroup>
+                        <FormElementValidate
+                            label={{text:'Dirección Matriz'}}
+                            input={{
+                                name : 'direccion_matriz',
+                                element: <Input direccion_matriz={this.onChange('direccion_matriz')} value={this.props.direccion_matriz} />
+                            }}
+                            validator={{
+                                validationRules: {required:true},
+                                validationMessages: {required:"El campo es requerido"}
+                            }}
+                        />
                         <FormElementValidate
                             label={{text:'Correo'}}
                             input={{
@@ -165,8 +202,8 @@ class MainView extends React.Component {
                                 element: <Input placeholder="example@gmail.com" onChange={this.onChange('correo')} value={this.props.correo} />
                             }}
                             validator={{
-                                validationRules: { email: true },
-                                validationMessages : { email: "El valor debe ser un correo" }
+                                validationRules: { required:true, email: true },
+                                validationMessages : { required : 'El campo es requerido', email: "El valor debe ser un correo valido" }
                             }}
                         />
                         <FormGroup className="row">
@@ -292,15 +329,6 @@ class EditCooperativas extends React.Component {
         }
     ]
 
-    constructor(props){
-        super(props)
-        this.onChange = this.onChange.bind(this)
-        this.changeTab = this.changeTab.bind(this)
-        this.onChangeFirma = this.onChangeFirma.bind(this)
-        this.onChangeFile = this.onChangeFile.bind(this)
-        this.onChangeCorreo = this.onChangeCorreo.bind(this)
-    }
-
     componentDidMount(){
         this.getLocalidades()
         let id = getParameter('id')
@@ -336,7 +364,7 @@ class EditCooperativas extends React.Component {
         })
     }
 
-    getAndendes(localidad){
+    getAndendes = (localidad) => {
         let andenes = []
         for(let i in localidad.niveles){
             let nivel = localidad.niveles[i]
@@ -364,7 +392,7 @@ class EditCooperativas extends React.Component {
         }, () => this.setAndenesLocalidades())
     }
 
-    setAndenesLocalidades(){
+    setAndenesLocalidades = () => {
         const { localidades } = this.state
         let data = this.state.data
         if(localidades && data.andenes){
@@ -392,11 +420,11 @@ class EditCooperativas extends React.Component {
         })
     }
 
-    changeTab(tab){
+    changeTab = (tab) => {
         this.setState({ tab })
     }
 
-    onChange(name, value){
+    onChange = (name, value) => {
         let data = this.state.data
         data[name] = value
         this.setState({
@@ -404,7 +432,7 @@ class EditCooperativas extends React.Component {
         })
     }
 
-    onChangeFirma(name, value){
+    onChangeFirma = (name, value) => {
         let data_firma = this.state.data_firma
         data_firma[name] = value
         this.setState({
@@ -424,7 +452,7 @@ class EditCooperativas extends React.Component {
         }
     }
 
-    onChangeCorreo(name, value){
+    onChangeCorreo = (name, value) => {
         let data_correo = this.state.data_correo
         data_correo[name] = value
         this.setState({

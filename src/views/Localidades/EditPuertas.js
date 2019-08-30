@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormGroup, Input, Select, Label, DualList, EditPage } from 'temeforest'
+import { FormGroup, Input, Select, Label, DualList, EditPage, FormValidate } from 'temeforest'
 import { baseurl, getParameter, getResults } from 'utils/url'
 import axios from 'axios'
 import 'react-dual-listbox/lib/react-dual-listbox.css';
@@ -97,7 +97,7 @@ class MainView extends React.Component {
         const { andenes, niveles } = this.state
         return (
             <div>
-                <form className="mt-4 form-horizontal">
+                <FormValidate className="mt-4 form-horizontal">
                     <FormGroup className="row">
                         <Label className="col-sm-3">Localidad</Label>
                         <div className="col-sm-5">
@@ -130,7 +130,7 @@ class MainView extends React.Component {
                             />
                         </div>
                     </FormGroup>
-                </form>
+                </FormValidate>
             </div>
         )
     }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
-import { Button, FormGroup, InputIcon, Label, Select } from 'temeforest'
+import { Button, FormGroup, InputIcon, Label, Select, FormValidate } from 'temeforest'
 import { baseurl } from 'utils/url'
 
 class AddParadaModal extends React.Component {
@@ -65,7 +65,7 @@ class AddParadaModal extends React.Component {
             <Modal isOpen={this.props.show} toggle={this.toggle.bind(this)}>
                 <ModalHeader toggle={this.toggle.bind(this)}>Agregar Parada</ModalHeader>
                 <ModalBody>
-                    <form className="mt-4 form-horizontal">
+                    <FormValidate className="mt-4 form-horizontal">
                         { errors.includes('repetido') &&
                             <div className="alert alert-danger">
                                 No se puede duplicar paradas
@@ -101,7 +101,7 @@ class AddParadaModal extends React.Component {
                                 <InputIcon icon={<span>Horas</span>} type="number" onChange={this.onChange('duracion')} value={this.state.data.duracion} error={errors.includes('duracion')} />
                             </div>
                         </FormGroup>
-                    </form>
+                    </FormValidate>
                 </ModalBody>
                 <ModalFooter>
                     <Button type="success" onClick={this.guardar}>Aceptar</Button>{' '}
