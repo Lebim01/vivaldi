@@ -4,6 +4,9 @@ import { CardTitle, InputIcon, Button } from 'temeforest'
 import axios from 'axios'
 import { baseurl, objectToUrl } from 'utils/url'
 
+import BlockUi from 'react-block-ui';
+import 'react-block-ui/style.css';
+
 // numero de filas por pagina
 const RowsPerPage = 25
 // numero limite de paginas visibles en el footer
@@ -212,85 +215,82 @@ class ListPage extends React.Component {
                 <br/>
                 <Row>
                     <Col xs="12" md="12">
-                        <div className="table-responsive">
-                            { loading &&
-                                <div className="spinner-border text-info spinner-center" role="status">
-                                    <span className="sr-only">Loading...</span>
-                                </div>
-                            }
-                            <table className="table table-hover table-striped footable footable-5 footable-paging footable-paging-center">
-                                <thead>
-                                    { (fieldNames.length > 0) &&
-                                        <tr>
-                                            {fieldNames.map((fieldName, i) => <th key={i} scope="col">{fieldName}</th>)}
-                                        </tr>
-                                    }
-                                    { (head.length > 0) &&
-                                        head.map((r,i) => {
-                                            let row = head[i]
-                                            return (
-                                                <tr key={i}>
-                                                    {row.map((col, j) => {
-                                                        let _title = '', 
-                                                            _props = {}
+                        <BlockUi tag="div" blocking={this.state.loading}>
+                            <div className="table-responsive">
+                                <table className="table table-hover table-striped footable footable-5 footable-paging footable-paging-center">
+                                    <thead>
+                                        { (fieldNames.length > 0) &&
+                                            <tr>
+                                                {fieldNames.map((fieldName, i) => <th key={i} scope="col">{fieldName}</th>)}
+                                            </tr>
+                                        }
+                                        { (head.length > 0) &&
+                                            head.map((r,i) => {
+                                                let row = head[i]
+                                                return (
+                                                    <tr key={i}>
+                                                        {row.map((col, j) => {
+                                                            let _title = '', 
+                                                                _props = {}
 
-                                                        if(typeof col === 'string'){
-                                                            _title = col
-                                                        }else{
-                                                            const { title, ...props } = col
-                                                            _title = title
-                                                            _props = props
-                                                        }
+                                                            if(typeof col === 'string'){
+                                                                _title = col
+                                                            }else{
+                                                                const { title, ...props } = col
+                                                                _title = title
+                                                                _props = props
+                                                            }
 
-                                                        return (
-                                                            <th key={j} {..._props} scope="col">{_title}</th>
-                                                        )
-                                                    })}
-                                                </tr>
-                                            )
-                                        })
-                                    }
-                                </thead>
-                                <tbody>
-                                    {filtered.map((record, i) => <RecordRow record={record} fields={fields} key={i} onDoubleClick={() => this.onRowDoubleClick(record.id, record)} />)}
-                                </tbody>
-                                <tfoot>
-                                    <tr className="footable-paging">
-                                        <td colSpan="10">
-                                            <div className="footable-pagination-wrapper text-center">
-                                                <ul className="pagination justify-content-center">
-                                                    <li className={`footable-page-nav ${previous && !loading ? 'pointer' : 'link-disabled'}`} data-page="first">
-                                                        <button className="footable-page-link" onClick={this.first}>«</button>
-                                                    </li>
-                                                    <li className={`footable-page-nav ${previous && !loading ? 'pointer' : 'link-disabled'}`} data-page="prev">
-                                                        <button className="footable-page-link" onClick={this.previous}>‹</button>
-                                                    </li>
-                                                    { numEndVisibleFooterPages > 0 ?
-                                                        new Array(numEndVisibleFooterPages - numBeginVisibleFooterPages).fill(1).map((z, index) => {
-                                                            let page = Number(numBeginVisibleFooterPages) + Number(index)
                                                             return (
-                                                                <li key={index} className={`footable-page visible ${page === currentPage ? 'active' : ''}`} data-page={page}>
-                                                                    <button className="footable-page-link" onClick={() => this.setPage(page)}>{ page }</button>
-                                                                </li>
+                                                                <th key={j} {..._props} scope="col">{_title}</th>
                                                             )
-                                                        })
-                                                        : null
-                                                    }
-                                                    <li className={`footable-page-nav ${next && !loading ? 'pointer' : 'link-disabled'}`} data-page="next">
-                                                        <button className="footable-page-link" onClick={this.next}>›</button>
-                                                    </li>
-                                                    <li className={`footable-page-nav ${next && !loading ? 'pointer' : 'link-disabled'}`} data-page="last">
-                                                        <button className="footable-page-link" onClick={this.last}>»</button>
-                                                    </li>
-                                                </ul>
-                                                <div className="divider"></div>
-                                                <span className="label label-info">{currentPage} de {numPages}</span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
+                                                        })}
+                                                    </tr>
+                                                )
+                                            })
+                                        }
+                                    </thead>
+                                    <tbody>
+                                        {filtered.map((record, i) => <RecordRow record={record} fields={fields} key={i} onDoubleClick={() => this.onRowDoubleClick(record.id, record)} />)}
+                                    </tbody>
+                                    <tfoot>
+                                        <tr className="footable-paging">
+                                            <td colSpan="10">
+                                                <div className="footable-pagination-wrapper text-center">
+                                                    <ul className="pagination justify-content-center">
+                                                        <li className={`footable-page-nav ${previous && !loading ? 'pointer' : 'link-disabled'}`} data-page="first">
+                                                            <button className="footable-page-link" onClick={this.first}>«</button>
+                                                        </li>
+                                                        <li className={`footable-page-nav ${previous && !loading ? 'pointer' : 'link-disabled'}`} data-page="prev">
+                                                            <button className="footable-page-link" onClick={this.previous}>‹</button>
+                                                        </li>
+                                                        { numEndVisibleFooterPages > 0 ?
+                                                            new Array(numEndVisibleFooterPages - numBeginVisibleFooterPages).fill(1).map((z, index) => {
+                                                                let page = Number(numBeginVisibleFooterPages) + Number(index)
+                                                                return (
+                                                                    <li key={index} className={`footable-page visible ${page === currentPage ? 'active' : ''}`} data-page={page}>
+                                                                        <button className="footable-page-link" onClick={() => this.setPage(page)}>{ page }</button>
+                                                                    </li>
+                                                                )
+                                                            })
+                                                            : null
+                                                        }
+                                                        <li className={`footable-page-nav ${next && !loading ? 'pointer' : 'link-disabled'}`} data-page="next">
+                                                            <button className="footable-page-link" onClick={this.next}>›</button>
+                                                        </li>
+                                                        <li className={`footable-page-nav ${next && !loading ? 'pointer' : 'link-disabled'}`} data-page="last">
+                                                            <button className="footable-page-link" onClick={this.last}>»</button>
+                                                        </li>
+                                                    </ul>
+                                                    <div className="divider"></div>
+                                                    <span className="label label-info">{currentPage} de {numPages}</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </BlockUi>
                     </Col>
                 </Row>
             </div>

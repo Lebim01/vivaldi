@@ -41,11 +41,3 @@ input[type=time].no-clear.no-ampm::-webkit-datetime-edit-ampm-field {
 .link-disabled a, .link-disabled button {
     cursor: not-allowed;
 }
-
-.spinner-center {
-    position: absolute;
-    width: 5rem;
-    height: 5rem;
-    top: 45%;
-    left: 45%;
-}
