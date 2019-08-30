@@ -3,6 +3,7 @@ import { Button, FormGroup, Input, Label, EditPage, Select, FormElementValidate,
 import EditPersona from './../Cooperativas/EditPersona'
 import { baseurl, baseMediaUrl, getParameter } from 'utils/url'
 import { fileToBase64 } from 'utils/file'
+import { confirmEndpoint } from 'utils/dialog'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import AddRol from './AddRol'
@@ -94,20 +95,6 @@ class EditUsuarios extends React.Component {
         {value:2, label:'Cooperativa'},
     ]
 
-    constructor(props){
-        super(props)
-        this.addRol = this.addRol.bind(this)
-        this.onChange = this.onChange.bind(this)
-        this.deleteRol = this.deleteRol.bind(this)
-        this.agregarRol = this.agregarRol.bind(this)
-        this.onChangeFile = this.onChangeFile.bind(this)
-        this.addCooperativa = this.addCooperativa.bind(this)
-        this.onChangePersona = this.onChangePersona.bind(this)
-        this.deleteRolCooperativa = this.deleteRolCooperativa.bind(this)
-        this.agregarRolCooperativa = this.agregarRolCooperativa.bind(this)
-        this.toggleModalCooperativa = this.toggleModalCooperativa.bind(this)
-    }
-
     componentDidMount(){
         let id = getParameter('id')
         if(id){
@@ -162,7 +149,6 @@ class EditUsuarios extends React.Component {
     searchPersona = async (identificacion) => {
         const { data } = await axios.get(`${baseurl}/persona/?identificacion=${identificacion}`)
         if(data.length > 0){
-            console.log('search', data)
             this.setState({
                 data : {
                     ...this.state.data,
@@ -183,11 +169,11 @@ class EditUsuarios extends React.Component {
         this.onChangeData('readOnlyPersona', true)
     }
 
-    async onChangePersona(data){
+    onChangePersona = async (data) => {
         this.onChangeData('persona', data)
     }
 
-    addRol(){
+    addRol = () => {
         this.setState({
             modal_rol : {
                 ...this.state.modal_rol,
@@ -206,7 +192,7 @@ class EditUsuarios extends React.Component {
         })
     }
 
-    agregarRol(data){
+    agregarRol = (data) => {
         let roles = this.state.data.roles
         roles.push(data)
         this.onChangeData('roles', roles)
@@ -227,7 +213,7 @@ class EditUsuarios extends React.Component {
     }
 
     // cooperativa
-    addCooperativa(){
+    addCooperativa = () => {
         this.setState({
             modal_cooperativa : {
                 ...this.state.modal_cooperativa,
@@ -245,7 +231,7 @@ class EditUsuarios extends React.Component {
         })
     }
 
-    agregarRolCooperativa(data){
+    agregarRolCooperativa = (data) => {
         let roles = this.state.data.roles_cooperativa
         roles.push(data)
         this.onChangeData('roles_cooperativa', roles)
@@ -304,35 +290,21 @@ class EditUsuarios extends React.Component {
         return false
     }
 
-    resetPassword(){
-        Swal.fire({
-            title: 'Confirmar Restablecer contraseña',
-            text : '¿Seguro de restablecer?',
-            showCancelButton: true,
-            showLoaderOnConfirm: true,
-            preConfirm: () => {
-                return axios.post(`${baseurl}/password_reset/`, { email: this._data.persona.correo })
-                .then(response => {
-                    if (response.status !== 200 && response.status !== 201) {
-                        throw new Error(response.statusText)
-                    }
-                    return response
-                })
-                .catch(error => {
-                    Swal.showValidationMessage(
-                        `Petición fallida: ${error}`
-                    )
-                })
-            },
-            allowOutsideClick: () => !Swal.isLoading()
-        }).then((result) => {
-            if (result.value) {
-                Swal.fire({
-                    text : `Contraseña restablecida`,
-                    type : 'success'
-                })
+    resetPassword = async () => {
+        const options = {
+            text: '¿Seguro de restablecer?',
+            endpoint: 'password_reset',
+            params : {
+                email: this._data.persona.correo
             }
-        })
+        }
+
+        if(await confirmEndpoint(options)){
+            Swal.fire({
+                text : `Contraseña restablecida`,
+                type : 'success'
+            })
+        }
     }
 
     render(){
@@ -433,8 +405,8 @@ class EditUsuarios extends React.Component {
                                 </FormGroup>
                                 <FormGroup className="row">
                                     <div className="col-sm-3"></div>
-                                    <div className="col-sm-3">
-                                        <Input id="documentation" type="file" style={{display:'none'}} onChange={this._onChangeFile}/>
+                                    <div className="col-sm-3 text-right">
+                                        <input id="documentation" type="file" style={{display:'none'}} onChange={this._onChangeFile}/>
                                         <Button type="success" style={{marginRight:5}} onClick={this.UploadFile}>Subir Documentación</Button>
                                     </div>
                                     <div className="col-sm-3" style={{marginLeft: 5}}>

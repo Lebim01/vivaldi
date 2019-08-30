@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormGroup, Input, Select, Label, DualList, EditPage } from 'temeforest'
+import { FormGroup, Input, Select, Label, DualList, EditPage, FormElementValidate } from 'temeforest'
 import { baseurl, getParameter, getResults } from 'utils/url'
 import axios from 'axios'
 import 'react-dual-listbox/lib/react-dual-listbox.css';
@@ -62,42 +62,83 @@ class MainView extends React.Component {
         return (
             <div>
                 <form className="mt-4 form-horizontal">
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Localidad</Label>
-                        <div className="col-sm-5">
-                            <Select onChange={this.onChange('localidad')} value={this.props.localidad} asyncOptions={this.optionsLocalidades} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row" style={{display:'none'}}>
-                        <Label className="col-sm-3">Descripci&oacute;n</Label>
-                        <div className="col-sm-5">
-                            <Input onChange={this.onChange('descripcion')} value={this.props.descripcion} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Ip</Label>
-                        <div className="col-sm-5">
-                            <Input onChange={this.onChange('ip')} value={this.props.ip} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">URL</Label>
-                        <div className="col-sm-5">
-                            <Input onChange={this.onChange('url')} value={this.props.url} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Usuario</Label>
-                        <div className="col-sm-5">
-                            <Input onChange={this.onChange('user')} value={this.props.user} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Contraseña</Label>
-                        <div className="col-sm-5">
-                            <Input onChange={this.onChange('password')} value={this.props.password} />
-                        </div>
-                    </FormGroup>
+                    <FormElementValidate
+                        label={{text:'Nombre'}}
+                        input={{
+                            name : 'nombre',
+                            element: <Input onChange={this.onChange('nombre')} value={this.props.nombre} />
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
+                    <FormElementValidate
+                        label={{text:'Localidad'}}
+                        input={{
+                            name : 'localidad',
+                            element: <Input type="password" onChange={this.onChange('localidad')} value={this.props.localidad} />
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
+                    <FormElementValidate
+                        label={{text:'Descripción'}}
+                        input={{
+                            name : 'descripcion',
+                            element: <Input onChange={this.onChange('descripcion')} value={this.props.descripcion} />
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
+                    <FormElementValidate
+                        label={{text:'IP'}}
+                        input={{
+                            name : 'ip',
+                            element: <Input onChange={this.onChange('ip')} value={this.props.ip} placeholder="0.0.0.0" />
+                        }}
+                        validator={{
+                            validationRules: {required:true, ip: true},
+                            validationMessages: {required:"El campo es requerido", ip: 'El valor debe ser una IP valida'}
+                        }}
+                    />
+                    <FormElementValidate
+                        label={{text:'URL'}}
+                        input={{
+                            name : 'url',
+                            element: <Input onChange={this.onChange('url')} value={this.props.url} />
+                        }}
+                        validator={{
+                            validationRules: {required:true, url: true},
+                            validationMessages: {required:"El campo es requerido", url: 'El valor debe ser una URL valida'}
+                        }}
+                    />
+                    <FormElementValidate
+                        label={{text:'Usuario'}}
+                        input={{
+                            name : 'user',
+                            element: <Input onChange={this.onChange('user')} value={this.props.user} />
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
+                    <FormElementValidate
+                        label={{text:'Contraseña'}}
+                        input={{
+                            name : 'password',
+                            element: <Input type="password" onChange={this.onChange('password')} value={this.props.password} />
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
                     <FormGroup className="row">
                         <Label className="col-sm-4">Andenes Disponibles</Label>
                         <Label className="col-sm-4">Andenes Habilitados</Label>

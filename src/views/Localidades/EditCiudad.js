@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormGroup, Input, Label, Select, EditPage } from 'temeforest'
+import { FormGroup, Input, Label, Select, EditPage, FormElementValidate } from 'temeforest'
 import { baseurl, getParameter } from 'utils/url'
 import axios from 'axios'
 
@@ -9,11 +9,6 @@ const urlFront = '/localidades/ciudad'
 class EditCiudad extends React.Component {
 
     state = {data:{}}
-
-    constructor(props){
-        super(props)
-        this.onChange = this.onChange.bind(this)
-    }
 
     componentDidMount(){
         let id = getParameter('id')
@@ -50,19 +45,28 @@ class EditCiudad extends React.Component {
             <EditPage title={`${id ? 'Editar' : 'Crear'} Ciudad`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
                 <div>
                     <form className="mt-4 form-horizontal">
-                        <FormGroup className="row">
-                            <Label className="col-sm-3">Nombre</Label>
-                            <div className="col-sm-5">
-                                <Input onChange={this.onChange('nombre')} value={this.state.data.nombre} />
-                            </div>
-                        </FormGroup>
-                        <FormGroup className="row">
-                            <Label className="col-sm-3">Provincia</Label>
-                            <div className="col-sm-5">
-                                <Select asyncOptions={this.optionsProvincias} onChange={this.onChange('provincia')} value={this.state.data.provincia} />
-                            </div>
-                        </FormGroup>
-
+                        <FormElementValidate
+                            label={{text:'Nombre'}}
+                            input={{
+                                name : 'nombre',
+                                element: <Input onChange={this.onChange('nombre')} value={this.props.nombre} />
+                            }}
+                            validator={{
+                                validationRules: {required:true},
+                                validationMessages: {required:"El campo es requerido"}
+                            }}
+                        />
+                        <FormElementValidate
+                            label={{text:'Provincia'}}
+                            input={{
+                                name : 'provincia',
+                                element: <Select asyncOptions={this.optionsProvincias} onChange={this.onChange('provincia')} value={this.state.data.provincia} />
+                            }}
+                            validator={{
+                                validationRules: {required:true},
+                                validationMessages: {required:"El campo es requerido"}
+                            }}
+                        />
                     </form>
                 </div>
             </EditPage>

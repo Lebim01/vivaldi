@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormGroup, Input, Label, EditPage } from 'temeforest'
+import { Input, FormElementValidate, EditPage } from 'temeforest'
 import { baseurl, getParameter } from 'utils/url'
 import axios from 'axios'
 
@@ -18,12 +18,17 @@ class MainView extends React.Component {
         return (
             <div>
                 <form className="mt-4 form-horizontal">
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Nombre</Label>
-                        <div className="col-sm-5">
-                            <Input onChange={this.onChange('nombre')} value={this.props.nombre} />
-                        </div>
-                    </FormGroup>
+                    <FormElementValidate
+                        label={{text:'Nombre'}}
+                        input={{
+                            name : 'nombre',
+                            element: <Input onChange={this.onChange('nombre')} value={this.props.nombre} />
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
                 </form>
             </div>
         )
@@ -33,11 +38,6 @@ class MainView extends React.Component {
 class EditProvincia extends React.Component {
 
     state = {data:{}}
-
-    constructor(props){
-        super(props)
-        this.onChange = this.onChange.bind(this)
-    }
 
     componentDidMount(){
         let id = getParameter('id')
@@ -54,7 +54,7 @@ class EditProvincia extends React.Component {
         })
     }
 
-    onChange(name, value){
+    onChange = (name, value) => {
         let data = this.state.data
         data[name] = value
         this.setState({
