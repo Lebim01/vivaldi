@@ -226,8 +226,8 @@ class MainView extends React.Component {
                                 element: <Input onChange={this.onChange('ruc')} value={this.props.ruc} />
                             }}
                             validator={{
-                                validationRules: {required:true},
-                                validationMessages: {required:"El campo es requerido"}
+                                validationRules: {required:true, number : true, minLength:this.props.lengthCedula, maxLength:this.props.lengthCedula},
+                                validationMessages: {required:"El campo es requerido", minLength:`El valor debe ser de 13 dígitos`, maxLength:`El valor debe ser de 13 dígitos`, number : 'Solo se aceptan números'}
                             }}
                         />
                         <FormElementValidate
@@ -259,8 +259,8 @@ class MainView extends React.Component {
                                 element: <Input onChange={this.onChange('correo')} value={this.props.correo} />
                             }}
                             validator={{
-                                validationRules: {required:true},
-                                validationMessages: {required:"El campo es requerido"}
+                                validationRules: {required:true, email: true},
+                                validationMessages: {required:"El campo es requerido", email:'El valor debe ser un correo valido'}
                             }}
                         />
                         <FormGroup className="row">

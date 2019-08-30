@@ -2,43 +2,33 @@ import React from 'react'
 import { Col, Row } from 'reactstrap'
 import { Card, CardBody, CardTitle, Button } from 'temeforest'
 import { baseurl } from 'utils/url'
+import { confirmEndpoint } from 'utils/dialog'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 
 class ApprovePage extends React.Component {
 
-    aprobar = () => {
+    aprobar = async () => {
         const { endpoint, urlFront, id, aprobarParams } = this.props
 
-        Swal.fire({
-            title: 'Confirmar Guardar',
-            text : '¿Seguro de guardar?',
-            showCancelButton: true,
-            showLoaderOnConfirm: true,
-            preConfirm: () => {
-                return axios.post(`${baseurl}/${endpoint}/${id ? `${id}/` : ``}`, { id, estado: 1, ...aprobarParams })
-                .then(response => {
-                    if (response.status !== 200 && response.status !== 201) {
-                        throw new Error(response.statusText)
-                    }
-                    return response
-                })
-                .catch(error => {
-                    Swal.showValidationMessage(
-                        `Petición fallida: ${error}`
-                    )
-                })
+        const options = {
+            id,
+            params: {
+                id,
+                estado: 1,
+                ...aprobarParams
             },
-            allowOutsideClick: () => !Swal.isLoading()
-        }).then((result) => {
-            if (result.value) {
-                Swal.fire({
-                    text : `Guardado`,
-                    type : 'success'
-                })
-                this.props.history.push(urlFront)
-            }
-        })
+            endpoint,
+            text: '¿Seguro de guardar?'
+        }
+
+        if(await confirmEndpoint(options)){
+            Swal.fire({
+                text : `Guardado`,
+                type : 'success'
+            })
+            this.props.history.push(urlFront)
+        }
     }
 
     rechazar = () => {
