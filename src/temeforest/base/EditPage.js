@@ -1,9 +1,7 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
 import { Card, CardBody, CardTitle, Button, ValidateContext } from 'temeforest'
-import { baseurl } from 'utils/url'
 import { confirmEndpoint } from 'utils/dialog'
-import axios from 'axios'
 import Swal from 'sweetalert2'
 import FormElementValidate from './FormElementValidate'
 
@@ -98,9 +96,15 @@ class EditPage extends React.Component {
 
     onSubmit = async (e) => {
         e.preventDefault();
-        let isFormValidationErrors = await this.evaluateErrors()
 
-        if (!isFormValidationErrors){
+        const { hasValidations } = this.state
+        let isFormValidationErrors= false
+
+        if(hasValidations){
+            isFormValidationErrors = await this.evaluateErrors()
+        }
+
+        if (!isFormValidationErrors || !hasValidations){
             this.confirmSave()
         }
     }
