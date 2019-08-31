@@ -34,10 +34,8 @@ class EditPage extends React.Component {
     componentDidMount(){
         let hasElement = this.getChildrenWithType(this.props.children, FormElementValidate)
         this.setState({
-            submitted: true,
             hasValidations : hasElement
         })
-
     }
 
     confirmSave(){
@@ -116,16 +114,27 @@ class EditPage extends React.Component {
 
     onChangeFlagValidate(flag){
         this.setState({
-            isFormValidationErrors: flag,
-            submitted: true
+            isFormValidationErrors: flag
         });
     }
 
-    onSubmit(e){
+    evaluateErrors = () => {
+        return new Promise((resolve) => {
+            this.setState({
+                submitted: true
+            }, () => {
+                setTimeout(() => {
+                    resolve(this.state.isFormValidationErrors)
+                }, 2000)
+            })
+        })
+    }
+
+    onSubmit = async (e) => {
         e.preventDefault();
-        const { isFormValidationErrors, submitted } = this.state;
-        const { noValidate } = this.props
-        if ((!isFormValidationErrors && submitted) || noValidate){
+        let isFormValidationErrors = await this.evaluateErrors()
+
+        if (!isFormValidationErrors){
             this.confirmSave()
         }
     }
