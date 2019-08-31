@@ -2,6 +2,7 @@ import React from 'react'
 import { Col, Row } from 'reactstrap'
 import { Card, CardBody, CardTitle, Button, ValidateContext } from 'temeforest'
 import { baseurl } from 'utils/url'
+import { confirmEndpoint } from 'utils/dialog'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import FormElementValidate from './FormElementValidate'
@@ -25,12 +26,6 @@ class EditPage extends React.Component {
         hasValidations : false
     }
 
-    constructor(props){
-        super(props)
-        this.confirmSave = this.confirmSave.bind(this)
-        this.confirmDelete = this.confirmDelete.bind(this)
-    }
-
     componentDidMount(){
         let hasElement = this.getChildrenWithType(this.props.children, FormElementValidate)
         this.setState({
@@ -38,7 +33,7 @@ class EditPage extends React.Component {
         })
     }
 
-    confirmSave(){
+    confirmSave = async () => {
         const { id, data, urlFront, endpoint } = this.props
         let parsed_data = data
 
@@ -46,73 +41,44 @@ class EditPage extends React.Component {
             parsed_data = this.props.parseData(parsed_data)
         }
 
-        Swal.fire({
-            title: 'Confirmar Guardar',
-            text : '¿Seguro de guardar?',
-            showCancelButton: true,
-            showLoaderOnConfirm: true,
-            preConfirm: () => {
-                return axios.post(`${baseurl}/${endpoint}/${id ? `${id}/` : ''}`, parsed_data)
-                .then(response => {
-                    if (response.status !== 200 && response.status !== 201) {
-                        throw new Error(response.statusText)
-                    }
-                    return response
-                })
-                .catch(error => {
-                    Swal.showValidationMessage(
-                        `Petición fallida: ${error}`
-                    )
-                })
-            },
-            allowOutsideClick: () => !Swal.isLoading()
-        }).then((result) => {
-            if (result.value) {
+        const options = {
+            id,
+            endpoint,
+            text: '¿Seguro de guardar?',
+            params : parsed_data,
+        }
+
+        if(await confirmEndpoint(options)){
+            Swal.fire({
+                text : `Guardado`,
+                type : 'success'
+            })
+            this.props.history.push(urlFront)
+        }
+    }
+
+    confirmDelete = async () => {
+        const { id, data, endpoint, urlFront } = this.props
+
+        if(id){
+            const options = {
+                id,
+                endpoint,
+                text: '¿Seguro de eliminar?',
+                params : data
+            }
+
+            if(await confirmEndpoint(options)){
                 Swal.fire({
-                    text : `Guardado`,
+                    text : `Eliminado`,
                     type : 'success'
                 })
                 this.props.history.push(urlFront)
             }
-        })
-    }
-
-    confirmDelete(){
-        const { id, data, endpoint, urlFront } = this.props
-        if(id){
-            Swal.fire({
-                title: 'Confirmar Eliminar',
-                text : '¿Seguro de eliminar?',
-                showCancelButton: true,
-                showLoaderOnConfirm: true,
-                preConfirm: () => {
-                    return axios.delete(`${baseurl}/${endpoint}/${id}`, data)
-                    .then(response => {
-                        if (response.status !== 204) {
-                            throw new Error(response.statusText)
-                        }
-                        return response
-                    })
-                    .catch(error => {
-                        Swal.showValidationMessage(
-                            `Petición fallida: ${error}`
-                        )
-                    })
-                },
-                allowOutsideClick: () => !Swal.isLoading()
-            }).then((response) => {
-                if(!response.dismiss){
-                    Swal.fire({
-                        text : `Eliminado`,
-                        type : 'success'
-                    })
-                    this.props.history.push(urlFront)
-                }
-            })
         }
     }
 
-    onChangeFlagValidate(flag){
+    onChangeFlagValidate = (flag) => {
         this.setState({
             isFormValidationErrors: flag
         });
@@ -141,7 +107,7 @@ class EditPage extends React.Component {
 
     typesAreEqual = (typeA, typeB) => typeA === typeB;
 
-    getChildrenWithType(children, type) {
+    getChildrenWithType = (children, type) => {
         let has = false;
         React.Children.forEach(children, child => {
             if (child && this.typesAreEqual(type, child.type)) {
