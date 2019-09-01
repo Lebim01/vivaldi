@@ -1,4 +1,5 @@
 import React from 'react'
+import { TabContent, TabPane } from 'reactstrap'
 import { Button, FormGroup, Input, Select, Label, EditPage, Tabs, FormElementValidate, FormValidate } from 'temeforest'
 import { baseurl, getParameter } from 'utils/url'
 import axios from 'axios'
@@ -439,9 +440,17 @@ class EditLocalidades extends React.Component {
         return (
             <EditPage title={`${id ? 'Editar' : 'Crear'} Localidad`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
                 <Tabs tab={tab} tabs={this.tabs} onClickTab={this.changeTab}/>
-                { tab === 'main' && <MainView id_localidad={id} {...data} onChange={this.onChange} />}
-                { tab === 'firma' && <FirmaElectronicaForm {...data_firma} onChange={this.onChangeFirma} onChangeFile={this.onChangeFile} /> }
-                { tab === 'correos' && <ConfiguracionCorreoForm {...data_correo} onChange={this.onChangeCorreo}/> }
+                <TabContent activeTab={tab}>
+                    <TabPane tabId="main">
+                        <MainView id_localidad={id} {...data} onChange={this.onChange} />
+                    </TabPane>
+                    <TabPane tabId="firma">
+                        <FirmaElectronicaForm {...data_firma} onChange={this.onChangeFirma} onChangeFile={this.onChangeFile} />
+                    </TabPane>
+                    <TabPane tabId="correos">
+                        <ConfiguracionCorreoForm {...data_correo} onChange={this.onChangeCorreo}/>
+                    </TabPane>
+                </TabContent>
             </EditPage>                    
         )
     }

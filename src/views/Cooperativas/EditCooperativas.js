@@ -1,4 +1,5 @@
 import React from 'react'
+import { TabContent, TabPane } from 'reactstrap'
 import { FormGroup, Input, Select, Label, Tabs, DualList, FormElementValidate, FormValidate, EditPage } from 'temeforest'
 import { baseurl, getParameter, getResults } from 'utils/url'
 import { fileToBase64 } from 'utils/file'
@@ -29,31 +30,23 @@ class MainView extends React.Component {
     state = {
         tab : 1
     }
-
-    constructor(props){
-        super(props)
-        this.toggleAndenes = this.toggleAndenes.bind(this)
-    }
-
     optionsGremios = {
         url : `${baseurl}/gremio/`,
         labelName: 'nombre',
         valueName: 'id'
     }
-
     tipos = [
         {
             value : 1,
             label : 'Intraprovicional'
         }
     ]
-
     sino = [
         { value : 'si', label : 'Si' },
         { value : 'no', label : 'No' }
     ]
 
-    changeTab(tab){
+    changeTab = (tab) => {
         this.setState({ tab })
     }
 
@@ -67,7 +60,7 @@ class MainView extends React.Component {
         }
     }
 
-    toggleAndenes(selected){
+    toggleAndenes = (selected) => {
         let localidades_andenes = this.props.localidades_andenes
         localidades_andenes[this.state.tab] = selected
         this.props.onChange('localidades_andenes', localidades_andenes)
@@ -482,27 +475,27 @@ class EditCooperativas extends React.Component {
                 parseData={this.parseData}
             >
                 <Tabs tab={tab} tabs={this.tabs} onClickTab={this.changeTab}/>
-                { tab === 'main' && 
-                    <MainView 
-                        {...data} 
-                        onChange={this.onChange}
-                        tabsLocalidades={tabsLocalidades} 
-                        localidades={localidades} 
-                    />
-                }
-                {
-                  tab === 'firma' &&
-                    <FirmaElectronicaForm {...data_firma}
-                        onChange={this.onChangeFirma}
-                        onChangeFile={this.onChangeFile}
-                    />
-                }
-                {
-                  tab === 'correos' &&
-                    <ConfiguracionCorreoForm {...data_correo}
-                        onChange={this.onChangeCorreo}
-                    />
-                }
+                <TabContent activeTab={tab}>
+                    <TabPane tabId="main">
+                        <MainView
+                            {...data} 
+                            onChange={this.onChange}
+                            tabsLocalidades={tabsLocalidades}
+                            localidades={localidades} 
+                        />
+                    </TabPane>
+                    <TabPane tabId="firma">
+                        <FirmaElectronicaForm {...data_firma}
+                            onChange={this.onChangeFirma}
+                            onChangeFile={this.onChangeFile}
+                        />
+                    </TabPane>
+                    <TabPane tabId="correos">
+                        <ConfiguracionCorreoForm {...data_correo}
+                            onChange={this.onChangeCorreo}
+                        />
+                    </TabPane>
+                </TabContent>
             </EditPage>
         )
     }
