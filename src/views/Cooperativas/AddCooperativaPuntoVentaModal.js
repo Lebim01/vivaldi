@@ -16,14 +16,6 @@ class AddCooperativaPuntoVentaModal extends React.Component {
         valueName: 'id'
     }
 
-    constructor(props){
-        super(props)
-        this.toggle = this.toggle.bind(this)
-        this.onChange = this.onChange.bind(this)
-        this.guardar = this.guardar.bind(this)
-        this.getCooperativaName = this.getCooperativaName.bind(this)
-    }
-
     componentWillReceiveProps(props){
         const { id, cooperativa, cooperativa_nombre, punto_emision_tasa, secuencia_tasa, punto_emision_boleto, secuencia_boleto, punto_emision_nota_credito, secuencia_nota_credito } = props
         this.setState({
@@ -33,13 +25,13 @@ class AddCooperativaPuntoVentaModal extends React.Component {
         })
     }
 
-    toggle() {
+    toggle = () => {
         if(this.props.toggle){
             this.props.toggle()
         }
     }
 
-    getCooperativaName(e){
+    getCooperativaName = (e) => {
         let options = e.target.options
         for(let i in options){
             let opt = options[i]
@@ -59,7 +51,7 @@ class AddCooperativaPuntoVentaModal extends React.Component {
         })
     }
 
-    guardar(){
+    guardar = () => {
         const required = ['cooperativa', 'punto_emision_tasa', 'secuencia_tasa', 'punto_emision_boleto', 'secuencia_boleto', 'punto_emision_nota_credito', 'secuencia_nota_credito']
         let errors = []
         for(let i in required){

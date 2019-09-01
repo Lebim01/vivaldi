@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormGroup, Input, Select, Label, DualList, EditPage, FormValidate } from 'temeforest'
+import { FormGroup, Input, Select, Label, DualList, EditPage, FormValidate, FormElementValidate } from 'temeforest'
 import { baseurl, getParameter, getResults } from 'utils/url'
 import axios from 'axios'
 import 'react-dual-listbox/lib/react-dual-listbox.css';
@@ -30,35 +30,36 @@ class MainView extends React.Component {
         valueName: 'id'
     }
 
-    constructor(props){
-        super(props)
-        this.toggleAndenes = this.toggleAndenes.bind(this)
-        this.getLocalidades = this.getLocalidades.bind(this)
-        this.getNiveles = this.getNiveles.bind(this)
-        this.getAndenes = this.getAndenes.bind(this)
-    }
-
     componentDidMount(){
-        this.getAndenes()
         this.getLocalidades()
     }
-
 
     onChange = name => (e) => {
         if(this.props.onChange){
             this.props.onChange(name, e.target.value)
+
+            if(name === 'localidad'){
+                this.getNiveles(e.target.value)
+            }
+
+            if(name === 'localidad_nivel'){
+                // limpiar andenes seleccionados
+                this.props.onChange('andenes', [])
+                // cargar nueva lista de andenes
+                this.getAndenes(e.target.value)
+            }
         }
     }
 
-    getAndenes = async ()  => {
-        const { data } = await axios.get(`${baseurl}/anden/`)
+    getAndenes = async (localidad_nivel)  => {
+        const { data } = await axios.get(`${baseurl}/anden/?localidad_nivel=${localidad_nivel}`)
         let options = [...data.results.map((r) => { return { value : r.id, label : r.descripcion } })]
         this.setState({
             andenes : options
         })
     }
 
-    toggleAndenes(selected){
+    toggleAndenes = (selected) => {
         this.props.onChange('andenes', selected)
     }
 
@@ -98,24 +99,39 @@ class MainView extends React.Component {
         return (
             <div>
                 <FormValidate className="mt-4 form-horizontal">
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Localidad</Label>
-                        <div className="col-sm-5">
-                            <Select onChange={this.onChangeLocalidad('localidad')} value={this.props.localidad} asyncOptions={this.optionsLocalidades} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Nivel</Label>
-                        <div className="col-sm-5">
-                            <Select onChange={this.onChange('localidad_nivel')} value={this.props.localidad_nivel} options={niveles} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">N&uacute;mero</Label>
-                        <div className="col-sm-5">
-                            <Input onChange={this.onChange('numero')} value={this.props.numero} />
-                        </div>
-                    </FormGroup>
+                    <FormElementValidate
+                        label={{text:'Localidad'}}
+                        input={{
+                            name : 'localidad',
+                            element: <Select onChange={this.onChangeLocalidad('localidad')} value={this.props.localidad} asyncOptions={this.optionsLocalidades} />
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
+                    <FormElementValidate
+                        label={{text:'Nivel'}}
+                        input={{
+                            name : 'localidad_nivel',
+                            element: <Select onChange={this.onChange('localidad_nivel')} value={this.props.localidad_nivel} options={this.props.localidad ? niveles : this.seleccione} />
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
+                    <FormElementValidate
+                        label={{text:'Número'}}
+                        input={{
+                            name : 'numero',
+                            element: <Input onChange={this.onChange('numero')} value={this.props.numero} />
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
                     <FormGroup className="row">
                         <Label className="col-sm-4">Andenes Disponibles</Label>
                         <Label className="col-sm-4">Andenes Habilitados</Label>
@@ -143,11 +159,6 @@ class EditPuertas extends React.Component {
         data : {}
     }
 
-    constructor(props){
-        super(props)
-        this.onChange = this.onChange.bind(this)
-    }
-
     componentDidMount(){
         let id = getParameter('id')
         if(id){
@@ -163,7 +174,7 @@ class EditPuertas extends React.Component {
         })
     }
 
-    onChange(name, value){
+    onChange = (name, value) => {
         let data = this.state.data
         data[name] = value
         this.setState({
