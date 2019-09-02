@@ -6,10 +6,6 @@ import { baseurl } from 'utils/url'
 class AddParadaModal extends React.Component {
 
     state = { errors: [], data: {} }
-    constructor(props){
-        super(props)
-        this.guardar = this.guardar.bind(this)
-    }
 
     optionsParada = {
         url : `${baseurl}/ciudad/`,
@@ -36,13 +32,13 @@ class AddParadaModal extends React.Component {
         })
     }
 
-    toggle() {
+    toggle = () => {
         if(this.props.toggle){
             this.props.toggle()
         }
     }
 
-    guardar(){
+    guardar = () => {
         const { ciudad, ciudad_nombre, orden_llegada, tarifa_normal, tarifa_media, duracion, index, id } = this.state.data
         if(this.props.guardar){
             let _exito = this.props.guardar({ ciudad, ciudad_nombre, orden_llegada, tarifa_media, tarifa_normal, duracion, index, id})

@@ -76,10 +76,10 @@ class MainView extends React.Component {
         this.props.onChange('paradas', paradas)
     }
 
-    toggleModal = (data = {}) => {
+    toggleModal = (data = null) => {
         let _modal = this.state.modal
         _modal.show = !_modal.show
-        _modal.data = data
+        _modal.data = data || {}
         this.setState({
             modal : _modal
         })
@@ -164,7 +164,7 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <h4>
                             Paradas
-                            <Button style={{marginLeft: 10}} onClick={this.toggleModal}>
+                            <Button style={{marginLeft: 10}} onClick={() => this.toggleModal()}>
                                 <i className="fa fa-plus"></i>
                             </Button>
                         </h4>
