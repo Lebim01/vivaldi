@@ -11,12 +11,7 @@ const urlFront = '/cooperativas/punto-venta'
 
 class RecordRow extends React.Component {
 
-    constructor(props){
-        super(props)
-        this.delete = this.delete.bind(this)
-    }
-
-    delete(){
+    delete = () => {
         if(this.props.delete){
             this.props.delete()
         }
@@ -54,13 +49,6 @@ class MainView extends React.Component {
         labelName: 'nombre',
         valueName : 'id'
     }
-    constructor(props){
-        super(props)
-        this.addCooperativa = this.addCooperativa.bind(this)
-        this.agregarCooperativa = this.agregarCooperativa.bind(this)
-        this.deleteCooperativa = this.deleteCooperativa.bind(this)
-        this.editCooperativa = this.editCooperativa.bind(this)
-    }
 
     onChange = name => (e) => {
         if(this.props.onChange){
@@ -72,7 +60,7 @@ class MainView extends React.Component {
         }
     }
 
-    addCooperativa(){
+    addCooperativa = () => {
         this.setState({
             modal : {
                 ...this.state.modal,
@@ -89,7 +77,7 @@ class MainView extends React.Component {
         })
     }
 
-    agregarCooperativa(data){
+    agregarCooperativa = (data) => {
         let puntoventa_cooperativas = this.props.puntoventa_cooperativas
         if(data.id){
             for(let i = 0; i < puntoventa_cooperativas.length; i++){
@@ -128,7 +116,7 @@ class MainView extends React.Component {
         })
     }
 
-    generateHexadecimal(){
+    generateHexadecimal = () => {
         this.props.onChange('api_key', generateHexadecimal(32))
     }
 
@@ -213,7 +201,14 @@ class MainView extends React.Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        { puntoventa_cooperativas.map((r, i) => <RecordRow {...r} onDoubleClick={() => this.editCooperativa(r)} key={i} delete={() => this.deleteCooperativa(i)} />) }
+                                        { puntoventa_cooperativas.map((r, i) => 
+                                            <RecordRow 
+                                                {...r} 
+                                                key={i}
+                                                onDoubleClick={() => this.editCooperativa(r)} 
+                                                delete={() => this.deleteCooperativa(i)} 
+                                            />
+                                        ) }
                                     </tbody>
                                 </table>
                             </div>

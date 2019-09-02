@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, FormGroup, Input, Label, EditPage, Select, FormElementValidate, FormValidate } from 'temeforest'
 import EditPersona from './../Cooperativas/EditPersona'
-import { baseurl, baseMediaUrl, getParameter } from 'utils/url'
+import { baseurl, getParameter, canDownload, downloadFile } from 'utils/url'
 import { fileToBase64 } from 'utils/file'
 import { confirmEndpoint } from 'utils/dialog'
 import axios from 'axios'
@@ -12,15 +12,9 @@ import AddRolCooperativa from './AddRolCooperativa'
 const endpoint = 'usuario'
 const urlFront = '/usuarios/usuarios'
 
-
 class RowRol extends React.Component {
 
-    constructor(props){
-        super(props)
-        this.delete = this.delete.bind(this)
-    }
-
-    delete(){
+    delete = () => {
         if(this.props.delete){
             this.props.delete()
         }
@@ -42,12 +36,7 @@ class RowRol extends React.Component {
 
 class RowCooperativa extends React.Component {
 
-    constructor(props){
-        super(props)
-        this.delete = this.delete.bind(this)
-    }
-
-    delete(){
+    delete = () => {
         if(this.props.delete){
             this.props.delete()
         }
@@ -111,15 +100,6 @@ class EditUsuarios extends React.Component {
         })
     }
 
-    setValue = (name, value) => {
-        this.setState({
-            data : {
-                ...this.state.data,
-                [name] : value
-            }
-        })
-    }
-
     onChange = name => (e) => {
         let data = {
             [name] : e.target.value
@@ -137,6 +117,7 @@ class EditUsuarios extends React.Component {
             }
         })
     }
+
     onChangeData = (name, value) => {
         this.setState({
             data : {
@@ -173,15 +154,6 @@ class EditUsuarios extends React.Component {
         this.onChangeData('persona', data)
     }
 
-    addRol = () => {
-        this.setState({
-            modal_rol : {
-                ...this.state.modal_rol,
-                show : true
-            }
-        })
-    }
-
     // rol
     toggleModal = (show = null) => {
         this.setState({
@@ -193,10 +165,13 @@ class EditUsuarios extends React.Component {
     }
 
     agregarRol = (data) => {
-        let roles = this.state.data.roles
-        roles.push(data)
-        this.onChangeData('roles', roles)
-        this.toggleModal(false)
+        // if rol is not selected
+        if(!this.state.data.roles.some((r) => Number(r.id) === Number(data.id))){
+            let roles = this.state.data.roles
+            roles.push(data)
+            this.onChangeData('roles', roles)
+            this.toggleModal(false)
+        }
     }
 
     deleteRol = async (index) => {
@@ -213,15 +188,6 @@ class EditUsuarios extends React.Component {
     }
 
     // cooperativa
-    addCooperativa = () => {
-        this.setState({
-            modal_cooperativa : {
-                ...this.state.modal_cooperativa,
-                show : true
-            }
-        })
-    }
-
     toggleModalCooperativa = (show = null) => {
         let _modal = this.state.modal_cooperativa
         _modal.show = !_modal.show
@@ -262,32 +228,18 @@ class EditUsuarios extends React.Component {
             Swal.fire('Subir archivo', 'Hubo algún problema al querer subir el archivo', 'error')
         }
     }
+
     _onChangeFile = (e) => {
         if(this.onChangeFile){
             this.onChangeFile(e.target.files[0])
         }
     }
-    UploadFile = (e) => {
+
+    uploadFile = (e) => {
         let el = document.getElementById("documentation");
         if (el) {
             el.click();
         }
-    }
-    DownloadFile = (url) => {
-        if (url){
-            let file_path = baseMediaUrl + url;
-            let a = document.createElement('A');
-            a.target = '_blank';
-            a.download = true;
-            a.href = file_path;
-            a.click()
-        }
-    }
-    canDownload = (url) => {
-        if(url && url.includes('none')){
-            return true
-        }
-        return false
     }
 
     resetPassword = async () => {
@@ -350,7 +302,7 @@ class EditUsuarios extends React.Component {
                                     <div className="col-sm-1">&nbsp;</div>
                                     <Label className="col-sm-3 col-sm-offset-3">
                                         Roles
-                                        <Button size="sm" style={{marginLeft:5}} onClick={this.addRol}>
+                                        <Button size="sm" style={{marginLeft:5}} onClick={() => this.toggleModal(true)}>
                                             <i className="fa fa-plus"></i>
                                         </Button>
                                     </Label>
@@ -380,7 +332,7 @@ class EditUsuarios extends React.Component {
                                     <div className="col-sm-1">&nbsp;</div>
                                     <Label className="col-sm-3 col-sm-offset-3">
                                         Cooperativas
-                                        <Button size="sm" style={{marginLeft:5}} onClick={this.addCooperativa}>
+                                        <Button size="sm" style={{marginLeft:5}} onClick={() => this.toggleModalCooperativa(true)}>
                                             <i className="fa fa-plus"></i>
                                         </Button>
                                     </Label>
@@ -407,11 +359,18 @@ class EditUsuarios extends React.Component {
                                     <div className="col-sm-3"></div>
                                     <div className="col-sm-3 text-right">
                                         <input id="documentation" type="file" style={{display:'none'}} onChange={this._onChangeFile}/>
-                                        <Button type="success" style={{marginRight:5}} onClick={this.UploadFile}>Subir Documentación</Button>
+                                        <Button type="success" style={{marginRight:5}} onClick={this.uploadFile}>Subir Documentación</Button>
                                     </div>
                                     <div className="col-sm-3" style={{marginLeft: 5}}>
                                         { this.state.data.documentacion_url &&
-                                            <Button type="success" style={{marginLeft:5}} onClick={() => this.DownloadFile(this.state.data.documentacion_url)} disabled={this.canDownload(this.state.data.documentacion_url)}>Ver Documentación</Button>
+                                            <Button 
+                                                type="success" 
+                                                style={{marginLeft:5}} 
+                                                onClick={() => downloadFile(this.state.data.documentacion_url)} 
+                                                disabled={canDownload(this.state.data.documentacion_url)}
+                                            >
+                                                Ver Documentación
+                                            </Button>
                                         }
                                     </div>
                                 </FormGroup>

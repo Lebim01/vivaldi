@@ -77,12 +77,7 @@ class Asiento extends React.Component {
 
 class Piso extends React.Component {
 
-    constructor(props){
-        super(props)
-        this.toggleActivate = this.toggleActivate.bind(this)
-    }
-
-    toggleActivate(indexAsiento){
+    toggleActivate = (indexAsiento) => {
         const { asientos_desactivados } = this.props
         if(asientos_desactivados.includes(indexAsiento)){
             let indexDesactivado = asientos_desactivados.indexOf(indexAsiento)
@@ -129,13 +124,7 @@ class MainView extends React.Component {
     state = {
         tab : 0
     }
-    constructor(props){
-        super(props)
-        this.onChange = this.onChange.bind(this)
-        this.changeFilas = this.changeFilas.bind(this)
-        this.changeTab = this.changeTab.bind(this)
-    }
-
+    
     onChange = name => (e) => {
         if(this.props.onChange){
             this.props.onChange(name, e.target.value)
@@ -163,7 +152,7 @@ class MainView extends React.Component {
         this.props.onChange('niveles', niveles)
     }
 
-    changeTab(tab){
+    changeTab = (tab) => {
         this.setState({
             tab
         })

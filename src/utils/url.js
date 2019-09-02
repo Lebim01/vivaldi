@@ -47,10 +47,30 @@ async function getResults(url, no_page = false){
     }
 }
 
+function downloadFile(url){
+    if (url){
+        let file_path = baseMediaUrl + url;
+        let a = document.createElement('A');
+        a.target = '_blank';
+        a.download = true;
+        a.href = file_path;
+        a.click()
+    }
+}
+
+function canDownload(url){
+    if(url && url.includes('none')){
+        return true
+    }
+    return false
+}
+
 export {
     baseurl,
     baseMediaUrl,
     getParameter,
     objectToUrl,
-    getResults
+    getResults,
+    downloadFile,
+    canDownload
 }

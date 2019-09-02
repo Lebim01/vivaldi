@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, FormGroup, Input, Label, Select, FormValidate, EditPage } from 'temeforest'
-import { baseurl, baseMediaUrl, getParameter } from 'utils/url'
+import { baseurl, baseMediaUrl, getParameter, canDownload, downloadFile } from 'utils/url'
 import { fileToBase64 } from 'utils/file'
 import axios from 'axios'
 import Swal from 'sweetalert2'
@@ -118,27 +118,11 @@ class EditConductor extends React.Component {
     onChangePersona(data){
         this.onChange('persona', data)
     }
-    UploadFile = (e) => {
+    uploadFile = (e) => {
         let el = document.getElementById("documentation");
         if (el) {
             el.click();
         }
-    }
-    DownloadFile = (url) => {
-        if (url){
-            let file_path = baseMediaUrl + url;
-            let a = document.createElement('A');
-            a.target = '_blank';
-            a.download = true;
-            a.href = file_path;
-            a.click()
-        }
-    }
-    canDownload = (url) => {
-        if(url && url.includes('none')){
-            return true
-        }
-        return false
     }
 
     render(){
@@ -170,9 +154,9 @@ class EditConductor extends React.Component {
                     <FormGroup className="row">
                         <div className="col-sm-12 text-center">
                             <Input id="documentation" type="file" style={{display:'none'}} onChange={this._onChangeFile}/>
-                            <Button type="success" style={{marginRight:5}} onClick={this.UploadFile}>Subir Documentación</Button>
+                            <Button type="success" style={{marginRight:5}} onClick={this.uploadFile}>Subir Documentación</Button>
                             { this.state.data.documentacion_url &&
-                                <Button type="success" style={{marginLeft:5}} onClick={() => this.DownloadFile(this.state.data.documentacion_url)} disabled={this.canDownload(this.state.data.documentacion_url)}>Ver Documentación</Button>
+                                <Button type="success" style={{marginLeft:5}} onClick={() => downloadFile(this.state.data.documentacion_url)} disabled={canDownload(this.state.data.documentacion_url)}>Ver Documentación</Button>
                             }
                         </div>
                     </FormGroup>

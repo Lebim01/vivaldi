@@ -116,7 +116,7 @@ class AddRolCooperativa extends React.Component {
                     </FormValidate>
                 </ModalBody>
                 <ModalFooter>
-                    <Button type="success" onClick={this.guardar} disabled={this.state.loading}>Aceptar</Button>{' '}
+                    <Button type="success" onClick={this.guardar} loading={this.state.loading} disabled={this.state.loading}>Aceptar</Button>{' '}
                     <Button type="secondary" onClick={this.toggle}>Cancelar</Button>
                 </ModalFooter>
             </Modal>

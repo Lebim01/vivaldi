@@ -331,7 +331,7 @@ class EditCooperativas extends React.Component {
     }
 
     getData = async (id) => {
-        const { data } = await axios.get(`${baseurl}/cooperativa/${id}/`)
+        const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/`)
         data.localidades_andenes = {}
         this.setState({
             id,

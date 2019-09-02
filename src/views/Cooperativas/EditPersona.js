@@ -15,11 +15,6 @@ class EditPersona extends React.Component {
         loading : false
     }
 
-    constructor(props){
-        super(props)
-        this.getPersona = this.getPersona.bind(this)
-    }
-
     componentWillReceiveProps(props){
         if(props.id !== this.state.id){
             this.setState({

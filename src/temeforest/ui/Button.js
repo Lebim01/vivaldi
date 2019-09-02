@@ -4,12 +4,6 @@ import { baseMediaUrl } from 'utils/url'
 import { isUndefined } from 'util';
 
 class Button extends React.Component {
-
-    constructor(props){
-        super(props)
-        this.DownloadFile = this.DownloadFile.bind(this)
-    }
-
     DownloadFile = (e) => {
         if (e){
             let file_path = baseMediaUrl + e;
@@ -34,7 +28,7 @@ class Button extends React.Component {
     }
 
     render(){
-        const { type, children, waves, outline, rounded, size, circle, className, download, ...othersProps } = this.props
+        const { type, children, waves, outline, rounded, size, circle, className, download, loading, ...othersProps } = this.props
         const clss_outline = outline ? '-outline' : ''
 
         let classes = []
@@ -54,6 +48,9 @@ class Button extends React.Component {
                 {...othersProps}
                 {...downloadProps}
                 className={`btn waves-effect waves-${waves} btn${clss_outline}-${type} ${classes.join(' ')} ${className}`}>
+                { loading &&
+                    <div style={{height:10}} className="lds-dual-ring"></div>
+                }
                 {children}
             </button>
         )
@@ -78,6 +75,7 @@ Button.defaultProps = {
     rounded : false,
     circle : false,
     className : '',
+    loading: false
 }
 
 export default Button

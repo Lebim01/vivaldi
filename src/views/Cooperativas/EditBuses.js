@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, FormGroup, Input, Label, Select, FormElementValidate, FormValidate, EditPage } from 'temeforest'
-import { baseurl, baseMediaUrl, getParameter } from 'utils/url'
+import { baseurl, getParameter, canDownload, downloadFile } from 'utils/url'
 import { fileToBase64 } from 'utils/file'
 import EditPersona from './EditPersona'
 import axios from 'axios'
@@ -65,24 +65,6 @@ class MainView extends React.Component {
         if(this.props.onChangeFile){
             this.props.onChangeFile(e.target.files[0])
         }
-    }
-
-    DownloadFile = (url) => {
-        if (url){
-            let file_path = baseMediaUrl + url;
-            let a = document.createElement('A');
-            a.target = '_blank';
-            a.download = true;
-            a.href = file_path;
-            a.click()
-        }
-    }
-
-    canDownload = (url) => {
-        if(url && url.includes('none')){
-            return true
-        }
-        return false
     }
 
     render(){
@@ -178,7 +160,7 @@ class MainView extends React.Component {
                                 <i className="fa fa-upload"/> Subir Documentación
                             </Button>
                             { this.props.documentacion_url &&
-                                <Button type="success" style={{marginLeft:5}} onClick={() => this.DownloadFile(this.props.documentacion_url)} disabled={this.canDownload(this.props.documentacion_url)}>
+                                <Button type="success" style={{marginLeft:5}} onClick={() => downloadFile(this.props.documentacion_url)} disabled={canDownload(this.props.documentacion_url)}>
                                     <i className="fa fa-download"/> Ver Documentación
                                 </Button>
                             }

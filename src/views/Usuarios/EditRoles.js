@@ -50,13 +50,8 @@ class _Row extends React.Component {
 }
 
 class MainView extends React.Component {
-    
-    constructor(props){
-        super(props)
-        this.toggle = this.toggle.bind(this)
-    }
 
-    toggle(id, type = ''){
+    toggle = (id, type = '') => {
         if(this.props.togglePermission){
             this.props.togglePermission(id, type)
         }
@@ -155,14 +150,6 @@ class EditRoles extends React.Component {
         all_delete : false
     }
 
-    constructor(props){
-        super(props)
-        this.onChange = this.onChange.bind(this)
-        this.getPermisos = this.getPermisos.bind(this)
-        this.togglePermission = this.togglePermission.bind(this)
-        this.onChangeSelectAll = this.onChangeSelectAll.bind(this)
-    }
-
     componentDidMount(){
         this.getPermisos()
         let id = getParameter('id')
@@ -172,7 +159,7 @@ class EditRoles extends React.Component {
     }
 
     getData = async (id) => {
-        const { data } = await axios.get(`${baseurl}/rol/${id}/`)
+        const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/`)
         this.setState({
             id,
             data
@@ -227,7 +214,7 @@ class EditRoles extends React.Component {
         })
     }
 
-    onChange(name, value){
+    onChange = (name, value) => {
         let data = this.state.data
         data[name] = value
         this.setState({
@@ -235,7 +222,7 @@ class EditRoles extends React.Component {
         })
     }
 
-    togglePermission(id, type){
+    togglePermission = (id, type) => {
         let data = this.state.data
         let permissions = data.permissions
 
@@ -271,7 +258,7 @@ class EditRoles extends React.Component {
         }
     }
 
-    diselectAll(type){
+    diselectAll = (type) => {
         let data = this.state.data
         let permissions = data.permissions
 
@@ -292,7 +279,7 @@ class EditRoles extends React.Component {
         })
     }
 
-    selectAll(type){
+    selectAll = (type) => {
         let data = this.state.data
         let permissions = data.permissions
 
