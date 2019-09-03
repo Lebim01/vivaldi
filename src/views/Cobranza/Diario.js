@@ -56,7 +56,9 @@ class Diario extends React.Component {
 
     fieldCobrar = (row) => {
         return (
-            <Button outline onClick={() => this.cobrar(row)}>Cobrar</Button>
+            <React.Fragment>
+                { row.cobrado === 0 && <Button outline onClick={() => this.cobrar(row)}>Cobrar</Button> }
+            </React.Fragment>
         )
     }
 
