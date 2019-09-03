@@ -21,6 +21,16 @@ input[type=time].no-clear::-webkit-clear-button {
 input[type=time].no-clear.no-ampm::-webkit-datetime-edit-ampm-field {
     display: none;
 }
+@media print
+{    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+    .page-wrapper {
+        margin-left : 0px !important;
+    }
+}
 
 // primer nivel del menu
 .sidebar-nav .active {

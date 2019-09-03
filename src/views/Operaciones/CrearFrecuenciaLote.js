@@ -6,6 +6,8 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import moment from 'moment'
 
+const endpoint = 'frecuencia'
+
 class MainView extends React.Component {
 
     optionsCooperativa = {
@@ -116,14 +118,7 @@ class CrearFrecuenciaLote extends React.Component {
             intervalo_minuto: 10
         }
     }
-
-    constructor(props){
-        super(props)
-        this.onChange = this.onChange.bind(this)
-        this.confirmSave = this.confirmSave.bind(this)
-        this.guardarFrecuencias = this.guardarFrecuencias.bind(this)
-    }
-
+    
     componentDidMount(){
         let id = getParameter('id')
         if(id){
@@ -132,14 +127,14 @@ class CrearFrecuenciaLote extends React.Component {
     }
 
     getData = async (id) => {
-        const { data } = await axios.get(`${baseurl}/frecuencia/${id}`)
+        const { data } = await axios.get(`${baseurl}/${endpoint}/${id}`)
         this.setState({
             id,
             data
         }, ()=> this.setDestino())
     }
 
-    onChange(name, value){
+    onChange = (name, value) => {
         let data = this.state.data
         data[name] = value
         if(name === 'ruta') this.setDestino()
@@ -149,7 +144,7 @@ class CrearFrecuenciaLote extends React.Component {
         })
     }
 
-    setDestino(){
+    setDestino = () => {
         setTimeout(() => {
             let select = document.getElementById('cmb_ruta')
             let index = select.selectedIndex
@@ -211,9 +206,9 @@ class CrearFrecuenciaLote extends React.Component {
         }
     }
 
-    guardarFrecuencia(data){
+    guardarFrecuencia = (data) => {
         return new Promise((resolve, reject) => {
-            axios.post(`${baseurl}/frecuencia/`, data)
+            axios.post(`${baseurl}/${endpoint}/`, data)
             .then(response => {
                 if (response.status !== 200 && response.status !== 201) {
                     throw new Error(response.statusText)

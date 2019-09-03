@@ -2,6 +2,19 @@ import React from 'react'
 import { Card, CardBody, ListPage } from 'temeforest'
 
 class PuntoVenta extends React.Component {
+
+    renderCooperativas(row){
+        return (
+            <ul>
+                {row.puntoventa_cooperativas.map((r, i) => 
+                    <li key={i}>
+                        {r.cooperativa_nombre}
+                    </li>
+                )}
+            </ul>
+        )
+    }
+
     render(){
         return (
             <div className="animated fadeIn">
@@ -17,7 +30,7 @@ class PuntoVenta extends React.Component {
                                     searchFields={['descripcion', '', 'localidad_nombre']}
 
                                     fieldNames={['Nombre', 'Cooperativa', 'Localidad']}
-                                    fields={['descripcion', (row) => <ul>{row.puntoventa_cooperativas.map((r, i) => <li key={i}>{r.cooperativa_nombre}</li>)}</ul>, 'localidad_nombre']}
+                                    fields={['descripcion', this.renderCooperativas, 'localidad_nombre']}
 
                                     endpoint='venta/puntoventa'
                                     urlFront='cooperativas/punto-venta'

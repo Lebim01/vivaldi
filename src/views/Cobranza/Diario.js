@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 class Diario extends React.Component {
     state = {
         dia : moment().format('YYYY-MM-DD'),
-        tipo: 0
+        tipo: 'p'
     }
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
@@ -21,9 +21,9 @@ class Diario extends React.Component {
         valueName: 'id' 
     }
     optionsTipos = [
-        {value:'', label:'Todos'},
-        {value:0, label:'Pendientes'},
-        {value:1, label:'Cobrados'},
+        {value:'t', label:'Todos'},
+        {value:'p', label:'Pendientes'},
+        {value:'c', label:'Cobrados'},
     ]
 
     onChange = name => (e) => {
@@ -62,7 +62,7 @@ class Diario extends React.Component {
 
     fieldImprimir(row){
         return (
-            <a href="#">Imprimir</a>
+            <Button outline >Imprimir</Button>
         )
     }
     
@@ -101,6 +101,7 @@ class Diario extends React.Component {
                     </div>
                 </div>
                 <ListPage
+                    id="report"
                     searchable={false}
 
                     fieldNames={['Cooperativa', 'Localidad', 'Fecha venta', 'Cobrar', 'Saldo', 'Emitido', 'Cobrado', 'N.C', 'Acción']}

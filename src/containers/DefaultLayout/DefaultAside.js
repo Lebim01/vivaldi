@@ -78,7 +78,7 @@ class Aside extends React.Component {
         const { navConfig } = this.props
         let level = 1
         return (
-            <aside className="left-sidebar" data-sidebarbg="skin6">
+            <aside className="left-sidebar no-print" data-sidebarbg="skin6">
                 {/*<!-- Sidebar scroll-->*/}
                 <div className="scroll-sidebar ps-container ps-theme-default ps-active-y" data-ps-id="ef5a9e5f-affc-b01b-55d7-9c375762dbbb">
                     {/*<!-- Sidebar navigation-->*/}

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Input, Select, FormValidate, EditPage, FormElementValidate } from 'temeforest'
-import { baseurl, getParameter } from 'utils/url'
+import { baseurl, getParameter, getResults } from 'utils/url'
 import axios from 'axios'
 
 const endpoint = 'anden'
@@ -37,16 +37,16 @@ class MainView extends React.Component {
     }
 
     getNiveles = async (id)  => {
-        const { data } = await axios.get(`${baseurl}/localidadnivel/?localidad=${id}`)
-        let options = [...this.seleccione, ...data.results.map((r) => { return { value : r.id, label : r.nombre } })]
+        const results = await getResults(`${baseurl}/localidadnivel/?localidad=${id}`)
+        let options = [...this.seleccione, ...results.map((r) => { return { value : r.id, label : r.nombre } })]
         this.setState({
-          niveles : options
+            niveles : options
         })
     }
 
     getLocalidades = async (id)  => {
-        const { data } = await axios.get(`${baseurl}/localidad/`)
-        let options = [...this.seleccione, ...data.results.map((r) => { return { value : r.id, label : r.nombre } })]
+        const results = await getResults(`${baseurl}/localidad/`)
+        let options = [...this.seleccione, ...results.map((r) => { return { value : r.id, label : r.nombre } })]
         this.setState({
             localidades : options
         }, () => {
@@ -116,11 +116,6 @@ class EditAndenes extends React.Component {
         }
     }
 
-    constructor(props){
-        super(props)
-        this.onChange = this.onChange.bind(this)
-    }
-
     componentDidMount(){
         let id = getParameter('id')
         if(id){
@@ -129,14 +124,14 @@ class EditAndenes extends React.Component {
     }
 
     getData = async (id) => {
-        const { data } = await axios.get(`${baseurl}/anden/${id}/`)
+        const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/`)
         this.setState({
             id,
             data
         })
     }
 
-    onChange(name, value){
+    onChange = (name, value) => {
         let data = this.state.data
         data[name] = value
         this.setState({

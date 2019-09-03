@@ -217,7 +217,7 @@ class ListPage extends React.Component {
                     <Col xs="12" md="12">
                         <BlockUi tag="div" blocking={this.state.loading}>
                             <div className="table-responsive">
-                                <table className="table table-hover table-striped footable footable-5 footable-paging footable-paging-center">
+                                <table className="table table-hover table-striped footable footable-5 footable-paging footable-paging-center" id={this.props.id}>
                                     <thead>
                                         { (fieldNames.length > 0) &&
                                             <tr>

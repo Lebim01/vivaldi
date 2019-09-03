@@ -16,20 +16,13 @@ class NivelModal extends React.Component {
 
     }
 
-    constructor(props){
-        super(props)
-        this.toggle = this.toggle.bind(this)
-        this.onChange = this.onChange.bind(this)
-        this.guardar = this.guardar.bind(this)
-    }
-
     componentWillReceiveProps(props){
         this.setState({
             ...props
         })
     }
 
-    toggle() {
+    toggle = () => {
         if(this.props.toggle){
             this.props.toggle()
         }
@@ -41,7 +34,7 @@ class NivelModal extends React.Component {
         })
     }
 
-    guardar(){
+    guardar = () => {
         const { nombre, index, id, puertas } = this.state
         if(this.props.guardar){
             let _exito = this.props.guardar({nombre, index, id, puertas})
@@ -74,7 +67,7 @@ class NivelModal extends React.Component {
         })
     }
 
-    agregarPuerta({ onChange, ...data }){
+    agregarPuerta = ({ onChange, ...data }) => {
         let puertas = this.state.puertas
         let _continue = !puertas.some(
             (r, i) => 
@@ -118,7 +111,7 @@ class NivelModal extends React.Component {
         }
     }
 
-    editPuerta(data){
+    editPuerta = (data) => {
         this.toggleModal({ ...data })
     }
 

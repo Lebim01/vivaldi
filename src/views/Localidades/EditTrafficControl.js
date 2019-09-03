@@ -92,12 +92,6 @@ class EditSilo extends React.Component {
         data : {}
     }
 
-    constructor(props){
-        super(props)
-        this.onChange = this.onChange.bind(this)
-        this.changeTab = this.changeTab.bind(this)
-    }
-
     componentDidMount(){
         let id = getParameter('id')
         if(id){
@@ -106,18 +100,14 @@ class EditSilo extends React.Component {
     }
 
     getData = async (id) => {
-        const { data } = await axios.get(`${baseurl}/trafficControl/${id}/`)
+        const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/`)
         this.setState({
             id,
             data
         })
     }
 
-    changeTab(tab){
-        this.setState({ tab })
-    }
-
-    onChange(name, value){
+    onChange = (name, value) => {
         let data = this.state.data
         data[name] = value
         this.setState({

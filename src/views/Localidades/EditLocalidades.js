@@ -368,7 +368,7 @@ class EditLocalidades extends React.Component {
     }
 
     getData = async (id) => {
-        const { data } = await axios.get(`${baseurl}/localidad/${id}/`)
+        const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/`)
         this.setState({
             id,
             data
@@ -376,7 +376,7 @@ class EditLocalidades extends React.Component {
     }
 
     getDataFirma = async (id) => {
-        const { data } = await axios.get(`${baseurl}/localidad/${id}/firma/`)
+        const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/firma/`)
         let data_firma = this.state.data_firma
         data_firma.file_firma_exist = data.file_firma_exist
         this.setState({
@@ -385,7 +385,7 @@ class EditLocalidades extends React.Component {
     }
 
     getDataCorreo = async (id) => {
-        const { data } = await axios.get(`${baseurl}/localidad/${id}/correo/`)
+        const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/correo/`)
         let data_correo = data
         data_correo.clave = null
         this.setState({
