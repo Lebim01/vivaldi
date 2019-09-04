@@ -194,16 +194,16 @@ export default {
           url : '/#/reportes/panel'
         },
         {
-          name : 'Reporte Tasas Generadas',
-          url : '/#/reportes/reporte-tasas-generadas'
+          name : 'Reporte de clientes frecuentes',
+          url : '/#/reportes/clientes-frecuentes'
+        },
+        {
+          name : 'Reporte Tasas Generadas y vendidas',
+          url : '/#/reportes/tasas-contingencia-general'
         },
         {
           name : 'Vendidos por cooperativa',
           url : '/#/reportes/vendidos-cooperativa'
-        },
-        {
-          name : 'Reporte de clientes frecuentes',
-          url : '/#/reportes/clientes-frecuentes'
         },
         {
           name : 'Reporte boletos y tasas',

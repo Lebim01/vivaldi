@@ -99,12 +99,12 @@ class ReporteTasasContingenciaGeneral extends React.Component {
                                     searchable={false}
                                     
                                     head={[
-                                        [{colSpan:3,title:''},{colspan:2,title:'Generado',style:style_text_center},{colspan:2,title:'Asignado',style:style_text_center},{colspan:2,title:'Saldo',style:style_text_center}],
+                                        [{colSpan:3,title:''},{colSpan:2,title:'Generado',style:style_text_center},{colSpan:2,title:'Asignado',style:style_text_center},{colSpan:2,title:'Saldo',style:style_text_center}],
                                         ['Fecha', 'Concepto', 'Cooperativa', 'Cantidad', 'Total', 'Cantidad', 'Total', 'Cantidad', 'Total']
                                     ]}
-                                    fields={['', '', '', '', '', '', '' , '', '']}
+                                    fields={['fecha', 'concepto', 'cooperativa_nombre', '', '', '', '' , '', '']}
 
-                                    endpoint='recaudaciones/tasas_general'
+                                    endpoint='venta/tasa-contingencia-general'
                                     parameters={this.state}
                                     
                                     history={this.props.history}
