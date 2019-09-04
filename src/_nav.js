@@ -164,95 +164,79 @@ export default {
       icon: 'fas fa-dollar-sign',
       children : [
         {
+          name : 'Diarios',
+          url : '/#/recaudaciones/diario'
+        },
+        {
+          name : 'Pendientes',
+          url : '/#/recaudaciones/pendientes'
+        },
+        {
+          name : 'Consultas',
+          url : '/#/recaudaciones/consultas'
+        },
+        {
           name : 'Tasas contingencia',
           url : '/#/recaudaciones/tasas-contingencia'
-        },
-        {
-          name : 'Venta de tasas',
-          url : '/#/recaudaciones/venta-tasas'
-        },
-        {
-          name : 'Reporte Tasas Vendidas',
-          url : '/#/recaudaciones/reporte-tasas-vendidas'
-        },
-        {
-          name : 'Reporte Tasas Contingencia General',
-          url : '/#/recaudaciones/tasas-contingencia-general'
-        },
-        {
-          name : 'Reporte Tasas Generadas',
-          url : '/#/recaudaciones/reporte-tasas-generadas'
-        },
-        {
-          name : 'Panel de recaudación',
-          url : '/#/recaudaciones/panel'
-        },
-        {
-          name : 'Vendidos por cooperativa',
-          url : '/#/recaudaciones/vendidos-cooperativa'
-        },
-        {
-          name : 'Reporte de clientes frecuentes',
-          url : '/#/recaudaciones/clientes-frecuentes'
-        },
-        {
-          name : 'Reporte boletos y tasas',
-          url : '/#/recaudaciones/reporte-boletos-tasas'
-        },
-        {
-          name : 'Turnos por cooperativa',
-          url : '/#/recaudaciones/turnos-cooperativa'
-        },
-        {
-          name : 'Tasas emitidas vs usadas',
-          url : '/#/recaudaciones/tasas-emitidas-vs-usadas'
-        },
-        {
-          name : 'Tasas usadas por viaje',
-          url : '/#/recaudaciones/tasas-usadas-por-viaje'
-        },
-        {
-          name : 'Recaudación',
-          url : '/#/recaudaciones/recaudacion'
-        },
-        {
-          name : 'Ventas por turno',
-          url : '/#/recaudaciones/ventas-por-turno'
-        },
-        {
-          name : 'Salida de viajes',
-          url : '/#/recaudaciones/salida-de-viajes'
-        },
-        {
-          name : 'Pasajeros por viaje',
-          url : '/#/recaudaciones/pasajeros-por-viaje'
-        },
-        {
-          name : 'Viajes por bus',
-          url : '/#/recaudaciones/viajes-por-bus'
-        },
-        {
-          name : 'Viajes semanales',
-          url : '/#/recaudaciones/viajes-semanales'
-        },
-        {
-          name : 'Viajes por liquidar',
-          url : '/#/recaudaciones/viajes-por-liquidar'
         }
       ]
     },
     {
-      name : 'Cobranza',
-      icon : 'far fa-money-bill-alt',
+      name : 'Reportes',
+      icon : 'fas fa-chart-area',
       children : [
         {
-          name : 'Diarios',
-          url : '/#/cobranza/diario'
+          name : 'Panel de recaudación',
+          url : '/#/reportes/panel'
         },
         {
-          name : 'Consultas',
-          url : '/#/cobranza/consultas'
-        }
+          name : 'Reporte Tasas Generadas',
+          url : '/#/reportes/reporte-tasas-generadas'
+        },
+        {
+          name : 'Vendidos por cooperativa',
+          url : '/#/reportes/vendidos-cooperativa'
+        },
+        {
+          name : 'Reporte de clientes frecuentes',
+          url : '/#/reportes/clientes-frecuentes'
+        },
+        {
+          name : 'Reporte boletos y tasas',
+          url : '/#/reportes/reporte-boletos-tasas'
+        },
+        {
+          name : 'Tasas emitidas vs usadas',
+          url : '/#/reportes/tasas-emitidas-vs-usadas'
+        },
+        {
+          name : 'Tasas usadas por viaje',
+          url : '/#/reportes/tasas-usadas-por-viaje'
+        },
+        {
+          name : 'Ventas por cooperativa',
+          url : '/#/reportes/ventas-por-cooperartiva'
+        },
+        {
+          name : 'Salida de viajes',
+          url : '/#/reportes/salida-de-viajes'
+        },
+        {
+          name : 'Pasajeros por viaje',
+          url : '/#/reportes/pasajeros-por-viaje'
+        },
+        {
+          name : 'Viajes por bus',
+          url : '/#/reportes/viajes-por-bus'
+        },
+        {
+          name : 'Viajes por fecha',
+          url : '/#/reportes/viajes-por-fecha'
+        },
+        {
+          name : 'Logs Auditoria',
+          url : '/#/reportes/logs-auditoria'
+        },
       ]
     },
     {
@@ -262,10 +246,6 @@ export default {
         {
           name : 'Reportes Detallados',
           url : '/#/auditoria/reportes-detallados'
-        },
-        {
-          name : 'Registro de Acciones',
-          url : '/#/auditoria/registro-acciones'
         },
         {
           name : 'Tipo Emisión Cooperativas',

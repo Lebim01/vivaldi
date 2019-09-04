@@ -52,33 +52,36 @@ const SolicitudConductores = React.lazy(() => import('views/Operaciones/Solicitu
 const EditSolicitudConductor = React.lazy(() => import('views/Operaciones/Solicitudes/EditSolicitudConductor'))
 const SolicitudTasaContingencia = React.lazy(() => import('views/Operaciones/Solicitudes/SolicitudTasaContingencia'))
 const EditSolicitudTasaContingencia = React.lazy(() => import('views/Operaciones/Solicitudes/EditSolicitudTasaContingencia'))
+
 /** RECAUDACIONES */
-const PanelRecaudaciones = React.lazy(() => import('views/Recaudaciones/PanelRecaudaciones'))
+const Diario = React.lazy(() => import('views/Recaudaciones/Diario'))
+const Pendientes = React.lazy(() => import('views/Recaudaciones/Pendientes'))
+const Consultas = React.lazy(() => import('views/Recaudaciones/Consultas'))
 const TasasContingencia = React.lazy(() => import('views/Recaudaciones/TasasContingencia'))
-const ReporteClientesFrecuentes = React.lazy(() => import('views/Recaudaciones/ReporteClientesFrecuentes'))
-const VentaTasas = React.lazy(() => import('views/Recaudaciones/VentaTasas'))
-const ReporteTasasVendidas = React.lazy(() => import('views/Recaudaciones/ReporteTasasVendidas'))
-const ReporteTasasGeneradas = React.lazy(() => import('views/Recaudaciones/ReporteTasasGeneradas'))
-const VendidosPorCooperativa = React.lazy(() => import('views/Recaudaciones/VendidosPorCooperativa'))
-const VendidosPorTurno = React.lazy(() => import('views/Recaudaciones/VendidosPorTurno'))
-const ReporteBoletosTasas = React.lazy(() => import('views/Recaudaciones/ReporteBoletosTasas'))
-const ReporteTurnosCooperativa = React.lazy(() => import('views/Recaudaciones/ReporteTurnosCooperativa'))
-const TasasEmitidasVSUsadasCooperativa = React.lazy(() => import('views/Recaudaciones/TasasEmitidasVSUsadasCooperativa'))
-const TasasUsadasPorViaje = React.lazy(() => import('views/Recaudaciones/TasasUsadasPorViaje'))
-const Recaudacion = React.lazy(() => import('views/Recaudaciones/Recaudacion'))
-const ReporteTasasContingenciaGeneral = React.lazy(() => import('views/Recaudaciones/ReporteTasasContingenciaGeneral'))
-const ViajesBus = React.lazy(() => import('views/Recaudaciones/ViajesBus'))
-const ReporteSalidaViajes = React.lazy(() => import('views/Recaudaciones/ReporteSalidaViajes'))
-const ViajesSemanales = React.lazy(() => import('views/Recaudaciones/ViajesSemanales'))
+
+/** REPORTES */
+const PanelRecaudaciones = React.lazy(() => import('views/Reportes/PanelRecaudaciones'))
+const ReporteClientesFrecuentes = React.lazy(() => import('views/Reportes/ReporteClientesFrecuentes'))
+const VentaTasas = React.lazy(() => import('views/Reportes/VentaTasas'))
+const ReporteTasasVendidas = React.lazy(() => import('views/Reportes/ReporteTasasVendidas'))
+const ReporteTasasGeneradas = React.lazy(() => import('views/Reportes/ReporteTasasGeneradas'))
+const VendidosPorCooperativa = React.lazy(() => import('views/Reportes/VendidosPorCooperativa'))
+const VendidosPorTurno = React.lazy(() => import('views/Reportes/VendidosPorTurno'))
+const ReporteBoletosTasas = React.lazy(() => import('views/Reportes/ReporteBoletosTasas'))
+const ReporteTurnosCooperativa = React.lazy(() => import('views/Reportes/ReporteTurnosCooperativa'))
+const TasasEmitidasVSUsadasCooperativa = React.lazy(() => import('views/Reportes/TasasEmitidasVSUsadasCooperativa'))
+const TasasUsadasPorViaje = React.lazy(() => import('views/Reportes/TasasUsadasPorViaje'))
+const Recaudacion = React.lazy(() => import('views/Reportes/Recaudacion'))
+const ReporteTasasContingenciaGeneral = React.lazy(() => import('views/Reportes/ReporteTasasContingenciaGeneral'))
+const ViajesBus = React.lazy(() => import('views/Reportes/ViajesBus'))
+const ReporteSalidaViajes = React.lazy(() => import('views/Reportes/ReporteSalidaViajes'))
+const ViajesSemanales = React.lazy(() => import('views/Reportes/ViajesSemanales'))
+const CobranzaRecaudacion = React.lazy(() => import('views/Reportes/Recaudacion'))
+
 /** FACTURACION */
 const Pasajeros = React.lazy(() => import('views/Facturacion/Pasajeros'))
 const EditPasajero = React.lazy(() => import('views/Facturacion/EditPasajero'))
 const Documentos = React.lazy(() => import('views/Facturacion/Documentos'))
-/** COBRANZA */
-const CobranzaRecaudacion = React.lazy(() => import('views/Cobranza/Recaudacion'))
-const Diario = React.lazy(() => import('views/Cobranza/Diario'))
-const Pendientes = React.lazy(() => import('views/Cobranza/Pendientes'))
-const Consultas = React.lazy(() => import('views/Cobranza/Consultas'))
 
 const Page404 = React.lazy(() => import('views/Pages/Page404'))
 /** DEMOGRAFIA */
@@ -159,30 +162,29 @@ const routes = [
   { path: '/facturacion/pasajeros/edit', name: 'Crear/Editar Pasajero', component: EditPasajero, exact: true },
   { path: '/facturacion/documentos', name: 'Documentos', component: Documentos, exact: true },
 
-  { path: '/recaudaciones/panel', name: 'Panel de Recaudaciones', component: PanelRecaudaciones, exact: true },
-  { path: '/recaudaciones/tasas-contingencia', name: 'Tasas contingencia', component: TasasContingencia, exact: true },
-  { path: '/recaudaciones/venta-tasas', name: 'Tasas contingencia', component: VentaTasas, exact: true },
-  { path: '/recaudaciones/tasas-contingencia-general', name: 'Reporte tasas contingencia general', component: ReporteTasasContingenciaGeneral, exact: true },
-  { path: '/recaudaciones/reporte-tasas-vendidas', name: 'Tasas vendidas', component: ReporteTasasVendidas, exact: true },
-  { path: '/recaudaciones/reporte-tasas-generadas', name: 'Tasas generadas', component: ReporteTasasGeneradas, exact: true },
-  { path: '/recaudaciones/vendidos-cooperativa', name: 'Tasas vendidas', component: VendidosPorCooperativa, exact: true },
-  { path: '/recaudaciones/clientes-frecuentes', name: 'Brand Buttons', component: ReporteClientesFrecuentes, exact: true },
-  { path: '/recaudaciones/reporte-boletos-tasas',  name: 'Reporte Boletos y tasas', component: ReporteBoletosTasas, exact: true },
-  { path: '/recaudaciones/turnos-cooperativa', name: 'Reporte Turnos cooperativa', component: ReporteTurnosCooperativa, exact: true },
-  { path: '/recaudaciones/tasas-emitidas-vs-usadas', name: 'Tasas emitidas VS Usuadas por cooperativa', component: TasasEmitidasVSUsadasCooperativa, exact: true },
-  { path: '/recaudaciones/tasas-usadas-por-viaje', name: 'Tasas usadas por viaje', component: TasasUsadasPorViaje, exact: true },
-  { path: '/recaudaciones/recaudacion', name: 'Recaudación', component: Recaudacion, exact: true },
-  { path: '/recaudaciones/ventas-por-turno', name: 'Ventas por turnos', component: VendidosPorTurno, exact: true },
-  { path: '/recaudaciones/salida-de-viajes', name: 'Reporte de salida de viajes', component: ReporteSalidaViajes, exact: true },
-  { path: '/recaudaciones/pasajeros-por-viaje', name: 'Pasajaros por viaje', component: Page404 },
-  { path: '/recaudaciones/viajes-por-bus', name: 'Viajes por bus', component: ViajesBus, exact: true },
-  { path: '/recaudaciones/viajes-semanales', name: 'Viajes semanales', component: ViajesSemanales, exact: true },
-  { path: '/recaudaciones/viajes-por-liquidar',  name: 'Users', component: Page404 },
+  { path: '/reportes/panel', name: 'Panel de Recaudaciones', component: PanelRecaudaciones, exact: true },
+  { path: '/reportes/venta-tasas', name: 'Tasas contingencia', component: VentaTasas, exact: true },
+  { path: '/reportes/tasas-contingencia-general', name: 'Reporte tasas contingencia general', component: ReporteTasasContingenciaGeneral, exact: true },
+  { path: '/reportes/reporte-tasas-vendidas', name: 'Tasas vendidas', component: ReporteTasasVendidas, exact: true },
+  { path: '/reportes/reporte-tasas-generadas', name: 'Tasas generadas', component: ReporteTasasGeneradas, exact: true },
+  { path: '/reportes/vendidos-cooperativa', name: 'Tasas vendidas', component: VendidosPorCooperativa, exact: true },
+  { path: '/reportes/clientes-frecuentes', name: 'Brand Buttons', component: ReporteClientesFrecuentes, exact: true },
+  { path: '/reportes/reporte-boletos-tasas',  name: 'Reporte Boletos y tasas', component: ReporteBoletosTasas, exact: true },
+  { path: '/reportes/turnos-cooperativa', name: 'Reporte Turnos cooperativa', component: ReporteTurnosCooperativa, exact: true },
+  { path: '/reportes/tasas-emitidas-vs-usadas', name: 'Tasas emitidas VS Usuadas por cooperativa', component: TasasEmitidasVSUsadasCooperativa, exact: true },
+  { path: '/reportes/tasas-usadas-por-viaje', name: 'Tasas usadas por viaje', component: TasasUsadasPorViaje, exact: true },
+  { path: '/reportes/recaudacion', name: 'Recaudación', component: Recaudacion, exact: true },
+  { path: '/reportes/ventas-por-turno', name: 'Ventas por turnos', component: VendidosPorTurno, exact: true },
+  { path: '/reportes/salida-de-viajes', name: 'Reporte de salida de viajes', component: ReporteSalidaViajes, exact: true },
+  { path: '/reportes/pasajeros-por-viaje', name: 'Pasajaros por viaje', component: Page404 },
+  { path: '/reportes/viajes-por-bus', name: 'Viajes por bus', component: ViajesBus, exact: true },
+  { path: '/reportes/viajes-semanales', name: 'Viajes semanales', component: ViajesSemanales, exact: true },
+  { path: '/reportes/viajes-por-liquidar',  name: 'Users', component: Page404 },
 
-  { path: '/cobranza/recaudacion', name: 'Recaudacion', component: CobranzaRecaudacion, exact: true },
-  { path: '/cobranza/diario', name: 'Diario', component: Diario, exact: true },
-  { path: '/cobranza/pendientes', name: 'Pendientes', component: Pendientes, exact: true },
-  { path: '/cobranza/consultas', name: 'Consultas', component: Consultas, exact: true },
+  { path: '/recaudaciones/tasas-contingencia', name: 'Tasas contingencia', component: TasasContingencia, exact: true },
+  { path: '/recaudaciones/diario', name: 'Diario', component: Diario, exact: true },
+  { path: '/recaudaciones/pendientes', name: 'Pendientes', component: Pendientes, exact: true },
+  { path: '/recaudaciones/consultas', name: 'Consultas', component: Consultas, exact: true },
 
   { path: '/auditoria/reportes-detallados', name: 'User Details', component: Page404 },
   { path: '/auditoria/registro-acciones', name: 'Registro de Acciones', component: RegistroAccion },
