@@ -2,6 +2,7 @@ import React from 'react'
 import { ListPage, Label, FormGroup, Select, Input, ReportPage, Button } from 'temeforest'
 import { baseurl } from 'utils/url'
 import { confirmEndpoint } from 'utils/dialog'
+import { Export2DocFromHtml } from 'utils/exportData'
 import moment from 'moment'
 import Swal from 'sweetalert2';
 
@@ -62,9 +63,20 @@ class Diario extends React.Component {
         )
     }
 
-    fieldImprimir(row){
+    toWord(row){
+        Export2DocFromHtml(`
+Localidad: ${row.localidad_nombre}
+Cooperativa: ${row.cooperativa_nombre}
+Fecha venta: ${row.fecha_venta}
+Valor: ${row.emitido}
+        `)
+    }
+
+    fieldImprimir = (row) => {
         return (
-            <Button outline >Imprimir</Button>
+            <React.Fragment>
+                { row.emitido !== 0 && <Button outline onClick={() => this.toWord(row)}>Imprimir</Button> }
+            </React.Fragment>
         )
     }
     

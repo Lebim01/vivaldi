@@ -34,7 +34,51 @@ function htmlToXls(tableHTML){
     }
 }
 
+function Export2Doc(element){
+    
+    let html = document.getElementById(element).innerHTML;
+    Export2DocFromHtml(html)
+    
+}
+
+function Export2DocFromHtml(html){
+    let preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
+    let postHtml = "</body></html>";
+
+    let blob = new Blob(['\ufeff', preHtml+html+postHtml], {
+        type: 'application/msword'
+    });
+
+    // Specify link url
+    let url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
+    
+    // Specify file name
+    let filename = 'document.doc';
+    
+    // Create download link element
+    let downloadLink = document.createElement("a");
+
+    document.body.appendChild(downloadLink);
+    
+    if(navigator.msSaveOrOpenBlob ){
+        navigator.msSaveOrOpenBlob(blob, filename);
+    }else{
+        // Create a link to the file
+        downloadLink.href = url;
+        
+        // Setting the file name
+        downloadLink.download = filename;
+        
+        //triggering the function
+        downloadLink.click();
+    }
+    
+    document.body.removeChild(downloadLink);
+}
+
 export {
     htmlToXlsById,
-    htmlToXls
+    htmlToXls,
+    Export2Doc,
+    Export2DocFromHtml
 }
