@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 
 class Diario extends React.Component {
     state = {
-        dia : moment().format('YYYY-MM-DD'),
+        fecha : moment().format('YYYY-MM-DD'),
         tipo: 'p'
     }
     optionsCooperativa = {
@@ -89,7 +89,7 @@ Valor: ${row.emitido}
                         <FormGroup className="row">
                             <Label className="col-sm-4">Dia</Label>
                             <div className="col-sm-8">
-                                <Input className="no-clear" type="date" onChange={this.onChange('dia')} value={this.state.dia}/>
+                                <Input className="no-clear" type="date" onChange={this.onChange('fecha')} value={this.state.fecha}/>
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
