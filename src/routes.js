@@ -58,11 +58,11 @@ const Diario = React.lazy(() => import('views/Recaudaciones/Diario'))
 const Pendientes = React.lazy(() => import('views/Recaudaciones/Pendientes'))
 const Consultas = React.lazy(() => import('views/Recaudaciones/Consultas'))
 const TasasContingencia = React.lazy(() => import('views/Recaudaciones/TasasContingencia'))
+const VentaTasas = React.lazy(() => import('views/Recaudaciones/VentaTasas'))
 
 /** REPORTES */
 const PanelRecaudaciones = React.lazy(() => import('views/Reportes/PanelRecaudaciones'))
 const ReporteClientesFrecuentes = React.lazy(() => import('views/Reportes/ReporteClientesFrecuentes'))
-const VentaTasas = React.lazy(() => import('views/Reportes/VentaTasas'))
 const ReporteTasasVendidas = React.lazy(() => import('views/Reportes/ReporteTasasVendidas'))
 const ReporteTasasGeneradas = React.lazy(() => import('views/Reportes/ReporteTasasGeneradas'))
 const VendidosPorCooperativa = React.lazy(() => import('views/Reportes/VendidosPorCooperativa'))
@@ -163,7 +163,6 @@ const routes = [
   { path: '/facturacion/documentos', name: 'Documentos', component: Documentos, exact: true },
 
   { path: '/reportes/panel', name: 'Panel de Recaudaciones', component: PanelRecaudaciones, exact: true },
-  { path: '/reportes/venta-tasas', name: 'Tasas contingencia', component: VentaTasas, exact: true },
   { path: '/reportes/tasas-contingencia-general', name: 'Reporte tasas contingencia general', component: ReporteTasasContingenciaGeneral, exact: true },
   { path: '/reportes/reporte-tasas-vendidas', name: 'Tasas vendidas', component: ReporteTasasVendidas, exact: true },
   { path: '/reportes/reporte-tasas-generadas', name: 'Tasas generadas', component: ReporteTasasGeneradas, exact: true },
@@ -185,6 +184,7 @@ const routes = [
   { path: '/recaudaciones/diario', name: 'Diario', component: Diario, exact: true },
   { path: '/recaudaciones/pendientes', name: 'Pendientes', component: Pendientes, exact: true },
   { path: '/recaudaciones/consultas', name: 'Consultas', component: Consultas, exact: true },
+  { path: '/recaudaciones/venta-tasas', name: 'Tasas contingencia', component: VentaTasas, exact: true },
 
   { path: '/auditoria/reportes-detallados', name: 'User Details', component: Page404 },
   { path: '/auditoria/registro-acciones', name: 'Registro de Acciones', component: RegistroAccion },

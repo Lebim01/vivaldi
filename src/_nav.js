@@ -178,6 +178,10 @@ export default {
         {
           name : 'Tasas contingencia',
           url : '/#/recaudaciones/tasas-contingencia'
+        },
+        {
+          name : 'Venta de Tasas',
+          url : '/#/recaudaciones/venta-tasas'
         }
       ]
     },
