@@ -191,10 +191,10 @@ class EditBuses extends React.Component {
     getData = async (id) => {
         const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/`)
         data.propietario = {
-            id: data.propietario
+            id: data.propietario.id
         }
         data.conductor = {
-            id: data.conductor
+            id: data.conductor.id
         }
         this.setState({
             id,
