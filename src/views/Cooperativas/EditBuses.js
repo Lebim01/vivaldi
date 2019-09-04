@@ -149,7 +149,7 @@ class MainView extends React.Component {
                         <div className="col-sm-6">
                             <fieldset>
                                 <legend>Conductor</legend>
-                                <EditPersona lengthCedula={10} onChange={this.onChangeData('conductor')} id={this.props.conductor ? this.props.conductor.id : null} />
+                                <EditPersona lengthCedula={10} onChange={this.onChangeData('conductor')} id={this.props.conductor ? this.props.conductor.id : null} endpoint='conductor' />
                             </fieldset>
                         </div>
                     </div>

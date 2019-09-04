@@ -4,8 +4,6 @@ import { FormGroup, Input, Label, FormElementValidate, FormValidate } from 'teme
 import { baseurl, getResults } from 'utils/url'
 import axios from 'axios'
 
-const endpoint = 'persona'
-
 class EditPersona extends React.Component {
 
     state = {
@@ -56,7 +54,7 @@ class EditPersona extends React.Component {
     }
 
     searchPersona = async (identificacion) => {
-        const results = await getResults(`${baseurl}/${endpoint}/?identificacion=${identificacion}`)
+        const results = await getResults(`${baseurl}/${this.props.endpoint}/?identificacion=${identificacion}`)
         if(results.length > 0){
             this.setState({
                 data : {
@@ -78,7 +76,7 @@ class EditPersona extends React.Component {
 
     getPersona = async (id) => {
         if(id){
-            const { data } = await axios.get(`${baseurl}/${endpoint}/${id}`)
+            const { data } = await axios.get(`${baseurl}/${this.props.endpoint}/${id}/`)
             if(data){
                 this.setState({
                     id : data.id,
@@ -146,7 +144,8 @@ class EditPersona extends React.Component {
 
 EditPersona.defaultProps = {
     readOnly : false,
-    lengthCedula : 13
+    lengthCedula : 10,
+    endpoint: 'persona',
 }
 
 export default EditPersona
