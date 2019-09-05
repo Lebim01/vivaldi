@@ -91,7 +91,7 @@ class RegistroTasa extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-3">Precio</Label>
                             <div className="col-sm-6">
-                                <Input type="number" onChange={this.onChange('precio')} value={this.props.precio} />
+                                <Input type="number" onChange={this.onChange('precio')} value={this.props.precio} readOnly />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
