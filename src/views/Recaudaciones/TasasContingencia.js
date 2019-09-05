@@ -18,7 +18,7 @@ class RegistroTasa extends React.Component {
     optionsLocalidad = {
         url : `${baseurl}/localidad/`,
         labelName: 'nombre',
-        valueName: 'id' 
+        valueName: 'id'
     }
 
     toggle = () => {
@@ -31,7 +31,7 @@ class RegistroTasa extends React.Component {
         let value = e.target.value
         this.setState({
             [name]: value,
-            ...(name === 'bloques' ? { cantidad: value*10 } : {})
+            ...(name === 'bloques' ? { cantidad: value*100 } : {})
         })
     }
 
@@ -97,7 +97,7 @@ class TasasContingencia extends React.Component {
     optionsLocalidad = {
         url : `${baseurl}/localidad/`,
         labelName: 'nombre',
-        valueName: 'id' 
+        valueName: 'id'
     }
 
     onChange = name => (e) => {
@@ -118,12 +118,12 @@ class TasasContingencia extends React.Component {
             openModal: state
         })
     }
-    
+
     render(){
         const { refresh } = this.state
         return (
             <div className="animated fadeIn">
-                <RegistroTasa 
+                <RegistroTasa
                     show={this.state.openModal}
                     toggle={this.toggle}
                 />
@@ -177,7 +177,7 @@ class TasasContingencia extends React.Component {
 
                                     endpoint='venta/generacion_contingencia'
                                     parameters={this.state}
-                                    
+
                                     history={this.props.history}
                                     refresh={refresh}
                                 />
