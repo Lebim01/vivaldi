@@ -3,19 +3,11 @@ import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, B
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import moment from 'moment'
 import { baseurl } from 'utils/url'
+import { confirmEndpoint } from 'utils/dialog'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 
 class RegistroTasa extends React.Component {
-
-    state = {}
-
-    constructor(props){
-        super(props)
-        this.toggle = this.toggle.bind(this)
-        this.onChange = this.onChange.bind(this)
-        this.guardar = this.guardar.bind(this)
-    }
 
     optionsLocalidad = {
         url : `${baseurl}/localidad/`,
@@ -36,7 +28,7 @@ class RegistroTasa extends React.Component {
         {label:'Seleccione', value:''}
     ]
 
-    toggle() {
+    toggle = () => {
         if(this.props.toggle){
             this.props.toggle()
         }
@@ -48,14 +40,13 @@ class RegistroTasa extends React.Component {
         }
     }
 
-    guardar(){
+    guardar = () => {
         if(this.props.guardar){
             this.props.guardar()
         }
     }
 
     render(){
-        console.log(this.props)
         return (
             <Modal isOpen={this.props.show} toggle={this.toggle}>
                 <ModalHeader toggle={this.toggle}>Crear/Editar Venta</ModalHeader>
@@ -109,12 +100,14 @@ class RegistroTasa extends React.Component {
                                 <Input type="number" readOnly value={this.props.precio * this.props.cantidad || 0} />
                             </div>
                         </FormGroup>
-                        <FormGroup className="row">
-                            <Label className="col-sm-3">Motivo de modificación</Label>
-                            <div className="col-sm-6">
-                                <Input onChange={this.onChange('motivo_modificacion')} value={this.props.motivo_modificacion} />
-                            </div>
-                        </FormGroup>
+                        { this.props.id &&
+                            <FormGroup className="row">
+                                <Label className="col-sm-3">Motivo de modificación</Label>
+                                <div className="col-sm-6">
+                                    <Input onChange={this.onChange('motivo_modificacion')} value={this.props.motivo_modificacion} />
+                                </div>
+                            </FormGroup>
+                        }
                     </FormValidate>
                 </ModalBody>
                 <ModalFooter>
@@ -178,32 +171,16 @@ class VentaTasas extends React.Component {
     }
 
     guardarVenta = async () => {
-        Swal.fire({
-            title: 'Confirmar Guardar',
+        const options = {
+            id : this.state.venta.id,
+            endpoint : 'venta/venta_contingencia',
             text : '¿Seguro de guardar?',
-            showCancelButton: true,
-            showLoaderOnConfirm: true,
-            preConfirm: () => {
-                return axios.post(`${baseurl}/venta/venta_contingencia/${this.state.venta.id ? `${this.state.venta.id}/` : ''}`, this.state.venta)
-                .then(response => {
-                    if (response.status !== 200 && response.status !== 201) {
-                        throw new Error(response.statusText)
-                    }
-                    return response
-                })
-                .catch(error => {
-                    Swal.showValidationMessage(
-                        `Petición fallida: ${error}`
-                    )
-                })
-            },
-            allowOutsideClick: () => !Swal.isLoading()
-        }).then((result) => {
-            if (result.value) {
-                Swal.fire('Guardado', 'Guardado exitosamente!', 'success')
-                this.nuevaVenta()
-            }
-        })
+            params : this.state.venta
+        }
+        if(await confirmEndpoint(options)){
+            Swal.fire('Guardado', 'Guardado exitosamente!', 'success')
+            this.nuevaVenta()
+        }
     }
 
     editarVenta = (venta) => {
@@ -247,7 +224,7 @@ class VentaTasas extends React.Component {
                                         <FormGroup className="row">
                                             <Label className="col-sm-3">Cooperativa</Label>
                                             <div className="col-sm-8">
-                                                <Select asyncOptions={this.optionsCooperativa} onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
+                                                <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
                                             </div>
                                         </FormGroup>
                                         <FormGroup className="row">

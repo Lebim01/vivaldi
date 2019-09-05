@@ -41,7 +41,7 @@ class FormularioFiltros extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-4">Cooperativa</Label>
                             <div className="col-sm-8">
-                                <Select onChange={this.onChange('cooperativa')} value={this.props.cooperativa} asyncOptions={this.optionsCooperativas} />
+                                <Select onChange={this.onChange('cooperativa')} defaultOption="Todos" value={this.props.cooperativa} asyncOptions={this.optionsCooperativas} />
                             </div>
                         </FormGroup>
                     </Col>

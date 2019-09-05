@@ -5,6 +5,7 @@ import moment from 'moment'
 import Swal from 'sweetalert2'
 import axios from 'axios'
 import { baseurl } from 'utils/url'
+import { confirmEndpoint } from 'utils/dialog'
 
 class RegistroTasa extends React.Component {
 
@@ -14,20 +15,13 @@ class RegistroTasa extends React.Component {
         localidad: 0
     }
 
-    constructor(props){
-        super(props)
-        this.toggle = this.toggle.bind(this)
-        this.onChange = this.onChange.bind(this)
-        this.guardar = this.guardar.bind(this)
-    }
-
     optionsLocalidad = {
         url : `${baseurl}/localidad/`,
         labelName: 'nombre',
         valueName: 'id' 
     }
 
-    toggle() {
+    toggle = () => {
         if(this.props.toggle){
             this.props.toggle()
         }
@@ -41,35 +35,22 @@ class RegistroTasa extends React.Component {
         })
     }
 
-    guardar(){
+    guardar = async () => {
         const data = this.state
-        Swal.fire({
-            title: 'Confirmar Guardar',
-            text : '¿Seguro de guardar?',
-            showCancelButton: true,
-            showLoaderOnConfirm: true,
-            preConfirm: () => {
-                return axios.post(`${baseurl}/venta/generacion_contingencia/`, data)
-                .then(response => {
-                    if (!(response.status >= 200 && response.status < 300)) {
-                        throw new Error(response.statusText)
-                    }
-                    return response
-                })
-                .catch(error => {
-                    Swal.showValidationMessage(
-                        `Petición fallida: ${error}`
-                    )
-                })
-            },
-            allowOutsideClick: () => !Swal.isLoading()
-        }).then(() => {
+        const endpoint = 'venta/generacion_contingencia'
+        const options = {
+            endpoint,
+            params : data,
+            text : '¿Seguro de guardar?'
+        }
+
+        if(await confirmEndpoint(options)){
             Swal.fire({
                 text : `Guardado`,
                 type : 'success'
             })
             this.toggle()
-        })
+        }
     }
 
     render(){
@@ -113,20 +94,10 @@ class TasasContingencia extends React.Component {
         fecha_fin : moment().format('YYYY-MM-DD'),
         openModal: false
     }
-    optionsCooperativa = {
-        url : `${baseurl}/cooperativa/`,
-        labelName: 'nombre',
-        valueName: 'id' 
-    }
     optionsLocalidad = {
         url : `${baseurl}/localidad/`,
         labelName: 'nombre',
         valueName: 'id' 
-    }
-
-    constructor(props){
-        super(props)
-        this.toggle = this.toggle.bind(this)
     }
 
     onChange = name => (e) => {
@@ -135,13 +106,13 @@ class TasasContingencia extends React.Component {
         })
     }
 
-    buscar(){
+    buscar = () => {
         this.setState({
             refresh: true
         })
     }
 
-    toggle(){
+    toggle = () => {
         let state = !this.state.openModal
         this.setState({
             openModal: state

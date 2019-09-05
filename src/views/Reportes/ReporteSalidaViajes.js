@@ -37,7 +37,7 @@ class ReporteSalidaViajes extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-4">Cooperativa</Label>
                             <div className="col-sm-8">
-                                <Select asyncOptions={this.optionsCooperativa} onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
+                                <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
                             </div>
                         </FormGroup>
                         <FormGroup className="row">

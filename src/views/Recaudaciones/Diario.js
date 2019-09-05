@@ -103,7 +103,7 @@ Valor: ${row.emitido}
                         <FormGroup className="row">
                             <Label className="col-sm-4">Cooperativa</Label>
                             <div className="col-sm-8">
-                                <Select asyncOptions={this.optionsCooperativa} onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
+                                <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
@@ -118,8 +118,8 @@ Valor: ${row.emitido}
                     id="report"
                     searchable={false}
 
-                    fieldNames={['Cooperativa', 'Localidad', 'Fecha venta', 'Cobrar', 'Saldo', 'Emitido', 'Cobrado', 'N.C', 'Acción']}
-                    fields={['cooperativa_nombre', 'localidad_nombre', 'fecha_venta', this.fieldCobrar, 'saldo', 'emitido', 'cobrado', 'nc', this.fieldImprimir]}
+                    fieldNames={['Cooperativa', 'Localidad', 'Fecha venta', 'Cobrar', 'A cobrar', 'Cobrado', 'N.C', 'Acción']}
+                    fields={['cooperativa_nombre', 'localidad_nombre', 'fecha_venta', this.fieldCobrar, 'a_cobrar', 'cobrado', 'nc', this.fieldImprimir]}
 
                     endpoint='venta/cobros-diarios'
                     parameters={this.state}

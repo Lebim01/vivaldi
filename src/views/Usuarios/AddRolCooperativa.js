@@ -22,22 +22,14 @@ class AddRolCooperativa extends React.Component {
         { value : 1, label : 'Boletero' },
         { value : 2, label : 'Supervisor' },
     ]
-
-    constructor(props){
-        super(props)
-        this.toggle = this.toggle.bind(this)
-        this.onChange = this.onChange.bind(this)
-        this.guardar = this.guardar.bind(this)
-        this.getCooperativaName = this.getCooperativaName.bind(this)
-    }
-
-    toggle() {
+    
+    toggle = () => {
         if(this.props.toggle){
             this.props.toggle()
         }
     }
 
-    async getCooperativaName(id){
+    getCooperativaName = async (id) => {
         const { data } = await axios.get(`${baseurl}/cooperativa/${id}`)
         if(data.id){
             return data.nombre
@@ -45,7 +37,7 @@ class AddRolCooperativa extends React.Component {
         return ''
     }
 
-    async getRolName(id){
+    getRolName = async (id) => {
         for(let i in this.optionsRol){
             if(Number(this.optionsRol[i].value) === Number(id))
                 return this.optionsRol[i].label
@@ -72,7 +64,7 @@ class AddRolCooperativa extends React.Component {
         })
     }
 
-    guardar(){
+    guardar = () => {
         const required = ['cooperativa', 'tipo_usuario_puntoventa']
         let errors = []
         for(let i in required){
@@ -104,7 +96,7 @@ class AddRolCooperativa extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-6">Cooperativa</Label>
                             <div className="col-sm-6">
-                                <Select asyncOptions={this.optionsCooperativa} onChange={this.onChange('cooperativa')} value={this.state.data.cooperativa} error={errors.includes('cooperativa')} />
+                                <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.data.cooperativa} error={errors.includes('cooperativa')} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">

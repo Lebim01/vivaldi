@@ -26,7 +26,7 @@ class Select extends React.Component {
         // get results
         const _results = await getResults(url, true)
         // fill options with results
-        let _options = [{value:'',label:'Seleccione'}, ..._results.map((record) => {
+        let _options = [{value:'',label: this.props.defaultOption || 'Seleccione'}, ..._results.map((record) => {
             return {
                 value: record[valueName],
                 label: typeof labelName === 'function' ? labelName(record) : record[labelName]

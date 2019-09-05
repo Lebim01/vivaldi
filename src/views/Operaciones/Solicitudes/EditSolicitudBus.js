@@ -1,6 +1,6 @@
 import React from 'react'
-import { FormGroup, Input, Label, ApprovePage, FormValidate } from 'temeforest'
-import { baseurl, getParameter } from 'utils/url'
+import { FormGroup, Input, Label, ApprovePage, FormValidate, Button } from 'temeforest'
+import { baseurl, getParameter, canDownload, downloadFile } from 'utils/url'
 import axios from 'axios'
 
 const endpoint = 'venta/solicitud_bus'
@@ -97,6 +97,13 @@ class MainView extends React.Component {
                             <Label className="col-sm-3">F. vencimiento matricula</Label>
                             <div className="col-sm-5">
                                 <Input value={this.props.bus_fecha_vencimiento_matricula} readOnly />
+                            </div>
+                        </FormGroup>
+                        <FormGroup className="row">
+                            <div className="col-sm-12 text-center">
+                                { this.props.documentacion_url &&
+                                    <Button type="success" style={{marginLeft:5}} onClick={() => downloadFile(this.props.documentacion_url)} disabled={canDownload(this.props.documentacion_url)}>Ver Documentación</Button>
+                                }
                             </div>
                         </FormGroup>
                     </fieldset>

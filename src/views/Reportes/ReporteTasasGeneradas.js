@@ -8,11 +8,6 @@ class ReporteTasasGeneradas extends React.Component {
         fecha_inicio : moment().format('YYYY-MM-DD'),
         fecha_fin : moment().format('YYYY-MM-DD'),
     }
-    optionsCooperativa = {
-        url : `${baseurl}/cooperativa/`,
-        labelName: 'nombre',
-        valueName: 'id' 
-    }
     optionsLocalidad = {
         url : `${baseurl}/localidad/`,
         labelName: 'nombre',

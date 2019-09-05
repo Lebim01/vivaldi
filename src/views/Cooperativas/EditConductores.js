@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, FormGroup, Input, Label, Select, FormValidate, EditPage } from 'temeforest'
-import { baseurl, baseMediaUrl, getParameter, canDownload, downloadFile } from 'utils/url'
+import { baseurl, getParameter, canDownload, downloadFile } from 'utils/url'
 import { fileToBase64 } from 'utils/file'
 import axios from 'axios'
 import Swal from 'sweetalert2'
@@ -141,7 +141,7 @@ class EditConductor extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Cooperativa</Label>
                         <div className="col-sm-5">
-                            <Select asyncOptions={this.optionsCooperativa} onChange={this._onChange('cooperativa')} value={this.state.data.cooperativa} />
+                            <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this._onChange('cooperativa')} value={this.state.data.cooperativa} />
                         </div>
                     </FormGroup>
                     <EditPersona lengthCedula={10} id={this.state.data.persona ? this.state.data.persona.id : null} readOnly={this.state.data.readOnlyPersona} onChange={this.onChangePersona} />
