@@ -2,15 +2,22 @@ import React from 'react'
 import { ListPage, Label, FormGroup, Select, Input, ReportPage, Button } from 'temeforest'
 import { baseurl } from 'utils/url'
 import { confirmEndpoint } from 'utils/dialog'
-import { Export2DocFromHtml } from 'utils/exportData'
+import { printHtml } from 'utils/exportData'
 import moment from 'moment'
 import Swal from 'sweetalert2';
 
 class Diario extends React.Component {
+
+    constructor(props){
+        super(props)
+        this.table = React.createRef();
+    }
+
     state = {
         fecha : moment().format('YYYY-MM-DD'),
         tipo: 'p'
     }
+
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
         labelName: 'nombre',
@@ -63,19 +70,32 @@ class Diario extends React.Component {
         )
     }
 
+
+    rowToHtml(row){
+        return `
+            <div style="margin-bottom: 10px; border-bottom: 1px solid black;">
+                <p>Localidad: ${row.localidad_nombre}</p>
+                <p>Cooperativa: ${row.cooperativa_nombre}</p>
+                <p>Fecha venta: ${row.fecha_venta}</p>
+                <p>Valor: ${row.a_cobrar}</p>
+            </div>
+        `
+    }
+
     toWord(row){
-        Export2DocFromHtml(`
-Localidad: ${row.localidad_nombre}
-Cooperativa: ${row.cooperativa_nombre}
-Fecha venta: ${row.fecha_venta}
-Valor: ${row.emitido}
-        `)
+        printHtml(this.rowToHtml(row))
+    }
+
+    imprimirTodos(){
+        let rows = this.table.current.state.filtered
+        let html = rows.filter((row) => row.a_cobrar !== 0).map((row) => this.rowToHtml(row)).join('')
+        printHtml(html)
     }
 
     fieldImprimir = (row) => {
         return (
             <React.Fragment>
-                { row.emitido !== 0 && <Button outline onClick={() => this.toWord(row)}>Imprimir</Button> }
+                { row.a_cobrar !== 0 && <Button outline onClick={() => this.toWord(row)}>Imprimir</Button> }
             </React.Fragment>
         )
     }
@@ -113,12 +133,20 @@ Valor: ${row.emitido}
                             </div>
                         </FormGroup>
                     </div>
+                    <div className="col-sm-4 text-right">
+                        
+                    </div>
                 </div>
                 <ListPage
                     id="report"
                     searchable={false}
+                    ref={this.table}
 
-                    fieldNames={['Cooperativa', 'Localidad', 'Fecha venta', 'Cobrar', 'A cobrar', 'Cobrado', 'N.C', 'Acción']}
+                    head={[
+                        ['', '', '', '', '', '', '', <Button outline onClick={() => this.imprimirTodos()}>Imprimir Todos</Button>],
+                        ['Cooperativa', 'Localidad', 'Fecha venta', 'Cobrar', 'A cobrar', 'Cobrado', 'N.C', 'Acción']
+                    ]}
+                    /*fieldNames={['Cooperativa', 'Localidad', 'Fecha venta', 'Cobrar', 'A cobrar', 'Cobrado', 'N.C', 'Acción']}*/
                     fields={['cooperativa_nombre', 'localidad_nombre', 'fecha_venta', this.fieldCobrar, 'a_cobrar', 'cobrado', 'nc', this.fieldImprimir]}
 
                     endpoint='venta/cobros-diarios'

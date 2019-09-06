@@ -76,9 +76,20 @@ function Export2DocFromHtml(html){
     document.body.removeChild(downloadLink);
 }
 
+function printHtml(html){
+    let _window = window.open('','')
+    _window.document.write(html)
+    _window.document.close();
+
+    _window.focus();
+    _window.print()
+    _window.close()
+}
+
 export {
     htmlToXlsById,
     htmlToXls,
     Export2Doc,
-    Export2DocFromHtml
+    Export2DocFromHtml,
+    printHtml
 }

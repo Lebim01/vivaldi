@@ -233,9 +233,10 @@ class ListPage extends React.Component {
                                                             let _title = '', 
                                                                 _props = {}
 
-                                                            if(typeof col === 'string'){
+                                                            if(typeof col === 'string' || React.isValidElement(col)){
                                                                 _title = col
-                                                            }else{
+                                                            }
+                                                            else{
                                                                 const { title, ...props } = col
                                                                 _title = title
                                                                 _props = props
