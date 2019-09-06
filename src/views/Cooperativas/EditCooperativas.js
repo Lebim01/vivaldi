@@ -1,7 +1,7 @@
 import React from 'react'
-import { TabContent, TabPane } from 'reactstrap'
-import { FormGroup, Input, Select, Label, Tabs, DualList, FormElementValidate, FormValidate, EditPage } from 'temeforest'
-import { baseurl, getParameter, getResults } from 'utils/url'
+import { TabContent, TabPane, Badge, UncontrolledTooltip } from 'reactstrap'
+import { Button, FormGroup, Input, Select, Label, Tabs, DualList, FormElementValidate, FormValidate, EditPage } from 'temeforest'
+import { baseurl, baseMediaUrl, getParameter, getResults } from 'utils/url'
 import { fileToBase64 } from 'utils/file'
 import axios from 'axios'
 import Swal from 'sweetalert2'
@@ -46,6 +46,16 @@ class MainView extends React.Component {
         { value : 'no', label : 'No' }
     ]
 
+    tipos_emision = [
+        { value: "FISI", label: "Física" },
+        { value: "ELEC", label: "Electrónica" },   
+    ]
+
+    ambientes_elect = [
+        { value: "1", label: "PRUEBAS" },
+        { value: "2", label: "PRODUCCION" }
+    ]
+
     changeTab = (tab) => {
         this.setState({ tab })
     }
@@ -64,6 +74,19 @@ class MainView extends React.Component {
         let localidades_andenes = this.props.localidades_andenes
         localidades_andenes[this.state.tab] = selected
         this.props.onChange('localidades_andenes', localidades_andenes)
+    }
+
+    _onChangeLogo = (e) => {
+        if(this.props.onChangeLogo){
+            this.props.onChangeLogo(e.target.files[0])
+        }
+    }
+
+    UploadLogo = (e) => {
+        let el = document.getElementById("logo_cooperativa_form");
+        if (el) {
+            el.click();
+        }
     }
 
     render(){
@@ -135,6 +158,21 @@ class MainView extends React.Component {
                             validationMessages: {required:"El campo es requerido"}
                         }}
                     />
+                    <FormGroup className="row">
+                        <Label className="col-sm-3">Logo</Label>
+                        <div className="col-sm-3">
+                            <Input id="logo_cooperativa_form" type="file" style={{display:'none'}} onChange={this._onChangeLogo} helperText="Imagen png o jpg"/>
+                            <Button type="success" style={{marginRight:5}} onClick={this.UploadLogo}>Subir Logo</Button>
+                        </div>
+                        { this.props.logo_url && 
+                        <div className="col-sm-3">
+                            <Badge className="mr-2" id="logo_badge" color="info" href={baseMediaUrl + this.props.logo_url} target="_blank" >Ya existe logo.</Badge>
+                            <UncontrolledTooltip placement="top" target="logo_badge">
+                                Click para ver la imagen
+                            </UncontrolledTooltip>
+                        </div>
+                        }
+                    </FormGroup>
                     <fieldset>
                         <legend>Información tributaria</legend>
                         <FormElementValidate
@@ -199,6 +237,17 @@ class MainView extends React.Component {
                                 validationMessages : { required : 'El campo es requerido', email: "El valor debe ser un correo valido" }
                             }}
                         />
+                        <FormElementValidate
+                            label={{text:'Teléfono'}}
+                            input={{
+                                name : 'telefono',
+                                element: <Input onChange={this.onChange('telefono')} value={this.props.telefono} />
+                            }}
+                            validator={{
+                                validationRules: { required:true},
+                                validationMessages : { required : 'El campo es requerido'}
+                            }}
+                        />
                         <FormGroup className="row">
                             <Label className="col-sm-4">Obligado a llevar contabilidad</Label>
                             <div className="col-sm-1">
@@ -214,6 +263,28 @@ class MainView extends React.Component {
                                 { this.props.contribuyente_especial === 'si' && <Input onChange={this.onChange('contribuyente_especial_detalle')} value={this.props.contribuyente_especial_detalle} /> }
                             </div>
                         </FormGroup>
+                        <FormGroup className="row">
+                            <Label className="col-sm-4">Emisi&oacute;n Facturas</Label>
+                            <div className="col-sm-2">
+                                <Select options={this.tipos_emision} value={this.props.emision_facturacion} onChange={this.onChange('emision_facturacion')} />
+                            </div>
+                        </FormGroup>
+                        { this.props.tieneFacturacionElectronica() &&
+                        <div>
+                          <FormGroup className="row">
+                            <Label className="col-sm-4">Ambiente Facturaci&oacute;n Electr&oacute;nica</Label>
+                            <div className="col-sm-2">
+                                <Select options={this.ambientes_elect} value={this.props.ambiente} onChange={this.onChange('ambiente')} />
+                            </div>
+                          </FormGroup>
+                          <FormGroup className='row'>
+                            <Label className='col-sm-3'>Leyenda Ride</Label>
+                            <div className='col-sm-5'>
+                                <Input type='textarea' rows='9' value={this.props.leyenda_ride} onChange={this.onChange('leyenda_ride')} />
+                            </div>
+                          </FormGroup>
+                        </div>
+                        }
                     </fieldset>
                     <fieldset>
                         <legend>Venta</legend>
@@ -287,6 +358,8 @@ class EditCooperativas extends React.Component {
             usa_api : false,
             contribuyente_especial : 'no',
             obligado_contabilidad : 'no',
+            emision_facturacion : "FISI",
+            ambiente: "1", 
         },
         data_firma: {
             file_firma : '',
@@ -313,13 +386,13 @@ class EditCooperativas extends React.Component {
             text : 'Crear/Editar Cooperativa'
         },
         {
+            link : 'correos',
+            text : 'Configuración de correos'
+        },
+        {
             link : 'firma',
             text : 'Firma electronica'
         },
-        {
-            link : 'correos',
-            text : 'Configuración de correos'
-        }
     ]
 
     componentDidMount(){
@@ -333,6 +406,7 @@ class EditCooperativas extends React.Component {
     getData = async (id) => {
         const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/`)
         data.localidades_andenes = {}
+        data.logo = null
         this.setState({
             id,
             data
@@ -453,6 +527,25 @@ class EditCooperativas extends React.Component {
         })
     }
 
+    onChangeLogo = async (value) => {
+        try {
+            let data = this.state.data
+            data.logo = await fileToBase64(value)
+            this.setState({
+                data
+            })
+        }catch(e){
+            Swal.fire('Subir archivo', 'Hubo algún problema al querer subir el archivo', 'error')
+        }
+    }
+
+    tieneFacturacionElectronica = () =>{
+        if ( this.state.data.emision_facturacion === "ELEC"){
+            return true
+        }
+        return false
+    }
+
     parseData(data){
         data.obligado_contabilidad = data.obligado_contabilidad === 'Si'    
         data.contribuyente_especial = data.contribuyente_especial === 'Si'
@@ -462,8 +555,27 @@ class EditCooperativas extends React.Component {
 
     render(){
         const { id, data, tab, tabsLocalidades, localidades, data_firma, data_correo } = this.state
+        let tabs = this.tabs
+        let facturacionElectronicaTab = {
+            link : 'firma',
+            text : 'Firma electronica'
+        }
         data.firma_electronica = data_firma
         data.configuracion_correo = data_correo
+
+        if (this.tieneFacturacionElectronica()){
+            let found = tabs.find((el)=>{
+                return el.link === 'firma'
+            })
+            if (!found) {
+                tabs.push(facturacionElectronicaTab)
+            }
+        } else {
+            tabs = tabs.filter((val, idx) => {
+                return val.link !== 'firma'
+            })
+        }
+
         return(
             <EditPage 
                 title={`${id ? 'Editar' : 'Crear'} Cooperativas`} 
@@ -474,14 +586,16 @@ class EditCooperativas extends React.Component {
                 history={this.props.history}
                 parseData={this.parseData}
             >
-                <Tabs tab={tab} tabs={this.tabs} onClickTab={this.changeTab}/>
+                <Tabs tab={tab} tabs={tabs} onClickTab={this.changeTab}/>
                 <TabContent activeTab={tab}>
                     <TabPane tabId="main">
                         <MainView
                             {...data} 
                             onChange={this.onChange}
                             tabsLocalidades={tabsLocalidades}
-                            localidades={localidades} 
+                            localidades={localidades}
+                            onChangeLogo={this.onChangeLogo} 
+                            tieneFacturacionElectronica={this.tieneFacturacionElectronica}  
                         />
                     </TabPane>
                     <TabPane tabId="firma">
