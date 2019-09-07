@@ -4,11 +4,15 @@ import { store } from 'store/auth'
 import { baseurl } from 'utils/url'
 import axios from 'axios'
 
+import BlockUi from 'react-block-ui';
+import 'react-block-ui/style.css';
+
 class Login2 extends React.Component {
 
-    constructor(props){
-        super(props)
-        this.login = this.login.bind(this)
+    state = {
+        loading: false,
+        error: '',
+        noValid: false
     }
 
     login = async (e) => {
@@ -17,7 +21,7 @@ class Login2 extends React.Component {
         if(!user || !pass){
             this.setState({ noValid : true })
         }else{
-            this.setState({ noValid : false })
+            this.setState({ noValid : false, loading: true })
             try {
                 let { data } = await axios.post(`${baseurl}/token-auth/`, { username: user, password: pass })
                 if(data.token){
@@ -31,7 +35,8 @@ class Login2 extends React.Component {
             catch(e){
                 this.setState({
                     error : 'Usuario o Contraseña invalidos',
-                    noValid : true
+                    noValid : true,
+                    loading: false
                 })
             }
         }
@@ -57,26 +62,28 @@ class Login2 extends React.Component {
                         </div>
                         <div className="row">
                             <div className="col-12">
-                                <form className="form-horizontal m-t-20" id="loginform" action="index.html" onSubmit={false}>
-                                    <div className="input-group mb-3">
-                                        <div className="input-group-prepend">
-                                            <span className="input-group-text" id="basic-addon1"><i className="ti-user"></i></span>
+                                <BlockUi tag="div" blocking={this.state.loading}>
+                                    <form className="form-horizontal m-t-20" id="loginform" action="index.html" onSubmit={false}>
+                                        <div className="input-group mb-3">
+                                            <div className="input-group-prepend">
+                                                <span className="input-group-text" id="basic-addon1"><i className="ti-user"></i></span>
+                                            </div>
+                                            <input type="text" className="form-control form-control-lg" placeholder="Usuario" aria-label="Usuario" aria-describedby="basic-addon1" onChange={this.onChange('user')} />
                                         </div>
-                                        <input type="text" className="form-control form-control-lg" placeholder="Usuario" aria-label="Usuario" aria-describedby="basic-addon1" onChange={this.onChange('user')} />
-                                    </div>
-                                    <div className="input-group mb-3">
-                                        <div className="input-group-prepend">
-                                            <span className="input-group-text" id="basic-addon2"><i className="ti-pencil"></i></span>
+                                        <div className="input-group mb-3">
+                                            <div className="input-group-prepend">
+                                                <span className="input-group-text" id="basic-addon2"><i className="ti-pencil"></i></span>
+                                            </div>
+                                            <input type="password" className="form-control form-control-lg" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="basic-addon1" onChange={this.onChange('pass')} />
                                         </div>
-                                        <input type="password" className="form-control form-control-lg" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="basic-addon1" onChange={this.onChange('pass')} />
-                                    </div>
-                                    
-                                    <div className="form-group text-center">
-                                        <div className="col-xs-12 p-b-20">
-                                            <button className="btn btn-block btn-lg btn-info" type="submit" onClick={(e) => this.login(e)}>Ingresar</button>
+                                        
+                                        <div className="form-group text-center">
+                                            <div className="col-xs-12 p-b-20">
+                                                <button className="btn btn-block btn-lg btn-info" type="submit" onClick={(e) => this.login(e)}>Ingresar</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                </BlockUi>
                             </div>
                         </div>
                     </div>
