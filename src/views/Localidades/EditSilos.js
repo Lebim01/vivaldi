@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormGroup, Input, Label, DualList, EditPage, FormElementValidate, FormValidate } from 'temeforest'
+import { FormGroup, Input, Label, DualList, EditPage, FormElementValidate, FormValidate, Select } from 'temeforest'
 import { baseurl, getParameter, getResults } from 'utils/url'
 import axios from 'axios'
 import 'react-dual-listbox/lib/react-dual-listbox.css';
@@ -28,16 +28,15 @@ class MainView extends React.Component {
         valueName: 'id'
     }
 
-    constructor(props){
-        super(props)
-        this.getAndenes = this.getAndenes.bind(this)
-        this.toggleAndenes = this.toggleAndenes.bind(this)
-    }
-
     componentDidMount(){
         this.getAndenes()
     }
 
+    componentDidUpdate(prevProps){
+        if(prevProps.localidad !== this.props.localidad){
+            this.getAndenes()
+        }
+    }
 
     onChange = name => (e) => {
         if(this.props.onChange){
@@ -46,14 +45,14 @@ class MainView extends React.Component {
     }
 
     getAndenes = async ()  => {
-        const results = await getResults(`${baseurl}/anden/`)
+        const results = await getResults(`${baseurl}/anden/?localidad=${this.props.localidad}`)
         let options = [...results.map((r) => { return { value : r.id, label : r.descripcion } })]
         this.setState({
             andenes : options
         })
     }
 
-    toggleAndenes(selected){
+    toggleAndenes = (selected) => {
         this.props.onChange('andenes', selected)
     }
 
@@ -77,7 +76,7 @@ class MainView extends React.Component {
                         label={{text:'Localidad'}}
                         input={{
                             name : 'localidad',
-                            element: <Input type="password" onChange={this.onChange('localidad')} value={this.props.localidad} />
+                            element: <Select asyncOptions={this.optionsLocalidades} onChange={this.onChange('localidad')} value={this.props.localidad} />
                         }}
                         validator={{
                             validationRules: {required:true},

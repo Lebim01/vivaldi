@@ -26,6 +26,56 @@ class ListAdenes extends React.Component {
     }
 }
 
+class SeleccionarSistemaExterno extends React.Component {
+
+    options = [
+        {label:'Boleteria3000', value:'Boleteria3000'},
+        {label:'Otro', value: -1},
+    ]
+
+    state = {
+        options: '',
+        otroSistema: ''
+    }
+
+    onChangeOption = e => {
+        let value = e.target.value
+        this.setState({
+            option: value,
+            otroSistema: ''
+        })
+        if(value === -1){
+            this.props.onChange('')
+        }else{
+            this.props.onChange(value)
+        }
+    }
+
+    onChangeSistema = e => {
+        let value = e.target.value
+        this.setState({
+            otroSistema: value
+        })
+        if(this.props.onChange){
+            this.props.onChange(value)
+        }
+    }
+
+    render(){
+        return (
+            <FormGroup className="row">
+                <Label className="col-sm-3">Sistema externo</Label>
+                <div className="col-sm-3">
+                    <Select value={this.state.option} options={this.options} onChange={this.onChangeOption} />
+                    { Number(this.state.option) === -1 &&
+                        <Input placeholder="Nombre" value={this.state.otroSistema} onChange={this.onChangeSistema} />
+                    }
+                </div>
+            </FormGroup>
+        )
+    }
+}
+
 class MainView extends React.Component {
     state = {
         tab : 1
@@ -66,6 +116,12 @@ class MainView extends React.Component {
             if(e.target.type === 'checkbox'){
                 value = !this.props[name]
             }
+            this.props.onChange(name, value)
+        }
+    }
+
+    onChangeData = (name, value) => {
+        if(this.props.onChange){
             this.props.onChange(name, value)
         }
     }
@@ -319,12 +375,7 @@ class MainView extends React.Component {
                             </div>
                         </FormGroup>
                         { this.props.usa_api &&
-                            <FormGroup className="row">
-                                <Label className="col-sm-3">Sistema externo</Label>
-                                <div className="col-sm-3">
-                                    <Select options={[{label:'Boleteria3000',value:''}]} />
-                                </div>
-                            </FormGroup>
+                            <SeleccionarSistemaExterno onChange={(value) => this.onChangeData('sistema_externo', value)} />
                         }
                     </fieldset>
 
@@ -423,7 +474,7 @@ class EditCooperativas extends React.Component {
     }
 
     getDataCorreo = async (id) => {
-        const { data } = await axios.get(`${baseurl}/cooperativa/${id}/correo/`)
+        const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/correo/`)
         let data_correo = data
         data_correo.clave = null
         this.setState({

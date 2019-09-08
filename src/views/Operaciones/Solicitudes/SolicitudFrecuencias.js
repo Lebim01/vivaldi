@@ -1,9 +1,10 @@
 import React from 'react'
 import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button } from 'temeforest'
-import moment from 'moment'
 import { baseurl } from 'utils/url'
+import moment from 'moment'
 
 class SolicitudFrecuencias extends React.Component {
+
     state = {
         fecha : moment().format('YYYY-MM-DD'),
         estado: 0
@@ -26,6 +27,16 @@ class SolicitudFrecuencias extends React.Component {
         { value:1, label: 'Aprobado' },
         { value:2, label: 'Rechazado' },
     ]
+
+    componentWillMount(){
+        this.interval = setInterval(() => {
+            this.buscar()
+        }, 30 * 1000)
+    }
+
+    componentWillUnmount(){
+        clearInterval(this.interval)
+    }
 
     onChange = name => (e) => {
         this.setState({
