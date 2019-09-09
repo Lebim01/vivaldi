@@ -12,17 +12,17 @@ class Viajes extends React.Component {
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
         labelName: 'nombre',
-        valueName: 'id' 
+        valueName: 'id'
     }
     optionsBus = {
         url : `${baseurl}/bus/`,
         labelName: 'nombre',
-        valueName: 'id' 
+        valueName: 'id'
     }
     optionsLocalidad = {
         url : `${baseurl}/localidad/`,
         labelName: 'nombre',
-        valueName: 'id' 
+        valueName: 'id'
     }
     tipoFrecuencia = [
         { value: '', label: 'Seleccione' },
@@ -101,8 +101,8 @@ class Viajes extends React.Component {
                                 <div className="col-sm-12">
                                     <ListPage
                                         searchable={false}
-                                        fieldNames={['Frecuencia','Cooperativa', 'Disco', 'Ruta', 'Salida']}
-                                        fields={['frecuencia_nombre', 'cooperativa_nombre', 'bus_nombre', 'ruta_nombre', 'hora_salida']}
+                                        fieldNames={['Frecuencia','Cooperativa', 'Disco', 'Ruta']}
+                                        fields={['frecuencia_nombre', 'cooperativa_nombre', 'bus_nombre', 'ruta_nombre']}
 
                                         endpoint='viaje'
                                         parameters={this.state}
