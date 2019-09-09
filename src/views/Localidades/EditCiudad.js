@@ -49,7 +49,7 @@ class EditCiudad extends React.Component {
                             label={{text:'Nombre'}}
                             input={{
                                 name : 'nombre',
-                                element: <Input onChange={this.onChange('nombre')} value={this.props.nombre} />
+                                element: <Input onChange={this.onChange('nombre')} value={this.state.data.nombre} />
                             }}
                             validator={{
                                 validationRules: {required:true},
