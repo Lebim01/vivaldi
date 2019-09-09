@@ -11,7 +11,7 @@ class SolicitudBuses extends React.Component {
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
         labelName: 'nombre',
-        valueName: 'id' 
+        valueName: 'id'
     }
     optionsEstado = [
         { value:0, label: 'Pendiente' },
@@ -90,12 +90,12 @@ class SolicitudBuses extends React.Component {
                                     searchable={false}
 
                                     fieldNames={['Cooperativa', 'Fecha', 'Descripión', 'Tipo de Solicitud', 'Estado']}
-                                    fields={['cooperativa_nombre', 'fecha', 'descripcion', 'tipo_solicitud_nombre', 'estado']}
+                                    fields={['cooperativa_nombre', 'fecha', 'descripcion', 'tipo_solicitud_nombre', 'estado_nombre']}
 
                                     endpoint='venta/solicitud_bus'
                                     urlFront='operaciones/solicitudes/buses'
                                     parameters={this.state}
-                                    
+
                                     history={this.props.history}
                                     refresh={refresh}
                                 />
