@@ -248,6 +248,10 @@ export default {
       icon : 'fas fa-eye',
       children : [
         {
+          name: 'Registro Acciones',
+          url: '/#/auditoria/registro-acciones'
+        },
+        {
           name : 'Reportes Detallados',
           url : '/#/auditoria/reportes-detallados'
         },
