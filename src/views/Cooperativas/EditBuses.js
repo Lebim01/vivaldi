@@ -5,6 +5,7 @@ import { fileToBase64 } from 'utils/file'
 import EditPersona from './EditPersona'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import moment from 'moment'
 
 const endpoint = 'bus'
 const urlFront = '/cooperativas/buses'
@@ -113,7 +114,7 @@ class MainView extends React.Component {
                         }}
                         validator={{
                             validationRules: { required : true, number: true, minRangeNumber : 1, maxRangeNumber : 200 },
-                            validationMessages : { number : "El valor debe ser un número" }
+                            validationMessages : { required : 'El valor es requerido', number : "El valor debe ser un número" , minRangeNumber: 'El valor no puede ser menor a 1', maxRangeNumber: 'El valor no puede ser mayor a 200'}
                         }}
                     />
                     <FormGroup className="row">
@@ -135,10 +136,12 @@ class MainView extends React.Component {
                             element: <Input type="number" onChange={this.onChange('anio_fabricacion')} value={this.props.anio_fabricacion} />
                         }}
                         validator={{
-                            validationRules: { required : true, number: true, minRangeDate : '1950-01-01' },
-                            validationMessages : { number : "El valor debe ser un número" }
+                            validationRules: { required : true, number: true, minRangeNumber : 1950, maxRangeNumber : moment().year()+1 },
+                            validationMessages : { required: 'El campo es requerido', number : "El valor debe ser un número", minRangeNumber: 'El año no puede ser menor a 1950', maxRangeNumber: `El año no puede ser mayor a ${moment().year()+1}` }
                         }}
                     />
+
+                    {/** PROPIETARIO Y CONDUCTOR  */}
                     <div className="row">
                         <div className="col-sm-6">
                             <fieldset>

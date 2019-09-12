@@ -25,6 +25,17 @@ class MainView extends React.Component {
             <div>
                 <FormValidate className="mt-4 form-horizontal">
                     <FormElementValidate
+                        label={{text:'Descripción'}}
+                        input={{
+                            name : 'descripcion',
+                            element: <Input onChange={this.onChange('descripcion')} value={this.props.descripcion} />
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
+                    <FormElementValidate
                         label={{text:'Localidad'}}
                         input={{
                             name : 'localidad',

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, FormGroup, Input, Label, Tabs, FormValidate, EditPage } from 'temeforest'
+import { Button, FormGroup, Input, Label, Tabs, FormValidate, EditPage, FormElementValidate } from 'temeforest'
 import { baseurl, getParameter } from 'utils/url'
 import axios from 'axios'
 
@@ -95,13 +95,19 @@ class Piso extends React.Component {
         for(let i = 0; i < filas; i++) { _filas.push(1) }
 
         return (
-            <div>
-                <FormGroup className="row">
-                    <Label className="col-sm-3">Filas</Label>
-                    <div className="col-sm-5">
-                        <Input type="number" min="1" onChange={(e) => this.props.onChange('filas', e.target.value)} value={filas} />
-                    </div>
-                </FormGroup>
+            <div>  
+                <FormElementValidate
+                    label={{text:'Filas'}}
+                    input={{
+                        name : 'filas',
+                        element: <Input type="number" min="1" max="50" onChange={(e) => this.props.onChange('filas', e.target.value)} value={filas} />
+                    }}
+                    validator={{
+                        validationRules: { required : true, number: true, minRangeNumber : 1, maxRangeNumber : 50 },
+                        validationMessages : { required: 'El campo es requerido', number : "El valor debe ser un número", minRangeNumber: 'El valor no puede ser menor a 1', maxRangeNumber: 'El valor no puede ser mayor a 50' }
+                    }}
+                />
+
                 <div style={{width:234, border:'1px solid black', margin:'10px auto'}}>
                     { _filas.map((j, index) => 
                         <div className="fila" key={index}>
@@ -139,17 +145,21 @@ class MainView extends React.Component {
     }
 
     changeFilas = (filas) => {
-        let niveles = this.props.niveles
-        let piso = this.state.tab
+        if(filas <= 50){
+            let niveles = this.props.niveles
+            let piso = this.state.tab
 
-        // set empty nivel
-        if(!niveles[piso]){
-            niveles[piso] = emptyNivel
+            // set empty nivel
+            if(!niveles[piso]){
+                niveles[piso] = {
+                    ...emptyNivel
+                }
+            }
+            
+            niveles[piso].asientos = getAsientos(niveles[piso], Number(filas))
+            niveles[piso].filas = Number(filas)
+            this.props.onChange('niveles', niveles)
         }
-
-        niveles[piso].asientos = getAsientos(niveles[piso], Number(filas))
-        niveles[piso].filas = Number(filas)
-        this.props.onChange('niveles', niveles)
     }
 
     changeTab = (tab) => {
@@ -191,8 +201,8 @@ class EditDistribucionAsientos extends React.Component {
         data:{
             nombre: '',
             niveles : [
-                emptyNivel,
-                emptyNivel
+                { ...emptyNivel },
+                { ...emptyNivel }
             ]
         }, 
         pisos:[{ link:'0', text:'Piso 1' }, { link:'1', text:'Piso 2' }]

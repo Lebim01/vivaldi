@@ -106,6 +106,7 @@ class EditUsuarios extends React.Component {
         }
         if(name === 'tipo'){
             data.roles = []
+            data.roles_cooperativa = []
             if(e.target.value === 1){
                 data.documentacion = 'none'
             }

@@ -5,6 +5,8 @@ import { confirmEndpoint } from 'utils/dialog'
 import Swal from 'sweetalert2'
 import FormElementValidate from './FormElementValidate'
 
+import EditPersona from 'views/Cooperativas/EditPersona'
+
 const defaultBtnDelete = {
     show : true,
     text : 'Eliminar',
@@ -26,8 +28,10 @@ class EditPage extends React.Component {
 
     componentDidMount(){
         let hasElement = this.getChildrenWithType(this.props.children, FormElementValidate)
+        let hasPersona = this.getChildrenWithType(this.props.children, EditPersona)
+
         this.setState({
-            hasValidations : hasElement
+            hasValidations : hasElement || hasPersona
         })
     }
 
@@ -89,7 +93,7 @@ class EditPage extends React.Component {
             }, () => {
                 setTimeout(() => {
                     resolve(this.state.isFormValidationErrors)
-                }, 2000)
+                }, 1000)
             })
         })
     }
@@ -103,7 +107,7 @@ class EditPage extends React.Component {
         if(hasValidations){
             isFormValidationErrors = await this.evaluateErrors()
         }
-
+        
         if (!isFormValidationErrors || !hasValidations){
             this.confirmSave()
         }
@@ -117,6 +121,7 @@ class EditPage extends React.Component {
             if (child && this.typesAreEqual(type, child.type)) {
                 has = true;
             }
+
             if (child && child.props && child.props.children){
                 if(this.getChildrenWithType(child.props.children, type)){
                     has = true
