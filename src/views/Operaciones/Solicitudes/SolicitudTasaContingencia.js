@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListPage, Card, CardBody, CardTitle, FormGroup, Input, Label, Select } from 'temeforest'
+import { ListPage, Card, CardBody, CardTitle, FormGroup, Input, Label, Select, Button } from 'temeforest'
 import moment from 'moment'
 import { baseurl } from 'utils/url'
 
@@ -45,6 +45,10 @@ class SolicitudTasaContingencia extends React.Component {
         })
     }
 
+    add = () => {
+        window.location = '/#/operaciones/solicitudes/tasas-contingencia/add'
+    }
+
     render(){
         return (
             <div className="animated fadeIn">
@@ -52,7 +56,12 @@ class SolicitudTasaContingencia extends React.Component {
                     <div className="col-sm-12">
                         <Card>
                             <CardBody>
-                                <CardTitle>Solicitud de tasa de contingencia</CardTitle>
+                                <CardTitle>
+                                    Solicitud de tasa de contingencia
+                                    <Button className="float-right" onClick={this.add}>
+                                        <i className="fas fa-plus" /> Solicitud
+                                    </Button>
+                                </CardTitle>
                                 <br/>
                                 <div className="row">
                                     <div className="col-sm-6">

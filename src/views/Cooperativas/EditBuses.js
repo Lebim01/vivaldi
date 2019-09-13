@@ -140,6 +140,28 @@ class MainView extends React.Component {
                             validationMessages : { required: 'El campo es requerido', number : "El valor debe ser un número", minRangeNumber: 'El año no puede ser menor a 1950', maxRangeNumber: `El año no puede ser mayor a ${moment().year()+1}` }
                         }}
                     />
+                    <FormElementValidate
+                        label={{text:'Venc. Matricula'}}
+                        input={{
+                            name : 'fecha_emision_matricula',
+                            element: <Input type="date" onChange={this.onChange('fecha_emision_matricula')} value={this.props.fecha_emision_matricula} />
+                        }}
+                        validator={{
+                            validationRules: { required : true },
+                            validationMessages : { required: 'El campo es requerido' }
+                        }}
+                    />
+                    <FormElementValidate
+                        label={{text:'Emis. Matricula'}}
+                        input={{
+                            name : 'fecha_vencimiento_matricula',
+                            element: <Input type="date" onChange={this.onChange('fecha_vencimiento_matricula')} value={this.props.fecha_vencimiento_matricula} />
+                        }}
+                        validator={{
+                            validationRules: { required : true },
+                            validationMessages : { required: 'El campo es requerido' }
+                        }}
+                    />
 
                     {/** PROPIETARIO Y CONDUCTOR  */}
                     <div className="row">
@@ -152,7 +174,7 @@ class MainView extends React.Component {
                         <div className="col-sm-6">
                             <fieldset>
                                 <legend>Conductor</legend>
-                                <EditPersona lengthCedula={10} onChange={this.onChangeData('conductor')} id={this.props.conductor ? this.props.conductor.id : null} endpoint='conductor' />
+                                <EditPersona lengthCedula={10} onChange={this.onChangeData('conductor')} id={this.props.conductor ? this.props.conductor.id : null} endpoint='conductor' editable={false} />
                             </fieldset>
                         </div>
                     </div>

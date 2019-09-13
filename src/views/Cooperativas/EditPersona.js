@@ -92,7 +92,8 @@ class EditPersona extends React.Component {
 
     render(){
         const { data, readOnly, loading } = this.state
-        let _readOnly = readOnly || loading
+        let _readOnly = (readOnly || loading) && !data.id || !this.props.editable
+
         return (
             <div className="animated fadeIn">
                 <Row>
@@ -113,20 +114,20 @@ class EditPersona extends React.Component {
                                 <FormGroup className="row">
                                     <Label className="col-sm-3">Apellidos</Label>
                                     <div className="col-sm-5">
-                                        <Input readOnly={_readOnly && !data.id} value={data.apellidos} onChange={this.onChange('apellidos')} />
+                                        <Input readOnly={_readOnly} value={data.apellidos} onChange={this.onChange('apellidos')} />
                                     </div>
                                 </FormGroup>
                                 <FormGroup className="row">
                                     <Label className="col-sm-3">Nombres</Label>
                                     <div className="col-sm-5">
-                                        <Input readOnly={_readOnly && !data.id} value={data.nombres} onChange={this.onChange('nombres')} />
+                                        <Input readOnly={_readOnly} value={data.nombres} onChange={this.onChange('nombres')} />
                                     </div>
                                 </FormGroup>
                                 <FormElementValidate
                                     label={{text:'Correo'}}
                                     input={{
                                         name : 'correo',
-                                        element: <Input placeholder="example@gmail.com" readOnly={_readOnly && !data.id} value={data.correo} onChange={this.onChange('correo')} />
+                                        element: <Input placeholder="example@gmail.com" readOnly={_readOnly} value={data.correo} onChange={this.onChange('correo')} />
                                     }}
                                     validator={{
                                         validationRules: { required : true, email: true },
@@ -144,6 +145,7 @@ class EditPersona extends React.Component {
 
 EditPersona.defaultProps = {
     readOnly : false,
+    editable : true,
     lengthCedula : 10,
     endpoint: 'persona',
 }

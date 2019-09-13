@@ -52,6 +52,7 @@ const SolicitudConductores = React.lazy(() => import('views/Operaciones/Solicitu
 const EditSolicitudConductor = React.lazy(() => import('views/Operaciones/Solicitudes/EditSolicitudConductor'))
 const SolicitudTasaContingencia = React.lazy(() => import('views/Operaciones/Solicitudes/SolicitudTasaContingencia'))
 const EditSolicitudTasaContingencia = React.lazy(() => import('views/Operaciones/Solicitudes/EditSolicitudTasaContingencia'))
+const CrearSolicitudTasaContingencia = React.lazy(() => import('views/Operaciones/Solicitudes/CrearSolicitudTasaContingencia'))
 
 /** RECAUDACIONES */
 const Diario = React.lazy(() => import('views/Recaudaciones/Diario'))
@@ -157,6 +158,7 @@ const routes = [
   { path: '/operaciones/solicitudes/conductores/edit', name: 'Crear/Editar Solicutud de Conductores', component: EditSolicitudConductor, exact: true },
   { path: '/operaciones/solicitudes/tasas-contingencia', name: 'Solicitud de Tasas de Contingencia', component: SolicitudTasaContingencia, exact: true },
   { path: '/operaciones/solicitudes/tasas-contingencia/edit', name: 'Crear/Editar Solicitud de Tasas de Contingencia', component: EditSolicitudTasaContingencia, exact: true },
+  { path: '/operaciones/solicitudes/tasas-contingencia/add', name: 'Crear Solicitud de Tasas de Contingencia', component: CrearSolicitudTasaContingencia, exact: true },
 
   { path: '/facturacion/pasajeros', name: 'Pasajeros', component: Pasajeros, exact: true },
   { path: '/facturacion/pasajeros/edit', name: 'Crear/Editar Pasajero', component: EditPasajero, exact: true },

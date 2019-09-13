@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormGroup, Input, Label, ApprovePage, FormValidate, Select } from 'temeforest'
+import { FormGroup, Input, Label, EditPage, FormValidate, Select } from 'temeforest'
 import { baseurl, getParameter } from 'utils/url'
 import axios from 'axios'
 
@@ -18,6 +18,12 @@ class MainView extends React.Component {
         this.props.onChangeCantidadAprobada(e.target.value)
     }
 
+    onChange = name => (e) => {
+        if(this.props.onChange){
+            this.props.onChange(name, e.target.value)
+        }
+    }
+
     render() {
         const { id } = this.props
         const readOnly = !id ? false : true
@@ -27,41 +33,37 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Cooperativa</Label>
                         <div className="col-sm-5">
-                            <Select asyncOptions={this.optionsCooperativa} value={this.props.cooperativa} readOnly={readOnly} />
+                            <Select asyncOptions={this.optionsCooperativa} value={this.props.cooperativa} onChange={this.onChange('cooperativa')} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
                         <Label className="col-sm-3">Tipo de cooperativa</Label>
                         <div className="col-sm-5">
-                            <Input value={this.props.tipo_cooperativa_nombre} readOnly={readOnly} />
+                            <Input value={this.props.tipo_cooperativa_nombre} onChange={this.onChange('tipo_cooperativa_nombre')} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
                         <Label className="col-sm-3">Usuario solicitante</Label>
                         <div className="col-sm-5">
-                            <Input value={this.props.usuario_solicitante_nombre} readOnly={readOnly} />
+                            <Input value={this.props.usuario_solicitante_nombre} onChange={this.onChange('usuario_solicitante_nombre')} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
                         <Label className="col-sm-3">Tipo solicitud</Label>
                         <div className="col-sm-5">
-                            <Input value={this.props.tipo_solicitud_nombre} readOnly={readOnly} />
+                            <Input value={this.props.tipo_solicitud} onChange={this.onChange('tipo_solicitud')} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
                         <Label className="col-sm-3">Descripción</Label>
                         <div className="col-sm-5">
-                            <Input value={this.props.descripcion} readOnly={readOnly} />
+                            <Input value={this.props.descripcion} onChange={this.onChange('descripcion')} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
                         <Label className="col-sm-3">Fecha y hora</Label>
                         <div className="col-sm-5">
-                            { readOnly
-                                 ? <Input value={this.props.fecha} readOnly={readOnly} />
-                                 : <Input type="date" value={this.props.fecha} readOnly={readOnly} />
-                            }
-                            
+                            <Input type="date" value={this.props.fecha} onChange={this.onChange('fecha')} />
                         </div>
                     </FormGroup>
                     <fieldset>
@@ -69,7 +71,7 @@ class MainView extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-3">Cantidad pedida</Label>
                             <div className="col-sm-5">
-                                <Input value={this.props.cantidad_pedida} readOnly={readOnly} />
+                                <Input value={this.props.cantidad_pedida} onChange={this.onChange('cantidad_pedida')} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
@@ -85,7 +87,7 @@ class MainView extends React.Component {
     }
 }
 
-class EditSolicitudTasaContigencia extends React.Component {
+class CrearSolicitudTasaContigencia extends React.Component {
 
     state = {
         cantidad_aprobada: 0,
@@ -114,24 +116,32 @@ class EditSolicitudTasaContigencia extends React.Component {
         })
     }
 
+    onChange = (name, value) => {
+        let data = this.state.data
+        data[name] = value
+        this.setState({
+            data
+        })
+    }
+
     render() {
         const { id, data, cantidad_aprobada } = this.state
         return (
-            <ApprovePage 
+            <EditPage 
                 id={id} 
                 data={data} 
-                title={'Aceptar/Rechazar Solicitud de tasas de contingencia'} 
+                title={'Crear Solicitud de tasas de contingencia'} 
                 history={this.props.history}
                 endpoint={endpoint} 
                 urlFront={urlFront}
-                aprobarParams={{
-                    cantidad_aprobada
+                btnDelete={{
+                    show: false
                 }}
             >
-                <MainView {...data} id={id} cantidad_aprobada={cantidad_aprobada} onChangeCantidadAprobada={this.onChangeCantidadAprobada} />
-            </ApprovePage>
+                <MainView {...data} id={id} cantidad_aprobada={cantidad_aprobada} onChangeCantidadAprobada={this.onChangeCantidadAprobada} onChange={this.onChange} />
+            </EditPage>
         )
     }
 }
 
-export default EditSolicitudTasaContigencia
+export default CrearSolicitudTasaContigencia

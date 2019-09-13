@@ -94,7 +94,7 @@ class AddParadaModal extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-4">Duración</Label>
                             <div className="col-sm-6">
-                                <InputIcon icon={<span>Horas</span>} type="number" onChange={this.onChange('duracion')} value={this.state.data.duracion} error={errors.includes('duracion')} />
+                                <InputIcon icon={<span>Horas</span>} type="number" min="1" onChange={this.onChange('duracion')} value={this.state.data.duracion} error={errors.includes('duracion')} />
                             </div>
                         </FormGroup>
                     </FormValidate>

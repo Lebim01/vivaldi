@@ -11,11 +11,18 @@ const styles = {
 }
 
 class Input extends React.Component {
+
+    onKeyDown(e){
+        if(e.target.type === 'number'){
+            return e.key === 'e' && e.preventDefault()
+        }
+    }
+
     render(){
         const { type, helperText, rightLabel, error, className, value, ...otherProps } = this.props
         return (
             <FormGroup>
-                <input type={type} className={`form-control ${className} ${error ?'is-invalid':''}`} value={value || ''} {...otherProps}/>
+                <input type={type} onKeyDown={this.onKeyDown} className={`form-control ${className} ${error ?'is-invalid':''}`} value={value || ''} {...otherProps}/>
                 { rightLabel && <label style={styles.rightLabel}>{rightLabel}</label> }
                 { helperText && <small className="form-text text-muted"> {helperText} </small> }
             </FormGroup>
