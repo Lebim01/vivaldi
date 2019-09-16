@@ -12,17 +12,17 @@ class RegistroTasa extends React.Component {
     optionsLocalidad = {
         url : `${baseurl}/localidad/`,
         labelName: 'nombre',
-        valueName: 'id' 
+        valueName: 'id'
     }
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
         labelName: 'nombre',
-        valueName: 'id' 
+        valueName: 'id'
     }
     optionsSupervisor = {
-        url : `${baseurl}/usuario/`,
+        url : `${baseurl}/usuario/?tipo=1`,
         labelName: 'username',
-        valueName: 'id' 
+        valueName: 'id'
     }
     optionsVenta = [
         {label:'Seleccione', value:''}
@@ -129,12 +129,12 @@ class VentaTasas extends React.Component {
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
         labelName: 'nombre',
-        valueName: 'id' 
+        valueName: 'id'
     }
     optionsLocalidad = {
         url : `${baseurl}/localidad/`,
         labelName: 'nombre',
-        valueName: 'id' 
+        valueName: 'id'
     }
 
     onChange = name => (e) => {
@@ -196,12 +196,12 @@ class VentaTasas extends React.Component {
             </Button>
         )
     }
-    
+
     render(){
         const { refresh } = this.state
         return (
             <div className="animated fadeIn">
-                <RegistroTasa 
+                <RegistroTasa
                     toggle={this.toggle}
                     guardar={this.guardarVenta}
                     show={this.state.openModal}
@@ -265,7 +265,7 @@ class VentaTasas extends React.Component {
 
                                     endpoint='venta/venta_contingencia'
                                     parameters={this.state}
-                                    
+
                                     history={this.props.history}
                                     refresh={refresh}
                                 />
