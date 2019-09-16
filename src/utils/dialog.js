@@ -16,11 +16,22 @@ async function confirmEndpoint(options){
         ...options
     }
 
+    const getValueResponse = (value) => {
+        if(typeof value === 'string') return value
+        else if(typeof value === 'object') {
+            let keys = Object.keys(value)
+            return keys.map((key) => `${key} : ${value[key].toString()}<br>`).join('')
+        }
+        else if(Array.isArray(value)){
+            return value.join('<br>')
+        }
+    }
+
     const formatErrorResponse = (response) => {
         if(typeof response.data === 'object'){
             let keys = Object.keys(response.data)
             let response_string = keys.map((key) =>
-                `${key} : ${response.data[key]}<br>`
+                `${key} : ${getValueResponse(response.data[key])}<br>`
             ).join('')
             return response_string
         }
