@@ -13,6 +13,12 @@ class MainView extends React.Component {
             <div>
                 <FormValidate className="mt-4 form-horizontal">
                     <FormGroup className="row">
+                        <Label className="col-sm-3">Localidad</Label>
+                        <div className="col-sm-5">
+                            <Input value={this.props.localidad_nombre} readOnly />
+                        </div>
+                    </FormGroup>
+                    <FormGroup className="row">
                         <Label className="col-sm-3">Cooperativa</Label>
                         <div className="col-sm-5">
                             <Input value={this.props.cooperativa_nombre} readOnly />

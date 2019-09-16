@@ -14,6 +14,22 @@ class MainView extends React.Component {
         valueName: 'id'
     }
 
+    optionsLocalidad = {
+        url : `${baseurl}/localidad/`,
+        labelName: 'nombre',
+        valueName: 'id'
+    }
+
+    optionsTipoSolicitud = [
+        { value : 'NUE', label : 'Nuevo' }
+    ]
+
+    optionsEstado = [
+        { value : '0', label : 'Pendiente' },
+        { value : '1', label : 'Aceptado' },
+        { value : '2', label : 'Rechazado' },
+    ]
+
     onChangeCantidadAprobada = (e) => {
         this.props.onChangeCantidadAprobada(e.target.value)
     }
@@ -30,6 +46,12 @@ class MainView extends React.Component {
         return (
             <div>
                 <FormValidate className="mt-4 form-horizontal">
+                    <FormGroup className="row">
+                        <Label className="col-sm-3">Localidad</Label>
+                        <div className="col-sm-5">
+                            <Select asyncOptions={this.optionsLocalidad} value={this.props.localidad} onChange={this.onChange('localidad')} />
+                        </div>
+                    </FormGroup>
                     <FormGroup className="row">
                         <Label className="col-sm-3">Cooperativa</Label>
                         <div className="col-sm-5">
@@ -51,7 +73,7 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Tipo solicitud</Label>
                         <div className="col-sm-5">
-                            <Input value={this.props.tipo_solicitud} onChange={this.onChange('tipo_solicitud')} />
+                            <Select options={this.optionsTipoSolicitud} value={this.props.tipo_solicitud} onChange={this.onChange('tipo_solicitud')} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
@@ -91,7 +113,10 @@ class CrearSolicitudTasaContigencia extends React.Component {
 
     state = {
         cantidad_aprobada: 0,
-        data: {}
+        data: {
+            tipo_solicitud : 'NUE',
+            estado : 0
+        }
     }
 
     onChangeCantidadAprobada = (cantidad_aprobada) => {

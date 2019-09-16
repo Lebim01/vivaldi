@@ -48,6 +48,7 @@ class EditPage extends React.Component {
             endpoint,
             text: '¿Seguro de guardar?',
             params : parsed_data,
+            showResponse : true
         }
 
         if(await confirmEndpoint(options)){
