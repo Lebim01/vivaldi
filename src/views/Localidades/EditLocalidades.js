@@ -58,7 +58,7 @@ class MainView extends React.Component {
 
     tipos_emision = [
         { value: "FISI", label: "Física" },
-        { value: "ELEC", label: "Electrónica" },   
+        { value: "ELEC", label: "Electrónica" },
     ]
 
     ambientes_elect = [
@@ -224,7 +224,7 @@ class MainView extends React.Component {
                             <Input id="logo_localidad_form" type="file" style={{display:'none'}} onChange={this._onChangeLogo} helperText="Imagen png o jpg"/>
                             <Button type="success" style={{marginRight:5}} onClick={this.UploadLogo}>Subir Logo</Button>
                         </div>
-                        { this.props.logo_url && 
+                        { this.props.logo_url &&
                         <div className="col-sm-3">
                             <Badge className="mr-2" id="logo_badge" color="info" href={baseMediaUrl + this.props.logo_url} target="_blank" >Ya existe logo.</Badge>
                             <UncontrolledTooltip placement="top" target="logo_badge">
@@ -235,7 +235,7 @@ class MainView extends React.Component {
                     </FormGroup>
 
                     <fieldset>
-                        <legend>Información tribunaria</legend>
+                        <legend>Información tributaria</legend>
                         <FormElementValidate
                             label={{text:'Establecimiento'}}
                             input={{
@@ -536,7 +536,7 @@ class EditLocalidades extends React.Component {
         }
         data.firma_electronica = data_firma
         data.configuracion_correo = data_correo
-        
+
         if (this.tieneFacturacionElectronica()){
             let found = tabs.find((el)=>{
                 return el.link === 'firma'
@@ -554,7 +554,7 @@ class EditLocalidades extends React.Component {
                 <Tabs tab={tab} tabs={tabs} onClickTab={this.changeTab}/>
                 <TabContent activeTab={tab}>
                     <TabPane tabId="main">
-                        <MainView id_localidad={id} {...data} onChange={this.onChange} 
+                        <MainView id_localidad={id} {...data} onChange={this.onChange}
                                 onChangeLogo={this.onChangeLogo} tieneFacturacionElectronica={this.tieneFacturacionElectronica} />
                     </TabPane>
                     <TabPane tabId="firma">
@@ -564,7 +564,7 @@ class EditLocalidades extends React.Component {
                         <ConfiguracionCorreoForm {...data_correo} onChange={this.onChangeCorreo}/>
                     </TabPane>
                 </TabContent>
-            </EditPage>                    
+            </EditPage>
         )
     }
 }
