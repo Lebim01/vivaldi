@@ -55,6 +55,23 @@ function getAsientos(nivel, _filas, init = false){
 }
 
 class Piso extends React.Component {
+    
+    state = {
+        _filas : []
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        if(this.props.filas !== prevProps.filas){
+            if(this.props.filas !== prevState._filas.length){
+                let _filas = []
+                for(let i = 0; i < this.props.filas; i++) { _filas.push(1) }
+
+                this.setState({
+                    _filas
+                })
+            }
+        }
+    }
 
     toggleActivate = (indexAsiento) => {
         const { asientos_desactivados } = this.props
@@ -69,9 +86,7 @@ class Piso extends React.Component {
 
     render(){
         const { filas, asientos, asientos_desactivados } = this.props
-
-        let _filas = []
-        for(let i = 0; i < filas; i++) { _filas.push(1) }
+        const { _filas } = this.state
 
         return (
             <div>  
