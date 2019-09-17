@@ -1,7 +1,9 @@
 import React from 'react'
-import { Button, FormGroup, Input, Label, Tabs, FormValidate, EditPage, FormElementValidate } from 'temeforest'
+import { FormGroup, Input, Label, Tabs, FormValidate, EditPage, FormElementValidate } from 'temeforest'
 import { baseurl, getParameter } from 'utils/url'
 import axios from 'axios'
+
+import Fila from './DistribucionAsientos/Fila'
 
 const emptyNivel = {
     nombre : '',
@@ -20,59 +22,36 @@ function getAsientos(nivel, _filas, init = false){
     if(filas < _filas || init){
         let filasNuevas = _filas - (init ? 0 : filas)
         for(let i  = 0; i < filasNuevas; i++){
-            _asientos = _asientos.concat([
-                { index : _asientos.length, lado : 'V' },
-                { index : _asientos.length+1, lado : 'P' },
-                { index : _asientos.length+2, lado : 'P' },
-                { index : _asientos.length+3, lado : 'V' }
-            ])
-        }
-    }
-    // menos filas
-    else if(filas > _filas){
-        let filasMenos = filas-_filas
-        _asientos.splice(_asientos.length-(4*filasMenos), (4*filasMenos))
-    }
-    return _asientos
-}
+            if(i === 0 && _asientos.length === 0){ // la primera fila que se agrega al array debe ser la que queda al final (debe ser 5 asientos)
+                _asientos = _asientos.concat([
+                    { index : _asientos.length, lado : 'V' },
+                    { index : _asientos.length+1, lado : 'P' },
+                    { index : _asientos.length+2, lado : 'P' },
+                    { index : _asientos.length+3, lado : 'P' },
+                    { index : _asientos.length+4, lado : 'V' }
+                ])
+            }
 
-
-class DividerAsiento extends React.Component {
-    render(){
-        return (
-            <div style={{display:'inline-block', marginLeft:3, marginRight:3}}>
-                <div style={{height:40, width:40}}>
-                </div>
-            </div>
-        )
-    }
-}
-class Asiento extends React.Component {
-
-    toggleActivate(){
-        if(this.props.toggleActivate){
-            this.props.toggleActivate(this.props.index)
-        }
-    }
-
-    render(){
-        const { type, lado, activate } = this.props
-        let activateCss = {}
-        if(activate){
-            activateCss = {
-                backgroundColor : '#4798e8',
-                borderColor : '#4798e8',
-                color: '#fff'
+            else {
+                _asientos = _asientos.concat([
+                    { index : _asientos.length, lado : 'V' },
+                    { index : _asientos.length+1, lado : 'P' },
+                    { index : _asientos.length+2, lado : 'P' },
+                    { index : _asientos.length+3, lado : 'V' }
+                ])
             }
         }
-        return (
-            <div style={{display:'inline-block', marginLeft:3, marginRight:3}}>
-                <Button type={type} style={{height:40, width:40, ...activateCss}} onClick={this.toggleActivate.bind(this)}>
-                    {lado}
-                </Button>
-            </div>
-        )
     }
+
+    // menos filas (elimina las filas de adelante hacia atras)
+    else if(filas > _filas){
+        // cantidad de filas a eliminar
+        let filasMenos = filas-_filas 
+
+        // elimina la cantidad de asientos equivalente a la cantidad de filas a eliminar multiplicada por 4
+        _asientos.splice(0, (4*filasMenos))
+    }
+    return _asientos
 }
 
 class Piso extends React.Component {
@@ -100,24 +79,24 @@ class Piso extends React.Component {
                     label={{text:'Filas'}}
                     input={{
                         name : 'filas',
-                        element: <Input type="number" min="1" max="50" onChange={(e) => this.props.onChange('filas', e.target.value)} value={filas} />
+                        element: <Input type="number" min="1" max="20" onChange={(e) => this.props.onChange('filas', e.target.value)} value={filas} />
                     }}
                     validator={{
-                        validationRules: { required : true, number: true, minRangeNumber : 1, maxRangeNumber : 50 },
-                        validationMessages : { required: 'El campo es requerido', number : "El valor debe ser un número", minRangeNumber: 'El valor no puede ser menor a 1', maxRangeNumber: 'El valor no puede ser mayor a 50' }
+                        validationRules: { required : true, number: true, minRangeNumber : 1, maxRangeNumber : 20 },
+                        validationMessages : { required: 'El campo es requerido', number : "El valor debe ser un número", minRangeNumber: 'El valor no puede ser menor a 1', maxRangeNumber: 'El valor no puede ser mayor a 20' }
                     }}
                 />
 
                 <div style={{width:234, border:'1px solid black', margin:'10px auto'}}>
                     { _filas.map((j, index) => 
-                        <div className="fila" key={index}>
-                            { asientos.slice(index*4, index*4+4).map((a,i) => (
-                                <div style={{display:'inline-block'}} key={i}>
-                                    <Asiento type={!asientos_desactivados.includes(a.index) ? 'info' : 'danger'} {...a} toggleActivate={this.toggleActivate} />
-                                    { i == 1 && <DividerAsiento /> }
-                                </div>
-                            ))}
-                        </div>
+                        <Fila 
+                            toggleActivate={this.toggleActivate} 
+                            asientos={asientos} 
+                            asientos_desactivados={asientos_desactivados} 
+                            index={index} 
+                            key={index} 
+                            isLast={_filas.length == index+1} 
+                        />
                     )}
                 </div>
             </div>
@@ -128,7 +107,7 @@ class Piso extends React.Component {
 class MainView extends React.Component {
 
     state = {
-        tab : 0
+        tab : '0'
     }
     
     onChange = name => (e) => {
