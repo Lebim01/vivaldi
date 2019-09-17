@@ -218,10 +218,6 @@ export default {
           url : '/#/reportes/tasas-usadas-por-viaje'
         },
         {
-          name : 'Ventas por cooperativa',
-          url : '/#/reportes/ventas-por-cooperartiva'
-        },
-        {
           name : 'Salida de viajes',
           url : '/#/reportes/salida-de-viajes'
         },
@@ -236,11 +232,7 @@ export default {
         {
           name : 'Viajes por fecha',
           url : '/#/reportes/viajes-por-fecha'
-        },
-        {
-          name : 'Logs Auditoria',
-          url : '/#/reportes/logs-auditoria'
-        },
+        }
       ]
     },
     {
