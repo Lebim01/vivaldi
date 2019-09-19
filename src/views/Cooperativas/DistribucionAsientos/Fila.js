@@ -12,9 +12,13 @@ class Fila extends React.Component {
         const { isLast, toggleActivate, asientos, asientos_desactivados, index } = this.props
 
         // quantity seats by hall
-        const cantidad_asientos_fila = isLast ? lastHallSeats : commonHallSeats
+        const cantidad_asientos_fila = isLast 
+            ? lastHallSeats 
+            : commonHallSeats
         // index become seat
-        const asiento_inicio = isLast ? 0 : ((index-1) * commonHallSeats) + lastHallSeats
+        const asiento_inicio = isLast 
+            ? 0 
+            : ((index-1) * commonHallSeats) + lastHallSeats
         // seats object
         const asientos_fila = asientos.slice(asiento_inicio, asiento_inicio + cantidad_asientos_fila)
 

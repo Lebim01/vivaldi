@@ -225,14 +225,25 @@ class MainView extends React.Component {
                             <Button type="success" style={{marginRight:5}} onClick={this.UploadLogo}>Subir Logo</Button>
                         </div>
                         { this.props.logo_url &&
-                        <div className="col-sm-3">
-                            <Badge className="mr-2" id="logo_badge" color="info" href={baseMediaUrl + this.props.logo_url} target="_blank" >Ya existe logo.</Badge>
-                            <UncontrolledTooltip placement="top" target="logo_badge">
-                                Click para ver la imagen
-                            </UncontrolledTooltip>
-                        </div>
+                            <div className="col-sm-3">
+                                <Badge className="mr-2" id="logo_badge" color="info" href={baseMediaUrl + this.props.logo_url} target="_blank" >Ya existe logo.</Badge>
+                                <UncontrolledTooltip placement="top" target="logo_badge">
+                                    Click para ver la imagen
+                                </UncontrolledTooltip>
+                            </div>
                         }
                     </FormGroup>
+                    <FormElementValidate
+                        label={{text:'Tiempo de gracia'}}
+                        input={{
+                            name : 'tiempo_gracia',
+                            element: <Input type="number" onChange={this.onChange('tiempo_gracia')} value={this.props.tiempo_gracia} rightLabel="Minutos" max={60} />
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
 
                     <fieldset>
                         <legend>Información tributaria</legend>
