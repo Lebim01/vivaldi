@@ -39,7 +39,7 @@ class Pasajeros extends React.Component {
 
     render(){
         return (
-            <ReportPage title="Listado de pasajeros" printButtons={false} timestamp={false}>
+            <ReportPage title="Listado de documentos" printButtons={false} timestamp={false}>
                 <div className="row">
                     <div className="col-sm-4">
                         <FormGroup className="row">
@@ -69,25 +69,23 @@ class Pasajeros extends React.Component {
                             </div>
                         </FormGroup>
                     </div>
-                    <div className="col-sm-4">
+                    {/* <div className="col-sm-4">
                         <FormGroup className="row">
                             <Label className="col-sm-3">Forma de pago</Label>
                             <div className="col-sm-8">
                                 <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('forma_de_pago')} value={this.state.forma_de_pago} />
                             </div>
                         </FormGroup>
-                    </div>
+                    </div> */}
                 </div>
                 <ListPage
-                    searchable={true}
-                    searchPlaceholder="Identificación, Apellidos, Nombres"
-                    searchFields={['identificacion', 'apellidos', 'nombres']}
+                    searchable={false}
 
-                    fieldNames={['Identificación', 'Apellidos', 'Nombres']}
-                    fields={['identificacion', 'apellidos', 'nombres']}
+                    fieldNames={['Fecha Emision', 'Tipo Documento', 'Numero', 'Firmado', 'Enviado SRI', 'Autorizado SRI', 'Envio correo']}
+                    fields={['fecha_emision', 'tipo_documento_display', 'numero', 'firmado', 'enviado_sri', 'autorizado_sri', 'enviado']}
 
-                    endpoint='pasajero'
-                    urlFront='facturacion/pasajeros'
+                    endpoint='venta/documentos'
+                    urlFront='/facturacion/documentos'
                     history={this.props.history}
                 />
             </ReportPage>
