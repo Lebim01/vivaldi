@@ -4,7 +4,7 @@ import { Button } from 'temeforest'
 
 class Asiento extends React.Component {
 
-    toggleActivate(){
+    toggleActivate = () => {
         if(this.props.toggleActivate){
             this.props.toggleActivate(this.props.index)
         }
@@ -22,8 +22,9 @@ class Asiento extends React.Component {
         }
         return (
             <div style={{display:'inline-block', marginLeft:3, marginRight:3}}>
-                <Button type={type} style={{height:40, width:40, ...activateCss}} onClick={this.toggleActivate.bind(this)}>
-                    {lado}
+                <Button type={type} style={{height:40, width:40, ...activateCss}} onClick={this.toggleActivate}>
+                    {/*lado*/}
+                    <small>{this.props.index}</small>
                 </Button>
             </div>
         )

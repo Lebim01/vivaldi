@@ -15,10 +15,10 @@ class Fila extends React.Component {
         const cantidad_asientos_fila = isLast 
             ? lastHallSeats 
             : commonHallSeats
+
         // index become seat
-        const asiento_inicio = isLast 
-            ? 0 
-            : ((index-1) * commonHallSeats) + lastHallSeats
+        const asiento_inicio = asientos.length - ( (index+1) * 4) - 1
+
         // seats object
         const asientos_fila = asientos.slice(asiento_inicio, asiento_inicio + cantidad_asientos_fila)
 
@@ -26,9 +26,13 @@ class Fila extends React.Component {
 
         return (
             <div className="fila" style={styles}>
-                { asientos_fila.map((a,i) => (
+                { asientos_fila.map((asiento,i) => (
                     <div style={{display:'inline-block'}} key={i}>
-                        <Asiento type={!asientos_desactivados.includes(a.index) ? 'info' : 'danger'} {...a} toggleActivate={toggleActivate} />
+                        <Asiento 
+                            {...asiento}
+                            type={!asientos_desactivados.includes(asiento.index) ? 'info' : 'danger'}
+                            toggleActivate={toggleActivate}
+                        />
                         { (!isLast && i === 1) && <DividerAsiento /> }
                     </div>
                 ))}

@@ -133,9 +133,23 @@ class MainView extends React.Component {
 
     onChange2 = (name, value) => {
         if(name == 'filas') this.changeFilas(value)
+        else if(name === 'asientos_desactivados'){
+            this.onChangeNivel(name, value)
+        }
         else {
             this.props.onChange(name, value)
         }
+    }
+
+    onChangeNivel = (name, value) => {
+        let tab = this.state.tab
+        let niveles = this.props.niveles
+
+        niveles[tab] = {
+            ...niveles[tab],
+            [name] : value
+        }
+        this.props.onChange('niveles', niveles)
     }
 
     changeFilas = (filas) => {
@@ -152,6 +166,7 @@ class MainView extends React.Component {
             
             niveles[piso].asientos = getAsientos(niveles[piso], Number(filas))
             niveles[piso].filas = Number(filas)
+            niveles[piso].asientos_desactivados = []
             this.props.onChange('niveles', niveles)
         }
     }
@@ -165,6 +180,7 @@ class MainView extends React.Component {
     render(){
         const { tab } = this.state
         const { pisos, niveles } = this.props
+
         return (
             <div>
                 <FormValidate className="mt-4 form-horizontal">
@@ -224,6 +240,7 @@ class EditDistribucionAsientos extends React.Component {
     onChange = (name, value) => {
         let data = this.state.data
         data[name] = value
+
         this.setState({
             data
         })
