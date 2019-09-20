@@ -20,6 +20,9 @@ class RecordRow extends React.Component {
 
     render(){
         const { fields, record } = this.props
+
+        console.log(record)
+
         return (
             <tr key={record.id} onDoubleClick={this.onRowDoubleClick}>
                 {fields.map((field, i) => {
@@ -81,39 +84,46 @@ class ListPage extends React.Component {
     }
 
     loadList = async (parameters = {}) => {
-        this.setState({
-            loading: true
-        })
-        const { currentPage } = this.state
-        const { data } = await axios.get(`${baseurl}/${this.props.endpoint}/${objectToUrl({ ...parameters, page : currentPage })}`)
+        if(this.props.endpoint){
+            this.setState({
+                loading: true
+            })
+            const { currentPage } = this.state
+            const { data } = await axios.get(`${baseurl}/${this.props.endpoint}/${objectToUrl({ ...parameters, page : currentPage })}`)
 
-        let _results = [], 
-            _count = 0, 
-            _next = null, 
-            _previous = null,
-            _numPages = 1
+            let _results = [], 
+                _count = 0, 
+                _next = null, 
+                _previous = null,
+                _numPages = 1
 
-        if(Array.isArray(data)){
-            _results = data
-            _count = data.length
-        }else{
-            const { results, count, next, previous } = data
-            _results = results
-            _count = count
-            _next = next
-            _previous = previous
-            _numPages = Math.ceil(_count / RowsPerPage)
+            if(Array.isArray(data)){
+                _results = data
+                _count = data.length
+            }else{
+                const { results, count, next, previous } = data
+                _results = results
+                _count = count
+                _next = next
+                _previous = previous
+                _numPages = Math.ceil(_count / RowsPerPage)
+            }
+            
+            this.setState({
+                results : _results,
+                filtered : _results,
+                count : _count,
+                numPages : _numPages,
+                next : _next,
+                previous : _previous,
+                loading: false
+            }, this.getVisibleFooterPages)
         }
-        
-        this.setState({
-            results : _results,
-            filtered : _results,
-            count : _count,
-            numPages : _numPages,
-            next : _next,
-            previous : _previous,
-            loading: false
-        }, this.getVisibleFooterPages)
+        else {
+            this.setState({
+                filtered : this.props.data
+            })
+        }
     }
 
     componentWillReceiveProps(props){
@@ -254,41 +264,43 @@ class ListPage extends React.Component {
                                     <tbody>
                                         {filtered.map((record, i) => <RecordRow record={record} fields={fields} key={i} onDoubleClick={() => this.onRowDoubleClick(record.id, record)} />)}
                                     </tbody>
-                                    <tfoot>
-                                        <tr className="footable-paging">
-                                            <td colSpan="10">
-                                                <div className="footable-pagination-wrapper text-center">
-                                                    <ul className="pagination justify-content-center">
-                                                        <li className={`footable-page-nav ${previous && !loading ? 'pointer' : 'link-disabled'}`} data-page="first">
-                                                            <button className="footable-page-link" onClick={this.first}>«</button>
-                                                        </li>
-                                                        <li className={`footable-page-nav ${previous && !loading ? 'pointer' : 'link-disabled'}`} data-page="prev">
-                                                            <button className="footable-page-link" onClick={this.previous}>‹</button>
-                                                        </li>
-                                                        { numEndVisibleFooterPages > 0 ?
-                                                            new Array(numEndVisibleFooterPages - numBeginVisibleFooterPages).fill(1).map((z, index) => {
-                                                                let page = Number(numBeginVisibleFooterPages) + Number(index)
-                                                                return (
-                                                                    <li key={index} className={`footable-page visible ${page === currentPage ? 'active' : ''}`} data-page={page}>
-                                                                        <button className="footable-page-link" onClick={() => this.setPage(page)}>{ page }</button>
-                                                                    </li>
-                                                                )
-                                                            })
-                                                            : null
-                                                        }
-                                                        <li className={`footable-page-nav ${next && !loading ? 'pointer' : 'link-disabled'}`} data-page="next">
-                                                            <button className="footable-page-link" onClick={this.next}>›</button>
-                                                        </li>
-                                                        <li className={`footable-page-nav ${next && !loading ? 'pointer' : 'link-disabled'}`} data-page="last">
-                                                            <button className="footable-page-link" onClick={this.last}>»</button>
-                                                        </li>
-                                                    </ul>
-                                                    <div className="divider"></div>
-                                                    <span className="label label-info">{currentPage} de {numPages}</span>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tfoot>
+                                    { numEndVisibleFooterPages > 2 &&
+                                        <tfoot>
+                                            <tr className="footable-paging">
+                                                <td colSpan="10">
+                                                    <div className="footable-pagination-wrapper text-center">
+                                                        <ul className="pagination justify-content-center">
+                                                            <li className={`footable-page-nav ${previous && !loading ? 'pointer' : 'link-disabled'}`} data-page="first">
+                                                                <button className="footable-page-link" onClick={this.first}>«</button>
+                                                            </li>
+                                                            <li className={`footable-page-nav ${previous && !loading ? 'pointer' : 'link-disabled'}`} data-page="prev">
+                                                                <button className="footable-page-link" onClick={this.previous}>‹</button>
+                                                            </li>
+                                                            { numEndVisibleFooterPages > 0 ?
+                                                                new Array(numEndVisibleFooterPages - numBeginVisibleFooterPages).fill(1).map((z, index) => {
+                                                                    let page = Number(numBeginVisibleFooterPages) + Number(index)
+                                                                    return (
+                                                                        <li key={index} className={`footable-page visible ${page === currentPage ? 'active' : ''}`} data-page={page}>
+                                                                            <button className="footable-page-link" onClick={() => this.setPage(page)}>{ page }</button>
+                                                                        </li>
+                                                                    )
+                                                                })
+                                                                : null
+                                                            }
+                                                            <li className={`footable-page-nav ${next && !loading ? 'pointer' : 'link-disabled'}`} data-page="next">
+                                                                <button className="footable-page-link" onClick={this.next}>›</button>
+                                                            </li>
+                                                            <li className={`footable-page-nav ${next && !loading ? 'pointer' : 'link-disabled'}`} data-page="last">
+                                                                <button className="footable-page-link" onClick={this.last}>»</button>
+                                                            </li>
+                                                        </ul>
+                                                        <div className="divider"></div>
+                                                        <span className="label label-info">{currentPage} de {numPages}</span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    }
                                 </table>
                             </div>
                         </BlockUi>

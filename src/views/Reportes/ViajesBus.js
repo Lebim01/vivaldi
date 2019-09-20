@@ -1,13 +1,17 @@
 import React from 'react'
 import { ListPage, Label, FormGroup, Select, Input, ReportPage } from 'temeforest'
 import moment from 'moment'
-import { baseurl } from 'utils/url'
+import { baseurl, objectToUrl } from 'utils/url'
+import axios from 'axios'
 
 class ViajesBus extends React.Component {
 
     state = {
-        fecha_inicio : moment().format('YYYY-MM-DD'),
-        fecha_fin : moment().format('YYYY-MM-DD'),
+        filters : {
+            fecha_inicio : moment().format('YYYY-MM-DD'),
+            fecha_fin : moment().format('YYYY-MM-DD'),
+        },
+        data : []
     }
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
@@ -20,8 +24,12 @@ class ViajesBus extends React.Component {
         valueName: 'id' 
     }
     onChange = name => (e) => {
+        const filters = this.state.filters
         this.setState({
-            [name]: e.target.value
+            filters : {
+                ...filters,
+                [name]: e.target.value
+            }
         })
     }
     buscar(){
@@ -29,7 +37,29 @@ class ViajesBus extends React.Component {
             refresh: true
         })
     }
+
+    componentDidMount(){
+        this.loadList()
+    }
+    componentDidUpdate(prevProps, prevState){
+        if(prevState.filters !== this.state.filters)
+            this.loadList()
+    }
+
+    loadList = async () => {
+        try {
+            const response = await axios.get(`${baseurl}/venta/viajes-por-bus/${objectToUrl(this.state.filters)}`)
+            this.setState({
+                data : response.data
+            })
+        }
+        catch(e){
+            console.error(e)
+        }
+    }
+
     render(){
+        const { data } = this.state
         return (
             <ReportPage title="Viajes Bus" printButtons={false} timestamp={false}>
                 <div className="row">
@@ -37,13 +67,13 @@ class ViajesBus extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-4">Cooperativa</Label>
                             <div className="col-sm-8">
-                                <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
+                                <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.filters.cooperativa}/>
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-4">Localidad</Label>
                             <div className="col-sm-8">
-                                <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad}/>
+                                <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.filters.localidad}/>
                             </div>
                         </FormGroup>
                     </div>
@@ -51,56 +81,35 @@ class ViajesBus extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-4">Fecha inicio</Label>
                             <div className="col-sm-8">
-                                <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
+                                <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.filters.fecha_inicio} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-4">Fecha fin</Label>
                             <div className="col-sm-8">
-                                <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
+                                <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.filters.fecha_fin} />
                             </div>
                         </FormGroup>
                     </div>
                 </div>
 
-                <h3 className="text-center">Bus: 003 / MAA - 8284 </h3>
-                <ListPage
-                    searchable={false}
+                { data.map((row) => 
+                    <>
+                        <h3 className="text-center">Bus: {row.disco} / {row.placa}</h3>
+                        <ListPage
+                            searchable={false}
 
-                    fieldNames={['Viaje', 'Fecha salida', 'Usuario', 'Pasajeros', 'Valor unitario', 'Total']}
-                    fields={['', '', '', '', '', '']}
+                            fieldNames={['Viaje', 'Destino', 'Tipo', 'Cantidad', 'v/u', 'Subtotal']}
+                            fields={['viaje', 'destino_nombre', 'tipo_boleto', 'pasajeros', 'valor_unitario', 'total']}
 
-                    endpoint='viaje'
-                    parameters={this.state}
-                    
-                    history={this.props.history}
-                />
-
-                <h3 className="text-center">Bus: 005 / MAA - 6664 </h3>
-                <ListPage
-                    searchable={false}
-
-                    fieldNames={['Viaje', 'Fecha salida', 'Usuario', 'Pasajeros', 'Valor unitario', 'Total']}
-                    fields={['', '', '', '', '', '']}
-
-                    endpoint='viaje'
-                    parameters={this.state}
-                    
-                    history={this.props.history}
-                />
-
-                <h3 className="text-center">Bus: 006 / MAU - 4284 </h3>
-                <ListPage
-                    searchable={false}
-
-                    fieldNames={['Viaje', 'Fecha salida', 'Usuario', 'Pasajeros', 'Valor unitario', 'Total']}
-                    fields={['', '', '', '', '', '']}
-
-                    endpoint='viaje'
-                    parameters={this.state}
-                    
-                    history={this.props.history}
-                />
+                            data={row.data}
+                            parameters={this.state}
+                            
+                            history={this.props.history}
+                        />
+                    </>
+                )}
+                { data.length === 0 && <h3>No hay información para mostrar</h3> }
             </ReportPage>
         )
     }
