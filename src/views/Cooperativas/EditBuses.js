@@ -133,7 +133,7 @@ class MainView extends React.Component {
                         label={{text:'Año Fabricación'}}
                         input={{
                             name : 'anio_fabricacion',
-                            element: <Input type="number" onChange={this.onChange('anio_fabricacion')} value={this.props.anio_fabricacion} />
+                            element: <Input type="number" onChange={this.onChange('anio_fabricacion')} value={this.props.anio_fabricacion} min={1950} max={moment().year()+1} />
                         }}
                         validator={{
                             validationRules: { required : true, number: true, minRangeNumber : 1950, maxRangeNumber : moment().year()+1 },

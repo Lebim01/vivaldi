@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, FormGroup, Input, Label, Select, FormValidate, EditPage } from 'temeforest'
+import { Button, FormGroup, Input, Label, Select, FormValidate, EditPage, FormElementValidate } from 'temeforest'
 import { baseurl, getParameter, canDownload, downloadFile } from 'utils/url'
 import { fileToBase64 } from 'utils/file'
 import axios from 'axios'
@@ -153,7 +153,20 @@ class EditConductor extends React.Component {
                     </FormGroup>
                     <FormGroup className="row">
                         <div className="col-sm-12 text-center">
-                            <Input id="documentation" type="file" style={{display:'none'}} onChange={this._onChangeFile}/>
+                            <FormElementValidate
+                                label={{text:''}}
+                                input={{
+                                    name : 'documentacion',
+                                    element: <Input id="documentation" name="documentacion" type="file" style={{display:'none'}} onChange={this._onChangeFile} />
+                                }}
+                                validator={{
+                                    validationRules: { required : true },
+                                    validationMessages : { required: 'El campo es requerido' },
+                                    reference : {
+                                        documentacion : this.state.data.documentacion
+                                    }
+                                }}
+                            />
                             <Button type="success" style={{marginRight:5}} onClick={this.uploadFile}>Subir Documentación</Button>
                             { this.state.data.documentacion_url &&
                                 <Button type="success" style={{marginLeft:5}} onClick={() => downloadFile(this.state.data.documentacion_url)} disabled={canDownload(this.state.data.documentacion_url)}>Ver Documentación</Button>

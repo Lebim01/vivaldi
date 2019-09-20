@@ -84,6 +84,12 @@ class EditUsuarios extends React.Component {
         {value:2, label:'Cooperativa'},
     ]
 
+    optionsLocalidad = {
+        url : `${baseurl}/localidad/`,
+        labelName : 'nombre',
+        valueName : 'id'
+    }
+
     componentDidMount(){
         let id = getParameter('id')
         if(id){
@@ -107,7 +113,8 @@ class EditUsuarios extends React.Component {
         if(name === 'tipo'){
             data.roles = []
             data.roles_cooperativa = []
-            if(e.target.value === 1){
+            if(e.target.value === 2){
+                data.localidad = 'none'
                 data.documentacion = 'none'
             }
         }
@@ -297,6 +304,14 @@ class EditUsuarios extends React.Component {
                                 <Select onChange={this.onChange('tipo')} value={data.tipo} options={this.tipos} />
                             </div>
                         </FormGroup>
+                        { Number(data.tipo) === 1 &&
+                            <FormGroup className="row">
+                                <Label className="col-sm-3">Localidad</Label>
+                                <div className="col-sm-5">
+                                    <Select onChange={this.onChange('localidad')} value={data.localidad} asyncOptions={this.optionsLocalidad} />
+                                </div>
+                            </FormGroup>
+                        }
                         { Number(data.tipo) === 1 &&
                             <div>
                                 <FormGroup className="row">
