@@ -75,9 +75,10 @@ const TasasUsadasPorViaje = React.lazy(() => import('views/Reportes/TasasUsadasP
 const Recaudacion = React.lazy(() => import('views/Reportes/Recaudacion'))
 const ReporteTasasContingenciaGeneral = React.lazy(() => import('views/Reportes/ReporteTasasContingenciaGeneral'))
 const ViajesBus = React.lazy(() => import('views/Reportes/ViajesBus'))
-const ReporteSalidaViajes = React.lazy(() => import('views/Reportes/ReporteSalidaViajes'))
 const ViajesSemanales = React.lazy(() => import('views/Reportes/ViajesSemanales'))
 const CobranzaRecaudacion = React.lazy(() => import('views/Reportes/Recaudacion'))
+const ViajesPorFecha = React.lazy(() => import('views/Reportes/ViajesFecha'))
+const SalidaViajes = React.lazy(() => import('views/Reportes/SalidaViajes'))
 
 /** FACTURACION */
 const Pasajeros = React.lazy(() => import('views/Facturacion/Pasajeros'))
@@ -176,10 +177,11 @@ const routes = [
   { path: '/reportes/tasas-usadas-por-viaje', name: 'Tasas usadas por viaje', component: TasasUsadasPorViaje, exact: true },
   { path: '/reportes/recaudacion', name: 'Recaudación', component: Recaudacion, exact: true },
   { path: '/reportes/ventas-por-turno', name: 'Ventas por turnos', component: VendidosPorTurno, exact: true },
-  { path: '/reportes/salida-de-viajes', name: 'Reporte de salida de viajes', component: ReporteSalidaViajes, exact: true },
   { path: '/reportes/pasajeros-por-viaje', name: 'Pasajaros por viaje', component: Page404 },
   { path: '/reportes/viajes-por-bus', name: 'Viajes por bus', component: ViajesBus, exact: true },
+  { path: '/reportes/viajes-por-fecha', name: 'Viajes por fecha', component: ViajesPorFecha, exact: true },
   { path: '/reportes/viajes-semanales', name: 'Viajes semanales', component: ViajesSemanales, exact: true },
+  { path: '/reportes/salida-de-viajes', name: 'Salida viajes', component: SalidaViajes, exact: true },
   { path: '/reportes/viajes-por-liquidar',  name: 'Users', component: Page404 },
 
   { path: '/recaudaciones/tasas-contingencia', name: 'Tasas contingencia', component: TasasContingencia, exact: true },

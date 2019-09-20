@@ -3,7 +3,7 @@ import { ListPage, Label, FormGroup, Select, Input, ReportPage } from 'temefores
 import moment from 'moment'
 import { baseurl } from 'utils/url'
 
-class ReporteSalidaViajes extends React.Component {
+class ViajesFecha extends React.Component {
 
     state = {
         fecha_inicio : moment().format('YYYY-MM-DD'),
@@ -29,9 +29,10 @@ class ReporteSalidaViajes extends React.Component {
             refresh: true
         })
     }
+
     render(){
         return (
-            <ReportPage title="Reporte de salida de viajes" printButtons={false} timestamp={false}>
+            <ReportPage title="Viajes por fecha" printButtons={false} timestamp={false}>
                 <div className="row">
                     <div className="col-sm-4">
                         <FormGroup className="row">
@@ -66,10 +67,10 @@ class ReporteSalidaViajes extends React.Component {
                 <ListPage
                     searchable={false}
 
-                    fieldNames={['Viaje', 'Fecha salida', 'Destino', 'Cantidad', 'Valor unitario', 'Total']}
-                    fields={['', '', '', '', '', '']}
+                    fieldNames={['Viaje', 'Localidad', 'Fecha salida', 'Vendeddor', 'Destino', 'Disco', 'total']}
+                    fields={['viaje', 'localidad', 'fecha_salida', 'vendedor', 'destino', 'disco', 'total']}
 
-                    endpoint='viaje'
+                    endpoint='venta/viajes-por-fecha'
                     parameters={this.state}
                     
                     history={this.props.history}
@@ -79,4 +80,4 @@ class ReporteSalidaViajes extends React.Component {
     }
 }
 
-export default ReporteSalidaViajes
+export default ViajesFecha
