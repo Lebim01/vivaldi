@@ -69,8 +69,9 @@ class MainView extends React.Component {
     }
 
     render(){
+        const { id, data } = this.props
         return (
-            <div>
+            <EditPage title={`${id ? 'Editar' : 'Crear'} Bus`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
                 <FormValidate className="mt-4 form-horizontal">
                     <FormElementValidate
                         label={{text:'Número'}}
@@ -192,7 +193,7 @@ class MainView extends React.Component {
                         </div>
                     </FormGroup>
                 </FormValidate>
-            </div>
+            </EditPage>
         )
     }
 }
@@ -250,9 +251,7 @@ class EditBuses extends React.Component {
     render(){
         const { id, data } = this.state
         return (
-            <EditPage title={`${id ? 'Editar' : 'Crear'} Bus`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
-                <MainView {...data} onChange={this.onChange} onChangeFile={this.onChangeFile}/>
-            </EditPage>
+            <MainView id={id} history={this.props.history} data={data} {...data} onChange={this.onChange} onChangeFile={this.onChangeFile}/>
         )
     }
 }

@@ -103,6 +103,7 @@ class EditPage extends React.Component {
         e.preventDefault();
 
         const { hasValidations } = this.state
+        const { data, customValidation } = this.props
         let isFormValidationErrors= false
 
         if(hasValidations){
@@ -110,7 +111,21 @@ class EditPage extends React.Component {
         }
         
         if (!isFormValidationErrors || !hasValidations){
-            this.confirmSave()
+            if(customValidation && typeof customValidation === 'function'){
+                let _customResult = customValidation(data)
+                if(typeof _customResult === 'object'){
+                    const { result, message } = _customResult
+                    if(result){
+                        this.confirmSave()
+                    }else{
+                        Swal.fire('', message, 'error')
+                    }
+                }else if(_customResult){
+                    this.confirmSave()
+                }
+            }
+            else 
+                this.confirmSave()
         }
     }
 
@@ -119,6 +134,7 @@ class EditPage extends React.Component {
     getChildrenWithType = (children, type) => {
         let has = false;
         React.Children.forEach(children, child => {
+
             if (child && this.typesAreEqual(type, child.type)) {
                 has = true;
             }

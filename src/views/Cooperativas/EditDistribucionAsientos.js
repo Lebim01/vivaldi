@@ -177,12 +177,32 @@ class MainView extends React.Component {
         })
     }
 
+    validation = (data) => {
+
+        let filasPorPiso = !data.niveles.some((piso) => {
+            return Number(piso.filas) <= 0 || Number(piso.filas) > 20
+        })
+
+        return {
+            result : filasPorPiso,
+            message : 'El numero de filas no puede ser mayor a 20'
+        }
+    }
+
     render(){
         const { tab } = this.state
-        const { pisos, niveles } = this.props
+        const { id, data, pisos, niveles } = this.props
 
         return (
-            <div>
+            <EditPage 
+                title={`${id ? 'Editar' : 'Crear'} Distribución de Asientos`} 
+                data={data} 
+                id={id} 
+                urlFront={urlFront} 
+                endpoint={endpoint} 
+                history={this.props.history}
+                customValidation={this.validation}
+            >
                 <FormValidate className="mt-4 form-horizontal">
                     <FormGroup className="row">
                         <Label className="col-sm-3">Distribución</Label>
@@ -199,7 +219,7 @@ class MainView extends React.Component {
                         </div>
                     </FormGroup>
                 </FormValidate>
-            </div>
+            </EditPage>
         )
     }
 }
@@ -249,17 +269,7 @@ class EditDistribucionAsientos extends React.Component {
     render(){
         const { id, data, pisos } = this.state
         return (
-            <EditPage 
-                title={`${id ? 'Editar' : 'Crear'} Distribución de Asientos`} 
-                data={data} 
-                id={id} 
-                urlFront={urlFront} 
-                endpoint={endpoint} 
-                history={this.props.history}
-                parseData={this.parseData}
-            >
-                <MainView {...data} onChange={this.onChange} pisos={pisos} />
-            </EditPage>
+            <MainView id={id} data={data} history={this.props.history} {...data} onChange={this.onChange} pisos={pisos} />
         )
     }
 }

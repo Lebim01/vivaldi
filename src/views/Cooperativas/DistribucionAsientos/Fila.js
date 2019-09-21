@@ -17,7 +17,7 @@ class Fila extends React.Component {
             : commonHallSeats
 
         // index become seat
-        const asiento_inicio = asientos.length - ( (index+1) * 4) - 1
+        const asiento_inicio = asientos.length - ( (index+1) * 4) - 1 + (!isLast ? 1 : 0)
 
         // seats object
         const asientos_fila = asientos.slice(asiento_inicio, asiento_inicio + cantidad_asientos_fila)
@@ -30,6 +30,7 @@ class Fila extends React.Component {
                     <div style={{display:'inline-block'}} key={i}>
                         <Asiento 
                             {...asiento}
+                            numero_asiento={(this.props.index * commonHallSeats) + i + 1}
                             type={!asientos_desactivados.includes(asiento.index) ? 'info' : 'danger'}
                             toggleActivate={toggleActivate}
                         />

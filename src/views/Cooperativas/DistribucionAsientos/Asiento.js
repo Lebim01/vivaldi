@@ -22,9 +22,11 @@ class Asiento extends React.Component {
         }
         return (
             <div style={{display:'inline-block', marginLeft:3, marginRight:3}}>
-                <Button type={type} style={{height:40, width:40, ...activateCss}} onClick={this.toggleActivate}>
-                    {/*lado*/}
-                    <small>{this.props.index}</small>
+                <Button type={type} style={{height:40, width:40, padding: 2, ...activateCss}} onClick={this.toggleActivate}>
+                    <small>
+                        {this.props.numero_asiento}
+                        {lado}
+                    </small>
                 </Button>
             </div>
         )
