@@ -87,20 +87,6 @@ class ReporteTasasVendidas extends React.Component {
                         </FormGroup>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col-sm-3">
-                        
-                    </div>
-                    <div className="col-sm-3 text-center">
-                        <InputIcon icon={<i className="fa fa-search"/>} placeholder="Bus" />
-                    </div>
-                    <div className="col-sm-3 text-center">
-                        <InputIcon icon={<i className="fa fa-search"/>} placeholder="Viaje" />
-                    </div>
-                    <div className="col-sm-3">
-                        
-                    </div>
-                </div>
                 <ListPage
                     searchable={false}
 

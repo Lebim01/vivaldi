@@ -1,12 +1,18 @@
 import React from 'react'
 import { ListPage, Label, FormGroup, Select, Input, ReportPage } from 'temeforest'
+import { TabContent, TabPane } from 'reactstrap'
 import moment from 'moment'
-import { baseurl } from 'utils/url'
+import { baseurl, objectToUrl } from 'utils/url'
+import axios from 'axios'
 
 class ReporteBoletosTasas extends React.Component {
     state = {
-        fecha_inicio : moment().format('YYYY-MM-DD'),
-        fecha_fin : moment().format('YYYY-MM-DD')
+        tipo_tabla : "1",
+        filters : {
+            fecha_inicio : moment().format('YYYY-MM-DD'),
+            fecha_fin : moment().format('YYYY-MM-DD')
+        },
+        data : []
     }
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
@@ -25,9 +31,37 @@ class ReporteBoletosTasas extends React.Component {
     }
 
     onChange = name => (e) => {
+        let state = {}
+
+        if(name === 'cooperativa'){
+            state.tipo_tabla = e.target.value === '' ? "1" : "2"
+        }
+
         this.setState({
-            [name]: e.target.value
+            filters : {
+                ...this.state.filters,
+                [name]: e.target.value
+            },
+            ...state
         })
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        if(this.state.tipo_tabla === '2' && prevState.filters !== this.state.filters){
+            this.loadListCooperativa()
+        }
+    }
+
+    loadListCooperativa = async () => {
+        try {
+            const response = await axios.get(`${baseurl}/venta/reporte-ventas-por-cooperativa/${objectToUrl(this.state.filters)}`)
+            this.setState({
+                data: response.data[0].data
+            }, this.buscar)
+        }
+        catch(e){
+            console.error(e)
+        }
     }
 
     buscar(){
@@ -38,6 +72,7 @@ class ReporteBoletosTasas extends React.Component {
     
     render(){
         const { refresh } = this.state
+        
         return (
             <ReportPage title="Reporte de boletos por cooperativa">
                 <div className="row">
@@ -45,13 +80,13 @@ class ReporteBoletosTasas extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-3">Cooperativa</Label>
                             <div className="col-sm-8">
-                                <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
+                                <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.filters.cooperativa}/>
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-3">Localidad</Label>
                             <div className="col-sm-8">
-                                <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad}/>
+                                <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.filters.localidad}/>
                             </div>
                         </FormGroup>
                     </div>
@@ -59,13 +94,13 @@ class ReporteBoletosTasas extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-3">Fecha inicio</Label>
                             <div className="col-sm-8">
-                                <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
+                                <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.filters.fecha_inicio} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-3">Fecha fin</Label>
                             <div className="col-sm-8">
-                                <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
+                                <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.filters.fecha_fin} />
                             </div>
                         </FormGroup>
                     </div>
@@ -73,23 +108,42 @@ class ReporteBoletosTasas extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-3">Forma de pago</Label>
                             <div className="col-sm-8">
-                                <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('forma_de_pago')} value={this.state.forma_de_pago} />
+                                <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('forma_de_pago')} value={this.state.filters.forma_de_pago} />
                             </div>
                         </FormGroup>
                     </div>
                 </div>
-                <ListPage
-                    searchable={false}
 
-                    fieldNames={['Boleto normal', 'Boleto especial', 'Normal anulado', 'Especial anulado', 'Total boleto', 'Total tasa']}
-                    fields={['boleto_normal', 'boleto_especial', 'normal_anulado', 'especial_anulado', 'total_boleto', 'total_tasa']}
+                <TabContent activeTab={this.state.tipo_tabla}>
+                    <TabPane tabId="1">
+                        <ListPage
+                            searchable={false}
 
-                    endpoint='recaudaciones/boletos-tasas'
-                    parameters={this.state}
-                    
-                    history={this.props.history}
-                    refresh={refresh}
-                />
+                            fieldNames={['Boleto normal', 'Boleto especial', 'Normal anulado', 'Especial anulado', 'Total boleto', 'Total tasa']}
+                            fields={['boleto_normal', 'boleto_especial', 'normal_anulado', 'especial_anulado', 'total_boleto', 'total_tasa']}
+
+                            endpoint='recaudaciones/boletos-tasas'
+                            parameters={this.state.filters}
+                            
+                            history={this.props.history}
+                            refresh={refresh}
+                        />
+                    </TabPane>
+                    <TabPane tabId="2">
+                        Vendidos por cooperativa
+                        <ListPage
+                            searchable={false}
+
+                            fieldNames={['Tipo', 'Cantidad', 'Valor unitario', 'Subtotal']}
+                            fields={['tipo_boleto', 'cantidad', 'valor_unitario', 'subtotal']}
+
+                            data={this.state.data}
+                            parameters={this.state.filters}
+                            
+                            history={this.props.history}
+                        />
+                    </TabPane>
+                </TabContent>
             </ReportPage>
         )
     }
