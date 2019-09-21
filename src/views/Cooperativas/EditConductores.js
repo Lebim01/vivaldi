@@ -101,7 +101,7 @@ class EditConductor extends React.Component {
             Swal.fire('Subir archivo', 'Hubo algún problema al querer subir el archivo', 'error')
         }
     }
-    parseData(data){
+    parseData = (data) => {
         const { persona } = this.state
         data['persona_obj'] = persona
         return data
@@ -125,6 +125,16 @@ class EditConductor extends React.Component {
         }
     }
 
+    validation(data){
+        if(!data.documentacion || data.documentacion === 'none')
+            return {
+                result : false,
+                message : 'La documentacion no puede ser vacia'
+            }
+        
+        return true
+    }
+
     render(){
         const { id, data, tipos } = this.state
         return (
@@ -135,7 +145,8 @@ class EditConductor extends React.Component {
                 urlFront={urlFront} 
                 endpoint={endpoint} 
                 history={this.props.history}
-                parseData={this.parseData.bind(this)}
+                parseData={this.parseData}
+                customValidation={this.validation}
             >
                 <FormValidate className="mt-4 form-horizontal">
                     <FormGroup className="row">
@@ -153,20 +164,7 @@ class EditConductor extends React.Component {
                     </FormGroup>
                     <FormGroup className="row">
                         <div className="col-sm-12 text-center">
-                            <FormElementValidate
-                                label={{text:''}}
-                                input={{
-                                    name : 'documentacion',
-                                    element: <Input id="documentation" name="documentacion" type="file" style={{display:'none'}} onChange={this._onChangeFile} />
-                                }}
-                                validator={{
-                                    validationRules: { required : true },
-                                    validationMessages : { required: 'El campo es requerido' },
-                                    reference : {
-                                        documentacion : this.state.data.documentacion
-                                    }
-                                }}
-                            />
+                            <Input id="documentation" name="documentacion" type="file" style={{display:'none'}} onChange={this._onChangeFile} />
                             <Button type="success" style={{marginRight:5}} onClick={this.uploadFile}>Subir Documentación</Button>
                             { this.state.data.documentacion_url &&
                                 <Button type="success" style={{marginLeft:5}} onClick={() => downloadFile(this.state.data.documentacion_url)} disabled={canDownload(this.state.data.documentacion_url)}>Ver Documentación</Button>
