@@ -167,21 +167,25 @@ export default {
           name : 'Diarios',
           url : '/#/recaudaciones/diario'
         },
-        {
+        /*{
           name : 'Pendientes',
           url : '/#/recaudaciones/pendientes'
         },
         {
           name : 'Consultas',
           url : '/#/recaudaciones/consultas'
-        },
+        },*/
         {
-          name : 'Tasas contingencia',
+          name : 'Tasas contingencia general',
           url : '/#/recaudaciones/tasas-contingencia'
         },
         {
           name : 'Venta de Tasas',
           url : '/#/recaudaciones/venta-tasas'
+        },
+        {
+          name : 'Bandeja Tasas Cooperativa',
+          url : '/#/recaudaciones/bandeja-tasas-cooperativa'
         }
       ]
     },

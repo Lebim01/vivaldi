@@ -183,10 +183,14 @@ class MainView extends React.Component {
             return Number(piso.filas) <= 0 || Number(piso.filas) > 20
         })
 
-        return {
-            result : filasPorPiso,
-            message : 'El numero de filas no puede ser mayor a 20'
+        if(!filasPorPiso){
+            return {
+                result : filasPorPiso,
+                message : 'El numero de filas no puede ser mayor a 20'
+            }
         }
+
+        return true
     }
 
     render(){

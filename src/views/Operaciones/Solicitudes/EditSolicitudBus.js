@@ -48,13 +48,15 @@ class MainView extends React.Component {
                                 <Input value={this.props.motivo} readOnly />
                             </div>
                         </FormGroup>
-	                }
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Descripción</Label>
-                        <div className="col-sm-5">
-                            <Input value={this.props.descripcion} readOnly />
-                        </div>
-                    </FormGroup>
+                    }
+                    { ['Inhabilitar', 'Cambio plantilla'].includes(this.props.tipo_solicitud_nombre) &&
+                        <FormGroup className="row">
+                            <Label className="col-sm-3">Descripción</Label>
+                            <div className="col-sm-5">
+                                <Input value={this.props.descripcion} readOnly />
+                            </div>
+                        </FormGroup>
+                    }
                     <FormGroup className="row">
                         <Label className="col-sm-3">Fecha y hora</Label>
                         <div className="col-sm-5">

@@ -72,12 +72,6 @@ class MainView extends React.Component {
                                 <Input value={this.props.cantidad_pedida} readOnly={readOnly} />
                             </div>
                         </FormGroup>
-                        <FormGroup className="row">
-                            <Label className="col-sm-3">Cantidad aprobada</Label>
-                            <div className="col-sm-5">
-                                <Input value={this.props.cantidad_aprobada} onChange={this.onChangeCantidadAprobada} />
-                            </div>
-                        </FormGroup>
                     </fieldset>
                 </FormValidate>
             </div>
