@@ -6,6 +6,16 @@ import axios from 'axios'
 const endpoint = 'frecuencia'
 const urlFront = '/operaciones/frecuencias'
 
+const dias = [
+    'Lunes',
+    'Martes',
+    'Miercolés',
+    'Jueves',
+    'Viernes',
+    'Sábado',
+    'Domingo'
+]
+
 class MainView extends React.Component {
 
     optionsCooperativa = {
@@ -35,6 +45,19 @@ class MainView extends React.Component {
         if(this.props.onChange){
             this.props.onChange(name, e.target.value)
         }
+    }
+
+    onChangeDias = index => {
+        let _dias = this.props.dias
+
+
+        if(_dias.includes(index)){
+            _dias.splice(_dias.indexOf(index))
+        }else{
+            _dias.push(index)
+        }
+
+        this.props.onChange('dias', _dias)
     }
 
     render(){
@@ -71,6 +94,23 @@ class MainView extends React.Component {
                             <Select onChange={this.onChange('tipo')} value={this.props.tipo} options={this.tipos} />
                         </div>
                     </FormGroup>
+                    <div className="row">
+                        <div className="col-sm-3"></div>
+                        <div className="col-sm-6">
+                            { Number(this.props.tipo) === 1 &&
+                                <FormGroup className="row">
+                                    { dias.map((nombre, index) => 
+                                        <div className="col-sm-3">
+                                            <div className="custom-control custom-checkbox">
+                                                <input type="checkbox" className="custom-control-input" id={nombre} name={nombre} checked={this.props.dias.includes(index)} onChange={() => this.onChangeDias(index)} />
+                                                <Label onlyClassName="custom-control-label" htmlFor={nombre}>{nombre}</Label>
+                                            </div>
+                                        </div>
+                                    )}
+                                </FormGroup>
+                            }
+                        </div>
+                    </div>
                     { Number(this.props.tipo) === 2 &&
                         <FormGroup className="row">
                             <Label className="col-sm-3">Fecha</Label>
