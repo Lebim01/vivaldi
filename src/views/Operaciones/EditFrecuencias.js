@@ -94,10 +94,10 @@ class MainView extends React.Component {
                             <Select onChange={this.onChange('tipo')} value={this.props.tipo} options={this.tipos} />
                         </div>
                     </FormGroup>
-                    <div className="row">
-                        <div className="col-sm-3"></div>
-                        <div className="col-sm-6">
-                            { Number(this.props.tipo) === 1 &&
+                    { Number(this.props.tipo) === 1 &&
+                        <div className="row">
+                            <div className="col-sm-3"></div>
+                            <div className="col-sm-6">
                                 <FormGroup className="row">
                                     { dias.map((nombre, index) => 
                                         <div className="col-sm-3">
@@ -108,9 +108,9 @@ class MainView extends React.Component {
                                         </div>
                                     )}
                                 </FormGroup>
-                            }
+                            </div>
                         </div>
-                    </div>
+                    }
                     { Number(this.props.tipo) === 2 &&
                         <FormGroup className="row">
                             <Label className="col-sm-3">Fecha</Label>
@@ -129,7 +129,11 @@ class EditFrecuencias extends React.Component {
 
     state = {
         id : null,
-        data : {}
+        data : {
+            dias : [
+                0,1,2,3,4,5,6
+            ]
+        }
     }
 
     componentDidMount(){
