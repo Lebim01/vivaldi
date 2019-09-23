@@ -6,7 +6,8 @@ const confirmarDefault = {
     text: '¿Seguro de guardar?',
     params : {},
     id: null,
-    showResponse : false
+    showResponse : false,
+    method: 'post'
 }
 
 async function confirmEndpoint(options){
@@ -44,7 +45,7 @@ async function confirmEndpoint(options){
         showCancelButton: true,
         showLoaderOnConfirm: true,
         preConfirm: () => {
-            return axios.post(`${baseurl}/${_options.endpoint}/${_options.id ? `${_options.id}/` : ``}`, _options.params)
+            return axios[_options.method](`${baseurl}/${_options.endpoint}/${_options.id ? `${_options.id}/` : ``}`, _options.params)
             .then(response => {
                 if (response.status >= 400 && response.status < 500){
                     // SHOW eg. {'tarifa_tasa' : ['A valid number is required.'] }                    
