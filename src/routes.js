@@ -53,6 +53,7 @@ const EditSolicitudConductor = React.lazy(() => import('views/Operaciones/Solici
 const SolicitudTasaContingencia = React.lazy(() => import('views/Operaciones/Solicitudes/SolicitudTasaContingencia'))
 const EditSolicitudTasaContingencia = React.lazy(() => import('views/Operaciones/Solicitudes/EditSolicitudTasaContingencia'))
 const CrearSolicitudTasaContingencia = React.lazy(() => import('views/Operaciones/Solicitudes/CrearSolicitudTasaContingencia'))
+const SolicitudDistribucionBuses = React.lazy(() => import('views/Operaciones/Solicitudes/SolicitudDistribucionBuses'))
 
 /** RECAUDACIONES */
 const Diario = React.lazy(() => import('views/Recaudaciones/Diario'))
@@ -154,7 +155,7 @@ const routes = [
   { path: '/operaciones/solicitudes/buses/edit', name: 'Crear/Edita Solicitud de Buses', component: EditSolicitudBus, exact: true },
   { path: '/operaciones/solicitudes/frecuencias', name: 'Solicitud de Frecuencia', component: SolicitudFrecuencias, exact: true },
   { path: '/operaciones/solicitudes/frecuencias/edit', name: 'Crear/Edita solicitud de frecuencia', component: EditSolicitudFrecuencia, exact: true },
-  { path: '/operaciones/solicitudes/modificaciones-buses', name: 'Tooltips', component: Page404 },
+  { path: '/operaciones/solicitudes/modificaciones-buses', name: 'Tooltips', component: SolicitudDistribucionBuses, exact: true },
   { path: '/operaciones/solicitudes/conductores', name: 'Solicutud de Conductores', component: SolicitudConductores, exact: true },
   { path: '/operaciones/solicitudes/conductores/edit', name: 'Crear/Editar Solicutud de Conductores', component: EditSolicitudConductor, exact: true },
   { path: '/operaciones/solicitudes/tasas-contingencia', name: 'Solicitud de Tasas de Contingencia', component: SolicitudTasaContingencia, exact: true },

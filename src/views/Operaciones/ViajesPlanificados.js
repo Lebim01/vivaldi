@@ -120,7 +120,7 @@ class ViajesPlanificados extends React.Component {
                                         fieldNames={['#','Cooperativa', 'Disco', 'Placa', 'Saldo', 'Vlts', 'Costo', 'Salida', 'Destino']}
                                         fields={['', 'cooperativa_nombre', 'bus_nombre', 'ruta_nombre', 'hora_salida']}
 
-                                        endpoint='viajes-planificados'
+                                        endpoint='venta/viajes-planificados'
                                         parameters={this.state}
 
                                         history={this.props.history}
