@@ -2,6 +2,7 @@ import React from 'react'
 import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button, FormValidate } from 'temeforest'
 import moment from 'moment'
 import { baseurl } from 'utils/url'
+import { printHtml } from 'utils/exportData'
 
 class BandejaTasaCooperativa extends React.Component {
     state = {
@@ -31,6 +32,28 @@ class BandejaTasaCooperativa extends React.Component {
         this.setState({
             openModal: state
         })
+    }
+
+    rowToHtml(row){
+        return `
+            <div style="margin-bottom: 10px; border-bottom: 1px solid black;">
+                <p>Cooperativa: ${row.cooperativa_nombre}</p>
+                <p>Fecha: ${row.fecha}</p>
+                <p>Cantidad Aprobada: ${row.cantidad_aprobada}</p>
+            </div>
+        `
+    }
+
+    toWord(row){
+        printHtml(this.rowToHtml(row))
+    }
+
+    fieldImprimir = (row) => {
+        return (
+            <React.Fragment>
+                <Button outline onClick={() => this.toWord(row)}>Imprimir</Button>
+            </React.Fragment>
+        )
     }
 
     render(){
@@ -72,7 +95,7 @@ class BandejaTasaCooperativa extends React.Component {
                                     searchable={false}
 
                                     fieldNames={['Cooperativa', 'Fecha', 'Descripcion', 'Tipo de solicitud', 'Cantidad', 'Acción']}
-                                    fields={['cooperativa_nombre', 'fecha', 'descripcion', 'tipo_solicitud_nombre', 'cantidad', '']}
+                                    fields={['cooperativa_nombre', 'fecha', 'descripcion', 'tipo_solicitud_nombre', 'cantidad_aprobada', this.fieldImprimir]}
 
                                     endpoint='venta/solicitud_tasacontingencia'
                                     parameters={this.state}

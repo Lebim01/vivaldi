@@ -5,6 +5,7 @@ import { baseurl } from 'utils/url'
 
 class SolicitudTasaContingencia extends React.Component {
 
+    interval = null
     state = {
         fecha : moment().format('YYYY-MM-DD'),
         estado: 0
@@ -30,7 +31,10 @@ class SolicitudTasaContingencia extends React.Component {
     }
 
     componentDidMount(){
-        setInterval(this.refresh.bind(this), 5000)
+        this.interval = setInterval(this.refresh.bind(this), 5000)
+    }
+    componentWillUnmount(){
+        clearInterval(this.interval)
     }
 
     onChange = name => (e) => {
