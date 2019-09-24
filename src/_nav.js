@@ -198,11 +198,11 @@ export default {
           url : '/#/reportes/panel'
         },
         {
-          name : 'Reporte de clientes frecuentes',
+          name : 'Clientes frecuentes',
           url : '/#/reportes/clientes-frecuentes'
         },
         {
-          name : 'Reporte Tasas Generadas y vendidas',
+          name : 'Tasas Generadas y vendidas',
           url : '/#/reportes/tasas-contingencia-general'
         },
         /*{
@@ -210,11 +210,11 @@ export default {
           url : '/#/reportes/vendidos-cooperativa'
         },*/
         {
-          name : 'Reporte boletos y tasas',
+          name : 'Boletos y tasas',
           url : '/#/reportes/reporte-boletos-tasas'
         },
         {
-          name : 'Tasas emitidas vs usadas',
+          name : 'Tasas emitidas vs usadas por cooperativa',
           url : '/#/reportes/tasas-emitidas-vs-usadas'
         },
         {
@@ -236,6 +236,10 @@ export default {
         {
           name : 'Viajes por fecha',
           url : '/#/reportes/viajes-por-fecha'
+        },
+        {
+          name : 'Kiosko',
+          url : '/#/reportes/kiosko'
         }
       ]
     },

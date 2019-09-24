@@ -1,10 +1,10 @@
 import React from 'react'
 import { FormGroup, Input, Label, Tabs, FormValidate, EditPage, FormElementValidate } from 'temeforest'
 import { baseurl, getParameter } from 'utils/url'
+import { POSITIVE_NUMBER_INTEGER } from 'utils/regex'
 import axios from 'axios'
 
 import Fila from './DistribucionAsientos/Fila'
-import { isUndefined } from 'util'
 
 const emptyNivel = {
     nombre : '',
@@ -87,6 +87,10 @@ class Piso extends React.Component {
         this.props.onChange('asientos_desactivados', asientos_desactivados)
     }
 
+    onChange = (name, e) => {
+        this.props.onChange(name, e.target.value)
+    }
+
     render(){
         const { filas, asientos, asientos_desactivados } = this.props
         const { _filas } = this.state
@@ -97,7 +101,7 @@ class Piso extends React.Component {
                     label={{text:'Filas'}}
                     input={{
                         name : 'filas',
-                        element: <Input type="number" min="1" max="20" onChange={(e) => this.props.onChange('filas', e.target.value)} value={filas} />
+                        element: <Input type="number" min="1" max="20" modeNumber="positive_integer" onChange={(e) => this.onChange('filas', e)} value={filas} />
                     }}
                     validator={{
                         validationRules: { required : true, number: true, minRangeNumber : 1, maxRangeNumber : 20 },
