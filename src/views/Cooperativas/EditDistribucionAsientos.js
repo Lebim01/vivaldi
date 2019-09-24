@@ -4,6 +4,7 @@ import { baseurl, getParameter } from 'utils/url'
 import axios from 'axios'
 
 import Fila from './DistribucionAsientos/Fila'
+import { isUndefined } from 'util'
 
 const emptyNivel = {
     nombre : '',
@@ -182,7 +183,7 @@ class MainView extends React.Component {
     validation = (data) => {
 
         let filasPorPiso = !data.niveles.some((piso) => {
-            return Number(piso.filas) <= 0 || Number(piso.filas) > 20
+            return Number(piso.filas) != 0 && (Number(piso.filas) <= 0 || Number(piso.filas) > 20)
         })
 
         if(!filasPorPiso){
