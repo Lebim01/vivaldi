@@ -262,10 +262,6 @@ export default {
       icon : 'fas fa-eye',
       children : [
         {
-          name : 'Registro Acciones',
-          url : '/#/auditoria-sri/registro-acciones'
-        },
-        {
           name : 'Totalizados',
           url : '/#/auditoria-sri/totalizados'
         }
