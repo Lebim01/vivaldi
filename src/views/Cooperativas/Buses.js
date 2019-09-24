@@ -14,10 +14,10 @@ class Buses extends React.Component {
 
                                     searchable={true}
                                     searchPlaceholder="Cooperativa, Placa, Disco"
-                                    searchFields={['cooperativa_nombre', 'placa', 'numero']}
+                                    searchFields={['cooperativa_nombre', 'placa', 'disco']}
 
                                     fieldNames={['Cooperativa', 'Placa', 'Disco']}
-                                    fields={['cooperativa_nombre', 'placa', 'numero']}
+                                    fields={['cooperativa_nombre', 'placa', 'disco']}
 
                                     endpoint='bus'
                                     urlFront='cooperativas/buses'

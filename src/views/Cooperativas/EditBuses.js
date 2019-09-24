@@ -80,10 +80,10 @@ class MainView extends React.Component {
             <EditPage title={`${id ? 'Editar' : 'Crear'} Bus`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
                 <FormValidate className="mt-4 form-horizontal">
                     <FormElementValidate
-                        label={{text:'Número'}}
+                        label={{text:'Disco'}}
                         input={{
-                            name : 'numero',
-                            element: <Input onChange={this.onChange('numero')} value={this.props.numero} />
+                            name : 'disco',
+                            element: <Input onChange={this.onChange('disco')} value={this.props.disco} />
                         }}
                         validator={{
                             validationRules: { required : true, number: true, minRangeNumber : 1, maxRangeNumber : 1000 },

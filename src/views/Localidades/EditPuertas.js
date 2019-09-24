@@ -122,10 +122,10 @@ class MainView extends React.Component {
                         }}
                     />
                     <FormElementValidate
-                        label={{text:'Número'}}
+                        label={{text:'Nombre'}}
                         input={{
-                            name : 'numero',
-                            element: <Input onChange={this.onChange('numero')} value={this.props.numero} />
+                            name : 'nombre',
+                            element: <Input onChange={this.onChange('nombre')} value={this.props.nombre} />
                         }}
                         validator={{
                             validationRules: {required:true},
