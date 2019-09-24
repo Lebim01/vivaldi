@@ -27,7 +27,7 @@ class Input extends React.Component {
             const value = Number(e.target.value)
 
             if(modeNumber){
-                if(!ModeNumber[modeNumber]){
+                if(!ModeNumber[modeNumber](value)){
                     e.preventDefault()
                     return false
                 }
@@ -61,6 +61,7 @@ class Input extends React.Component {
                 return false
             }
             if(['integer', 'positive_integer'].includes(modeNumber)){
+                // - || .
                 if(e.keyCode === 189 || e.keyCode === 190){
                     e.preventDefault()
                     return false
