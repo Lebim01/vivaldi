@@ -49,7 +49,9 @@ function getAsientos(nivel, _filas, init = false){
         let filasMenos = filas-_filas 
 
         // elimina la cantidad de asientos equivalente a la cantidad de filas a eliminar multiplicada por 4
+        _asientos = _asientos.reverse()
         _asientos.splice(0, (4*filasMenos))
+        _asientos = _asientos.reverse()
     }
     return _asientos
 }
