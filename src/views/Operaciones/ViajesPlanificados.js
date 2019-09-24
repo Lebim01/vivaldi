@@ -5,8 +5,16 @@ import moment from 'moment'
 
 class ViajesPlanificados extends React.Component {
 
+    inverval = null
     state = {
         fecha: moment().format('YYYY-MM-DD HH:mm:ss')
+    }
+
+    componentDidMount(){
+        this.interval = setInterval(this.refresh, 3 * 1000)
+    }
+    componentWillUnmount(){
+        clearInterval(this.interval)
     }
 
     optionsCooperativa = {
@@ -39,7 +47,7 @@ class ViajesPlanificados extends React.Component {
         })
     }
 
-    refresh(){
+    refresh = () => {
         this.setState({
             fecha: moment().format('YYYY-MM-DD HH:mm:ss'),
             refresh: true
