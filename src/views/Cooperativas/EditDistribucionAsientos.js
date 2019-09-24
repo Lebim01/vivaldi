@@ -100,7 +100,7 @@ class Piso extends React.Component {
                     label={{text:'Filas'}}
                     input={{
                         name : 'filas',
-                        element: <Input type="number" min="1" max="20" onChange={(e) => this.onChange('filas', e)} value={filas} />
+                        element: <Input type="number" min="1" max="20" modeNumber="positive_integer" onChange={(e) => this.onChange('filas', e)} value={filas} />
                     }}
                     validator={{
                         validationRules: { required : true, number: true, minRangeNumber : 1, maxRangeNumber : 20 },

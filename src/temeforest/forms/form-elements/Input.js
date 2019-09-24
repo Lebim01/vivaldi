@@ -1,5 +1,13 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import FormGroup from './FormGroup'
+
+const ModeNumber = {
+    decimal : (value) => parseFloat(value) ? true : false,
+    integer : (value) => Number.isInteger(value),
+    positive_decimal : (value) => ModeNumber.decimal(value) && Number(value) >= 0,
+    positive_integer : (value) => ModeNumber.integer(value) && Number(value) >= 0
+}
 
 const styles = {
     rightLabel : {
@@ -13,10 +21,18 @@ const styles = {
 class Input extends React.Component {
 
     onChange = (e) => {
-        const { type, onChange, min, max } = this.props
+        const { type, onChange, modeNumber, min, max } = this.props
 
         if(type === 'number'){
             const value = Number(e.target.value)
+
+            if(modeNumber){
+                if(!ModeNumber[modeNumber]){
+                    e.preventDefault()
+                    return false
+                }
+            }
+
             if(min){
                 if(min > value){
                     e.preventDefault()
@@ -37,12 +53,18 @@ class Input extends React.Component {
     }
 
     onKeyDown = (e) => {
-        const { type, onKeyDown } = this.props
+        const { type, onKeyDown, modeNumber } = this.props
 
         if(type === 'number'){
             if(e.key === 'e'){
                 e.preventDefault()
                 return false
+            }
+            if(['integer', 'positive_integer'].includes(modeNumber)){
+                if(e.keyCode === 189 || e.keyCode === 190){
+                    e.preventDefault()
+                    return false
+                }
             }
         }
 
@@ -52,7 +74,7 @@ class Input extends React.Component {
     }
 
     render(){
-        const { type, helperText, rightLabel, error, className, value, onChange, keyDown, ...otherProps } = this.props
+        const { type, helperText, rightLabel, error, className, value, onChange, keyDown, modeNumber, ...otherProps } = this.props
         return (
             <FormGroup>
                 <input type={type} onKeyDown={this.onKeyDown} className={`form-control ${className} ${error ?'is-invalid':''}`} value={value || ''} onChange={this.onChange} {...otherProps}/>
@@ -63,12 +85,22 @@ class Input extends React.Component {
     }
 }
 
+Input.propTypes = {
+    modeNumber : PropTypes.oneOf([
+        'decimal',
+        'integer',
+        'positive_decimal',
+        'positive_integer'
+    ])
+}
+
 Input.defaultProps = {
     type : 'text',
     helperText : '',
     className : '',
     error : false,
-    value : ''
+    value : '',
+    modeNumber : 'decimal'
 }
 
 export default Input
