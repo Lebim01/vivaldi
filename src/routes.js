@@ -61,6 +61,7 @@ const Pendientes = React.lazy(() => import('views/Recaudaciones/Pendientes'))
 const Consultas = React.lazy(() => import('views/Recaudaciones/Consultas'))
 const TasasContingencia = React.lazy(() => import('views/Recaudaciones/TasasContingencia'))
 const VentaTasas = React.lazy(() => import('views/Recaudaciones/VentaTasas'))
+const BandejaTasaCooperativa = React.lazy(() => import('views/Recaudaciones/BandejaTasaCooperativa'))
 
 /** REPORTES */
 const PanelRecaudaciones = React.lazy(() => import('views/Reportes/PanelRecaudaciones'))
@@ -190,6 +191,7 @@ const routes = [
   { path: '/recaudaciones/pendientes', name: 'Pendientes', component: Pendientes, exact: true },
   { path: '/recaudaciones/consultas', name: 'Consultas', component: Consultas, exact: true },
   { path: '/recaudaciones/venta-tasas', name: 'Tasas contingencia', component: VentaTasas, exact: true },
+  { path: '/recaudaciones/bandeja-tasas-cooperativa', name: 'Bandeja tasas cooperativa', component: BandejaTasaCooperativa, exact: true },
 
   { path: '/auditoria/reportes-detallados', name: 'User Details', component: Page404 },
   { path: '/auditoria/registro-acciones', name: 'Registro de Acciones', component: RegistroAccion },

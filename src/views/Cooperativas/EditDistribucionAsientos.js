@@ -207,7 +207,7 @@ class MainView extends React.Component {
             <EditPage 
                 title={`${id ? 'Editar' : 'Crear'} Distribución de Asientos`} 
                 data={data} 
-                id={id} 
+                id={id}
                 urlFront={urlFront} 
                 endpoint={endpoint} 
                 history={this.props.history}

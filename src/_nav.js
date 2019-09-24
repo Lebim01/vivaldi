@@ -167,14 +167,6 @@ export default {
           name : 'Diarios',
           url : '/#/recaudaciones/diario'
         },
-        /*{
-          name : 'Pendientes',
-          url : '/#/recaudaciones/pendientes'
-        },
-        {
-          name : 'Consultas',
-          url : '/#/recaudaciones/consultas'
-        },*/
         {
           name : 'Tasas contingencia general',
           url : '/#/recaudaciones/tasas-contingencia'
