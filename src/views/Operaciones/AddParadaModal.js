@@ -76,19 +76,19 @@ class AddParadaModal extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-4">Llegada</Label>
                             <div className="col-sm-6">
-                                <InputIcon icon={<span>#</span>} type="number" onChange={this.onChange('orden_llegada')} value={this.state.data.orden_llegada} error={errors.includes('orden_llegada')} />
+                                <InputIcon icon={<span>#</span>} type="number" min="1" onChange={this.onChange('orden_llegada')} value={this.state.data.orden_llegada} error={errors.includes('orden_llegada')} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-4">Tarifa Normal</Label>
                             <div className="col-sm-6">
-                                <InputIcon icon={<i className="fas fa-dollar-sign"/>} type="number" onChange={this.onChange('tarifa_normal')} value={this.state.data.tarifa_normal} error={errors.includes('tarifa_normal')} />
+                                <InputIcon icon={<i className="fas fa-dollar-sign"/>} type="number" step="0.1" onChange={this.onChange('tarifa_normal')} value={this.state.data.tarifa_normal} error={errors.includes('tarifa_normal')} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-4">Tarifa Media</Label>
                             <div className="col-sm-6">
-                                <InputIcon icon={<i className="fas fa-dollar-sign"/>} type="number" onChange={this.onChange('tarifa_media')} value={this.state.data.tarifa_media} error={errors.includes('tarifa_media')} />
+                                <InputIcon icon={<i className="fas fa-dollar-sign"/>} type="number" step="0.1" onChange={this.onChange('tarifa_media')} value={this.state.data.tarifa_media} error={errors.includes('tarifa_media')} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">

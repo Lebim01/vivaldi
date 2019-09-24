@@ -205,10 +205,10 @@ export default {
           name : 'Reporte Tasas Generadas y vendidas',
           url : '/#/reportes/tasas-contingencia-general'
         },
-        {
+        /*{
           name : 'Vendidos por cooperativa',
           url : '/#/reportes/vendidos-cooperativa'
-        },
+        },*/
         {
           name : 'Reporte boletos y tasas',
           url : '/#/reportes/reporte-boletos-tasas'
