@@ -68,7 +68,8 @@ class EditPage extends React.Component {
                 id,
                 endpoint,
                 text: '¿Seguro de eliminar?',
-                params : data
+                params : data,
+                method : 'delete'
             }
 
             if(await confirmEndpoint(options)){

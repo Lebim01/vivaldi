@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListPage, Card, CardBody, CardTitle, FormGroup, Label, Select, Input } from 'temeforest'
+import { ListPage, Card, CardBody, CardTitle, FormGroup, Label, Select, Input, Button } from 'temeforest'
 import { baseurl } from 'utils/url'
 
 class Frecuencias extends React.Component {
@@ -30,6 +30,10 @@ class Frecuencias extends React.Component {
         })
     }
 
+    nuevo = () => {
+        this.props.history.push('/operaciones/frecuencias/edit?')
+    }
+
     render(){
         return (
             <div className="animated fadeIn">
@@ -37,7 +41,12 @@ class Frecuencias extends React.Component {
                     <div className="col-sm-12">
                         <Card>
                             <CardBody>
-                                <CardTitle>Listado de Frecuencias</CardTitle>
+                                <CardTitle>
+                                    Listado de Frecuencias
+                                    <Button className="pull-right" onClick={this.nuevo}>
+                                        <i className="fa fa-plus" />
+                                    </Button>
+                                </CardTitle>
                                 <br/>
                                 <div className="row">
                                     <div className="col-sm-4">
