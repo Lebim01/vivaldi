@@ -26,7 +26,7 @@ class Input extends React.Component {
         if(type === 'number'){
             const value = Number(e.target.value)
 
-            if(modeNumber){
+            if(modeNumber && ModeNumber[modeNumber]){
                 if(!ModeNumber[modeNumber](value)){
                     e.preventDefault()
                     return false
