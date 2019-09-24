@@ -5,7 +5,7 @@ import moment from 'moment'
 
 class ViajesPlanificados extends React.Component {
 
-    inverval = null
+    interval = null
     state = {
         fecha: moment().format('YYYY-MM-DD HH:mm:ss')
     }

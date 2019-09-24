@@ -14,6 +14,12 @@ class MainView extends React.Component {
         valueName: 'id'
     }
 
+    optionsUsuario = {
+        url : `${baseurl}/usuario/`,
+        labelName: 'username',
+        valueName: 'id'
+    }
+
     optionsLocalidad = {
         url : `${baseurl}/localidad/`,
         labelName: 'nombre',
@@ -59,12 +65,6 @@ class MainView extends React.Component {
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
-                        <Label className="col-sm-3">Tipo de cooperativa</Label>
-                        <div className="col-sm-5">
-                            <Input value={this.props.tipo_cooperativa_nombre} onChange={this.onChange('tipo_cooperativa_nombre')} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
                         <Label className="col-sm-3">Usuario solicitante</Label>
                         <div className="col-sm-5">
                             <Input value={this.props.usuario_solicitante_nombre} onChange={this.onChange('usuario_solicitante_nombre')} />
@@ -91,15 +91,15 @@ class MainView extends React.Component {
                     <fieldset>
                         <legend>Datos de la solicitud</legend>
                         <FormGroup className="row">
-                            <Label className="col-sm-3">Cantidad pedida</Label>
+                            <Label className="col-sm-3">Usuario solicitante</Label>
                             <div className="col-sm-5">
-                                <Input value={this.props.cantidad_pedida} onChange={this.onChange('cantidad_pedida')} />
+                                <Select asyncOptions={this.optionsUsuario} value={this.props.usuario_solicitante} onChange={this.onChange('usuario_solicitante')} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
-                            <Label className="col-sm-3">Cantidad aprobada</Label>
+                            <Label className="col-sm-3">Cantidad pedida</Label>
                             <div className="col-sm-5">
-                                <Input value={this.props.cantidad_aprobada} onChange={this.onChangeCantidadAprobada} />
+                                <Input value={this.props.cantidad_pedida} onChange={this.onChange('cantidad_pedida')} />
                             </div>
                         </FormGroup>
                     </fieldset>
