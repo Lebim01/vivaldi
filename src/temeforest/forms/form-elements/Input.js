@@ -23,11 +23,15 @@ class Input extends React.Component {
     onChange = (e) => {
         const { type, modeNumber, onChange } = this.props
 
+        console.log('on change')
+
         // aplicar mode number automatico
         if(modeNumber && type === 'number'){
+            console.log(e.target.value)
             const regex_to_apply = REGEX[modeNumber]
             if(regex_to_apply){
                 if(!regex_to_apply.test(e.target.value)){
+                    console.log('fail')
                     e.preventDefault()
                     return false
                 }
@@ -40,19 +44,21 @@ class Input extends React.Component {
     }
 
     onKeyDown = (e) => {
-        const { onKeyDown, modeNumber } = this.props
+        const { type, onKeyDown, modeNumber } = this.props
 
-        if(e.target.type === 'number'){
+        console.log('on key down')
+
+        if(type === 'number'){
             if(e.key === 'e'){ 
                 e.preventDefault()
                 return false
             }
-        }
 
-        if(['integer', 'positive_integer'].includes(modeNumber)){
-            if(e.keyCode === 45 || e.keyCode === 189 || e.keyCode === 190){
-                e.preventDefault()
-                return false
+            if(['integer', 'positive_integer'].includes(modeNumber)){
+                if(e.keyCode === 45 || e.keyCode === 189 || e.keyCode === 190){
+                    e.preventDefault()
+                    return false
+                }
             }
         }
 
