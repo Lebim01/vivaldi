@@ -327,13 +327,13 @@ class MainView extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-4">Obligado a llevar contabilidad</Label>
                             <div className="col-sm-1">
-                                <Select options={this.sino}  value={this.props.obligado_contabilidad}  onChange={this.onChange('obligado_contabilidad')}/>
+                                <Select options={this.sino}  value={this.props.obligado_contabilidad} onChange={this.onChange('obligado_contabilidad')}/>
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-4">Contribuyente Especial</Label>
                             <div className="col-sm-1">
-                                <Select options={this.sino}  value={this.props.contribuyente_especial}  onChange={this.onChange('contribuyente_especial')}/>
+                                <Select options={this.sino}  value={this.props.contribuyente_especial} onChange={this.onChange('contribuyente_especial')}/>
                             </div>
                             <div className="col-sm-3">
                                 { this.props.contribuyente_especial ===  true && <Input onChange={this.onChange('contribuyente_especial_detalle')} value={this.props.contribuyente_especial_detalle} /> }

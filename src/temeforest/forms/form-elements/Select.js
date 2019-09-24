@@ -19,6 +19,21 @@ class Select extends React.Component {
         }
     }
 
+    getOptionProps = (option, prefix = '') => {
+        const { asyncOptions } = this.props
+
+        if(asyncOptions.optionProps){
+            let props = {}
+            for(let i in asyncOptions.optionProps){
+                let name_option = asyncOptions.optionProps[i]
+                props[`${prefix}${name_option}`] = option[name_option]
+            }
+            return props
+        }
+
+        return {}
+    }
+
     loadListAsync = async (props = null) => {
         const _props = props !== null ? props : this.props
         const { url, valueName, labelName } = typeof _props.asyncOptions === 'function' ? _props.asyncOptions() : _props.asyncOptions
@@ -29,7 +44,8 @@ class Select extends React.Component {
         let _options = [{value:'',label: this.props.defaultOption || 'Seleccione'}, ..._results.map((record) => {
             return {
                 value: record[valueName],
-                label: typeof labelName === 'function' ? labelName(record) : record[labelName]
+                label: typeof labelName === 'function' ? labelName(record) : record[labelName],
+                ...this.getOptionProps(record)
             }
         })]
         this.setState({
@@ -44,7 +60,7 @@ class Select extends React.Component {
             <FormGroup>
                 <select className={`form-control ${className} ${error ?'is-invalid':''}`} {...otherProps} {...(value !== undefined && value !== null ? { value } : { defaultValue : defaultValue || '' })}>
                     { asyncOptions 
-                        ? _options.map((o, i) => <option value={o.value} key={i}>{o.label}</option>)
+                        ? _options.map((o, i) => <option value={o.value} key={i} {...this.getOptionProps(o, 'data-')}>{o.label}</option>)
                         : options.map((o, i) => <option value={o.value} key={i}>{o.label}</option>) 
                     }
                 </select>

@@ -20,7 +20,8 @@ class MainView extends React.Component {
     optionsBusTipos = {
         url : `${baseurl}/busTipo/`,
         labelName: 'nombre',
-        valueName: 'id'
+        valueName: 'id',
+        optionProps: ['capacidad']
     }
     optionsBusTiposServicios = {
         url : `${baseurl}/busTipoServicio/`,
@@ -45,6 +46,11 @@ class MainView extends React.Component {
 
     onChange = name => (e) => {
         if(this.props.onChange){
+            if(name === 'bus_tipo'){
+                const select_tipo = e.target
+                const capacidad = select_tipo.options[select_tipo.options.selectedIndex].attributes['data-capacidad'].value
+                this.props.onChange('capacidad', capacidad)
+            }
             this.props.onChange(name, e.target.value)
         }
     }
