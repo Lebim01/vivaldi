@@ -14,10 +14,10 @@ class Puertas extends React.Component {
 
                                     searchable={true}
                                     searchPlaceholder="Nombre, Localidad, Nivel"
-                                    searchFields={['numero', 'localidad_nivel_nombre', 'localidad_nombre' ]}
+                                    searchFields={['nombre', 'localidad_nivel_nombre', 'localidad_nombre' ]}
 
                                     fieldNames={['Nombre', 'Localidad','Nivel']}
-                                    fields={['numero', 'localidad_nivel_nombre', 'localidad_nombre']}
+                                    fields={['nombre', 'localidad_nivel_nombre', 'localidad_nombre']}
 
                                     endpoint='puerta'
                                     urlFront='localidades/puertas'
