@@ -211,7 +211,7 @@ class MainView extends React.Component {
                         label={{text:'Ciudad'}}
                         input={{
                             name : 'ciudad',
-                            element: <Input onChange={this.onChange('ciudad')} value={this.props.ciudad} />
+                            element: <Select asyncOptions={this.optionsCiudades} onChange={this.onChange('ciudad')} value={this.props.ciudad} />
                         }}
                         validator={{
                             validationRules: {required:true},
@@ -346,20 +346,20 @@ class MainView extends React.Component {
                             </div>
                         </FormGroup>
                         { this.props.tieneFacturacionElectronica() &&
-                        <div>
-                          <FormGroup className="row">
-                            <Label className="col-sm-4">Ambiente Facturaci&oacute;n Electr&oacute;nica</Label>
-                            <div className="col-sm-2">
-                                <Select options={this.ambientes_elect} value={this.props.ambiente} onChange={this.onChange('ambiente')} />
+                            <div>
+                            <FormGroup className="row">
+                                <Label className="col-sm-4">Ambiente Facturaci&oacute;n Electr&oacute;nica</Label>
+                                <div className="col-sm-2">
+                                    <Select options={this.ambientes_elect} value={this.props.ambiente} onChange={this.onChange('ambiente')} />
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <Label className='col-sm-3'>Leyenda Ride</Label>
+                                <div className='col-sm-5'>
+                                    <Input type='textarea' rows='9' value={this.props.leyenda_ride} onChange={this.onChange('leyenda_ride')} />
+                                </div>
+                            </FormGroup>
                             </div>
-                          </FormGroup>
-                          <FormGroup className="row">
-                            <Label className='col-sm-3'>Leyenda Ride</Label>
-                            <div className='col-sm-5'>
-                                <Input type='textarea' rows='9' value={this.props.leyenda_ride} onChange={this.onChange('leyenda_ride')} />
-                            </div>
-                          </FormGroup>
-                        </div>
                         }
                     </fieldset>
                     <fieldset>
@@ -565,8 +565,13 @@ class EditLocalidades extends React.Component {
                 <Tabs tab={tab} tabs={tabs} onClickTab={this.changeTab}/>
                 <TabContent activeTab={tab}>
                     <TabPane tabId="main">
-                        <MainView id_localidad={id} {...data} onChange={this.onChange}
-                                onChangeLogo={this.onChangeLogo} tieneFacturacionElectronica={this.tieneFacturacionElectronica} />
+                        <MainView 
+                            {...data} 
+                            id_localidad={id} 
+                            onChange={this.onChange}
+                            onChangeLogo={this.onChangeLogo} 
+                            tieneFacturacionElectronica={this.tieneFacturacionElectronica} 
+                        />
                     </TabPane>
                     <TabPane tabId="firma">
                         <FirmaElectronicaForm {...data_firma} onChange={this.onChangeFirma} onChangeFile={this.onChangeFile} />

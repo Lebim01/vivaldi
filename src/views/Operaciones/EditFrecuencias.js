@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormGroup, Input, Select, Label, EditPage, FormValidate } from 'temeforest'
+import { FormGroup, Input, Select, Label, EditPage, FormValidate, FormElementValidate } from 'temeforest'
 import { baseurl, getParameter, objectToUrl } from 'utils/url'
 import axios from 'axios'
 
@@ -42,6 +42,11 @@ class MainView extends React.Component {
     ]
 
     onChange = name => (e) => {
+
+        if(name === 'cooperativa'){
+            this.props.onChange('ruta', '')
+        }
+
         if(this.props.onChange){
             this.props.onChange(name, e.target.value)
         }
@@ -62,38 +67,58 @@ class MainView extends React.Component {
 
     render(){
         return (
-            <div>
+            <EditPage title={`${this.props.id ? 'Editar' : 'Crear'} Frecuencias`} data={this.props.data} id={this.props.id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
                 <FormValidate className="mt-4 form-horizontal">
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Hora salida</Label>
-                        <div className="col-sm-5">
-                            <Input className="no-clear" type="time" onChange={this.onChange('hora_salida')} value={this.props.hora_salida} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Cooperativa</Label>
-                        <div className="col-sm-5">
-                            <Select onChange={this.onChange('cooperativa')} defaultOption="Todos" value={this.props.cooperativa} asyncOptions={this.optionsCooperativa} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Ruta</Label>
-                        <div className="col-sm-5">
-                            <Select onChange={this.onChange('ruta')} value={this.props.ruta} asyncOptions={this.optionsRutas({ cooperativa: this.props.cooperativa })} id="cmb_ruta" />
-                        </div>
-                    </FormGroup>
+                    <FormElementValidate
+                        label={{text:'Hora salida'}}
+                        input={{
+                            name : 'hora_salida',
+                            element: <Input className="no-clear" type="time" onChange={this.onChange('hora_salida')} value={this.props.hora_salida} />
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
+                    <FormElementValidate
+                        label={{text:'Cooperativa'}}
+                        input={{
+                            name : 'cooperativa',
+                            element: <Select onChange={this.onChange('cooperativa')} value={this.props.cooperativa} asyncOptions={this.optionsCooperativa} />
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
+                    <FormElementValidate
+                        label={{text:'Ruta'}}
+                        input={{
+                            name : 'ruta',
+                            element: <Select onChange={this.onChange('ruta')} value={this.props.ruta} asyncOptions={this.optionsRutas({ cooperativa: this.props.cooperativa })} id="cmb_ruta" />
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
                     <FormGroup className="row">
                         <Label className="col-sm-3">Destino</Label>
                         <div className="col-sm-5">
                             <Input readOnly value={this.props.destino} />
                         </div>
                     </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Tipo</Label>
-                        <div className="col-sm-5">
-                            <Select onChange={this.onChange('tipo')} value={this.props.tipo} options={this.tipos} />
-                        </div>
-                    </FormGroup>
+                    <FormElementValidate
+                        label={{text:'Tipo'}}
+                        input={{
+                            name : 'tipo',
+                            element: <Select onChange={this.onChange('tipo')} value={this.props.tipo} options={this.tipos} />
+                        }}
+                        validator={{
+                            validationRules: {required:true},
+                            validationMessages: {required:"El campo es requerido"}
+                        }}
+                    />
                     { Number(this.props.tipo) === 1 &&
                         <div className="row">
                             <div className="col-sm-3"></div>
@@ -120,7 +145,7 @@ class MainView extends React.Component {
                         </FormGroup>
                     }
                 </FormValidate>
-            </div>
+            </EditPage>
         )
     }
 }
@@ -178,9 +203,7 @@ class EditFrecuencias extends React.Component {
     render(){
         const { data, id } = this.state
         return (
-            <EditPage title={`${id ? 'Editar' : 'Crear'} Frecuencias`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history} noValidate>
-                <MainView {...data} onChange={this.onChange} />
-            </EditPage>
+            <MainView id={id} data={data} history={this.props.history} {...data} onChange={this.onChange} />
         )
     }
 }

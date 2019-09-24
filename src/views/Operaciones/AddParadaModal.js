@@ -3,6 +3,9 @@ import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { Button, FormGroup, InputIcon, Label, Select, FormValidate } from 'temeforest'
 import { baseurl } from 'utils/url'
 
+// positivos decimal
+const pattern = /[(\d+\.\d)|]/
+
 class AddParadaModal extends React.Component {
 
     state = { errors: [], data: {} }
@@ -22,8 +25,13 @@ class AddParadaModal extends React.Component {
     }
 
     onChange = name => (e) => {
+        if(['tarifa_normal', 'tarifa_media'].indexOf(name) !== -1){
+            if(`${e.target.value}`.search(pattern) !== 0) return false
+        }
+
         let data = this.state.data
         data[name] = e.target.value
+
         if(name === 'ciudad'){
             data.ciudad_nombre = e.target.options[e.target.selectedIndex].text
         }
@@ -58,8 +66,8 @@ class AddParadaModal extends React.Component {
     render(){
         const { errors } = this.state
         return (
-            <Modal isOpen={this.props.show} toggle={this.toggle.bind(this)}>
-                <ModalHeader toggle={this.toggle.bind(this)}>Agregar Parada</ModalHeader>
+            <Modal isOpen={this.props.show} toggle={this.toggle}>
+                <ModalHeader toggle={this.toggle}>Agregar Parada</ModalHeader>
                 <ModalBody>
                     <FormValidate className="mt-4 form-horizontal">
                         { errors.includes('repetido') &&
@@ -101,7 +109,7 @@ class AddParadaModal extends React.Component {
                 </ModalBody>
                 <ModalFooter>
                     <Button type="success" onClick={this.guardar}>Aceptar</Button>{' '}
-                    <Button type="secondary" onClick={this.toggle.bind(this)}>Cancelar</Button>
+                    <Button type="secondary" onClick={this.toggle}>Cancelar</Button>
                 </ModalFooter>
             </Modal>
         )

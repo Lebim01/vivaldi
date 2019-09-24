@@ -47,9 +47,9 @@ class FirmaElectronicaForm extends React.Component {
                             <Button type="success" style={{marginRight:5}} onClick={this.UploadFile}>Subir Firma</Button>
                         </div>
                         { this.props.file_firma_exist && 
-                        <div className="col-sm-4">
-                            <Badge className="mr-2" color="info">Ya existe una firma subida.</Badge>
-                        </div>
+                            <div className="col-sm-4">
+                                <Badge className="mr-2" color="info">Ya existe una firma subida.</Badge>
+                            </div>
                         }
                     </FormGroup>
                     <FormGroup className="row">
