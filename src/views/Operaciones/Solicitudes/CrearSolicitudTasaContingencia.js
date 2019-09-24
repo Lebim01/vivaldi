@@ -1,6 +1,6 @@
 import React from 'react'
 import { FormGroup, Input, Label, EditPage, FormValidate, Select } from 'temeforest'
-import { baseurl, getParameter } from 'utils/url'
+import { baseurl, getParameter, objectToUrl } from 'utils/url'
 import axios from 'axios'
 
 const urlFront = '/operaciones/solicitudes/tasas-contingencia/'
@@ -14,10 +14,12 @@ class MainView extends React.Component {
         valueName: 'id'
     }
 
-    optionsUsuario = {
-        url : `${baseurl}/usuario/`,
-        labelName: 'username',
-        valueName: 'id'
+    optionsUsuario = (obj) => {
+        return {
+            url : `${baseurl}/usuario/${objectToUrl(obj)}`,
+            labelName: 'username',
+            valueName: 'id'
+        }
     }
 
     optionsLocalidad = {
@@ -93,7 +95,7 @@ class MainView extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-3">Usuario solicitante</Label>
                             <div className="col-sm-5">
-                                <Select asyncOptions={this.optionsUsuario} value={this.props.usuario_solicitante} onChange={this.onChange('usuario_solicitante')} />
+                                <Select asyncOptions={this.optionsUsuario({ cooperativa: this.props.cooperativa })} value={this.props.usuario_solicitante} onChange={this.onChange('usuario_solicitante')} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
