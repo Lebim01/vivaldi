@@ -1,16 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import FormGroup from './FormGroup'
-
-const validInteger = (value) => {
-    return value % 1 ? true : false
-}
-
-const ranges = {
-    'integer' : validInteger,
-    'positive_decimal': (value) => value >= 0,
-    'positive_integer': (value) => validInteger(value) && value >= 0
-}
 
 const styles = {
     rightLabel : {

@@ -1,7 +1,6 @@
 import React from 'react'
 import { FormGroup, Input, Label, Tabs, FormValidate, EditPage, FormElementValidate } from 'temeforest'
 import { baseurl, getParameter } from 'utils/url'
-import { POSITIVE_NUMBER_INTEGER } from 'utils/regex'
 import axios from 'axios'
 
 import Fila from './DistribucionAsientos/Fila'
