@@ -3,6 +3,7 @@ import axios from 'axios'
 
 const baseurl = config.baseurl
 const baseMediaUrl = config.baseMediaUrl
+const einoviceUrl = config.einoviceUrl
 
 function getParameter(_name){
     let url_string = window.location.href
@@ -68,6 +69,7 @@ function canDownload(url){
 export {
     baseurl,
     baseMediaUrl,
+    einoviceUrl,
     getParameter,
     objectToUrl,
     getResults,

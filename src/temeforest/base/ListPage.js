@@ -15,7 +15,9 @@ const NumVisibleFooterPages = 5
 class RecordRow extends React.Component {
 
     onRowDoubleClick = () => {
-        this.props.onDoubleClick(this.props.record.id)
+        if (this.props.onDoubleClick){
+            this.props.onDoubleClick(this.props.record.id)
+        }     
     }
 
     render(){
@@ -316,4 +318,4 @@ ListPage.defaultProps = {
     head : []
 }
 
-export default ListPage
+export {ListPage, RecordRow}
