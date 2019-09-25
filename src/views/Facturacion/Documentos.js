@@ -219,6 +219,10 @@ class Documentos extends React.Component {
     }
     
     tipos_documentos = [
+        { 
+            value:'', 
+            label: 'Todos' 
+        },
         {
             value : 'FAC',
             label : 'Factura'
@@ -239,6 +243,13 @@ class Documentos extends React.Component {
         this.setState({
             refresh: true
         })
+    }
+
+    estados_electronicos = {
+        'firmado' : <div><i className="cui-pencil icons font-2xl d-block" id="firmado_label"></i><UncontrolledTooltip placement="top" target="firmado_label">Firmado</UncontrolledTooltip></div>,
+        'enviado_sri': <div><i className="cui-arrow-top icons font-2xl d-block" id="enviado_sri_label"></i><UncontrolledTooltip placement="top" target="enviado_sri_label">Enviado SRI</UncontrolledTooltip></div>,
+        'autorizado_sri': <div><i className="cui-task icons font-2xl d-block" id="autorizado_sri_label"></i><UncontrolledTooltip placement="top" target="autorizado_sri_label">Autorizado SRI</UncontrolledTooltip></div>,
+        'enviado_cliente': <div><i className="cui-envelope-letter icons font-2xl d-block" id="enviado_cliente_label"></i><UncontrolledTooltip placement="top" target="enviado_cliente_label">Correo Enviado</UncontrolledTooltip></div>,
     }
 
     render(){
@@ -284,11 +295,11 @@ class Documentos extends React.Component {
                 </div>
                 <CustomListPage
                     searchable={true}
-                    searchPlaceholder="Identificacion"
-                    searchFields={['identificacion_cliente']}
+                    searchPlaceholder="Identificacion, Apellidos, Nombres"
+                    searchFields={['identificacion_cliente', 'nombre_cliente']}
 
-                    fieldNames={['Fecha Emision', 'Tipo Documento', 'Numero', 'Identificacion', 'Firmado', 'Enviado SRI', 'Autorizado SRI', 'Envio correo']}
-                    fields={['fecha_emision', 'tipo_documento_display', 'numero', 'identificacion_cliente', 'firmado', 'enviado_sri', 'autorizado_sri', 'enviado']}
+                    fieldNames={['Fecha Emision', 'Tipo Documento', 'Numero', 'Persona', this.estados_electronicos['firmado'], this.estados_electronicos['enviado_sri'], this.estados_electronicos['autorizado_sri'], this.estados_electronicos['enviado_cliente']]}
+                    fields={['fecha_emision', 'tipo_documento_display', 'numero', 'nombre_cliente', 'firmado', 'enviado_sri', 'autorizado_sri', 'enviado']}
 
                     endpoint='venta/documentos'
                     urlFront='/facturacion/documentos'
