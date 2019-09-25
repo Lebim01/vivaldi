@@ -1,4 +1,4 @@
-import { Card, CardTitle, CardBody, CardSubtitle, ListPage, EditPage, ReportPage, FormElementValidate, FormValidate, ValidateContext, ApprovePage } from './base'
+import { Card, CardTitle, CardBody, CardSubtitle, ListPage, EditPage, ReportPage, FormElementValidate, FormValidate, ValidateContext, ApprovePage, RecordRow } from './base'
 import { Input, FormGroup, InputIcon, Select, Label, Tabs, DualList, TextArea, InputAutocomplete } from './forms'
 import { Button, ListGroup, ListItem, ListItemButton, Table } from './ui'
 import { BarChart, PieChart } from './charts'
@@ -10,6 +10,7 @@ export {
     CardBody, 
     CardSubtitle,
     ListPage,
+    RecordRow,
     EditPage,
     ReportPage,
     FormValidate,
