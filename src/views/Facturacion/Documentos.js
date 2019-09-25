@@ -69,21 +69,21 @@ class CustomRecordRow extends RecordRow {
                 })}
                 <td className="text-center">
                     <a href={this.goToFile('ride', record.tipo_documento ,record.facturacion_electronica_id)} target="_blank">
-                        <Button color="success" id="btn_ride" >
+                        <Button color="success" id={`btn_ride_${record.id}`} >
                             <i className="cui-file icons font-2xl d-block"></i>
                         </Button>
-                        <UncontrolledTooltip placement="top" target="btn_ride">Click para ver el ride</UncontrolledTooltip>
+                        <UncontrolledTooltip placement="top" target={`btn_ride_${record.id}`}>Click para ver el ride</UncontrolledTooltip>
                     </a>
                     <a href={this.goToFile('xml', record.tipo_documento ,record.facturacion_electronica_id)} target="_blank">
-                        <Button color="info" id="btn_xml">
+                        <Button color="info" id={`btn_xml_${record.id}`}>
                             <i className="cui-code icons font-2xl d-block"></i>
                         </Button>
-                        <UncontrolledTooltip placement="top" target="btn_xml">Click para ver xml</UncontrolledTooltip>
+                        <UncontrolledTooltip placement="top" target={`btn_xml_${record.id}`}>Click para ver xml</UncontrolledTooltip>
                     </a>
-                    <Button color="danger" id="btn_ndc" onClick={() => this.generateRefound(record)} disabled={!record.puede_generar_notacredito}>
+                    <Button color="danger" id={`btn_ndc_${record.id}`} onClick={() => this.generateRefound(record)} disabled={!record.puede_generar_notacredito}>
                         <i className="cui-action-undo icons font-2xl d-block"></i>
                     </Button>
-                    <UncontrolledTooltip placement="top" target="btn_ndc">Click para emitir Nota de Credito</UncontrolledTooltip>
+                    <UncontrolledTooltip placement="top" target={`btn_ndc_${record.id}`}>Click para emitir Nota de Credito</UncontrolledTooltip>
                 </td>
             </tr>
         )
