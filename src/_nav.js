@@ -150,8 +150,8 @@ export default {
       icon: 'fas fa-file-alt',
       children: [
         {
-          name: 'Pasajeros',
-          url: '/#/facturacion/pasajeros'
+          name: 'Personas',
+          url: '/#/facturacion/personas'
         },
         {
           name: 'Documentos',

@@ -163,8 +163,8 @@ const routes = [
   { path: '/operaciones/solicitudes/tasas-contingencia/edit', name: 'Crear/Editar Solicitud de Tasas de Contingencia', component: EditSolicitudTasaContingencia, exact: true },
   { path: '/operaciones/solicitudes/tasas-contingencia/add', name: 'Crear Solicitud de Tasas de Contingencia', component: CrearSolicitudTasaContingencia, exact: true },
 
-  { path: '/facturacion/pasajeros', name: 'Pasajeros', component: Pasajeros, exact: true },
-  { path: '/facturacion/pasajeros/edit', name: 'Crear/Editar Pasajero', component: EditPasajero, exact: true },
+  { path: '/facturacion/personas', name: 'Personas', component: Pasajeros, exact: true },
+  { path: '/facturacion/personas/edit', name: 'Crear/Editar Personas', component: EditPasajero, exact: true },
   { path: '/facturacion/documentos', name: 'Documentos', component: Documentos, exact: true },
 
   { path: '/reportes/panel', name: 'Panel de Recaudaciones', component: PanelRecaudaciones, exact: true },
