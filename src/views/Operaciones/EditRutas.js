@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, FormGroup, Input, Select, Label, EditPage, FormValidate } from 'temeforest'
-import { baseurl, getParameter } from 'utils/url'
+import { baseurl, getParameter, objectToUrl } from 'utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import AddParadaModal from './AddParadaModal'
@@ -55,6 +55,12 @@ class MainView extends React.Component {
         valueName: 'id'
     }
 
+    optionsAnden = ({ cooperativa, ...obj }) => ({    
+        url : `${baseurl}/anden/${objectToUrl({  cooperativas: cooperativa, ...obj })}`,
+        labelName : 'descripcion',
+        valueName : 'id'
+    })
+
     optionsDestinos = {
         url : `${baseurl}/ciudad/`,
         labelName: 'nombre',
@@ -65,6 +71,10 @@ class MainView extends React.Component {
         if(this.props.onChange){
             let value = e.target.value
             this.props.onChange(name, value)
+
+            if(name === 'cooperativa'){
+                this.props.onChange('anden', '')
+            }
         }
     }
 
@@ -141,6 +151,12 @@ class MainView extends React.Component {
                         <Label className="col-sm-3">Cooperativa</Label>
                         <div className="col-sm-5">
                             <Select onChange={this.onChange('cooperativa')} defaultOption="Todos" value={this.props.cooperativa} asyncOptions={this.optionsCooperativa} />
+                        </div>
+                    </FormGroup>
+                    <FormGroup className="row">
+                        <Label className="col-sm-3">Anden</Label>
+                        <div className="col-sm-5">
+                            <Select onChange={this.onChange('anden')} value={this.props.anden} asyncOptions={this.optionsAnden({ cooperativa: this.props.cooperativa })} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">

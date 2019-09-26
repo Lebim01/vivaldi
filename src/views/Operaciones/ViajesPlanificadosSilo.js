@@ -24,7 +24,7 @@ class ViajesPlanificadosSilo extends React.Component {
     }
     optionsSilo = {
         url : `${baseurl}/silo/`,
-        labelName: 'nombre',
+        labelName: 'descripcion',
         valueName: 'id' 
     }
     optionsLocalidad = {
