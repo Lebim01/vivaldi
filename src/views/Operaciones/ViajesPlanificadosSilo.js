@@ -20,17 +20,17 @@ class ViajesPlanificadosSilo extends React.Component {
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
         labelName: 'nombre',
-        valueName: 'id' 
+        valueName: 'id'
     }
     optionsSilo = {
         url : `${baseurl}/silo/`,
         labelName: 'descripcion',
-        valueName: 'id' 
+        valueName: 'id'
     }
     optionsLocalidad = {
         url : `${baseurl}/localidad/`,
         labelName: 'nombre',
-        valueName: 'id' 
+        valueName: 'id'
     }
 
     estados = [
@@ -40,7 +40,7 @@ class ViajesPlanificadosSilo extends React.Component {
 
     onChange = name => (e) => {
         let value = e.target.value
-        if(e.target.type === 'checkbox') value = e.target.checked
+        //if(e.target.type === 'checkbox') value = e.target.checked
 
         this.setState({
             [name]: value
@@ -90,24 +90,6 @@ class ViajesPlanificadosSilo extends React.Component {
                                             <Label className="col-sm-3">Silo</Label>
                                             <div className="col-sm-8">
                                                 <Select asyncOptions={this.optionsSilo} onChange={this.onChange('silo')} value={silo}/>
-                                            </div>
-                                        </FormGroup>
-                                        <FormGroup className="row">
-                                            <div className="col-sm-3"></div>
-                                            <div className="col-sm-9">
-                                                <div className="custom-control custom-checkbox">
-                                                    <input type="checkbox" className="custom-control-input" id="saldo" name="saldo" checked={this.state.saldo} onChange={this.onChange('saldo')} />
-                                                    <Label onlyClassName="custom-control-label" htmlFor="saldo">Mostrar saldo</Label>
-                                                </div>
-                                            </div>
-                                        </FormGroup>
-                                        <FormGroup className="row">
-                                            <div className="col-sm-3"></div>
-                                            <div className="col-sm-9">
-                                                <div className="custom-control custom-checkbox">
-                                                    <input type="checkbox" className="custom-control-input" id="horas_conduccion" name="horas_conduccion" checked={this.state.horas_conduccion} onChange={this.onChange('horas_conduccion')} />
-                                                    <Label onlyClassName="custom-control-label" htmlFor="horas_conduccion">Mostrar horas de conducción</Label>
-                                                </div>
                                             </div>
                                         </FormGroup>
                                     </div>

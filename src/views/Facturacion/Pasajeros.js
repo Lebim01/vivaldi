@@ -10,7 +10,7 @@ class Pasajeros extends React.Component {
                         <Card>
                             <CardBody>
                                 <ListPage
-                                    title="Listado de Pasajeros"
+                                    title="Listado de Personas"
 
                                     searchable={true}
                                     searchPlaceholder="Identificación, Apellidos, Nombres"
@@ -19,8 +19,8 @@ class Pasajeros extends React.Component {
                                     fieldNames={['Identificación', 'Apellidos', 'Nombres']}
                                     fields={['identificacion', 'apellidos', 'nombres']}
 
-                                    endpoint='pasajero'
-                                    urlFront='facturacion/pasajeros'
+                                    endpoint='persona'
+                                    urlFront='facturacion/personas'
                                     history={this.props.history}
                                 />
                             </CardBody>

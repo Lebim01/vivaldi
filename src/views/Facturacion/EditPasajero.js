@@ -4,10 +4,10 @@ import { baseurl, getParameter } from 'utils/url'
 import axios from 'axios'
 import EditPersona from 'views/Cooperativas/EditPersona'
 
-const endpoint = 'pasajero'
-const urlFront = '/facturacion/pasajeros'
+const endpoint = 'persona'
+const urlFront = '/facturacion/personas'
 
-class EditCiudad extends React.Component {
+class EditPasajero extends React.Component {
 
     state = {data:{}}
 
@@ -31,12 +31,9 @@ class EditCiudad extends React.Component {
         })
     }
 
-    onChange = name => (e) => {
-        let data = this.state.data
-        data[name] = e.target.value
-        this.setState({
-            data
-        })
+    onChange = name => (value) => {
+        const data = value;
+        this.setState({data})
     }
 
     optionsProvincias = {
@@ -49,10 +46,10 @@ class EditCiudad extends React.Component {
         const { id, data } = this.state
         return (
             <EditPage title={`${id ? 'Editar' : 'Crear'} Pasajero`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
-                <EditPersona />
+                <EditPersona  id={id} editable={true} onChange={this.onChange('data')}/>  
             </EditPage>
         )
     }
 }
 
-export default EditCiudad
+export default EditPasajero
