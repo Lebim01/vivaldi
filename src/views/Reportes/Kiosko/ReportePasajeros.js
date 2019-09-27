@@ -14,7 +14,7 @@ const formato = (props) => {
         <div>
             <div>
                 <h3>${props.localidad_nombre}</h3>
-                <h3>"${moment(`${props.fecha} ${props.hora_salida}`).format('D [de] MMMM')}"</h3>
+                <h3>"${props.cooperativa_nombre}"</h3>
                 <h3>Pasajeros en Viaje</h3>
                 <h4>
                     <table>
