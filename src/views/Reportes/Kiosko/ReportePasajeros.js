@@ -26,7 +26,7 @@ class ReportePasajeros extends React.Component {
                     history={this.props.history}
                 />
                 <br/>
-                <Button style={{backgroundColor: '#29bbe3', height:50, width: 200}} onClick={this.props.back}>
+                <Button style={{backgroundColor: '#069bd3', height:50, width: 200}} onClick={this.props.back}>
                     Atrás
                 </Button>
             </div>
