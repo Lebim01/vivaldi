@@ -31,7 +31,7 @@ class EditPasajero extends React.Component {
         })
     }
 
-    onChange = name => (value) => {
+    onChange = async (value) => {
         const data = value;
         this.setState({data})
     }
@@ -45,8 +45,8 @@ class EditPasajero extends React.Component {
     render(){
         const { id, data } = this.state
         return (
-            <EditPage title={`${id ? 'Editar' : 'Crear'} Pasajero`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
-                <EditPersona  id={id} editable={true} onChange={this.onChange('data')}/>  
+            <EditPage title={`${id ? 'Editar' : 'Crear'} Persona`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
+                <EditPersona id={this.state.data.id ? this.state.data.id : null} editable={true} onChange={this.onChange}/>  
             </EditPage>
         )
     }
