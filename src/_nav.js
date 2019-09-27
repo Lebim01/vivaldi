@@ -217,10 +217,10 @@ export default {
           name : 'Salida de viajes',
           url : '/#/reportes/salida-de-viajes'
         },
-        {
+        /*{
           name : 'Pasajeros por viaje',
           url : '/#/reportes/pasajeros-por-viaje'
-        },
+        },*/
         {
           name : 'Viajes por bus',
           url : '/#/reportes/viajes-por-bus'
