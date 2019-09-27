@@ -67,27 +67,9 @@ class MainView extends React.Component {
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
-                        <Label className="col-sm-3">Usuario solicitante</Label>
-                        <div className="col-sm-5">
-                            <Input value={this.props.usuario_solicitante_nombre} onChange={this.onChange('usuario_solicitante_nombre')} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Tipo solicitud</Label>
-                        <div className="col-sm-5">
-                            <Select options={this.optionsTipoSolicitud} value={this.props.tipo_solicitud} onChange={this.onChange('tipo_solicitud')} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
                         <Label className="col-sm-3">Descripción</Label>
                         <div className="col-sm-5">
                             <Input value={this.props.descripcion} onChange={this.onChange('descripcion')} />
-                        </div>
-                    </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Fecha y hora</Label>
-                        <div className="col-sm-5">
-                            <Input type="date" value={this.props.fecha} onChange={this.onChange('fecha')} />
                         </div>
                     </FormGroup>
                     <fieldset>
@@ -95,7 +77,7 @@ class MainView extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-3">Usuario solicitante</Label>
                             <div className="col-sm-5">
-                                <Select asyncOptions={this.optionsUsuario({ cooperativa: this.props.cooperativa })} value={this.props.usuario_solicitante} onChange={this.onChange('usuario_solicitante')} />
+                                <Select asyncOptions={this.optionsUsuario({ cooperativa: this.props.cooperativa, tipo: 2 })} value={this.props.usuario_solicitante} onChange={this.onChange('usuario_solicitante')} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
