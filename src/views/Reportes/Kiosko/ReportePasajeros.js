@@ -1,33 +1,37 @@
 import React from 'react'
 import { ListPage, Button } from 'temeforest'
 import { printHtml } from 'utils/exportData'
+import { baseurl } from 'utils/url'
+import { moneyFormat } from 'utils/number'
 import moment from 'moment'
+import 'moment/locale/es'
+import axios from 'axios'
 
 const formato = (props) => {
     return `
         <div>
             <div>
-                <h3>TTG</h3>
-                <h3>"7 de Noviembre"</h3>
+                <h3>${props.localidad_nombre}</h3>
+                <h3>"${moment(`${props.fecha} ${props.hora_salida}`).format('D [de] MMMM')}"</h3>
                 <h3>Pasajeros en Viaje</h3>
                 <h4>
                     <table>
                         <tbody>
                             <tr>
                                 <th>Disco/Placa:</th>
-                                <td>${props.disco} / S/P</td>
+                                <td>${props.bus_disco} / ${props.bus_placa}</td>
                             </tr>
                             <tr>
-                                <th>EmisiÃ³n:</th>
-                                <td>26/09/2019 10:30</td>
+                                <th>Emisión:</th>
+                                <td>${moment().format('DD/MM/YYYY HH:mm:ss')}</td>
                             </tr>
                             <tr>
                                 <th>Destino:</th>
-                                <td>Pajan</td>
+                                <td>${props.viaje_destino}</td>
                             </tr>
                             <tr>
                                 <th>Viaje:</th>
-                                <td>6890444</td>
+                                <td>${props.viaje_codigo}</td>
                             </tr>
                             <tr>
                                 <th>Salida:</th>
@@ -36,20 +40,20 @@ const formato = (props) => {
                                 </td>
                             </tr>
                             <tr>
-                                <th>DueÃ±o:</th>
-                                <td>generico</td>
+                                <th>Dueño:</th>
+                                <td>${props.propietario}</td>
                             </tr>
                             <tr>
                                 <th>Conductor:</th>
-                                <td>jonathan Prueba</td>
+                                <td>${props.viaje_conductor}</td>
                             </tr>                        
                             <tr>
                                 <th>Usuario:</th>
-                                <td>skyrock</td>
+                                <td>${props.vendedor}</td>
                             </tr>
                             <tr>
                                 <th>Forma de pago:</th>
-                                <td>Todos</td>
+                                <td>${props.forma_pago}</td>
                             </tr>
                             
                         </tbody>
@@ -67,72 +71,27 @@ const formato = (props) => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td rowspan="2">3</td>
-                                <td>0000000000</td>
-                                <td>Cascol</td>
-                            </tr>
-                            <tr style="border-bottom:1px solid">
-                                <td>Consumidor Final</td>
-                                <td>$2,50</td>
-                            </tr>
-                        
-                            <tr>
-                                <td rowspan="2">8</td>
-                                <td>0000000000</td>
-                                <td>Cascol</td>
-                            </tr>
-                            <tr style="border-bottom:1px solid">
-                                <td>Consumidor Final</td>
-                                <td>$2,50</td>
-                            </tr>
-                            <tr>
-                                <td rowspan="2">9</td>
-                                <td>0000000000</td>
-                                <td>Cascol</td>
-                            </tr>
-                            <tr style="border-bottom:1px solid">
-                                <td>Consumidor Final</td>
-                                <td>$2,50</td>
-                            </tr>
-                        
-                            <tr>
-                                <td rowspan="2">13</td>
-                                <td>0000000000</td>
-                                <td>Cascol</td>
-                            </tr>
-                            <tr style="border-bottom:1px solid">
-                                <td>Consumidor Final</td>
-                                <td>$2,50</td>
-                            </tr>
-                            <tr>
-                                <td rowspan="2">14</td>
-                                <td>0000000000</td>
-                                <td>Cascol</td>
-                            </tr>
-                            <tr style="border-bottom:1px solid">
-                                <td>Consumidor Final</td>
-                                <td>$1,25</td>
-                            </tr>
-                            <tr>
-                                <td rowspan="2">15</td>
-                                <td>0000000000</td>
-                                <td>Cascol</td>
-                            </tr>
-                            <tr style="border-bottom:1px solid">
-                                <td>Consumidor Final</td>
-                                <td>$1,25</td>
-                            </tr>
+                            ${props.pasajeros.map((p) => `
+                                <tr>
+                                    <td rowspan="2">${p.asiento}</td>
+                                    <td>${p.factura}</td>
+                                    <td>${p.parada}</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid">
+                                    <td>${p.persona}</td>
+                                    <td>$${p.precio}</td>
+                                </tr>  
+                            `)}
                         </tbody>
                     </table>
                     <table>
                         <tbody><tr>
                             <td>Total Pasajeros:</td>
-                            <td>6</td>
+                            <td>${props.pasajeros.length}</td>
                         </tr>
                         <tr>
                             <td>Total Vendido:</td>
-                            <td>$12,50</td>
+                            <td>$${props.total}</td>
                         </tr>
                         <tr>
                             <td colspan="2">.</td>
@@ -151,16 +110,25 @@ const formato = (props) => {
                     </tbody>
                 </table>
             </div>
-            <div><p>_</p></div>
         </div>
     `
 }
 
 class ReportePasajeros extends React.Component {
 
+    getFormato = async (props) => {
+        try {
+            const response = await axios.get(`${baseurl}/venta/pasajeros-por-viaje/?viaje=${props.viaje}`)
+            const formato_html = formato({ ...response.data[0], ...props })
+            printHtml(formato_html)
+        }catch(e){
+
+        }
+    }
+
     imprimir = (row) => {
         return (
-            <Button outline onClick={() => printHtml(formato(row))}>
+            <Button outline onClick={() => this.getFormato(row)}>
                 <i className="fa fa-print"/> Imprimir
             </Button>
         )
