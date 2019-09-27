@@ -191,9 +191,7 @@ class EditFrecuencias extends React.Component {
             let select = document.getElementById('cmb_ruta')
             let index = select.selectedIndex
             if(index > 0){
-                let text = select.options[index].text
-                let destino = text.split('-')[1].trim()
-                this.onChange('destino', destino)
+                this.onChange('destino', select.options[index].text)
             }else{
                 this.onChange('destino', '')
             }
