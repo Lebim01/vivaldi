@@ -13,23 +13,23 @@ class ReportePasajeros extends React.Component {
 
     render(){
         return (
-            <>
-                <Button outline onClick={this.props.back}>
-                    <i className="fa fa-arrow-left"/> Volver
-                </Button>
-                <br/>
+            <div className="text-center">
                 <ListPage 
                     searchable={false}
 
                     fieldNames={['Disco', 'Hora entrada', 'Hora salida', 'Estado', 'Acción']}
                     fields={['bus_disco', 'hora_entrada', 'hora_salida', 'estado', this.imprimir]}
 
-                    endpoint={'viaje'}
+                    endpoint={'venta/viajes-planificados'}
                     parameters={{ cooperativa: this.props.cooperativa }}
                     
                     history={this.props.history}
                 />
-            </>
+                <br/>
+                <Button style={{backgroundColor: '#29bbe3', height:50, width: 200}} onClick={this.props.back}>
+                    Atrás
+                </Button>
+            </div>
         )
     }
 }
