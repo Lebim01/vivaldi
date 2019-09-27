@@ -325,13 +325,13 @@ class MainView extends React.Component {
                             }}
                         />
                         <FormGroup className="row">
-                            <Label className="col-sm-4">Obligado a llevar contabilidad</Label>
+                            <Label className="col-sm-3">Obligado a llevar contabilidad</Label>
                             <div className="col-sm-1">
                                 <Select options={this.sino}  value={this.props.obligado_contabilidad} onChange={this.onChange('obligado_contabilidad')}/>
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
-                            <Label className="col-sm-4">Contribuyente Especial</Label>
+                            <Label className="col-sm-3">Contribuyente Especial</Label>
                             <div className="col-sm-1">
                                 <Select options={this.sino}  value={this.props.contribuyente_especial} onChange={this.onChange('contribuyente_especial')}/>
                             </div>
@@ -340,7 +340,7 @@ class MainView extends React.Component {
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
-                            <Label className="col-sm-4">Emisi&oacute;n Facturas</Label>
+                            <Label className="col-sm-3">Emisi&oacute;n Facturas</Label>
                             <div className="col-sm-2">
                                 <Select options={this.tipos_emision} value={this.props.emision_facturacion} onChange={this.onChange('emision_facturacion')} />
                             </div>
@@ -348,7 +348,7 @@ class MainView extends React.Component {
                         { this.props.tieneFacturacionElectronica() &&
                             <div>
                             <FormGroup className="row">
-                                <Label className="col-sm-4">Ambiente Facturaci&oacute;n Electr&oacute;nica</Label>
+                                <Label className="col-sm-3">Ambiente Facturaci&oacute;n Electr&oacute;nica</Label>
                                 <div className="col-sm-2">
                                     <Select options={this.ambientes_elect} value={this.props.ambiente} onChange={this.onChange('ambiente')} />
                                 </div>
