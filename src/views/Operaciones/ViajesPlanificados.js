@@ -20,17 +20,17 @@ class ViajesPlanificados extends React.Component {
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
         labelName: 'nombre',
-        valueName: 'id' 
+        valueName: 'id'
     }
     optionsSilo = {
         url : `${baseurl}/silo/`,
         labelName: 'nombre',
-        valueName: 'id' 
+        valueName: 'id'
     }
     optionsLocalidad = {
         url : `${baseurl}/localidad/`,
         labelName: 'nombre',
-        valueName: 'id' 
+        valueName: 'id'
     }
 
     estados = [
@@ -105,8 +105,8 @@ class ViajesPlanificados extends React.Component {
                                             <div className="col-sm-3"></div>
                                             <div className="col-sm-9">
                                                 <div className="custom-control custom-checkbox">
-                                                    <input type="checkbox" className="custom-control-input" id="horas_conduccion" name="horas_conduccion" checked={this.state.horas_conduccion} onChange={this.onChange('horas_conduccion')} />
-                                                    <Label onlyClassName="custom-control-label" htmlFor="horas_conduccion">Mostrar horas de conducción</Label>
+                                                    <input type="checkbox" className="custom-control-input" id="tiempo_viaje" name="tiempo_viaje" checked={this.state.tiempo_viaje} onChange={this.onChange('tiempo_viaje')} />
+                                                    <Label onlyClassName="custom-control-label" htmlFor="tiempo_viaje">Mostrar tiempo de viaje</Label>
                                                 </div>
                                             </div>
                                         </FormGroup>
