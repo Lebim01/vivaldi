@@ -2,10 +2,12 @@ import React from 'react'
 import { ListPage, Button } from 'temeforest'
 import { printHtml } from 'utils/exportData'
 import { baseurl } from 'utils/url'
-import { moneyFormat } from 'utils/number'
 import moment from 'moment'
 import 'moment/locale/es'
 import axios from 'axios'
+
+import store from 'store/auth'
+const { user_info } = store.getState()
 
 const formato = (props) => {
     return `
@@ -41,7 +43,7 @@ const formato = (props) => {
                             </tr>
                             <tr>
                                 <th>Dueño:</th>
-                                <td>${props.propietario}</td>
+                                <td>${props.bus_dueno}</td>
                             </tr>
                             <tr>
                                 <th>Conductor:</th>
@@ -49,7 +51,7 @@ const formato = (props) => {
                             </tr>                        
                             <tr>
                                 <th>Usuario:</th>
-                                <td>${props.vendedor}</td>
+                                <td>${user_info.name ? user_info.name : user_info.username}</td>
                             </tr>
                             <tr>
                                 <th>Forma de pago:</th>
