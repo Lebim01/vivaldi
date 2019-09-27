@@ -52,6 +52,7 @@ class ViajesPlanificados extends React.Component {
             fecha: moment().format('YYYY-MM-DD HH:mm:ss'),
             refresh: true
         })
+        console.log(this.state)
     }
 
     render(){
