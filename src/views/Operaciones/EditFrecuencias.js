@@ -26,7 +26,7 @@ class MainView extends React.Component {
     optionsRutas = (obj) => {
         return {
             url : `${baseurl}/ruta/${objectToUrl(obj)}`,
-            labelName: (record) => `${record.origen.ciudad_nombre}-${record.destino.ciudad_nombre}`,
+            labelName: (record) => `${record.trayecto}`,
             valueName: 'id'
         }
     }
