@@ -107,8 +107,8 @@ class ViajesPlanificadosSilo extends React.Component {
                                 <div className="col-sm-12">
                                     <ListPage
                                         searchable={false}
-                                        fieldNames={['Hora','Cooperativa', 'Disco', 'Ruta', 'Anden', 'Estado']}
-                                        fields={['hora_salida', 'cooperativa', 'disco', 'ruta', 'anden', '']}
+                                        fieldNames={['Hora','Cooperativa', 'Disco', 'Destino', 'Anden', 'Estado']}
+                                        fields={['hora_salida', 'cooperativa', 'disco', 'destino', 'anden', '']}
 
                                         endpoint='venta/viajes-planificados-silos'
                                         parameters={this.state}
