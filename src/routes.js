@@ -99,6 +99,7 @@ const EditCiudad = React.lazy(() => import('views/Localidades/EditCiudad'))
 
 /** AUDITORIA */
 const RegistroAccion = React.lazy(() => import('views/Auditoria/RegistroAccion'))
+const EmisionPorCooperativa = React.lazy(() => import('views/Auditoria/EmisionPorCooperativa'))
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
@@ -199,7 +200,7 @@ const routes = [
 
   { path: '/auditoria/reportes-detallados', name: 'User Details', component: Page404 },
   { path: '/auditoria/registro-acciones', name: 'Registro de Acciones', component: RegistroAccion },
-  { path: '/auditoria/tipo-emision-cooperativas', name: 'User Details', component: Page404 },
+  { path: '/auditoria/tipo-emision-cooperativas', name: 'User Details', component: EmisionPorCooperativa, exact: true },
   { path: '/auditoria/permisos-roles', name: 'User Details', component: Page404 },
   { path: '/auditoria-sri/registro-acciones', name: 'User Details', component: Page404 },
   { path: '/auditoria-sri/totalizados', name: 'User Details', component: Page404 },
