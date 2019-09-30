@@ -275,7 +275,7 @@ class MainView extends React.Component {
                             label={{text:'Dirección Matriz'}}
                             input={{
                                 name : 'direccion_matriz',
-                                element: <Input direccion_matriz={this.onChange('direccion_matriz')} value={this.props.direccion_matriz} />
+                                element: <Input onChange={this.onChange('direccion_matriz')} value={this.props.direccion_matriz} />
                             }}
                             validator={{
                                 validationRules: {required:true},
