@@ -415,6 +415,7 @@ class EditCooperativas extends React.Component {
             localidades_andenes : {},
             asume_tasa : false,
             puede_anular : false,
+            omitir_pasajeros : false,
             usa_api : false,
             contribuyente_especial : 'no',
             obligado_contabilidad : 'no',
