@@ -25,24 +25,25 @@ class Input extends React.Component {
 
         if(type === 'number'){
             const value = Number(e.target.value)
-
-            if(modeNumber && ModeNumber[modeNumber]){
-                if(!ModeNumber[modeNumber](value)){
-                    e.preventDefault()
-                    return false
+            if(value){
+                if(modeNumber && ModeNumber[modeNumber]){
+                    if(!ModeNumber[modeNumber](value)){
+                        e.preventDefault()
+                        return false
+                    }
                 }
-            }
 
-            if(min){
-                if(min > value){
-                    e.preventDefault()
-                    return false
+                if(min){
+                    if(min > value){
+                        e.preventDefault()
+                        return false
+                    }
                 }
-            }
-            if(max){
-                if(max < value){
-                    e.preventDefault()
-                    return false
+                if(max){
+                    if(max < value){
+                        e.preventDefault()
+                        return false
+                    }
                 }
             }
         }

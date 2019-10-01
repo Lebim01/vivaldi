@@ -237,7 +237,7 @@ class MainView extends React.Component {
                         label={{text:'Tiempo de gracia'}}
                         input={{
                             name : 'tiempo_gracia',
-                            element: <Input type="number" onChange={this.onChange('tiempo_gracia')} value={this.props.tiempo_gracia} rightLabel="Minutos" max={60} />
+                            element: <Input type="number" onChange={this.onChange('tiempo_gracia')} value={this.props.tiempo_gracia} rightLabel="Minutos" min={1} max={60} />
                         }}
                         validator={{
                             validationRules: {required:true},
