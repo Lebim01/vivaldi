@@ -17,17 +17,17 @@ class ReporteBoletosTasas extends React.Component {
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
         labelName: 'nombre',
-        valueName: 'id' 
+        valueName: 'id'
     }
     optionsLocalidad = {
         url : `${baseurl}/localidad/`,
         labelName: 'nombre',
-        valueName: 'id' 
+        valueName: 'id'
     }
     optionsFormapago = {
         url : `${baseurl}/formaDePago/`,
         labelName: 'nombre',
-        valueName: 'id' 
+        valueName: 'id'
     }
 
     onChange = name => (e) => {
@@ -69,10 +69,10 @@ class ReporteBoletosTasas extends React.Component {
             refresh: true
         })
     }
-    
+
     render(){
         const { refresh } = this.state
-        
+
         return (
             <ReportPage title="Reporte de boletos por cooperativa">
                 <div className="row">
@@ -119,12 +119,12 @@ class ReporteBoletosTasas extends React.Component {
                         <ListPage
                             searchable={false}
 
-                            fieldNames={['Boleto normal', 'Boleto especial', 'Normal anulado', 'Especial anulado', 'Total boleto', 'Total tasa']}
-                            fields={['boleto_normal', 'boleto_especial', 'normal_anulado', 'especial_anulado', 'total_boleto', 'total_tasa']}
+                            fieldNames={['Cooperativa','Boleto normal', 'Boleto especial', 'Normal anulado', 'Especial anulado', 'Total boleto', 'Total tasa']}
+                            fields={['cooperativa','boleto_normal', 'boleto_especial', 'normal_anulado', 'especial_anulado', 'total_boleto', 'total_tasa']}
 
                             endpoint='recaudaciones/boletos-tasas'
                             parameters={this.state.filters}
-                            
+
                             history={this.props.history}
                             refresh={refresh}
                         />
@@ -139,7 +139,7 @@ class ReporteBoletosTasas extends React.Component {
 
                             data={this.state.data}
                             parameters={this.state.filters}
-                            
+
                             history={this.props.history}
                         />
                     </TabPane>
