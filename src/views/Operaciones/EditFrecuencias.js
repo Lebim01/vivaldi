@@ -57,7 +57,7 @@ class MainView extends React.Component {
 
 
         if(_dias.includes(index)){
-            _dias.splice(_dias.indexOf(index))
+            _dias.splice(_dias.indexOf(index), 1)
         }else{
             _dias.push(index)
         }

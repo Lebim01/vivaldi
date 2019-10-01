@@ -41,7 +41,7 @@ class EmisionPorCooperativa extends React.Component {
                     searchable={false}
 
                     fieldNames={['Cooperativa', 'Api', 'Sistema externo']}
-                    fields={['nombre', (row) => this.usaapi(row), 'sistema_externo']}
+                    fields={['nombre', this.usaapi, 'sistema_externo']}
 
                     endpoint='cooperativa'
                     parameters={this.state}
