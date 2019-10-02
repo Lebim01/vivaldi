@@ -175,13 +175,25 @@ class MainView extends React.Component {
                         <div className="col-sm-6">
                             <fieldset>
                                 <legend>Propietario</legend>
-                                <EditPersona lengthCedula={10} onChange={this.onChangeData('propietario')} id={this.props.propietario ? this.props.propietario.id : null} />
+                                <EditPersona 
+                                    lengthCedula={10} 
+                                    onChange={this.onChangeData('propietario')} 
+                                    persona={this.props.propietario}
+                                    id={this.props.propietario ? this.props.propietario.id : null} 
+                                />
                             </fieldset>
                         </div>
                         <div className="col-sm-6">
                             <fieldset>
                                 <legend>Conductor</legend>
-                                <EditPersona lengthCedula={10} onChange={this.onChangeData('conductor')} id={this.props.conductor ? this.props.conductor.id : null} endpoint='conductor' editable={false} />
+                                <EditPersona 
+                                    lengthCedula={10} 
+                                    onChange={this.onChangeData('conductor')} 
+                                    persona={this.props.conductor}
+                                    id={this.props.conductor ? this.props.conductor.id : null} 
+                                    endpoint='conductor' 
+                                    editable={false} 
+                                />
                             </fieldset>
                         </div>
                     </div>
@@ -222,12 +234,6 @@ class EditBuses extends React.Component {
 
     getData = async (id) => {
         const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/`)
-        data.propietario = {
-            id: data.propietario.id
-        }
-        data.conductor = {
-            id: data.conductor.id
-        }
         this.setState({
             id,
             data

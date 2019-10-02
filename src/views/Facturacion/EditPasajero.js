@@ -46,7 +46,12 @@ class EditPasajero extends React.Component {
         const { id, data } = this.state
         return (
             <EditPage title={`${id ? 'Editar' : 'Crear'} Persona`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
-                <EditPersona id={this.state.data.id ? this.state.data.id : null} editable={true} onChange={this.onChange}/>  
+                <EditPersona 
+                    id={this.state.data.id ? this.state.data.id : null} 
+                    editable={true} 
+                    persona={this.state.data}
+                    onChange={this.onChange}
+                /> 
             </EditPage>
         )
     }

@@ -16,9 +16,8 @@ class EditPersona extends React.Component {
     componentWillReceiveProps(props){
         if(props.id !== this.state.id){
             this.setState({
-                id: props.id
+                data : props.persona
             })
-            this.getPersona(props.id)
         }
     }
     
@@ -148,6 +147,7 @@ EditPersona.defaultProps = {
     editable : true,
     lengthCedula : 10,
     endpoint: 'persona',
+    persona : {}
 }
 
 export default EditPersona

@@ -297,7 +297,13 @@ class EditUsuarios extends React.Component {
                                 )
                             }}
                         />
-                        <EditPersona lengthCedula={10} id={this.state.data.persona ? this.state.data.persona.id : null} readOnly={this.state.data.readOnlyPersona} onChange={this.onChangePersona} />
+                        <EditPersona 
+                            lengthCedula={10} 
+                            id={this.state.data.persona ? this.state.data.persona.id : null} 
+                            persona={this.state.data.persona}
+                            readOnly={this.state.data.readOnlyPersona} 
+                            onChange={this.onChangePersona} 
+                        />
                         <FormGroup className="row">
                             <Label className="col-sm-3">Tipo</Label>
                             <div className="col-sm-5">

@@ -155,7 +155,13 @@ class EditConductor extends React.Component {
                             <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this._onChange('cooperativa')} value={this.state.data.cooperativa} />
                         </div>
                     </FormGroup>
-                    <EditPersona lengthCedula={10} id={this.state.data.persona ? this.state.data.persona.id : null} readOnly={this.state.data.readOnlyPersona} onChange={this.onChangePersona} />
+                    <EditPersona 
+                        lengthCedula={10} 
+                        id={this.state.data.persona ? this.state.data.persona.id : null} 
+                        persona={this.state.data.persona}
+                        readOnly={this.state.data.readOnlyPersona} 
+                        onChange={this.onChangePersona} 
+                    />
                     <FormGroup className="row">
                       <Label className="col-sm-3">Tipo</Label>
                         <div className="col-sm-5">
