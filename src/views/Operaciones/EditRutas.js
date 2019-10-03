@@ -254,10 +254,21 @@ class EditRutas extends React.Component {
         })
     }
 
+    validation(data){
+        if(!data.paradas.length > 0){
+            return {
+                result : false,
+                message : 'Debe tener almenos una parada'
+            }
+        }
+
+        return true
+    }
+
     render(){
         const { data, id } = this.state
         return (
-            <EditPage title={`${id ? 'Editar' : 'Crear'} Rutas`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
+            <EditPage title={`${id ? 'Editar' : 'Crear'} Rutas`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history} customValidation={this.validation}>
                 <MainView {...data} onChange={this.onChange} />
             </EditPage>
         )

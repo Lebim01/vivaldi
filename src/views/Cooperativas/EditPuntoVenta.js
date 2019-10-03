@@ -2,10 +2,40 @@ import React from 'react'
 import { Button, FormGroup, Input, Label, Select, FormElementValidate, FormValidate, EditPage } from 'temeforest'
 import { baseurl, getParameter } from 'utils/url'
 import { generateHexadecimal } from 'utils/string'
+import Swal from 'sweetalert2'
+import AddCooperativaPuntoVentaModal from './AddCooperativaPuntoVentaModal'
 import axios from 'axios'
 
 const endpoint = 'venta/puntoventa'
 const urlFront = '/cooperativas/punto-venta'
+
+class RecordRow extends React.Component {
+
+    delete = () => {
+        if(this.props.delete){
+            this.props.delete()
+        }
+    }
+
+    render(){
+        return (
+            <tr onDoubleClick={this.props.onDoubleClick}>
+                <td>
+                    <Button outline={true} type="danger" size="sm" rounded={true} onClick={this.delete}>
+                        <i className="fa fa-times"></i>
+                    </Button>{' '}
+                    {this.props.cooperativa_nombre}
+                </td>
+                <td>{this.props.punto_emision_tasa}</td>
+                <td>{this.props.secuencia_tasa}</td>
+                <td>{this.props.punto_emision_boleto}</td>
+                <td>{this.props.secuencia_boleto}</td>
+                <td>{this.props.punto_emision_nota_credito}</td>
+                <td>{this.props.secuencia_nota_credito}</td>
+            </tr>
+        )
+    }
+}
 
 class MainView extends React.Component {
 
@@ -28,8 +58,12 @@ class MainView extends React.Component {
     onChange = name => (e) => {
         if(this.props.onChange){
             if(e.target.type === 'checkbox'){
-                if(name === 'externo' && !e.target.checked) {
-                    this.props.onChange('cooperativa', '')
+                if(name === 'externo') {
+                    if(e.target.checked){
+                        this.props.onChange('puntoventa_cooperativas', [])
+                    }else{
+                        this.props.onChange('cooperativa', '')
+                    }
                 }
 
                 this.props.onChange(name, e.target.checked)
@@ -37,6 +71,62 @@ class MainView extends React.Component {
                 this.props.onChange(name, e.target.value)
             }
         }
+    }
+
+    addCooperativa = () => {
+        this.setState({
+            modal : {
+                ...this.state.modal,
+                show : true
+            }
+        })
+    }
+
+    toggleModal = () => {
+        let _modal = this.state.modal
+        _modal.show = !_modal.show
+        this.setState({
+            modal : _modal
+        })
+    }
+
+    agregarCooperativa = (data) => {
+        let puntoventa_cooperativas = this.props.puntoventa_cooperativas
+        if(data.id){
+            for(let i = 0; i < puntoventa_cooperativas.length; i++){
+                if(puntoventa_cooperativas[i].id === data.id){
+                    puntoventa_cooperativas[i] = data
+                    break
+                }
+            }
+        }else{
+            puntoventa_cooperativas.push(data)
+        }
+        this.props.onChange('puntoventa_cooperativas', puntoventa_cooperativas)
+        this.toggleModal()
+    }
+
+    deleteCooperativa = async (index) => {
+        const {value} = await Swal.fire({
+            title: 'Confirmar',
+            text : '¿Seguro de borrar?',
+            showCancelButton: true,
+        })
+        if(value){
+            let puntoventa_cooperativas = this.props.puntoventa_cooperativas
+            puntoventa_cooperativas.splice(index, 1)
+            this.props.onChange('puntoventa_cooperativas', puntoventa_cooperativas)
+        }
+    }
+
+    editCooperativa = (row) => {
+        let modal = {
+            show : true,
+            ...row
+        }
+        this.setState({
+            modal,
+        })
     }
 
     generateHexadecimal = () => {
@@ -124,7 +214,50 @@ class MainView extends React.Component {
                             }}
                         />
                     }
+                    { !this.props.externo &&
+                        <>
+                            <Label className="col-sm-4">
+                                Cooperativas e Información tribunaria
+                                <Button size="sm" style={{marginLeft:5}} onClick={this.addCooperativa}>
+                                    <i className="fa fa-plus"></i>
+                                </Button>
+                            </Label>
+                            <div className="col-sm-12">
+                                <div className="table-responsive">
+                                    <table className="table table-hover table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Cooperativa</th>
+                                                <th scope="col">Punto<br/>(tasa)</th>
+                                                <th scope="col">Secuencia<br/>(tasa)</th>
+                                                <th scope="col">Punto<br/>(boleto)</th>
+                                                <th scope="col">Secuencia<br/>(boleto)</th>
+                                                <th scope="col">Punto<br/>(nota de crédito)</th>
+                                                <th scope="col">Secuencia<br/>(nota de crédito)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            { puntoventa_cooperativas.map((r, i) => 
+                                                <RecordRow 
+                                                    {...r} 
+                                                    key={i}
+                                                    onDoubleClick={() => this.editCooperativa(r)} 
+                                                    delete={() => this.deleteCooperativa(i)} 
+                                                />
+                                            ) }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </>
+
+                    }
                 </FormValidate>
+                <AddCooperativaPuntoVentaModal 
+                    guardar={this.agregarCooperativa} 
+                    {...this.state.modal} 
+                    toggle={this.toggleModal} 
+                />
             </div>
         )
     }

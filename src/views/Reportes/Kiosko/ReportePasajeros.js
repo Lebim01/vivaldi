@@ -11,6 +11,24 @@ const { user_info } = store.getState()
 
 const formato = (props) => {
     return `
+        <style>
+            /* 
+                Document   : print
+                Created on : 18-nov-2010, 14:48:05
+                Author     : fttg
+                Description:
+                    Purpose of the stylesheet follows.
+            */
+            
+            /* 
+            TODO customize this sample style
+            Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+            */
+            
+            .imprimir {visibility: hidden}
+            #tasa2 {width:35cm;}
+            #notaC {width:490px;}
+        </style>
         <div>
             <div>
                 <h3>${props.localidad_nombre}</h3>
