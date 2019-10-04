@@ -19,7 +19,7 @@ class Kiosko extends React.Component {
 
     loadList = async () => {
         try {
-            const res = await axios.get(`${baseurl}/cooperativa/?page_size=0`)
+            const res = await axios.get(`${baseurl}/venta/viajes-planificados/?page_size=0`)
             this.setState({
                 cooperativas: res.data
             })

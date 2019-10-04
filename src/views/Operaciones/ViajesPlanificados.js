@@ -2,6 +2,7 @@ import React from 'react'
 import { ListPage, Select, Label, FormGroup, Card, CardBody, CardTitle, Button } from 'temeforest'
 import { baseurl } from 'utils/url'
 import moment from 'moment'
+import Clock  from 'utils/clock'
 
 class ViajesPlanificados extends React.Component {
 
@@ -49,13 +50,13 @@ class ViajesPlanificados extends React.Component {
 
     refresh = () => {
         this.setState({
-            fecha: moment().format('YYYY-MM-DD HH:mm:ss'),
+
             refresh: true
         })
     }
 
     render(){
-        const { cooperativa, silo, localidad, estado, fecha } = this.state
+        const { cooperativa_nombre, silo, localidad, estado, fecha } = this.state
         return (
             <div className="animated fadeIn">
                 <div className="row">
@@ -69,7 +70,7 @@ class ViajesPlanificados extends React.Component {
                                         <FormGroup className="row">
                                             <Label className="col-sm-3">Cooperativa</Label>
                                             <div className="col-sm-8">
-                                                <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={cooperativa}/>
+                                                <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={cooperativa_nombre}/>
                                             </div>
                                         </FormGroup>
                                         <FormGroup className="row">
@@ -117,8 +118,8 @@ class ViajesPlanificados extends React.Component {
                                 </div>
                                 <br />
                                 <br />
-                                <div className="col-sm-12 text-center">
-                                    <h2>{fecha}</h2>
+                                <div>
+                                   <Clock/>
                                 </div>
                                 <br />
                                 <br />
@@ -126,7 +127,7 @@ class ViajesPlanificados extends React.Component {
                                     <ListPage
                                         searchable={false}
                                         fieldNames={['#','Cooperativa', 'Disco', 'Placa', 'Saldo', 'Vlts', 'Costo', 'Salida', 'Destino']}
-                                        fields={['', 'cooperativa', 'disco', 'placa', 'saldo', 'vlts', 'costo', 'hora_salida', 'destino']}
+                                        fields={['', 'cooperativa_nombre', 'disco', 'placa', 'saldo', 'vlts', 'costo', 'hora_salida', 'destino']}
 
                                         endpoint='venta/viajes-planificados'
                                         parameters={this.state}

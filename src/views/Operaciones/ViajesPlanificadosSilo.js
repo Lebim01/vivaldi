@@ -2,6 +2,7 @@ import React from 'react'
 import { ListPage, Select, Label, FormGroup, Card, CardBody, CardTitle, Button } from 'temeforest'
 import { baseurl } from 'utils/url'
 import moment from 'moment'
+import Clock  from 'utils/clock'
 
 class ViajesPlanificadosSilo extends React.Component {
 
@@ -49,7 +50,6 @@ class ViajesPlanificadosSilo extends React.Component {
 
     refresh = () => {
         this.setState({
-            fecha: moment().format('YYYY-MM-DD HH:mm:ss'),
             refresh: true
         })
     }
@@ -99,8 +99,8 @@ class ViajesPlanificadosSilo extends React.Component {
                                 </div>
                                 <br />
                                 <br />
-                                <div className="col-sm-12 text-center">
-                                    <h2>{fecha}</h2>
+                                <div>
+                                  <Clock/>
                                 </div>
                                 <br />
                                 <br />

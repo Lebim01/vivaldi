@@ -20,43 +20,43 @@ class ListadoCooperativas extends React.Component {
                         <Row>
                             { cp1 &&
                                 <Col xs="2" style={{padding: 10}} className="text-center">
-                                    <Button className="btn-lg" outline style={{ width: 150, height: 150, borderRadius: 10 }} onClick={() => this.props.select(cp1.id) }>
-                                        {cp1.nombre}
+                                    <Button className="btn-lg" outline style={{ width: 150, height: 150, borderRadius: 10 }} onClick={() => this.props.select(cp1.cooperativa) }>
+                                        {cp1.cooperativa_nombre}
                                     </Button>
                                 </Col>
                             }
                             { cp2 &&
                                 <Col xs="2" style={{padding: 10}} className="text-center">
-                                    <Button className="btn-lg" outline style={{ width: 150, height: 150, borderRadius: 10 }} onClick={() => this.props.select(cp2.id) }>
-                                        {cp2.nombre}
+                                    <Button className="btn-lg" outline style={{ width: 150, height: 150, borderRadius: 10 }} onClick={() => this.props.select(cp2.cooperativa) }>
+                                        {cp2.cooperativa_nombre}
                                     </Button>
                                 </Col>
                             }
                             { cp3 &&
                                 <Col xs="2" style={{padding: 10}} className="text-center">
-                                    <Button className="btn-lg" outline style={{ width: 150, height: 150, borderRadius: 10 }} onClick={() => this.props.select(cp3.id) }>
-                                        {cp3.nombre}
+                                    <Button className="btn-lg" outline style={{ width: 150, height: 150, borderRadius: 10 }} onClick={() => this.props.select(cp3.cooperativa) }>
+                                        {cp3.cooperativa_nombre}
                                     </Button>
                                 </Col>
                             }
                             { cp4 &&
                                 <Col xs="2" style={{padding: 10}} className="text-center">
-                                    <Button className="btn-lg" outline style={{ width: 150, height: 150, borderRadius: 10 }} onClick={() => this.props.select(cp4.id) }>
-                                        {cp4.nombre}
+                                    <Button className="btn-lg" outline style={{ width: 150, height: 150, borderRadius: 10 }} onClick={() => this.props.select(cp4.cooperativa) }>
+                                        {cp4.cooperativa_nombre}
                                     </Button>
                                 </Col>
                             }
                             { cp5 &&
                                 <Col xs="2" style={{padding: 10}} className="text-center">
-                                    <Button className="btn-lg" outline style={{ width: 150, height: 150, borderRadius: 10 }} onClick={() => this.props.select(cp5.id) }>
-                                        {cp5.nombre}
+                                    <Button className="btn-lg" outline style={{ width: 150, height: 150, borderRadius: 10 }} onClick={() => this.props.select(cp5.cooperativa) }>
+                                        {cp5.cooperativa_nombre}
                                     </Button>
                                 </Col>
                             }
                             { cp6 &&
                                 <Col xs="2" style={{padding: 10}} className="text-center">
-                                    <Button className="btn-lg" outline style={{ width: 150, height: 150, borderRadius: 10 }} onClick={() => this.props.select(cp6.id) }>
-                                        {cp6.nombre}
+                                    <Button className="btn-lg" outline style={{ width: 150, height: 150, borderRadius: 10 }} onClick={() => this.props.select(cp6.cooperativa) }>
+                                        {cp6.cooperativa_nombre}
                                     </Button>
                                 </Col>
                             }
