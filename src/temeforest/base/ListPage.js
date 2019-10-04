@@ -89,7 +89,7 @@ class ListPage extends React.Component {
                 loading: true
             })
             const { currentPage } = this.state
-            const { data } = await axios.get(`${baseurl}/${this.props.endpoint}/${objectToUrl({ ...parameters, page : currentPage })}`)
+            const { data } = await axios.get(`${baseurl}/${this.props.endpoint}/${objectToUrl({ ...parameters, page : currentPage })}`, this.props.config)
 
             let _results = [], 
                 _count = 0, 
@@ -315,7 +315,8 @@ ListPage.defaultProps = {
     parameters : {},
     redirect: true,
     fieldNames : [],
-    head : []
+    head : [],
+    config : {}
 }
 
 export {ListPage, RecordRow}

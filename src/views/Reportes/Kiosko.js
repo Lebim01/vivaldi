@@ -14,7 +14,9 @@ class Kiosko extends React.Component {
         localidades : [],
         cooperativas : [],
         cooperativa: '',
-        localidad : ''
+        cooperativa_nombre : '',
+        localidad : '',
+        localidad_nombre : ''
     }
 
     componentDidMount(){
@@ -67,20 +69,22 @@ class Kiosko extends React.Component {
         }
     }
 
-    selectCooperativa = (cooperativa_id) => {
+    selectCooperativa = (cooperativa_id, nombre) => {
         this.setState({
-            cooperativa: cooperativa_id
+            cooperativa: cooperativa_id,
+            cooperativa_nombre: nombre
         })
     }
 
-    selectLocalidad = (localidad_id) => {
+    selectLocalidad = (localidad_id, nombre) => {
         this.setState({
-            localidad: localidad_id
+            localidad: localidad_id,
+            localidad_nombre: nombre
         }, this.loadCooerativas)
     }
 
     render(){
-        const { cooperativa, localidad } = this.state
+        const { cooperativa, localidad, cooperativa_nombre, localidad_nombre } = this.state
 
         return (
             <div className="animated fadeIn">
@@ -91,8 +95,8 @@ class Kiosko extends React.Component {
                                 <CardTitle>Kiosko</CardTitle>
 
                                 { !localidad && <ListadoLocalidad localidades={this.state.localidades} select={this.selectLocalidad} /> }
-                                { localidad && !cooperativa && <ListadoCooperativas cooperativas={this.state.cooperativas} select={this.selectCooperativa} /> }
-                                { localidad && cooperativa && <ReportePasajeros cooperativa={cooperativa} localidad={localidad} back={() => this.selectCooperativa('')} /> }
+                                { localidad && !cooperativa && <ListadoCooperativas cooperativas={this.state.cooperativas} localidad={localidad} localidad_nombre={localidad_nombre} select={this.selectCooperativa} back={() => this.selectLocalidad('')} /> }
+                                { localidad && cooperativa && <ReportePasajeros cooperativa={cooperativa} cooperativa_nombre={cooperativa_nombre} localidad={localidad} back={() => this.selectCooperativa('')} /> }
                             </CardBody>
                         </Card>
                     </div>
