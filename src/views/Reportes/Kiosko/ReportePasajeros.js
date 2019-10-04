@@ -164,7 +164,7 @@ class ReportePasajeros extends React.Component {
                     fields={['disco', 'hora_entrada', 'hora_salida', 'estado', (row) => this.imprimir(row)]}
 
                     endpoint={'venta/viajes-planificados'}
-                    parameters={{ cooperativa: this.props.cooperativa }}
+                    parameters={{ cooperativa: this.props.cooperativa, localidad: this.props.localidad }}
                     
                     history={this.props.history}
                 />

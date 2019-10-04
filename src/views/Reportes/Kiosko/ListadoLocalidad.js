@@ -2,19 +2,19 @@ import React from 'react'
 import { Button } from 'temeforest'
 import { Row, Col } from 'reactstrap'
 
-class ListadoCooperativas extends React.Component {
+class ListadoLocalidades extends React.Component {
     render(){
-        const { cooperativas } = this.props
+        const { localidades } = this.props
 
         return (
             <>
-                Seleccionar cooperativa
+                Seleccione localidad
                 <Row>
-                    { cooperativas.map((row, i) => {
+                    { localidades.map((row, i) => {
                         return (
                             <Col xs="2" style={{padding: 10}} className="text-center">
-                                <Button className="btn-lg" outline style={{ width: 150, height: 150, borderRadius: 10 }} onClick={() => this.props.select(row.cooperativa) }>
-                                    {row.cooperativa_nombre}
+                                <Button className="btn-lg" outline style={{ width: 150, height: 150, borderRadius: 10 }} onClick={() => this.props.select(row.id) }>
+                                    {row.nombre}
                                 </Button>
                             </Col>
                         )
@@ -25,4 +25,4 @@ class ListadoCooperativas extends React.Component {
     }
 }
 
-export default ListadoCooperativas
+export default ListadoLocalidades
