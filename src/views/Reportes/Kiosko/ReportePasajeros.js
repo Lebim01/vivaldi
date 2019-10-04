@@ -9,14 +9,6 @@ import axios from 'axios'
 import store from 'store/auth'
 const { user_info, token } = store.getState()
 
-let state = store.getState()
-
-let config = {
-    headers: {
-        Authorization : `JWT ${token}`
-    }
-}
-
 const formato = (props) => {
     return `
         <style>
@@ -173,7 +165,6 @@ class ReportePasajeros extends React.Component {
                     fields={['disco', 'hora_entrada', 'hora_salida', 'estado', (row) => this.imprimir(row)]}
 
                     endpoint={'venta/viajes-planificados'}
-                    config={config}
                     parameters={{ cooperativa: this.props.cooperativa, localidad: this.props.localidad }}
                     
                     history={this.props.history}

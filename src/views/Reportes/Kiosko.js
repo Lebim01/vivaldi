@@ -8,6 +8,8 @@ import ListadoLocalidad from './Kiosko/ListadoLocalidad'
 import ListadoCooperativas from './Kiosko/ListadoCooperativas'
 import ReportePasajeros from './Kiosko/ReportePasajeros'
 
+axios.defaults.headers.common['Authorization'] = `JWT ${store.getState().token}`
+
 class Kiosko extends React.Component {
 
     state = {
@@ -25,15 +27,7 @@ class Kiosko extends React.Component {
 
     loadLocalidades = async () => {
         try {
-            let state = store.getState()
-
-            let config = {
-                headers: {
-                    Authorization : `JWT ${state.token}`
-                }
-            }
-
-            const res = await axios.get(`${baseurl}/localidad/?page_size=0`, config)
+            const res = await axios.get(`${baseurl}/localidad/?page_size=0`)
 
             this.setState({
                 localidades: res.data
@@ -48,15 +42,7 @@ class Kiosko extends React.Component {
 
     loadCooerativas = async () => {
         try {
-            let state = store.getState()
-
-            let config = {
-                headers: {
-                    Authorization : `JWT ${state.token}`
-                }
-            }
-
-            const res = await axios.get(`${baseurl}/venta/viajes-planificados/?page_size=0&localidad=${this.state.localidad}`, config)
+            const res = await axios.get(`${baseurl}/venta/viajes-planificados/?page_size=0&localidad=${this.state.localidad}`)
 
             this.setState({
                 cooperativas: res.data
