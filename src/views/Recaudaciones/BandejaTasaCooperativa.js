@@ -2,7 +2,10 @@ import React from 'react'
 import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button, FormValidate } from 'temeforest'
 import moment from 'moment'
 import { baseurl } from 'utils/url'
-import { printHtml } from 'utils/exportData'
+import { printHtml, barcodeToPng } from 'utils/exportData'
+import axios from 'axios'
+
+const endpoint = 'venta/solicitud_tasacontingencia'
 
 class BandejaTasaCooperativa extends React.Component {
     state = {
@@ -34,18 +37,32 @@ class BandejaTasaCooperativa extends React.Component {
         })
     }
 
-    rowToHtml(row){
+    async rowToHtml(row){
+        await axios.post(`${baseurl}/${endpoint}/${row.id}/`, { estado : 3 /** IMPRESO */ })
         return `
-            <div style="margin-bottom: 10px; border-bottom: 1px solid black;">
-                <p>Cooperativa: ${row.cooperativa_nombre}</p>
-                <p>Fecha: ${row.fecha}</p>
-                <p>Cantidad Aprobada: ${row.cantidad_aprobada}</p>
+            <div style="margin-bottom: 10px; border-bottom: 1px solid black; width: 300px; text-align: center;">
+                <p style="margin-top: 5px; margin-bottom: 5px;">${row.localidad_nombre}</p>
+                <p style="margin-top: 5px; margin-bottom: 5px;">Contingencia General</p>
+                <p style="margin-top: 5px; margin-bottom: 5px;">Bloque #${row.bloque} - Tasa #${row.tasa}</p>
+                <p style="margin-top: 5px; margin-bottom: 5px;">
+                    <span style="width: 100px; text-align: left;">Emisión: </span>
+                    <span style="width: 100px; text-align: left;">${moment().format('DD/MM/YYYY')}</span>
+                </p>
+                <p style="margin-top: 5px; margin-bottom: 5px;">
+                    <span style="width: 100px; text-align: left;">Tasa: </span>
+                    <span style="width: 100px; text-align: left;">$ ${row.tasa_valor}</span>
+                </p>
+                <p style="margin-top: 5px; margin-bottom: 5px;">
+                    <span style="width: 100px; text-align: left;">Oficinista: </span>
+                    <span style="width: 100px; text-align: left;">admin</span>
+                </p>
+                <img src="${barcodeToPng("1234")}"/>
             </div>
         `
     }
 
-    toWord(row){
-        printHtml(this.rowToHtml(row))
+    async toWord(row){
+        printHtml(await this.rowToHtml(row))
     }
 
     fieldImprimir = (row) => {
@@ -97,7 +114,7 @@ class BandejaTasaCooperativa extends React.Component {
                                     fieldNames={['Cooperativa', 'Fecha', 'Descripcion', 'Tipo de solicitud', 'Cantidad', 'Acción']}
                                     fields={['cooperativa_nombre', 'fecha', 'descripcion', 'tipo_solicitud_nombre', 'cantidad_aprobada', this.fieldImprimir]}
 
-                                    endpoint='venta/solicitud_tasacontingencia'
+                                    endpoint={endpoint}
                                     parameters={this.state}
 
                                     history={this.props.history}

@@ -83,7 +83,6 @@ const CobranzaRecaudacion = React.lazy(() => import('views/Reportes/Recaudacion'
 const ViajesPorFecha = React.lazy(() => import('views/Reportes/ViajesFecha'))
 const SalidaViajes = React.lazy(() => import('views/Reportes/SalidaViajes'))
 const PasajerosPorViaje = React.lazy(() => import('views/Reportes/PasajerosPorViaje'))
-const Kiosko = React.lazy(() => import('views/Reportes/Kiosko'))
 
 /** FACTURACION */
 const Pasajeros = React.lazy(() => import('views/Facturacion/Pasajeros'))
@@ -189,7 +188,6 @@ const routes = [
   { path: '/reportes/viajes-semanales', name: 'Viajes semanales', component: ViajesSemanales, exact: true },
   { path: '/reportes/salida-de-viajes', name: 'Salida viajes', component: SalidaViajes, exact: true },
   { path: '/reportes/viajes-por-liquidar',  name: 'Users', component: Page404 },
-  { path: '/reportes/kiosko',  name: 'Kiosko', component: Kiosko, exact: true },
 
   { path: '/recaudaciones/tasas-contingencia', name: 'Tasas contingencia', component: TasasContingencia, exact: true },
   { path: '/recaudaciones/diario', name: 'Diario', component: Diario, exact: true },

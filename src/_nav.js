@@ -231,7 +231,7 @@ export default {
         },
         {
           name : 'Kiosko',
-          url : '/#/reportes/kiosko'
+          url : '/#/kiosko'
         }
       ]
     },

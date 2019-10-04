@@ -86,10 +86,21 @@ function printHtml(html){
     _window.close()
 }
 
+function barcodeToPng(code = ''){
+    const JsBarcode = require('jsbarcode');
+
+    const canvas = document.createElement('canvas')
+
+    JsBarcode(canvas, code, {format: "CODE39"});
+
+    return canvas.toDataURL("image/png");
+}
+
 export {
     htmlToXlsById,
     htmlToXls,
     Export2Doc,
     Export2DocFromHtml,
-    printHtml
+    printHtml,
+    barcodeToPng
 }
