@@ -10,6 +10,8 @@ class Fila extends React.Component {
     render(){
 
         const { isLast, toggleActivate, asientos, asientos_desactivados, index } = this.props
+        
+        const _asientos = asientos ? asientos : []
 
         // quantity seats by hall
         const cantidad_asientos_fila = isLast 
@@ -17,10 +19,10 @@ class Fila extends React.Component {
             : commonHallSeats
 
         // index become seat
-        const asiento_inicio = (asientos ? asientos.length : 0) - ( (index+1) * 4) - 1 + (!isLast ? 1 : 0)
+        const asiento_inicio = _asientos.length - ( (index+1) * 4) - 1 + (!isLast ? 1 : 0)
 
         // seats object
-        const asientos_fila = asientos.slice(asiento_inicio, asiento_inicio + cantidad_asientos_fila)
+        const asientos_fila = _asientos.slice(asiento_inicio, asiento_inicio + cantidad_asientos_fila)
 
         const styles = isLast ? { marginTop: 10, marginBotton: 10 } : {}
 
