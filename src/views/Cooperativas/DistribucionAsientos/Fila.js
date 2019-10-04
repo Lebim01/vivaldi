@@ -17,7 +17,7 @@ class Fila extends React.Component {
             : commonHallSeats
 
         // index become seat
-        const asiento_inicio = asientos.length - ( (index+1) * 4) - 1 + (!isLast ? 1 : 0)
+        const asiento_inicio = (asientos ? asientos.length : 0) - ( (index+1) * 4) - 1 + (!isLast ? 1 : 0)
 
         // seats object
         const asientos_fila = asientos.slice(asiento_inicio, asiento_inicio + cantidad_asientos_fila)
