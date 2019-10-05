@@ -34,6 +34,12 @@ class MainView extends React.Component {
         this.getLocalidades()
     }
 
+    componentDidUpdate(prevProps){
+        if(prevProps.id !== this.props.id){
+            this.getAndenes(this.props.localidad_nivel)
+        }
+    }
+
     onChange = name => (e) => {
         if(this.props.onChange){
             this.props.onChange(name, e.target.value)
@@ -92,7 +98,6 @@ class MainView extends React.Component {
             }
         })
     }
-
 
     render(){
         const { andenes, niveles } = this.state
