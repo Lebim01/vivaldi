@@ -105,10 +105,10 @@ class EditPersona extends React.Component {
                                         name : 'identificacion',
                                         element: <Input value={data.identificacion} onChange={this.onChange('identificacion')} /> 
                                     }}
-                                    validator={{
+                                    validator={this.props.required ? {
                                         validationRules: {required:true, number : true, minLength:this.props.lengthCedula, maxLength:this.props.lengthCedula},
                                         validationMessages: {required:"El campo es requerido", minLength:`El valor debe ser de ${this.props.lengthCedula} dígitos`, maxLength:`El valor debe ser de ${this.props.lengthCedula} dígitos`, number : 'Solo se aceptan números'}
-                                    }}
+                                    } : {}}
                                 />
                                 <FormGroup className="row">
                                     <Label className="col-sm-3">Apellidos</Label>
