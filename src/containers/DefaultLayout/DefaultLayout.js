@@ -21,7 +21,7 @@ class DefaultLayout extends Component {
     state = {
         user_info : store.getState().user_info
     }
-    authInterval = null
+    unlisten = null
     reduxUnsubscribe = null
 
     loading = () => <div className="animated fadeIn pt-1 text-center">Cargando...</div>
@@ -43,10 +43,11 @@ class DefaultLayout extends Component {
     }
 
     componentDidMount(){
-
         // refresh token
         this.makeAuth()
-        this.authInterval = setInterval(this.makeAuth, 30 * 1000)
+        this.unlisten = this.props.history.listen(() => {
+            this.makeAuth()
+        })
 
         // refresh user auth data
         this.reduxUnsubscribe = store.subscribe(() => {
@@ -61,7 +62,7 @@ class DefaultLayout extends Component {
 
     componentWillUnmount(){
         this.reduxUnsubscribe()
-        clearInterval(this.authInterval)
+        this.unlisten()
     }
 
     render() {
