@@ -77,6 +77,7 @@ class MainView extends React.Component {
         _modal.id_nivel = id ? id : null
         _modal.id_localidad = this.props.id_localidad
         _modal.show = true
+        _modal.nombre = ''
 
         this.setState({
             modalNivel : _modal
@@ -132,7 +133,6 @@ class MainView extends React.Component {
         else {
             niveles.push({ ...data, is_enable: true })
         }
-        niveles.puertas = data.puertas
         this.props.onChange('niveles', niveles)
         this.toggleModalNivel({})
         return true

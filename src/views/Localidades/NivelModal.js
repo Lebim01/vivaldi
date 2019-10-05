@@ -6,20 +6,15 @@ import Swal from 'sweetalert2'
 class NivelModal extends React.Component {
 
     state = {
-        nombre : '',
-        modal : {
-            show : false,
-            id_nivel : null,
-            id_localidad : null
-        },
-        puertas :[]
-
+        nombre : ''
     }
 
-    componentWillReceiveProps(props){
-        this.setState({
-            ...props
-        })
+    componentDidUpdate(prevProps, prevState){
+        if(prevProps.show !== this.props.show){
+            this.setState({
+                ...this.props
+            })
+        }
     }
 
     toggle = () => {
@@ -35,9 +30,9 @@ class NivelModal extends React.Component {
     }
 
     guardar = () => {
-        const { nombre, index, id, puertas } = this.state
+        const { nombre, index, id } = this.state
         if(this.props.guardar){
-            let _exito = this.props.guardar({nombre, index, id, puertas})
+            let _exito = this.props.guardar({nombre, index, id})
             if(_exito){
                 this.setState({
                     errors: []
@@ -48,71 +43,6 @@ class NivelModal extends React.Component {
                 })
             }
         }
-    }
-
-
-  onChangePuerta = index => name => (e) => {
-        let puertas = this.state.puertas
-        let value = e.target.value
-        puertas[index][name] = value
-        this.onChange('puertas', puertas)
-    }
-
-    toggleModal = (data = {}) => {
-        let _modal = this.state.modal
-        _modal.show = !_modal.show
-        _modal.data = data
-        this.setState({
-            modal : _modal
-        })
-    }
-
-    agregarPuerta = ({ onChange, ...data }) => {
-        let puertas = this.state.puertas
-        let _continue = !puertas.some(
-            (r, i) => 
-                Number(r.numero) === Number(data.numero) && 
-                Number(r.id) !== Number(data.id) && 
-                Number(i) !== Number(data.index)
-        )
-        if(!_continue){
-            return false
-        }
-
-        if(data.id){
-            for(let i in puertas){
-                if(Number(puertas[i].id) === Number(data.id)){
-                    puertas[i] = data
-                    break
-                }
-            }
-        }
-        else if(data.index){
-            puertas[data.index] = data
-        }
-        else {
-            puertas.push({ ...data, is_enable: true })
-        }
-        this.onChange('puertas', puertas)
-        this.toggleModal({})
-        return true
-    }
-
-    deletePuerta = async (index) => {
-        const { value } = await Swal.fire({
-            title: 'Borrar puerta',
-            text: '¿Esta seguro de eliminar?',
-            showCancelButton: true
-        })
-        if(value){
-            let puertas = this.state.puertas
-            puertas.splice(index, 1)
-            this.props.onChange('puertas', puertas)
-        }
-    }
-
-    editPuerta = (data) => {
-        this.toggleModal({ ...data })
     }
 
     render(){
@@ -131,7 +61,8 @@ class NivelModal extends React.Component {
                     </FormValidate>
                 </ModalBody>
                 <ModalFooter>
-                    <Button type="success" onClick={this.guardar}>Aceptar</Button>{' '}
+                    <Button type="success" onClick={this.guardar}>Aceptar</Button>
+                    {' '}
                     <Button type="secondary" onClick={this.toggle}>Cancelar</Button>
                 </ModalFooter>
             </Modal>
