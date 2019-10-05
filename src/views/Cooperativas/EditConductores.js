@@ -126,7 +126,7 @@ class EditConductor extends React.Component {
     }
 
     validation(data){
-        if(!data.documentacion || data.documentacion === 'none')
+        if(!data.documentacion_url && (!data.documentacion || data.documentacion === 'none'))
             return {
                 result : false,
                 message : 'La documentacion no puede ser vacia'
@@ -149,12 +149,17 @@ class EditConductor extends React.Component {
                 customValidation={this.validation}
             >
                 <FormValidate className="mt-4 form-horizontal">
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Cooperativa</Label>
-                        <div className="col-sm-5">
-                            <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this._onChange('cooperativa')} value={this.state.data.cooperativa} />
-                        </div>
-                    </FormGroup>
+                    <FormElementValidate
+                        label={{text:'Cooperativa'}}
+                        input={{
+                            name : 'cooperativa',
+                            element: <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this._onChange('cooperativa')} value={this.state.data.cooperativa} />
+                        }}
+                        validator={{
+                            validationRules: { required : true },
+                            validationMessages : { required: 'El campo es requerido' }
+                        }}
+                    />
                     <EditPersona 
                         lengthCedula={10} 
                         id={this.state.data.persona ? this.state.data.persona.id : null} 
