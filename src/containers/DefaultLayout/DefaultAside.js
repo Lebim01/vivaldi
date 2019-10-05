@@ -4,9 +4,6 @@ import { Nav, NavItem, NavLink } from 'reactstrap';
 import $ from 'jquery'
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import PerfectScrollbar from 'react-perfect-scrollbar'
-import store from './../../store/auth'
-
-const { user_info } = store.getState()
 
 const propTypes = {
     children: PropTypes.node,
@@ -75,7 +72,7 @@ class MenuItem extends React.Component {
 class Aside extends React.Component {
 
     render(){
-        const { navConfig } = this.props
+        const { navConfig, user_info } = this.props
         let level = 1
         return (
             <aside className="left-sidebar no-print" data-sidebarbg="skin6">

@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import $ from 'jquery'
-import store from './../../store/auth'
-
-const { user_info } = store.getState()
 
 const propTypes = {
   children: PropTypes.node,
@@ -29,7 +26,7 @@ class DefaultHeader extends Component {
     render() {
 
         // eslint-disable-next-line
-        const { children, ...attributes } = this.props;
+        const { children, user_info, ...attributes } = this.props;
 
         return (
             <nav className="navbar top-navbar navbar-expand-md navbar-dark">
