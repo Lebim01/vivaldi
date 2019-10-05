@@ -136,6 +136,17 @@ const formato = (props) => {
 
 class ReportePasajeros extends React.Component {
 
+    interval = null
+
+    componentDidMount(){
+        let time = (process.env.NODE_ENV !== 'production' ? 5 : 60) * 1000
+        this.interval = setInterval(() => this.setState({ refresh: true }), time)
+    }
+
+    componentWillUnmount(){
+        clearInterval(this.interval)
+    }
+
     getFormato = async (props) => {
         try {
             const response = await axios.get(`${baseurl}/venta/pasajeros-por-viaje/?viaje=${props.viaje}`)

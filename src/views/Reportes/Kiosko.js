@@ -40,21 +40,6 @@ class Kiosko extends React.Component {
         }
     }
 
-    loadCooerativas = async () => {
-        try {
-            const res = await axios.get(`${baseurl}/venta/viajes-planificados/?page_size=0&localidad=${this.state.localidad}`)
-
-            this.setState({
-                cooperativas: res.data
-            })
-
-        }catch({ response }){
-            this.setState({
-                error: response.data.detail
-            })
-        }
-    }
-
     selectCooperativa = (cooperativa_id, nombre) => {
         this.setState({
             cooperativa: cooperativa_id,
@@ -66,7 +51,7 @@ class Kiosko extends React.Component {
         this.setState({
             localidad: localidad_id,
             localidad_nombre: nombre
-        }, this.loadCooerativas)
+        })
     }
 
     render(){
@@ -81,7 +66,7 @@ class Kiosko extends React.Component {
                                 <CardTitle>Kiosko</CardTitle>
 
                                 { !localidad && <ListadoLocalidad localidades={this.state.localidades} select={this.selectLocalidad} /> }
-                                { localidad && !cooperativa && <ListadoCooperativas cooperativas={this.state.cooperativas} localidad={localidad} localidad_nombre={localidad_nombre} select={this.selectCooperativa} back={() => this.selectLocalidad('')} /> }
+                                { localidad && !cooperativa && <ListadoCooperativas localidad={localidad} localidad_nombre={localidad_nombre} select={this.selectCooperativa} back={() => this.selectLocalidad('')} /> }
                                 { localidad && cooperativa && <ReportePasajeros cooperativa={cooperativa} cooperativa_nombre={cooperativa_nombre} localidad={localidad} back={() => this.selectCooperativa('')} /> }
                             </CardBody>
                         </Card>
