@@ -193,6 +193,7 @@ class MainView extends React.Component {
                                     id={this.props.conductor ? this.props.conductor.id : null} 
                                     endpoint='conductor' 
                                     editable={false} 
+                                    required={false}
                                 />
                             </fieldset>
                         </div>

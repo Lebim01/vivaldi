@@ -46,6 +46,9 @@ class MainView extends React.Component {
 
             if(name === 'localidad'){
                 this.getNiveles(e.target.value)
+                this.setState({
+                    andenes : []
+                })
             }
 
             if(name === 'localidad_nivel'){

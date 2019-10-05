@@ -129,7 +129,7 @@ class EditPersona extends React.Component {
                                         element: <Input placeholder="example@gmail.com" readOnly={_readOnly} value={data.correo} onChange={this.onChange('correo')} />
                                     }}
                                     validator={{
-                                        validationRules: { required : true, email: true },
+                                        validationRules: { required : this.props.required, email: this.props.required },
                                         validationMessages : { required: "El campo es requerido", email: "El valor debe ser un correo válido" }
                                     }}
                                 />
@@ -147,7 +147,8 @@ EditPersona.defaultProps = {
     editable : true,
     lengthCedula : 10,
     endpoint: 'persona',
-    persona : {}
+    persona : {},
+    required : true
 }
 
 export default EditPersona
