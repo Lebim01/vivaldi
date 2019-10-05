@@ -365,7 +365,7 @@ class MainView extends React.Component {
                     <fieldset>
                       <FormGroup className="row">
                           <h4>
-                              Níveles
+                              Niveles
                               <Button style={{marginLeft: 10}} onClick={this.openModalNivel}>
                                   <i className="fa fa-plus"></i>
                               </Button>
@@ -565,12 +565,12 @@ class EditLocalidades extends React.Component {
                 <Tabs tab={tab} tabs={tabs} onClickTab={this.changeTab}/>
                 <TabContent activeTab={tab}>
                     <TabPane tabId="main">
-                        <MainView 
-                            {...data} 
-                            id_localidad={id} 
+                        <MainView
+                            {...data}
+                            id_localidad={id}
                             onChange={this.onChange}
-                            onChangeLogo={this.onChangeLogo} 
-                            tieneFacturacionElectronica={this.tieneFacturacionElectronica} 
+                            onChangeLogo={this.onChangeLogo}
+                            tieneFacturacionElectronica={this.tieneFacturacionElectronica}
                         />
                     </TabPane>
                     <TabPane tabId="firma">
