@@ -126,7 +126,7 @@ class MainView extends React.Component {
                 }
             }
         }
-        else if(data.index){
+        else if(data.index >= 0){
             niveles[data.index] = data
         }
         else {
