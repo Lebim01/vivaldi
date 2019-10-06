@@ -379,9 +379,6 @@ class MainView extends React.Component {
                                     <Label onlyClassName="custom-control-label" htmlFor="usa_api">Usa API</Label>
                                 </div>
                             </div>
-                            <div className="col-sm-3">
-                                { this.props.usa_api && <Input onChange={this.onChange('api_key')} value={this.props.api_key} /> }
-                            </div>
                         </FormGroup>
                         { this.props.usa_api &&
                             <SeleccionarSistemaExterno onChange={(value) => this.onChangeData('sistema_externo', value)} />
