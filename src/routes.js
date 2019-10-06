@@ -35,6 +35,7 @@ const EditMarcas = React.lazy(() => import('views/Cooperativas/EditMarcas'))
 const Rutas = React.lazy(() => import('views/Operaciones/Rutas'))
 const EditRutas = React.lazy(() => import('views/Operaciones/EditRutas'))
 const Viajes = React.lazy(() => import('views/Operaciones/Viajes'))
+const EditViajes = React.lazy(() => import('views/Operaciones/EditViajes'))
 const ViajesPlanificados = React.lazy(() => import('views/Operaciones/ViajesPlanificados'))
 const ViajesPlanificadosSilo = React.lazy(() => import('views/Operaciones/ViajesPlanificadosSilo'))
 const Frecuencias = React.lazy(() => import('views/Operaciones/Frecuencias'))
@@ -144,6 +145,7 @@ const routes = [
   { path: '/operaciones/rutas', name: 'Rutas', component: Rutas, exact: true },
   { path: '/operaciones/rutas/edit', name: 'Crear/Editar Rutas', component: EditRutas, exact: true },
   { path: '/operaciones/viajes', name: 'Viajes', component: Viajes, exact: true },
+  { path: '/operaciones/viajes/edit', name: 'Crear/Editar Viajes', component: EditViajes, exact: true },
   { path: '/operaciones/viajes-planificados', name: 'Viajes Planificados', component: ViajesPlanificados, exact: true },
   { path: '/operaciones/viajes-planificados-silo', name: 'Viajes Planificados Silo', component: ViajesPlanificadosSilo, exact: true },
   { path: '/operaciones/frecuencias', name: 'Frecuencias', component: Frecuencias, exact: true },

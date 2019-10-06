@@ -20,6 +20,8 @@ function EditPage(props){
     const { register, handleSubmit, watch, errors, triggerValidation } = useForm()
 
     const { id, title, btnDelete, btnSave } = props
+
+    const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop)
     
     // events
     const onSubmit = async data => { 
@@ -98,7 +100,7 @@ function EditPage(props){
                 register,
                 handleSubmit,
                 watch,
-                errors
+                errors,
             }}>
             <div className="animated fadeIn">
                 <Row>

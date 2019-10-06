@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListPage, Select, Label, FormGroup, Card, CardBody, CardTitle, Input } from 'temeforest'
+import { Button, ListPage, Select, Label, FormGroup, Card, CardBody, CardTitle, Input } from 'temeforest'
 import { baseurl } from 'utils/url'
 import moment from 'moment'
 
@@ -40,6 +40,10 @@ class Viajes extends React.Component {
         })
     }
 
+    nuevo = () => {
+        this.props.history.push('/operaciones/viajes/edit?')
+    }
+
     render(){
         const { cooperativa, bus, tipo_frecuencia, fecha_inicio, localidad, fecha_fin, estado } = this.state
         return (
@@ -48,7 +52,12 @@ class Viajes extends React.Component {
                     <div className="col-sm-12">
                         <Card>
                             <CardBody>
-                                <CardTitle>Listado de Viajes</CardTitle>
+                                <CardTitle>
+                                    Listado de Viajes
+                                    <Button className="pull-right" onClick={this.nuevo}>
+                                        <i className="fa fa-plus" />
+                                    </Button>
+                                </CardTitle>
                                 <br/>
                                 <div className="row">
                                     <div className="col-sm-6">
@@ -105,6 +114,7 @@ class Viajes extends React.Component {
                                         fields={['frecuencia_nombre', 'cooperativa_nombre', 'bus_disco', 'ruta_nombre']}
 
                                         endpoint='viaje'
+                                        urlFront={'operaciones/viajes'}
                                         parameters={this.state}
 
                                         history={this.props.history}

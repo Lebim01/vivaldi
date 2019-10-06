@@ -153,7 +153,7 @@ class ReportePasajeros extends React.Component {
             const formato_html = formato({ ...response.data[0], ...props })
             printHtml(formato_html)
         }catch(e){
-
+            console.log(e)
         }
     }
 

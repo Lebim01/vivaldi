@@ -3,9 +3,12 @@ import React from 'react'
 import FormGroup from './FormGroup'
 import { getResults } from 'utils/url';
 
+import BlockUi from 'react-block-ui';
+import 'react-block-ui/style.css';
+
 class Select extends React.Component {
 
-    state = { _options : [] }
+    state = { _options : [], loading: false }
 
     componentDidMount(){
         if(this.props.asyncOptions){
@@ -14,7 +17,7 @@ class Select extends React.Component {
     }
 
     componentWillReceiveProps(props){
-        if(props.asyncOptions && props.asyncOptions.url !== this.props.asyncOptions.url){
+        if(props.asyncOptions && (!this.props.asyncOptions || props.asyncOptions.url !== this.props.asyncOptions.url)) {
             this.loadListAsync(props)
         }
     }
@@ -34,14 +37,22 @@ class Select extends React.Component {
         return {}
     }
 
+    getSelectOption = () => {
+        
+    }
+
     loadListAsync = async (props = null) => {
         const _props = props !== null ? props : this.props
         const { url, valueName, labelName } = typeof _props.asyncOptions === 'function' ? _props.asyncOptions() : _props.asyncOptions
 
+        this.setState({
+            loading: true
+        })
+
         // get results
         const _results = await getResults(url, true)
         // fill options with results
-        let _options = [{value:'',label: this.props.defaultOption || 'Seleccione'}, ..._results.map((record) => {
+        let _options = [{value: '', label: this.props.defaultOption || 'Seleccione'}, ..._results.map((record) => {
             return {
                 value: record[valueName],
                 label: typeof labelName === 'function' ? labelName(record) : record[labelName],
@@ -49,23 +60,33 @@ class Select extends React.Component {
             }
         })]
         this.setState({
-            _options
+            _options,
+            loading: false
         })
     }
 
     render(){
         const { _options } = this.state
         const { options, helperText, error, className, value, defaultValue, asyncOptions, register, ...otherProps } = this.props
-        
         return (
-            <FormGroup>
-                <select className={`form-control ${className} ${error ?'is-invalid':''}`} {...otherProps} {...(value !== undefined && value !== null ? { value } : { defaultValue : defaultValue || '' })} ref={register}>                    { asyncOptions 
-                        ? _options.map((o, i) => <option value={o.value} key={i} {...this.getOptionProps(o, 'data-')}>{o.label}</option>)
-                        : options.map((o, i) => <option value={o.value} key={i}>{o.label}</option>) 
-                    }
-                </select>
-                { helperText && <small class="form-text text-muted"> {helperText} </small> }
-            </FormGroup>
+            <BlockUi tag="div" blocking={this.state.loading}>
+                <FormGroup>
+                    <select 
+                        className={`form-control ${className} ${error ?'is-invalid':''}`} 
+                        defaultValue={defaultValue}
+                        ref={register}
+
+                        {...otherProps} 
+                        {...(value !== undefined && value !== null ? { value } : {})} 
+                    >
+                        { asyncOptions 
+                            ? _options.map(({ label, ...o }, i) => <option {...o} key={i} {...this.getOptionProps(o, 'data-')}>{label}</option>)
+                            : options.map(({ label, ...o }, i) => <option {...o} key={i}>{label}</option>) 
+                        }
+                    </select>
+                    { helperText && <small class="form-text text-muted"> {helperText} </small> }
+                </FormGroup>
+            </BlockUi>
         )
     }
 }
@@ -76,7 +97,7 @@ Select.defaultProps = {
     className : '',
     error : false,
     asyncOptions : null,
-    defaultValue: ''
+    defaultValue: 'Seleccione'
 }
 
 export default Select
