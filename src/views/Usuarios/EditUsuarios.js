@@ -281,8 +281,7 @@ class EditUsuarios extends React.Component {
                                 element: <Input onChange={this.onChange('username')} value={data.username} />
                             }}
                             validator={{
-                                validationRules: {required:true},
-                                validationMessages: {required:"El campo es requerido"}
+                                validationRules: {required:"El campo es requerido"},
                             }}
                         />
                         <FormElementValidate

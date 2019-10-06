@@ -2,6 +2,7 @@ import React from 'react'
 import { FormGroup, Input, Label, Tabs, FormValidate, EditPage, FormElementValidate } from 'temeforest'
 import { baseurl, getParameter } from 'utils/url'
 import axios from 'axios'
+import { validate } from 'utils/validate'
 
 import Fila from './DistribucionAsientos/Fila'
 
@@ -103,8 +104,14 @@ class Piso extends React.Component {
                         element: <Input type="number" min="1" max="20" modeNumber="positive_integer" onChange={(e) => this.onChange('filas', e)} value={filas} />
                     }}
                     validator={{
-                        validationRules: { required : true, number: true, minRangeNumber : 1, maxRangeNumber : 20 },
-                        validationMessages : { required: 'El campo es requerido', number : "El valor debe ser un número", minRangeNumber: 'El valor no puede ser menor a 1', maxRangeNumber: 'El valor no puede ser mayor a 20' }
+                        validationRules: { 
+                            required : 'El campo es requerido', 
+                            validate : validate({
+                                number : "El valor debe ser un número"
+                            }), 
+                            min : { value: 1, message: 'El valor no puede ser menor a 1' }, 
+                            max : { value: 20, message: 'El valor no puede ser mayor a 20' }
+                        }
                     }}
                 />
 

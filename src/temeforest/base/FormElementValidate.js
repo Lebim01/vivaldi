@@ -1,7 +1,18 @@
 import React from 'react'
-import { Input, FormGroup, Label } from './../index'
-import Validator from 'react-forms-validator';
+import { FormGroup, Label } from './../index'
 import ValidateContext from './ValidateContext'
+
+/**
+ * NATIVE VALIDATIONS
+ *  required
+ *  min
+ *  max
+ *  minLength
+ *  maxLength
+ *  pattern
+ *  validate
+ * another validations extra import from 'utils/validate'
+ */
 
 const defaultProps = {
     label : {
@@ -38,7 +49,7 @@ class FormElementValidate extends React.Component {
         
         return (
             <ValidateContext.Consumer>
-                {({onChangeFlagValidate, submitted}) => {
+                {({register, errors}) => {
                     return (
                         <FormGroup className="row">
                             <Label className="col-sm-3">
@@ -48,17 +59,20 @@ class FormElementValidate extends React.Component {
                                 </span>
                             </Label>
                             <div className="col-sm-5">
-                                {_input.element || <Input />}
-                                { validator &&
-                                    <Validator 
-                                        isValidationError={onChangeFlagValidate}
-                                        isFormSubmitted={submitted}
-                                        reference={{
-                                            [_input.name] : _input.element.props.value,
-                                            ...validator.reference
-                                        }}
-                                        {...validator}
-                                    />
+                                {/** ELEMENT */}
+                                {<_input.element.type 
+                                    name={_input.name} 
+                                    {..._input.element.props} 
+                                    register={register(validator.validationRules)}
+                                />}
+                                {/** ERROR MESSAGE */}
+                                { errors[_input.name] && 
+                                    <span className="text-danger">
+                                        { errors[_input.name].message !== '' 
+                                            ? errors[_input.name].message 
+                                            : validator.validationMessages[errors[_input.name].type]
+                                        }
+                                    </span> 
                                 }
                             </div>
                             { _input.button &&

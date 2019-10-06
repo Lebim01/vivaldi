@@ -76,8 +76,7 @@ class MainView extends React.Component {
                             element: <Input className="no-clear" type="time" onChange={this.onChange('hora_salida')} value={this.props.hora_salida} />
                         }}
                         validator={{
-                            validationRules: {required:true},
-                            validationMessages: {required:"El campo es requerido"}
+                            validationRules: {required:"El campo es requerido"},
                         }}
                     />
                     <FormElementValidate
@@ -87,8 +86,7 @@ class MainView extends React.Component {
                             element: <Select onChange={this.onChange('cooperativa')} value={this.props.cooperativa} asyncOptions={this.optionsCooperativa} />
                         }}
                         validator={{
-                            validationRules: {required:true},
-                            validationMessages: {required:"El campo es requerido"}
+                            validationRules: {required:"El campo es requerido"},
                         }}
                     />
                     <FormElementValidate
@@ -98,8 +96,7 @@ class MainView extends React.Component {
                             element: <Select onChange={this.onChange('ruta')} value={this.props.ruta} asyncOptions={this.optionsRutas({ cooperativa: this.props.cooperativa })} id="cmb_ruta" />
                         }}
                         validator={{
-                            validationRules: {required:true},
-                            validationMessages: {required:"El campo es requerido"}
+                            validationRules: {required:"El campo es requerido"},
                         }}
                     />
                     <FormGroup className="row">
@@ -115,8 +112,7 @@ class MainView extends React.Component {
                             element: <Select onChange={this.onChange('tipo')} value={this.props.tipo} options={this.tipos} />
                         }}
                         validator={{
-                            validationRules: {required:true},
-                            validationMessages: {required:"El campo es requerido"}
+                            validationRules: {required:"El campo es requerido"},
                         }}
                     />
                     { Number(this.props.tipo) === 1 &&

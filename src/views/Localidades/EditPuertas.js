@@ -2,6 +2,7 @@ import React from 'react'
 import { FormGroup, Input, Select, Label, DualList, EditPage, FormValidate, FormElementValidate } from 'temeforest'
 import { baseurl, getParameter, getResults } from 'utils/url'
 import axios from 'axios'
+import { validate } from 'utils/validate'
 import 'react-dual-listbox/lib/react-dual-listbox.css';
 
 const endpoint = 'puerta'
@@ -54,8 +55,15 @@ class MainView extends React.Component {
             if(name === 'localidad_nivel'){
                 // limpiar andenes seleccionados
                 this.props.onChange('andenes', [])
-                // cargar nueva lista de andenes
-                this.getAndenes(e.target.value)
+
+                if(e.target.value){
+                    // cargar nueva lista de andenes
+                    this.getAndenes(e.target.value)
+                }else{
+                    this.setState({
+                        andenes : []
+                    })
+                }
             }
         }
     }
@@ -105,7 +113,7 @@ class MainView extends React.Component {
     render(){
         const { andenes, niveles } = this.state
         return (
-            <div>
+            <EditPage title={`${this.props.id ? 'Editar' : 'Crear'} Puerta`} data={this.props.data} id={this.props.id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
                 <FormValidate className="mt-4 form-horizontal">
                     <FormElementValidate
                         label={{text:'Localidad'}}
@@ -114,8 +122,9 @@ class MainView extends React.Component {
                             element: <Select onChange={this.onChangeLocalidad('localidad')} value={this.props.localidad} asyncOptions={this.optionsLocalidades} />
                         }}
                         validator={{
-                            validationRules: {required:true},
-                            validationMessages: {required:"El campo es requerido"}
+                            validationRules: { 
+                                required: 'El campo es requerido'
+                            }
                         }}
                     />
                     <FormElementValidate
@@ -125,8 +134,9 @@ class MainView extends React.Component {
                             element: <Select onChange={this.onChange('localidad_nivel')} value={this.props.localidad_nivel} options={this.props.localidad ? niveles : this.seleccione} />
                         }}
                         validator={{
-                            validationRules: {required:true},
-                            validationMessages: {required:"El campo es requerido"}
+                            validationRules: { 
+                                required: 'El campo es requerido'
+                            }
                         }}
                     />
                     <FormElementValidate
@@ -136,8 +146,9 @@ class MainView extends React.Component {
                             element: <Input onChange={this.onChange('nombre')} value={this.props.nombre} />
                         }}
                         validator={{
-                            validationRules: {required:true},
-                            validationMessages: {required:"El campo es requerido"}
+                            validationRules: { 
+                                required: 'El campo es requerido'
+                            }
                         }}
                     />
                     <FormGroup className="row">
@@ -155,7 +166,7 @@ class MainView extends React.Component {
                         </div>
                     </FormGroup>
                 </FormValidate>
-            </div>
+            </EditPage>
         )
     }
 }
@@ -193,9 +204,7 @@ class EditPuertas extends React.Component {
     render(){
         const { data, id } = this.state
         return (
-            <EditPage title={`${id ? 'Editar' : 'Crear'} Puerta`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
-                <MainView  {...data} onChange={this.onChange} />
-            </EditPage>
+            <MainView id={id} data={data} history={this.props.history} {...data} onChange={this.onChange} />
         )
     }
 }

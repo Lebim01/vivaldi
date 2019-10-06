@@ -5,6 +5,7 @@ import { generateHexadecimal } from 'utils/string'
 import Swal from 'sweetalert2'
 import AddCooperativaPuntoVentaModal from './AddCooperativaPuntoVentaModal'
 import axios from 'axios'
+import { validate } from 'utils/validate'
 
 const endpoint = 'venta/puntoventa'
 const urlFront = '/cooperativas/punto-venta'
@@ -145,8 +146,9 @@ class MainView extends React.Component {
                             element: <Input onChange={this.onChange('descripcion')} value={this.props.descripcion} />
                         }}
                         validator={{
-                            validationRules: {required:true},
-                            validationMessages: {required:"El campo es requerido"}
+                            validationRules: {
+                                required:"El campo es requerido",
+                            },
                         }}
                     />
                     <FormElementValidate
@@ -157,8 +159,9 @@ class MainView extends React.Component {
                             button : <Button onClick={this.generateHexadecimal.bind(this)}>Generar</Button>
                         }}
                         validator={{
-                            validationRules: {required:true},
-                            validationMessages: {required:"El campo es requerido"}
+                            validationRules: {
+                                required:"El campo es requerido",
+                            },
                         }}
                     />
                     <FormElementValidate
@@ -168,8 +171,9 @@ class MainView extends React.Component {
                             element: <Select asyncOptions={this.optionsLocalidades} onChange={this.onChange('localidad')} value={this.props.localidad} />
                         }}
                         validator={{
-                            validationRules: {required:true},
-                            validationMessages: {required:"El campo es requerido"}
+                            validationRules: {
+                                required:"El campo es requerido",
+                            },
                         }}
                     />
                     <FormElementValidate
@@ -179,8 +183,12 @@ class MainView extends React.Component {
                             element: <Input onChange={this.onChange('ip')} value={this.props.ip} placeholder="0.0.0.0" />
                         }}
                         validator={{
-                            validationRules: { required:true, ip : true },
-                            validationMessages: { required:"El campo es requerido", ip:"El campo debe ser una IP"}
+                            validationRules: {
+                                required:"El campo es requerido",
+                                validate: validate({
+                                    ip: "El campo debe ser una IP"
+                                })
+                            },
                         }}
                     />
                     <FormGroup className="row">
@@ -209,8 +217,9 @@ class MainView extends React.Component {
                                 element: <Select asyncOptions={this.optionsCooperativas} onChange={this.onChange('cooperativa')} value={this.props.cooperativa} />
                             }}
                             validator={{
-                                validationRules: {required:true},
-                                validationMessages: {required:"El campo es requerido"}
+                                validationRules: {
+                                    required:"El campo es requerido",
+                                },
                             }}
                         />
                     }

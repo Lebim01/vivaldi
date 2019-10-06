@@ -2,6 +2,7 @@ import React from 'react'
 import { Input, Select, EditPage, FormElementValidate, FormValidate } from 'temeforest'
 import { baseurl, getParameter } from 'utils/url'
 import axios from 'axios'
+import { validate } from 'utils/validate'
 
 const endpoint = 'trafficControl'
 const urlFront = '/localidades/traffic-control'
@@ -31,8 +32,7 @@ class MainView extends React.Component {
                             element: <Input onChange={this.onChange('descripcion')} value={this.props.descripcion} />
                         }}
                         validator={{
-                            validationRules: {required:true},
-                            validationMessages: {required:"El campo es requerido"}
+                            validationRules: {required:"El campo es requerido"}
                         }}
                     />
                     <FormElementValidate
@@ -42,8 +42,7 @@ class MainView extends React.Component {
                             element: <Select asyncOptions={this.optionsLocalidad} value={this.props.localidad} onChange={this.onChange('localidad')} />
                         }}
                         validator={{
-                            validationRules: {required:true},
-                            validationMessages: {required:"El campo es requerido"}
+                            validationRules: {required:"El campo es requerido"}
                         }}
                     />
                     <FormElementValidate
@@ -64,8 +63,12 @@ class MainView extends React.Component {
                             element: <Input onChange={this.onChange('url')} value={this.props.url} />
                         }}
                         validator={{
-                            validationRules: {required:true, url:true},
-                            validationMessages: {required:"El campo es requerido", ip: 'El valor debe ser una URL valida'}
+                            validationRules: {
+                                required:"El campo es requerido",
+                                validate: validate({
+                                    ip: 'El valor debe ser una URL válida'
+                                })
+                            }
                         }}
                     />
                     <FormElementValidate
@@ -75,8 +78,7 @@ class MainView extends React.Component {
                             element: <Input onChange={this.onChange('user')} value={this.props.user} />
                         }}
                         validator={{
-                            validationRules: {required:true},
-                            validationMessages: {required:"El campo es requerido"}
+                            validationRules: {required:"El campo es requerido"}
                         }}
                     />
                     <FormElementValidate

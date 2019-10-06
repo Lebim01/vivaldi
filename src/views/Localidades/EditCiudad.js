@@ -52,8 +52,9 @@ class EditCiudad extends React.Component {
                                 element: <Input onChange={this.onChange('nombre')} value={this.state.data.nombre} />
                             }}
                             validator={{
-                                validationRules: {required:true},
-                                validationMessages: {required:"El campo es requerido"}
+                                validationRules: {
+                                    required:"El campo es requerido",
+                                },
                             }}
                         />
                         <FormElementValidate
@@ -63,8 +64,9 @@ class EditCiudad extends React.Component {
                                 element: <Select asyncOptions={this.optionsProvincias} onChange={this.onChange('provincia')} value={this.state.data.provincia} />
                             }}
                             validator={{
-                                validationRules: {required:true},
-                                validationMessages: {required:"El campo es requerido"}
+                                validationRules: {
+                                    required:"El campo es requerido",
+                                },
                             }}
                         />
                     </FormValidate>

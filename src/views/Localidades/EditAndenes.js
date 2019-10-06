@@ -74,8 +74,9 @@ class MainView extends React.Component {
                             element: <Input onChange={this.onChange('descripcion')} value={this.props.descripcion} />
                         }}
                         validator={{
-                            validationRules: {required:true},
-                            validationMessages: {required:"El campo es requerido"}
+                            validationRules: {
+                                required:"El campo es requerido",
+                            },
                         }}
                     />
                     <FormElementValidate
@@ -85,8 +86,9 @@ class MainView extends React.Component {
                             element: <Select onChange={this.onChangeLocalidad('localidad')} value={this.props.localidad} asyncOptions={this.optionsLocalidad} />
                         }}
                         validator={{
-                            validationRules: {required:true},
-                            validationMessages: {required:"El campo es requerido"}
+                            validationRules: {
+                                required:"El campo es requerido",
+                            },
                         }}
                     />
                     <FormElementValidate
@@ -96,8 +98,9 @@ class MainView extends React.Component {
                             element: <Select onChange={this.onChange('localidad_nivel')} value={this.props.localidad_nivel} options={this.props.localidad ? this.state.niveles : this.seleccione} />
                         }}
                         validator={{
-                            validationRules: {required:true},
-                            validationMessages: {required:"El campo es requerido"}
+                            validationRules: {
+                                required:"El campo es requerido",
+                            },
                         }}
                     />
                   </FormValidate>

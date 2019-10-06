@@ -6,6 +6,7 @@ import EditPersona from './EditPersona'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import moment from 'moment'
+import { validate } from 'utils/validate'
 
 const endpoint = 'bus'
 const urlFront = '/cooperativas/buses'
@@ -86,8 +87,14 @@ class MainView extends React.Component {
                             element: <Input onChange={this.onChange('disco')} value={this.props.disco} />
                         }}
                         validator={{
-                            validationRules: { required : true, number: true, minRangeNumber : 1, maxRangeNumber : 1000 },
-                            validationMessages : { required: 'El campo es requerido', number : "El valor debe ser un número", minRangeNumber: 'El valor debe ser entre 1 y 1000', maxRangeNumber : 'El valor debe ser entre 1 y 1000' }
+                            validationRules: { 
+                                required : 'El campo es requerido', 
+                                min : { value: 1, message : 'El valor debe ser entre 1 y 1000' }, 
+                                max : { value: 1000, message : 'El valor debe ser entre 1 y 1000' },
+                                validate : validate({
+                                    number : 'El valor debe ser un número'
+                                })
+                            }
                         }}
                     />
                     <FormElementValidate
@@ -97,8 +104,7 @@ class MainView extends React.Component {
                             element: <Input onChange={this.onChange('placa')} value={this.props.placa} />
                         }}
                         validator={{
-                            validationRules: { required : true },
-                            validationMessages : { required : 'El campo es requerido' }
+                            validationRules: { required : 'El campo es requerido' }
                         }}
                     />
                     <FormGroup className="row">
@@ -120,8 +126,14 @@ class MainView extends React.Component {
                             element: <Input readOnly value={this.props.capacidad} />
                         }}
                         validator={{
-                            validationRules: { required : true, number: true, minRangeNumber : 1, maxRangeNumber : 200 },
-                            validationMessages : { required : 'El valor es requerido', number : "El valor debe ser un número" , minRangeNumber: 'El valor no puede ser menor a 1', maxRangeNumber: 'El valor no puede ser mayor a 200'}
+                            validationRules: { 
+                                required : 'El valor es requerido', number: true, 
+                                min : { value : 1, message : 'El valor no puede ser menor a 1' }, 
+                                max : { value : 200, message : 'El valor no puede ser mayor a 200' },
+                                validate : validate({
+                                    number : "El valor debe ser un número"
+                                })
+                            }
                         }}
                     />
                     <FormGroup className="row">
@@ -143,8 +155,14 @@ class MainView extends React.Component {
                             element: <Input type="number" onChange={this.onChange('anio_fabricacion')} value={this.props.anio_fabricacion} min={1950} max={moment().year()+1} />
                         }}
                         validator={{
-                            validationRules: { required : true, number: true, minRangeNumber : 1950, maxRangeNumber : moment().year()+1 },
-                            validationMessages : { required: 'El campo es requerido', number : "El valor debe ser un número", minRangeNumber: 'El año no puede ser menor a 1950', maxRangeNumber: `El año no puede ser mayor a ${moment().year()+1}` }
+                            validationRules: { 
+                                required : 'El campo es requerido', 
+                                min : { value: 1950, message : 'El año no puede ser menor a 1950' } , 
+                                max : { value: moment().year()+1, message : `El año no puede ser mayor a ${moment().year()+1}` },
+                                validate : validate({
+                                    number : "El valor debe ser un número"
+                                })
+                            }
                         }}
                     />
                     <FormElementValidate
@@ -154,8 +172,7 @@ class MainView extends React.Component {
                             element: <Input type="date" onChange={this.onChange('fecha_emision_matricula')} value={this.props.fecha_emision_matricula} />
                         }}
                         validator={{
-                            validationRules: { required : true },
-                            validationMessages : { required: 'El campo es requerido' }
+                            validationRules: { required : 'El campo es requerido' }
                         }}
                     />
                     <FormElementValidate
@@ -165,8 +182,7 @@ class MainView extends React.Component {
                             element: <Input type="date" onChange={this.onChange('fecha_vencimiento_matricula')} value={this.props.fecha_vencimiento_matricula} />
                         }}
                         validator={{
-                            validationRules: { required : true },
-                            validationMessages : { required: 'El campo es requerido' }
+                            validationRules: { required : 'El campo es requerido' }
                         }}
                     />
 

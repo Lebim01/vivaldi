@@ -25,8 +25,7 @@ class MainView extends React.Component {
                             element: <Input onChange={this.onChange('nombre')} value={this.props.nombre} />
                         }}
                         validator={{
-                            validationRules: {required:true},
-                            validationMessages: {required:"El campo es requerido"}
+                            validationRules: {required:"El campo es requerido"},
                         }}
                     />
                     <FormElementValidate
@@ -36,8 +35,7 @@ class MainView extends React.Component {
                             element: <TextArea onChange={this.onChange('descripcion')} rows="6" value={this.props.descripcion}/>
                         }}
                         validator={{
-                            validationRules: {required:true},
-                            validationMessages: {required:"El campo es requerido"}
+                            validationRules: {required:"El campo es requerido"},
                         }}
                     />
                 </FormValidate>

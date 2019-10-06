@@ -156,8 +156,7 @@ class EditConductor extends React.Component {
                             element: <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this._onChange('cooperativa')} value={this.state.data.cooperativa} />
                         }}
                         validator={{
-                            validationRules: { required : true },
-                            validationMessages : { required: 'El campo es requerido' }
+                            validationRules: { required : 'El campo es requerido' },
                         }}
                     />
                     <EditPersona 

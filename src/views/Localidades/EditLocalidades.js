@@ -181,8 +181,9 @@ class MainView extends React.Component {
                             element: <Input onChange={this.onChange('nombre')} value={this.props.nombre} />
                         }}
                         validator={{
-                            validationRules: {required:true},
-                            validationMessages: {required:"El campo es requerido"}
+                            validationRules: {
+                                required:"El campo es requerido",
+                            },
                         }}
                     />
                     <FormElementValidate
@@ -192,8 +193,9 @@ class MainView extends React.Component {
                             element: <Input onChange={this.onChange('tarifa_tasa')} value={this.props.tarifa_tasa} />
                         }}
                         validator={{
-                            validationRules: {required:true},
-                            validationMessages: {required:"El campo es requerido"}
+                            validationRules: {
+                                required:"El campo es requerido",
+                            },
                         }}
                     />
                     <FormElementValidate
@@ -203,8 +205,9 @@ class MainView extends React.Component {
                             element: <Input onChange={this.onChange('representante_legal')} value={this.props.representante_legal} />
                         }}
                         validator={{
-                            validationRules: {required:true},
-                            validationMessages: {required:"El campo es requerido"}
+                            validationRules: {
+                                required:"El campo es requerido",
+                            },
                         }}
                     />
                     <FormElementValidate
@@ -214,8 +217,9 @@ class MainView extends React.Component {
                             element: <Select asyncOptions={this.optionsCiudades} onChange={this.onChange('ciudad')} value={this.props.ciudad} />
                         }}
                         validator={{
-                            validationRules: {required:true},
-                            validationMessages: {required:"El campo es requerido"}
+                            validationRules: {
+                                required:"El campo es requerido",
+                            },
                         }}
                     />
                     <FormGroup className="row">
@@ -240,8 +244,9 @@ class MainView extends React.Component {
                             element: <Input type="number" onChange={this.onChange('tiempo_gracia')} value={this.props.tiempo_gracia} rightLabel="Minutos" min={1} max={60} />
                         }}
                         validator={{
-                            validationRules: {required:true},
-                            validationMessages: {required:"El campo es requerido"}
+                            validationRules: {
+                                required:"El campo es requerido",
+                            },
                         }}
                     />
 
@@ -254,8 +259,9 @@ class MainView extends React.Component {
                                 element: <Input onChange={this.onChange('establecimiento')} value={this.props.establecimiento} />
                             }}
                             validator={{
-                                validationRules: {required:true},
-                                validationMessages: {required:"El campo es requerido"}
+                                validationRules: {
+                                    required:"El campo es requerido",
+                                },
                             }}
                         />
                         <FormElementValidate
@@ -265,8 +271,9 @@ class MainView extends React.Component {
                                 element: <Input onChange={this.onChange('razon_social')} value={this.props.razon_social} />
                             }}
                             validator={{
-                                validationRules: {required:true},
-                                validationMessages: {required:"El campo es requerido"}
+                                validationRules: {
+                                    required:"El campo es requerido",
+                                },
                             }}
                         />
                         <FormElementValidate
@@ -287,8 +294,9 @@ class MainView extends React.Component {
                                 element: <Input onChange={this.onChange('nombre_comercial')} value={this.props.nombre_comercial} />
                             }}
                             validator={{
-                                validationRules: {required:true},
-                                validationMessages: {required:"El campo es requerido"}
+                                validationRules: {
+                                    required:"El campo es requerido",
+                                },
                             }}
                         />
                         <FormElementValidate
@@ -320,8 +328,9 @@ class MainView extends React.Component {
                                 element: <Input onChange={this.onChange('telefono')} value={this.props.telefono} />
                             }}
                             validator={{
-                                validationRules: {required:true},
-                                validationMessages: {required:"El campo es requerido"}
+                                validationRules: {
+                                    required:"El campo es requerido",
+                                },
                             }}
                         />
                         <FormGroup className="row">

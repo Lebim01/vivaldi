@@ -1,24 +1,18 @@
 import React from 'react'
 import { ValidateContext } from '../index'
 
-class FormValidate extends React.Component {
-    render(){
-        return (
-            <ValidateContext.Consumer>
-                {({onSubmit}) => {
-                    return (
-                        <form noValidate onSubmit={onSubmit} className={this.props.className}>
-                            {this.props.children}
-                        </form>
-                    )
-                }}
-            </ValidateContext.Consumer>
-        )
-    }
-}
-
-FormValidate.defaultProps = {
-    className : ''
+function FormValidate(props) {
+    return (
+        <ValidateContext.Consumer>
+            {({handleSubmit, onSubmit}) => {
+                return (
+                    <form noValidate onSubmit={handleSubmit(onSubmit)} {...props}>
+                        {props.children}
+                    </form>
+                )
+            }}
+        </ValidateContext.Consumer>
+    )
 }
 
 export default FormValidate

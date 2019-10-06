@@ -3,6 +3,7 @@ import { Col, Row } from 'reactstrap'
 import { FormGroup, Input, Label, FormElementValidate, FormValidate } from 'temeforest'
 import { baseurl, getResults } from 'utils/url'
 import axios from 'axios'
+import { validate } from 'utils/validate'
 
 class EditPersona extends React.Component {
 
@@ -106,8 +107,14 @@ class EditPersona extends React.Component {
                                         element: <Input value={data.identificacion} onChange={this.onChange('identificacion')} /> 
                                     }}
                                     validator={this.props.required ? {
-                                        validationRules: {required:true, number : true, minLength:this.props.lengthCedula, maxLength:this.props.lengthCedula},
-                                        validationMessages: {required:"El campo es requerido", minLength:`El valor debe ser de ${this.props.lengthCedula} dígitos`, maxLength:`El valor debe ser de ${this.props.lengthCedula} dígitos`, number : 'Solo se aceptan números'}
+                                        validationRules: {
+                                            required:"El campo es requerido", 
+                                            validate: validate({
+                                                number : 'Solo se aceptan números' 
+                                            }),
+                                            minLength: { value: this.props.lengthCedula, message: `El valor debe ser de ${this.props.lengthCedula} dígitos` },
+                                            maxLength: { value: this.props.lengthCedula, message: `El valor debe ser de ${this.props.lengthCedula} dígitos` },
+                                        }
                                     } : {}}
                                 />
                                 <FormGroup className="row">
@@ -129,8 +136,12 @@ class EditPersona extends React.Component {
                                         element: <Input placeholder="example@gmail.com" readOnly={_readOnly} value={data.correo} onChange={this.onChange('correo')} />
                                     }}
                                     validator={{
-                                        validationRules: { required : this.props.required, email: this.props.required },
-                                        validationMessages : { required: "El campo es requerido", email: "El valor debe ser un correo válido" }
+                                        validationRules: {
+                                            required:"El campo es requerido",
+                                            validate: validate({
+                                                email : "El valor debe ser un correo válido"
+                                            })
+                                        },
                                     }}
                                 />
                             </FormValidate>
