@@ -6,7 +6,7 @@ function FormValidate(props) {
         <ValidateContext.Consumer>
             {({handleSubmit, onSubmit}) => {
                 return (
-                    <form noValidate onSubmit={handleSubmit(onSubmit)} {...props}>
+                    <form noValidate onSubmit={handleSubmit ? handleSubmit(onSubmit) : null} {...props}>
                         {props.children}
                     </form>
                 )
