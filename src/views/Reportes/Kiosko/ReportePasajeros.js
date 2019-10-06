@@ -7,7 +7,7 @@ import 'moment/locale/es'
 import axios from 'axios'
 
 import store from 'store/auth'
-const { user_info, token } = store.getState()
+const { user_info } = store.getState()
 
 const formato = (props) => {
     return `
