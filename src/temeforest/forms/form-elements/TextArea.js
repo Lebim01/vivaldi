@@ -2,9 +2,9 @@ import React from 'react'
 
 class TextArea extends React.Component {
     render(){
-        const { ...otherProps } = this.props
+        const {  register, ...otherProps } = this.props
         return (
-            <textarea className="form-control" {...otherProps}>{this.props.children}</textarea>
+            <textarea className="form-control" ref={register} {...otherProps}>{this.props.children}</textarea>
         )
     }
 }
