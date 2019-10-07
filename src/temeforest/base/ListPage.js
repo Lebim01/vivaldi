@@ -1,7 +1,7 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
 import { CardTitle, InputIcon, Button } from 'temeforest'
-import axios from 'axios'
+import axios, { CancelToken } from 'axios'
 import { baseurl, objectToUrl } from 'utils/url'
 
 import BlockUi from 'react-block-ui';
@@ -11,6 +11,15 @@ import 'react-block-ui/style.css';
 const RowsPerPage = 25
 // numero limite de paginas visibles en el footer
 const NumVisibleFooterPages = 5
+
+// cancel axios
+let cancel;
+const defaultConfigAxios = {
+    cancelToken: new CancelToken(function executor(c) {
+        // An executor function receives a cancel function as a parameter
+        cancel = c;
+    })
+}
 
 class RecordRow extends React.Component {
 
@@ -85,39 +94,43 @@ class ListPage extends React.Component {
 
     loadList = async (parameters = {}) => {
         if(this.props.endpoint){
-            this.setState({
-                loading: true
-            })
-            const { currentPage } = this.state
-            const { data } = await axios.get(`${baseurl}/${this.props.endpoint}/${objectToUrl({ ...parameters, page : currentPage })}`, this.props.config)
+            try {
+                this.setState({
+                    loading: true
+                })
+                const { currentPage } = this.state
+                const { data } = await axios.get(`${baseurl}/${this.props.endpoint}/${objectToUrl({ ...parameters, page : currentPage })}`, { ...defaultConfigAxios, ...this.props.config })
 
-            let _results = [], 
-                _count = 0, 
-                _next = null, 
-                _previous = null,
-                _numPages = 1
+                let _results = [], 
+                    _count = 0, 
+                    _next = null, 
+                    _previous = null,
+                    _numPages = 1
 
-            if(Array.isArray(data)){
-                _results = data
-                _count = data.length
-            }else{
-                const { results, count, next, previous } = data
-                _results = results
-                _count = count
-                _next = next
-                _previous = previous
-                _numPages = Math.ceil(_count / RowsPerPage)
+                if(Array.isArray(data)){
+                    _results = data
+                    _count = data.length
+                }else{
+                    const { results, count, next, previous } = data
+                    _results = results
+                    _count = count
+                    _next = next
+                    _previous = previous
+                    _numPages = Math.ceil(_count / RowsPerPage)
+                }
+                
+                this.setState({
+                    results : _results,
+                    filtered : _results,
+                    count : _count,
+                    numPages : _numPages,
+                    next : _next,
+                    previous : _previous,
+                    loading: false
+                }, this.getVisibleFooterPages)
+            }catch(e){
+                console.error(e)
             }
-            
-            this.setState({
-                results : _results,
-                filtered : _results,
-                count : _count,
-                numPages : _numPages,
-                next : _next,
-                previous : _previous,
-                loading: false
-            }, this.getVisibleFooterPages)
         }
         else {
             this.setState({
@@ -132,6 +145,10 @@ class ListPage extends React.Component {
 
     componentDidMount(){
         this.setPage(1)
+    }
+
+    componentWillUnmount(){
+        cancel()
     }
 
     onRowDoubleClick = (id, row) => {
