@@ -20,6 +20,13 @@ const styles = {
 
 class Input extends React.Component {
 
+    input = null
+
+    constructor(props){
+        super(props)
+        this.input = React.createRef();
+    }
+
     onChange = (e) => {
         const { type, onChange, modeNumber, min, max } = this.props
 
@@ -79,7 +86,7 @@ class Input extends React.Component {
         const { type, helperText, rightLabel, error, className, value, onChange, keyDown, modeNumber, register, ...otherProps } = this.props
         return (
             <FormGroup>
-                <input type={type} onKeyDown={this.onKeyDown} className={`form-control ${className} ${error ?'is-invalid':''}`} value={value || ''} onChange={this.onChange} {...otherProps} ref={register}/>
+                <input type={type} onKeyDown={this.onKeyDown} className={`form-control ${className} ${error ?'is-invalid':''}`} value={value || ''} onChange={this.onChange} {...otherProps} ref={register} ref={this.input}/>
                 { rightLabel && <label style={styles.rightLabel}>{rightLabel}</label> }
                 { helperText && <small className="form-text text-muted"> {helperText} </small> }
             </FormGroup>

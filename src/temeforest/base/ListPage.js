@@ -147,10 +147,6 @@ class ListPage extends React.Component {
         this.setPage(1)
     }
 
-    componentWillUnmount(){
-        cancel()
-    }
-
     onRowDoubleClick = (id, row) => {
         if(this.props.onRowDoubleClick){
             this.props.onRowDoubleClick(row)
