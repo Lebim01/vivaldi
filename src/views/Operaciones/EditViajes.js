@@ -39,7 +39,7 @@ class MainView extends React.Component {
             this.props.onChange(name, value)
 
             if(name === 'cooperativa'){
-                //this.clearFieldsByCooperativa()
+                this.clearFieldsByCooperativa()
             }
             if(name === 'frecuencia'){
                 this.getTipoFrecuencia(value)

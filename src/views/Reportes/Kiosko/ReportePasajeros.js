@@ -28,84 +28,96 @@ const formato = (props) => {
             .imprimir {visibility: hidden}
             #tasa2 {width:35cm;}
             #notaC {width:490px;}
+            .tableleft td, .tableleft th {
+                text-align: left;
+            }
+            .tableright td, .tableright th {
+                text-align: right;
+            }
+            .text-center {
+                text-align: center;
+            }
+            * {
+                font-family: Helvetica,sans-serif;
+            }
         </style>
-        <div>
-            <div>
-                <h3>${props.localidad_nombre}</h3>
-                <h3>"${props.cooperativa_nombre}"</h3>
-                <h3>Pasajeros en Viaje</h3>
-                <h4>
-                    <table>
-                        <tbody>
+        <div style="width: 350px">
+            <div class="text-center">
+                <h3 style="margin:5px">${props.localidad_nombre}</h3>
+                <h3 style="margin:5px">"${props.cooperativa_nombre}"</h3>
+                <h3 style="margin:5px">Pasajeros en Viaje</h3>
+                <table class="tableleft" style="margin-left:10px; margin-right:10px;">
+                    <tbody>
+                        <tr>
+                            <th>Disco/Placa:</th>
+                            <td>${props.bus_disco} / ${props.bus_placa}</td>
+                        </tr>
+                        <tr>
+                            <th>Emisión:</th>
+                            <td>${moment().format('DD/MM/YYYY HH:mm:ss')}</td>
+                        </tr>
+                        <tr>
+                            <th>Destino:</th>
+                            <td>${props.viaje_destino}</td>
+                        </tr>
+                        <tr>
+                            <th>Viaje:</th>
+                            <td>${props.viaje_codigo}</td>
+                        </tr>
+                        <tr>
+                            <th>Salida:</th>
+                            <td>
+                                ${moment(`${props.fecha} ${props.hora_salida}`).format('DD/MM/YYYY HH:mm:ss')}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Dueño:</th>
+                            <td>${props.bus_dueno}</td>
+                        </tr>
+                        <tr>
+                            <th>Conductor:</th>
+                            <td>${props.viaje_conductor}</td>
+                        </tr>                        
+                        <tr>
+                            <th>Usuario:</th>
+                            <td>${user_info.name ? user_info.name : user_info.username}</td>
+                        </tr>
+                        <tr>
+                            <th style="white-space: nowrap;">Forma de pago:</th>
+                            <td>${props.forma_pago}</td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+                </h4>
+                <table frame="border" rules="groups" border="1" class="tableright" style="width:100%">
+                    <colgroup></colgroup>
+                    <colgroup></colgroup>
+                    <colgroup></colgroup>
+                    <thead>
+                        <tr>
+                            <th class="text-center">Num</th>
+                            <th class="text-center">C.I./Nombre</th>
+                            <th class="text-center">Parada/p.u.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${props.pasajeros.map((p) => `
                             <tr>
-                                <th>Disco/Placa:</th>
-                                <td>${props.bus_disco} / ${props.bus_placa}</td>
+                                <td rowspan="2">${p.asiento}</td>
+                                <td>${p.factura}</td>
+                                <td>${p.parada}</td>
                             </tr>
-                            <tr>
-                                <th>Emisión:</th>
-                                <td>${moment().format('DD/MM/YYYY HH:mm:ss')}</td>
-                            </tr>
-                            <tr>
-                                <th>Destino:</th>
-                                <td>${props.viaje_destino}</td>
-                            </tr>
-                            <tr>
-                                <th>Viaje:</th>
-                                <td>${props.viaje_codigo}</td>
-                            </tr>
-                            <tr>
-                                <th>Salida:</th>
-                                <td>
-                                    ${moment(`${props.fecha} ${props.hora_salida}`).format('DD/MM/YYYY HH:mm:ss')}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Dueño:</th>
-                                <td>${props.bus_dueno}</td>
-                            </tr>
-                            <tr>
-                                <th>Conductor:</th>
-                                <td>${props.viaje_conductor}</td>
-                            </tr>                        
-                            <tr>
-                                <th>Usuario:</th>
-                                <td>${user_info.name ? user_info.name : user_info.username}</td>
-                            </tr>
-                            <tr>
-                                <th>Forma de pago:</th>
-                                <td>${props.forma_pago}</td>
-                            </tr>
-                            
-                        </tbody>
-                    </table>
-                    </h4>
-                    <table frame="border" rules="groups" border="1">
-                        <colgroup></colgroup>
-                        <colgroup></colgroup>
-                        <colgroup></colgroup>
-                        <thead>
-                            <tr>
-                                <th>Asiento</th>
-                                <th>C.I./Nombre</th>
-                                <th>Parada/p.u.</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${props.pasajeros.map((p) => `
-                                <tr>
-                                    <td rowspan="2">${p.asiento}</td>
-                                    <td>${p.factura}</td>
-                                    <td>${p.parada}</td>
-                                </tr>
-                                <tr style="border-bottom:1px solid">
-                                    <td>${p.persona}</td>
-                                    <td>$${p.precio}</td>
-                                </tr>  
-                            `)}
-                        </tbody>
-                    </table>
-                    <table>
-                        <tbody><tr>
+                            <tr style="border-bottom:1px solid">
+                                <td>${p.persona}</td>
+                                <td>$${p.precio}</td>
+                            </tr>  
+                        `)}
+                    </tbody>
+                </table>
+                <table class="tableright" style="width:100%">
+                    <tbody>
+                        <tr>
                             <td>Total Pasajeros:</td>
                             <td>${props.pasajeros.length}</td>
                         </tr>

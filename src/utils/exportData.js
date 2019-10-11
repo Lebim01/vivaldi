@@ -83,7 +83,7 @@ function printHtml(html){
 
     _window.focus();
     _window.print()
-    _window.close()
+    //_window.close()
 }
 
 function barcodeToPng(code = ''){
