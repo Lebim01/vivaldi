@@ -80,7 +80,7 @@ const formato = (props) => {
                         </tr>                        
                         <tr>
                             <th>Usuario:</th>
-                            <td>${user_info.name ? user_info.name : user_info.username}</td>
+                            <td>${user_info.username}</td>
                         </tr>
                         <tr>
                             <th style="white-space: nowrap;">Forma de pago:</th>
@@ -105,7 +105,7 @@ const formato = (props) => {
                         ${props.pasajeros.map((p) => `
                             <tr>
                                 <td rowspan="2">${p.asiento}</td>
-                                <td>${p.factura}</td>
+                                <td>${p.identificacion}</td>
                                 <td>${p.parada}</td>
                             </tr>
                             <tr style="border-bottom:1px solid">
