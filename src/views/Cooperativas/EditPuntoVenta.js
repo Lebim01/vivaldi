@@ -210,6 +210,7 @@ class MainView extends React.Component {
                         </div>
                     </FormGroup>
                     { this.props.externo &&
+                        <div>
                         <FormElementValidate
                             label={{text:'Cooperativa'}}
                             input={{
@@ -222,6 +223,31 @@ class MainView extends React.Component {
                                 },
                             }}
                         />
+                        <FormElementValidate
+                            label={{text:'Punto Emision Tasa'}} 
+                            input={{
+                                name: 'punto_emision_tasa',
+                                element: <Input onChange={this.onChange('punto_emision_tasa')} value={this.props.punto_emision_tasa} />
+                            }}
+                            validator={{
+                                validationRules: {
+                                    required: "El campo es requerido"
+                                }
+                            }}
+                        />
+                        <FormElementValidate
+                            label={{text:'Secuencial Tasa'}} 
+                            input={{
+                                name: 'secuencial_tasa',
+                                element: <Input onChange={this.onChange('secuencial_tasa')} value={this.props.secuencial_tasa} />
+                            }}
+                            validator={{
+                                validationRules: {
+                                    required: "El campo es requerido"
+                                }
+                            }}
+                        />
+                        </div>
                     }
                     { !this.props.externo &&
                         <>
