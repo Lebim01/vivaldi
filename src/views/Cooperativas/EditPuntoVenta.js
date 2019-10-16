@@ -137,7 +137,7 @@ class MainView extends React.Component {
     render(){
         const { puntoventa_cooperativas } = this.props
         // TODO no usar 001, usar el establecimiento de la localidad
-        let numero_prueba = `001-${this.props.punto_emision_tasa ? this.props.punto_emision_tasa.padStart(3, "0") : "001"}-${this.props.secuencial_tasa ? this.props.secuencial_tasa.padStart(9) : "000000001"}`
+        let numero_prueba = `001-${this.props.punto_emision_tasa ? this.props.punto_emision_tasa.padStart(3, "0") : "001"}-${this.props.secuencial_tasa ? this.props.secuencial_tasa.padStart(9, "0") : "000000001"}`
         return (
             <div>
                 <FormValidate className="mt-4 form-horizontal">
