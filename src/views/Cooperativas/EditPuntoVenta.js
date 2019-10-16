@@ -43,7 +43,8 @@ class MainView extends React.Component {
     state = {
         modal : {
             show : false
-        }
+        },
+        isEditedEmision: false
     }
     optionsLocalidades = {
         url : `${baseurl}/localidad/`,
@@ -69,6 +70,9 @@ class MainView extends React.Component {
 
                 this.props.onChange(name, e.target.checked)
             }else{
+                if (name == 'punto_emision_tasa'){
+                    this.setState({isEditedEmision: true})
+                }
                 this.props.onChange(name, e.target.value)
             }
         }
@@ -138,6 +142,7 @@ class MainView extends React.Component {
         const { puntoventa_cooperativas } = this.props
         // TODO no usar 001, usar el establecimiento de la localidad
         let numero_prueba = `001-${this.props.punto_emision_tasa ? this.props.punto_emision_tasa.padStart(3, "0") : "001"}-${this.props.secuencial_tasa ? this.props.secuencial_tasa.padStart(9, "0") : "000000001"}`
+        let readOnlyEmision = ! (this.state.isEditedEmision && this.props.tiene_ventas )
         return (
             <div>
                 <FormValidate className="mt-4 form-horizontal">
@@ -241,7 +246,7 @@ class MainView extends React.Component {
                             label={{text:'Secuencial Tasa'}} 
                             input={{
                                 name: 'secuencial_tasa',
-                                element: <Input onChange={this.onChange('secuencial_tasa')} value={this.props.secuencial_tasa} readOnly={this.props.tiene_ventas}/>
+                                element: <Input onChange={this.onChange('secuencial_tasa')} value={this.props.secuencial_tasa} readOnly={readOnlyEmision}/>
                             }}
                             validator={{
                                 validationRules: {
