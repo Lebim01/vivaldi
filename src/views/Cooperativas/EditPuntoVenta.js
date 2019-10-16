@@ -136,6 +136,8 @@ class MainView extends React.Component {
 
     render(){
         const { puntoventa_cooperativas } = this.props
+        // TODO no usar 001, usar el establecimiento de la localidad
+        let numero_prueba = `001-${this.props.punto_emision_tasa ? this.props.punto_emision_tasa.padStart(3, "0") : "001"}-${this.props.secuencial_tasa ? this.props.secuencial_tasa.padStart(9) : "000000001"}`
         return (
             <div>
                 <FormValidate className="mt-4 form-horizontal">
@@ -239,7 +241,7 @@ class MainView extends React.Component {
                             label={{text:'Secuencial Tasa'}} 
                             input={{
                                 name: 'secuencial_tasa',
-                                element: <Input onChange={this.onChange('secuencial_tasa')} value={this.props.secuencial_tasa} />
+                                element: <Input onChange={this.onChange('secuencial_tasa')} value={this.props.secuencial_tasa} readOnly={this.props.tiene_ventas}/>
                             }}
                             validator={{
                                 validationRules: {
@@ -247,6 +249,10 @@ class MainView extends React.Component {
                                 }
                             }}
                         />
+                        <div className='row'>
+                            <div className='col-sm-3'></div>
+                            <div className='col-sm-5'><p className='text-center'>{numero_prueba}</p></div>
+                        </div>
                         </div>
                     }
                     { !this.props.externo &&
