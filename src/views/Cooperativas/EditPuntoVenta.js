@@ -65,6 +65,8 @@ class MainView extends React.Component {
                         this.props.onChange('puntoventa_cooperativas', [])
                     }else{
                         this.props.onChange('cooperativa', '')
+                        this.props.onChange('punto_emision_tasa', '')
+                        this.props.onChange('secuencial_tasa', '')
                     }
                 }
 
