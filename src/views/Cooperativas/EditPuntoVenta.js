@@ -44,7 +44,7 @@ class MainView extends React.Component {
         modal : {
             show : false
         },
-        isEditedEmision: true
+        isEditedEmision: false
     }
     optionsLocalidades = {
         url : `${baseurl}/localidad/`,
@@ -147,9 +147,9 @@ class MainView extends React.Component {
         let readOnlyEmision = false
         if (this.props.tiene_ventas) {
             if (this.state.isEditedEmision){
-                readOnlyEmision = true
-            } else {
                 readOnlyEmision = false
+            } else {
+                readOnlyEmision = true
             }
         } else {
             readOnlyEmision = false
