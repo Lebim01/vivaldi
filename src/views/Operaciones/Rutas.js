@@ -10,13 +10,13 @@ function Rutas(props) {
                         <CardBody>
                             <ListPage
                                 title="Listado de Rutas"
-                                
+
                                 searchable={true}
-                                searchPlaceholder="Cooperativa, Ruta, Destino"
+                                searchPlaceholder="Cooperativa, Vía, Destino"
                                 searchFields={['cooperativa_nombre', 'via', 'ciudad_destino_nombre']}
 
-                                fieldNames={['Cooperativa', 'Ruta', 'Destino']}
-                                fields={['cooperativa_nombre', 'via', 'ciudad_destino_nombre']}
+                                fieldNames={['Cooperativa', 'Destino', 'Vía']}
+                                fields={['cooperativa_nombre', 'ciudad_destino_nombre', 'via']}
 
                                 endpoint='ruta'
                                 urlFront='operaciones/rutas'
