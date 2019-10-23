@@ -32,7 +32,7 @@ class MainView extends React.Component {
         labelName : ({ nombres, apellidos }) => `${apellidos} ${nombres}`,
         valueName : 'id'
     })
-    
+
     onChange = name => (e) => {
         if(this.props.onChange){
             let value = e.target.value
@@ -71,8 +71,8 @@ class MainView extends React.Component {
                     <FormElementValidate
                         label={{text:'Localidad'}}
                         input={{
-                            name : 'localidad',
-                            element: <Select onChange={this.onChange('localidad')} value={this.props.localidad} asyncOptions={this.optionsLocalidad} />
+                            name : 'localidad_origen',
+                            element: <Select onChange={this.onChange('localidad_origen')} value={this.props.localidad_origen} asyncOptions={this.optionsLocalidad} />
                         }}
                         validator={{
                             validationRules: { required:"El campo es requerido", },
@@ -92,7 +92,7 @@ class MainView extends React.Component {
                         label={{text:'Fecha salida'}}
                         input={{
                             name : 'fecha_salida',
-                            element: <Input onChange={this.onChange('fecha_salida')} value={this.props.fecha_salida} type="date" />
+                            element: <Input onChange={this.onChange('fecha_salida')} value={this.props.fecha} type="date" />
                         }}
                         validator={{
                             validationRules: { required:"El campo es requerido", },
@@ -103,10 +103,10 @@ class MainView extends React.Component {
                         input={{
                             name : 'frecuencia',
                             element: (
-                                <Select 
-                                    onChange={this.onChange('frecuencia')} 
+                                <Select
+                                    onChange={this.onChange('frecuencia')}
                                     value={this.props.frecuencia}
-                                    { ...(this.props.cooperativa 
+                                    { ...(this.props.cooperativa
                                         ? { asyncOptions : this.optionsFrecuencia({ cooperativa: this.props.cooperativa }) }
                                         : { options : [{ label: 'Seleccione un cooperativa', value : '' }] }
                                     )}
@@ -129,10 +129,10 @@ class MainView extends React.Component {
                         input={{
                             name : 'bus',
                             element: (
-                                <Select 
-                                    onChange={this.onChange('bus')} 
+                                <Select
+                                    onChange={this.onChange('bus')}
                                     value={this.props.bus}
-                                    { ...(this.props.cooperativa 
+                                    { ...(this.props.cooperativa
                                         ? { asyncOptions : this.optionsBus({ cooperativa: this.props.cooperativa }) }
                                         : { options : [{ label: 'Seleccione un cooperativa', value : '' }] }
                                     )}
@@ -148,10 +148,10 @@ class MainView extends React.Component {
                         input={{
                             name : 'conductor',
                             element: (
-                                <Select 
-                                    onChange={this.onChange('conductor')} 
+                                <Select
+                                    onChange={this.onChange('conductor')}
                                     value={this.props.conductor}
-                                    { ...(this.props.cooperativa 
+                                    { ...(this.props.cooperativa
                                         ? { asyncOptions : this.optionsConductor({ cooperativa: this.props.cooperativa }) }
                                         : { options : [{ label: 'Seleccione un cooperativa', value : '' }] }
                                     )}
@@ -167,8 +167,8 @@ class MainView extends React.Component {
                         input={{
                             name : 'causa_creacion_administrativa',
                             element: (
-                                <TextArea 
-                                    onChange={this.onChange('causa_creacion_administrativa')} 
+                                <TextArea
+                                    onChange={this.onChange('causa_creacion_administrativa')}
                                     value={this.props.conductor}
                                 />
                             )
@@ -187,7 +187,7 @@ function EditViajes(props){
     const [state, setState] = useState({
         id : null,
         data : {
-            
+
         }
     })
 
@@ -200,7 +200,7 @@ function EditViajes(props){
 
     const getData = async (id) => {
         const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/`)
-        this.setState({
+        setState({
             id,
             data
         })
