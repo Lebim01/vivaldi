@@ -7,6 +7,15 @@ import Swal from 'sweetalert2'
 import moment from 'moment'
 
 const endpoint = 'frecuencia'
+const dias = [
+    'Lunes',
+    'Martes',
+    'Miercolés',
+    'Jueves',
+    'Viernes',
+    'Sábado',
+    'Domingo'
+]
 
 class MainView extends React.Component {
 
@@ -37,6 +46,19 @@ class MainView extends React.Component {
         if(this.props.onChange){
             this.props.onChange(name, e.target.value)
         }
+    }
+
+    onChangeDias = index => {
+        let _dias = this.props.dias
+
+
+        if(_dias.includes(index)){
+            _dias.splice(_dias.indexOf(index), 1)
+        }else{
+            _dias.push(index)
+        }
+
+        this.props.onChange('dias', _dias)
     }
 
     render(){
@@ -95,6 +117,23 @@ class MainView extends React.Component {
                             <Select onChange={this.onChange('tipo')} value={this.props.tipo} options={this.tipos} />
                         </div>
                     </FormGroup>
+                    { Number(this.props.tipo) === 1 &&
+                        <div className="row">
+                            <div className="col-sm-3"></div>
+                            <div className="col-sm-6">
+                                <FormGroup className="row">
+                                    { dias.map((nombre, index) => 
+                                        <div className="col-sm-3">
+                                            <div className="custom-control custom-checkbox">
+                                                <input type="checkbox" className="custom-control-input" id={nombre} name={nombre} checked={this.props.dias.includes(index)} onChange={() => this.onChangeDias(index)} />
+                                                <Label onlyClassName="custom-control-label" htmlFor={nombre}>{nombre}</Label>
+                                            </div>
+                                        </div>
+                                    )}
+                                </FormGroup>
+                            </div>
+                        </div>
+                    }
                     { Number(this.props.tipo) === 2 &&
                         <FormGroup className="row">
                             <Label className="col-sm-3">Fecha</Label>
@@ -115,7 +154,8 @@ class CrearFrecuenciaLote extends React.Component {
         id : null,
         data : {
             intervalo_hora: 0,
-            intervalo_minuto: 10
+            intervalo_minuto: 10,
+            dias : []
         }
     }
     
