@@ -27,7 +27,7 @@ class MainView extends React.Component {
     optionsRutas = (obj) => {
         return {
             url : `${baseurl}/ruta/${objectToUrl(obj)}`,
-            labelName: 'ciudad_destino_nombre',
+            labelName: 'nombre',
             valueName: 'id'
         }
     }
@@ -100,17 +100,17 @@ class MainView extends React.Component {
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
-                        <Label className="col-sm-3">Ruta</Label>
+                        <Label className="col-sm-3">Destino</Label>
                         <div className="col-sm-5">
                             <Select onChange={this.onChange('ruta')} value={this.props.ruta} asyncOptions={this.optionsRutas({ cooperativa: this.props.cooperativa })} id="cmb_ruta" />
                         </div>
                     </FormGroup>
-                    <FormGroup className="row">
+                    {/*<FormGroup className="row">
                         <Label className="col-sm-3">Destino</Label>
                         <div className="col-sm-5">
                             <Input readOnly value={this.props.destino} />
                         </div>
-                    </FormGroup>
+                    </FormGroup>*/}
                     <FormGroup className="row">
                         <Label className="col-sm-3">Tipo</Label>
                         <div className="col-sm-5">
@@ -122,7 +122,7 @@ class MainView extends React.Component {
                             <div className="col-sm-3"></div>
                             <div className="col-sm-6">
                                 <FormGroup className="row">
-                                    { dias.map((nombre, index) => 
+                                    { dias.map((nombre, index) =>
                                         <div className="col-sm-3">
                                             <div className="custom-control custom-checkbox">
                                                 <input type="checkbox" className="custom-control-input" id={nombre} name={nombre} checked={this.props.dias.includes(index)} onChange={() => this.onChangeDias(index)} />
@@ -158,7 +158,7 @@ class CrearFrecuenciaLote extends React.Component {
             dias : []
         }
     }
-    
+
     componentDidMount(){
         let id = getParameter('id')
         if(id){
