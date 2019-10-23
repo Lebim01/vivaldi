@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Col, Row } from 'reactstrap'
 import { Card, CardBody, CardTitle, Button, ValidateContext } from 'temeforest'
 import { confirmEndpoint } from 'utils/dialog'
@@ -17,9 +17,17 @@ const defaultBtnSave = {
 }
 
 function EditPage(props){
-    const { register, handleSubmit, watch, errors, triggerValidation } = useForm()
+    const { register, handleSubmit, watch, errors, triggerValidation, getValues, setValue } = useForm()
 
     const { id, title, btnDelete, btnSave } = props
+
+    useEffect(() => {
+        const values = getValues()
+        for(let i in values){
+            console.log(i)
+            setValue(i, ' ')
+        }
+    }, [])
     
     // events
     const onSubmit = async data => { 
@@ -99,6 +107,7 @@ function EditPage(props){
                 handleSubmit,
                 watch,
                 errors,
+                setValue
             }}>
             <div className="animated fadeIn">
                 <Row>

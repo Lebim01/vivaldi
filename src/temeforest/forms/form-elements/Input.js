@@ -28,7 +28,7 @@ class Input extends React.Component {
     }
 
     onChange = (e) => {
-        const { type, onChange, modeNumber, min, max } = this.props
+        const { type, onChange, modeNumber, min, max, setValue } = this.props
 
         if(type === 'number'){
             const value = Number(e.target.value)
