@@ -85,12 +85,11 @@ class MainView extends React.Component {
         labelName: 'nombre',
         valueName: 'id'
     }
-    tipos = [
-        {
-            value : 1,
-            label : 'Intraprovicional'
-        }
-    ]
+    tipos = {
+        url : `${baseurl}/tipoCooperativa/`,
+        labelName: 'nombre',
+        valueName: 'id'
+    }
     sino = [
         { value : 'si', label : 'Si' },
         { value : 'no', label : 'No' }
@@ -146,7 +145,7 @@ class MainView extends React.Component {
     }
 
     render(){
-        const tipos = this.tipos, sino = this.sino
+        const sino = this.sino
         const { tab } = this.state
         const { localidades, tabsLocalidades } = this.props
         return (
@@ -167,7 +166,7 @@ class MainView extends React.Component {
                         label={{text:'Tipo'}}
                         input={{
                             name : 'tipo',
-                            element: <Select options={tipos} onChange={this.onChange('tipo')} value={this.props.tipo} />
+                            element: <Select asyncOptions={this.tipos} onChange={this.onChange('tipo')} value={this.props.tipo} />
                         }}
                         validator={{
                             validationRules: {required:true},

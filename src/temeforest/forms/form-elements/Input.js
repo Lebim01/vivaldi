@@ -86,7 +86,7 @@ class Input extends React.Component {
         const { type, helperText, rightLabel, error, className, value, onChange, keyDown, modeNumber, register, ...otherProps } = this.props
         return (
             <FormGroup>
-                <input type={type} onKeyDown={this.onKeyDown} className={`form-control ${className} ${error ?'is-invalid':''}`} value={value || ''} onChange={this.onChange} {...otherProps} ref={register} ref={this.input}/>
+                <input type={type} onKeyDown={this.onKeyDown} className={`form-control ${className} ${error ?'is-invalid':''}`} value={value || ''} onChange={this.onChange} {...otherProps} ref={register} />
                 { rightLabel && <label style={styles.rightLabel}>{rightLabel}</label> }
                 { helperText && <small className="form-text text-muted"> {helperText} </small> }
             </FormGroup>

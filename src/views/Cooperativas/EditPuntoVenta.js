@@ -43,7 +43,8 @@ class MainView extends React.Component {
     state = {
         modal : {
             show : false
-        }
+        },
+        isEditedEmision: false
     }
     optionsLocalidades = {
         url : `${baseurl}/localidad/`,
@@ -64,11 +65,16 @@ class MainView extends React.Component {
                         this.props.onChange('puntoventa_cooperativas', [])
                     }else{
                         this.props.onChange('cooperativa', '')
+                        this.props.onChange('punto_emision_tasa', '')
+                        this.props.onChange('secuencial_tasa', '')
                     }
                 }
 
                 this.props.onChange(name, e.target.checked)
             }else{
+                if (name == 'punto_emision_tasa'){
+                    this.setState({isEditedEmision: true})
+                }
                 this.props.onChange(name, e.target.value)
             }
         }
@@ -136,6 +142,18 @@ class MainView extends React.Component {
 
     render(){
         const { puntoventa_cooperativas } = this.props
+        // TODO no usar 001, usar el establecimiento de la localidad
+        let numero_prueba = `001-${this.props.punto_emision_tasa ? this.props.punto_emision_tasa.padStart(3, "0") : "001"}-${this.props.secuencial_tasa ? this.props.secuencial_tasa.padStart(9, "0") : "000000001"}`
+        let readOnlyEmision = false
+        if (this.props.tiene_ventas) {
+            if (this.state.isEditedEmision){
+                readOnlyEmision = false
+            } else {
+                readOnlyEmision = true
+            }
+        } else {
+            readOnlyEmision = false
+        }
         return (
             <div>
                 <FormValidate className="mt-4 form-horizontal">
@@ -210,6 +228,7 @@ class MainView extends React.Component {
                         </div>
                     </FormGroup>
                     { this.props.externo &&
+                        <div>
                         <FormElementValidate
                             label={{text:'Cooperativa'}}
                             input={{
@@ -222,6 +241,35 @@ class MainView extends React.Component {
                                 },
                             }}
                         />
+                        <FormElementValidate
+                            label={{text:'Punto Emision Tasa'}} 
+                            input={{
+                                name: 'punto_emision_tasa',
+                                element: <Input onChange={this.onChange('punto_emision_tasa')} value={this.props.punto_emision_tasa} maxlength="3"/>
+                            }}
+                            validator={{
+                                validationRules: {
+                                    required: "El campo es requerido"
+                                }
+                            }}
+                        />
+                        <FormElementValidate
+                            label={{text:'Secuencial Tasa'}} 
+                            input={{
+                                name: 'secuencial_tasa',
+                                element: <Input onChange={this.onChange('secuencial_tasa')} value={this.props.secuencial_tasa} maxlength="9" readOnly={readOnlyEmision}/>
+                            }}
+                            validator={{
+                                validationRules: {
+                                    required: "El campo es requerido"
+                                }
+                            }}
+                        />
+                        <div className='row'>
+                            <div className='col-sm-3'></div>
+                            <div className='col-sm-5'><p className='text-center'>{numero_prueba}</p></div>
+                        </div>
+                        </div>
                     }
                     { !this.props.externo &&
                         <>

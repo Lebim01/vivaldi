@@ -15,8 +15,9 @@ class MainView extends React.Component {
     }
 
     render(){
+        const {data, id} = this.props 
         return (
-            <div>
+            <EditPage title={`${id ? 'Editar' : 'Crear'} Marca`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
                 <FormValidate className="mt-4 form-horizontal" onSubmit={false}>
                     <FormElementValidate
                         label={{text:'Nombre'}}
@@ -29,7 +30,7 @@ class MainView extends React.Component {
                         }}
                     />
                 </FormValidate>
-            </div>
+            </EditPage>
         )
     }
 }
@@ -64,9 +65,7 @@ class EditMarcas extends React.Component {
     render(){
         const { id, data } = this.state
         return (
-            <EditPage title={`${id ? 'Editar' : 'Crear'} Marca`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
-                <MainView {...data} onChange={this.onChange} />
-            </EditPage>
+            <MainView id={id} data={data} {...data} onChange={this.onChange} />
         )
     }
 }
