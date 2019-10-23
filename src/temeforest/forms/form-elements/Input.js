@@ -20,15 +20,8 @@ const styles = {
 
 class Input extends React.Component {
 
-    input = null
-
-    constructor(props){
-        super(props)
-        this.input = React.createRef();
-    }
-
     onChange = (e) => {
-        const { type, onChange, modeNumber, min, max, setValue } = this.props
+        const { type, onChange, modeNumber, min, max } = this.props
 
         if(type === 'number'){
             const value = Number(e.target.value)

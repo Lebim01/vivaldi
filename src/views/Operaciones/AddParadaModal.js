@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
-import { Button, FormGroup, InputIcon, Label, Select, FormValidate, RSelect } from 'temeforest'
+import { Button, FormGroup, InputIcon, Label, FormValidate, RSelect } from 'temeforest'
 import { baseurl, getResults } from 'utils/url'
 
 // positivos decimal

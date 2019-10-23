@@ -17,14 +17,19 @@ const defaultBtnSave = {
 }
 
 function EditPage(props){
-    const { register, handleSubmit, watch, errors, triggerValidation, getValues, setValue } = useForm()
+    const { register, handleSubmit, watch, errors, triggerValidation, getValues, setValue, ...methods } = useForm()
 
     const { id, title, btnDelete, btnSave } = props
 
     useEffect(() => {
         const values = getValues()
+
         for(let i in values){
-            setValue(i, ' ')
+            const element = document.getElementsByName(i)[0]
+            if(element.type === 'number')
+                setValue(i, '1')
+            else
+                setValue(i, ' ')
         }
     }, [])
     
