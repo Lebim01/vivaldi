@@ -37,36 +37,7 @@ class BandejaTasaCooperativa extends React.Component {
         })
     }
 
-    async rowToHtml(row){
-        try {
-            const res1 = await axios.get(`${baseurl}/venta/generacion_contingencia/${row.id}/`)
-            const res2 = await axios.get(`${baseurl}/venta/generacion_contingencia/${row.id}/tasas/`)
-            //await axios.post(`${baseurl}/${endpoint}/${row.id}/`, { estado : 3 /** IMPRESO */ })
-        }
-        catch(e){
-            console.error(e)
-        }
-        /*return `
-            <div style="margin-bottom: 10px; border-bottom: 1px solid black; width: 300px; text-align: center;">
-                <p style="margin-top: 5px; margin-bottom: 5px;">${row.localidad_nombre}</p>
-                <p style="margin-top: 5px; margin-bottom: 5px;">Contingencia General</p>
-                <p style="margin-top: 5px; margin-bottom: 5px;">Bloque #${row.bloque} - Tasa #${row.tasa}</p>
-                <p style="margin-top: 5px; margin-bottom: 5px;">
-                    <span style="width: 100px; text-align: left;">Emisión: </span>
-                    <span style="width: 100px; text-align: left;">${moment().format('DD/MM/YYYY')}</span>
-                </p>
-                <p style="margin-top: 5px; margin-bottom: 5px;">
-                    <span style="width: 100px; text-align: left;">Tasa: </span>
-                    <span style="width: 100px; text-align: left;">$ ${row.tasa_valor}</span>
-                </p>
-                <p style="margin-top: 5px; margin-bottom: 5px;">
-                    <span style="width: 100px; text-align: left;">Oficinista: </span>
-                    <span style="width: 100px; text-align: left;">admin</span>
-                </p>
-                <img src="${barcodeToPng("1234")}"/>
-            </div>
-        `*/
-
+    rowToHtml(row){
         return `
             <div style="margin-bottom: 10px; border-bottom: 1px solid black; width: 300px; text-align: center;">
                 <p style="margin-top: 5px; margin-bottom: 5px;">${row.localidad_nombre}</p>

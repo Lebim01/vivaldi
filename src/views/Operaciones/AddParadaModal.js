@@ -1,19 +1,41 @@
 import React from 'react'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { Button, FormGroup, InputIcon, Label, Select, FormValidate } from 'temeforest'
-import { baseurl } from 'utils/url'
+import { baseurl, getResults } from 'utils/url'
+import RSelect from 'react-select'
 
 // positivos decimal
 const pattern = /[(\d+\.\d)|]/
 
+const rselect = {
+    styles : {
+        menu : (provided, state) => ({
+            ...provided,
+            zIndex : 2
+        })
+    }
+}
+
 class AddParadaModal extends React.Component {
 
-    state = { errors: [], data: {} }
+    state = { errors: [], data: {}, ciudades: [] }
 
     optionsParada = {
         url : `${baseurl}/ciudad/`,
         labelName: 'nombre',
         valueName: 'id'
+    }
+    
+    componentDidMount(){
+        this.loadOptionsCiudades()
+    }
+
+    loadOptionsCiudades = async () => {
+        const {url, labelName, valueName} = this.optionsParada
+        const results = await getResults(url)
+        this.setState({
+            ciudades : results.map((row) => ({ label: row[labelName], value: row[valueName] }))
+        })
     }
 
     componentWillReceiveProps(props){

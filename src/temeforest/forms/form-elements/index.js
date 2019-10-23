@@ -7,6 +7,7 @@ import Tabs from './Tabs'
 import DualList from './DualList'
 import TextArea from './TextArea'
 import InputAutocomplete from './InputAutocomplete'
+import RSelect from './RSelect'
 
 export {
     Input,
@@ -17,5 +18,6 @@ export {
     Tabs,
     DualList,
     TextArea,
-    InputAutocomplete
+    InputAutocomplete,
+    RSelect
 }

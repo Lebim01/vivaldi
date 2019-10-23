@@ -24,7 +24,6 @@ function EditPage(props){
     useEffect(() => {
         const values = getValues()
         for(let i in values){
-            console.log(i)
             setValue(i, ' ')
         }
     }, [])

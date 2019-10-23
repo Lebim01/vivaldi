@@ -1,7 +1,7 @@
 import React from 'react'
 import { TabContent, TabPane, Badge, UncontrolledTooltip } from 'reactstrap'
-import { Button, FormGroup, Input, Select, Label, EditPage, Tabs, FormElementValidate, FormValidate } from 'temeforest'
-import { baseurl, baseMediaUrl, getParameter } from 'utils/url'
+import { Button, FormGroup, Input, Select, Label, EditPage, Tabs, FormElementValidate, FormValidate, RSelect } from 'temeforest'
+import { baseurl, baseMediaUrl, getParameter, getResults } from 'utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import NivelModal from './NivelModal'
@@ -12,6 +12,7 @@ const ConfiguracionCorreoForm = React.lazy(() => import('utils/ConfiguracionCorr
 
 const endpoint = 'localidad'
 const urlFront = '/localidades/localidades'
+
 
 class NivelRecordRow extends React.Component {
 
@@ -38,17 +39,18 @@ class NivelRecordRow extends React.Component {
 
 class MainView extends React.Component {
 
+    optionsCiudades = {
+        url : `${baseurl}/ciudad/`,
+        labelName : 'nombre',
+        valueName : 'id'
+    }
+
     state = {
         modalNivel : {
             show : false,
             id_nivel : null,
             id_localidad : null
         }
-    }
-    optionsCiudades = {
-        url : `${baseurl}/ciudad/`,
-        labelName : 'nombre',
-        valueName : 'id'
     }
 
     sino = [
@@ -214,7 +216,13 @@ class MainView extends React.Component {
                         label={{text:'Ciudad'}}
                         input={{
                             name : 'ciudad',
-                            element: <Select asyncOptions={this.optionsCiudades} onChange={this.onChange('ciudad')} value={this.props.ciudad} />
+                            element: (
+                                <RSelect
+                                    value={this.props.ciudad}
+                                    onChange={(value) => this.props.onChange('ciudad', value) }
+                                    asyncOptions={this.optionsCiudades}
+                                />
+                            )
                         }}
                         validator={{
                             validationRules: {
@@ -222,6 +230,7 @@ class MainView extends React.Component {
                             },
                         }}
                     />
+                    
                     <FormGroup className="row">
                         <Label className="col-sm-3">Logo</Label>
                         <div className="col-sm-3">
@@ -434,7 +443,7 @@ class EditLocalidades extends React.Component {
             tls: false
         },
         showConfirmSave : false,
-        niveles: [],
+        niveles: []
     }
 
     tabs = [
@@ -452,7 +461,7 @@ class EditLocalidades extends React.Component {
         }
     ]
 
-    componentDidMount(){
+    async componentDidMount(){
         let id = getParameter('id')
         if(id){
             this.getData(id)
@@ -547,8 +556,12 @@ class EditLocalidades extends React.Component {
         return false
     }
 
+    parseData = () => {
+
+    }
+
     render(){
-        const { tab, data, id, data_correo, data_firma } = this.state
+        const { tab, data, id, data_correo, data_firma, ciudades } = this.state
         let tabs = this.tabs
         let facturacionElectronicaTab = {
             link : 'firma',
@@ -570,12 +583,13 @@ class EditLocalidades extends React.Component {
             })
         }
         return (
-            <EditPage title={`${id ? 'Editar' : 'Crear'} Localidad`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
+            <EditPage title={`${id ? 'Editar' : 'Crear'} Localidad`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history} parseData={this.parseData}>
                 <Tabs tab={tab} tabs={tabs} onClickTab={this.changeTab}/>
                 <TabContent activeTab={tab}>
                     <TabPane tabId="main">
                         <MainView
                             {...data}
+                            ciudades={ciudades}
                             id_localidad={id}
                             onChange={this.onChange}
                             onChangeLogo={this.onChangeLogo}

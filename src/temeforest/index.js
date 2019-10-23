@@ -1,5 +1,5 @@
 import { Card, CardTitle, CardBody, CardSubtitle, ListPage, EditPage, ReportPage, FormElementValidate, FormValidate, ValidateContext, ApprovePage, RecordRow } from './base'
-import { Input, FormGroup, InputIcon, Select, Label, Tabs, DualList, TextArea, InputAutocomplete } from './forms'
+import { Input, FormGroup, InputIcon, Select, Label, Tabs, DualList, TextArea, InputAutocomplete, RSelect } from './forms'
 import { Button, ListGroup, ListItem, ListItemButton, Table } from './ui'
 import { BarChart, PieChart } from './charts'
 
@@ -27,6 +27,7 @@ export {
     DualList,
     TextArea,
     InputAutocomplete,
+    RSelect,
     /** UI */
     Button,
     ListGroup,
