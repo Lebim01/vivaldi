@@ -1,20 +1,10 @@
 import React from 'react'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
-import { Button, FormGroup, InputIcon, Label, Select, FormValidate } from 'temeforest'
+import { Button, FormGroup, InputIcon, Label, Select, FormValidate, RSelect } from 'temeforest'
 import { baseurl, getResults } from 'utils/url'
-import RSelect from 'react-select'
 
 // positivos decimal
 const pattern = /[(\d+\.\d)|]/
-
-const rselect = {
-    styles : {
-        menu : (provided, state) => ({
-            ...provided,
-            zIndex : 2
-        })
-    }
-}
 
 class AddParadaModal extends React.Component {
 
@@ -62,6 +52,14 @@ class AddParadaModal extends React.Component {
         })
     }
 
+    onSaveData = (name, value) => {
+        let data = this.state.data
+        data[name] = value
+        this.setState({
+            data
+        })
+    }
+
     toggle = () => {
         if(this.props.toggle){
             this.props.toggle()
@@ -100,7 +98,7 @@ class AddParadaModal extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-4">Parada</Label>
                             <div className="col-sm-6">
-                                <Select asyncOptions={this.optionsParada} onChange={this.onChange('ciudad')} value={this.state.data.ciudad} error={errors.includes('ciudad')} />
+                                <RSelect asyncOptions={this.optionsParada} onChange={(value) => this.onSaveData('ciudad', value)} value={this.state.data.ciudad} error={errors.includes('ciudad')} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
