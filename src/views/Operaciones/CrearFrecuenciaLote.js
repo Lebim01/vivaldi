@@ -155,7 +155,9 @@ class CrearFrecuenciaLote extends React.Component {
         data : {
             intervalo_hora: 0,
             intervalo_minuto: 10,
-            dias : []
+            dias : [
+              0,1,2,3,4,5,6
+            ]
         }
     }
 
