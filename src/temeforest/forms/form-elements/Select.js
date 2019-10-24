@@ -16,6 +16,15 @@ class Select extends React.Component {
         }
     }
 
+    componentDidUpdate(prevProps){
+        if(this.props.setValue){
+            const { setValue } = this.props
+            if(prevProps.value !== this.props.value){
+                setValue(this.props.name, this.props.value)
+            }
+        }
+    }
+
     componentWillReceiveProps(props){
         if(props.asyncOptions && (!this.props.asyncOptions || props.asyncOptions.url !== this.props.asyncOptions.url)) {
             this.loadListAsync(props)
@@ -67,7 +76,10 @@ class Select extends React.Component {
 
     render(){
         const { _options } = this.state
-        const { options, helperText, error, className, value, defaultValue, asyncOptions, register, ...otherProps } = this.props
+        const { options, helperText, error, className, value, defaultValue, asyncOptions, register, setValue, ...otherProps } = this.props
+
+        const _value = setValue ? null : (value !== undefined && value !== null ? { value } : null)
+
         return (
             <BlockUi tag="div" blocking={this.state.loading}>
                 <FormGroup>
@@ -77,7 +89,7 @@ class Select extends React.Component {
                         ref={register}
 
                         {...otherProps} 
-                        {...(value !== undefined && value !== null ? { value } : {})} 
+                        value={_value}
                     >
                         { asyncOptions 
                             ? _options.map(({ label, ...o }, i) => <option {...o} key={i} {...this.getOptionProps(o, 'data-')}>{label}</option>)

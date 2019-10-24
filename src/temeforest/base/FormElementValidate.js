@@ -49,7 +49,7 @@ class FormElementValidate extends React.Component {
         
         return (
             <ValidateContext.Consumer>
-                {({register, errors}) => {
+                {({register, errors, setValue}) => {
                     return (
                         <FormGroup className="row">
                             <Label className="col-sm-3">
@@ -62,6 +62,7 @@ class FormElementValidate extends React.Component {
                                 {/** ELEMENT */}
                                 {<_input.element.type 
                                     name={_input.name} 
+                                    setValue={setValue}
                                     {..._input.element.props}
                                     register={register(validator.validationRules)}
                                 />}

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Col, Row } from 'reactstrap'
 import { Card, CardBody, CardTitle, Button, ValidateContext } from 'temeforest'
 import { confirmEndpoint } from 'utils/dialog'
@@ -17,22 +17,9 @@ const defaultBtnSave = {
 }
 
 function EditPage(props){
-    const { register, handleSubmit, watch, errors, triggerValidation, getValues, setValue, ...methods } = useForm()
-
+    const { register, handleSubmit, watch, errors, triggerValidation, getValues, setValue, ...methods } = useForm({ reValidateMode : 'onBlur' })
     const { id, title, btnDelete, btnSave } = props
 
-    useEffect(() => {
-        const values = getValues()
-
-        for(let i in values){
-            const element = document.getElementsByName(i)[0]
-            if(element.type === 'number')
-                setValue(i, '1')
-            else
-                setValue(i, ' ')
-        }
-    }, [])
-    
     // events
     const onSubmit = async data => { 
         const res = await triggerValidation()

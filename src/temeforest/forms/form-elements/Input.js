@@ -20,6 +20,15 @@ const styles = {
 
 class Input extends React.Component {
 
+    componentDidUpdate(prevProps){
+        if(this.props.setValue){
+            const { setValue } = this.props
+            if(prevProps.value !== this.props.value){
+                setValue(this.props.name, this.props.value)
+            }
+        }
+    }
+
     onChange = (e) => {
         const { type, onChange, modeNumber, min, max } = this.props
 
@@ -76,10 +85,13 @@ class Input extends React.Component {
     }
 
     render(){
-        const { type, helperText, rightLabel, error, className, value, onChange, keyDown, modeNumber, register, ...otherProps } = this.props
+        const { type, helperText, rightLabel, error, className, value, onChange, keyDown, modeNumber, register, setValue, ...otherProps } = this.props
+
+        const _value = setValue ? null : value || ''
+
         return (
             <FormGroup>
-                <input type={type} onKeyDown={this.onKeyDown} className={`form-control ${className} ${error ?'is-invalid':''}`} value={value || ''} onChange={this.onChange} {...otherProps} ref={register} />
+                <input type={type} onKeyDown={this.onKeyDown} className={`form-control ${className} ${error ?'is-invalid':''}`} value={_value} onChange={this.onChange} {...otherProps} ref={register} />
                 { rightLabel && <label style={styles.rightLabel}>{rightLabel}</label> }
                 { helperText && <small className="form-text text-muted"> {helperText} </small> }
             </FormGroup>
