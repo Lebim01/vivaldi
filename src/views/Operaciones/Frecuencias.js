@@ -1,6 +1,6 @@
 import React from 'react'
 import { ListPage, Card, CardBody, CardTitle, FormGroup, Label, Select, Input, Button } from 'temeforest'
-import { baseurl } from 'utils/url'
+import { baseurl, objectToUrl } from 'utils/url'
 
 class Frecuencias extends React.Component {
 
@@ -13,11 +13,11 @@ class Frecuencias extends React.Component {
         labelName: 'nombre',
         valueName: 'id'
     }
-    optionsCiudad = {
-        url : `${baseurl}/ciudad/`,
-        labelName: 'nombre',
+    optionsCiudad = (obj) => ({
+        url : `${baseurl}/ruta/${objectToUrl(obj)}`,
+        labelName: 'ciudad_destino_nombre',
         valueName: 'id'
-    }
+    })
     optionsTipo = [
         { value:'', label: 'Todas' },
         { value:1, label: 'Normal' },
@@ -59,7 +59,7 @@ class Frecuencias extends React.Component {
                                         <FormGroup className="row">
                                             <Label className="col-sm-4">Destino</Label>
                                             <div className="col-sm-8">
-                                                <Select asyncOptions={this.optionsCiudad} onChange={this.onChange('ruta__ciudad_destino')} value={this.state.ruta__ciudad_destino}/>
+                                                <Select asyncOptions={this.optionsCiudad({ cooperativa: this.state.cooperativa })} onChange={this.onChange('ruta__ciudad_destino')} value={this.state.ruta__ciudad_destino}/>
                                             </div>
                                         </FormGroup>
                                     </div>

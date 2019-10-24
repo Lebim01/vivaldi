@@ -99,12 +99,6 @@ class MainView extends React.Component {
                             validationRules: {required:"El campo es requerido"},
                         }}
                     />
-                    {/*  <FormGroup className="row">
-                        <Label className="col-sm-3">Destino</Label>
-                        <div className="col-sm-5">
-                            <Input readOnly value={this.props.destino} />
-                        </div>
-                      </FormGroup> */}
                     <FormElementValidate
                         label={{text:'Tipo'}}
                         input={{

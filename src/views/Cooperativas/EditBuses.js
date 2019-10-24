@@ -163,7 +163,7 @@ class MainView extends React.Component {
                                     number : "El valor debe ser un número"
                                 })
                             }
-                        }}
+                        }} 
                     />
                     <FormElementValidate
                         label={{text:'Venc. Matricula'}}
