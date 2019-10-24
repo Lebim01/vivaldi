@@ -6,12 +6,12 @@ class Asiento extends React.Component {
 
     toggleActivate = () => {
         if(this.props.toggleActivate){
-            this.props.toggleActivate(this.props.index)
+            this.props.toggleActivate(this.props.numero_asiento-1)
         }
     }
 
     render(){
-        const { type, lado, activate } = this.props
+        const { type, activate } = this.props
         let activateCss = {}
         if(activate){
             activateCss = {
@@ -20,12 +20,13 @@ class Asiento extends React.Component {
                 color: '#fff'
             }
         }
+
         return (
             <div style={{display:'inline-block', marginLeft:3, marginRight:3}}>
                 <Button type={type} style={{height:40, width:40, padding: 2, ...activateCss}} onClick={this.toggleActivate}>
                     <small>
                         {this.props.numero_asiento}
-                        {lado}
+                        {this.props.lado}
                     </small>
                 </Button>
             </div>

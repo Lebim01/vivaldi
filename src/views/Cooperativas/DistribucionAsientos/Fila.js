@@ -28,17 +28,21 @@ class Fila extends React.Component {
 
         return (
             <div className="fila" style={styles}>
-                { asientos_fila.map((asiento,i) => (
-                    <div style={{display:'inline-block'}} key={i}>
-                        <Asiento 
-                            {...asiento}
-                            numero_asiento={(this.props.index * commonHallSeats) + i + 1}
-                            type={!asientos_desactivados.includes(asiento.index) ? 'info' : 'danger'}
-                            toggleActivate={toggleActivate}
-                        />
-                        { (!isLast && i === 1) && <DividerAsiento /> }
-                    </div>
-                ))}
+                { asientos_fila.map((asiento,i) => {
+                    const numero_asiento = (this.props.index * commonHallSeats) + i + 1
+                    return (
+                        <div style={{display:'inline-block'}} key={i}>
+                            <Asiento 
+                                {...asiento}
+                                lado={(i === 0 || (isLast && i === 4 || !isLast && i === 3)) ? 'V' : 'P'}
+                                numero_asiento={numero_asiento}
+                                type={!asientos_desactivados.includes(numero_asiento-1) ? 'info' : 'danger'}
+                                toggleActivate={toggleActivate}
+                            />
+                            { (!isLast && i === 1) && <DividerAsiento /> }
+                        </div>
+                    )
+                })}
             </div>
         )
     }

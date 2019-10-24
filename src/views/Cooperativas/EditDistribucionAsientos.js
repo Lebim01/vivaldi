@@ -24,22 +24,22 @@ function getAsientos(nivel, _filas, init = false){
         let filasNuevas = _filas - (init ? 0 : filas)
         for(let i  = 0; i < filasNuevas; i++){
             if(i === 0 && _asientos.length === 0){ // la primera fila que se agrega al array debe ser la que queda al final (debe ser 5 asientos)
-                _asientos = _asientos.concat([
-                    { index : _asientos.length, lado : 'V' },
-                    { index : _asientos.length+1, lado : 'P' },
-                    { index : _asientos.length+2, lado : 'P' },
-                    { index : _asientos.length+3, lado : 'P' },
-                    { index : _asientos.length+4, lado : 'V' }
-                ])
+                _asientos.unshift(
+                    { },
+                    { },
+                    { },
+                    { },
+                    { }
+                )
             }
 
             else {
-                _asientos = _asientos.concat([
-                    { index : _asientos.length, lado : 'V' },
-                    { index : _asientos.length+1, lado : 'P' },
-                    { index : _asientos.length+2, lado : 'P' },
-                    { index : _asientos.length+3, lado : 'V' }
-                ])
+                _asientos.unshift(
+                    { },
+                    { },
+                    { },
+                    { }
+                )
             }
         }
     }

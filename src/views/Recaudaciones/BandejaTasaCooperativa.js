@@ -3,7 +3,6 @@ import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, B
 import moment from 'moment'
 import { baseurl } from 'utils/url'
 import { printHtml, barcodeToPng } from 'utils/exportData'
-import axios from 'axios'
 
 const endpoint = 'venta/solicitud_tasacontingencia'
 
