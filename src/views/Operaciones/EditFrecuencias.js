@@ -26,7 +26,7 @@ class MainView extends React.Component {
     optionsRutas = (obj) => {
         return {
             url : `${baseurl}/ruta/${objectToUrl(obj)}`,
-            labelName: 'ciudad_destino_nombre',
+            labelName: 'nombre',
             valueName: 'id'
         }
     }
@@ -90,7 +90,7 @@ class MainView extends React.Component {
                         }}
                     />
                     <FormElementValidate
-                        label={{text:'Ruta'}}
+                        label={{text:'Destino'}}
                         input={{
                             name : 'ruta',
                             element: <Select onChange={this.onChange('ruta')} value={this.props.ruta} asyncOptions={this.optionsRutas({ cooperativa: this.props.cooperativa })} id="cmb_ruta" />
@@ -99,12 +99,12 @@ class MainView extends React.Component {
                             validationRules: {required:"El campo es requerido"},
                         }}
                     />
-                    <FormGroup className="row">
+                    {/*  <FormGroup className="row">
                         <Label className="col-sm-3">Destino</Label>
                         <div className="col-sm-5">
                             <Input readOnly value={this.props.destino} />
                         </div>
-                    </FormGroup>
+                      </FormGroup> */}
                     <FormElementValidate
                         label={{text:'Tipo'}}
                         input={{
@@ -120,7 +120,7 @@ class MainView extends React.Component {
                             <div className="col-sm-3"></div>
                             <div className="col-sm-6">
                                 <FormGroup className="row">
-                                    { dias.map((nombre, index) => 
+                                    { dias.map((nombre, index) =>
                                         <div className="col-sm-3">
                                             <div className="custom-control custom-checkbox">
                                                 <input type="checkbox" className="custom-control-input" id={nombre} name={nombre} checked={this.props.dias.includes(index)} onChange={() => this.onChangeDias(index)} />

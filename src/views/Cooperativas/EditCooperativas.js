@@ -191,7 +191,7 @@ class MainView extends React.Component {
                             validationMessages: {required:"El campo es requerido"}
                         }}
                     />
-                    <FormElementValidate
+                    {/* <FormElementValidate
                         label={{text:'Establecimiento'}}
                         input={{
                             name : 'establecimiento',
@@ -201,7 +201,7 @@ class MainView extends React.Component {
                             validationRules: {required:true},
                             validationMessages: {required:"El campo es requerido"}
                         }}
-                    />
+                    /> */}
                     <FormElementValidate
                         label={{text:'Tiempo de gracia'}}
                         input={{
