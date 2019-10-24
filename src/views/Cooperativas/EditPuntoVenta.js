@@ -27,12 +27,13 @@ class RecordRow extends React.Component {
                     </Button>{' '}
                     {this.props.cooperativa_nombre}
                 </td>
-                <td>{this.props.punto_emision_tasa}</td>
-                <td>{this.props.secuencia_tasa}</td>
+                <td>{this.props.establecimiento}</td>
                 <td>{this.props.punto_emision_boleto}</td>
                 <td>{this.props.secuencia_boleto}</td>
                 <td>{this.props.punto_emision_nota_credito}</td>
                 <td>{this.props.secuencia_nota_credito}</td>
+                <td>{this.props.punto_emision_tasa}</td>
+                <td>{this.props.secuencia_tasa}</td>
             </tr>
         )
     }
@@ -195,18 +196,6 @@ class MainView extends React.Component {
                         }}
                     />
                     <FormElementValidate
-                        label={{text:'Establecimiento'}}
-                        input={{
-                            name : 'establecimiento',
-                            element: <Input onChange={this.onChange('establecimiento')} value={this.props.establecimiento} maxlength="3"/>
-                        }}
-                        validator={{
-                            validationRules: {
-                                required:"El campo es requerido",
-                            },
-                        }}
-                    />
-                    <FormElementValidate
                         label={{text:'Dirección IP'}}
                         input={{
                             name : 'ip',
@@ -257,7 +246,7 @@ class MainView extends React.Component {
                             label={{text:'Punto Emision Tasa'}} 
                             input={{
                                 name: 'punto_emision_tasa',
-                                element: <Input onChange={this.onChange('punto_emision_tasa')} value={this.props.punto_emision_tasa} maxlength="3"/>
+                                element: <Input onChange={this.onChange('punto_emision_tasa')} value={this.props.punto_emision_tasa} maxLength="3"/>
                             }}
                             validator={{
                                 validationRules: {
@@ -269,7 +258,7 @@ class MainView extends React.Component {
                             label={{text:'Secuencial Tasa'}} 
                             input={{
                                 name: 'secuencial_tasa',
-                                element: <Input onChange={this.onChange('secuencial_tasa')} value={this.props.secuencial_tasa} maxlength="9" readOnly={readOnlyEmision}/>
+                                element: <Input onChange={this.onChange('secuencial_tasa')} value={this.props.secuencial_tasa} maxLength="9" readOnly={readOnlyEmision}/>
                             }}
                             validator={{
                                 validationRules: {
@@ -297,12 +286,13 @@ class MainView extends React.Component {
                                         <thead>
                                             <tr>
                                                 <th scope="col">Cooperativa</th>
-                                                <th scope="col">Punto<br/>(tasa)</th>
-                                                <th scope="col">Secuencia<br/>(tasa)</th>
+                                                <th scope="col">Establecimiento<br/>(boleto)</th>
                                                 <th scope="col">Punto<br/>(boleto)</th>
                                                 <th scope="col">Secuencia<br/>(boleto)</th>
                                                 <th scope="col">Punto<br/>(nota de crédito)</th>
                                                 <th scope="col">Secuencia<br/>(nota de crédito)</th>
+                                                <th scope="col">Punto<br/>(tasa)</th>
+                                                <th scope="col">Secuencia<br/>(tasa)</th>
                                             </tr>
                                         </thead>
                                         <tbody>
