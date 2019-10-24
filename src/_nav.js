@@ -243,28 +243,28 @@ export default {
           name: 'Registro Acciones',
           url: '/#/auditoria/registro-acciones'
         },
-        {
+        /*{
           name : 'Reportes Detallados',
           url : '/#/auditoria/reportes-detallados'
-        },
+        },*/
         {
           name : 'Tipo Emisión Cooperativas',
           url : '/#/auditoria/tipo-emision-cooperativas'
         },
-        {
+        /*{
           name : 'Permisos Roles',
           url : '/#/auditoria/permisos-roles'
-        }
+        }*/
       ]
     },
     {
       name : 'Auditoria SRI',
       icon : 'fas fa-eye',
       children : [
-        {
+        /*{
           name : 'Totalizados',
           url : '/#/auditoria-sri/totalizados'
-        }
+        }*/
       ]
     },
   ],
