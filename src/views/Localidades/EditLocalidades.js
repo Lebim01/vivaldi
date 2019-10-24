@@ -583,7 +583,7 @@ class EditLocalidades extends React.Component {
             })
         }
         return (
-            <EditPage title={`${id ? 'Editar' : 'Crear'} Localidad`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history} parseData={this.parseData}>
+            <EditPage title={`${id ? 'Editar' : 'Crear'} Localidad`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
                 <Tabs tab={tab} tabs={tabs} onClickTab={this.changeTab}/>
                 <TabContent activeTab={tab}>
                     <TabPane tabId="main">
