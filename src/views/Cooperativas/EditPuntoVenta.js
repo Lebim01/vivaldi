@@ -195,6 +195,18 @@ class MainView extends React.Component {
                         }}
                     />
                     <FormElementValidate
+                        label={{text:'Establecimiento'}}
+                        input={{
+                            name : 'establecimiento',
+                            element: <Input onChange={this.onChange('establecimiento')} value={this.props.establecimiento} maxlength="3"/>
+                        }}
+                        validator={{
+                            validationRules: {
+                                required:"El campo es requerido",
+                            },
+                        }}
+                    />
+                    <FormElementValidate
                         label={{text:'Dirección IP'}}
                         input={{
                             name : 'ip',
