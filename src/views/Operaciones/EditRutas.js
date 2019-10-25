@@ -1,4 +1,5 @@
 import React from 'react'
+import {Row} from 'reactstrap'
 import { Button, FormGroup, Input, Select, Label, EditPage, FormValidate } from 'temeforest'
 import { baseurl, getParameter, objectToUrl } from 'utils/url'
 import axios from 'axios'
@@ -29,7 +30,6 @@ class RecordRow extends React.Component {
                 <td>{this.props.orden_llegada}</td>
                 <td>{this.props.tarifa_normal}</td>
                 <td>{this.props.tarifa_media}</td>
-                <td>{this.props.duracion}h</td>
                 <td>
                     <div className="custom-control custom-checkbox">
                         <input type="checkbox" className="custom-control-input" id={name_input} name={name_input} checked={this.props.is_enable} onChange={this.props.onChange('is_enable')} />
@@ -177,6 +177,21 @@ class MainView extends React.Component {
                             <Input onChange={this.onChange('trayecto')} value={this.props.trayecto} />
                         </div>
                     </FormGroup>
+                    <Row>
+                        <div className="col-sm-2"></div>
+                        <div className="col-sm-6">
+                            <FormGroup className="row">
+                                <Label className="col-sm-2">Duración </Label>
+                                <div className="col-sm-2">
+                                    <Input rightLabel={<span>h</span>} type="number" min="1" onChange={this.onChange('duracion_horas')} value={this.props.duracion_horas} />
+                                </div>
+                                <div className="col-sm-2">
+                                    <Input rightLabel={<span>min</span>} type="number" min="1" onChange={this.onChange('duracion_minutos')} value={this.props.duracion_minutos} />
+                                </div>
+                            </FormGroup>
+                        </div>
+                    </Row>
+
                     <FormGroup className="row">
                         <h4>
                             Paradas
@@ -192,7 +207,6 @@ class MainView extends React.Component {
                                         <th>Llegada</th>
                                         <th>Tarifa Normal</th>
                                         <th>Tarifa Media</th>
-                                        <th>Tiempo</th>
                                         <th>Activa</th>
                                     </tr>
                                 </thead>

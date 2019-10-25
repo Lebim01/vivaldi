@@ -67,9 +67,9 @@ class AddParadaModal extends React.Component {
     }
 
     guardar = () => {
-        const { ciudad, ciudad_nombre, orden_llegada, tarifa_normal, tarifa_media, duracion, index, id } = this.state.data
+        const { ciudad, ciudad_nombre, orden_llegada, tarifa_normal, tarifa_media, index, id } = this.state.data
         if(this.props.guardar){
-            let _exito = this.props.guardar({ ciudad, ciudad_nombre, orden_llegada, tarifa_media, tarifa_normal, duracion, index, id})
+            let _exito = this.props.guardar({ ciudad, ciudad_nombre, orden_llegada, tarifa_media, tarifa_normal, index, id})
             if(_exito){
                 this.setState({
                     data : {},
@@ -117,12 +117,6 @@ class AddParadaModal extends React.Component {
                             <Label className="col-sm-4">Tarifa Media</Label>
                             <div className="col-sm-6">
                                 <InputIcon icon={<i className="fas fa-dollar-sign"/>} type="number" step="0.1" onChange={this.onChange('tarifa_media')} value={this.state.data.tarifa_media} error={errors.includes('tarifa_media')} />
-                            </div>
-                        </FormGroup>
-                        <FormGroup className="row">
-                            <Label className="col-sm-4">Duración</Label>
-                            <div className="col-sm-6">
-                                <InputIcon icon={<span>Horas</span>} type="number" min="1" onChange={this.onChange('duracion')} value={this.state.data.duracion} error={errors.includes('duracion')} />
                             </div>
                         </FormGroup>
                     </FormValidate>
