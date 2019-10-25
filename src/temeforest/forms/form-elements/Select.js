@@ -78,7 +78,7 @@ class Select extends React.Component {
         const { _options } = this.state
         const { options, helperText, error, className, value, defaultValue, asyncOptions, register, setValue, ...otherProps } = this.props
 
-        const _value = setValue ? null : (value !== undefined && value !== null ? { value } : null)
+        const _value = setValue ? null : (value !== undefined && value !== null ? value : null)
 
         return (
             <BlockUi tag="div" blocking={this.state.loading}>
