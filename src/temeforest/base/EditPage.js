@@ -17,7 +17,7 @@ const defaultBtnSave = {
 }
 
 function EditPage(props){
-    const { register, handleSubmit, watch, errors, triggerValidation, getValues, setValue, ...methods } = useForm({ reValidateMode : 'onBlur' })
+    const { register, handleSubmit, watch, errors, triggerValidation, getValues, setValue, ...methods } = useForm()
     const { id, title, btnDelete, btnSave } = props
 
     // events
