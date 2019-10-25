@@ -103,7 +103,7 @@ class EditPersona extends React.Component {
                                 <FormElementValidate
                                     label={{text:'Cédula/RUC'}}
                                     input={{
-                                        name : 'identificacion',
+                                        name : `identificacion-${this.props.name}`,
                                         element: <Input value={data.identificacion} onChange={this.onChange('identificacion')} /> 
                                     }}
                                     validator={this.props.required ? {
@@ -126,7 +126,7 @@ class EditPersona extends React.Component {
                                 <FormElementValidate
                                     label={{text:'Correo'}}
                                     input={{
-                                        name : 'correo',
+                                        name : `correo-${this.props.name}`,
                                         element: <Input placeholder="example@gmail.com" readOnly={_readOnly} value={data.correo} onChange={this.onChange('correo')} />
                                     }}
                                     validator={{
@@ -165,7 +165,8 @@ EditPersona.defaultProps = {
     lengthCedula : 10,
     endpoint: 'persona',
     persona : {},
-    required : true
+    required : true,
+    name : 'default'
 }
 
 export default EditPersona

@@ -193,6 +193,7 @@ class MainView extends React.Component {
                                 <legend>Propietario</legend>
                                 <EditPersona 
                                     lengthCedula={10} 
+                                    name="propietario"
                                     onChange={this.onChangeData('propietario')} 
                                     persona={this.props.propietario}
                                     id={this.props.propietario ? this.props.propietario.id : null} 
@@ -204,6 +205,7 @@ class MainView extends React.Component {
                                 <legend>Conductor</legend>
                                 <EditPersona 
                                     lengthCedula={10} 
+                                    name="conductor"
                                     onChange={this.onChangeData('conductor')} 
                                     persona={this.props.conductor}
                                     id={this.props.conductor ? this.props.conductor.id : null} 
