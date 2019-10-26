@@ -1,6 +1,6 @@
 import React from 'react'
 import {Row} from 'reactstrap'
-import { Button, FormGroup, Input, Select, Label, EditPage, FormValidate } from 'temeforest'
+import { Button, FormGroup, Input, Select, Label, EditPage, FormValidate, RSelect } from 'temeforest'
 import { baseurl, getParameter, objectToUrl } from 'utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
@@ -76,6 +76,10 @@ class MainView extends React.Component {
                 this.props.onChange('anden', '')
             }
         }
+    }
+
+    onChangeData = (name, value) => {
+        this.props.onChange(name, value)
     }
 
     onChangeParada = index => name => (e) => {
@@ -162,7 +166,7 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Destino</Label>
                         <div className="col-sm-5">
-                            <Select onChange={this.onChange('ciudad_destino')} value={this.props.ciudad_destino} asyncOptions={this.optionsDestinos} />
+                            <RSelect onChange={(value) => this.onChangeData('ciudad_destino', value)} value={this.props.ciudad_destino} asyncOptions={this.optionsDestinos} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
