@@ -185,11 +185,11 @@ class MainView extends React.Component {
                         <div className="col-sm-2"></div>
                         <div className="col-sm-6">
                             <FormGroup className="row">
-                                <Label className="col-sm-2">Duración </Label>
-                                <div className="col-sm-2">
+                                <Label className="col-xl-2 col-md-4 col-sm-2">Duración </Label>
+                                <div className="col-xl-2 col-md-4 col-sm-5">
                                     <Input rightLabel={<span>h</span>} type="number" min="1" onChange={this.onChange('duracion_horas')} value={this.props.duracion_horas} />
                                 </div>
-                                <div className="col-sm-2">
+                                <div className="col-xl-2 col-md-4 col-sm-5">
                                     <Input rightLabel={<span>min</span>} type="number" min="1" onChange={this.onChange('duracion_minutos')} value={this.props.duracion_minutos} />
                                 </div>
                             </FormGroup>
