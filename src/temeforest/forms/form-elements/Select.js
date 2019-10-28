@@ -77,7 +77,7 @@ class Select extends React.Component {
         this.setState({
             _options,
             loading: false
-        })
+        }, this.setValue)
     }
 
     render(){
