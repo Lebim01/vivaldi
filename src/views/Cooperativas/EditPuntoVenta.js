@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, FormGroup, Input, Label, Select, FormElementValidate, FormValidate, EditPage } from 'temeforest'
+import { TabContent, TabPane } from 'reactstrap'
 import { baseurl, getParameter } from 'utils/url'
 import { generateHexadecimal } from 'utils/string'
 import Swal from 'sweetalert2'
@@ -228,52 +229,52 @@ class MainView extends React.Component {
                             </div>
                         </div>
                     </FormGroup>
-                    { this.props.externo &&
-                        <div>
-                        <FormElementValidate
-                            label={{text:'Cooperativa'}}
-                            input={{
-                                name : 'cooperativa',
-                                element: <Select asyncOptions={this.optionsCooperativas} onChange={this.onChange('cooperativa')} value={this.props.cooperativa} />
-                            }}
-                            validator={{
-                                validationRules: {
-                                    required:"El campo es requerido",
-                                },
-                            }}
-                        />
-                        <FormElementValidate
-                            label={{text:'Punto Emision Tasa'}} 
-                            input={{
-                                name: 'punto_emision_tasa',
-                                element: <Input onChange={this.onChange('punto_emision_tasa')} value={this.props.punto_emision_tasa} maxLength="3"/>
-                            }}
-                            validator={{
-                                validationRules: {
-                                    required: "El campo es requerido"
-                                }
-                            }}
-                        />
-                        <FormElementValidate
-                            label={{text:'Secuencial Tasa'}} 
-                            input={{
-                                name: 'secuencial_tasa',
-                                element: <Input onChange={this.onChange('secuencial_tasa')} value={this.props.secuencial_tasa} maxLength="9" readOnly={readOnlyEmision}/>
-                            }}
-                            validator={{
-                                validationRules: {
-                                    required: "El campo es requerido"
-                                }
-                            }}
-                        />
-                        <div className='row'>
-                            <div className='col-sm-3'></div>
-                            <div className='col-sm-5'><p className='text-center'>{numero_prueba}</p></div>
-                        </div>
-                        </div>
-                    }
-                    { !this.props.externo &&
-                        <>
+                    <TabContent activeTab={this.props.externo ? "1" : "0"}>
+                        <TabPane tabId="1">
+                            <div>
+                                <FormElementValidate
+                                    label={{text:'Cooperativa'}}
+                                    input={{
+                                        name : 'cooperativa',
+                                        element: <Select asyncOptions={this.optionsCooperativas} onChange={this.onChange('cooperativa')} value={this.props.cooperativa} />
+                                    }}
+                                    validator={{
+                                        validationRules: {
+                                            required:"El campo es requerido",
+                                        },
+                                    }}
+                                />
+                                <FormElementValidate
+                                    label={{text:'Punto Emision Tasa'}} 
+                                    input={{
+                                        name: 'punto_emision_tasa',
+                                        element: <Input onChange={this.onChange('punto_emision_tasa')} value={this.props.punto_emision_tasa} maxLength="3"/>
+                                    }}
+                                    validator={{
+                                        validationRules: {
+                                            required: "El campo es requerido"
+                                        }
+                                    }}
+                                />
+                                <FormElementValidate
+                                    label={{text:'Secuencial Tasa'}} 
+                                    input={{
+                                        name: 'secuencial_tasa',
+                                        element: <Input onChange={this.onChange('secuencial_tasa')} value={this.props.secuencial_tasa} maxLength="9" readOnly={readOnlyEmision}/>
+                                    }}
+                                    validator={{
+                                        validationRules: {
+                                            required: "El campo es requerido"
+                                        }
+                                    }}
+                                />
+                                <div className='row'>
+                                    <div className='col-sm-3'></div>
+                                    <div className='col-sm-5'><p className='text-center'>{numero_prueba}</p></div>
+                                </div>
+                            </div>
+                        </TabPane>
+                        <TabPane tabId="0">
                             <Label className="col-sm-4">
                                 Cooperativas e Información tribunaria
                                 <Button size="sm" style={{marginLeft:5}} onClick={this.addCooperativa}>
@@ -308,9 +309,8 @@ class MainView extends React.Component {
                                     </table>
                                 </div>
                             </div>
-                        </>
-
-                    }
+                        </TabPane>
+                    </TabContent>
                 </FormValidate>
                 <AddCooperativaPuntoVentaModal 
                     guardar={this.agregarCooperativa} 

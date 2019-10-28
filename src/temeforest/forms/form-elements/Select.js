@@ -18,9 +18,8 @@ class Select extends React.Component {
 
     componentDidUpdate(prevProps){
         if(this.props.setValue){
-            const { setValue } = this.props
             if(prevProps.value !== this.props.value){
-                setValue(this.props.name, this.props.value)
+                this.setValue()
             }
         }
     }
@@ -28,6 +27,12 @@ class Select extends React.Component {
     componentWillReceiveProps(props){
         if(props.asyncOptions && (!this.props.asyncOptions || props.asyncOptions.url !== this.props.asyncOptions.url)) {
             this.loadListAsync(props)
+        }
+    }
+
+    setValue = () => {
+        if(this.props.setValue){
+            this.props.setValue(this.props.name, this.props.value)
         }
     }
 
@@ -68,6 +73,7 @@ class Select extends React.Component {
                 ...this.getOptionProps(record)
             }
         })]
+
         this.setState({
             _options,
             loading: false
@@ -78,7 +84,7 @@ class Select extends React.Component {
         const { _options } = this.state
         const { options, helperText, error, className, value, defaultValue, asyncOptions, register, setValue, ...otherProps } = this.props
 
-        const _value = setValue ? null : (value !== undefined && value !== null ? value : null)
+        const _value = setValue ? null : (value !== undefined && value !== null ? value : '')
 
         return (
             <BlockUi tag="div" blocking={this.state.loading}>
