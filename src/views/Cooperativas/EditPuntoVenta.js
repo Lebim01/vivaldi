@@ -239,9 +239,9 @@ class MainView extends React.Component {
                                         element: <Select asyncOptions={this.optionsCooperativas} onChange={this.onChange('cooperativa')} value={this.props.cooperativa} />
                                     }}
                                     validator={{
-                                        validationRules: {
+                                        validationRules: this.props.externo ? {
                                             required:"El campo es requerido",
-                                        },
+                                        } : {}
                                     }}
                                 />
                                 <FormElementValidate
@@ -251,9 +251,9 @@ class MainView extends React.Component {
                                         element: <Input onChange={this.onChange('punto_emision_tasa')} value={this.props.punto_emision_tasa} maxLength="3"/>
                                     }}
                                     validator={{
-                                        validationRules: {
+                                        validationRules: this.props.externo ? {
                                             required: "El campo es requerido"
-                                        }
+                                        } : {}
                                     }}
                                 />
                                 <FormElementValidate
@@ -263,9 +263,9 @@ class MainView extends React.Component {
                                         element: <Input onChange={this.onChange('secuencial_tasa')} value={this.props.secuencial_tasa} maxLength="9" readOnly={readOnlyEmision}/>
                                     }}
                                     validator={{
-                                        validationRules: {
+                                        validationRules: this.props.externo ? {
                                             required: "El campo es requerido"
-                                        }
+                                        } : {}
                                     }}
                                 />
                                 <div className='row'>
