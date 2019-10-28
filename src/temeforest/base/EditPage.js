@@ -17,11 +17,11 @@ const defaultBtnSave = {
 }
 
 function EditPage(props){
-    const { register, handleSubmit, watch, errors, triggerValidation, getValues, setValue, ...methods } = useForm()
+    const { register, handleSubmit, watch, errors, triggerValidation, setValue, ...methods } = useForm()
     const { id, title, btnDelete, btnSave } = props
 
     // events
-    const onSubmit = async data => { 
+    const onSubmit = async data => {
         const res = await triggerValidation()
         if(res){
             confirmSave()

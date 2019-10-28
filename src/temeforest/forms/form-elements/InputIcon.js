@@ -2,8 +2,29 @@ import React from 'react'
 import InputGroup from './InputGroup'
 
 class InputIcon extends React.Component {
+
+    componentDidMount(){
+        this.setValue()
+    }
+    componentDidUpdate(prevProps){
+        if(this.props.setValue){
+            if(prevProps.value !== this.props.value){
+                this.setValue()
+            }
+        }
+    }
+
+    setValue = () => {
+        if(this.props.setValue){
+            this.props.setValue(this.props.name, this.props.value)
+        }
+    }
+
     render(){
-        const { type, icon, className, ...otherProps } = this.props
+        const { type, icon, className, value, setValue, ...otherProps } = this.props
+
+        const _value = setValue ? null : value || ''
+
         return (
             <InputGroup>
                 <div className="input-group-prepend">
@@ -11,7 +32,7 @@ class InputIcon extends React.Component {
                         {icon}
                     </span>
                 </div>
-                <input type={type} className={`form-control ${className}`} {...otherProps}/>
+                <input type={type} className={`form-control ${className}`} value={_value} {...otherProps}/>
             </InputGroup>
         )
     }

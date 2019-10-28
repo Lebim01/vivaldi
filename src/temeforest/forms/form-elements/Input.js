@@ -20,12 +20,20 @@ const styles = {
 
 class Input extends React.Component {
 
+    componentDidMount(){
+        this.setValue()
+    }
     componentDidUpdate(prevProps){
         if(this.props.setValue){
-            const { setValue } = this.props
             if(prevProps.value !== this.props.value){
-                setValue(this.props.name, this.props.value)
+                this.setValue()
             }
+        }
+    }
+
+    setValue = () => {
+        if(this.props.setValue){
+            this.props.setValue(this.props.name, this.props.value)
         }
     }
 
