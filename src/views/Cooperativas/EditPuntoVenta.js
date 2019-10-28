@@ -236,7 +236,13 @@ class MainView extends React.Component {
                                     label={{text:'Cooperativa'}}
                                     input={{
                                         name : 'cooperativa',
-                                        element: <Select asyncOptions={this.optionsCooperativas} onChange={this.onChange('cooperativa')} value={this.props.cooperativa} />
+                                        element: (
+                                            <Select 
+                                                asyncOptions={this.optionsCooperativas} 
+                                                onChange={this.onChange('cooperativa')}
+                                                value={this.props.cooperativa} 
+                                            />
+                                        )
                                     }}
                                     validator={{
                                         validationRules: this.props.externo ? {
@@ -355,6 +361,15 @@ class EditPuntoVenta extends React.Component {
         })
     }
 
+    parseData(data){
+        if(!data.externo){
+            delete data.secuencial_tasa
+            delete data.punto_emision_tasa
+            delete data.cooperativa
+        }
+        return data
+    }
+
     render(){
         const { id, data } = this.state
         return (
@@ -365,6 +380,7 @@ class EditPuntoVenta extends React.Component {
                 urlFront={urlFront} 
                 endpoint={endpoint} 
                 history={this.props.history}
+                parseData={this.parseData}
             >
                 <MainView {...data} onChange={this.onChange} />
             </EditPage>
