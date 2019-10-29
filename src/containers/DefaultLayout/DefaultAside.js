@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import { Nav, NavItem, NavLink } from 'reactstrap';
 import { Permission } from 'temeforest'
+import { checkPermission } from 'temeforest/base/Permission'
 import $ from 'jquery'
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import PerfectScrollbar from 'react-perfect-scrollbar'
@@ -42,6 +43,10 @@ class MenuItem extends React.Component {
 
     render(){
         const { name, icon, children, badge, url, level, permission } = this.props
+
+        if(children && !permission) 
+            if(!children.find(p => checkPermission(p.permission)))
+                return null
 
         let margin = (level-1) * 35
         //if(icon) margin -= 35

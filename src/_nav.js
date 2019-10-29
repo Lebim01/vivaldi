@@ -47,11 +47,12 @@ export default {
       children : [
         {
           name : 'Usuarios',
-          url : '/#/usuarios/usuarios'
+          url : '/#/usuarios/usuarios',
+          permission : 'view_usuariocooperativa'
         },
         {
           name : 'Roles',
-          url : '/#/usuarios/roles'
+          url : '/#/usuarios/roles',
         }
       ]
     },
@@ -61,31 +62,38 @@ export default {
       children : [
         {
           name : 'Cooperativas',
-          url : '/#/cooperativas/cooperativas'
+          url : '/#/cooperativas/cooperativas',
+          permission : 'view_cooperativa'
         },
         {
           name : 'Gremios',
-          url : '/#/cooperativas/gremios'
+          url : '/#/cooperativas/gremios',
+          permission : 'view_gremio'
         },
         {
           name : 'Marcas',
-          url : '/#/cooperativas/marcas'
+          url : '/#/cooperativas/marcas',
+          permission : 'view_marca'
         },
         {
           name : 'Buses',
-          url : '/#/cooperativas/buses'
+          url : '/#/cooperativas/buses',
+          permission : 'view_bus'
         },
         {
           name : 'Distribución de Asientos',
-          url : '/#/cooperativas/distribucion-asientos'
+          url : '/#/cooperativas/distribucion-asientos',
+          permission : 'view_bustipo'
         },
         {
           name : 'Conductores',
-          url : '/#/cooperativas/conductores'
+          url : '/#/cooperativas/conductores',
+          permission : 'view_conductor'
         },
         {
           name : 'Punto de Venta',
-          url : '/#/cooperativas/punto-venta'
+          url : '/#/cooperativas/punto-venta',
+          permission : 'view_puntoventa'
         }
       ]
     },
@@ -95,15 +103,17 @@ export default {
       children: [
         {
           name: 'Rutas',
-          url: '/#/operaciones/rutas'
+          url: '/#/operaciones/rutas',
+          permission : 'view_ruta'
         },
         {
           name: 'Viajes',
-          url: '/#/operaciones/viajes'
+          url: '/#/operaciones/viajes',
+          permission : 'view_viaje'
         },
         {
           name: 'Viajes Planificados',
-          url: '/#/operaciones/viajes-planificados'
+          url: '/#/operaciones/viajes-planificados',
         },
         {
           name: 'Viajes Planificados Silo',
@@ -111,7 +121,8 @@ export default {
         },
         {
           name: 'Frecuencias',
-          url: '/#/operaciones/frecuencias'
+          url: '/#/operaciones/frecuencias',
+          permission : 'view_frecuencia'
         },
         {
           name: 'Frecuencias por lote',
