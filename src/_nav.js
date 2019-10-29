@@ -53,6 +53,7 @@ export default {
         {
           name : 'Roles',
           url : '/#/usuarios/roles',
+          permission : 'view_group'
         }
       ]
     },
@@ -137,27 +138,33 @@ export default {
           children : [
             {
               name : 'Usuario',
-              url : '/#/operaciones/solicitudes/usuario'
+              url : '/#/operaciones/solicitudes/usuario',
+              permission : 'view_soliictudusuario'
             },
             {
               name : 'Frecuencias',
-              url : '/#/operaciones/solicitudes/frecuencias'
+              url : '/#/operaciones/solicitudes/frecuencias',
+              permission : 'view_solicitudfrecuencia'
             },
             {
               name : 'Buses',
-              url : '/#/operaciones/solicitudes/buses'
+              url : '/#/operaciones/solicitudes/buses',
+              permission : 'view_solicitudbus'
             },
             {
               name : 'Modificación de buses',
-              url : '/#/operaciones/solicitudes/modificaciones-buses'
+              url : '/#/operaciones/solicitudes/modificaciones-buses',
+              permission : 'view_solicitudbus'
             },
             {
               name : 'Conductores',
-              url : '/#/operaciones/solicitudes/conductores'
+              url : '/#/operaciones/solicitudes/conductores',
+              permission : 'view_solicitudconductor'
             },
             {
               name : 'Tasas de contigencia',
-              url : '/#/operaciones/solicitudes/tasas-contingencia'
+              url : '/#/operaciones/solicitudes/tasas-contingencia',
+              permission : 'view_solicitudtasacontingencia'
             },
           ]
         },
@@ -187,11 +194,13 @@ export default {
         },
         {
           name : 'Tasas contingencia general',
-          url : '/#/recaudaciones/tasas-contingencia'
+          url : '/#/recaudaciones/tasas-contingencia',
+          permission : 'generacioncontingencia'
         },
         {
           name : 'Venta de Tasas',
-          url : '/#/recaudaciones/venta-tasas'
+          url : '/#/recaudaciones/venta-tasas',
+          permission : 'ventacontigencia'
         },
         {
           name : 'Bandeja Tasas Cooperativa',

@@ -1,33 +1,37 @@
 import React from 'react'
-import { Card, CardBody, ListPage } from 'temeforest'
+import { Card, CardBody, ListPage, Permission } from 'temeforest'
 
 class Cooperativas extends React.Component {
     render(){
         return (
-            <div className="animated fadeIn">
-                <div className="row">
-                    <div className="col-sm-12">
-                        <Card>
-                            <CardBody>
-                                <ListPage
-                                    title="Listado de Cooperativas"
+            <Permission key_permission="cooperativa" mode="redirect">
+                <div className="animated fadeIn">
+                    <div className="row">
+                        <div className="col-sm-12">
+                            <Card>
+                                <CardBody>
+                                    <ListPage
+                                        title="Listado de Cooperativas"
 
-                                    searchable={true}
-                                    searchPlaceholder="Nombre, Gremio"
-                                    searchFields={['nombre', 'gremio_nombre']}
+                                        key_permission="cooperativa"
 
-                                    fieldNames={['Nombre', 'Gremio']}
-                                    fields={['nombre', 'gremio_nombre']}
+                                        searchable={true}
+                                        searchPlaceholder="Nombre, Gremio"
+                                        searchFields={['nombre', 'gremio_nombre']}
 
-                                    endpoint='cooperativa'
-                                    urlFront='cooperativas/cooperativas'
-                                    history={this.props.history}
-                                />
-                            </CardBody>
-                        </Card>
+                                        fieldNames={['Nombre', 'Gremio']}
+                                        fields={['nombre', 'gremio_nombre']}
+
+                                        endpoint='cooperativa'
+                                        urlFront='cooperativas/cooperativas'
+                                        history={this.props.history}
+                                    />
+                                </CardBody>
+                            </Card>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </Permission>
         )
     }
 }
