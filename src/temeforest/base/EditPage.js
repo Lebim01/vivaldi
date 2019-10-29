@@ -115,14 +115,14 @@ function EditPage(props){
                                 </CardBody>
                                 <div className="row">
                                     <div className="col-sm-12 text-center">
-                                        <Permission key={id ? key_change : key_add}>
+                                        <Permission key_permission={id ? key_change : key_add}>
                                             { btnSaveShow &&
                                                 <Button style={{marginRight:5}} onClick={onSubmit} {..._btnSave}>
                                                     {_btnSave.text}
                                                 </Button>
                                             }
                                         </Permission>
-                                        <Permission key={key_delete}>
+                                        <Permission key_permission={key_delete}>
                                             { btnDeleteShow &&
                                                 <Button style={{marginLeft:5}} disabled={!id} onClick={() => confirmDelete()} {..._btnDelete}>
                                                     { _btnDelete.text }

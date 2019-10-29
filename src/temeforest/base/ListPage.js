@@ -223,7 +223,7 @@ class ListPage extends React.Component {
                         <Col xs="12" md="6">
                             <InputIcon placeholder={`Buscar... ${searchPlaceholder}`} onChange={this.onFilterChange()} icon={<i className="fa fa-search"></i>} />
                         </Col>
-                        <Permission key={`add_${this.props.key_permission}`}>
+                        <Permission key_permission={`add_${this.props.key_permission}`}>
                             <Col xs="12" md="6">
                                 <Button style={{'float': 'right'}} onClick={() => this.onRowDoubleClick('', {})}>
                                     <i className="fa fa-plus"></i>

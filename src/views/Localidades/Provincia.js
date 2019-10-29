@@ -4,7 +4,7 @@ import { Card, CardBody, ListPage, Permission } from 'temeforest'
 class Provincias extends React.Component {
     render(){
         return (
-            <Permission key="view_provincia" mode="redirect">
+            <Permission key_permission="view_provincia" mode="redirect">
                 <div className="animated fadeIn">
                     <div className="row">
                         <div className="col-sm-12">

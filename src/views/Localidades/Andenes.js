@@ -3,7 +3,7 @@ import { ListPage, Card, CardBody, Permission } from 'temeforest'
 
 function Andenes(props) {
     return (
-        <Permission key="view_anden" mode="redirect">
+        <Permission key_permission="view_anden" mode="redirect">
             <div className="animated fadeIn">
                 <div className="row">
                     <div className="col-sm-12">

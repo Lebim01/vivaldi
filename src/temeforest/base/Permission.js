@@ -16,15 +16,15 @@ const mapStateToProps = ({ user_info }) => {
     }
 }
 
-const check = (key, permissions, isSuperuser) => {
-    return ( key ? !!permissions.find(p => p === key) : true ) || isSuperuser
+const check = (key_permission, permissions, isSuperuser) => {
+    return ( key_permission ? !!permissions.find(p => p === key_permission) : true ) 
 }
 
-function Permission({ key, mode, children }){
+function Permission({ key_permission, mode, children }){
     
     const { permissions, isSuperuser } = useSelector(mapStateToProps)
 
-    const available = check(key, permissions, isSuperuser)
+    const available = check(key_permission, permissions, isSuperuser)
 
     return (
         <>
@@ -48,9 +48,9 @@ Permission.defaultProps = {
     mode : 'hidden'
 }
 
-export const checkPermission = (key) => {
+export const checkPermission = (key_permission) => {
     const { user_info } = store.getState()
-    return check(key, user_info.permissions, user_info.isSuperuser )
+    return check(key_permission, user_info.permissions, user_info.isSuperuser )
 }
 
 export default Permission

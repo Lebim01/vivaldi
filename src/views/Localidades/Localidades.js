@@ -4,7 +4,7 @@ import { Card, CardBody, ListPage, Permission } from 'temeforest'
 class Localidades extends React.Component {
     render(){
         return (
-            <Permission key="view_localidad" mode="redirect">
+            <Permission key_permission="view_localidad" mode="redirect">
                 <div className="animated fadeIn">
                     <div className="row">
                         <div className="col-sm-12">

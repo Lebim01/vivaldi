@@ -7,30 +7,37 @@ export default {
         {
           name : 'Localidades',
           url : '/#/localidades/localidades',
+          permission : 'view_localidad'
         },
         {
           name : 'Puertas',
-          url : '/#/localidades/puertas'
+          url : '/#/localidades/puertas',
+          permission : 'view_puerta'
         },
         {
           name : 'Andenes',
-          url : '/#/localidades/andenes'
+          url : '/#/localidades/andenes',
+          permission : 'view_anden'
         },
         {
           name : 'Traffic Control',
-          url : '/#/localidades/traffic-control'
+          url : '/#/localidades/traffic-control',
+          permission : 'view_trafficcontrol'
         },
         {
           name : 'Silos',
-          url : '/#/localidades/silos'
+          url : '/#/localidades/silos',
+          permission : 'view_silo'
         },
         {
           name : 'Ciudad',
-          url : '/#/localidades/ciudad'
+          url : '/#/localidades/ciudad',
+          permission : 'view_ciudad'
         },
         {
           name : 'Provincia',
-          url : '/#/localidades/provincia'
+          url : '/#/localidades/provincia',
+          permission : 'view_provincia'
         }
       ]
     },

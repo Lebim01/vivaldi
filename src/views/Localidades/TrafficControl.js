@@ -4,7 +4,7 @@ import { Card, CardBody, ListPage, Permission } from 'temeforest'
 class TrafficControl extends React.Component {
     render(){
         return(
-            <Permission key="trafficcontrol" mode="redirect">
+            <Permission key_permission="trafficcontrol" mode="redirect">
                 <div className="animated fadeIn">
                     <div className="row">
                         <div className="col-sm-12">

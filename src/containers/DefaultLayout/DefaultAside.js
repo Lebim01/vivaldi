@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import { Nav, NavItem, NavLink } from 'reactstrap';
+import { Permission } from 'temeforest'
 import $ from 'jquery'
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import PerfectScrollbar from 'react-perfect-scrollbar'
@@ -40,7 +41,7 @@ class MenuItem extends React.Component {
     }
 
     render(){
-        const { name, icon, children, badge, url, level } = this.props
+        const { name, icon, children, badge, url, level, permission } = this.props
 
         let margin = (level-1) * 35
         //if(icon) margin -= 35
@@ -51,20 +52,22 @@ class MenuItem extends React.Component {
         else if(level === 3) level_name = 'third'
 
         return (
-            <NavItem className={`sidebar-item`}>
-                <NavLink className={`sidebar-link waves-effect waves-dark ${children?'has-arrow':''}`} aria-expanded="false" href={url} style={{marginLeft: margin}} onClick={this.onClick}>
-                    { icon && <i className={icon} onClick={this.prevent}></i> }
-                    { children ? <span className="hide-menu" onClick={this.prevent}> {name} </span> : name }
-                    { badge && <span class={`badge badge-pill badge-${badge.variant} float-right`} onClick={this.prevent}>{badge.text}</span> }
-                </NavLink>
-                { children &&
-                    <ul aria-expanded="false" className={`collapse ${level_name}-level`}>
-                        { children.map((submenu, j) => 
-                            <MenuItem {...submenu} level={level+1} key={`${level+1}-${j}`} />
-                        )}
-                    </ul>
-                }
-            </NavItem>
+            <Permission key_permission={permission}>
+                <NavItem className={`sidebar-item`}>
+                    <NavLink className={`sidebar-link waves-effect waves-dark ${children?'has-arrow':''}`} aria-expanded="false" href={url} style={{marginLeft: margin}} onClick={this.onClick}>
+                        { icon && <i className={icon} onClick={this.prevent}></i> }
+                        { children ? <span className="hide-menu" onClick={this.prevent}> {name} </span> : name }
+                        { badge && <span class={`badge badge-pill badge-${badge.variant} float-right`} onClick={this.prevent}>{badge.text}</span> }
+                    </NavLink>
+                    { children &&
+                        <ul aria-expanded="false" className={`collapse ${level_name}-level`}>
+                            { children.map((submenu, j) => 
+                                <MenuItem {...submenu} level={level+1} key={`${level+1}-${j}`} />
+                            )}
+                        </ul>
+                    }
+                </NavItem>
+            </Permission>
         )
     }
 }
