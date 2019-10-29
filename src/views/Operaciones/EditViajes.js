@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Input, Select, EditPage, TextArea, FormValidate, FormElementValidate } from 'temeforest'
+import { Input, Select, EditPage, TextArea, FormValidate, FormElementValidate, RSelect } from 'temeforest'
 import { baseurl, getParameter, objectToUrl } from 'utils/url'
 import axios from 'axios'
 
@@ -26,6 +26,11 @@ class MainView extends React.Component {
         labelName: 'nombre',
         valueName: 'id'
     }
+    optionsDestinos = {
+        url : `${baseurl}/ruta/`,
+        labelName: 'nombre',
+        valueName: 'id'
+    }
     optionsFrecuencia = (obj) => ({
         url : `${baseurl}/frecuencia/${objectToUrl(obj)}`,
         labelName : 'hora_salida',
@@ -42,7 +47,7 @@ class MainView extends React.Component {
         valueName : 'id'
     })
 
-    onChange = name => async (e) => {
+    onChange = name => (e) => {
         if(this.props.onChange){
             let value = e.target.value
             this.props.onChange(name, value)
@@ -50,11 +55,15 @@ class MainView extends React.Component {
             if(name === 'cooperativa'){
                 this.clearFieldsByCooperativa()
             }
-            if(name === 'frecuencia'){
-                let tipo = await getTipoFrecuencia(value)
-                this.props.onChange('tipo_frecuencia', tipo)
-            }
         }
+    }
+
+    onChangeValue = async (name, value) => {
+        if(name === 'frecuencia'){
+            let tipo = await getTipoFrecuencia(value)
+            this.props.onChange('tipo_frecuencia', tipo)
+        }
+        this.props.onChange(name, value)
     }
 
     clearFieldsByCooperativa = () => {
@@ -99,16 +108,26 @@ class MainView extends React.Component {
                         }}
                     />
                     <FormElementValidate
+                        label={{text:'Destino'}}
+                        input={{
+                            name : 'ruta',
+                            element: <Select onChange={this.onChange('ruta')} value={this.props.ruta} asyncOptions={this.optionsDestinos} />
+                        }}
+                        validator={{
+                            
+                        }}
+                    />
+                    <FormElementValidate
                         label={{text:'Frecuencia'}}
                         input={{
                             name : 'frecuencia',
                             element: (
-                                <Select
-                                    onChange={this.onChange('frecuencia')}
+                                <RSelect
+                                    onChange={(value) => this.onChangeValue('frecuencia', value)}
                                     value={this.props.frecuencia}
-                                    { ...(this.props.cooperativa
-                                        ? { asyncOptions : this.optionsFrecuencia({ cooperativa: this.props.cooperativa }) }
-                                        : { options : [{ label: 'Seleccione un cooperativa', value : '' }] }
+                                    { ...(this.props.cooperativa || this.props.ruta
+                                        ? { asyncOptions : this.optionsFrecuencia({ cooperativa: this.props.cooperativa, ruta: this.props.ruta }) }
+                                        : { options : [{ label: 'Seleccione un cooperativa o destino', value : '' }] }
                                     )}
                                 />
                             )

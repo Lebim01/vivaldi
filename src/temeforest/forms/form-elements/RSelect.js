@@ -26,10 +26,12 @@ const RSelect = (props) => {
     const [options, setOptions] = useState([])
 
     useEffect(() => {
-        loadOptions(props.asyncOptions)
-        .then((res) => {
-            setOptions(res)
-        })
+        if(props.asyncOptions){
+            loadOptions(props.asyncOptions)
+            .then((res) => {
+                setOptions(res)
+            })
+        }
     }, [props.asyncOptions])
 
     const _value = valueFromId(options, value) || ''
