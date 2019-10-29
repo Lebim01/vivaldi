@@ -91,6 +91,7 @@ const EditPasajero = React.lazy(() => import('views/Facturacion/EditPasajero'))
 const Documentos = React.lazy(() => import('views/Facturacion/Documentos'))
 
 const Page404 = React.lazy(() => import('views/Pages/Page404'))
+const Page401 = React.lazy(() => import('views/Pages/Page401'))
 /** DEMOGRAFIA */
 const Provincia = React.lazy(() => import('views/Localidades/Provincia'))
 const EditProvincia = React.lazy(() => import('views/Localidades/EditProvincia'))
@@ -104,6 +105,7 @@ const EmisionPorCooperativa = React.lazy(() => import('views/Auditoria/EmisionPo
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
   { path: '/', name: 'Home' },
+  { path: '/401', name: '401', component: Page401 },
   { path: '/dashboard', name: 'Dashboard', component: PanelRecaudaciones, exact: true  },
 
   { path: '/localidades/localidades', name: 'Localidades', component: Localidades, exact : true },

@@ -131,7 +131,7 @@ class EditSilo extends React.Component {
     render(){
         const { data, id } = this.state
         return (
-            <EditPage title={`${id ? 'Editar' : 'Crear'} Traffic Control`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
+            <EditPage title={`${id ? 'Editar' : 'Crear'} Traffic Control`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history} key_permission="trafficcontrol">
                 <MainView id_localidad={id} {...data} onChange={this.onChange} />
             </EditPage>
         )

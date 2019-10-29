@@ -1,4 +1,4 @@
-import { Card, CardTitle, CardBody, CardSubtitle, ListPage, EditPage, ReportPage, FormElementValidate, FormValidate, ValidateContext, ApprovePage, RecordRow } from './base'
+import { Card, CardTitle, CardBody, CardSubtitle, ListPage, EditPage, ReportPage, FormElementValidate, FormValidate, ValidateContext, ApprovePage, RecordRow, Permission } from './base'
 import { Input, FormGroup, InputIcon, Select, Label, Tabs, DualList, TextArea, InputAutocomplete, RSelect } from './forms'
 import { Button, ListGroup, ListItem, ListItemButton, Table } from './ui'
 import { BarChart, PieChart } from './charts'
@@ -17,6 +17,7 @@ export {
     FormElementValidate,
     ValidateContext,
     ApprovePage,
+    Permission,
     /** FORM */
     Input,
     FormGroup,

@@ -1,33 +1,37 @@
 import React from 'react'
-import { Card, CardBody, ListPage } from 'temeforest'
+import { Card, CardBody, ListPage, Permission } from 'temeforest'
 
 class Silos extends React.Component {
     render(){
         return (
-            <div className="animated fadeIn">
-                <div className="row">
-                    <div className="col-sm-12">
-                        <Card>
-                            <CardBody>
-                                <ListPage
-                                    title="Listado de Silos"
+            <Permission key="view_silo" mode="redirect">
+                <div className="animated fadeIn">
+                    <div className="row">
+                        <div className="col-sm-12">
+                            <Card>
+                                <CardBody>
+                                    <ListPage
+                                        title="Listado de Silos"
 
-                                    searchable={true}
-                                    searchPlaceholder="Nombre, Dirección IP, localidad"
-                                    searchFields={['descripcion', 'ip', 'localidad']}
+                                        key_permission="silo"
 
-                                    fieldNames={['Nombre', 'Dirección IP', 'Localidad']}
-                                    fields={['descripcion', 'ip', 'localidad_nombre']}
+                                        searchable={true}
+                                        searchPlaceholder="Nombre, Dirección IP, localidad"
+                                        searchFields={['descripcion', 'ip', 'localidad']}
 
-                                    endpoint='silo'
-                                    urlFront='localidades/silos'
-                                    history={this.props.history}
-                                />
-                            </CardBody>
-                        </Card>
+                                        fieldNames={['Nombre', 'Dirección IP', 'Localidad']}
+                                        fields={['descripcion', 'ip', 'localidad_nombre']}
+
+                                        endpoint='silo'
+                                        urlFront='localidades/silos'
+                                        history={this.props.history}
+                                    />
+                                </CardBody>
+                            </Card>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </Permission>
         )
     }
 }

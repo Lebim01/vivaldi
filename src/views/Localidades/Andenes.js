@@ -1,32 +1,36 @@
 import React from 'react'
-import { ListPage, Card, CardBody } from 'temeforest'
+import { ListPage, Card, CardBody, Permission } from 'temeforest'
 
 function Andenes(props) {
     return (
-        <div className="animated fadeIn">
-            <div className="row">
-                <div className="col-sm-12">
-                    <Card>
-                        <CardBody>
-                            <ListPage
-                                title="Listado de Andenes"
+        <Permission key="view_anden" mode="redirect">
+            <div className="animated fadeIn">
+                <div className="row">
+                    <div className="col-sm-12">
+                        <Card>
+                            <CardBody>
+                                <ListPage
+                                    title="Listado de Andenes"
 
-                                searchable={true}
-                                searchPlaceholder="Descripcion, silos, puertas de acceso"
+                                    key_permission="anden"
 
-                                searchFields={['descripcion', 'silos_nombre', 'puertas_nombre', 'localidad_nombre','localidad_nivel_nombre']}
-                                fieldNames={['Descripcion', 'Silos', 'Puertas de acceso', 'Localidad', 'Nivel']}
-                                fields={['descripcion', 'silos_nombre', 'puertas_nombre', 'localidad_nombre','localidad_nivel_nombre']}
+                                    searchable={true}
+                                    searchPlaceholder="Descripcion, silos, puertas de acceso"
 
-                                endpoint='anden'
-                                urlFront='localidades/andenes'
-                                history={props.history}
-                            />
-                        </CardBody>
-                    </Card>
+                                    searchFields={['descripcion', 'silos_nombre', 'puertas_nombre', 'localidad_nombre','localidad_nivel_nombre']}
+                                    fieldNames={['Descripcion', 'Silos', 'Puertas de acceso', 'Localidad', 'Nivel']}
+                                    fields={['descripcion', 'silos_nombre', 'puertas_nombre', 'localidad_nombre','localidad_nivel_nombre']}
+
+                                    endpoint='anden'
+                                    urlFront='localidades/andenes'
+                                    history={props.history}
+                                />
+                            </CardBody>
+                        </Card>
+                    </div>
                 </div>
             </div>
-        </div>
+        </Permission>
     )
 }
 export default Andenes

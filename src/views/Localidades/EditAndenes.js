@@ -145,7 +145,7 @@ class EditAndenes extends React.Component {
     render(){
         const { data, id } = this.state
         return (
-            <EditPage title={`${id ? 'Editar' : 'Crear'} Anden`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
+            <EditPage title={`${id ? 'Editar' : 'Crear'} Anden`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history} key_permission="anden">
                 <MainView {...data} onChange={this.onChange} />
             </EditPage>
         )

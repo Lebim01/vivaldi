@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Button, ValidateContext } from 'temeforest'
+import { Card, CardBody, CardTitle, Button, ValidateContext, Permission } from 'temeforest'
 import { confirmEndpoint } from 'utils/dialog'
 import useForm from 'react-hook-form'
 import Swal from 'sweetalert2'
@@ -18,7 +18,11 @@ const defaultBtnSave = {
 
 function EditPage(props){
     const { register, handleSubmit, watch, errors, triggerValidation, setValue, ...methods } = useForm()
-    const { id, title, btnDelete, btnSave } = props
+    const { id, title, btnDelete, btnSave, key_permission } = props
+
+    const key_add = `add_${key_permission}`
+    const key_change = `change_${key_permission}`
+    const key_delete = `delete_${key_permission}`
 
     // events
     const onSubmit = async data => {
@@ -111,16 +115,20 @@ function EditPage(props){
                                 </CardBody>
                                 <div className="row">
                                     <div className="col-sm-12 text-center">
-                                        { btnSaveShow &&
-                                            <Button style={{marginRight:5}} onClick={onSubmit} {..._btnSave}>
-                                                {_btnSave.text}
-                                            </Button>
-                                        }
-                                        { btnDeleteShow &&
-                                            <Button style={{marginLeft:5}} disabled={!id} onClick={() => confirmDelete()} {..._btnDelete}>
-                                                { _btnDelete.text }
-                                            </Button>
-                                        }
+                                        <Permission key={id ? key_change : key_add}>
+                                            { btnSaveShow &&
+                                                <Button style={{marginRight:5}} onClick={onSubmit} {..._btnSave}>
+                                                    {_btnSave.text}
+                                                </Button>
+                                            }
+                                        </Permission>
+                                        <Permission key={key_delete}>
+                                            { btnDeleteShow &&
+                                                <Button style={{marginLeft:5}} disabled={!id} onClick={() => confirmDelete()} {..._btnDelete}>
+                                                    { _btnDelete.text }
+                                                </Button>
+                                            }
+                                        </Permission>
                                     </div>
                                 </div>
                             </CardBody>

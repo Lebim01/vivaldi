@@ -1,33 +1,37 @@
 import React from 'react'
-import { Card, CardBody, ListPage } from 'temeforest'
+import { Card, CardBody, ListPage, Permission } from 'temeforest'
 
 class Puertas extends React.Component {
     render(){
         return (
-            <div className="animated fadeIn">
-                <div className="row">
-                    <div className="col-sm-12">
-                        <Card>
-                            <CardBody>
-                                <ListPage
-                                    title="Listado de Puertas"
+            <Permission key="view_puerta" mode="redirect">
+                <div className="animated fadeIn">
+                    <div className="row">
+                        <div className="col-sm-12">
+                            <Card>
+                                <CardBody>
+                                    <ListPage
+                                        title="Listado de Puertas"
 
-                                    searchable={true}
-                                    searchPlaceholder="Nombre, Localidad, Nivel"
-                                    searchFields={['nombre', 'localidad_nivel_nombre', 'localidad_nombre' ]}
+                                        key_permission='puerta'
 
-                                    fieldNames={['Nombre', 'Localidad','Nivel']}
-                                    fields={['nombre', 'localidad_nivel_nombre', 'localidad_nombre']}
+                                        searchable={true}
+                                        searchPlaceholder="Nombre, Localidad, Nivel"
+                                        searchFields={['nombre', 'localidad_nivel_nombre', 'localidad_nombre' ]}
 
-                                    endpoint='puerta'
-                                    urlFront='localidades/puertas'
-                                    history={this.props.history}
-                                />
-                            </CardBody>
-                        </Card>
+                                        fieldNames={['Nombre', 'Localidad','Nivel']}
+                                        fields={['nombre', 'localidad_nivel_nombre', 'localidad_nombre']}
+
+                                        endpoint='puerta'
+                                        urlFront='localidades/puertas'
+                                        history={this.props.history}
+                                    />
+                                </CardBody>
+                            </Card>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </Permission>
         )
     }
 }

@@ -1,33 +1,37 @@
 import React from 'react'
-import { Card, CardBody, ListPage } from 'temeforest'
+import { Card, CardBody, ListPage, Permission } from 'temeforest'
 
 class TrafficControl extends React.Component {
     render(){
         return(
-            <div className="animated fadeIn">
-                <div className="row">
-                    <div className="col-sm-12">
-                        <Card>
-                            <CardBody>
-                                <ListPage
-                                    title="Traffic Control"
+            <Permission key="trafficcontrol" mode="redirect">
+                <div className="animated fadeIn">
+                    <div className="row">
+                        <div className="col-sm-12">
+                            <Card>
+                                <CardBody>
+                                    <ListPage
+                                        title="Traffic Control"
 
-                                    searchable={true}
-                                    searchPlaceholder="Descripción, IP, Localidad"
-                                    searchFields={['descripcion', 'ip', 'localidad_nombre']}
+                                        key_permission="trafficcontrol"
 
-                                    fieldNames={['Descripción', 'Dirección IP', 'Localidad']}
-                                    fields={['descripcion', 'ip', 'localidad_nombre']}
+                                        searchable={true}
+                                        searchPlaceholder="Descripción, IP, Localidad"
+                                        searchFields={['descripcion', 'ip', 'localidad_nombre']}
 
-                                    endpoint='trafficControl'
-                                    urlFront='localidades/traffic-control'
-                                    history={this.props.history}
-                                />
-                            </CardBody>
-                        </Card>
+                                        fieldNames={['Descripción', 'Dirección IP', 'Localidad']}
+                                        fields={['descripcion', 'ip', 'localidad_nombre']}
+
+                                        endpoint='trafficControl'
+                                        urlFront='localidades/traffic-control'
+                                        history={this.props.history}
+                                    />
+                                </CardBody>
+                            </Card>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </Permission>
         )
     }
 }

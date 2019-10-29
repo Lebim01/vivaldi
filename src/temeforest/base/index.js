@@ -6,8 +6,10 @@ import ReportPage from './ReportPage'
 import FormElementValidate from './FormElementValidate'
 import FormValidate from './FormValidate'
 import ValidateContext from './ValidateContext'
+import Permission from './Permission'
 
 export {
     Card, CardBody, CardTitle, CardSubtitle, ListPage, EditPage, ReportPage,
-    FormElementValidate, FormValidate, ValidateContext, ApprovePage, RecordRow
+    FormElementValidate, FormValidate, ValidateContext, ApprovePage, RecordRow,
+    Permission
 }

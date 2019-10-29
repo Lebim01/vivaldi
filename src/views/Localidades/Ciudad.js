@@ -1,33 +1,37 @@
 import React from 'react'
-import { Card, CardBody, ListPage } from 'temeforest'
+import { Card, CardBody, ListPage, Permission } from 'temeforest'
 
 class Ciudades extends React.Component {
     render(){
         return (
-            <div className="animated fadeIn">
-                <div className="row">
-                    <div className="col-sm-12">
-                        <Card>
-                            <CardBody>
-                                <ListPage
-                                    title="Listado de Ciudades"
+            <Permission key="view_ciudad" mode="redirect">
+                <div className="animated fadeIn">
+                    <div className="row">
+                        <div className="col-sm-12">
+                            <Card>
+                                <CardBody>
+                                    <ListPage
+                                        title="Listado de Ciudades"
 
-                                    searchable={true}
-                                    searchPlaceholder="Nombre, Provincia"
-                                    searchFields={['nombre', 'provincia_nombre']}
+                                        key_permission="ciudad"
 
-                                    fieldNames={['Nombre', 'Provincia']}
-                                    fields={['nombre', 'provincia_nombre']}
+                                        searchable={true}
+                                        searchPlaceholder="Nombre, Provincia"
+                                        searchFields={['nombre', 'provincia_nombre']}
 
-                                    endpoint='ciudad'
-                                    urlFront='localidades/ciudad'
-                                    history={this.props.history}
-                                />
-                            </CardBody>
-                        </Card>
+                                        fieldNames={['Nombre', 'Provincia']}
+                                        fields={['nombre', 'provincia_nombre']}
+
+                                        endpoint='ciudad'
+                                        urlFront='localidades/ciudad'
+                                        history={this.props.history}
+                                    />
+                                </CardBody>
+                            </Card>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </Permission>
         )
     }
 }

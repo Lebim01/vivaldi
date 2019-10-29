@@ -1,7 +1,8 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { CardTitle, InputIcon, Button } from 'temeforest'
-import axios, { CancelToken } from 'axios'
+import { CardTitle, InputIcon, Button, Permission } from 'temeforest'
+import { checkPermission } from 'temeforest/base/Permission'
+import axios from 'axios'
 import { baseurl, objectToUrl } from 'utils/url'
 
 import BlockUi from 'react-block-ui';
@@ -12,14 +13,6 @@ const RowsPerPage = 25
 // numero limite de paginas visibles en el footer
 const NumVisibleFooterPages = 5
 
-// cancel axios
-let cancel;
-const defaultConfigAxios = {
-    cancelToken: new CancelToken(function executor(c) {
-        // An executor function receives a cancel function as a parameter
-        cancel = c;
-    })
-}
 
 class RecordRow extends React.Component {
 
@@ -99,7 +92,7 @@ class ListPage extends React.Component {
                     loading: true
                 })
                 const { currentPage } = this.state
-                const { data } = await axios.get(`${baseurl}/${this.props.endpoint}/${objectToUrl({ ...parameters, page : currentPage })}`, { ...defaultConfigAxios, ...this.props.config })
+                const { data } = await axios.get(`${baseurl}/${this.props.endpoint}/${objectToUrl({ ...parameters, page : currentPage })}`, { ...this.props.config })
 
                 let _results = [], 
                     _count = 0, 
@@ -148,11 +141,13 @@ class ListPage extends React.Component {
     }
 
     onRowDoubleClick = (id, row) => {
-        if(this.props.onRowDoubleClick){
-            this.props.onRowDoubleClick(row)
-        }
-        else if(this.props.urlFront && this.props.redirect){
-            this.props.history.push(`/${this.props.urlFront}/edit?id=${id}`)
+        if(checkPermission(`change_${this.props.key_permission}`)){
+            if(this.props.onRowDoubleClick){
+                this.props.onRowDoubleClick(row)
+            }
+            else if(this.props.urlFront && this.props.redirect){
+                this.props.history.push(`/${this.props.urlFront}/edit?id=${id}`)
+            }
         }
     }
 
@@ -228,11 +223,13 @@ class ListPage extends React.Component {
                         <Col xs="12" md="6">
                             <InputIcon placeholder={`Buscar... ${searchPlaceholder}`} onChange={this.onFilterChange()} icon={<i className="fa fa-search"></i>} />
                         </Col>
-                        <Col xs="12" md="6">
-                            <Button style={{'float': 'right'}} onClick={() => this.onRowDoubleClick('', {})}>
-                                <i className="fa fa-plus"></i>
-                            </Button>
-                        </Col>
+                        <Permission key={`add_${this.props.key_permission}`}>
+                            <Col xs="12" md="6">
+                                <Button style={{'float': 'right'}} onClick={() => this.onRowDoubleClick('', {})}>
+                                    <i className="fa fa-plus"></i>
+                                </Button>
+                            </Col>
+                        </Permission>
                     </Row>
                 }
                 <br/>
