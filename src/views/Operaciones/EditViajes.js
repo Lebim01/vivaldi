@@ -6,6 +6,15 @@ import axios from 'axios'
 const endpoint = 'viaje'
 const urlFront = '/operaciones/viajes'
 
+const getTipoFrecuencia = async (id_frecuencia) => {
+    try {
+        const res = await axios.get(`${baseurl}/frecuencia/${id_frecuencia}/`)
+        return res.data.tipo_nombre
+    }catch(e){
+        return ''
+    }
+}
+
 class MainView extends React.Component {
     optionsLocalidad = {
         url : `${baseurl}/localidad/`,
@@ -29,11 +38,11 @@ class MainView extends React.Component {
     })
     optionsConductor = (obj) => ({
         url : `${baseurl}/conductor/${objectToUrl(obj)}`,
-        labelName : ({ nombres, apellidos }) => `${apellidos} ${nombres}`,
+        labelName : ({ nombre }) => `${nombre}`,
         valueName : 'id'
     })
 
-    onChange = name => (e) => {
+    onChange = name => async (e) => {
         if(this.props.onChange){
             let value = e.target.value
             this.props.onChange(name, value)
@@ -42,18 +51,9 @@ class MainView extends React.Component {
                 this.clearFieldsByCooperativa()
             }
             if(name === 'frecuencia'){
-                this.getTipoFrecuencia(value)
+                let tipo = await getTipoFrecuencia(value)
+                this.props.onChange('tipo_frecuencia', tipo)
             }
-        }
-    }
-
-    getTipoFrecuencia = async (id_frecuencia) => {
-        try {
-            const res = await axios.get(`${baseurl}/frecuencia/${id_frecuencia}/`)
-            this.props.onChange('tipo_frecuencia', res.data.tipo_nombre)
-        }catch(e){
-            console.error(e)
-            this.props.onChange('tipo_frecuencia', '')
         }
     }
 
@@ -169,7 +169,7 @@ class MainView extends React.Component {
                             element: (
                                 <TextArea
                                     onChange={this.onChange('causa_creacion_administrativa')}
-                                    value={this.props.conductor}
+                                    value={this.props.causa_creacion_administrativa}
                                 />
                             )
                         }}
@@ -200,6 +200,12 @@ function EditViajes(props){
 
     const getData = async (id) => {
         const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/`)
+
+        if(data.frecuencia){
+            let tipo = await getTipoFrecuencia(data.frecuencia)
+            data.tipo_frecuencia = tipo
+        }
+
         setState({
             id,
             data
