@@ -17,7 +17,7 @@ const mapStateToProps = ({ user_info }) => {
 }
 
 const check = (key_permission, permissions, isSuperuser) => {
-    return ( key_permission ? !!permissions.find(p => p === key_permission) : true )  || isSuperuser
+    return ( key_permission ? !!(permissions || []).find(p => p === key_permission) : true )  || isSuperuser
 }
 
 function Permission({ key_permission, mode, children }){
