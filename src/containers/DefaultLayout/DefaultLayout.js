@@ -45,6 +45,7 @@ class DefaultLayout extends Component {
     componentDidMount(){
         // refresh token
         this.makeAuth()
+
         this.unlisten = this.props.history.listen(() => {
             this.makeAuth()
         })

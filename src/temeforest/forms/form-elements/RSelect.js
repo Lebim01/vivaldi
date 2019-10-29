@@ -36,7 +36,7 @@ const RSelect = (props) => {
 
     const _onChange = (e) => {
         if(e && e.value){
-            onChange(e.value)
+            onChange(e.value, e.label)
         }else{
             onChange('')
         }

@@ -37,16 +37,13 @@ class AddParadaModal extends React.Component {
     }
 
     onChange = name => (e) => {
-        if(['tarifa_normal', 'tarifa_media'].indexOf(name) !== -1){
+        if(['tarifa_normal', 'tarifa_media', 'tarifa_ejecuta_normal', 'tarifa_ejecuta_media'].indexOf(name) !== -1){
             if(`${e.target.value}`.search(pattern) !== 0) return false
         }
 
         let data = this.state.data
         data[name] = e.target.value
 
-        if(name === 'ciudad'){
-            data.ciudad_nombre = e.target.options[e.target.selectedIndex].text
-        }
         this.setState({
             data
         })
@@ -67,9 +64,9 @@ class AddParadaModal extends React.Component {
     }
 
     guardar = () => {
-        const { ciudad, ciudad_nombre, orden_llegada, tarifa_normal, tarifa_media, index, id } = this.state.data
+        const { ciudad, ciudad_nombre, orden_llegada, tarifa_normal, tarifa_media, tarifa_ejecutiva_normal, tarifa_ejecutiva_media, index, id } = this.state.data
         if(this.props.guardar){
-            let _exito = this.props.guardar({ ciudad, ciudad_nombre, orden_llegada, tarifa_media, tarifa_normal, index, id})
+            let _exito = this.props.guardar({ ciudad, ciudad_nombre, orden_llegada, tarifa_media, tarifa_normal, tarifa_ejecutiva_normal, tarifa_ejecutiva_media, index, id})
             if(_exito){
                 this.setState({
                     data : {},
@@ -98,7 +95,7 @@ class AddParadaModal extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-4">Parada</Label>
                             <div className="col-sm-6">
-                                <RSelect asyncOptions={this.optionsParada} onChange={(value) => this.onSaveData('ciudad', value)} value={this.state.data.ciudad} error={errors.includes('ciudad')} />
+                                <RSelect asyncOptions={this.optionsParada} onChange={(value, label) => { this.onSaveData('ciudad', value); this.onSaveData('ciudad_nombre', label)}} value={this.state.data.ciudad} error={errors.includes('ciudad')} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
@@ -114,9 +111,21 @@ class AddParadaModal extends React.Component {
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
+                            <Label className="col-sm-4">Tarifa Ejecutiva Normal</Label>
+                            <div className="col-sm-6">
+                                <InputIcon icon={<i className="fas fa-dollar-sign"/>} type="number" step="0.1" onChange={this.onChange('tarifa_ejecutiva_normal')} value={this.state.data.tarifa_ejecutiva_normal} error={errors.includes('tarifa_ejecutiva_normal')} />
+                            </div>
+                        </FormGroup>
+                        <FormGroup className="row">
                             <Label className="col-sm-4">Tarifa Media</Label>
                             <div className="col-sm-6">
                                 <InputIcon icon={<i className="fas fa-dollar-sign"/>} type="number" step="0.1" onChange={this.onChange('tarifa_media')} value={this.state.data.tarifa_media} error={errors.includes('tarifa_media')} />
+                            </div>
+                        </FormGroup>
+                        <FormGroup className="row">
+                            <Label className="col-sm-4">Tarifa Ejecutiva Media</Label>
+                            <div className="col-sm-6">
+                                <InputIcon icon={<i className="fas fa-dollar-sign"/>} type="number" step="0.1" onChange={this.onChange('tarifa_ejecutiva_media')} value={this.state.data.tarifa_ejecutiva_media} error={errors.includes('tarifa_ejecutiva_media')} />
                             </div>
                         </FormGroup>
                     </FormValidate>
