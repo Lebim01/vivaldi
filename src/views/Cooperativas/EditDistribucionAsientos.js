@@ -206,6 +206,27 @@ class MainView extends React.Component {
         return true
     }
 
+    parseData = (data) => {
+        let _data = {
+            nombre : data.nombre,
+            capacidad : data.capacidad,
+            id : data.id,
+            filas : [],
+            asientos_desactivados : [],
+            asientos_disponibles : []
+        }
+        
+        for(let i in data.niveles){
+            let { filas, asientos_desactivados, asientos } = data.niveles[i]
+
+            _data.filas.push(filas)
+            _data.asientos_desactivados.push(asientos_desactivados)
+            _data.asientos_disponibles.push(asientos)
+        }
+
+        return _data
+    }
+
     render(){
         const { tab } = this.state
         const { id, data, pisos, niveles } = this.props
@@ -219,6 +240,7 @@ class MainView extends React.Component {
                 endpoint={endpoint} 
                 history={this.props.history}
                 customValidation={this.validation}
+                parseData={this.parseData}
             >
                 <FormValidate className="mt-4 form-horizontal">
                     <FormGroup className="row">
@@ -264,8 +286,14 @@ class EditDistribucionAsientos extends React.Component {
 
     getData = async (id) => {
         const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/`)
-        for(let i in data.niveles){
-            data.niveles[i].asientos = []
+
+        data.niveles = []
+        for(let i in data.filas){
+            data.niveles[i] = {
+                filas : data.filas[i],
+                asientos : [],
+                asientos_desactivados : data.asientos_desactivados[i]
+            }
             data.niveles[i].asientos = getAsientos(data.niveles[i], data.niveles[i].filas, true)
         }
         this.setState({
