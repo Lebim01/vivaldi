@@ -47,12 +47,17 @@ class MainView extends React.Component {
 
     onChange = name => (e) => {
         if(this.props.onChange){
-            if(name === 'bus_tipo'){
-                const select_tipo = e.target
-                const capacidad = select_tipo.options[select_tipo.options.selectedIndex].attributes['data-capacidad'].value
-                this.props.onChange('capacidad', capacidad)
+            if(e.target.type === 'checkbox'){
+                this.props.onChange(name, e.target.checked)
             }
-            this.props.onChange(name, e.target.value)
+            else {
+                if(name === 'bus_tipo'){
+                    const select_tipo = e.target
+                    const capacidad = select_tipo.options[select_tipo.options.selectedIndex].attributes['data-capacidad'].value
+                    this.props.onChange('capacidad', capacidad)
+                }
+                this.props.onChange(name, e.target.value)
+            }
         }
     }
 
@@ -185,6 +190,16 @@ class MainView extends React.Component {
                             validationRules: { required : 'El campo es requerido' }
                         }}
                     />
+
+                    <FormGroup className="row">
+                        <div className="col-sm-2"></div>
+                        <div className="col-sm-2">
+                            <div className="custom-control custom-checkbox">
+                                <input type="checkbox" className="custom-control-input" id="is_enable" name="is_enable" checked={this.props.is_enable} onChange={this.onChange('is_enable')} />
+                                <Label onlyClassName="custom-control-label" htmlFor="is_enable">Habilitado</Label>
+                            </div>
+                        </div>
+                    </FormGroup>
 
                     {/** PROPIETARIO Y CONDUCTOR  */}
                     <div className="row">
