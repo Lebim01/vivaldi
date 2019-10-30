@@ -204,7 +204,7 @@ class MainView extends React.Component {
                             <fieldset>
                                 <legend>Propietario</legend>
                                 <EditPersona 
-                                    lengthCedula={10} 
+                                    lengthCedula={[10,13]} 
                                     name="propietario"
                                     onChange={this.onChangeData('propietario')} 
                                     persona={this.props.propietario}

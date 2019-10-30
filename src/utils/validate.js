@@ -23,6 +23,15 @@ export const functions = {
         // ddd ddd ddd
         const format2 = /(\d\d\d+\s+\d\d\d+\s+\d\d\d)/
         return (format1.test(value) || format2.test(value))
+    },
+    length : (value, { compare }) => {
+        let length = value.length
+
+        if(Array.isArray(compare)){
+            return !!compare.find(val => val === length)
+        }else{
+            return length === compare
+        }
     }
 }
 
@@ -30,10 +39,10 @@ export function validate(funcs){
     return function(value){
         // nameFuntion is a function on this file
         for(let nameFunction in funcs){
-            let messageFunction = funcs[nameFunction]
-            let result = functions[nameFunction](value)
+            let aditionalParamsFunc = funcs[nameFunction]
+            let result = functions[nameFunction](value, aditionalParamsFunc)
             if(!result){
-                return result || messageFunction
+                return result || ( typeof aditionalParamsFunc === 'string' ? aditionalParamsFunc : aditionalParamsFunc.message )
             }
         }
 

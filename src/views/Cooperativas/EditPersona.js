@@ -33,7 +33,11 @@ class EditPersona extends React.Component {
         
         if(name === 'identificacion'){
             _readOnly = true
-            if(_data.identificacion.length === this.props.lengthCedula){
+            if(
+                Array.isArray(this.props.lengthCedula)
+                ? this.props.lengthCedula.find(val => _data.identificacion.length === val)
+                : _data.identificacion.length === this.props.lengthCedula
+            ){
                 _readOnly = false
                 loading = true
                 this.searchPersona(_data.identificacion)
@@ -110,10 +114,14 @@ class EditPersona extends React.Component {
                                         validationRules: {
                                             required:"El campo es requerido", 
                                             validate: validate({
-                                                number : 'Solo se aceptan números' 
+                                                number : 'Solo se aceptan números',
+                                                length : {
+                                                    compare : this.props.lengthCedula,
+                                                    message : Array.isArray(this.props.lengthCedula)
+                                                        ? `El valor debe tener una longitud de [${this.props.lengthCedula.join(',')}]`
+                                                        : `El valor debe tener una longitud de ${this.props.lengthCedula}`
+                                                }
                                             }),
-                                            minLength: { value: this.props.lengthCedula, message: `El valor debe ser de ${this.props.lengthCedula} dígitos` },
-                                            maxLength: { value: this.props.lengthCedula, message: `El valor debe ser de ${this.props.lengthCedula} dígitos` },
                                         }
                                     } : {}}
                                 />
@@ -168,5 +176,9 @@ EditPersona.defaultProps = {
     required : true,
     name : 'default'
 }
+
+export const LENGTH_CEDULA = 10
+export const LENGTH_RUC = 13
+export const LENGTH_CEDULA_RUC = [ LENGTH_CEDULA, LENGTH_RUC ]
 
 export default EditPersona
