@@ -130,12 +130,12 @@ class EditPersona extends React.Component {
                                         element: <Input placeholder="example@gmail.com" readOnly={_readOnly} value={data.correo} onChange={this.onChange('correo')} />
                                     }}
                                     validator={{
-                                        validationRules: {
+                                        validationRules: this.props.required ? {
                                             required:"El campo es requerido",
                                             validate: validate({
                                                 email : "El valor debe ser un correo válido"
                                             })
-                                        },
+                                        } : {},
                                     }}
                                 />
                                 <FormGroup className="row">

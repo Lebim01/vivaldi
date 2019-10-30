@@ -176,9 +176,6 @@ class MainView extends React.Component {
                             name : 'fecha_emision_matricula',
                             element: <Input type="date" onChange={this.onChange('fecha_emision_matricula')} value={this.props.fecha_emision_matricula} />
                         }}
-                        validator={{
-                            validationRules: { required : 'El campo es requerido' }
-                        }}
                     />
                     <FormElementValidate
                         label={{text:'Emis. Matricula'}}
