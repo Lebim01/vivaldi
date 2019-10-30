@@ -43,6 +43,8 @@ class RecordRow extends React.Component {
 class ListPage extends React.Component {
 
     state = { 
+        // cadena para buscar
+        search: '',
         loading : false,
         // resultados completos de la peticion
         results:[], 
@@ -161,6 +163,7 @@ class ListPage extends React.Component {
         newState.filtered = this.state.results.filter((record) => searchFields.some((field) => compare(record[field], value)))
 
         this.setState({
+            search : value,
             ...newState
         })
     }
@@ -213,7 +216,7 @@ class ListPage extends React.Component {
 
     render(){
         const { title, searchPlaceholder, fieldNames, fields, searchable, head } = this.props
-        const { filtered, numPages, next, previous, currentPage, numBeginVisibleFooterPages, numEndVisibleFooterPages, loading } = this.state
+        const { filtered, numPages, next, previous, currentPage, numBeginVisibleFooterPages, numEndVisibleFooterPages, search, loading } = this.state
 
         return (
             <div>
@@ -221,7 +224,7 @@ class ListPage extends React.Component {
                 { searchable &&
                     <Row>
                         <Col xs="12" md="6">
-                            <InputIcon placeholder={`Buscar... ${searchPlaceholder}`} onChange={this.onFilterChange()} icon={<i className="fa fa-search"></i>} />
+                            <InputIcon placeholder={`Buscar... ${searchPlaceholder}`} onChange={this.onFilterChange()} icon={<i className="fa fa-search"></i>} value={search} />
                         </Col>
                         <Permission key_permission={`add_${this.props.key_permission}`}>
                             <Col xs="12" md="6">
