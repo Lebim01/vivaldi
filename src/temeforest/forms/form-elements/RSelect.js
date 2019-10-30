@@ -16,7 +16,7 @@ const valueFromId = (opts, id) => opts.find(o => o.value === id);
 const loadOptions = (asyncOptions) => {
     return new Promise(async (resolve) => {
         const {url, labelName, valueName} = asyncOptions
-        const results = await getResults(url)
+        const results = await getResults(url, true)
         resolve(results.map((row) => ({ label: row[labelName], value: row[valueName], id: row[valueName] })))
     })
 }
