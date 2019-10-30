@@ -25,7 +25,7 @@ class MainView extends React.Component {
         optionProps: ['capacidad']
     }
     optionsBusTiposServicios = {
-        url : `${baseurl}/busTipoServicio/`,
+        url : `${baseurl}/tipoServicio/`,
         labelName : 'nombre',
         valueName : 'id'
     }
@@ -144,7 +144,7 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Tipo servicio</Label>
                         <div className="col-sm-5">
-                            <Select asyncOptions={this.optionsBusTiposServicios} onChange={this.onChange('bus_tipo_servicio')} value={this.props.bus_tipo_servicio} />
+                            <Select asyncOptions={this.optionsBusTiposServicios} onChange={this.onChange('tipo_servicio')} value={this.props.tipo_servicio} />
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
