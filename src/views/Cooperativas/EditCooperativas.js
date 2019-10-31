@@ -158,8 +158,7 @@ class MainView extends React.Component {
                             element: <Input onChange={this.onChange('nombre')} value={this.props.nombre} />
                         }}
                         validator={{
-                            validationRules: {required:true},
-                            validationMessages: {required:"El campo es requerido"}
+                            validationRules : {required:"El campo es requerido"}
                         }}
                     />
                     <FormElementValidate
@@ -169,8 +168,7 @@ class MainView extends React.Component {
                             element: <Select asyncOptions={this.tipos} onChange={this.onChange('tipo')} value={this.props.tipo} />
                         }}
                         validator={{
-                            validationRules: {required:true},
-                            validationMessages: {required:"El campo es requerido"}
+                            validationRules: {required:"El campo es requerido"},
                         }}
                     />
                     <FormElementValidate
@@ -187,21 +185,9 @@ class MainView extends React.Component {
                             element: <Input onChange={this.onChange('ventanilla')} value={this.props.ventanilla} />
                         }}
                         validator={{
-                            validationRules: {required:true},
-                            validationMessages: {required:"El campo es requerido"}
+                            validationRules : {required:"El campo es requerido"}
                         }}
                     />
-                    {/* <FormElementValidate
-                        label={{text:'Establecimiento'}}
-                        input={{
-                            name : 'establecimiento',
-                            element: <Input onChange={this.onChange('establecimiento')} value={this.props.establecimiento} />
-                        }}
-                        validator={{
-                            validationRules: {required:true},
-                            validationMessages: {required:"El campo es requerido"}
-                        }}
-                    /> */}
                     <FormElementValidate
                         label={{text:'Tiempo de gracia'}}
                         input={{
@@ -209,8 +195,7 @@ class MainView extends React.Component {
                             element: <Input type="number" onChange={this.onChange('tiempo_gracia')} value={this.props.tiempo_gracia} rightLabel="Minutos" max={60} />
                         }}
                         validator={{
-                            validationRules: {required:true},
-                            validationMessages: {required:"El campo es requerido"}
+                            validationRules : {required:"El campo es requerido"}
                         }}
                     />
                     <FormGroup className="row">
@@ -220,12 +205,12 @@ class MainView extends React.Component {
                             <Button type="success" style={{marginRight:5}} onClick={this.UploadLogo}>Subir Logo</Button>
                         </div>
                         { this.props.logo_url && 
-                        <div className="col-sm-3">
-                            <Badge className="mr-2" id="logo_badge" color="info" href={baseMediaUrl + this.props.logo_url} target="_blank" >Ya existe logo.</Badge>
-                            <UncontrolledTooltip placement="top" target="logo_badge">
-                                Click para ver la imagen
-                            </UncontrolledTooltip>
-                        </div>
+                            <div className="col-sm-3">
+                                <Badge className="mr-2" id="logo_badge" color="info" href={baseMediaUrl + this.props.logo_url} target="_blank" >Ya existe logo.</Badge>
+                                <UncontrolledTooltip placement="top" target="logo_badge">
+                                    Click para ver la imagen
+                                </UncontrolledTooltip>
+                            </div>
                         }
                     </FormGroup>
                     <fieldset>
@@ -237,8 +222,7 @@ class MainView extends React.Component {
                                 element: <Input onChange={this.onChange('representante_legal')} value={this.props.representante_legal} />
                             }}
                             validator={{
-                                validationRules: {required:true},
-                                validationMessages: {required:"El campo es requerido"}
+                                validationRules : {required:"El campo es requerido"}
                             }}
                         />
                         <FormElementValidate
@@ -248,8 +232,7 @@ class MainView extends React.Component {
                                 element: <Input onChange={this.onChange('razon_social')} value={this.props.razon_social} />
                             }}
                             validator={{
-                                validationRules: {required:true},
-                                validationMessages: {required:"El campo es requerido"}
+                                validationRules : {required:"El campo es requerido"}
                             }}
                         />
                         <FormElementValidate
@@ -277,8 +260,7 @@ class MainView extends React.Component {
                                 element: <Input onChange={this.onChange('direccion_matriz')} value={this.props.direccion_matriz} />
                             }}
                             validator={{
-                                validationRules: {required:true},
-                                validationMessages: {required:"El campo es requerido"}
+                                validationRules : {required:"El campo es requerido"}
                             }}
                         />
                         <FormElementValidate
@@ -299,8 +281,7 @@ class MainView extends React.Component {
                                 element: <Input onChange={this.onChange('telefono')} value={this.props.telefono} />
                             }}
                             validator={{
-                                validationRules: { required:true},
-                                validationMessages : { required : 'El campo es requerido'}
+                                validationRules : {required:"El campo es requerido"}
                             }}
                         />
                         <FormGroup className="row">
@@ -325,20 +306,20 @@ class MainView extends React.Component {
                             </div>
                         </FormGroup>
                         { this.props.tieneFacturacionElectronica() &&
-                        <div>
-                          <FormGroup className="row">
-                            <Label className="col-sm-3">Ambiente Facturaci&oacute;n Electr&oacute;nica</Label>
-                            <div className="col-sm-2">
-                                <Select options={this.ambientes_elect} value={this.props.ambiente} onChange={this.onChange('ambiente')} />
+                            <div>
+                            <FormGroup className="row">
+                                <Label className="col-sm-3">Ambiente Facturaci&oacute;n Electr&oacute;nica</Label>
+                                <div className="col-sm-2">
+                                    <Select options={this.ambientes_elect} value={this.props.ambiente} onChange={this.onChange('ambiente')} />
+                                </div>
+                            </FormGroup>
+                            <FormGroup className='row'>
+                                <Label className='col-sm-3'>Leyenda Ride</Label>
+                                <div className='col-sm-5'>
+                                    <Input type='textarea' rows='9' value={this.props.leyenda_ride} onChange={this.onChange('leyenda_ride')} />
+                                </div>
+                            </FormGroup>
                             </div>
-                          </FormGroup>
-                          <FormGroup className='row'>
-                            <Label className='col-sm-3'>Leyenda Ride</Label>
-                            <div className='col-sm-5'>
-                                <Input type='textarea' rows='9' value={this.props.leyenda_ride} onChange={this.onChange('leyenda_ride')} />
-                            </div>
-                          </FormGroup>
-                        </div>
                         }
                     </fieldset>
                     <fieldset>
@@ -462,8 +443,13 @@ class EditCooperativas extends React.Component {
 
     getData = async (id) => {
         const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/`)
+
         data.localidades_andenes = {}
         data.logo = null
+
+        data.obligado_contabilidad = data.obligado_contabilidad ? 'si' : 'no'
+        data.contribuyente_especial = data.contribuyente_especial ? 'si' : 'no'
+
         this.setState({
             id,
             data
@@ -604,7 +590,7 @@ class EditCooperativas extends React.Component {
     }
 
     parseData(data){
-        data.obligado_contabilidad = data.obligado_contabilidad === 'Si'    
+        data.obligado_contabilidad = data.obligado_contabilidad === 'Si'
         data.contribuyente_especial = data.contribuyente_especial === 'Si'
         data.andenes = Object.keys(data.localidades_andenes).map((r) => data.localidades_andenes[r]).flat()
         return data

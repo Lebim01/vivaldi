@@ -1,4 +1,5 @@
 import React from 'react'
+import MaskedInput from 'react-text-mask'
 import PropTypes from 'prop-types'
 import FormGroup from './FormGroup'
 
@@ -23,6 +24,7 @@ class Input extends React.Component {
     componentDidMount(){
         this.setValue()
     }
+
     componentDidUpdate(prevProps){
         if(this.props.setValue){
             if(prevProps.value !== this.props.value){
@@ -95,11 +97,19 @@ class Input extends React.Component {
     render(){
         const { type, helperText, rightLabel, error, className, value, onChange, keyDown, modeNumber, register, setValue, ...otherProps } = this.props
 
-        const _value = setValue ? null : value || ''
+        const _value = setValue ? undefined : value || ''
 
         return (
             <FormGroup>
-                <input type={type} onKeyDown={this.onKeyDown} className={`form-control ${className} ${error ?'is-invalid':''}`} value={_value} onChange={this.onChange} {...otherProps} ref={register} />
+                <input
+                    type={type} 
+                    onKeyDown={this.onKeyDown} 
+                    className={`form-control ${className} ${error ?'is-invalid':''}`} 
+                    value={_value} 
+                    onChange={this.onChange} 
+                    {...otherProps} 
+                    ref={register} 
+                />
                 { rightLabel && <label style={styles.rightLabel}>{rightLabel}</label> }
                 { helperText && <small className="form-text text-muted"> {helperText} </small> }
             </FormGroup>
@@ -122,7 +132,8 @@ Input.defaultProps = {
     className : '',
     error : false,
     value : '',
-    modeNumber : 'decimal'
+    modeNumber : 'decimal',
+    mask: []
 }
 
 export default Input

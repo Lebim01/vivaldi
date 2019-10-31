@@ -62,7 +62,7 @@ class FormElementValidate extends React.Component {
                                 {/** ELEMENT */}
                                 {<_input.element.type 
                                     name={_input.name} 
-                                    setValue={setValue}
+                                    setValue={validator.validationRules ? setValue : null}
                                     {..._input.element.props}
                                     register={register(validator.validationRules)}
                                 />}

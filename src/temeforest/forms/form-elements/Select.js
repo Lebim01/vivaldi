@@ -84,14 +84,13 @@ class Select extends React.Component {
         const { _options } = this.state
         const { options, helperText, error, className, value, defaultValue, asyncOptions, register, setValue, ...otherProps } = this.props
 
-        const _value = setValue ? null : (value !== undefined && value !== null ? value : '')
+        const _value = setValue ? undefined : (value !== undefined && value !== null ? value : '')
 
         return (
             <BlockUi tag="div" blocking={this.state.loading}>
                 <FormGroup>
                     <select 
                         className={`form-control ${className} ${error ?'is-invalid':''}`} 
-                        defaultValue={defaultValue}
                         ref={register}
 
                         {...otherProps} 
