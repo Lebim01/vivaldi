@@ -26,11 +26,11 @@ class MainView extends React.Component {
         labelName: 'nombre',
         valueName: 'id'
     }
-    optionsDestinos = {
-        url : `${baseurl}/ruta/`,
+    optionsDestinos = (obj) => ({
+        url : `${baseurl}/ruta/${objectToUrl(obj)}`,
         labelName: 'nombre',
         valueName: 'id'
-    }
+    })
     optionsFrecuencia = (obj) => ({
         url : `${baseurl}/frecuencia/${objectToUrl(obj)}`,
         labelName : 'hora_salida',
@@ -111,7 +111,16 @@ class MainView extends React.Component {
                         label={{text:'Destino'}}
                         input={{
                             name : 'ruta',
-                            element: <Select onChange={this.onChange('ruta')} value={this.props.ruta} asyncOptions={this.optionsDestinos} />
+                            element: (
+                                <Select 
+                                    onChange={this.onChange('ruta')} 
+                                    value={this.props.ruta} 
+                                    { ...(this.props.cooperativa
+                                        ? { asyncOptions : this.optionsDestinos({ cooperativa: this.props.cooperativa }) }
+                                        : { options : [{ label: 'Seleccione un cooperativa', value : '' }] }
+                                    )}
+                                />
+                            )
                         }}
                         validator={{
                             
