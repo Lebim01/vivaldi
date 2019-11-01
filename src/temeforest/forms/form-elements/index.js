@@ -8,6 +8,7 @@ import DualList from './DualList'
 import TextArea from './TextArea'
 import InputAutocomplete from './InputAutocomplete'
 import RSelect from './RSelect'
+import MaskedInput from './MaskedInput'
 
 export {
     Input,
@@ -19,5 +20,6 @@ export {
     DualList,
     TextArea,
     InputAutocomplete,
-    RSelect
+    RSelect,
+    MaskedInput
 }

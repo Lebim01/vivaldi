@@ -18,7 +18,23 @@ const styles = {
     }
 }
 
-class Input extends React.Component {
+class FormInput extends React.Component {
+    render(){
+        const { helperText, rightLabel, ...otherProps } = this.props
+
+        return (
+            <FormGroup>
+                <Input
+                    {...otherProps} 
+                />
+                { rightLabel && <label style={styles.rightLabel}>{rightLabel}</label> }
+                { helperText && <small className="form-text text-muted"> {helperText} </small> }
+            </FormGroup>
+        )
+    }
+}
+
+export class Input extends React.Component {
 
     componentDidMount(){
         this.setValue()
@@ -94,24 +110,20 @@ class Input extends React.Component {
     }
 
     render(){
-        const { type, helperText, rightLabel, error, className, value, onChange, keyDown, modeNumber, register, setValue, ...otherProps } = this.props
+        const { type, error, className, value, onChange, keyDown, modeNumber, register, setValue, disableOnChange, disableValue, ...otherProps } = this.props
 
         const _value = setValue ? undefined : value || ''
 
         return (
-            <FormGroup>
-                <input
-                    type={type} 
-                    onKeyDown={this.onKeyDown} 
-                    className={`form-control ${className} ${error ?'is-invalid':''}`} 
-                    value={_value} 
-                    onChange={this.onChange} 
-                    {...otherProps} 
-                    ref={register} 
-                />
-                { rightLabel && <label style={styles.rightLabel}>{rightLabel}</label> }
-                { helperText && <small className="form-text text-muted"> {helperText} </small> }
-            </FormGroup>
+            <input
+                type={type} 
+                onKeyDown={this.onKeyDown} 
+                className={`form-control ${className} ${error ?'is-invalid':''}`} 
+                value={disableValue ? undefined : _value} 
+                onChange={disableOnChange ? undefined : this.onChange}
+                {...otherProps} 
+                ref={register} 
+            />
         )
     }
 }
@@ -132,7 +144,9 @@ Input.defaultProps = {
     error : false,
     value : '',
     modeNumber : 'decimal',
-    mask: []
+
+    disableOnChange : false,
+    disableValue : false
 }
 
-export default Input
+export default FormInput

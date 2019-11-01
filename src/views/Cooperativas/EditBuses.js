@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, FormGroup, Input, Label, Select, FormElementValidate, FormValidate, EditPage } from 'temeforest'
+import { Button, FormGroup, Input, Label, Select, FormElementValidate, FormValidate, EditPage, MaskedInput } from 'temeforest'
 import { baseurl, getParameter, canDownload, downloadFile } from 'utils/url'
 import { fileToBase64 } from 'utils/file'
 import EditPersona from './EditPersona'
@@ -182,9 +182,6 @@ class MainView extends React.Component {
                         input={{
                             name : 'fecha_vencimiento_matricula',
                             element: <Input type="date" onChange={this.onChange('fecha_vencimiento_matricula')} value={this.props.fecha_vencimiento_matricula} />
-                        }}
-                        validator={{
-                            validationRules: { required : 'El campo es requerido' }
                         }}
                     />
 
