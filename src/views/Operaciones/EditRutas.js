@@ -27,11 +27,6 @@ class RecordRow extends React.Component {
                     </Button>{' '}
                     {this.props.ciudad_nombre}
                 </td>
-                <td>{this.props.orden_llegada}</td>
-                <td>{this.props.tarifa_normal}</td>
-                <td>{this.props.tarifa_ejecutiva_normal}</td>
-                <td>{this.props.tarifa_media}</td>
-                <td>{this.props.tarifa_ejecutiva_media}</td>
                 <td>
                     <div className="custom-control custom-checkbox">
                         <input type="checkbox" className="custom-control-input" id={name_input} name={name_input} checked={this.props.is_enable} onChange={this.props.onChange('is_enable')} />
@@ -210,11 +205,6 @@ class MainView extends React.Component {
                                 <thead>
                                     <tr>
                                         <th>Parada</th>
-                                        <th>Llegada</th>
-                                        <th>Tarifa Normal</th>
-                                        <th>Tarifa Ejecutiva Normal</th>
-                                        <th>Tarifa Media</th>
-                                        <th>Tarifa Ejecutiva Media</th>
                                         <th>Activa</th>
                                     </tr>
                                 </thead>
