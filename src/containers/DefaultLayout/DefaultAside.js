@@ -59,7 +59,7 @@ class MenuItem extends React.Component {
         return (
             <Permission key_permission={permission}>
                 <NavItem className={`sidebar-item`}>
-                    <NavLink className={`sidebar-link waves-effect waves-dark ${children?'has-arrow':''}`} aria-expanded="false" href={url} style={{marginLeft: margin}} onClick={this.onClick}>
+                    <NavLink className={`sidebar-link waves-effect waves-dark ${children?'has-arrow':''}`} aria-expanded="false" href={url} style={{marginLeft: margin, whiteSpace:'normal'}} onClick={this.onClick}>
                         { icon && <i className={icon} onClick={this.prevent}></i> }
                         { children ? <span className="hide-menu" onClick={this.prevent}> {name} </span> : name }
                         { badge && <span class={`badge badge-pill badge-${badge.variant} float-right`} onClick={this.prevent}>{badge.text}</span> }
