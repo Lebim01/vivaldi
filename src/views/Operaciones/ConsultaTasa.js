@@ -16,7 +16,7 @@ class ConsultaTasa extends React.Component {
     }
     optionsBus = {
         url : `${baseurl}/bus/`,
-        labelName: 'numero',
+        labelName: (row) => `${row.disco} / ${row.placa}`,
         valueName: 'id' 
     }
     optionsAndenes = {
