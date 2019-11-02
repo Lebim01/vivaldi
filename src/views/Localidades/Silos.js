@@ -17,10 +17,10 @@ class Silos extends React.Component {
 
                                         searchable={true}
                                         searchPlaceholder="Nombre, Dirección IP, localidad"
-                                        searchFields={['descripcion', 'ip', 'localidad']}
+                                        searchFields={['nombre', 'ip', 'localidad']}
 
                                         fieldNames={['Nombre', 'Dirección IP', 'Localidad']}
-                                        fields={['descripcion', 'ip', 'localidad_nombre']}
+                                        fields={['nombre', 'ip', 'localidad_nombre']}
 
                                         endpoint='silo'
                                         urlFront='localidades/silos'
