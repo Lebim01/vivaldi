@@ -87,8 +87,8 @@ class Frecuencias extends React.Component {
                                     </div>
                                 </div>
                                 <ListPage
-                                    fieldNames={['Hora', 'Cooperativa', 'Destino', 'Vía', 'Tipo']}
-                                    fields={['hora_salida', 'cooperativa_nombre', 'ciudad_destino', 'ruta_via', 'tipo_nombre']}
+                                    fieldNames={['Hora', 'Cooperativa', 'Destino', 'Vía', 'Tipo', 'Localidad']}
+                                    fields={['hora_salida', 'cooperativa_nombre', 'ciudad_destino', 'ruta_via', 'tipo_nombre', 'localidad_nombre']}
                                     parameters={this.state}
 
                                     endpoint='frecuencia'
