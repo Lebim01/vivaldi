@@ -8,6 +8,9 @@ export const functions = {
     number : (value) => {
         return /^[-+]?\d+$/gm.test(value);
     },
+    decimal : (value) => {
+        return /^[+-]?\d+(\.\d+)?$/gm.test(value)
+    },
     date : (value) => {
         return /^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](18|19|20|21)\d\d$/gm.test(value);
     },
@@ -19,9 +22,9 @@ export const functions = {
     },
     phone : (value) => {
         // (dd) ddd-dddd
-        const format1 = /(\(\d\d\)+\s+\d\d\d+\s\-+\s+\d\d\d\d)/
+        const format1 = /(\(\d\d\)+\s+\d\d\d+\s\-+\s+\d\d\d\d)/gm
         // ddd ddd ddd
-        const format2 = /(\d\d\d+\s+\d\d\d+\s+\d\d\d)/
+        const format2 = /(\d\d\d+\s+\d\d\d+\s+\d\d\d)/gm
         return (format1.test(value) || format2.test(value))
     },
     length : (value, { compare }) => {

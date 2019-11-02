@@ -6,6 +6,7 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import NivelModal from './NivelModal'
 import { fileToBase64 } from 'utils/file'
+import { validate } from 'utils/validate'
 
 const FirmaElectronicaForm = React.lazy(() => import('utils/FirmaElectronicaForm'))
 const ConfiguracionCorreoForm = React.lazy(() => import('utils/ConfiguracionCorreoForm'))
@@ -54,8 +55,8 @@ class MainView extends React.Component {
     }
 
     sino = [
-        { value : false, label : 'No' },
-        { value : true, label : 'Si' }
+        { value : "0", label : 'No' },
+        { value : "1", label : 'Si' }
     ]
 
     tipos_emision = [
@@ -184,7 +185,7 @@ class MainView extends React.Component {
                         }}
                         validator={{
                             validationRules: {
-                                required:"El campo es requerido",
+                                required: "El campo es requerido"
                             },
                         }}
                     />
@@ -192,11 +193,14 @@ class MainView extends React.Component {
                         label={{text:'Tarifa tasa'}}
                         input={{
                             name : 'tarifa_tasa',
-                            element: <Input onChange={this.onChange('tarifa_tasa')} value={this.props.tarifa_tasa} />
+                            element: <Input onChange={this.onChange('tarifa_tasa')} type="number" value={this.props.tarifa_tasa} />
                         }}
                         validator={{
                             validationRules: {
-                                required:"El campo es requerido",
+                                required: "El campo es requerido",
+                                validate: validate({
+                                    decimal : "El valor debe ser un número"
+                                })
                             },
                         }}
                     />
@@ -339,6 +343,9 @@ class MainView extends React.Component {
                             validator={{
                                 validationRules: {
                                     required:"El campo es requerido",
+                                    validate:validate({
+                                        phone: 'El teléfono debe ser un valor valido: (dd) ddd-dddd ó ddd ddd ddd'
+                                    })
                                 },
                             }}
                         />
@@ -354,7 +361,9 @@ class MainView extends React.Component {
                                 <Select options={this.sino}  value={this.props.contribuyente_especial} onChange={this.onChange('contribuyente_especial')}/>
                             </div>
                             <div className="col-sm-3">
-                                { this.props.contribuyente_especial ===  true && <Input onChange={this.onChange('contribuyente_especial_detalle')} value={this.props.contribuyente_especial_detalle} /> }
+                                { Number(this.props.contribuyente_especial) === 1 && 
+                                    <Input onChange={this.onChange('contribuyente_especial_detalle')} value={this.props.contribuyente_especial_detalle} /> 
+                                }
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
@@ -473,6 +482,7 @@ class EditLocalidades extends React.Component {
     getData = async (id) => {
         const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/`)
         data.logo = null
+        data.contribuyente_especial = data.contribuyente_especial ? '1' : '0'
         this.setState({
             id,
             data

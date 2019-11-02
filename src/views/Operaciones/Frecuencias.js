@@ -4,9 +4,7 @@ import { baseurl, objectToUrl } from 'utils/url'
 
 class Frecuencias extends React.Component {
 
-    state = {
-
-    }
+    state = {}
 
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,

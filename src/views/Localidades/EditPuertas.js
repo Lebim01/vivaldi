@@ -112,6 +112,9 @@ class MainView extends React.Component {
 
     render(){
         const { andenes, niveles } = this.state
+
+        console.log(this.props)
+
         return (
             <EditPage title={`${this.props.id ? 'Editar' : 'Crear'} Puerta`} data={this.props.data} id={this.props.id} urlFront={urlFront} endpoint={endpoint} history={this.props.history} key_permission="puerta">
                 <FormValidate className="mt-4 form-horizontal">
@@ -131,7 +134,13 @@ class MainView extends React.Component {
                         label={{text:'Nivel'}}
                         input={{
                             name : 'localidad_nivel',
-                            element: <Select onChange={this.onChange('localidad_nivel')} value={this.props.localidad_nivel} options={this.props.localidad ? niveles : this.seleccione} />
+                            element: (
+                                <Select 
+                                    onChange={this.onChange('localidad_nivel')} 
+                                    value={this.props.localidad_nivel} 
+                                    options={this.props.localidad ? niveles : this.seleccione} 
+                                />
+                            )
                         }}
                         validator={{
                             validationRules: { 

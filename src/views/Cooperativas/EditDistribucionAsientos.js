@@ -219,9 +219,25 @@ class MainView extends React.Component {
         for(let i in data.niveles){
             let { filas, asientos_desactivados, asientos } = data.niveles[i]
 
-            _data.filas.push(filas)
-            _data.asientos_desactivados.push(asientos_desactivados)
-            _data.asientos_disponibles.push(asientos)
+            if(filas > 0){
+                _data.filas.push(filas)
+                _data.asientos_desactivados.push(asientos_desactivados)
+                _data.asientos_disponibles.push(asientos)
+            }
+        }
+
+        if(_data.filas.length > 1){
+            let lenght1 = _data.asientos_desactivados[0].length
+            let lenght2 = _data.asientos_desactivados[1].length
+
+            if(lenght1 > lenght2){
+                for(let i = 0; i < lenght1-lenght2; i++)
+                    _data.asientos_desactivados[1].push(-1)
+            }
+            if(lenght2 > lenght1){
+                for(let i = 0; i < lenght2-lenght1; i++)
+                    _data.asientos_desactivados[0].push(-1)
+            }
         }
 
         return _data
@@ -292,7 +308,7 @@ class EditDistribucionAsientos extends React.Component {
             data.niveles[i] = {
                 filas : data.filas[i],
                 asientos : [],
-                asientos_desactivados : data.asientos_desactivados[i]
+                asientos_desactivados : data.asientos_desactivados[i] || []
             }
             data.niveles[i].asientos = getAsientos(data.niveles[i], data.niveles[i].filas, true)
         }

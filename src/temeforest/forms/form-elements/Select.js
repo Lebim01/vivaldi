@@ -22,6 +22,9 @@ class Select extends React.Component {
                 this.setValue()
             }
         }
+        if(prevProps.options !== this.props.options){
+            this.setValue()
+        }
     }
 
     componentWillReceiveProps(props){
