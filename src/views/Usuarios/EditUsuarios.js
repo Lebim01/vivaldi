@@ -273,15 +273,17 @@ class EditUsuarios extends React.Component {
         return (
             <EditPage title={`${id ? 'Editar' : 'Crear'} Usuario`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
                 <div>
-                    <FormValidate className="mt-4 form-horizontal">
+                    <FormValidate className="mt-4 form-horizontal" autoComplete="off">
                         <FormElementValidate
                             label={{text:'Usuario'}}
                             input={{
                                 name : 'username',
-                                element: <Input onChange={this.onChange('username')} value={data.username} />
+                                element: <Input onChange={this.onChange('username')} value={data.username} autoComplete="off" />
                             }}
                             validator={{
-                                validationRules: {required:"El campo es requerido"},
+                                validationRules: {
+                                    required:"El campo es requerido"
+                                },
                             }}
                         />
                         <FormElementValidate

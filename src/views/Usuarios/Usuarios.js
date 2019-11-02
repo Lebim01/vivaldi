@@ -17,8 +17,8 @@ class Usuarios extends React.Component {
                                     searchPlaceholder="Usuario, Nombre, Cooperativa"
                                     searchFields={['username', 'first_name', 'last_name']}
 
-                                    fieldNames={['Usuario', 'Apellidos', 'Nombres', 'Cooperativas']}
-                                    fields={['username', 'last_name', 'first_name', (row) => 
+                                    fieldNames={['Usuario', 'Nombre', 'Cooperativas']}
+                                    fields={['username', 'first_name', (row) => 
                                         <ul>
                                             { row.roles_cooperativa.map((r, i) => 
                                                 <li key={i}>{r.cooperativa_nombre}</li>
