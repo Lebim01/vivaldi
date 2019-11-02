@@ -13,6 +13,11 @@ class Frecuencias extends React.Component {
         labelName: 'nombre',
         valueName: 'id'
     }
+    optionsLocalidad = {
+        url : `${baseurl}/localidad/`,
+        labelName: 'nombre',
+        valueName: 'id'
+    }
     optionsCiudad = (obj) => ({
         url : `${baseurl}/ruta/${objectToUrl(obj)}`,
         labelName: 'nombre',
@@ -68,6 +73,12 @@ class Frecuencias extends React.Component {
                                             <Label className="col-sm-4">Tipo</Label>
                                             <div className="col-sm-8">
                                                 <Select options={this.optionsTipo} onChange={this.onChange('tipo')} value={this.state.tipo}/>
+                                            </div>
+                                        </FormGroup>
+                                        <FormGroup className="row">
+                                            <Label className="col-sm-4">Localidad</Label>
+                                            <div className="col-sm-8">
+                                                <Select asyncOptions={this.optionsLocalidad} defaultOption="Todos" onChange={this.onChange('localidad')} value={this.state.localidad}/>
                                             </div>
                                         </FormGroup>
                                     </div>
