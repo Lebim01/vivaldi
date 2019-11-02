@@ -35,6 +35,11 @@ class MainView extends React.Component {
         labelName: 'nombre',
         valueName: 'id'
     }
+    optionsLocalidad = {
+      url: `${baseurl}/localidad/`,
+      labelName: 'nombre',
+      valueName: 'id'
+    }
     tipos = [
         { value: '', label : 'Seleccione' },
         { value: 1, label : 'Normal' },
@@ -74,6 +79,16 @@ class MainView extends React.Component {
                         input={{
                             name : 'hora_salida',
                             element: <Input className="no-clear" type="time" onChange={this.onChange('hora_salida')} value={this.props.hora_salida} />
+                        }}
+                        validator={{
+                            validationRules: {required:"El campo es requerido"},
+                        }}
+                    />
+                    <FormElementValidate
+                        label={{text:'Localidad'}}
+                        input={{
+                            name : 'localidad',
+                            element: <Select onChange={this.onChange('localidad')} value={this.props.localidad} asyncOptions={this.optionsLocalidad}/>
                         }}
                         validator={{
                             validationRules: {required:"El campo es requerido"},
