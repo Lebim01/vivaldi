@@ -4,7 +4,7 @@ import { baseurl, getParameter } from 'utils/url'
 import axios from 'axios'
 
 const endpoint = 'provincia'
-const urlFront = '/cooperativas/provincia'
+const urlFront = '/localidades/provincia'
 
 class MainView extends React.Component {
 
