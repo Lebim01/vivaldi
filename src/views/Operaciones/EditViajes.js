@@ -111,7 +111,7 @@ class MainView extends React.Component {
                         label={{text:'Destino'}}
                         input={{
                             name : 'ruta',
-                            element: (
+                            element: 
                                 <Select 
                                     onChange={this.onChange('ruta')} 
                                     value={this.props.ruta} 
@@ -120,10 +120,9 @@ class MainView extends React.Component {
                                         : { options : [{ label: 'Seleccione un cooperativa', value : '' }] }
                                     )}
                                 />
-                            )
                         }}
                         validator={{
-                            
+                            validationRules: {  },
                         }}
                     />
                     <FormElementValidate

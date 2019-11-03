@@ -13,11 +13,11 @@ class Pasajeros extends React.Component {
                                     title="Listado de Personas"
 
                                     searchable={true}
-                                    searchPlaceholder="Identificación, Apellidos, Nombres"
-                                    searchFields={['identificacion', 'apellidos', 'nombres']}
+                                    searchPlaceholder="Identificación, Nombre"
+                                    searchFields={['identificacion', 'nombre']}
 
-                                    fieldNames={['Identificación', 'Apellidos', 'Nombres']}
-                                    fields={['identificacion', 'apellidos', 'nombres']}
+                                    fieldNames={['Identificación', 'Nombre']}
+                                    fields={['identificacion', 'nombre']}
 
                                     endpoint='persona'
                                     urlFront='facturacion/personas'

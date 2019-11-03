@@ -22,7 +22,7 @@ class Select extends React.Component {
                 this.setValue()
             }
         }
-        if(prevProps.options !== this.props.options){
+        if(prevProps.options !== this.props.options || prevProps.asyncOptions !== this.props.asyncOptions){
             this.setValue()
         }
     }
@@ -34,7 +34,9 @@ class Select extends React.Component {
     }
 
     setValue = () => {
+        console.log(this.props.name)
         if(this.props.setValue){
+            console.log('setvalue', this.props.name, this.props.value)
             this.props.setValue(this.props.name, this.props.value)
         }
     }
