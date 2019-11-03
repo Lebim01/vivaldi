@@ -1,7 +1,7 @@
 import React from 'react'
 import { TabContent, TabPane, Badge, UncontrolledTooltip } from 'reactstrap'
 import { Button, FormGroup, Input, Select, Label, Tabs, DualList, FormElementValidate, FormValidate, EditPage } from 'temeforest'
-import { baseurl, baseMediaUrl, getParameter, getResults } from 'utils/url'
+import { baseurl, baseMediaUrl, getParameter, getResults, objectToUrl } from 'utils/url'
 import { fileToBase64 } from 'utils/file'
 import axios from 'axios'
 import Swal from 'sweetalert2'
@@ -491,16 +491,15 @@ class EditCooperativas extends React.Component {
         })
     }
 
-    getAndendes = (localidad) => {
-        let andenes = []
-        for(let i in localidad.niveles){
-            let nivel = localidad.niveles[i]
-            for(let j in nivel.andenes){
-                let anden = nivel.andenes[j]
-                andenes.push({ value : anden.id, label : anden.descripcion })
-            }
+    getAndendes = async (localidad) => {
+        const params = {
+            localidad : localidad.id
         }
-        return andenes
+        const res = await getResults(`${baseurl}/anden/${objectToUrl(params)}`, true)
+        return res.map(row => ({
+            value : row.id,
+            label : row.descripcion
+        }))
     }
 
     getLocalidades = async () => {
@@ -510,7 +509,7 @@ class EditCooperativas extends React.Component {
         for(let i in results){
             localidades[results[i].id] = {
                 ...results[i],
-                andenes : this.getAndendes(results[i])
+                andenes : await this.getAndendes(results[i])
             }
         }
         this.setState({

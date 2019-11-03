@@ -34,9 +34,7 @@ class Select extends React.Component {
     }
 
     setValue = () => {
-        console.log(this.props.name)
         if(this.props.setValue){
-            console.log('setvalue', this.props.name, this.props.value)
             this.props.setValue(this.props.name, this.props.value)
         }
     }
