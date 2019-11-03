@@ -34,8 +34,25 @@ class SeleccionarSistemaExterno extends React.Component {
     ]
 
     state = {
+        option : '',
         options: '',
         otroSistema: ''
+    }
+
+    componentDidUpdate(prevProps){
+        if(this.props.value !== this.state.option && this.props.value !== this.state.otroSistema){
+            let f = this.options.find(r => r.value === this.props.value)
+            if(!f && this.state.option !== -1){
+                this.setState({
+                    option : -1,
+                    otroSistema : this.props.value
+                })
+            }else{
+                this.setState({
+                    option : this.props.value
+                })
+            }
+        }
     }
 
     onChangeOption = e => {
@@ -361,7 +378,7 @@ class MainView extends React.Component {
                             </div>
                         </FormGroup>
                         { this.props.usa_api &&
-                            <SeleccionarSistemaExterno onChange={(value) => this.onChangeData('sistema_externo', value)} />
+                            <SeleccionarSistemaExterno value={this.props.sistema_externo} onChange={(value) => this.onChangeData('sistema_externo', value)} />
                         }
                     </fieldset>
 
@@ -590,8 +607,8 @@ class EditCooperativas extends React.Component {
     }
 
     parseData(data){
-        data.obligado_contabilidad = data.obligado_contabilidad === 'Si'
-        data.contribuyente_especial = data.contribuyente_especial === 'Si'
+        data.obligado_contabilidad = data.obligado_contabilidad.toLocaleLowerCase() === 'si'
+        data.contribuyente_especial = data.contribuyente_especial.toLocaleLowerCase() === 'si'
         data.andenes = Object.keys(data.localidades_andenes).map((r) => data.localidades_andenes[r]).flat()
         return data
     }
