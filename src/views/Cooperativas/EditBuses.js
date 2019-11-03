@@ -7,6 +7,9 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import moment from 'moment'
 import { validate } from 'utils/validate'
+import { REGEX } from 'temeforest/forms/form-elements/MaskedInput'
+
+const { LETTER, DIGIT } = REGEX
 
 const endpoint = 'bus'
 const urlFront = '/cooperativas/buses'
@@ -106,7 +109,16 @@ class MainView extends React.Component {
                         label={{text:'Placa'}}
                         input={{
                             name : 'placa',
-                            element: <Input onChange={this.onChange('placa')} value={this.props.placa} />
+                            element: (
+                                <MaskedInput 
+                                    onChange={this.onChange('placa')} 
+                                    value={this.props.placa}
+                                    mask={
+                                        //'ddd-cccc'
+                                        [DIGIT, DIGIT, DIGIT, '-', LETTER, LETTER, LETTER, LETTER]
+                                    }
+                                />
+                            )
                         }}
                         validator={{
                             validationRules: { required : 'El campo es requerido' }

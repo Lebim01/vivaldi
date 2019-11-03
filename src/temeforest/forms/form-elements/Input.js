@@ -88,7 +88,7 @@ export class Input extends React.Component {
     }
 
     onKeyDown = (e) => {
-        const { type, onKeyDown, modeNumber } = this.props
+        const { type, onKeyDown, modeNumber, mask, preventMask } = this.props
 
         if(type === 'number'){
             if(e.key === 'e'){
@@ -103,6 +103,12 @@ export class Input extends React.Component {
                 }
             }
         }
+        if(mask){
+            if(e.keyCode !== 8){
+                preventMask(e.target.value + e.key)
+                e.preventDefault()
+            }
+        }
 
         if(onKeyDown){
             onKeyDown(e)
@@ -110,7 +116,7 @@ export class Input extends React.Component {
     }
 
     render(){
-        const { type, error, className, value, onChange, keyDown, modeNumber, register, setValue, disableOnChange, disableValue, ...otherProps } = this.props
+        const { type, error, className, value, onChange, keyDown, modeNumber, register, setValue, disableOnChange, disableValue, tooltip, ...otherProps } = this.props
 
         const _value = setValue ? undefined : value || ''
 
@@ -119,8 +125,8 @@ export class Input extends React.Component {
                 type={type} 
                 onKeyDown={this.onKeyDown} 
                 className={`form-control ${className} ${error ?'is-invalid':''}`} 
-                value={disableValue ? undefined : _value} 
-                onChange={disableOnChange ? undefined : this.onChange}
+                value={_value} 
+                onChange={this.onChange}
                 {...otherProps} 
                 ref={register} 
             />
@@ -144,9 +150,6 @@ Input.defaultProps = {
     error : false,
     value : '',
     modeNumber : 'decimal',
-
-    disableOnChange : false,
-    disableValue : false
 }
 
 export default FormInput

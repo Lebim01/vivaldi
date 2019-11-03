@@ -1,25 +1,83 @@
 import React from 'react'
 import { Input } from './Input'
-import InputMask from 'react-input-mask';
 
-const formatChars = {
-    '9': '[0-9]',
-    'a': '[A-Za-z]',
-    '*': '[A-Za-z0-9]'
+export const REGEX = {
+    LETTER : /^[a-zA-Z\s]+$/,
+    DIGIT : /^\d+$/
 }
 
-function MaskedInput({ mask, value, onChange, ...props }){
+function MaskedInput ({ mask, onChange, ...props }) {
+
+    const getHelperText = (value, mask) => {
+        for(let index in value){
+            let char = value[index]
+            let maskChar = mask[index]
+    
+        }
+    }
+
+    const preventMask = (newValue) => {
+        // process value
+        let validValue = getValue(newValue, mask)
+        // trigger only with has changes
+        let result = props.value !== validValue
+
+        if(result){
+            onChange({
+                target : {
+                    type : 'text',
+                    value : validValue
+                }
+            })
+        }
+
+        return result
+    }
+    
+    const getValue = (value, mask) => {
+        let validValue = ''
+
+        for(let index in value){
+            let char = value[index]
+            let maskCondition = mask[index]
+
+            if(maskCondition instanceof RegExp){
+                let result = maskCondition.test(char)
+                if(result){
+                    validValue += char + appendNextString(Number(index))
+                }else{
+                    break
+                }
+            }
+        }
+
+        return validValue
+    }
+
+    const appendNextString = (index) => {
+        let append = ''
+        for(let i = index+1; i <= mask.length; i++){
+            if(typeof mask[i] === 'string'){
+                append += mask[i]
+            }else{
+                break
+            }
+        }
+        return append
+    }
+
     return (
-        <InputMask mask={mask} formatChars={formatChars} value={value} onChange={onChange} {...props}>
-            {(inputProps) => {
-                return <Input {...inputProps} />
-            }}
-        </InputMask>
+        <Input 
+            mask={mask} 
+            preventMask={preventMask}
+            {...props} 
+        />
     )
 }
 
 MaskedInput.defaultProps = {
-    
+    mask : '',
+    value : ''
 }
 
 export default MaskedInput
