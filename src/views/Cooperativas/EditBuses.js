@@ -115,7 +115,7 @@ class MainView extends React.Component {
                                     value={this.props.placa}
                                     mask={
                                         //'ddd-cccc'
-                                        [DIGIT, DIGIT, DIGIT, '-', LETTER, LETTER, LETTER, LETTER]
+                                        [LETTER, LETTER, LETTER, '-', DIGIT, DIGIT, DIGIT, DIGIT]
                                     }
                                 />
                             )
