@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import FormGroup from './FormGroup'
 
+const isNotSpecialKey = /^[a-zA-Z0-9\s]+$/
+
 const ModeNumber = {
     decimal : (value) => parseFloat(value) ? true : false,
     integer : (value) => Number.isInteger(value),
@@ -104,7 +106,7 @@ export class Input extends React.Component {
             }
         }
         if(mask){
-            if(e.keyCode !== 8){
+            if(e.keyCode !== 8 && !isNotSpecialKey.test(e.keyCode)){
                 preventMask(e.target.value + e.key)
                 e.preventDefault()
             }
