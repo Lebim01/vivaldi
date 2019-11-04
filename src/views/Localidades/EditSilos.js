@@ -46,7 +46,7 @@ class MainView extends React.Component {
     }
 
     getAndenes = async ()  => {
-        const results = await getResults(`${baseurl}/anden/?localidad=${this.props.localidad}`)
+        const results = await getResults(`${baseurl}/anden/?localidad=${this.props.localidad}`, true)
         let options = [...results.map((r) => { return { value : r.id, label : r.descripcion } })]
         this.setState({
             andenes : options
