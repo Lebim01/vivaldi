@@ -113,6 +113,7 @@ class MainView extends React.Component {
                                 <MaskedInput 
                                     onChange={this.onChange('placa')} 
                                     value={this.props.placa}
+                                    upper={true}
                                     mask={
                                         //'ddd-cccc'
                                         [LETTER, LETTER, LETTER, '-', DIGIT, DIGIT, DIGIT, DIGIT]

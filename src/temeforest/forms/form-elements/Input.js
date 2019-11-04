@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import FormGroup from './FormGroup'
 
-const isNotSpecialKey = /^[a-zA-Z0-9\s]+$/
+const isNotSpecialKey = /^[a-zA-Z0-9\s]$/gm
 
 const ModeNumber = {
     decimal : (value) => parseFloat(value) ? true : false,
@@ -106,9 +106,13 @@ export class Input extends React.Component {
             }
         }
         if(mask){
-            
-            if(e.keyCode !== 8 || !isNotSpecialKey.test(e.key)){
+            // solo enviar al estado los caracteres validos
+            if(isNotSpecialKey.test(e.key)){
                 preventMask(e.target.value + e.key)
+                e.preventDefault()
+            }
+            // permite borrar en el input
+            else if(e.keyCode !== 8){
                 e.preventDefault()
             }
         }
@@ -116,6 +120,13 @@ export class Input extends React.Component {
         if(onKeyDown){
             onKeyDown(e)
         }
+    }
+
+    onKeyUp = (e) => {
+        if(this.props.upper)
+            e.target.value = ("" + e.target.value).toUpperCase()
+        if(this.props.lower)
+            e.target.value = ("" + e.target.value).toLowerCase()
     }
 
     render(){
@@ -130,6 +141,7 @@ export class Input extends React.Component {
                 className={`form-control ${className} ${error ?'is-invalid':''}`} 
                 value={_value} 
                 onChange={this.onChange}
+                onKeyUp={this.onKeyUp}
                 {...otherProps} 
                 ref={register} 
             />
@@ -143,7 +155,9 @@ Input.propTypes = {
         'integer',
         'positive_decimal',
         'positive_integer'
-    ])
+    ]),
+    upper : PropTypes.bool,
+    lower : PropTypes.bool,
 }
 
 Input.defaultProps = {
@@ -153,6 +167,8 @@ Input.defaultProps = {
     error : false,
     value : '',
     modeNumber : 'decimal',
+    upper : false,
+    lower : false
 }
 
 export default FormInput
