@@ -106,7 +106,8 @@ export class Input extends React.Component {
             }
         }
         if(mask){
-            if(e.keyCode !== 8 && !isNotSpecialKey.test(e.keyCode)){
+            
+            if(e.keyCode !== 8 || !isNotSpecialKey.test(e.key)){
                 preventMask(e.target.value + e.key)
                 e.preventDefault()
             }
