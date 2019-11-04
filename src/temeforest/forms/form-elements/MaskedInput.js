@@ -53,6 +53,10 @@ function MaskedInput ({ mask, onChange, ...props }) {
                 break
             }
         }
+
+        if(index-1 === 0)
+            return ''
+
         return _value
     }
     
