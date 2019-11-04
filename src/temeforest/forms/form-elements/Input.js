@@ -107,14 +107,10 @@ export class Input extends React.Component {
         }
         if(mask){
             // solo enviar al estado los caracteres validos
-            if(isNotSpecialKey.test(e.key)){
-                preventMask(e.target.value + e.key)
-                e.preventDefault()
+            if(e.keyCode === 8 || isNotSpecialKey.test(e.key)){
+                preventMask(e.target.value + e.key, e.keyCode)
             }
-            // permite borrar en el input
-            else if(e.keyCode !== 8){
-                e.preventDefault()
-            }
+            e.preventDefault()
         }
 
         if(onKeyDown){

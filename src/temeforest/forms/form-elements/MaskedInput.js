@@ -8,30 +8,52 @@ export const REGEX = {
 
 function MaskedInput ({ mask, onChange, ...props }) {
 
-    const getHelperText = (value, mask) => {
-        for(let index in value){
-            let char = value[index]
-            let maskChar = mask[index]
-    
-        }
-    }
+    const preventMask = (newValue, keyCode) => {
 
-    const preventMask = (newValue) => {
+        if(keyCode === 8){
+            const { value } = props
+            changeValue(removeLastString(value, mask))
+            return true
+        }
+
         // process value
         let validValue = getValue(newValue, mask)
         // trigger only with has changes
         let result = props.value !== validValue
 
         if(result){
-            onChange({
-                target : {
-                    type : 'text',
-                    value : validValue
-                }
-            })
+            changeValue(validValue)
         }
 
         return result
+    }
+
+    const changeValue = (value) => {
+        onChange({
+            target : {
+                type : 'text',
+                value : value
+            }
+        })
+    }
+
+    /**
+     * Va removiendo el ultimo caracter hasta eliminar la ultima regexp
+     */
+    const removeLastString = (value, mask) => {
+        let index = value.length
+        let _value = value
+
+        for(let i = index-1; i > 0; i--){
+            let maskCondition = mask[i]
+
+            _value = _value.substring(0, _value.length - 1);
+
+            if(maskCondition instanceof RegExp){
+                break
+            }
+        }
+        return _value
     }
     
     const getValue = (value, mask) => {
