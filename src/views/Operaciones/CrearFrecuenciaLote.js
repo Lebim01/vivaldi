@@ -31,6 +31,11 @@ class MainView extends React.Component {
             valueName: 'id'
         }
     }
+    optionsLocalidad = {
+        url: `${baseurl}/localidad/`,
+        labelName: 'nombre',
+        valueName : 'id'
+    }
     optionsDestinos = {
         url : `${baseurl}/ciudad/`,
         labelName: 'nombre',
@@ -94,6 +99,12 @@ class MainView extends React.Component {
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
+                        <Label className="col-sm-3">Localidad</Label>
+                        <div className="col-sm-5">
+                            <Select onChange={this.onChange('localidad')} value={this.props.localidad} asyncOptions={this.optionsLocalidad}/>
+                        </div>
+                    </FormGroup>
+                    <FormGroup className="row">
                         <Label className="col-sm-3">Cooperativa</Label>
                         <div className="col-sm-5">
                             <Select onChange={this.onChange('cooperativa')} defaultOption="Todos" value={this.props.cooperativa} asyncOptions={this.optionsCooperativa} />
@@ -105,12 +116,6 @@ class MainView extends React.Component {
                             <Select onChange={this.onChange('ruta')} value={this.props.ruta} asyncOptions={this.optionsRutas({ cooperativa: this.props.cooperativa })} id="cmb_ruta" />
                         </div>
                     </FormGroup>
-                    {/*<FormGroup className="row">
-                        <Label className="col-sm-3">Destino</Label>
-                        <div className="col-sm-5">
-                            <Input readOnly value={this.props.destino} />
-                        </div>
-                    </FormGroup>*/}
                     <FormGroup className="row">
                         <Label className="col-sm-3">Tipo</Label>
                         <div className="col-sm-5">
