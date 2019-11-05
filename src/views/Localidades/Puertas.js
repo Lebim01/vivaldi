@@ -17,7 +17,6 @@ class Puertas extends React.Component {
 
                                         searchable={true}
                                         searchPlaceholder="Nombre, Localidad, Nivel"
-                                        searchFields={['nombre', 'localidad_nivel_nombre', 'localidad_nombre' ]}
 
                                         fieldNames={['Nombre', 'Localidad','Nivel']}
                                         fields={['nombre', 'localidad_nivel_nombre', 'localidad_nombre']}

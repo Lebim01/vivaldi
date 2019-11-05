@@ -15,9 +15,8 @@ function Andenes(props) {
                                     key_permission="anden"
 
                                     searchable={true}
-                                    searchPlaceholder="Descripcion, silos, puertas de acceso"
+                                    searchPlaceholder="Descripción"
 
-                                    searchFields={['descripcion', 'silos_nombre', 'puertas_nombre', 'localidad_nombre','localidad_nivel_nombre']}
                                     fieldNames={['Descripcion', 'Silos', 'Puertas de acceso', 'Localidad', 'Nivel']}
                                     fields={['descripcion', 'silos_nombre', 'puertas_nombre', 'localidad_nombre','localidad_nivel_nombre']}
 

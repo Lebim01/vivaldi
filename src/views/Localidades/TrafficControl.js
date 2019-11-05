@@ -17,7 +17,6 @@ class TrafficControl extends React.Component {
 
                                         searchable={true}
                                         searchPlaceholder="Descripción, IP, Localidad"
-                                        searchFields={['descripcion', 'ip', 'localidad_nombre']}
 
                                         fieldNames={['Descripción', 'Dirección IP', 'Localidad']}
                                         fields={['descripcion', 'ip', 'localidad_nombre']}

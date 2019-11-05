@@ -27,7 +27,6 @@ class PuntoVenta extends React.Component {
 
                                     searchable={true}
                                     searchPlaceholder="Descripción, Cooperativa, Localidad"
-                                    searchFields={['descripcion', '', 'localidad_nombre']}
 
                                     fieldNames={['Nombre', 'Cooperativa', 'Localidad']}
                                     fields={['descripcion', this.renderCooperativas, 'localidad_nombre']}

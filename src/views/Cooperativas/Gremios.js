@@ -17,7 +17,6 @@ class Gremios extends React.Component {
 
                                         searchable={true}
                                         searchPlaceholder="Nombre, Descripcion"
-                                        searchFields={['nombre', 'descripcion']}
 
                                         fieldNames={['Nombre', 'Descripción']}
                                         fields={['nombre', 'descripcion']}

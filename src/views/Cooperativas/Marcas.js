@@ -15,7 +15,6 @@ class Provincias extends React.Component {
 
                                         searchable={true}
                                         searchPlaceholder="Nombre"
-                                        searchFields={['nombre']}
 
                                         fieldNames={['Nombre']}
                                         fields={['nombre']}

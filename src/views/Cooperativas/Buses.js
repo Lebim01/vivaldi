@@ -17,7 +17,6 @@ class Buses extends React.Component {
 
                                         searchable={true}
                                         searchPlaceholder="Cooperativa, Placa, Disco"
-                                        searchFields={['cooperativa_nombre', 'placa', 'disco']}
 
                                         fieldNames={['Cooperativa', 'Placa', 'Disco']}
                                         fields={['cooperativa_nombre', 'placa', 'disco']}

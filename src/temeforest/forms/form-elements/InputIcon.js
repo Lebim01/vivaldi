@@ -1,29 +1,11 @@
 import React from 'react'
 import InputGroup from './InputGroup'
+import { Input } from './Input'
 
 class InputIcon extends React.Component {
 
-    componentDidMount(){
-        this.setValue()
-    }
-    componentDidUpdate(prevProps){
-        if(this.props.setValue){
-            if(prevProps.value !== this.props.value){
-                this.setValue()
-            }
-        }
-    }
-
-    setValue = () => {
-        if(this.props.setValue){
-            this.props.setValue(this.props.name, this.props.value)
-        }
-    }
-
     render(){
-        const { type, icon, className, value, setValue, ...otherProps } = this.props
-
-        const _value = setValue ? null : value || ''
+        const { icon, ...otherProps } = this.props
 
         return (
             <InputGroup>
@@ -32,14 +14,10 @@ class InputIcon extends React.Component {
                         {icon}
                     </span>
                 </div>
-                <input type={type} className={`form-control ${className}`} value={_value} {...otherProps}/>
+                <Input {...otherProps}/>
             </InputGroup>
         )
     }
-}
-
-InputIcon.defaultProps = {
-    type : 'text'
 }
 
 export default InputIcon

@@ -17,7 +17,6 @@ class Cooperativas extends React.Component {
 
                                         searchable={true}
                                         searchPlaceholder="Nombre, Gremio"
-                                        searchFields={['nombre', 'gremio_nombre']}
 
                                         fieldNames={['Nombre', 'Gremio']}
                                         fields={['nombre', 'gremio_nombre']}

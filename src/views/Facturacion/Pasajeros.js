@@ -14,7 +14,6 @@ class Pasajeros extends React.Component {
 
                                     searchable={true}
                                     searchPlaceholder="Identificación, Nombre"
-                                    searchFields={['identificacion', 'nombre']}
 
                                     fieldNames={['Identificación', 'Nombre']}
                                     fields={['identificacion', 'nombre']}

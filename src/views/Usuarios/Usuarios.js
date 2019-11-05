@@ -14,8 +14,7 @@ class Usuarios extends React.Component {
                                     title="Listado de Usuarios"
 
                                     searchable={true}
-                                    searchPlaceholder="Usuario, Nombre, Cooperativa"
-                                    searchFields={['username', 'first_name', 'last_name']}
+                                    searchPlaceholder="Usuario, Nombre"
 
                                     fieldNames={['Usuario', 'Nombre', 'Cooperativas']}
                                     fields={['username', 'first_name', (row) => 

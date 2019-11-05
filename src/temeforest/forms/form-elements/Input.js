@@ -126,7 +126,7 @@ export class Input extends React.Component {
     }
 
     render(){
-        const { type, error, className, value, onChange, keyDown, modeNumber, register, setValue, disableOnChange, disableValue, tooltip, ...otherProps } = this.props
+        const { type, error, className, value, onChange, keyDown, modeNumber, register, setValue, disableOnChange, disableValue, tooltip, delay, ...otherProps } = this.props
 
         const _value = setValue ? undefined : value || ''
 
@@ -154,6 +154,7 @@ Input.propTypes = {
     ]),
     upper : PropTypes.bool,
     lower : PropTypes.bool,
+    delay : PropTypes.number
 }
 
 Input.defaultProps = {
@@ -164,7 +165,8 @@ Input.defaultProps = {
     value : '',
     modeNumber : 'decimal',
     upper : false,
-    lower : false
+    lower : false,
+    delay : 0
 }
 
 export default FormInput

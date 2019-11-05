@@ -14,7 +14,6 @@ class DistribucionAsientos extends React.Component {
 
                                     searchable={true}
                                     searchPlaceholder="Nombre"
-                                    searchFields={['nombre']}
 
                                     fieldNames={['Nombre', 'Asientos']}
                                     fields={['nombre', 'asientos']}

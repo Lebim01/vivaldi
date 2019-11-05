@@ -17,7 +17,6 @@ class Conductores extends React.Component {
 
                                         searchable={true}
                                         searchPlaceholder="Cooperativa, Nombre"
-                                        searchFields={['cooperativa_nombre', 'nombre']}
 
                                         fieldNames={['Cooperativa', 'Nombre']}
                                         fields={['cooperativa_nombre', 'nombre']}

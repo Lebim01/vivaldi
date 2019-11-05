@@ -2,8 +2,9 @@ import React from 'react'
 import { Col, Row } from 'reactstrap'
 import { CardTitle, InputIcon, Button, Permission } from 'temeforest'
 import { checkPermission } from 'temeforest/base/Permission'
-import axios from 'axios'
 import { baseurl, objectToUrl } from 'utils/url'
+
+import axios from 'axios'
 
 import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
@@ -13,6 +14,7 @@ const RowsPerPage = 25
 // numero limite de paginas visibles en el footer
 const NumVisibleFooterPages = 5
 
+const DELAY_SEARCH_INPUT = 500
 
 class RecordRow extends React.Component {
 
@@ -88,15 +90,15 @@ class ListPage extends React.Component {
     }
 
     loadList = async (parameters = {}) => {
-        if(this.props.endpoint){
-            try {
-                this.setState({
-                    loading: true
-                })
-                const { currentPage } = this.state
-                const { data } = await axios.get(`${baseurl}/${this.props.endpoint}/${objectToUrl({ ...parameters, page : currentPage })}`, { ...this.props.config })
+        if(this.props.endpoint){        
+            this.setState({
+                loading: true
+            })
+            const { currentPage, search } = this.state
 
-                let _results = [], 
+            try {
+                const { data } = await axios.get(`${baseurl}/${this.props.endpoint}/${objectToUrl({ ...parameters, searchtext: search, page : currentPage })}`, { ...this.props.config })
+                    let _results = [], 
                     _count = 0, 
                     _next = null, 
                     _previous = null,
@@ -153,18 +155,15 @@ class ListPage extends React.Component {
         }
     }
 
-    onFilterChange = name => (e) => {
-        const { searchFields } = this.props
+    onFilterChange = (e) => {
+        clearTimeout(this.timer)
+        this.timer = setTimeout(this.loadList, DELAY_SEARCH_INPUT)
 
         let value = e.target.value
-        let newState = {}
-
-        let compare = (v1, v2) => (v1 || '').toUpperCase().includes((v2 || '').toUpperCase())
-        newState.filtered = this.state.results.filter((record) => searchFields.some((field) => compare(record[field], value)))
 
         this.setState({
-            search : value,
-            ...newState
+            currentPage : 1,
+            search : value
         })
     }
 
@@ -224,7 +223,7 @@ class ListPage extends React.Component {
                 { searchable &&
                     <Row>
                         <Col xs="12" md="6">
-                            <InputIcon placeholder={`Buscar... ${searchPlaceholder}`} onChange={this.onFilterChange()} icon={<i className="fa fa-search"></i>} value={search} />
+                            <InputIcon placeholder={`Buscar... ${searchPlaceholder}`} onChange={this.onFilterChange} icon={<i className="fa fa-search"></i>} value={search} delay={1000} />
                         </Col>
                         <Permission key_permission={`add_${this.props.key_permission}`}>
                             <Col xs="12" md="6">
