@@ -355,7 +355,7 @@ class MainView extends React.Component {
                             <div className="col-sm-2">
                                 <div className="custom-control custom-checkbox">
                                     <input type="checkbox" className="custom-control-input" id="omitir_pasajeros" name="omitir_pasajeros" checked={this.props.omitir_pasajeros} onChange={this.onChange('omitir_pasajeros')} />
-                                    <Label onlyClassName="custom-control-label" htmlFor="omitir_pasajeros">Anulación Boleto</Label>
+                                    <Label onlyClassName="custom-control-label" htmlFor="omitir_pasajeros">Omitir Pasajeros</Label>
                                 </div>
                             </div>
                         </FormGroup>
@@ -364,7 +364,7 @@ class MainView extends React.Component {
                             <div className="col-sm-2">
                                 <div className="custom-control custom-checkbox">
                                     <input type="checkbox" className="custom-control-input" id="puede_anular" name="puede_anular" checked={this.props.puede_anular} onChange={this.onChange('puede_anular')} />
-                                    <Label onlyClassName="custom-control-label" htmlFor="puede_anular">Omitir Pasajeros</Label>
+                                    <Label onlyClassName="custom-control-label" htmlFor="puede_anular">Anulación Boleto</Label>
                                 </div>
                             </div>
                         </FormGroup>
