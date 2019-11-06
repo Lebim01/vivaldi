@@ -78,8 +78,8 @@ class Viajes extends React.Component {
                                             <div className="col-sm-8">
                                                 <Select 
                                                     {
-                                                        ...this.props.cooperativa
-                                                            ? { asyncOptions : this.optionsBus({ cooperativa : this.props.cooperativa }) }
+                                                        ...cooperativa
+                                                            ? { asyncOptions : this.optionsBus({ cooperativa }) }
                                                             : { options : [ { label : 'Seleccione una cooperativa' } ] }
                                                     }
                                                     onChange={this.onChange('bus')} 
