@@ -2,16 +2,20 @@
 import React from 'react'
 import FormGroup from './FormGroup'
 import { getResults } from 'utils/url';
-import housecall from 'housecall'
+import axios from 'axios'
 
 import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
 
-let queue = housecall({ concurrency: 5, cooldown: 5000 });
+const CancelToken = axios.CancelToken;
 
 class Select extends React.Component {
 
-    state = { _options : [], loading: false }
+    state = { 
+        _options : [], 
+        loading: false,
+        cancelRequest : () => {}
+    }
 
     componentDidMount(){
         if(this.props.asyncOptions){
@@ -61,7 +65,7 @@ class Select extends React.Component {
         
     }
 
-    loadListAsync = (props = null) => {
+    loadListAsync = async (props = null) => {
         const _props = props !== null ? props : this.props
         const { url, valueName, labelName } = typeof _props.asyncOptions === 'function' ? _props.asyncOptions() : _props.asyncOptions
 
@@ -69,24 +73,32 @@ class Select extends React.Component {
             loading: true
         })
 
-        queue.push(async () => {
-            // get results
-            const _results = await getResults(url, true)
-
-            // fill options with results
-            let _options = [{value: '', label: this.props.defaultOption || 'Seleccione'}, ..._results.map((record) => {
-                return {
-                    value: record[valueName],
-                    label: typeof labelName === 'function' ? labelName(record) : record[labelName],
-                    ...this.getOptionProps(record)
-                }
-            })]
-
-            this.setState({
-                _options,
-                loading: false
-            }, this.setValue)
+        // cancel
+        if(this.state.cancelRequest)
+            this.state.cancelRequest('Operation canceled by the user.');
+        // get results
+        const _results = await getResults(url, true, {
+            cancelToken: new CancelToken((c) => {
+                // An executor function receives a cancel function as a parameter
+                this.setState({
+                    cancelRequest : c
+                })
+            })
         })
+
+        // fill options with results
+        let _options = [{value: '', label: this.props.defaultOption || 'Seleccione'}, ..._results.map((record) => {
+            return {
+                value: record[valueName],
+                label: typeof labelName === 'function' ? labelName(record) : record[labelName],
+                ...this.getOptionProps(record)
+            }
+        })]
+
+        this.setState({
+            _options,
+            loading: false
+        }, this.setValue)
     }
 
     render(){

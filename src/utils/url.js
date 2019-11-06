@@ -24,7 +24,7 @@ function objectToUrl(_obj){
     return `?${Object.keys(_obj).filter(key => _obj[key] !== undefined && _obj[key] !== null && _obj[key] !== '').map((key) => `${key}=${_obj[key]}`).join('&')}`
 }
 
-async function getResults(url, no_page = false){
+async function getResults(url, no_page = false, headers = {}){
     try {
         let _url = new URL(url)
         if(no_page){
@@ -35,7 +35,7 @@ async function getResults(url, no_page = false){
             }
         }
 
-        const { data } = await axios.get(_url.toString())
+        const { data } = await axios.get(_url.toString(), headers)
         if(Array.isArray(data))
             return data
         else if(data.results)
