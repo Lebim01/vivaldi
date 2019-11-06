@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, ListPage, Select, Label, FormGroup, Card, CardBody, CardTitle, Input } from 'temeforest'
-import { baseurl } from 'utils/url'
+import { baseurl, objectToUrl } from 'utils/url'
 import moment from 'moment'
 
 class Viajes extends React.Component {
@@ -14,11 +14,11 @@ class Viajes extends React.Component {
         labelName: 'nombre',
         valueName: 'id'
     }
-    optionsBus = {
-        url : `${baseurl}/bus/`,
-        labelName: 'nombre',
+    optionsBus = (obj) => ({
+        url : `${baseurl}/bus/${objectToUrl(obj)}`,
+        labelName: (row) => `${row.disco} / ${row.placa}`,
         valueName: 'id'
-    }
+    })
     optionsLocalidad = {
         url : `${baseurl}/localidad/`,
         labelName: 'nombre',
@@ -76,7 +76,15 @@ class Viajes extends React.Component {
                                         <FormGroup className="row">
                                             <Label className="col-sm-3">Bus</Label>
                                             <div className="col-sm-8">
-                                                <Select asyncOptions={this.optionsBus} onChange={this.onChange('bus')} value={bus}/>
+                                                <Select 
+                                                    {
+                                                        ...this.props.cooperativa
+                                                            ? { asyncOptions : this.optionsBus({ cooperativa : this.props.cooperativa }) }
+                                                            : { options : [ { label : 'Seleccione una cooperativa' } ] }
+                                                    }
+                                                    onChange={this.onChange('bus')} 
+                                                    value={bus}
+                                                />
                                             </div>
                                         </FormGroup>
                                         <FormGroup className="row">
