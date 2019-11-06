@@ -1,6 +1,5 @@
 import React from 'react'
 import { Button, FormGroup, Input, Label, Select, FormElementValidate, FormValidate, EditPage } from 'temeforest'
-import { TabContent, TabPane } from 'reactstrap'
 import { baseurl, getParameter } from 'utils/url'
 import { generateHexadecimal } from 'utils/string'
 import Swal from 'sweetalert2'
@@ -108,7 +107,11 @@ class MainView extends React.Component {
                     break
                 }
             }
-        }else{
+        }
+        else if(data.index >= 0){
+            puntoventa_cooperativas[data.index] = data
+        }
+        else{
             puntoventa_cooperativas.push(data)
         }
         this.props.onChange('puntoventa_cooperativas', puntoventa_cooperativas)
@@ -128,10 +131,11 @@ class MainView extends React.Component {
         }
     }
 
-    editCooperativa = (row) => {
+    editCooperativa = (row, i) => {
         let modal = {
             show : true,
-            ...row
+            ...row,
+            index : i,
         }
         this.setState({
             modal,
@@ -313,7 +317,7 @@ class MainView extends React.Component {
                                                 <RecordRow 
                                                     {...r} 
                                                     key={i}
-                                                    onDoubleClick={() => this.editCooperativa(r)} 
+                                                    onDoubleClick={() => this.editCooperativa(r, i)} 
                                                     delete={() => this.deleteCooperativa(i)} 
                                                 />
                                             ) }

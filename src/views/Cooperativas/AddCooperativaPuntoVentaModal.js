@@ -16,13 +16,16 @@ class AddCooperativaPuntoVentaModal extends React.Component {
         valueName: 'id'
     }
 
-    componentWillReceiveProps(props){
-        const { id, cooperativa, cooperativa_nombre, punto_emision_tasa, secuencia_tasa, punto_emision_boleto, secuencia_boleto, punto_emision_nota_credito, secuencia_nota_credito, establecimiento } = props
-        this.setState({
-            data : {
-                id, cooperativa, cooperativa_nombre, punto_emision_tasa, secuencia_tasa, punto_emision_boleto, secuencia_boleto, punto_emision_nota_credito, secuencia_nota_credito, establecimiento
-            }
-        })
+    componentDidUpdate(prevProps){
+        if(prevProps.show !== this.props.show && this.props.show){
+            console.log(this.props)
+            const { id, cooperativa, cooperativa_nombre, punto_emision_tasa, secuencia_tasa, punto_emision_boleto, secuencia_boleto, punto_emision_nota_credito, secuencia_nota_credito, establecimiento, index } = this.props
+            this.setState({
+                data : {
+                    id, cooperativa, cooperativa_nombre, punto_emision_tasa, secuencia_tasa, punto_emision_boleto, secuencia_boleto, punto_emision_nota_credito, secuencia_nota_credito, establecimiento, index
+                }
+            })
+        }
     }
 
     toggle = () => {
