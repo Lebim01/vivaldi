@@ -2,9 +2,12 @@
 import React from 'react'
 import FormGroup from './FormGroup'
 import { getResults } from 'utils/url';
+import housecall from 'housecall'
 
 import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
+
+let queue = housecall({ concurrency: 5, cooldown: 5000 });
 
 class Select extends React.Component {
 
@@ -58,7 +61,7 @@ class Select extends React.Component {
         
     }
 
-    loadListAsync = async (props = null) => {
+    loadListAsync = (props = null) => {
         const _props = props !== null ? props : this.props
         const { url, valueName, labelName } = typeof _props.asyncOptions === 'function' ? _props.asyncOptions() : _props.asyncOptions
 
@@ -66,21 +69,24 @@ class Select extends React.Component {
             loading: true
         })
 
-        // get results
-        const _results = await getResults(url, true)
-        // fill options with results
-        let _options = [{value: '', label: this.props.defaultOption || 'Seleccione'}, ..._results.map((record) => {
-            return {
-                value: record[valueName],
-                label: typeof labelName === 'function' ? labelName(record) : record[labelName],
-                ...this.getOptionProps(record)
-            }
-        })]
+        queue.push(async () => {
+            // get results
+            const _results = await getResults(url, true)
 
-        this.setState({
-            _options,
-            loading: false
-        }, this.setValue)
+            // fill options with results
+            let _options = [{value: '', label: this.props.defaultOption || 'Seleccione'}, ..._results.map((record) => {
+                return {
+                    value: record[valueName],
+                    label: typeof labelName === 'function' ? labelName(record) : record[labelName],
+                    ...this.getOptionProps(record)
+                }
+            })]
+
+            this.setState({
+                _options,
+                loading: false
+            }, this.setValue)
+        })
     }
 
     render(){
