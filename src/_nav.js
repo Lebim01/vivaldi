@@ -115,6 +115,7 @@ export default {
         {
           name: 'Viajes Planificados',
           url: '/#/operaciones/viajes-planificados',
+          permission : 'view_viajes_planificados'
         },
         {
           name: 'Viajes Planificados Silo',
@@ -204,7 +205,8 @@ export default {
         },
         {
           name : 'Bandeja Tasas Cooperativa',
-          url : '/#/recaudaciones/bandeja-tasas-cooperativa'
+          url : '/#/recaudaciones/bandeja-tasas-cooperativa',
+          permission : 'view_solicitudes_aprobadas'
         }
       ]
     },
@@ -214,15 +216,18 @@ export default {
       children : [
         {
           name : 'Panel de recaudación',
-          url : '/#/reportes/panel'
+          url : '/#/reportes/panel',
+          permission : 'view_panel_recaudacion'
         },
         {
           name : 'Clientes frecuentes',
-          url : '/#/reportes/clientes-frecuentes'
+          url : '/#/reportes/clientes-frecuentes',
+          permission : 'view_clientes_frecuentes'
         },
         {
           name : 'Tasas Generadas y vendidas',
-          url : '/#/reportes/tasas-contingencia-general'
+          url : '/#/reportes/tasas-contingencia-general',
+          permission : 'view_reporte_contigencia_general'
         },
         /*{
           name : 'Vendidos por cooperativa',
@@ -230,19 +235,23 @@ export default {
         },*/
         {
           name : 'Boletos y tasas',
-          url : '/#/reportes/reporte-boletos-tasas'
+          url : '/#/reportes/reporte-boletos-tasas',
+          permission : 'view_boletos_tasas'
         },
         {
           name : 'Tasas emitidas vs usadas por cooperativa',
-          url : '/#/reportes/tasas-emitidas-vs-usadas'
+          url : '/#/reportes/tasas-emitidas-vs-usadas',
+          permission : 'view_tasas_emitidas_usadas'
         },
         {
           name : 'Tasas usadas por viaje',
-          url : '/#/reportes/tasas-usadas-por-viaje'
+          url : '/#/reportes/tasas-usadas-por-viaje',
+          permission : 'view_tasas_viaje'
         },
         {
           name : 'Salida de viajes',
-          url : '/#/reportes/salida-de-viajes'
+          url : '/#/reportes/salida-de-viajes',
+          permission : 'view_salida_viajes'
         },
         /*{
           name : 'Pasajeros por viaje',
@@ -250,15 +259,18 @@ export default {
         },*/
         {
           name : 'Viajes por bus',
-          url : '/#/reportes/viajes-por-bus'
+          url : '/#/reportes/viajes-por-bus',
+          permission : 'view_viajes_bus'
         },
         {
           name : 'Viajes por fecha',
-          url : '/#/reportes/viajes-por-fecha'
+          url : '/#/reportes/viajes-por-fecha',
+          permission : 'view_viajes_fecha'
         },
         {
           name : 'Kiosko',
-          url : '/#/kiosko'
+          url : '/#/kiosko',
+          permission : 'view_kiosko'
         }
       ]
     },

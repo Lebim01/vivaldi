@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { Card, CardBody, CardTitle } from 'temeforest'
+import { Card, CardBody, CardTitle, Permission } from 'temeforest'
 import { baseurl } from 'utils/url'
 import store from 'store/auth'
 
@@ -58,21 +58,23 @@ class Kiosko extends React.Component {
         const { cooperativa, localidad, cooperativa_nombre, localidad_nombre } = this.state
 
         return (
-            <div className="animated fadeIn">
-                <div className="row">
-                    <div className="col-sm-12">
-                        <Card>
-                            <CardBody>
-                                <CardTitle>Kiosko</CardTitle>
+            <Permission key_permission="view_kiosko" mode="redirect">
+                <div className="animated fadeIn">
+                    <div className="row">
+                        <div className="col-sm-12">
+                            <Card>
+                                <CardBody>
+                                    <CardTitle>Kiosko</CardTitle>
 
-                                { !localidad && <ListadoLocalidad localidades={this.state.localidades} select={this.selectLocalidad} /> }
-                                { localidad && !cooperativa && <ListadoCooperativas localidad={localidad} localidad_nombre={localidad_nombre} select={this.selectCooperativa} back={() => this.selectLocalidad('')} /> }
-                                { localidad && cooperativa && <ReportePasajeros cooperativa={cooperativa} cooperativa_nombre={cooperativa_nombre} localidad={localidad} back={() => this.selectCooperativa('')} /> }
-                            </CardBody>
-                        </Card>
+                                    { !localidad && <ListadoLocalidad localidades={this.state.localidades} select={this.selectLocalidad} /> }
+                                    { localidad && !cooperativa && <ListadoCooperativas localidad={localidad} localidad_nombre={localidad_nombre} select={this.selectCooperativa} back={() => this.selectLocalidad('')} /> }
+                                    { localidad && cooperativa && <ReportePasajeros cooperativa={cooperativa} cooperativa_nombre={cooperativa_nombre} localidad={localidad} back={() => this.selectCooperativa('')} /> }
+                                </CardBody>
+                            </Card>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </Permission>
         )
     }
 }

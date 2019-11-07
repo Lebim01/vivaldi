@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Select, FormGroup, Label, Input, BarChart, PieChart, Table, Button, FormValidate } from 'temeforest'
+import { Card, CardBody, CardTitle, Select, FormGroup, Label, Input, BarChart, PieChart, Table, Button, FormValidate, Permission } from 'temeforest'
 import { config } from 'config'
 import { objectToUrl } from 'utils/url'
 import axios from 'axios'
@@ -173,23 +173,25 @@ class PanelRecaudaciones extends React.Component {
 
     render(){
         return (
-            <div className="animated fadeIn">
-                <Row>
-                    <Col xs="12" md="12">
-                        <Card>
-                            <CardBody>
-                                <CardTitle>Panel de Recaudaciones</CardTitle>
-                                <FormularioFiltros {...this.state.filtros} onChange={this.onChange} />
-                                <GraficasBarras {...this.state.horario} />
-                                <br />
-                                <GraficasPie {...this.state.conteo} />
-                                <br />
-                                <Tablas {...this.state.top} />
-                            </CardBody>
-                        </Card>
-                    </Col>
-                </Row>
-            </div>
+            <Permission key_permission="view_panel_recaudacion" mode="redirect">
+                <div className="animated fadeIn">
+                    <Row>
+                        <Col xs="12" md="12">
+                            <Card>
+                                <CardBody>
+                                    <CardTitle>Panel de Recaudaciones</CardTitle>
+                                    <FormularioFiltros {...this.state.filtros} onChange={this.onChange} />
+                                    <GraficasBarras {...this.state.horario} />
+                                    <br />
+                                    <GraficasPie {...this.state.conteo} />
+                                    <br />
+                                    <Tablas {...this.state.top} />
+                                </CardBody>
+                            </Card>
+                        </Col>
+                    </Row>
+                </div>
+            </Permission>
         )
     }
 }
