@@ -37,7 +37,7 @@ class FormularioFiltros extends React.Component {
         return (
             <FormValidate className="form-horizontal">
                 <Row>
-                    <Col xs="4">
+                    <Col md="4" xs="6">
                         <FormGroup className="row">
                             <Label className="col-sm-4">Cooperativa</Label>
                             <div className="col-sm-8">
@@ -45,7 +45,7 @@ class FormularioFiltros extends React.Component {
                             </div>
                         </FormGroup>
                     </Col>
-                    <Col xs="4">
+                    <Col md="4" xs="6">
                         <FormGroup className="row">
                             <Label className="col-sm-4">Fecha inicio</Label>
                             <div className="col-sm-8">
@@ -53,7 +53,7 @@ class FormularioFiltros extends React.Component {
                             </div>
                         </FormGroup>
                     </Col>
-                    <Col xs="4">
+                    <Col md="4" xs="6">
                         <FormGroup className="row">
                             <Label className="col-sm-4">Forma pago</Label>
                             <div className="col-sm-8">
@@ -61,7 +61,7 @@ class FormularioFiltros extends React.Component {
                             </div>
                         </FormGroup>
                     </Col>
-                    <Col xs="4">
+                    <Col md="4" xs="6">
                         <FormGroup className="row">
                             <Label className="col-sm-4">Localidad</Label>
                             <div className="col-sm-8">
@@ -69,7 +69,7 @@ class FormularioFiltros extends React.Component {
                             </div>
                         </FormGroup>
                     </Col>
-                    <Col xs="4">
+                    <Col md="4" xs="6">
                         <FormGroup className="row">
                             <Label className="col-sm-4">Fecha fin</Label>
                             <div className="col-sm-8">
@@ -77,7 +77,7 @@ class FormularioFiltros extends React.Component {
                             </div>
                         </FormGroup>
                     </Col>
-                    <Col xs="4">
+                    <Col md="4" xs="6">
                         <Button onClick={this.onChange('refresh')}>Actualizar</Button>
                     </Col>
                 </Row>
@@ -91,13 +91,13 @@ class GraficasBarras extends React.Component {
         const { boleto, tasa, viaje } = this.props
         return (
             <Row>
-                <Col xs="4">
+                <Col md="4" xs="12">
                     <BarChart data={viaje} nameBars={['cantidad']} yAxis={{ label: {value:'Viajes',angle:-90, position:'insideLeft'} }} />
                 </Col>
-                <Col xs="4">
+                <Col md="4" xs="12">
                     <BarChart data={boleto} nameBars={['cantidad']} yAxis={{ label: {value:'Boletos',angle:-90, position:'insideLeft'} }} />
                 </Col>
-                <Col xs="4">
+                <Col md="4" xs="12">
                     <BarChart data={tasa} nameBars={['cantidad']} yAxis={{ label: {value:'Tasas',angle:-90, position:'insideLeft'} }} />
                 </Col>
             </Row>
@@ -110,13 +110,13 @@ class Tablas extends React.Component {
         const { boletos, tasas, viajes } = this.props
         return (
             <Row>
-                <Col xs="4">
+                <Col md="4" xs="12">
                     <Table data={viajes} columnsNames={['name', 'value']} columnsTitles={['Cooperativa', 'Viajes']} />
                 </Col>
-                <Col xs="4">
+                <Col md="4" xs="12">
                     <Table data={boletos} columnsNames={['name', 'value']} columnsTitles={['Cooperativa', 'Boletos']} />
                 </Col>
-                <Col xs="4">
+                <Col md="4" xs="12">
                     <Table data={tasas} columnsNames={['name', 'value']} columnsTitles={['Cooperativa', 'Tasas']} />
                 </Col>
             </Row>
