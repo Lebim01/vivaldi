@@ -4,7 +4,6 @@ import { baseurl, objectToUrl } from 'utils/url'
 import moment from 'moment'
 
 class Viajes extends React.Component {
-
     state = {
         fecha_inicio : moment().format('YYYY-MM-DD'),
         fecha_fin : moment().format('YYYY-MM-DD')
@@ -35,8 +34,16 @@ class Viajes extends React.Component {
     ]
 
     onChange = name => (e) => {
+        let value = e.target.value
+
+        if(name === 'cooperativa' && !value){
+            this.setState({
+                bus : ''
+            })
+        }
+
         this.setState({
-            [name]: e.target.value
+            [name]: value
         })
     }
 
@@ -49,9 +56,8 @@ class Viajes extends React.Component {
     nuevo = () => {
         this.props.history.push('/operaciones/viajes/edit?')
     }
-
     render(){
-        const { cooperativa, bus, tipo_frecuencia, fecha_inicio, localidad, fecha_fin, estado } = this.state
+        const { cooperativa, bus, bus_label, tipo_frecuencia, fecha_inicio, localidad, fecha_fin, estado } = this.state
         return (
             <div className="animated fadeIn">
                 <div className="row">
@@ -82,12 +88,24 @@ class Viajes extends React.Component {
                                         <FormGroup className="row">
                                             <Label className="col-sm-3">Bus</Label>
                                             <div className="col-sm-8">
-                                                <RSelectAsync
-                                                    asyncOptions={this.optionsBus({ cooperativa })}
-                                                    isDisabled={!cooperativa}
-                                                    onChange={(value) => this.onValue('bus', value)} 
-                                                    value={bus}
-                                                />
+                                                { cooperativa 
+                                                    ? (
+                                                        <RSelectAsync
+                                                            asyncOptions={this.optionsBus({ cooperativa })}
+                                                            isDisabled={!cooperativa}
+                                                            onChange={(value, label) => {
+                                                                this.onValue('bus', value)
+                                                            }}
+                                                            placeholder={'Seleccione'}
+                                                            value={bus}
+                                                            isClearable
+                                                            loadingMessage={() => 'Cargando, no cierre el menu'}
+                                                            noOptionsMessage={() => 'No se encontraron resultados'}
+                                                        />
+                                                    ) : (
+                                                        <Input readOnly placeholder="Seleccione una cooperativa" />
+                                                    )
+                                                }
                                             </div>
                                         </FormGroup>
                                         <FormGroup className="row">
