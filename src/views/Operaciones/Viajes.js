@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, ListPage, Select, Label, FormGroup, Card, CardBody, CardTitle, Input } from 'temeforest'
+import { Button, ListPage, Select, Label, FormGroup, Card, CardBody, CardTitle, Input, RSelectAsync } from 'temeforest'
 import { baseurl, objectToUrl } from 'utils/url'
 import moment from 'moment'
 
@@ -40,6 +40,12 @@ class Viajes extends React.Component {
         })
     }
 
+    onValue = (name, value) => {
+        this.setState({
+            [name] : value
+        })
+    }
+
     nuevo = () => {
         this.props.history.push('/operaciones/viajes/edit?')
     }
@@ -76,13 +82,10 @@ class Viajes extends React.Component {
                                         <FormGroup className="row">
                                             <Label className="col-sm-3">Bus</Label>
                                             <div className="col-sm-8">
-                                                <Select 
-                                                    {
-                                                        ...cooperativa
-                                                            ? { asyncOptions : this.optionsBus({ cooperativa }) }
-                                                            : { options : [ { label : 'Seleccione una cooperativa' } ] }
-                                                    }
-                                                    onChange={this.onChange('bus')} 
+                                                <RSelectAsync
+                                                    asyncOptions={this.optionsBus({ cooperativa })}
+                                                    isDisabled={!cooperativa}
+                                                    onChange={(value) => this.onValue('bus', value)} 
                                                     value={bus}
                                                 />
                                             </div>

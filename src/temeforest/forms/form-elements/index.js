@@ -9,6 +9,7 @@ import TextArea from './TextArea'
 import InputAutocomplete from './InputAutocomplete'
 import RSelect from './RSelect'
 import MaskedInput from './MaskedInput'
+import RSelectAsync from './RSelectAsync'
 
 export {
     Input,
@@ -21,5 +22,6 @@ export {
     TextArea,
     InputAutocomplete,
     RSelect,
-    MaskedInput
+    MaskedInput,
+    RSelectAsync
 }
