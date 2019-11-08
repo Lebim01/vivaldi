@@ -3,6 +3,7 @@ import { Col, Row } from 'reactstrap'
 import { CardTitle, InputIcon, Button, Permission } from 'temeforest'
 import { checkPermission } from 'temeforest/base/Permission'
 import { baseurl, objectToUrl } from 'utils/url'
+import { htmlToXlsById } from 'utils/exportData'
 
 import axios from 'axios'
 
@@ -213,25 +214,43 @@ class ListPage extends React.Component {
         }
     }
 
+    exportExcel = () => {
+        const { id } = this.props
+        if(id){
+            htmlToXlsById(id)
+        }
+    }
+
     render(){
-        const { title, searchPlaceholder, fieldNames, fields, searchable, head } = this.props
+        const { title, searchPlaceholder, fieldNames, fields, searchable, head, exportExcel } = this.props
         const { filtered, numPages, next, previous, currentPage, numBeginVisibleFooterPages, numEndVisibleFooterPages, search, loading } = this.state
 
         return (
             <div>
                 { title && <CardTitle>{ title }</CardTitle> }
-                { searchable &&
+                { (searchable || exportExcel) &&
                     <Row>
                         <Col xs="12" md="6">
-                            <InputIcon placeholder={`Buscar... ${searchPlaceholder}`} onChange={this.onFilterChange} icon={<i className="fa fa-search"></i>} value={search} delay={1000} />
+                            { searchable &&
+                                <InputIcon placeholder={`Buscar... ${searchPlaceholder}`} onChange={this.onFilterChange} icon={<i className="fa fa-search"></i>} value={search} delay={1000} />   
+                            }
                         </Col>
-                        <Permission key_permission={`add_${this.props.key_permission}`}>
-                            <Col xs="12" md="6">
-                                <Button style={{'float': 'right'}} onClick={() => this.onRowDoubleClick('', {})}>
-                                    <i className="fa fa-plus"></i>
+                        { exportExcel &&
+                            <Col xs="12" md="6" className="text-right">
+                                { searchable &&
+                                    <Permission key_permission={`add_${this.props.key_permission}`}>
+                                        <Col xs="12" md="6">
+                                            <Button style={{'float': 'right'}} onClick={() => this.onRowDoubleClick('', {})}>
+                                                <i className="fa fa-plus"></i>
+                                            </Button>
+                                        </Col>
+                                    </Permission>
+                                }
+                                <Button onClick={this.exportExcel} title="Exportar excel">
+                                    <i className="fas fa-file-excel"></i>
                                 </Button>
                             </Col>
-                        </Permission>
+                        }
                     </Row>
                 }
                 <br/>

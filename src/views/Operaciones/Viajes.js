@@ -117,6 +117,7 @@ class Viajes extends React.Component {
                                 </div>
                                 <div className="col-sm-12">
                                     <ListPage
+                                        id="table-viajes"
                                         searchable={false}
                                         fieldNames={['Frecuencia','Cooperativa', 'Disco', 'Ruta']}
                                         fields={['frecuencia_nombre', 'cooperativa_nombre', 'bus_disco', 'ruta_nombre']}
@@ -124,6 +125,7 @@ class Viajes extends React.Component {
                                         endpoint='viaje'
                                         urlFront={'operaciones/viajes'}
                                         parameters={this.state}
+                                        exportExcel
 
                                         history={this.props.history}
                                     />

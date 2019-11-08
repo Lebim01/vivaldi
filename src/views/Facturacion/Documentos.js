@@ -102,7 +102,7 @@ class CustomListPage extends ListPage {
                 { searchable &&
                     <Row>
                         <Col xs="12" md="6">
-                            <InputIcon placeholder={`Buscar... ${searchPlaceholder}`} onChange={this.onFilterChange()} icon={<i className="fa fa-search"></i>} />
+                            <InputIcon placeholder={`Buscar... ${searchPlaceholder}`} onChange={this.onFilterChange} icon={<i className="fa fa-search"></i>} />
                         </Col>
                     </Row>
                 }
@@ -258,13 +258,13 @@ class Documentos extends React.Component {
                 <div className="row">
                     <div className="col-sm-4">
                         <FormGroup className="row">
-                            <Label className="col-sm-3">Cooperativa</Label>
+                            <Label className="col-xl-3 col-sm-4">Cooperativa</Label>
                             <div className="col-sm-8">
                                 <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
-                            <Label className="col-sm-3">Localidad</Label>
+                            <Label className="col-xl-3 col-sm-4">Localidad</Label>
                             <div className="col-sm-8">
                                 <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad}/>
                             </div>
@@ -272,13 +272,13 @@ class Documentos extends React.Component {
                     </div>
                     <div className="col-sm-4">
                         <FormGroup className="row">
-                            <Label className="col-sm-3">Fecha inicio</Label>
+                            <Label className="col-xl-3 col-sm-4">Fecha inicio</Label>
                             <div className="col-sm-8">
                                 <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
-                            <Label className="col-sm-3">Fecha fin</Label>
+                            <Label className="col-xl-3 col-sm-4">Fecha fin</Label>
                             <div className="col-sm-8">
                                 <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
                             </div>
@@ -286,7 +286,7 @@ class Documentos extends React.Component {
                     </div>
                     <div className="col-sm-4">
                         <FormGroup className="row">
-                            <Label className="col-sm-3">Tipo de documento</Label>
+                            <Label className="col-xl-3 col-sm-4">Tipo de documento</Label>
                             <div className="col-sm-8">
                                 <Select  options={this.tipos_documentos} onChange={this.onChange('tipo_documento')} value={this.state.tipo_documento} />
                             </div>
