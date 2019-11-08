@@ -5,6 +5,7 @@ import { baseurl, getParameter, objectToUrl } from 'utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import AddParadaModal from './AddParadaModal'
+import { forStatement } from '@babel/types'
 
 const endpoint = 'ruta'
 const urlFront = '/operaciones/rutas'
@@ -277,10 +278,28 @@ class EditRutas extends React.Component {
         return true
     }
 
+    parseData(data){
+
+        for(let i in data.paradas){
+            let row = data.paradas[i]
+
+            let _tarifas = []
+
+            for(let j in row.tarifas){
+                let tarifa = row.tarifas[j]
+                if(tarifa.tarifa) _tarifas.push(tarifa)
+            }
+
+            data.paradas[i].tarifas = _tarifas
+        }
+
+        return data
+    }
+
     render(){
         const { data, id } = this.state
         return (
-            <EditPage title={`${id ? 'Editar' : 'Crear'} Rutas`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history} customValidation={this.validation}>
+            <EditPage title={`${id ? 'Editar' : 'Crear'} Rutas`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history} customValidation={this.validation} parseData={this.parseData}>
                 <MainView {...data} onChange={this.onChange} />
             </EditPage>
         )

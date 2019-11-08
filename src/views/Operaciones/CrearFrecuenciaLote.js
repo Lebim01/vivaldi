@@ -205,6 +205,7 @@ class CrearFrecuenciaLote extends React.Component {
 
     confirmSave = async () => {
         const { data } = this.state
+
         try {
             if(!data.hora_inicio || (!data.intervalo_hora && !data.intervalo_minuto) || !data.hora_fin) throw 'Favor de llenar todos los campos'
             let cantidad_registros_por_crear = 0
