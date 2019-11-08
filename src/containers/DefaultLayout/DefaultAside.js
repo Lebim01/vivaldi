@@ -94,10 +94,10 @@ class Aside extends React.Component {
                                     <li style={{backgroundColor: '#eee'}} className="hide-menu">
                                         <div className="col-sm-12" style={{padding:15}}>
                                             <div className="row">
-                                                <div className="col-sm-3">
-                                                    <img src="../../assets/img/avatars/default.svg" width="100%" alt="default"/>
+                                                <div className="col-sm-3 col-3">
+                                                    <img src="../../assets/img/avatars/default.svg" width="100%" alt="default" style={{maxHeight : 60}} />
                                                 </div>
-                                                <div className="col-sm-9">
+                                                <div className="col-sm-9 col-9">
                                                     <b style={{fontSize: 15}}>{user_info.name ? user_info.name : user_info.username}</b>
                                                     <br/>
                                                     <span style={{fontSize: 12}}>Terminal terrestre</span>

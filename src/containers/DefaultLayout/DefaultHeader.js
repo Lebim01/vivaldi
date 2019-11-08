@@ -32,8 +32,8 @@ class DefaultHeader extends Component {
             <nav className="navbar top-navbar navbar-expand-md navbar-dark">
                 <div className="navbar-header">
                     { /* <!-- This is for the sidebar toggle which is visible on mobile only --> */ }
-                    <a className="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)">
-                        <i className="fas fa-bars"></i>
+                    <a className="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)" style={{color: 'black'}} onClick={this.toggleMenu.bind(this)}>
+                        <i className="sl-icon-menu font-20 text-dark" />
                     </a>
                     {/*
                     <!-- ============================================================== -->
