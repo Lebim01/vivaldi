@@ -235,22 +235,20 @@ class ListPage extends React.Component {
                                 <InputIcon placeholder={`Buscar... ${searchPlaceholder}`} onChange={this.onFilterChange} icon={<i className="fa fa-search"></i>} value={search} delay={1000} />   
                             }
                         </Col>
-                        { exportExcel &&
-                            <Col xs="12" md="6" className="text-right">
-                                { searchable &&
-                                    <Permission key_permission={`add_${this.props.key_permission}`}>
-                                        <Col xs="12" md="6">
-                                            <Button style={{'float': 'right'}} onClick={() => this.onRowDoubleClick('', {})}>
-                                                <i className="fa fa-plus"></i>
-                                            </Button>
-                                        </Col>
-                                    </Permission>
-                                }
+                        <Col xs="12" md="6" className="text-right">
+                            { searchable &&
+                                <Permission key_permission={`add_${this.props.key_permission}`}>
+                                    <Button style={{'float': 'right'}} onClick={() => this.onRowDoubleClick('', {})}>
+                                        <i className="fa fa-plus"></i>
+                                    </Button>
+                                </Permission>
+                            }
+                            { exportExcel &&
                                 <Button onClick={this.exportExcel} title="Exportar excel">
                                     <i className="fas fa-file-excel"></i>
                                 </Button>
-                            </Col>
-                        }
+                            }
+                        </Col>
                     </Row>
                 }
                 <br/>
