@@ -12,7 +12,33 @@ class Login2 extends React.Component {
     state = {
         loading: false,
         error: '',
-        noValid: false
+        noValid: false,
+        auth : false
+    }
+    unsubscribe = null
+
+    componentDidMount(){
+        this.unsubscribe = store.subscribe(() => {
+            let state = store.getState()
+
+            if(!this.state.auth && state.auth){
+                this.setState({
+                    auth : true
+                })
+                store.dispatch({
+                    type : 'AUTH-SUCCESS'
+                })
+            }
+
+            if(state.auth && (state.user_info.permissions || state.user_info.isSuperUser)){
+                this.unsubscribe()
+                this.props.history.push('/#/dashboard')
+            }
+        })
+    }
+
+    componentWillUnmount(){
+        this.unsubscribe()
     }
 
     login = async (e) => {
@@ -29,10 +55,11 @@ class Login2 extends React.Component {
                         type : 'LOGIN',
                         token : data.token
                     })
-                    this.props.history.push('/#/cooperativas')
                 }
             }
             catch(e){
+                console.error(e)
+
                 let error = 'Usuario y/o contraseña incorrectos'
                 if(e.response && e.response.data && e.response.data.non_field_errors && e.response.data.non_field_errors[0])
                     error =  e.response.data.non_field_errors[0]

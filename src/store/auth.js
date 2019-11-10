@@ -30,7 +30,7 @@ function reducer(state = initialState, action) {
             }
         case 'LOGOUT':
             return initialState
-        case 'AUTH-SUCCECSS':
+        case 'AUTH-SUCCESS':
             axios.defaults.headers.common['Authorization'] = `JWT ${state.token}`
             axios.get(`${baseurl}/user-info/`)
             .then(({ data }) => {
@@ -53,7 +53,7 @@ function reducer(state = initialState, action) {
             axios.post(`${baseurl}/token-verify/`, { token : state.token })
             .then(() => {
                 store.dispatch({
-                    type: 'AUTH-SUCCECSS'
+                    type: 'AUTH-SUCCESS'
                 }) 
             })
             .catch(() => {
