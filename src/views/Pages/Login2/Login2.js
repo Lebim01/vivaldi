@@ -33,8 +33,12 @@ class Login2 extends React.Component {
                 }
             }
             catch(e){
+                let error = 'Usuario y/o contraseña incorrectos'
+                if(e.response && e.response.data && e.response.data.non_field_errors && e.response.data.non_field_errors[0])
+                    error =  e.response.data.non_field_errors[0]
+
                 this.setState({
-                    error : 'Usuario o Contraseña invalidos',
+                    error,
                     noValid : true,
                     loading: false
                 })
@@ -79,6 +83,9 @@ class Login2 extends React.Component {
                                         
                                         <div className="form-group text-center">
                                             <div className="col-xs-12 p-b-20">
+                                                { this.state.error && 
+                                                    <b><span className="text-danger">{this.state.error}</span> </b>
+                                                }
                                                 <button className="btn btn-block btn-lg btn-info" type="submit" onClick={(e) => this.login(e)}>Ingresar</button>
                                             </div>
                                         </div>
