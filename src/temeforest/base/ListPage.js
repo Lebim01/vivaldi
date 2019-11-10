@@ -325,6 +325,8 @@ class ListPage extends React.Component {
                                                         </ul>
                                                         <div className="divider"></div>
                                                         <span className="label label-info">{currentPage} de {numPages}</span>
+                                                        <div className="divider"></div>
+                                                        <span className="text-muted">Registros totales: {this.state.count}</span>
                                                     </div>
                                                 </td>
                                             </tr>
