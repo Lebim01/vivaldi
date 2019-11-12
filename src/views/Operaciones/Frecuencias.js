@@ -82,14 +82,14 @@ class Frecuencias extends React.Component {
                                     </div>
                                     <div className="col-sm-4">
                                         <FormGroup className="row">
-                                            <Label className="col-sm-4">Fecha validez desde</Label>
-                                            <div className="col-sm-8">
+                                            <Label className="col-sm-6">Fecha validez desde</Label>
+                                            <div className="col-sm-6">
                                                 <Input type="date" onChange={this.onChange('fecha_validez_desde')} value={this.state.fecha_validez_desde} />
                                             </div>
                                         </FormGroup>
                                         <FormGroup className="row">
-                                            <Label className="col-sm-4">Fecha validez hasta</Label>
-                                            <div className="col-sm-8">
+                                            <Label className="col-sm-6">Fecha validez hasta</Label>
+                                            <div className="col-sm-6">
                                                 <Input type="date" onChange={this.onChange('fecha_validez_hasta')} value={this.state.fecha_validez_hasta} />
                                             </div>
                                         </FormGroup>

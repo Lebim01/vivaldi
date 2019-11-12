@@ -53,13 +53,13 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
                     <div className="row">
                         <div className="col-sm-4">
                             <FormGroup className="row">
-                                <Label className="col-sm-3">Cooperativa</Label>
+                                <Label className="col-sm-4">Cooperativa</Label>
                                 <div className="col-sm-8">
                                     <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
                                 </div>
                             </FormGroup>
                             <FormGroup className="row">
-                                <Label className="col-sm-3">Localidad</Label>
+                                <Label className="col-sm-4">Localidad</Label>
                                 <div className="col-sm-8">
                                     <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad}/>
                                 </div>
@@ -67,13 +67,13 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
                         </div>
                         <div className="col-sm-4">
                             <FormGroup className="row">
-                                <Label className="col-sm-3">Fecha inicio</Label>
+                                <Label className="col-sm-4">Fecha inicio</Label>
                                 <div className="col-sm-8">
                                     <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
                                 </div>
                             </FormGroup>
                             <FormGroup className="row">
-                                <Label className="col-sm-3">Fecha fin</Label>
+                                <Label className="col-sm-4">Fecha fin</Label>
                                 <div className="col-sm-8">
                                     <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
                                 </div>
@@ -81,13 +81,13 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
                         </div>
                         <div className="col-sm-4">
                             <FormGroup className="row">
-                                <Label className="col-sm-3">Forma de pago</Label>
+                                <Label className="col-sm-4">Forma de pago</Label>
                                 <div className="col-sm-8">
                                     <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('forma_de_pago')} value={this.state.forma_de_pago} />
                                 </div>
                             </FormGroup>
                             <FormGroup className="row">
-                                <Label className="col-sm-3">Reporte</Label>
+                                <Label className="col-sm-4">Reporte</Label>
                                 <div className="col-sm-8">
                                     <Select options={this.optionsReporte} onChange={this.onChange('reporte')} value={this.state.reporte} />
                                 </div>

@@ -1,7 +1,6 @@
 import React from 'react'
 import { ListPage, Label, FormGroup, Select, Input, Button, ReportPage, Permission } from 'temeforest'
 import { baseurl } from 'utils/url'
-
 class ReporteClientesFrecuentes extends React.Component {
 
     state = {
@@ -57,38 +56,38 @@ class ReporteClientesFrecuentes extends React.Component {
                             </div>
                         </FormGroup>
                         <FormGroup className="row col-sm-4">
-                            <Label className="col-sm-4">Fecha inicio</Label>
+                            <Label className="col-sm-4" >Fecha inicio</Label>
                             <div className="col-sm-8">
                                 <Input type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row col-sm-4">
-                            <Label className="col-sm-4">Metodo de pago</Label>
-                            <div className="col-sm-8">
+                            <Label className="col-sm-5" >Metodo de pago</Label>
+                            <div className="col-sm-7">
                                 <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('forma_de_pago')} value={this.state.forma_de_pago}/>
                             </div>
                         </FormGroup>
                         <FormGroup className="row col-sm-4">
-                            <Label className="col-sm-4">Localidad</Label>
-                            <div className="col-sm-8">
+                            <Label className="col-sm-4" style={{ marginLeft: '-20px' }} >Localidad</Label>
+                            <div className="col-sm-8" style={{ marginLeft: '20px' }}>
                                 <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row col-sm-4">
-                            <Label className="col-sm-4">Fecha fin</Label>
-                            <div className="col-sm-8">
+                            <Label className="col-sm-4" style={{ marginLeft: '-22px' }} >Fecha fin</Label>
+                            <div className="col-sm-8" style={{ marginLeft: '22px' }}>
                                 <Input type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
                             </div>
                         </FormGroup>
-                        <FormGroup className="row col-sm-4">
-                            <Label className="col-sm-4">Destino</Label>
-                            <div className="col-sm-8">
+                        <FormGroup className="row col-sm-4" >
+                            <Label className="col-sm-5" style={{ marginLeft: '-60px' }}>Destino</Label>
+                            <div className="col-sm-7" style={{ marginLeft: '60px' }}>
                                 <Select asyncOptions={this.optionsDestino} onChange={this.onChange('destino')} value={this.state.destino} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row col-sm-4">
-                            <Label className="col-sm-4">Reporte</Label>
-                            <div className="col-sm-8">
+                            <Label className="col-sm-4" style={{ marginLeft: '-32px' }}>Reporte</Label>
+                            <div className="col-sm-8" style={{ marginLeft: '32px' }}>
                                 <Select options={this.optionsReporte} onChange={this.onChange('reporte')} value={this.state.reporte} />
                             </div>
                         </FormGroup>

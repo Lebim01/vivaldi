@@ -153,7 +153,7 @@ class EditConductor extends React.Component {
                         label={{text:'Cooperativa'}}
                         input={{
                             name : 'cooperativa',
-                            element: <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this._onChange('cooperativa')} value={this.state.data.cooperativa} />
+                            element: <Select asyncOptions={this.optionsCooperativa} defaultOption="Seleccione" onChange={this._onChange('cooperativa')} value={this.state.data.cooperativa} />
                         }}
                         validator={{
                             validationRules: { required : 'El campo es requerido' },

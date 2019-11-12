@@ -95,19 +95,38 @@ class ReporteTasasContingenciaGeneral extends React.Component {
                                         </Button>
                                     </div>
                                 </div>
-                                <ListPage
+                                
+                                <ListPage 
                                     searchable={false}
                                     
                                     head={[
                                         [
                                             {colSpan:3,title:''},
-                                            {colSpan:2,title:'Generado',style:style_text_center},
-                                            {colSpan:2,title:'Vendido',style:style_text_center},
-                                            {colSpan:2,title:'Saldo',style:style_text_center}
+                                            {colSpan:2,title:'Generado',style:{style_text_center, borderLeft: '1px solid #e9e9e9'}},
+                                        
+                                            
+                                            {colSpan:2,title:'Vendido',style:{style_text_center, borderLeft: '1px solid #e9e9e9'}},
+                                            {colSpan:2,title:'Saldo',style:{style_text_center, borderLeft: '1px solid #e9e9e9'}},
+                                            
                                         ],
-                                        ['Fecha', 'Concepto', 'Cooperativa', 'Cantidad', 'Total', 'Cantidad', 'Total', 'Cantidad', 'Total']
+
+                                        ['Fecha','Concepto','Cooperativa',
+                                        {colSpan:1,title:'Cantidad',style:{style_text_center, borderLeft: '1px solid #e9e9e9'}}, 
+                                        'Total',
+                                        {colSpan:1,title:'Cantidad',style:{style_text_center, borderLeft: '1px solid #e9e9e9'}},
+                                        'Total', 
+                                        {colSpan:1,title:'Cantidad',style:{style_text_center, borderLeft: '1px solid #e9e9e9'}}, 
+                                        'Total']
                                     ]}
-                                    fields={['fecha', 'concepto', 'cooperativa_nombre', 'generado_cantidad', 'generado_total', 'vendido_cantidad', 'vendido_total', 'saldo_cantidad', 'saldo_total']}
+                                    
+                                    fields={['fecha', 'concepto', 'cooperativa_nombre',
+                                     'generado_cantidad', 
+                                     'generado_total', 
+                                     'vendido_cantidad', 
+                                     'vendido_total', 
+                                     'saldo_cantidad',
+                                     'saldo_total'
+                                     ]}
 
                                     endpoint='venta/tasa-contingencia-general'
                                     parameters={this.state}
@@ -115,6 +134,7 @@ class ReporteTasasContingenciaGeneral extends React.Component {
                                     history={this.props.history}
                                     refresh={refresh}
                                 />
+                                
                             </CardBody>
                         </Card>
                     </div>
@@ -122,6 +142,8 @@ class ReporteTasasContingenciaGeneral extends React.Component {
             </div>
         )
     }
+
+    
 }
 
 export default ReporteTasasContingenciaGeneral

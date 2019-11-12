@@ -286,8 +286,8 @@ class Documentos extends React.Component {
                     </div>
                     <div className="col-sm-4">
                         <FormGroup className="row">
-                            <Label className="col-xl-3 col-sm-4">Tipo de documento</Label>
-                            <div className="col-sm-8">
+                            <Label className="col-xl-3 col-sm-6">Tipo de documento</Label>
+                            <div className="col-sm-6">
                                 <Select  options={this.tipos_documentos} onChange={this.onChange('tipo_documento')} value={this.state.tipo_documento} />
                             </div>
                         </FormGroup>
