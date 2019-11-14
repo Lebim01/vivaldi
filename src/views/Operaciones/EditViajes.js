@@ -133,9 +133,9 @@ class MainView extends React.Component {
                                 <RSelect
                                     onChange={(value) => this.onChangeValue('frecuencia', value)}
                                     value={this.props.frecuencia}
-                                    { ...(this.props.cooperativa || this.props.ruta
+                                    { ...(this.props.cooperativa && this.props.ruta
                                         ? { asyncOptions : this.optionsFrecuencia({ cooperativa: this.props.cooperativa, ruta: this.props.ruta }) }
-                                        : { options : [{ label: 'Seleccione un cooperativa o destino', value : '' }] }
+                                        : { options : [{ label: 'Seleccione un cooperativa y destino', value : '' }] }
                                     )}
                                 />
                             )

@@ -24,13 +24,18 @@ const loadOptions = (asyncOptions) => {
 const RSelect = (props) => {
     const { register, value, onChange, ...otherProps } = props
     const [options, setOptions] = useState([])
+    const [prevAsyncOptions, setPrevAsyncOptions] = useState({})
 
     useEffect(() => {
-        if(props.asyncOptions){
-            loadOptions(props.asyncOptions)
-            .then((res) => {
-                setOptions(res)
-            })
+        if(JSON.stringify(prevAsyncOptions) !== JSON.stringify(props.asyncOptions)){
+            setPrevAsyncOptions(props.asyncOptions)
+            if(props.asyncOptions){
+                loadOptions(props.asyncOptions)
+                .then((res) => {
+                    setOptions(res)
+                    
+                })
+            }
         }
     }, [props.asyncOptions])
 
