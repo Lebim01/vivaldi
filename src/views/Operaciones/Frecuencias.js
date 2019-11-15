@@ -62,7 +62,14 @@ class Frecuencias extends React.Component {
                                         <FormGroup className="row">
                                             <Label className="col-sm-4">Destino</Label>
                                             <div className="col-sm-8">
-                                                <Select asyncOptions={this.optionsCiudad({ cooperativa: this.state.cooperativa })} onChange={this.onChange('ruta')} value={this.state.ruta}/>
+                                                <Select 
+                                                    {...this.state.cooperativa
+                                                        ? { asyncOptions : this.optionsCiudad({ cooperativa: this.state.cooperativa })}
+                                                        : { options : [{ label: 'Seleccione una cooperativa' }] }
+                                                    }
+                                                    onChange={this.onChange('ruta')} 
+                                                    value={this.state.ruta}
+                                                />
                                             </div>
                                         </FormGroup>
                                     </div>
