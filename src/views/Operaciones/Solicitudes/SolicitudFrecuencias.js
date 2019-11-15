@@ -16,16 +16,18 @@ class SolicitudFrecuencias extends React.Component {
     }
     optionsEstado = [
         { value:0, label: 'Pendiente' },
-        { value:1, label: 'Aprobado' },
+        { value:1, label: 'Aceptado' },
         { value:2, label: 'Rechazado' },
+        { value:3, label: 'Impreso' },
     ]
     optionsRazon = [
         { value:'', label:'Seleccione' },
     ]
     estados = [
         { value:0, label: 'Pendiente' },
-        { value:1, label: 'Aprobado' },
+        { value:1, label: 'Aceptado' },
         { value:2, label: 'Rechazado' },
+        { value:3, label: 'Impreso' },
     ]
 
     componentWillMount(){
