@@ -33,7 +33,6 @@ const RSelect = (props) => {
                 loadOptions(props.asyncOptions)
                 .then((res) => {
                     setOptions(res)
-                    
                 })
             }
         }

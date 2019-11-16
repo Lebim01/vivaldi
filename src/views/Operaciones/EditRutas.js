@@ -279,7 +279,6 @@ class EditRutas extends React.Component {
     }
 
     parseData(data){
-
         for(let i in data.paradas){
             let row = data.paradas[i]
 

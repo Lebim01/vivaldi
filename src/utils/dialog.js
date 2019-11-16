@@ -17,14 +17,40 @@ async function confirmEndpoint(options){
         ...options
     }
 
-    const getValueResponse = (value) => {
-        if(typeof value === 'string') return value
+    const getTabs = (t) => {
+        let spaces = ''
+        for(let i = 0; i < t; i++){
+            spaces += '&emsp;';
+        }
+        return spaces
+    }
+
+    const getValueResponse = (value, t = 0) => {
+        if(Array.isArray(value)){
+            return value
+                .map((row, index) => {
+                    if(typeof row === 'object'){
+                        if(Object.keys(row).length === 0) return null
+                        return `
+                            <br/>
+                            ${getTabs(t)}#${index}
+                            ${getValueResponse(row, t+1)}
+                        `
+                    }else{
+                        return row
+                    }
+                })
+                .join('')
+        }
         else if(typeof value === 'object') {
             let keys = Object.keys(value)
-            return keys.map((key) => `${key} : ${value[key].toString()}<br>`).join('')
-        }
-        else if(Array.isArray(value)){
-            return value.join('<br>')
+            return keys.map((key) => `
+                <br />
+                ${getTabs(t)}${key} : ${getValueResponse(value[key], t+1)}
+            `)
+            .join('')
+        }else{
+            return value
         }
     }
 
