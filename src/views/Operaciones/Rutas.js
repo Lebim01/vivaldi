@@ -25,8 +25,7 @@ function Rutas(props) {
                     <Card>
                         <CardBody>
                             <CardTitle>
-                                Listado de Frecuencias
-                                
+                                Listado de Rutas
                             </CardTitle>
                             <br/>
                             <div className="row">
