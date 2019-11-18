@@ -6,6 +6,13 @@ import { printHtml, barcodeToPng } from 'utils/exportData'
 
 const endpoint = 'venta/solicitud_tasacontingencia'
 
+/**
+ * TASAS DE CONTINGENCIA TIPO 1
+ * LA CABEZA DE LA IMPRESION DEBE SER LA COOPERATIVA
+ * PORQUE LAS COOPERATIVAS SON LAS QUE HACEN LA SOLICITUD
+ * Y SALEN EN ESTE MODULO SOLO LAS APROBADAS PARA PODER IMPRIMIR
+ */
+
 class BandejaTasaCooperativa extends React.Component {
     state = {
         fecha : moment().format('YYYY-MM-DD'),
