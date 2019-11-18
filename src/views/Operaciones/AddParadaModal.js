@@ -10,8 +10,8 @@ class AddParadaModal extends React.Component {
     state = { errors: [], data: {}, ciudades: [], tipos_servicio: [], tipos_clientes: [], tab: "1" }
 
     optionsParada = {
-        url : `${baseurl}/ruta/`,
-        labelName: 'nombre',
+        url : `${baseurl}/ciudad/`,
+        labelName: 'ciudad_provincia',
         valueName: 'id'
     }
     
