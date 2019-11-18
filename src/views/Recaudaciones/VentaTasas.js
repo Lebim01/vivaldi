@@ -7,6 +7,11 @@ import { confirmEndpoint } from 'utils/dialog'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 
+/**
+ * TASAS DE TIPO 2
+ * Contingencia general
+ */
+
 class RegistroTasa extends React.Component {
 
     optionsLocalidad = {
@@ -190,11 +195,13 @@ class VentaTasas extends React.Component {
     }
 
     fieldEditar = (row) => {
-        return (
-            <Button onClick={(e) => this.editarVenta(row)}>
-                Editar
-            </Button>
-        )
+        if(row.motivo_modificacion === null)
+            return (
+                <Button onClick={(e) => this.editarVenta(row)}>
+                    Editar
+                </Button>
+            )
+        return null
     }
 
     render(){
