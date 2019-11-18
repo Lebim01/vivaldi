@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, FormGroup, Input, Label, Select, FormElementValidate, FormValidate, EditPage } from 'temeforest'
-import { baseurl, getParameter } from 'utils/url'
+import { baseurl, getParameter, getResults } from 'utils/url'
 import { generateHexadecimal } from 'utils/string'
 import Swal from 'sweetalert2'
 import AddCooperativaPuntoVentaModal from './AddCooperativaPuntoVentaModal'
@@ -45,7 +45,8 @@ class MainView extends React.Component {
         modal : {
             show : false
         },
-        isEditedEmision: false
+        isEditedEmision: false,
+        establecimientoLocalidad : '000'
     }
     optionsLocalidades = {
         url : `${baseurl}/localidad/`,
@@ -76,8 +77,24 @@ class MainView extends React.Component {
                 if (name == 'punto_emision_tasa'){
                     this.setState({isEditedEmision: true})
                 }
+                if (name === 'localidad'){
+                    this.getEstablecimientoLocalidad(e.target.value)
+                }
                 this.props.onChange(name, e.target.value)
             }
+        }
+    }
+
+    getEstablecimientoLocalidad = async (id) => {
+        if(id){
+            const res = await axios.get(`${baseurl}/localidad/${id}`)
+            this.setState({
+                establecimientoLocalidad: res.data.establecimiento
+            })
+        }else{
+            this.setState({
+                establecimientoLocalidad: '000'
+            })
         }
     }
 
@@ -306,6 +323,7 @@ class MainView extends React.Component {
                                                 <th scope="col">Establecimiento<br/>(boleto)</th>
                                                 <th scope="col">Punto<br/>(boleto)</th>
                                                 <th scope="col">Secuencia<br/>(boleto)</th>
+                                                <th scope="col">Numero de factura<br/>(boleto)</th>
                                                 <th scope="col">Punto<br/>(nota de crédito)</th>
                                                 <th scope="col">Secuencia<br/>(nota de crédito)</th>
                                                 <th scope="col">Punto<br/>(tasa)</th>
@@ -333,6 +351,7 @@ class MainView extends React.Component {
                     guardar={this.agregarCooperativa} 
                     {...this.state.modal} 
                     toggle={this.toggleModal} 
+                    establecimientoLocalidad={this.state.establecimientoLocalidad}
                 />
             </div>
         )
@@ -345,7 +364,8 @@ class EditPuntoVenta extends React.Component {
         data:{
             venta_offline: false,
             externo : false,
-            puntoventa_cooperativas : []
+            puntoventa_cooperativas : [], 
+           
         }
     }
 
