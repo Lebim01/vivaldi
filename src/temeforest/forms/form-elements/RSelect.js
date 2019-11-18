@@ -24,15 +24,22 @@ const loadOptions = (asyncOptions) => {
 const RSelect = (props) => {
     const { register, value, onChange, ...otherProps } = props
     const [options, setOptions] = useState([])
+    const [loading, setLoading] = useState(false)
     const [prevAsyncOptions, setPrevAsyncOptions] = useState({})
 
     useEffect(() => {
         if(JSON.stringify(prevAsyncOptions) !== JSON.stringify(props.asyncOptions)){
             setPrevAsyncOptions(props.asyncOptions)
             if(props.asyncOptions){
+
+                setLoading(true)
                 loadOptions(props.asyncOptions)
                 .then((res) => {
+                    setLoading(false)
                     setOptions(res)
+                })
+                .catch(() => {
+                    setLoading(false)
                 })
             }
         }
@@ -49,7 +56,7 @@ const RSelect = (props) => {
     }
 
     return (
-        <Select value={_value} options={options} onChange={_onChange} {...otherProps} styles={rselect.styles} />
+        <Select value={_value} options={options} onChange={_onChange} {...otherProps} isLoading={loading} styles={rselect.styles} />
     )
 }
 
