@@ -52,7 +52,7 @@ class BandejaTasaCooperativa extends React.Component {
                 <p style="margin-top: 5px; margin-bottom: 5px;">Contingencia</p>
                 <p style="margin-top: 5px; margin-bottom: 5px;">
                     <span style="width: 100px; text-align: left;">Emisión: </span>
-                    <span style="width: 100px; text-align: left;">${row.fecha_creacion}</span>
+                    <span style="width: 100px; text-align: left;">${row.fecha_hora_venta}</span>
                 </p>
                 <p style="margin-top: 5px; margin-bottom: 5px;">
                     <span style="width: 100px; text-align: left;">Tasa: </span>
