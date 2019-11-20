@@ -3,6 +3,7 @@ import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, B
 import moment from 'moment'
 import { baseurl } from 'utils/url'
 import { printHtml, barcodeToPng } from 'utils/exportData'
+import axios from 'axios'
 
 const endpoint = 'venta/solicitud_tasacontingencia'
 
@@ -51,23 +52,25 @@ class BandejaTasaCooperativa extends React.Component {
                 <p style="margin-top: 5px; margin-bottom: 5px;">Contingencia</p>
                 <p style="margin-top: 5px; margin-bottom: 5px;">
                     <span style="width: 100px; text-align: left;">Emisión: </span>
-                    <span style="width: 100px; text-align: left;">${moment().format('DD/MM/YYYY')}</span>
+                    <span style="width: 100px; text-align: left;">${moment(row.fecha_creacion).format('DD/MM/YYYY')}</span>
                 </p>
                 <p style="margin-top: 5px; margin-bottom: 5px;">
                     <span style="width: 100px; text-align: left;">Tasa: </span>
-                    <span style="width: 100px; text-align: left;">$ ${row.tasa_valor}</span>
+                    <span style="width: 100px; text-align: left;">$ ${row.valor}</span>
                 </p>
                 <p style="margin-top: 5px; margin-bottom: 5px;">
                     <span style="width: 100px; text-align: left;">Oficinista: </span>
-                    <span style="width: 100px; text-align: left;">${row.usuario_solicitante_nombre}</span>
+                    <span style="width: 100px; text-align: left;">${row.usuario_creacion_nombre}</span>
                 </p>
-                <img src="${barcodeToPng("1234")}"/>
+                <img width="300" src="${barcodeToPng(row.codigo)}"/>
             </div>
         `
     }
 
     async toWord(row){
-        printHtml(await this.rowToHtml(row))
+        const res = await axios.get(`${baseurl}/venta/solicitud_tasacontingencia/${row.id}/tasas`)
+        const html = res.data.map((row) => this.rowToHtml(row))
+        printHtml(html)
     }
 
     fieldImprimir = (row) => {
