@@ -130,10 +130,10 @@ export default {
           name: 'Frecuencias por lote',
           url: '/#/operaciones/frecuencias-lote',
         },
-        {
+        /*{
           name: 'Consulta Tasa',
           url: '/#/operaciones/consulta-tasa',
-        },
+        },*/
         {
           name: 'Solicitudes',
           children : [

@@ -121,59 +121,59 @@ class AddCooperativaPuntoVentaModal extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-6">Establecimiento</Label>
                             <div className="col-sm-6">
-                                <Input type="text"  onChange={this.onChange('establecimiento')} value={this.state.data.establecimiento} error={errors.includes('establecimiento')} maxLength="1"/>
+                                <Input type="number"  onChange={this.onChange('establecimiento')} value={this.state.data.establecimiento} error={errors.includes('establecimiento')} max="999"/>
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-6">Punto de emisión (boleto)</Label>
                             <div className="col-sm-6">
-                                <Input type="number" onChange={this.onChange('punto_emision_boleto')} value={this.state.data.punto_emision_boleto} error={errors.includes('punto_emision_boleto')} max="9"  />
+                                <Input type="number" onChange={this.onChange('punto_emision_boleto')} value={this.state.data.punto_emision_boleto} error={errors.includes('punto_emision_boleto')} max="999"  />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-6">Secuencia (boleto)</Label>
                             <div className="col-sm-6">
-                                <Input type="number" id="secuenciaUna" onChange={this.onChange('secuencia_boleto')} value={this.state.data.secuencia_boleto} error={errors.includes('secuencia_boleto')} max="9" />
+                                <Input type="number" id="secuenciaUna" onChange={this.onChange('secuencia_boleto')} value={this.state.data.secuencia_boleto} error={errors.includes('secuencia_boleto')} max="9999" />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                                 <Label className="col-sm-6">No. de factura (boleto)</Label>
                                 
-                                <Label style={{width:"100%",textAlign:"left", flex: 1}} className="col-sm-6">{`${'00'}${this.state.data.establecimiento}${'-'}${'00'}${this.state.data.punto_emision_boleto}${'-'}${'00000000'}${this.state.data.secuencia_boleto}`}</Label>
+                                <Label style={{width:"100%",textAlign:"left", flex: 1}} className="col-sm-6">{`${this.state.data.establecimiento}${'-'}${this.state.data.punto_emision_boleto}${'-'}${'00000'}${this.state.data.secuencia_boleto}`}</Label>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-6">Punto de emisión (nota de crédito)</Label>
                             <div className="col-sm-6">
-                                <Input type="number" onChange={this.onChange('punto_emision_nota_credito')} value={this.state.data.punto_emision_nota_credito} error={errors.includes('punto_emision_nota_credito')} max="9" />
+                                <Input type="number" onChange={this.onChange('punto_emision_nota_credito')} value={this.state.data.punto_emision_nota_credito} error={errors.includes('punto_emision_nota_credito')} max="999" />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-6">Secuencia (nota de crédito)</Label>
                             <div className="col-sm-6">
-                                <Input type="number" onChange={this.onChange('secuencia_nota_credito')} value={this.state.data.secuencia_nota_credito} error={errors.includes('secuencia_nota_credito')} max="9"/>
+                                <Input type="number" onChange={this.onChange('secuencia_nota_credito')} value={this.state.data.secuencia_nota_credito} error={errors.includes('secuencia_nota_credito')} max="9999"/>
                             </div>
                         </FormGroup>
                           <FormGroup className="row">
                                 <Label className="col-sm-6">No. de Nota de crédito (nota de crédito)</Label>
                                 
-                                <Label style={{border:"none",width:"100%",textAlign:"left", flex: 1}} className="col-sm-6">{`${'00' + this.state.data.establecimiento + '-00' +this.state.data.punto_emision_nota_credito +'-00000000'+this.state.data.secuencia_nota_credito}`}</Label>
+                                <Label style={{border:"none",width:"100%",textAlign:"left", flex: 1}} className="col-sm-6">{`${this.state.data.establecimiento + '-' +this.state.data.punto_emision_nota_credito +'-00000'+this.state.data.secuencia_nota_credito}`}</Label>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-6">Punto de emisión (tasa)</Label>
                             <div className="col-sm-6">
-                                <Input type="number" onChange={this.onChange('punto_emision_tasa')} value={this.state.data.punto_emision_tasa} error={errors.includes('punto_emision_tasa')} max="9" />
+                                <Input type="number" onChange={this.onChange('punto_emision_tasa')} value={this.state.data.punto_emision_tasa} error={errors.includes('punto_emision_tasa')} max="999" />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-6">Secuencia (tasa)</Label>
                             <div className="col-sm-6">
-                                <Input type="number" onChange={this.onChange('secuencia_tasa')} name="fee" value={this.state.data.secuencia_tasa} error={errors.includes('secuencia_tasa')} max="9"/>
+                                <Input type="number" onChange={this.onChange('secuencia_tasa')} name="fee" value={this.state.data.secuencia_tasa} error={errors.includes('secuencia_tasa')} max="9999"/>
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-6">No. de Factura(tasa)</Label>
                             
-                                <Label style={{border:"none",width:"100%",textAlign:"left"}} onChange={this.onChange('localidad_establecimiento')} className="col-sm-6">{`${''}${this.props.establecimientoLocalidad}${'-00'}${this.state.data.punto_emision_tasa}${'-00000000'}${this.state.data.secuencia_tasa}`}</Label>
+                                <Label style={{border:"none",width:"100%",textAlign:"left"}} onChange={this.onChange('localidad_establecimiento')} className="col-sm-6">{`${''}${this.props.establecimientoLocalidad}${'-'}${this.state.data.punto_emision_tasa}${'-00000'}${this.state.data.secuencia_tasa}`}</Label>
                             
                         </FormGroup>
                     </FormValidate>
