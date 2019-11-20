@@ -152,11 +152,11 @@ export default {
               url : '/#/operaciones/solicitudes/buses',
               permission : 'view_solicitudbus'
             },
-            {
+           /* {
               name : 'Modificación de buses',
               url : '/#/operaciones/solicitudes/modificaciones-buses',
               permission : 'view_solicitudbus'
-            },
+            },*/
             {
               name : 'Conductores',
               url : '/#/operaciones/solicitudes/conductores',

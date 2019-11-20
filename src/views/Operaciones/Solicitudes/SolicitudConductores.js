@@ -17,7 +17,7 @@ class SolicitudConductores extends React.Component {
         { value:0, label: 'Pendiente' },
         { value:1, label: 'Aceptado' },
         { value:2, label: 'Rechazado' },
-        { value:3, label: 'Impreso' },
+        //{ value:3, label: 'Impreso' },
     ]
     optionsRazon = [
         { value:'', label:'Seleccione' },
@@ -93,8 +93,8 @@ class SolicitudConductores extends React.Component {
                                 <ListPage
                                     searchable={false}
 
-                                    fieldNames={['Cooperativa', 'Fecha', 'Descripión', 'Tipo de Solicitud']}
-                                    fields={['cooperativa_nombre', 'fecha', 'descripcion', 'tipo_solicitud_nombre']}
+                                    fieldNames={['Cooperativa', 'Fecha', 'Descripión', 'Tipo de Solicitud', 'Estado']}
+                                    fields={['cooperativa_nombre', 'fecha', 'descripcion', 'tipo_solicitud_nombre', 'estado_nombre']}
 
                                     endpoint='venta/solicitud_conductor'
                                     urlFront='operaciones/solicitudes/conductores'

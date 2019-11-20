@@ -5,7 +5,7 @@ import moment from 'moment'
 
 class Viajes extends React.Component {
     state = {
-        fecha_inicio : moment().format('YYYY-MM-DD'),
+        fecha_inicio : moment().format('YYYY-MM-DD') ,
         fecha_fin : moment().format('YYYY-MM-DD')
     }
     optionsCooperativa = {
@@ -82,7 +82,7 @@ class Viajes extends React.Component {
                                         <FormGroup className="row">
                                             <Label className="col-sm-3">Fecha inicio</Label>
                                             <div className="col-sm-8">
-                                                <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={fecha_inicio} />
+                                                <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={fecha_inicio} max="8" />
                                             </div>
                                         </FormGroup>
                                         <FormGroup className="row">

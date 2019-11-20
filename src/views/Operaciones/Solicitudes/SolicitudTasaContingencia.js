@@ -101,8 +101,8 @@ class SolicitudTasaContingencia extends React.Component {
                                 <ListPage
                                     searchable={false}
 
-                                    fieldNames={['Cooperativa', 'Fecha', 'Descripión', 'Tipo de Solicitud', 'Cantidad']}
-                                    fields={['cooperativa_nombre', 'fecha', 'descripcion', 'tipo_solicitud_nombre', 'cantidad_pedida']}
+                                    fieldNames={['Cooperativa', 'Fecha', 'Descripión', 'Tipo de Solicitud', 'Cantidad', 'Estado']}
+                                    fields={['cooperativa_nombre', 'fecha', 'descripcion', 'tipo_solicitud_nombre', 'cantidad_pedida', 'estado_nombre']}
 
                                     endpoint='venta/solicitud_tasacontingencia'
                                     urlFront='operaciones/solicitudes/tasas-contingencia'

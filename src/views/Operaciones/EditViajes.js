@@ -101,7 +101,7 @@ class MainView extends React.Component {
                         label={{text:'Fecha salida'}}
                         input={{
                             name : 'fecha_salida',
-                            element: <Input onChange={this.onChange('fecha_salida')} value={this.props.fecha} type="date" />
+                            element: <Input onChange={this.onChange('fecha_salida')} value={this.props.fecha} type="date" maxLength="8"/>
                         }}
                         validator={{
                             validationRules: { required:"El campo es requerido", },
