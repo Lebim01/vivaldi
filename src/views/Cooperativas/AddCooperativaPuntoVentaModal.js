@@ -1,8 +1,7 @@
 import React from 'react'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
-import { Button, FormGroup, Input, Label, Select, FormValidate } from 'temeforest'
+import { Button, FormGroup, Input, Label, Select , FormElementValidate, FormValidate} from 'temeforest'
 import { baseurl } from 'utils/url'
-import EditPersona from './EditPersona'
 import axios from 'axios'
 import { validate } from 'utils/validate'
 
@@ -15,9 +14,9 @@ class AddCooperativaPuntoVentaModal extends React.Component {
     state = {
         errors : [],
         data : {
-            establecimiento : '0',
+           /* establecimiento : '0',
             punto_emision_boleto: '0',
-            secuencia_boleto: '0'
+            secuencia_boleto: '0'*/
         }, 
         
        
@@ -51,7 +50,7 @@ class AddCooperativaPuntoVentaModal extends React.Component {
             const { id, cooperativa, cooperativa_nombre, punto_emision_tasa='', secuencia_tasa='', punto_emision_boleto='', secuencia_boleto='', punto_emision_nota_credito='', secuencia_nota_credito='', establecimiento='', index } = this.props
             this.setState({
                 data : {
-                    id, cooperativa, cooperativa_nombre, punto_emision_tasa, secuencia_tasa, punto_emision_boleto, secuencia_boleto, punto_emision_nota_credito, secuencia_nota_credito, establecimiento:'', index
+                    id, cooperativa, cooperativa_nombre, punto_emision_tasa, secuencia_tasa, punto_emision_boleto, secuencia_boleto, punto_emision_nota_credito, secuencia_nota_credito, establecimiento, index
                 }
             })
         }
@@ -122,19 +121,19 @@ class AddCooperativaPuntoVentaModal extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-6">Establecimiento</Label>
                             <div className="col-sm-6">
-                                <Input type="text"  onChange={this.onChange('establecimiento')} value={this.state.data.establecimiento} error={errors.includes('establecimiento')} maxLength="3"/>
+                                <Input type="text"  onChange={this.onChange('establecimiento')} value={this.state.data.establecimiento} error={errors.includes('establecimiento')} maxLength="1"/>
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-6">Punto de emisión (boleto)</Label>
                             <div className="col-sm-6">
-                                <Input type="number" onChange={this.onChange('punto_emision_boleto')} value={this.state.data.punto_emision_boleto} error={errors.includes('punto_emision_boleto')} />
+                                <Input type="number" onChange={this.onChange('punto_emision_boleto')} value={this.state.data.punto_emision_boleto} error={errors.includes('punto_emision_boleto')} max="9"  />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-6">Secuencia (boleto)</Label>
                             <div className="col-sm-6">
-                                <Input type="number" id="secuenciaUna" onChange={this.onChange('secuencia_boleto')} value={this.state.data.secuencia_boleto} error={errors.includes('secuencia_boleto')} />
+                                <Input type="number" id="secuenciaUna" onChange={this.onChange('secuencia_boleto')} value={this.state.data.secuencia_boleto} error={errors.includes('secuencia_boleto')} max="9" />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
@@ -145,13 +144,13 @@ class AddCooperativaPuntoVentaModal extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-6">Punto de emisión (nota de crédito)</Label>
                             <div className="col-sm-6">
-                                <Input type="number" onChange={this.onChange('punto_emision_nota_credito')} value={this.state.data.punto_emision_nota_credito} error={errors.includes('punto_emision_nota_credito')} />
+                                <Input type="number" onChange={this.onChange('punto_emision_nota_credito')} value={this.state.data.punto_emision_nota_credito} error={errors.includes('punto_emision_nota_credito')} max="9" />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-6">Secuencia (nota de crédito)</Label>
                             <div className="col-sm-6">
-                                <Input type="number" onChange={this.onChange('secuencia_nota_credito')} value={this.state.data.secuencia_nota_credito} error={errors.includes('secuencia_nota_credito')} />
+                                <Input type="number" onChange={this.onChange('secuencia_nota_credito')} value={this.state.data.secuencia_nota_credito} error={errors.includes('secuencia_nota_credito')} max="9"/>
                             </div>
                         </FormGroup>
                           <FormGroup className="row">
@@ -162,13 +161,13 @@ class AddCooperativaPuntoVentaModal extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-6">Punto de emisión (tasa)</Label>
                             <div className="col-sm-6">
-                                <Input type="number" onChange={this.onChange('punto_emision_tasa')} value={this.state.data.punto_emision_tasa} error={errors.includes('punto_emision_tasa')} />
+                                <Input type="number" onChange={this.onChange('punto_emision_tasa')} value={this.state.data.punto_emision_tasa} error={errors.includes('punto_emision_tasa')} max="9" />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-6">Secuencia (tasa)</Label>
                             <div className="col-sm-6">
-                                <Input type="number" onChange={this.onChange('secuencia_tasa')} name="fee" value={this.state.data.secuencia_tasa} error={errors.includes('secuencia_tasa')} />
+                                <Input type="number" onChange={this.onChange('secuencia_tasa')} name="fee" value={this.state.data.secuencia_tasa} error={errors.includes('secuencia_tasa')} max="9"/>
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
