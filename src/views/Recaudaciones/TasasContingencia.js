@@ -141,7 +141,7 @@ class TasasContingencia extends React.Component {
                 </p>
                 <p style="margin-top: 5px; margin-bottom: 5px;">
                     <span style="width: 100px; text-align: left;">Oficinista: </span>
-                    <span style="width: 100px; text-align: left;">${row.usuario_solicitante_nombre}</span>
+                    <span style="width: 100px; text-align: left;">${row.usuario_creacion_nombre}</span>
                 </p>
                 <img src="${barcodeToPng(row.codigo)}" width="300"/>
             </div>
