@@ -14,7 +14,7 @@ class AddParadaModal extends React.Component {
         labelName: 'ciudad_provincia',
         valueName: 'id'
     }
-    
+        
     componentDidMount(){
         this.loadOptionsCiudades()
         this.getTiposServicios()

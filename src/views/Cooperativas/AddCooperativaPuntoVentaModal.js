@@ -133,7 +133,7 @@ class AddCooperativaPuntoVentaModal extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-6">Secuencia (boleto)</Label>
                             <div className="col-sm-6">
-                                <Input type="number" id="secuenciaUna" onChange={this.onChange('secuencia_boleto')} value={this.state.data.secuencia_boleto} error={errors.includes('secuencia_boleto')} max="9999" />
+                                <Input type="number" id="secuenciaUna" onChange={this.onChange('secuencia_boleto')} value={this.state.data.secuencia_boleto} error={errors.includes('secuencia_boleto')} min="9999" />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">

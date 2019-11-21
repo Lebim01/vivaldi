@@ -54,14 +54,14 @@ class Frecuencias extends React.Component {
                                 <div className="row">
                                     <div className="col-sm-4">
                                         <FormGroup className="row">
-                                            <Label className="col-sm-4">Cooperativa</Label>
-                                            <div className="col-sm-8">
+                                            <Label className="col-sm-6">Cooperativa</Label>
+                                            <div className="col-sm-6">
                                                 <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
                                             </div>
                                         </FormGroup>
                                         <FormGroup className="row">
-                                            <Label className="col-sm-4">Destino</Label>
-                                            <div className="col-sm-8">
+                                            <Label className="col-sm-6">Destino</Label>
+                                            <div className="col-sm-6">
                                                 <Select 
                                                     {...this.state.cooperativa
                                                         ? { asyncOptions : this.optionsCiudad({ cooperativa: this.state.cooperativa })}

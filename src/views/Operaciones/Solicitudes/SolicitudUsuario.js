@@ -55,13 +55,13 @@ class SolicitudUsuario extends React.Component {
                                 <div className="row">
                                     <div className="col-sm-6">
                                         <FormGroup className="row">
-                                            <Label className="col-sm-3">Cooperativa</Label>
+                                            <Label className="col-sm-4">Cooperativa</Label>
                                             <div className="col-sm-8">
                                                 <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
                                             </div>
                                         </FormGroup>
                                         <FormGroup className="row">
-                                            <Label className="col-sm-3">Fecha</Label>
+                                            <Label className="col-sm-4">Fecha</Label>
                                             <div className="col-sm-8">
                                                 <Input className="no-clear" type="date" onChange={this.onChange('fecha')} value={this.state.fecha} />
                                             </div>

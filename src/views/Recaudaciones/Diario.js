@@ -107,28 +107,28 @@ class Diario extends React.Component {
                 <div className="row">
                     <div className="col-sm-4">
                         <FormGroup className="row">
-                            <Label className="col-sm-4">Dia</Label>
-                            <div className="col-sm-8">
+                            <Label className="col-sm-5">Dia</Label>
+                            <div className="col-sm-7">
                                 <Input className="no-clear" type="date" onChange={this.onChange('fecha')} value={this.state.fecha}/>
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
-                            <Label className="col-sm-4">Localidad</Label>
-                            <div className="col-sm-8">
+                            <Label className="col-sm-5">Localidad</Label>
+                            <div className="col-sm-7">
                                 <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad}/>
                             </div>
                         </FormGroup>
                     </div>
                     <div className="col-sm-4">
                         <FormGroup className="row">
-                            <Label className="col-sm-4">Cooperativa</Label>
-                            <div className="col-sm-8">
+                            <Label className="col-sm-6">Cooperativa</Label>
+                            <div className="col-sm-6">
                                 <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
-                            <Label className="col-sm-4">Tipo</Label>
-                            <div className="col-sm-8">
+                            <Label className="col-sm-6">Tipo</Label>
+                            <div className="col-sm-6">
                                 <Select options={this.optionsTipos} onChange={this.onChange('tipo')} value={this.state.tipo}/>
                             </div>
                         </FormGroup>

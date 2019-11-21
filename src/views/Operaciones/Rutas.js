@@ -31,8 +31,8 @@ function Rutas(props) {
                             <div className="row">
                                 <div className="col-sm-4">
                                     <FormGroup className="row">
-                                        <Label className="col-sm-4">Cooperativa</Label>
-                                        <div className="col-sm-8">
+                                        <Label className="col-sm-6">Cooperativa</Label>
+                                        <div className="col-sm-6">
                                             <Select asyncOptions={optionsCooperativa} defaultOption="Todos" onChange={onChange('cooperativa')} value={state.cooperativa}/>
                                         </div>
                                     </FormGroup>
