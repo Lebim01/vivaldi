@@ -59,6 +59,12 @@ class MainView extends React.Component {
         valueName : 'id'
     }
 
+    componentDidUpdate(prevProps){
+        if(prevProps.localidad !== this.props.localidad){
+            this.getEstablecimientoLocalidad(this.props.localidad)
+        }
+    }
+
     onChange = name => (e) => {
         if(this.props.onChange){
             if(e.target.type === 'checkbox'){
@@ -76,9 +82,6 @@ class MainView extends React.Component {
             }else{
                 if (name == 'punto_emision_tasa'){
                     this.setState({isEditedEmision: true})
-                }
-                if (name === 'localidad'){
-                    this.getEstablecimientoLocalidad(e.target.value)
                 }
                 this.props.onChange(name, e.target.value)
             }

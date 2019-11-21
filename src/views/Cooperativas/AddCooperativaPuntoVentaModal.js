@@ -14,14 +14,9 @@ class AddCooperativaPuntoVentaModal extends React.Component {
     state = {
         errors : [],
         data : {
-           /* establecimiento : '0',
-            punto_emision_boleto: '0',
-            secuencia_boleto: '0'*/
+            punto_emision_tasa : '',
+            secuencia_tasa : ''
         }, 
-        
-       
-        
-
     }
 
     optionsBusTipos = {
@@ -46,7 +41,6 @@ class AddCooperativaPuntoVentaModal extends React.Component {
 
     componentDidUpdate(prevProps){
         if(prevProps.show !== this.props.show && this.props.show){
-            console.log(this.props)
             const { id, cooperativa, cooperativa_nombre, punto_emision_tasa='', secuencia_tasa='', punto_emision_boleto='', secuencia_boleto='', punto_emision_nota_credito='', secuencia_nota_credito='', establecimiento='', index } = this.props
             this.setState({
                 data : {
@@ -139,7 +133,13 @@ class AddCooperativaPuntoVentaModal extends React.Component {
                         <FormGroup className="row">
                                 <Label className="col-sm-6">No. de factura (boleto)</Label>
                                 
-                                <Label style={{width:"100%",textAlign:"left", flex: 1}} className="col-sm-6">{`${'00'}${this.state.data.establecimiento}${'-'}${'00'}${this.state.data.punto_emision_boleto}${'-'}${'00000000'}${this.state.data.secuencia_boleto}`}</Label>
+                                <Label style={{width:"100%",textAlign:"left", flex: 1}} className="col-sm-6">
+                                    {(this.state.data.establecimiento || '').padStart(3, '0')}
+                                    -
+                                    {(`${this.state.data.punto_emision_boleto}` || '').padStart(3, '0')}
+                                    -
+                                    {(`${this.state.data.secuencia_boleto}` || '').padStart(9, '0')}
+                                </Label>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-6">Punto de emisión (nota de crédito)</Label>
@@ -156,7 +156,13 @@ class AddCooperativaPuntoVentaModal extends React.Component {
                           <FormGroup className="row">
                                 <Label className="col-sm-6">No. de Nota de crédito (nota de crédito)</Label>
                                 
-                                <Label style={{border:"none",width:"100%",textAlign:"left", flex: 1}} className="col-sm-6">{`${'00' + this.state.data.establecimiento + '-00' +this.state.data.punto_emision_nota_credito +'-00000000'+this.state.data.secuencia_nota_credito}`}</Label>
+                                <Label style={{border:"none",width:"100%",textAlign:"left", flex: 1}} className="col-sm-6">
+                                    {(this.state.data.establecimiento || '').padStart(3, '0')}
+                                    -
+                                    {(`${this.state.data.punto_emision_nota_credito}` || '').padStart(3, '0')}
+                                    -
+                                    {(`${this.state.data.secuencia_nota_credito}` || '').padStart(9, '0')}
+                                </Label>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-6">Punto de emisión (tasa)</Label>
@@ -173,8 +179,14 @@ class AddCooperativaPuntoVentaModal extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-6">No. de Factura(tasa)</Label>
                             
-                                <Label style={{border:"none",width:"100%",textAlign:"left"}} onChange={this.onChange('localidad_establecimiento')} className="col-sm-6">{`${''}${this.props.establecimientoLocalidad}${'-00'}${this.state.data.punto_emision_tasa}${'-00000000'}${this.state.data.secuencia_tasa}`}</Label>
-                            
+                            <Label style={{border:"none",width:"100%",textAlign:"left"}} className="col-sm-6">
+                                {''}
+                                {(this.props.establecimientoLocalidad || '').padStart(3, '0')}
+                                -
+                                {(`${this.state.data.punto_emision_tasa}` || '').padStart(3, '0')}
+                                -
+                                {(`${this.state.data.secuencia_tasa}` || '').padStart(9, '0')}
+                            </Label>
                         </FormGroup>
                     </FormValidate>
                 </ModalBody>
