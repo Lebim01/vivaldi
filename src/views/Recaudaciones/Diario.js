@@ -151,7 +151,7 @@ class Diario extends React.Component {
                         ['', '', '', '', '', '', '', <Button outline onClick={() => this.imprimirTodos()}>Imprimir Todos</Button>],
                         ['Cooperativa', 'Localidad', 'Fecha venta', 'Cobrar', 'A cobrar', 'Cobrado', 'N.C', 'Acción']
                     ]}
-                    /*fieldNames={['Cooperativa', 'Localidad', 'Fecha venta', 'Cobrar', 'A cobrar', 'Cobrado', 'N.C', 'Acción']}*/
+                    fieldNames={['Cooperativa', 'Localidad', 'Fecha venta', 'Cobrar', 'A cobrar', 'Cobrado', 'N.C', 'Acción']}
                     fields={[
                         'cooperativa_nombre', 
                         'localidad_nombre', 

@@ -2,6 +2,7 @@ import React from 'react'
 import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button } from 'temeforest'
 import moment from 'moment'
 import { baseurl } from 'utils/url'
+import { moneyFormat } from 'utils/number'
 
 const style_text_center = { textAlign: 'center' }
 
@@ -100,7 +101,7 @@ class ReporteTasasContingenciaGeneral extends React.Component {
                                     searchable={false}
                                     
                                     head={[
-                                        [
+                                        ['', '', '', '', '', '', '', '', '', 
                                             {colSpan:3,title:''},
                                             {colSpan:2,title:'Generado',style:{style_text_center, borderLeft: '1px solid #e9e9e9'}},
                                         
@@ -109,6 +110,7 @@ class ReporteTasasContingenciaGeneral extends React.Component {
                                             {colSpan:2,title:'Saldo',style:{style_text_center, borderLeft: '1px solid #e9e9e9'}},
                                             
                                         ],
+                                        
 
                                         ['Fecha','Concepto','Cooperativa',
                                         {colSpan:1,title:'Cantidad',style:{style_text_center, borderLeft: '1px solid #e9e9e9'}}, 
@@ -120,12 +122,12 @@ class ReporteTasasContingenciaGeneral extends React.Component {
                                     ]}
                                     
                                     fields={['fecha', 'concepto', 'cooperativa_nombre',
-                                     'generado_cantidad', 
-                                     'generado_total', 
-                                     'vendido_cantidad', 
-                                     'vendido_total', 
-                                     'saldo_cantidad',
-                                     'saldo_total'
+                                     (row) => <label style={{float:"right"}}>$ {moneyFormat(row.generado_cantidad)}</label>,
+                                     (row) => <label style={{float:"right"}}>$ {moneyFormat(row.generado_total)}</label>,
+                                     (row) => <label style={{float:"right"}}>$ {moneyFormat(row.vendido_cantidad)}</label>,
+                                     (row) => <label style={{float:"right"}}>$ {moneyFormat(row.vendido_cantidad)}</label>,
+                                     (row) => <label style={{float:"right"}}>$ {moneyFormat(row.saldo_cantidad)}</label>,
+                                     (row) => <label style={{float:"right"}}>$ {moneyFormat(row.saldo_total)}</label>
                                      ]}
 
                                     endpoint='venta/tasa-contingencia-general'
