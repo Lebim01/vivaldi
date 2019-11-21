@@ -50,44 +50,44 @@ class ReporteClientesFrecuentes extends React.Component {
                 <ReportPage title="Reporte de clientes frecuentes">
                     <div className="row">
                         <FormGroup className="row col-sm-4">
-                            <Label className="col-sm-4">Cooperativa</Label>
-                            <div className="col-sm-8">
+                            <Label className="col-sm-6">Cooperativa</Label>
+                            <div className="col-sm-6">
                                 <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
                             </div>
                         </FormGroup>
                         <FormGroup className="row col-sm-4">
-                            <Label className="col-sm-4" >Fecha inicio</Label>
-                            <div className="col-sm-8">
+                            <Label className="col-sm-6" >Fecha inicio</Label>
+                            <div className="col-sm-6">
                                 <Input type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row col-sm-4">
-                            <Label className="col-sm-5" >Metodo de pago</Label>
-                            <div className="col-sm-7">
+                            <Label className="col-sm-7" >Metodo de pago</Label>
+                            <div className="col-sm-5">
                                 <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('forma_de_pago')} value={this.state.forma_de_pago}/>
                             </div>
                         </FormGroup>
                         <FormGroup className="row col-sm-4">
-                            <Label className="col-sm-4" style={{ marginLeft: '-20px' }} >Localidad</Label>
-                            <div className="col-sm-8" style={{ marginLeft: '20px' }}>
+                            <Label className="col-sm-6" style={{ marginLeft: '-20px' }} >Localidad</Label>
+                            <div className="col-sm-6" style={{ marginLeft: '20px' }}>
                                 <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row col-sm-4">
-                            <Label className="col-sm-4" style={{ marginLeft: '-22px' }} >Fecha fin</Label>
-                            <div className="col-sm-8" style={{ marginLeft: '22px' }}>
+                            <Label className="col-sm-6" >Fecha fin</Label>
+                            <div className="col-sm-6" >
                                 <Input type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row col-sm-4" >
-                            <Label className="col-sm-5" style={{ marginLeft: '-60px' }}>Destino</Label>
-                            <div className="col-sm-7" style={{ marginLeft: '60px' }}>
+                            <Label className="col-sm-5" >Destino</Label>
+                            <div className="col-sm-7" >
                                 <Select asyncOptions={this.optionsDestino} onChange={this.onChange('destino')} value={this.state.destino} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row col-sm-4">
-                            <Label className="col-sm-4" style={{ marginLeft: '-32px' }}>Reporte</Label>
-                            <div className="col-sm-8" style={{ marginLeft: '32px' }}>
+                            <Label className="col-sm-4" >Reporte</Label>
+                            <div className="col-sm-8" >
                                 <Select options={this.optionsReporte} onChange={this.onChange('reporte')} value={this.state.reporte} />
                             </div>
                         </FormGroup>

@@ -79,14 +79,14 @@ class ReporteBoletosTasas extends React.Component {
                     <div className="row">
                         <div className="col-sm-4">
                             <FormGroup className="row">
-                                <Label className="col-sm-4" id='mylabel'>Cooperativa</Label>
-                                <div className="col-sm-8">
+                                <Label className="col-sm-5" id='mylabel'>Cooperativa</Label>
+                                <div className="col-sm-7">
                                     <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.filters.cooperativa}/>
                                 </div>
                             </FormGroup>
                             <FormGroup className="row">
-                                <Label className="col-sm-4" id='mylabel'>Localidad</Label>
-                                <div className="col-sm-8">
+                                <Label className="col-sm-5" id='mylabel'>Localidad</Label>
+                                <div className="col-sm-7">
                                     <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.filters.localidad}/>
                                 </div>
                             </FormGroup>
@@ -107,8 +107,8 @@ class ReporteBoletosTasas extends React.Component {
                         </div>
                         <div className="col-sm-4">
                             <FormGroup className="row">
-                                <Label className="col-sm-4" id='mylabel'>Forma de pago</Label>
-                                <div className="col-sm-8">
+                                <Label className="col-sm-6" id='mylabel'>Forma de pago</Label>
+                                <div className="col-sm-6">
                                     <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('forma_de_pago')} value={this.state.filters.forma_de_pago} />
                                 </div>
                             </FormGroup>

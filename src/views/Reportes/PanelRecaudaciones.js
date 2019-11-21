@@ -39,8 +39,8 @@ class FormularioFiltros extends React.Component {
                 <Row>
                     <Col md="4" xs="6">
                         <FormGroup className="row">
-                            <Label className="col-sm-4">Cooperativa</Label>
-                            <div className="col-sm-8">
+                            <Label className="col-sm-6">Cooperativa</Label>
+                            <div className="col-sm-6">
                                 <Select onChange={this.onChange('cooperativa')} defaultOption="Todos" value={this.props.cooperativa} asyncOptions={this.optionsCooperativas} />
                             </div>
                         </FormGroup>
@@ -63,8 +63,8 @@ class FormularioFiltros extends React.Component {
                     </Col>
                     <Col md="4" xs="6">
                         <FormGroup className="row">
-                            <Label className="col-sm-4">Localidad</Label>
-                            <div className="col-sm-8">
+                            <Label className="col-sm-6">Localidad</Label>
+                            <div className="col-sm-6">
                                 <Select onChange={this.onChange('localidad')} value={this.props.localidad} asyncOptions={this.optionsLocalidad} />
                             </div>
                         </FormGroup>
