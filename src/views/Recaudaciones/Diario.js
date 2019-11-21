@@ -66,7 +66,9 @@ class Diario extends React.Component {
     fieldCobrar = (row) => {
         return (
             <React.Fragment>
-                { row.cobrado === 0 && <Button outline onClick={() => this.cobrar(row)}>Cobrar</Button> }
+                { row.a_cobrar > 0 && 
+                    <Button outline onClick={() => this.cobrar(row)}>Cobrar</Button> 
+                }
             </React.Fragment>
         )
     }
@@ -96,7 +98,9 @@ class Diario extends React.Component {
     fieldImprimir = (row) => {
         return (
             <React.Fragment>
-                { row.a_cobrar !== 0 && <Button outline onClick={() => this.toWord(row)}>Imprimir</Button> }
+                { row.a_cobrar !== 0 && 
+                    <Button outline onClick={() => this.toWord(row)}>Imprimir</Button> 
+                }
             </React.Fragment>
         )
     }
@@ -148,7 +152,16 @@ class Diario extends React.Component {
                         ['Cooperativa', 'Localidad', 'Fecha venta', 'Cobrar', 'A cobrar', 'Cobrado', 'N.C', 'Acción']
                     ]}
                     /*fieldNames={['Cooperativa', 'Localidad', 'Fecha venta', 'Cobrar', 'A cobrar', 'Cobrado', 'N.C', 'Acción']}*/
-                    fields={['cooperativa_nombre', 'localidad_nombre', 'fecha_venta', this.fieldCobrar, 'a_cobrar', 'cobrado', 'nc', this.fieldImprimir]}
+                    fields={[
+                        'cooperativa_nombre', 
+                        'localidad_nombre', 
+                        'fecha_venta', 
+                        this.fieldCobrar, 
+                        (row) => <label style={{float:"right"}}>$ {moneyFormat(row.a_cobrar)}</label>, 
+                        (row) => <label style={{float:"right"}}>$ {moneyFormat(row.cobrado)}</label>,
+                        (row) => <label style={{float:"right"}}>$ {moneyFormat(row.nc)}</label>,
+                        this.fieldImprimir
+                    ]}
 
                     endpoint='venta/cobros-diarios'
                     parameters={this.state}
