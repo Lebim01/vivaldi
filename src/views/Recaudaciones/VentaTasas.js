@@ -189,9 +189,11 @@ class VentaTasas extends React.Component {
     }
 
     editarVenta = (venta) => {
-        this.setState({
-            venta
-        }, this.toggle)
+        if(venta.motivo_modificacion === null){
+            this.setState({
+                venta
+            }, this.toggle)
+        }
     }
 
     fieldEditar = (row) => {
