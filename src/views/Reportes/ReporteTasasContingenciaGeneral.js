@@ -100,6 +100,7 @@ class ReporteTasasContingenciaGeneral extends React.Component {
                                 <ListPage 
                                     searchable={false}
                                     
+                                    
                                     head={[
                                         [
                                             {colSpan:3,title:''},
@@ -109,8 +110,19 @@ class ReporteTasasContingenciaGeneral extends React.Component {
                                         ],
                                         ['Fecha', 'Concepto', 'Cooperativa', 'Cantidad', 'Total', 'Cantidad', 'Total', 'Cantidad', 'Total']
                                     ]}
-                                    fields={['fecha', 'concepto', 'cooperativa_nombre', 'generado_cantidad', 'generado_total', 'vendido_cantidad', 'vendido_total', 'saldo_cantidad', 'saldo_total']}
+                                    fields={[
+                                        'fecha', 
+                                        'concepto', 
+                                        'cooperativa_nombre', 
+                                        (row)=> <label style={{float:"right"}}>${moneyFormat(row.generado_cantidad || 0)}</label>, 
+                                        (row) => <label style={{float:"right"}}>${moneyFormat(row.generado_total || 0)}</label>, 
+                                        (row) => <label style={{float:"right"}}>${moneyFormat(row.vendido_cantidad || 0)}</label>, 
+                                        (row) => <label style={{float:"right"}}>${moneyFormat(row.vendido_total || 0)}</label>, 
+                                        (row) => <label style={{float:"right"}}>${moneyFormat(row.saldo_cantidad)}</label>,
+                                        (row) => <label style={{float:"right"}}>${moneyFormat(row.saldo_total)}</label>,
+                                    ]}
 
+                                    
                                     endpoint='venta/tasa-contingencia-general'
                                     parameters={this.state}
                                     
