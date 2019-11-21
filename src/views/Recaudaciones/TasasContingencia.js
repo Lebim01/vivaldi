@@ -130,7 +130,7 @@ class TasasContingencia extends React.Component {
             <div style="margin-bottom: 10px; border-bottom: 1px solid black; width: 300px; text-align: center;">
                 <p style="margin-top: 5px; margin-bottom: 5px;">${row.localidad_nombre}</p>
                 <p style="margin-top: 5px; margin-bottom: 5px;">Contingencia general</p>
-                <p style="margin-top: 5px; margin-bottom: 5px;">Bloque #${row.bloque} - Tasa #${id}</p>
+                <p style="display:none; margin-top: 5px; margin-bottom: 5px;">Bloque #${row.bloque} - Tasa #${id}</p>
                 <p style="margin-top: 5px; margin-bottom: 5px;">
                     <span style="width: 100px; text-align: left;">Emisión: </span>
                     <span style="width: 100px; text-align: left;">${moment().format('DD/MM/YYYY')}</span>

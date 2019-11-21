@@ -3,6 +3,7 @@ import { ListPage, Label, FormGroup, Select, Input, ReportPage, Button } from 't
 import { baseurl } from 'utils/url'
 import { confirmEndpoint } from 'utils/dialog'
 import { printHtml } from 'utils/exportData'
+import { moneyFormat } from 'utils/number'
 import moment from 'moment'
 import Swal from 'sweetalert2';
 
@@ -77,7 +78,7 @@ class Diario extends React.Component {
                 <p>Localidad: ${row.localidad_nombre}</p>
                 <p>Cooperativa: ${row.cooperativa_nombre}</p>
                 <p>Fecha venta: ${row.fecha_venta}</p>
-                <p>Valor: ${row.a_cobrar}</p>
+                <p>Valor: $ ${moneyFormat(row.a_cobrar)}</p>
             </div>
         `
     }
