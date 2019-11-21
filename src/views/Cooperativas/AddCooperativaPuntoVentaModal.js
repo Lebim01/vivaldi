@@ -133,13 +133,13 @@ class AddCooperativaPuntoVentaModal extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-6">Secuencia (boleto)</Label>
                             <div className="col-sm-6">
-                                <Input type="number" id="secuenciaUna" onChange={this.onChange('secuencia_boleto')} value={this.state.data.secuencia_boleto} error={errors.includes('secuencia_boleto')} max="999" />
+                                <Input type="number" id="secuenciaUna" onChange={this.onChange('secuencia_boleto')} value={this.state.data.secuencia_boleto} error={errors.includes('secuencia_boleto')} max="9" />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
                                 <Label className="col-sm-6">No. de factura (boleto)</Label>
                                 
-                                <Label style={{width:"100%",textAlign:"left", flex: 1}} className="col-sm-6">{`${'00'}${this.state.data.establecimiento}${'-'}${'00'}${this.state.data.punto_emision_boleto}${'-'}${'000000'}${this.state.data.secuencia_boleto}`}</Label>
+                                <Label style={{width:"100%",textAlign:"left", flex: 1}} className="col-sm-6">{`${'00'}${this.state.data.establecimiento}${'-'}${'00'}${this.state.data.punto_emision_boleto}${'-'}${'00000000'}${this.state.data.secuencia_boleto}`}</Label>
                         </FormGroup>
                         <FormGroup className="row">
                             <Label className="col-sm-6">Punto de emisión (nota de crédito)</Label>
