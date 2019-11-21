@@ -122,12 +122,12 @@ class ReporteTasasContingenciaGeneral extends React.Component {
                                     ]}
                                     
                                     fields={['fecha', 'concepto', 'cooperativa_nombre',
-                                     (row) => <label style={{float:"right"}}>$ {moneyFormat(row.generado_cantidad)}</label>,
-                                     (row) => <label style={{float:"right"}}>$ {moneyFormat(row.generado_total)}</label>,
-                                     (row) => <label style={{float:"right"}}>$ {moneyFormat(row.vendido_cantidad)}</label>,
-                                     (row) => <label style={{float:"right"}}>$ {moneyFormat(row.vendido_cantidad)}</label>,
-                                     (row) => <label style={{float:"right"}}>$ {moneyFormat(row.saldo_cantidad)}</label>,
-                                     (row) => <label style={{float:"right"}}>$ {moneyFormat(row.saldo_total)}</label>
+                                     'generado_cantidad', 
+                                     'generado_total',
+                                     'vendido_cantidad',
+                                     'vendido_total',
+                                     'saldo_cantidad',
+                                     'saldo_total'
                                      ]}
 
                                     endpoint='venta/tasa-contingencia-general'
