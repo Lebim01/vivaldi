@@ -114,7 +114,8 @@ class MainView extends React.Component {
 
     tipos_emision = [
         { value: "FISI", label: "Física" },
-        { value: "ELEC", label: "Electrónica" },   
+        { value: "ELEC", label: "Electrónica" },
+        { value: "COMP", label: "Comprobante" },
     ]
 
     ambientes_elect = [
