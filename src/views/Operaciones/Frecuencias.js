@@ -100,6 +100,7 @@ class Frecuencias extends React.Component {
                     </div>
                 </div>
                 <ListPage
+                    id="report"
                     fieldNames={['Hora', 'Cooperativa', 'Destino', 'Vía', 'Tipo', 'Localidad', 'Fecha']}
                     fields={['hora_salida', 'cooperativa_nombre', 'ciudad_destino', 'ruta_via', 'tipo_nombre', 'localidad_nombre', 'fecha_validez']}
                     parameters={this.state}
