@@ -121,7 +121,7 @@ class AddCooperativaPuntoVentaModal extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-6">Punto de emisión (boleto)</Label>
                             <div className="col-sm-6">
-                                <Input type="number" onChange={this.onChange('punto_emision_boleto')} value={this.state.data.punto_emision_boleto} error={errors.includes('punto_emision_boleto')} max="999"  />
+                                <Input type="number" onChange={this.onChange('punto_emision_boleto')} value={this.state.data.punto_emision_boleto} error={errors.includes('punto_emision_boleto')} min="1" max="999"  />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">

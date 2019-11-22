@@ -275,7 +275,7 @@ class VentaTasas extends React.Component {
                                     endpoint='venta/venta_contingencia'
                                     parameters={this.state}
 
-                                    history={this.props.history}
+                                    history={this.props.history }
                                     refresh={refresh}
                                 />
                             </CardBody>

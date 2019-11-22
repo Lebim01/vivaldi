@@ -207,6 +207,11 @@ export default {
           name : 'Bandeja Tasas Cooperativa',
           url : '/#/recaudaciones/bandeja-tasas-cooperativa',
           permission : 'view_solicitudes_aprobadas'
+        }, 
+        {
+          name : 'Reporte de tasas normales',
+          url : '/#/recaudaciones/reporte-tasas-normales',
+          permission : 'view_tasas_normales'
         }
       ]
     },

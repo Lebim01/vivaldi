@@ -160,7 +160,7 @@ class Diario extends React.Component {
                         (row) => <label style={{float:"right"}}>$ {moneyFormat(row.a_cobrar)}</label>, 
                         (row) => <label style={{float:"right"}}>$ {moneyFormat(row.cobrado)}</label>,
                         (row) => <label style={{float:"right"}}>$ {moneyFormat(row.nc)}</label>,
-                        this.fieldImprimir
+                       this.fieldImprimir
                     ]}
 
                     endpoint='venta/cobros-diarios'
