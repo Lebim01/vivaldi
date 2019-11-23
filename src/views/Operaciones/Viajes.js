@@ -68,6 +68,7 @@ class Viajes extends React.Component {
                                     Listado de Viajes
                                     <Button className="pull-right" onClick={this.nuevo}>
                                         <i className="fa fa-plus" />
+
                                     </Button>
                                 </CardTitle>
                                 <br/>
@@ -138,6 +139,7 @@ class Viajes extends React.Component {
                                 </div>
                                 <div className="col-sm-12">
                                     <ListPage
+                                        exportExcel
                                         id="table-viajes"
                                         searchable={false}
                                         fieldNames={['Frecuencia','Cooperativa', 'Disco', 'Ruta']}
@@ -146,7 +148,7 @@ class Viajes extends React.Component {
                                         endpoint='viaje'
                                         urlFront={'operaciones/viajes'}
                                         parameters={this.state}
-                                        exportExcel
+                                        
 
                                         history={this.props.history}
                                     />

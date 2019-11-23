@@ -39,79 +39,78 @@ class Frecuencias extends React.Component {
 
     render(){
         return (
-            <ReportPage title="Listado de Frecuencias">       
-                <CardTitle>
-                    
-                    <Button className="pull-right" onClick={this.nuevo}>
-                        <i className="fa fa-plus" />
-                    </Button>
-                </CardTitle>
-                <br/>
-                <br/>
+            <div className="animated fadeIn">
                 <div className="row">
-                    <div className="col-sm-4">
-                        <FormGroup className="row">
-                            <Label className="col-sm-6">Cooperativa</Label>
-                            <div className="col-sm-6">
-                                <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
-                            </div>
-                        </FormGroup>
-                        <FormGroup className="row">
-                            <Label className="col-sm-6">Destino</Label>
-                            <div className="col-sm-6">
-                                <Select 
-                                    {...this.state.cooperativa
-                                        ? { asyncOptions : this.optionsCiudad({ cooperativa: this.state.cooperativa })}
-                                        : { options : [{ label: 'Seleccione una cooperativa' }] }
-                                    }
-                                    onChange={this.onChange('ruta')} 
-                                    value={this.state.ruta}
+                    <div className="col-sm-12">
+                    <Card>
+                         <CardBody>
+
+                                <CardTitle>
+                                    Listado de Frecuencias
+                                    <Button className="pull-right" onClick={this.nuevo}>
+                                        <i className="fa fa-plus" />
+                                    </Button>
+                                </CardTitle>
+                                <br/>
+                                <div className="row">
+                                    <div className="col-sm-4">
+                                        <FormGroup className="row">
+                                            <Label className="col-sm-5">Cooperativa</Label>
+                                            <div className="col-sm-7">
+                                                <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
+                                            </div>
+                                        </FormGroup>
+                                        <FormGroup className="row">
+                                            <Label className="col-sm-5">Destino</Label>
+                                            <div className="col-sm-7">
+                                                <Select asyncOptions={this.optionsCiudad({ cooperativa: this.state.cooperativa })} onChange={this.onChange('ruta')} value={this.state.ruta}/>
+                                            </div>
+                                        </FormGroup>
+                                    </div>
+                                    <div className="col-sm-4">
+                                        <FormGroup className="row">
+                                            <Label className="col-sm-5">Tipo</Label>
+                                            <div className="col-sm-7">
+                                                <Select options={this.optionsTipo} onChange={this.onChange('tipo')} value={this.state.tipo}/>
+                                            </div>
+                                        </FormGroup>
+                                        <FormGroup className="row">
+                                            <Label className="col-sm-5">Localidad</Label>
+                                            <div className="col-sm-7">
+                                                <Select asyncOptions={this.optionsLocalidad} defaultOption="Todos" onChange={this.onChange('localidad')} value={this.state.localidad}/>
+                                            </div>
+                                        </FormGroup>
+                                    </div>
+                                    <div className="col-sm-4">
+                                        <FormGroup className="row">
+                                            <Label className="col-sm-6">Fecha validez desde</Label>
+                                            <div className="col-sm-6">
+                                                <Input type="date" onChange={this.onChange('fecha_validez_desde')} value={this.state.fecha_validez_desde} />
+                                            </div>
+                                        </FormGroup>
+                                        <FormGroup className="row">
+                                            <Label className="col-sm-6">Fecha validez hasta</Label>
+                                            <div className="col-sm-6">
+                                                <Input type="date" onChange={this.onChange('fecha_validez_hasta')} value={this.state.fecha_validez_hasta} />
+                                            </div>
+                                        </FormGroup>
+                                    </div>
+                                </div>
+                                <ListPage
+                                    fieldNames={['Hora', 'Cooperativa', 'Destino', 'Vía', 'Tipo', 'Localidad']}
+                                    fields={['hora_salida', 'cooperativa_nombre', 'ciudad_destino', 'ruta_via', 'tipo_nombre', 'localidad_nombre']}
+                                    parameters={this.state}
+                                    exportExcel
+                                    
+                                    endpoint='frecuencia'
+                                    urlFront='operaciones/frecuencias'
+                                    history={this.props.history}
                                 />
-                            </div>
-                        </FormGroup>
-                    </div>
-                    <div className="col-sm-4">
-                        <FormGroup className="row">
-                            <Label className="col-sm-4">Tipo</Label>
-                            <div className="col-sm-8">
-                                <Select options={this.optionsTipo} onChange={this.onChange('tipo')} value={this.state.tipo}/>
-                            </div>
-                        </FormGroup>
-                        <FormGroup className="row">
-                            <Label className="col-sm-4">Localidad</Label>
-                            <div className="col-sm-8">
-                                <Select asyncOptions={this.optionsLocalidad} defaultOption="Todos" onChange={this.onChange('localidad')} value={this.state.localidad}/>
-                            </div>
-                        </FormGroup>
-                    </div>
-                    <div className="col-sm-4">
-                        <FormGroup className="row">
-                            <Label className="col-sm-6">Fecha validez desde</Label>
-                            <div className="col-sm-6">
-                                <Input type="date" onChange={this.onChange('fecha_validez_desde')} value={this.state.fecha_validez_desde} />
-                            </div>
-                        </FormGroup>
-                        <FormGroup className="row">
-                            <Label className="col-sm-6">Fecha validez hasta</Label>
-                            <div className="col-sm-6">
-                                <Input type="date" onChange={this.onChange('fecha_validez_hasta')} value={this.state.fecha_validez_hasta} />
-                            </div>
-                        </FormGroup>
+                             </CardBody>
+                        </Card>
                     </div>
                 </div>
-                <ListPage
-                    id="report"
-                    fieldNames={['Hora', 'Cooperativa', 'Destino', 'Vía', 'Tipo', 'Localidad', 'Fecha']}
-                    fields={['hora_salida', 'cooperativa_nombre', 'ciudad_destino', 'ruta_via', 'tipo_nombre', 'localidad_nombre', 'fecha_validez']}
-                    parameters={this.state}
-
-                    endpoint='frecuencia'
-                    urlFront='operaciones/frecuencias'
-                    history={this.props.history}
-                />
-                            
-                   
-            </ReportPage>
+            </div>
         )
     }
 }

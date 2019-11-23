@@ -86,13 +86,13 @@ class ReporteTasasNormales extends React.Component {
         printHtml(html)
     }
 
-    fieldImprimir = (row) => {
+    /*fieldImprimir = (row) => {
         return (
             <React.Fragment>
                 <Button outline onClick={() => this.toWord(row)}>Imprimir</Button>
             </React.Fragment>
         )
-    }
+    }*/
 
     render(){
         const { refresh } = this.state
@@ -148,10 +148,12 @@ class ReporteTasasNormales extends React.Component {
                      	(row)=> <label style={{float:"right"}}>{(row.usuario_solicitante_nombre || '')}</label>,
                         (row)=> <label style={{float:"right"}}>{(row.cantidad_aprobada || 0)}</label>,
                         (row)=> <label style={{float:"right"}}>${moneyFormat(row.valor || 0)}</label>,
-                        this.fieldImprimir]}
+                        /*this.fieldImprimir*/]}
 
                         endpoint={endpoint}
                         parameters={this.state}
+
+                        exportExcel
 
                         history={this.props.history}
                         refresh={refresh}
