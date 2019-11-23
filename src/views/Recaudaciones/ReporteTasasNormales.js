@@ -139,6 +139,7 @@ class ReporteTasasNormales extends React.Component {
                     <ListPage
                     	id="report"
                         searchable={false}
+                        exportExcel
 
                         fieldNames={['Localidad', 'Cooperativa','Fecha', 'Usuario', 'Cantidad', 'Valor']}
                         fields={[
@@ -153,7 +154,7 @@ class ReporteTasasNormales extends React.Component {
                         endpoint={endpoint}
                         parameters={this.state}
 
-                        exportExcel
+                        
 
                         history={this.props.history}
                         refresh={refresh}
