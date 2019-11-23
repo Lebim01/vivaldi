@@ -159,7 +159,7 @@ class Diario extends React.Component {
                         this.fieldCobrar, 
                         (row) => <label style={{float:"right"}}>$ {moneyFormat(row.a_cobrar)}</label>, 
                         (row) => <label style={{float:"right"}}>$ {moneyFormat(row.cobrado)}</label>,
-                        (row) => <label style={{float:"right"}}>{(row.fecha_cobro || 'fecha')}</label>,
+                        (row) => <label style={{float:"right"}}>{(row.fecha_cobro)}</label>,
                         (row) => <label style={{float:"right"}}>$ {moneyFormat(row.nc)}</label>,
                        this.fieldImprimir
                     ]}
