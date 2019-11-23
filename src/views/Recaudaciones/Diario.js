@@ -149,9 +149,9 @@ class Diario extends React.Component {
 
                     head={[
                         ['', '', '', '', '', '', '', <Button outline onClick={() => this.imprimirTodos()}>Imprimir Todos</Button>],
-                        ['Cooperativa', 'Localidad', 'Fecha venta', 'Cobrar', 'A cobrar', 'Cobrado', 'N.C', 'Acción']
+                        ['Cooperativa', 'Localidad', 'Fecha venta', 'Cobrar', 'A cobrar', 'Cobrado', 'Fecha cobro', 'N.C', 'Acción']
                     ]}
-                    fieldNames={['Cooperativa', 'Localidad', 'Fecha venta', 'Cobrar', 'A cobrar', 'Cobrado', 'N.C', 'Acción']}
+                    fieldNames={['Cooperativa', 'Localidad', 'Fecha venta', 'Cobrar', 'A cobrar', 'Cobrado', 'fecha_cobro', 'N.C', 'Acción']}
                     fields={[
                         'cooperativa_nombre', 
                         'localidad_nombre', 
@@ -159,6 +159,7 @@ class Diario extends React.Component {
                         this.fieldCobrar, 
                         (row) => <label style={{float:"right"}}>$ {moneyFormat(row.a_cobrar)}</label>, 
                         (row) => <label style={{float:"right"}}>$ {moneyFormat(row.cobrado)}</label>,
+                        (row) => <label style={{float:"right"}}> {(row.fecha_cobro)}</label>,
                         (row) => <label style={{float:"right"}}>$ {moneyFormat(row.nc)}</label>,
                        this.fieldImprimir
                     ]}
