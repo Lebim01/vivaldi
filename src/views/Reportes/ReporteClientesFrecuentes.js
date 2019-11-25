@@ -101,6 +101,7 @@ class ReporteClientesFrecuentes extends React.Component {
                     </div>
                     <ListPage
                         searchable={false}
+                        exportExcel
 
                         fieldNames={this.state.reporte == 1 ?  ['Pasajero', 'Viajes'] : ['Cliente', 'Cédula/RUC', 'Viajes']}
                         fields={this.state.reporte == 1 ? ['nombre', 'viajes'] : ['nombre', 'identificacion', 'viajes']}

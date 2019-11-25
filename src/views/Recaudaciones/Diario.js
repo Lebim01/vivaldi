@@ -143,12 +143,13 @@ class Diario extends React.Component {
                     </div>
                 </div>
                 <ListPage
+                    exportExcel
                     id="report"
                     searchable={false}
                     ref={this.table}
 
                     head={[
-                        ['', '', '', '', '', '', '', <Button outline onClick={() => this.imprimirTodos()}>Imprimir Todos</Button>],
+                        ['', '', '', '', '', '', '', '',  <Button outline onClick={() => this.imprimirTodos()}>Imprimir Todos</Button>],
                         ['Cooperativa', 'Localidad', 'Fecha venta', 'Cobrar', 'A cobrar', 'Cobrado', 'Fecha cobro', 'N.C', 'Acción']
                     ]}
                     fieldNames={['Cooperativa', 'Localidad', 'Fecha venta', 'Cobrar', 'A cobrar', 'Cobrado', 'Fecha cobro', 'N.C', 'Acción']}
@@ -157,10 +158,10 @@ class Diario extends React.Component {
                         'localidad_nombre', 
                         'fecha_venta', 
                         this.fieldCobrar, 
-                        (row) => <label style={{float:"right"}}>$ {moneyFormat(row.a_cobrar)}</label>, 
-                        (row) => <label style={{float:"right"}}>$ {moneyFormat(row.cobrado)}</label>,
-                        (row) => <label style={{float:"right"}}>{(row.fecha_cobro)}</label>,
-                        (row) => <label style={{float:"right"}}>$ {moneyFormat(row.nc)}</label>,
+                        (row) => <label style={{float:"right", fontWeight: 300}}>$ {moneyFormat(row.a_cobrar)}</label>, 
+                        (row) => <label style={{float:"right", fontWeight: 300}}>$ {moneyFormat(row.cobrado)}</label>,
+                        (row) => <label style={{float:"right", fontWeight: 300}}>{(row.fecha_cobro)}</label>,
+                        (row) => <label style={{float:"right", fontWeight: 300}}>$ {moneyFormat(row.nc)}</label>,
                        this.fieldImprimir
                     ]}
 

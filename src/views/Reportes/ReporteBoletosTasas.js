@@ -119,6 +119,7 @@ class ReporteBoletosTasas extends React.Component {
                         <TabPane tabId="1">
                             <ListPage
                                 searchable={false}
+                                exportExcel
 
                                 fieldNames={['Cooperativa','Boleto normal', 'Boleto especial', 'Normal anulado', 'Especial anulado', 'Total boleto', 'Total tasa']}
                                 fields={['cooperativa','boleto_normal', 'boleto_especial', 'normal_anulado', 'especial_anulado', 'total_boleto', 'total_tasa']}
@@ -134,6 +135,7 @@ class ReporteBoletosTasas extends React.Component {
                             Vendidos por cooperativa
                             <ListPage
                                 searchable={false}
+
 
                                 fieldNames={['Tipo', 'Cantidad', 'Valor unitario', 'Subtotal']}
                                 fields={['tipo_boleto', 'cantidad', 'valor_unitario', 'subtotal']}

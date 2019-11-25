@@ -96,6 +96,7 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
                     </div>
                     <ListPage
                         searchable={false}
+                        exportExcel
 
                         fieldNames={[(this.state.reporte === 2) ? 'Viaje' : 'Boletero' , 'Emitidas', 'Usadas']}
                         fields={[(this.state.reporte === 2) ? 'viaje' : 'boletero', 'tasas_emitidas', 'tasas_usadas']}

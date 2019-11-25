@@ -138,6 +138,7 @@ class TasasUsadasPorViaje extends React.Component {
                                     </div>
                                     <ListPage
                                         searchable={false}
+                                        exportExcel
 
                                         fieldNames={['Tasa (Código)', 'Usada', '# Asiento']}
                                         fields={['', '', '']}

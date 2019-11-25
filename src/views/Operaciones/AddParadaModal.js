@@ -12,7 +12,8 @@ class AddParadaModal extends React.Component {
     optionsParada = {
         url : `${baseurl}/ciudad/`,
         labelName: 'ciudad_provincia',
-        valueName: 'id'
+        valueName: 'id', 
+        optionProps: ['nombre']
     }
         
     componentDidMount(){
@@ -67,10 +68,10 @@ class AddParadaModal extends React.Component {
     }
 
     loadOptionsCiudades = async () => {
-        const {url, labelName, valueName} = this.optionsParada
+        const {url, labelName, valueName, optionProps} = this.optionsParada
         const results = await getResults(url)
         this.setState({
-            ciudades : results.map((row) => ({ label: row[labelName], value: row[valueName] }))
+            ciudades : results.map((row) => ({  value: row[labelName], value: row[valueName] , value: row[optionProps]}))
         })
     }
 
@@ -122,7 +123,7 @@ class AddParadaModal extends React.Component {
     }
 
     guardar = () => {
-        const { ciudad, ciudad_nombre, index, id } = this.state.data
+        const { ciudad, ciudad_nombre, nombre, index, id } = this.state.data
 
         if(!ciudad){
             this.setState({
@@ -136,7 +137,7 @@ class AddParadaModal extends React.Component {
         if(this.props.guardar){
             let _tarifas = this.encodeTarifas()
 
-            let _exito = this.props.guardar({ ciudad, ciudad_nombre, tarifas : _tarifas, index, id})
+            let _exito = this.props.guardar({ ciudad, ciudad_nombre, nombre, tarifas : _tarifas, index, id})
             if(_exito){
                 this.setState({
                     data : {},
@@ -172,7 +173,7 @@ class AddParadaModal extends React.Component {
         const { errors, tipos_servicio, tipos_clientes, data } = this.state
         const { tarifas } = data
 
-        const tabs = tipos_servicio.map((row) => ({ link: `${row.id}`, text: row.nombre }))
+        const tabs = tipos_servicio.map((row) => ({ link: `${row.id}`, text: row.nombre, text: row.nombre1 }))
 
         return (
             <Modal isOpen={this.props.show} toggle={this.toggle}>

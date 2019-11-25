@@ -143,12 +143,12 @@ class ReporteTasasNormales extends React.Component {
 
                         fieldNames={['Localidad', 'Cooperativa','Fecha', 'Usuario', 'Cantidad', 'Valor']}
                         fields={[
-                        (row)=> <label style={{float:"right"}}>{(row.localidad_nombre || '')}</label>,
-                        (row)=> <label style={{float:"right"}}>{(row.cooperativa_nombre || '')}</label>,  
-                        (row)=> <label style={{float:"right"}}>{(row.fecha || '')}</label>,
-                     	(row)=> <label style={{float:"right"}}>{(row.usuario_solicitante_nombre || '')}</label>,
-                        (row)=> <label style={{float:"right"}}>{(row.cantidad_aprobada || 0)}</label>,
-                        (row)=> <label style={{float:"right"}}>${moneyFormat(row.valor || 0)}</label>,
+                        (row)=> <label style={{float:"center", fontWeight: 300}}>{(row.localidad_nombre || '')}</label>,
+                        (row)=> <label style={{float:"center", fontWeight: 300}}>{(row.cooperativa_nombre || '')}</label>,  
+                        (row)=> <label style={{float:"center", fontWeight: 300}}>{(row.fecha || '')}</label>,
+                     	(row)=> <label style={{float:"left", fontWeight: 300}}>{(row.usuario_solicitante_nombre || '')}</label>,
+                        (row)=> <label style={{fontWeight: 300}}>{("  " + row.cantidad_aprobada || 0)}</label>,
+                        (row)=> <label style={{float:"right", fontWeight: 300}}>${moneyFormat(row.valor || 0)}</label>,
                         /*this.fieldImprimir*/]}
 
                         endpoint={endpoint}
