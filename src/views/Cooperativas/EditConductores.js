@@ -17,7 +17,8 @@ class EditConductor extends React.Component {
         data:{
             persona:{}, 
             documentacion:'none',
-            readOnlyPersona : true
+            readOnlyPersona : true,
+            tipo : '1'
         }, 
         tipos: this.tipos
     }
