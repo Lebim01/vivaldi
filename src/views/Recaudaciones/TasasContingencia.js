@@ -5,8 +5,13 @@ import moment from 'moment'
 import Swal from 'sweetalert2'
 import axios from 'axios'
 import { baseurl } from 'utils/url'
+import { moneyFormat } from 'utils/number'
 import { confirmEndpoint } from 'utils/dialog'
 import { printHtml, barcodeToPng } from 'utils/exportData'
+
+const style_money_label = {
+    float:'right'
+}
 
 /**
  * TASAS DE TIPO 2
@@ -215,8 +220,18 @@ class TasasContingencia extends React.Component {
                                 <ListPage
                                     searchable={false}
 
-                                    fieldNames={['Fecha', 'Localidad', 'Cantidad', 'Acción']}
-                                    fields={['fecha', 'localidad_nombre', 'cantidad', this.imprimir]}
+                                    headerClass="text-center"
+                                    tdBodyClass="text-center"
+
+                                    fieldNames={['Fecha', 'Localidad', 'Precio', 'Cantidad', 'Total', 'Acción']}
+                                    fields={[
+                                        'fecha', 
+                                        'localidad_nombre', 
+                                        (row) => <label style={style_money_label}>${moneyFormat(row.precio)}</label>, 
+                                        'cantidad', 
+                                        (row) => <label style={style_money_label}>${moneyFormat(row.total)}</label>, 
+                                        this.imprimir
+                                    ]}
 
                                     endpoint='venta/generacion_contingencia'
                                     parameters={this.state}

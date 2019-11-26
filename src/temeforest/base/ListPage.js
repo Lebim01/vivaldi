@@ -32,7 +32,7 @@ class RecordRow extends React.Component {
             <tr key={record.id} onDoubleClick={this.onRowDoubleClick}>
                 {fields.map((field, i) => {
                     return (
-                        <td key={i}>
+                        <td className={this.props.tdBodyClass} key={i}>
                             {typeof field === 'function' ? field(record) : record[field]}
                         </td>
                     )
@@ -260,7 +260,7 @@ class ListPage extends React.Component {
                                     <thead>
                                         { (fieldNames.length > 0) &&
                                             <tr>
-                                                {fieldNames.map((fieldName, i) => <th key={i} scope="col">{fieldName}</th>)}
+                                                {fieldNames.map((fieldName, i) => <th className={this.props.headerClass} key={i} scope="col">{fieldName}</th>)}
                                             </tr>
                                         }
                                         { (head.length > 0) &&
@@ -291,7 +291,7 @@ class ListPage extends React.Component {
                                         }
                                     </thead>
                                     <tbody>
-                                        {filtered.map((record, i) => <RecordRow record={record} fields={fields} key={i} onDoubleClick={() => this.onRowDoubleClick(record.id, record)} />)}
+                                        {filtered.map((record, i) => <RecordRow tdBodyClass={this.props.tdBodyClass} record={record} fields={fields} key={i} onDoubleClick={() => this.onRowDoubleClick(record.id, record)} />)}
                                     </tbody>
                                     { numEndVisibleFooterPages > 2 &&
                                         <tfoot>
@@ -347,7 +347,9 @@ ListPage.defaultProps = {
     redirect: true,
     fieldNames : [],
     head : [],
-    config : {}
+    config : {},
+    headerClass : '',
+    tdBodyClass : ''
 }
 
 export {ListPage, RecordRow}

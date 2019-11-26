@@ -31,28 +31,28 @@ class CustomRecordRow extends RecordRow {
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Aceptar'
-            }).then((result) => {
-                if (result.value) {
-                    axios.post(`${baseurl}/venta/venta/${record.venta}/generar_nota_credito/`, {
-                        numero_factura: record.numero,
-                        tipo_venta: record.tipo_venta
-                    }).then(response => {
-                        if (response.status == 201){   
-                            Swal.fire(
-                                'Operacion Exitosa',
-                                'La nota de credito ha sido realizada con exito.',
-                                'success'
-                            )
-                        }
-                    }).catch(err => {
-                        Swal.fire( 
-                            `Error`,
-                            'Intente nuevamente.',
-                            'error'
+        }).then((result) => {
+            if (result.value) {
+                axios.post(`${baseurl}/venta/venta/${record.venta}/generar_nota_credito/`, {
+                    numero_factura: record.numero,
+                    tipo_venta: record.tipo_venta
+                }).then(response => {
+                    if (response.status == 201){   
+                        Swal.fire(
+                            'Operacion Exitosa',
+                            'La nota de credito ha sido realizada con exito.',
+                            'success'
                         )
-                    })
-                }
-          })
+                    }
+                }).catch(err => {
+                    Swal.fire( 
+                        `Error`,
+                        'Intente nuevamente.',
+                        'error'
+                    )
+                })
+            }
+        })
     }
 
     render(){

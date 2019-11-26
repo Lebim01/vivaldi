@@ -1,9 +1,7 @@
 import React from 'react'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
-import { Button, FormGroup, Input, Label, Select , FormElementValidate, FormValidate} from 'temeforest'
+import { Button, FormGroup, Input, Label, Select , FormValidate} from 'temeforest'
 import { baseurl } from 'utils/url'
-import axios from 'axios'
-import { validate } from 'utils/validate'
 
 //const endpoint = 'venta/puntoventa' 
 const endpoint = 'localidad'
