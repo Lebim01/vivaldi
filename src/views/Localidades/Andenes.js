@@ -2,6 +2,17 @@ import React from 'react'
 import { ListPage, Card, CardBody, Permission } from 'temeforest'
 
 function Andenes(props) {
+
+    const puertasAndenes = (row) => {
+        return (
+            <ul>
+                {row.puertas_acceso.map((p) => 
+                    <li>{p}</li>
+                )}
+            </ul>
+        )
+    }
+
     return (
         <Permission key_permission="view_anden" mode="redirect">
             <div className="animated fadeIn">
@@ -18,7 +29,7 @@ function Andenes(props) {
                                     searchPlaceholder="Descripción"
 
                                     fieldNames={['Descripcion', 'Silos', 'Puertas de acceso', 'Localidad', 'Nivel']}
-                                    fields={['descripcion', 'silos_nombre', 'puertas_nombre', 'localidad_nombre','localidad_nivel_nombre']}
+                                    fields={['descripcion', 'silos_nombre', puertasAndenes, 'localidad_nombre','localidad_nivel_nombre']}
 
                                     endpoint='anden'
                                     urlFront='localidades/andenes'
