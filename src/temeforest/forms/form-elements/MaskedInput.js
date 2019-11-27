@@ -8,7 +8,7 @@ export const REGEX = {
 
 function MaskedInput ({ mask, onChange, ...props }) {
 
-    const preventMask = (newValue, keyCode) => {
+    const onChangeMask = (newValue, keyCode) => {
 
         if(keyCode === 8){
             const { value } = props
@@ -95,7 +95,7 @@ function MaskedInput ({ mask, onChange, ...props }) {
     return (
         <Input 
             mask={mask} 
-            preventMask={preventMask}
+            preventMask={onChangeMask}
             {...props} 
         />
     )
