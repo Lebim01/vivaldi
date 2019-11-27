@@ -64,10 +64,7 @@ class MainView extends React.Component {
                         }}
                         validator={{
                             validationRules: {
-                                required:"El campo es requerido",
-                                validate: validate({
-                                    url: 'El valor debe ser una URL válida'
-                                })
+                                required:"El campo es requerido"
                             }
                         }}
                     />
