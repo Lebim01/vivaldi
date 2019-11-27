@@ -609,8 +609,8 @@ class EditCooperativas extends React.Component {
     }
 
     parseData(data){
-        data.obligado_contabilidad = data.obligado_contabilidad.toLocaleLowerCase() === 'si'
-        data.contribuyente_especial = data.contribuyente_especial.toLocaleLowerCase() === 'si'
+        data.obligado_contabilidad = data.obligado_contabilidad === 'si'
+        data.contribuyente_especial = data.contribuyente_especial === 'si'
         data.andenes = Object.keys(data.localidades_andenes).map((r) => data.localidades_andenes[r]).flat()
         return data
     }
