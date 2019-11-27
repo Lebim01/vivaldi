@@ -456,6 +456,8 @@ class EditCooperativas extends React.Component {
         let id = getParameter('id')
         if(id){
             this.getData(id)
+            this.getDataFirma(id)
+            this.getDataCorreo(id)
         }
     }
 
@@ -475,7 +477,7 @@ class EditCooperativas extends React.Component {
     }
 
     getDataFirma = async (id) => {
-        const { data } = await axios.get(`${baseurl}/cooperativa/${id}/firma/`)
+        const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/firma/`)
         let data_firma = this.state.data_firma
         data_firma.file_firma_exist = data.file_firma_exist
         this.setState({
