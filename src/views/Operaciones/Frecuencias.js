@@ -1,6 +1,8 @@
 import React from 'react'
 import { ListPage, Card, CardBody, CardTitle, FormGroup, Label, Select, ReportPage, Input, Button } from 'temeforest'
 import { baseurl, objectToUrl } from 'utils/url'
+import moment from 'moment'
+
 
 class Frecuencias extends React.Component {
 
@@ -104,14 +106,19 @@ class Frecuencias extends React.Component {
                                     </div>
                                 </div>
                                 <ListPage
+                                    exportExcel
+                                    id="frecuencia"
+                                    searchable={false}
                                     fieldNames={['Hora', 'Cooperativa', 'Destino', 'Vía', 'Tipo', 'Localidad']}
                                     fields={['hora_salida', 'cooperativa_nombre', 'ciudad_destino', 'ruta_via', 'tipo_nombre', 'localidad_nombre']}
-                                    parameters={this.state}
-                                    exportExcel
+                                    
+                                    
                                     
                                     endpoint='frecuencia'
-                                    urlFront='operaciones/frecuencias'
+                                    urlFront={'operaciones/frecuencias'}
+                                    parameters={this.state}
                                     history={this.props.history}
+                                    
                                 />
                              </CardBody>
                         </Card>
