@@ -7,7 +7,7 @@ import { baseurl, getResults } from 'utils/url'
 const pattern = /[(\d+\.\d)|]/
 class AddParadaModal extends React.Component {
 
-    state = { errors: [], data: {}, ciudades: [], tipos_servicio: [], tipos_clientes: [], tab: "1" }
+    state = { errors: [], data: {}, tipos_servicio: [], tipos_clientes: [], tab: "1" }
 
     optionsParada = {
         url : `${baseurl}/ciudad/`,
@@ -17,7 +17,6 @@ class AddParadaModal extends React.Component {
     }
         
     componentDidMount(){
-        this.loadOptionsCiudades()
         this.getTiposServicios()
         this.getTiposClientes()
     }
@@ -65,14 +64,6 @@ class AddParadaModal extends React.Component {
         }
 
         return _tarifas
-    }
-
-    loadOptionsCiudades = async () => {
-        const {url, labelName, valueName, optionProps} = this.optionsParada
-        const results = await getResults(url)
-        this.setState({
-            ciudades : results.map((row) => ({  value: row[labelName], value: row[valueName] , value: row[optionProps]}))
-        })
     }
 
     componentWillReceiveProps(props){
@@ -169,6 +160,12 @@ class AddParadaModal extends React.Component {
         })
     }
 
+    onChangeDestino = (value, label, e) => {
+        this.onSaveData('ciudad', value)
+        this.onSaveData('ciudad_nombre', e.nombre)
+
+    }
+
     render(){
         const { errors, tipos_servicio, tipos_clientes, data } = this.state
         const { tarifas } = data
@@ -188,7 +185,7 @@ class AddParadaModal extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-4">Parada</Label>
                             <div className="col-sm-6">
-                                <RSelect asyncOptions={this.optionsParada} onChange={(value, label) => { this.onSaveData('ciudad', value); this.onSaveData('ciudad_nombre', label)}} value={this.state.data.ciudad} />
+                                <RSelect id="ciudad-destino-modal" asyncOptions={this.optionsParada} onChange={this.onChangeDestino} value={this.state.data.ciudad} />
                                 {errors.includes('ciudad') && <span className="text-danger">Este campo es requerido</span>}
                             </div>
                         </FormGroup>
