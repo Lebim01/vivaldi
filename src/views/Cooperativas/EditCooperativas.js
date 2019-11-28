@@ -215,7 +215,16 @@ class MainView extends React.Component {
                         validator={{
                             validationRules : {required:"El campo es requerido"}
                         }}
-                    />
+                    /> 
+                
+                    <FormGroup className="row">
+                            <Label className="col-sm-3">Cortesias por viajes</Label>
+                            <div className="col-sm-5">
+                                <Input type="number" onChange={this.onChange('cortesias_por_viaje')} value={this.props.cortesias_por_viaje} min="1" max="999"  />
+                            </div>
+                    </FormGroup>
+                
+                    
                     <FormGroup className="row">
                         <Label className="col-sm-3">Logo</Label>
                         <div className="col-sm-3">
