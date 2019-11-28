@@ -1,6 +1,7 @@
 import React from 'react'
 import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, ReportPage, Input, Button, FormValidate } from 'temeforest'
 import moment from 'moment'
+import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { baseurl } from 'utils/url'
 import { printHtml, barcodeToPng } from 'utils/exportData'
 import axios from 'axios'
@@ -20,7 +21,8 @@ class ReporteTasasNormales extends React.Component {
         //fecha : moment().format('YYYY-MM-DD'),
         fecha_inicio : moment().format('YYYY-MM-DD'),
         fecha_fin : moment().format('YYYY-MM-DD'),
-        estado : 1 // aceptado
+        estado : 1, // aceptado
+        
     }
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
@@ -31,6 +33,12 @@ class ReporteTasasNormales extends React.Component {
     optionsLocalidad = {
         url : `${baseurl}/localidad/`,
         labelName: 'nombre',
+        valueName: 'id'
+    }
+
+    optionsFecha= {
+        url : `${baseurl}/venta/generacion_contingencia/`,
+        labelName: 'fecha',
         valueName: 'id'
     }
 
@@ -97,7 +105,9 @@ class ReporteTasasNormales extends React.Component {
     render(){
         const { refresh } = this.state
         return (
+
             <ReportPage title="Reporte Tasas Normales">
+               
       			    <br/>
                     <div className="row">
                         <div className="col-sm-6">
@@ -118,13 +128,13 @@ class ReporteTasasNormales extends React.Component {
                             <FormGroup className="row">
                                 <Label className="col-sm-3">Fecha inicio</Label>
                                 <div className="col-sm-8">
-                                    <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
+                                    <Input asyncOptions={this.optionsFecha} className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
                                 </div>
                             </FormGroup>
                             <FormGroup className="row">
                                 <Label className="col-sm-3">Fecha fin</Label>
                                 <div className="col-sm-8">
-                                    <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
+                                    <Input asyncOptions={this.optionsFecha} className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
                                 </div>
                             </FormGroup>
                         </div>
@@ -140,13 +150,14 @@ class ReporteTasasNormales extends React.Component {
                     	id="report"
                         searchable={false}
                         exportExcel
+                        ref={this.table}
 
                         fieldNames={['Localidad', 'Cooperativa','Fecha', 'Usuario', 'Cantidad', 'Valor']}
                         fields={[
-                        (row)=> <label style={{float:"center", fontWeight: 300}}>{(row.localidad_nombre || '')}</label>,
-                        (row)=> <label style={{float:"center", fontWeight: 300}}>{(row.cooperativa_nombre || '')}</label>,  
-                        (row)=> <label style={{float:"center", fontWeight: 300}}>{(row.fecha || '')}</label>,
-                     	(row)=> <label style={{float:"left", fontWeight: 300}}>{(row.usuario_solicitante_nombre || '')}</label>,
+                        'localidad_nombre',
+                        'cooperativa_nombre', 
+                        'fecha',
+                     	'usuario_solicitante_nombre',
                         (row)=> <label style={{fontWeight: 300}}>{("  " + row.cantidad_aprobada || 0)}</label>,
                         (row)=> <label style={{float:"right", fontWeight: 300}}>${moneyFormat(row.valor || 0)}</label>,
                         /*this.fieldImprimir*/]}

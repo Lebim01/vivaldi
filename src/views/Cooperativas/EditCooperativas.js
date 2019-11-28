@@ -5,6 +5,7 @@ import { baseurl, baseMediaUrl, getParameter, getResults, objectToUrl } from 'ut
 import { fileToBase64 } from 'utils/file'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import { validate } from 'utils/validate'
 import 'react-dual-listbox/lib/react-dual-listbox.css';
 
 const endpoint = 'cooperativa'
@@ -216,13 +217,24 @@ class MainView extends React.Component {
                             validationRules : {required:"El campo es requerido"}
                         }}
                     /> 
-                
-                    <FormGroup className="row">
-                            <Label className="col-sm-3">Cortesias por viajes</Label>
-                            <div className="col-sm-5">
-                                <Input type="number" onChange={this.onChange('cortesias_por_viaje')} value={this.props.cortesias_por_viaje} min="1" max="999"  />
-                            </div>
-                    </FormGroup>
+                    <FormElementValidate
+                        label={{text:'Cortesia por viaje'}}
+                        input={{
+                            name : 'cortesias_por_viaje',
+                            element: <Input type="number" min="1" max="20" modeNumber="positive_integer" onChange={this.onChange('cortesias_por_viaje')} value={this.props.cortesias_por_viaje} />
+                        }}
+                        
+                        validator={{
+                            validationRules: { 
+                                required : 'El campo es requerido', 
+                                validate : validate({
+                                    number : "El valor debe ser un número"
+                                }), 
+                                min : { value: 1, message: 'El valor no puede ser menor a 1' }, 
+                                max : { value: 20, message: 'El valor no puede ser mayor a 20' }
+                            }
+                        }}
+                    /> 
                 
                     
                     <FormGroup className="row">

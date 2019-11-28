@@ -109,8 +109,8 @@ class Frecuencias extends React.Component {
                                     exportExcel
                                     id="frecuencia"
                                     searchable={false}
-                                    fieldNames={['Hora', 'Cooperativa', 'Destino', 'Vía', 'Tipo', 'Localidad']}
-                                    fields={['hora_salida', 'cooperativa_nombre', 'ciudad_destino', 'ruta_via', 'tipo_nombre', 'localidad_nombre']}
+                                    fieldNames={['Hora', 'Cooperativa', 'Destino', 'Vía', 'Fecha' ,'Tipo', 'Localidad']}
+                                    fields={['hora_salida', 'cooperativa_nombre', 'ciudad_destino', 'ruta_via', 'fecha_validez','tipo_nombre', 'localidad_nombre']}
                                     
                                     
                                     

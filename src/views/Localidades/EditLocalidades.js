@@ -193,7 +193,7 @@ class MainView extends React.Component {
                         label={{text:'Tarifa tasa'}}
                         input={{
                             name : 'tarifa_tasa',
-                            element: <Input onChange={this.onChange('tarifa_tasa')} type="number" value={this.props.tarifa_tasa} />
+                            element: <Input onChange={this.onChange('tarifa_tasa')} type="number" value={this.props.tarifa_tasa} min={1}/>
                         }}
                         validator={{
                             validationRules: {

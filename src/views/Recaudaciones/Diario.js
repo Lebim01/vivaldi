@@ -148,10 +148,6 @@ class Diario extends React.Component {
                     searchable={false}
                     ref={this.table}
 
-                    head={[
-                        ['', '', '', '', '', '', '', '',  <Button outline onClick={() => this.imprimirTodos()}>Imprimir Todos</Button>],
-                        ['Cooperativa', 'Localidad', 'Fecha venta', 'Cobrar', 'A cobrar', 'Cobrado', 'Fecha cobro', 'N.C', 'Acción']
-                    ]}
                     fieldNames={['Cooperativa', 'Localidad', 'Fecha venta', 'Cobrar', 'A cobrar', 'Cobrado', 'Fecha cobro', 'N.C', 'Acción']}
                     fields={[
                         'cooperativa_nombre', 
