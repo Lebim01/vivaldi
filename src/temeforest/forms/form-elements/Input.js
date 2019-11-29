@@ -93,6 +93,7 @@ export class Input extends React.Component {
     onKeyDown = (e) => {
         if(isMobile()){
             let v = e.originalEvent
+            console.log(v)
             if(e.hasOwnProperty(v))
                 console.log(v + ' |-.-> ' + e[v]);
             else
