@@ -91,9 +91,7 @@ export class Input extends React.Component {
     }
 
     onInput = (e) => {
-        e.persist()
-        console.log(e)
-        let keyCode = e.originalEvent.data.charCodeAt(0);
+        let keyCode = e.nativeEvent.data.charCodeAt(0);
         let key = String.fromCharCode(keyCode)
         console.log(keyCode, key)
     }
