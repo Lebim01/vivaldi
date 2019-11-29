@@ -91,6 +91,7 @@ export class Input extends React.Component {
     }
 
     onKeyDown = (e) => {
+        e.persist()
         console.log(e)
         const { type, onKeyDown, modeNumber, mask, preventMask } = this.props
 
