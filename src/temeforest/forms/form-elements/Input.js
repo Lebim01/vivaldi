@@ -90,16 +90,13 @@ export class Input extends React.Component {
         }
     }
 
-    onKeyDown = (e) => {
+    onKeyPress = (e) => {
         if(isMobile()){
-            let v = e.originalEvent
-            console.log(v)
-            if(e.hasOwnProperty(v))
-                console.log(v + ' |-.-> ' + e[v]);
-            else
-                console.log('no tiene')
+            console.log(e.keyCode)
         }
+    }
 
+    onKeyDown = (e) => {
         const { type, onKeyDown, modeNumber, mask, preventMask } = this.props
 
         if(type === 'number'){
@@ -153,7 +150,7 @@ export class Input extends React.Component {
                 value={_value} 
                 onChange={this.onChange}
                 onKeyUp={this.onKeyUp}
-                onInput={this.onInput}
+                onKeyPress={this.onKeyPress}
                 {...otherProps} 
                 ref={register} 
             />
