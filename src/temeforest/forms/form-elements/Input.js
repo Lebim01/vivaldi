@@ -91,6 +91,7 @@ export class Input extends React.Component {
     }
 
     onKeyDown = (e) => {
+        e.persist()
         const { type, onKeyDown, modeNumber, mask, preventMask } = this.props
 
         if(type === 'number'){
@@ -108,6 +109,7 @@ export class Input extends React.Component {
         }
 
         if(mask){
+            console.log(e)
             let key = isMobile() ? e.nativeEvent.data : e.key 
             console.log(key)
             let res1 = isMobile() ? key.charCodeAt(0) : e.keyCode === 8
