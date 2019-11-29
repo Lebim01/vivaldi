@@ -90,9 +90,16 @@ export class Input extends React.Component {
         }
     }
 
+    onInput = (e) => {
+        if(isMobile()){
+            console.log(e.key)
+            console.log(e.keyCode)
+        }
+    }
+
     onKeyDown = (e) => {
-        e.persist()
-        console.log(e)
+        console.log(e.key)
+        console.log(e.keyCode)
         const { type, onKeyDown, modeNumber, mask, preventMask } = this.props
 
         if(type === 'number'){
@@ -146,6 +153,7 @@ export class Input extends React.Component {
                 value={_value} 
                 onChange={this.onChange}
                 onKeyUp={this.onKeyUp}
+                onInput={this.onInput}
                 {...otherProps} 
                 ref={register} 
             />
