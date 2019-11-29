@@ -90,12 +90,6 @@ export class Input extends React.Component {
         }
     }
 
-    onKeyPress = (e) => {
-        console.log('onkeypress')
-        console.log(e.key)
-        console.log(e.keyCode)
-    }
-
     onKeyDown = (e) => {
         const { type, onKeyDown, modeNumber, mask, preventMask } = this.props
 
@@ -131,6 +125,9 @@ export class Input extends React.Component {
     }
 
     onKeyUp = (e) => {
+        console.log(e.key)
+        console.log(e.keyCode)
+
         if(this.props.upper)
             e.target.value = ("" + e.target.value).toUpperCase()
         if(this.props.lower)
@@ -149,8 +146,7 @@ export class Input extends React.Component {
                 value={_value} 
                 onChange={this.onChange}
                 onKeyUp={this.onKeyUp}
-                
-                onKeyPress={this.onKeyPress}
+                onKeyDown={this.onKeyDown} 
                 {...otherProps} 
                 ref={register} 
             />
