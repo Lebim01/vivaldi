@@ -92,6 +92,8 @@ export class Input extends React.Component {
     onKeyDown = (e) => {
         const { type, onKeyDown, modeNumber, mask, preventMask } = this.props
 
+        console.log('onkeydown')
+
         if(type === 'number'){
             if(e.key === 'e'){
                 e.preventDefault()
