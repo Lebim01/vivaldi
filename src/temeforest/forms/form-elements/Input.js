@@ -91,9 +91,9 @@ export class Input extends React.Component {
     }
 
     onKeyPress = (e) => {
-        if(isMobile()){
-            console.log(e.keyCode)
-        }
+        console.log('onkeypress')
+        console.log(e.key)
+        console.log(e.keyCode)
     }
 
     onKeyDown = (e) => {
@@ -113,7 +113,7 @@ export class Input extends React.Component {
             }
         }
 
-        if(mask){
+        if(mask && !isMobile()){
             let key = e.key
             let res1 = e.keyCode === 8
             let res2 = isNotSpecialKey.test(key)
@@ -145,11 +145,11 @@ export class Input extends React.Component {
         return (
             <input
                 type={type} 
-                onKeyDown={this.onKeyDown} 
                 className={`form-control ${className} ${error ?'is-invalid':''}`} 
                 value={_value} 
                 onChange={this.onChange}
                 onKeyUp={this.onKeyUp}
+                onKeyDown={this.onKeyDown} 
                 onKeyPress={this.onKeyPress}
                 {...otherProps} 
                 ref={register} 
