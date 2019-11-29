@@ -84,7 +84,7 @@ class Login2 extends React.Component {
     render(){
         return (
             <div className="auth-wrapper d-flex no-block justify-content-center align-items-center container-login">
-                <div className="auth-box on-sidebar" style={{'max-width' : 500, padding: 50, 'padding-top' : 100}}>
+                <div className="auth-box on-sidebar" style={{maxWidth : 500, padding: 50, paddingTop : 100}}>
                     <div id="loginform">
                         <div className="logo">
                             <span className="db"><img src="assets/img/LOGO-ICON-TEXTO.png" height="50" alt="logo"/></span>
