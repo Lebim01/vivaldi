@@ -13,3 +13,7 @@ function isMobile() {
        return false;
     }
 }
+
+export {
+   isMobile
+}
