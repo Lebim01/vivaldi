@@ -52,8 +52,12 @@ class MainView extends React.Component {
                             element: <Input onChange={this.onChange('ip')} value={this.props.ip} placeholder="0.0.0.0" />
                         }}
                         validator={{
-                            validationRules: {required:true, ip:true},
-                            validationMessages: {required:"El campo es requerido", ip: 'El valor debe ser una IP valida'}
+                            validationRules: {
+                                required:"El campo es requerido",
+                                validate: validate({
+                                    ip: 'El valor debe ser una IP válida'
+                                })
+                            },
                         }}
                     />
                     <FormElementValidate
@@ -64,8 +68,11 @@ class MainView extends React.Component {
                         }}
                         validator={{
                             validationRules: {
-                                required:"El campo es requerido"
-                            }
+                                required:"El campo es requerido",
+                                validate: validate({
+                                    url: 'El valor debe ser una URL válida'
+                                })
+                            },
                         }}
                     />
                     <FormElementValidate
