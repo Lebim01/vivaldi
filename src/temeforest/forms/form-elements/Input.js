@@ -127,7 +127,7 @@ export class Input extends React.Component {
             }
         }
 
-        if(mask && !isMobile()){
+        if(mask){
             let key = e.key 
             let res1 = e.keyCode === 8
             let res2 = isNotSpecialKey.test(key)
@@ -163,7 +163,7 @@ export class Input extends React.Component {
                 value={_value} 
                 onChange={this.onChange}
                 onKeyUp={this.onKeyUp}
-                onKeyDown={this.onKeyDown} 
+                onKeyDown={this.onKeyDown}
                 {...otherProps} 
                 ref={register} 
             />
