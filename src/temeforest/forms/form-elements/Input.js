@@ -90,16 +90,15 @@ export class Input extends React.Component {
         }
     }
 
-    onInput = (e) => {
-        if(isMobile()){
-            console.log(e.key)
-            console.log(e.keyCode)
-        }
-    }
-
     onKeyDown = (e) => {
-        console.log(e.key)
-        console.log(e.keyCode)
+        if(isMobile()){
+            let v = e.originalEvent
+            if(e.hasOwnProperty(v))
+                console.log(v + ' |-.-> ' + e[v]);
+            else
+                console.log('no tiene')
+        }
+
         const { type, onKeyDown, modeNumber, mask, preventMask } = this.props
 
         if(type === 'number'){
@@ -117,7 +116,7 @@ export class Input extends React.Component {
         }
 
         if(mask){
-            let key = isMobile() ? e.originalEvent.data.charCodeAt(0) : e.key
+            let key = e.key
             let res1 = e.keyCode === 8
             let res2 = isNotSpecialKey.test(key)
             console.log(key, isNotSpecialKey.test(key), res2, res1 || res2)
