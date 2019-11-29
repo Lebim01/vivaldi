@@ -10,8 +10,6 @@ function MaskedInput ({ mask, onChange, ...props }) {
 
     const onChangeMask = (newValue, keyCode) => {
 
-        console.log('onchangemask', newValue, keyCode)
-
         if(keyCode === 8){
             const { value } = props
             changeValue(removeLastString(value, mask))

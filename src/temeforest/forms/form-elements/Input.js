@@ -92,8 +92,6 @@ export class Input extends React.Component {
     onKeyDown = (e) => {
         const { type, onKeyDown, modeNumber, mask, preventMask } = this.props
 
-        console.log('onkeydown')
-
         if(type === 'number'){
             if(e.key === 'e'){
                 e.preventDefault()
@@ -111,7 +109,7 @@ export class Input extends React.Component {
         if(mask){
             let res1 = e.keyCode === 8
             let res2 = isNotSpecialKey.test(e.key)
-            console.log(e.key, isNotSpecialKey.test(e.key), res2, res1 || res2)
+            console.log(e.key, e.which, isNotSpecialKey.test(e.key), res2, res1 || res2)
             // solo enviar al estado los caracteres validos
             if(res1 || res2){
                 preventMask(e.target.value + e.key, e.keyCode)
