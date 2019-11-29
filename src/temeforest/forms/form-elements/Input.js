@@ -145,9 +145,6 @@ export class Input extends React.Component {
     }
 
     onKeyUp = (e) => {
-        console.log(e.key)
-        console.log(e.keyCode)
-
         if(this.props.upper)
             e.target.value = ("" + e.target.value).toUpperCase()
         if(this.props.lower)
