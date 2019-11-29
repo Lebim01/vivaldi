@@ -90,7 +90,7 @@ class RegistroTasa extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-3">Cantidad (unidades)</Label>
                             <div className="col-sm-6">
-                                <Input type="number" onChange={this.onChange('cantidad')} value={this.props.cantidad} />
+                                <Input type="number" onChange={this.onChange('cantidad')} value={this.props.cantidad} min="1" />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
