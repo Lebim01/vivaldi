@@ -149,7 +149,7 @@ export class Input extends React.Component {
                 value={_value} 
                 onChange={this.onChange}
                 onKeyUp={this.onKeyUp}
-                onKeyDown={this.onKeyDown} 
+                
                 onKeyPress={this.onKeyPress}
                 {...otherProps} 
                 ref={register} 
