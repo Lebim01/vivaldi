@@ -90,8 +90,27 @@ export class Input extends React.Component {
         }
     }
 
+    onInput = (e) => {
+        const { onInput, mask, preventMask } = this.props
+
+        if(mask){
+            if(isMobile()){
+                let key = e.nativeEvent.data
+                let res1 = key.charCodeAt(0) == 8
+                let res2 = isNotSpecialKey.test(key)
+                console.log(key, isNotSpecialKey.test(key), res2, res1 || res2)
+
+                if(res1 || res2){
+                    preventMask(e.target.value + key, e.keyCode)
+                }
+                e.preventDefault()
+            }
+        }
+
+        if(onInput) onInput(e)
+    }
+
     onKeyDown = (e) => {
-        e.persist()
         const { type, onKeyDown, modeNumber, mask, preventMask } = this.props
 
         if(type === 'number'){
@@ -108,11 +127,9 @@ export class Input extends React.Component {
             }
         }
 
-        if(mask){
-            console.log(e)
-            let key = isMobile() ? e.nativeEvent.data : e.key 
-            console.log(key)
-            let res1 = isMobile() ? key.charCodeAt(0) : e.keyCode === 8
+        if(mask && !isMobile()){
+            let key = e.key 
+            let res1 = e.keyCode === 8
             let res2 = isNotSpecialKey.test(key)
             console.log(key, isNotSpecialKey.test(key), res2, res1 || res2)
             // solo enviar al estado los caracteres validos
