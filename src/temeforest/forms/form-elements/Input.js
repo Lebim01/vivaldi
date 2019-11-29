@@ -107,12 +107,13 @@ export class Input extends React.Component {
         }
 
         if(mask){
+            let key = String.fromCharCode(e.keyCode)
             let res1 = e.keyCode === 8
-            let res2 = isNotSpecialKey.test(e.key)
-            console.log(e.key, e.which, isNotSpecialKey.test(e.key), res2, res1 || res2)
+            let res2 = isNotSpecialKey.test(key)
+            console.log(key, isNotSpecialKey.test(key), res2, res1 || res2)
             // solo enviar al estado los caracteres validos
             if(res1 || res2){
-                preventMask(e.target.value + e.key, e.keyCode)
+                preventMask(e.target.value + key, e.keyCode)
             }
             e.preventDefault()
         }
