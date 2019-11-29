@@ -90,12 +90,6 @@ export class Input extends React.Component {
         }
     }
 
-    onInput = (e) => {
-        let keyCode = e.nativeEvent.data.charCodeAt(0);
-        let key = String.fromCharCode(keyCode)
-        console.log(keyCode, key)
-    }
-
     onKeyDown = (e) => {
         const { type, onKeyDown, modeNumber, mask, preventMask } = this.props
 
@@ -113,9 +107,9 @@ export class Input extends React.Component {
             }
         }
 
-        if(mask && !isMobile()){
-            let key = e.key
-            let res1 = e.keyCode === 8
+        if(mask){
+            let key = isMobile() ? e.nativeEvent.data : e.key 
+            let res1 = isMobile() ? e.nativeEvent.data.charCodeAt(0) : e.keyCode === 8
             let res2 = isNotSpecialKey.test(key)
             console.log(key, isNotSpecialKey.test(key), res2, res1 || res2)
             // solo enviar al estado los caracteres validos
@@ -153,7 +147,6 @@ export class Input extends React.Component {
                 onChange={this.onChange}
                 onKeyUp={this.onKeyUp}
                 onKeyDown={this.onKeyDown} 
-                onInput={this.onInput}
                 {...otherProps} 
                 ref={register} 
             />
