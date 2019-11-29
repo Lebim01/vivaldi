@@ -90,7 +90,15 @@ export class Input extends React.Component {
         }
     }
 
+    onInput = (e) => {
+        let keyCode = e.originalEvent.data.charCodeAt(0);
+        let key = String.fromCharCode(keyCode)
+        console.log(keyCode, key)
+    }
+
     onKeyDown = (e) => {
+        e.persist()
+        console.log(e)
         const { type, onKeyDown, modeNumber, mask, preventMask } = this.props
 
         if(type === 'number'){
@@ -147,6 +155,7 @@ export class Input extends React.Component {
                 onChange={this.onChange}
                 onKeyUp={this.onKeyUp}
                 onKeyDown={this.onKeyDown} 
+                onInput={this.onInput}
                 {...otherProps} 
                 ref={register} 
             />
