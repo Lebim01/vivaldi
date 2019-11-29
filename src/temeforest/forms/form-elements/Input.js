@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import FormGroup from './FormGroup'
+import { getCharFromKeyCode } from 'utils/string'
 
 const isNotSpecialKey = /^[a-zA-Z0-9\s]$/gm
 
@@ -107,7 +108,8 @@ export class Input extends React.Component {
         }
 
         if(mask){
-            let key = String.fromCharCode((96 <= e.keyCode && e.keyCode <= 105)? e.keyCode-48 : e.keyCode)
+            console.log(e.keyCode)
+            let key = getCharFromKeyCode(e.keyCode)
             let res1 = e.keyCode === 8
             let res2 = isNotSpecialKey.test(key)
             console.log(key, isNotSpecialKey.test(key), res2, res1 || res2)
