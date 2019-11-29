@@ -109,7 +109,8 @@ export class Input extends React.Component {
 
         if(mask){
             let key = isMobile() ? e.nativeEvent.data : e.key 
-            let res1 = isMobile() ? e.nativeEvent.data.charCodeAt(0) : e.keyCode === 8
+            console.log(key)
+            let res1 = isMobile() ? key.charCodeAt(0) : e.keyCode === 8
             let res2 = isNotSpecialKey.test(key)
             console.log(key, isNotSpecialKey.test(key), res2, res1 || res2)
             // solo enviar al estado los caracteres validos
