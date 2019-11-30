@@ -128,6 +128,8 @@ export class Input extends React.Component {
         }
 
         if(mask){
+            e.persist()
+            console.log(e)
             let key = isMobile() ? e.target.value.substr(-1) : e.key 
             let res1 = isMobile() ? e.target.value.substr(-1).charCodeAt(0) : e.keyCode === 8
             let res2 = isNotSpecialKey.test(key)
