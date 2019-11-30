@@ -1,110 +1,39 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { InputMask } from 'temeforest';
 import { Input } from './Input'
 
 export const REGEX = {
     LETTER : /^[a-zA-Z\s]+$/,
-    DIGIT : /^\d+$/
+    DIGIT : /^[\d]+$/
 }
 
-function MaskedInput ({ mask, onChange, ...props }) {
+function MaskedInput ({ mask, disabled, onBlur, onFocus, onMouseDown, readOnly, onChange, upper, lower, ...props }) {
 
-    const onChangeMask = (newValue, keyCode) => {
+    const [maskedValue, setMaskedValue] = useState('')
 
-        console.log(keyCode)
-        if(keyCode === 8){
-            const { value } = props
-            changeValue(removeLastString(value, mask))
-            return true
-        }
+    const _onChange = (e) => {
+        let val = e.target.value
 
-        // process value
-        let validValue = getValue(newValue, mask)
-        // trigger only with has changes
-        let result = props.value !== validValue
-
-        if(result){
-            changeValue(validValue)
-        }
-
-        return result
-    }
-
-    const changeValue = (value) => {
-        onChange({
-            target : {
-                type : 'text',
-                value : value
-            }
-        })
-    }
-
-    /**
-     * Va removiendo el ultimo caracter hasta eliminar la ultima regexp
-     */
-    const removeLastString = (value, mask) => {
-        let index = value.length
-        let _value = value
-
-        for(let i = index-1; i > 0; i--){
-            let maskCondition = mask[i]
-
-            _value = _value.substring(0, _value.length - 1);
-
-            if(maskCondition instanceof RegExp){
-                break
-            }
-        }
-
-        if(index-1 === 0)
-            return ''
-
-        return _value
-    }
-    
-    const getValue = (value, mask) => {
-        let validValue = ''
-
-        for(let index in value){
-            let char = value[index]
-            let maskCondition = mask[index]
-
-            if(maskCondition instanceof RegExp){
-                let result = maskCondition.test(char)
-                if(result){
-                    validValue += char + appendNextString(Number(index))
-                }else{
-                    break
-                }
-            }
-        }
-
-        return validValue
-    }
-
-    const appendNextString = (index) => {
-        let append = ''
-        for(let i = index+1; i <= mask.length; i++){
-            if(typeof mask[i] === 'string'){
-                append += mask[i]
-            }else{
-                break
-            }
-        }
-        return append
+        if(upper)
+            setMaskedValue(val.toUpperCase())
+        else if(lower)
+            setMaskedValue(val.toLowerCase())
+        else
+            setMaskedValue(val)
     }
 
     return (
-        <Input 
-            mask={mask} 
-            preventMask={onChangeMask}
-            {...props} 
-        />
+        <InputMask mask={mask} value={maskedValue} onChange={_onChange}>
+            <Input {...props} />
+        </InputMask>
     )
 }
 
 MaskedInput.defaultProps = {
     mask : '',
-    value : ''
+    value : '',
+    upper : false,
+    lower : false
 }
 
 export default MaskedInput

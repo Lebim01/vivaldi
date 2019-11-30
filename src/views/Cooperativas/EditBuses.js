@@ -114,6 +114,7 @@ class MainView extends React.Component {
                                     onChange={this.onChange('placa')} 
                                     value={this.props.placa}
                                     upper={true}
+                                    placeholder="ABC-1234"
                                     mask={
                                         //'ddd-cccc'
                                         [LETTER, LETTER, LETTER, '-', DIGIT, DIGIT, DIGIT, DIGIT]

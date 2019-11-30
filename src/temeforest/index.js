@@ -1,5 +1,5 @@
 import { Card, CardTitle, CardBody, CardSubtitle, ListPage, EditPage, ReportPage, FormElementValidate, FormValidate, ValidateContext, ApprovePage, RecordRow, Permission } from './base'
-import { Input, FormGroup, InputIcon, Select, Label, Tabs, DualList, TextArea, InputAutocomplete, RSelect, MaskedInput, RSelectAsync } from './forms'
+import { Input, FormGroup, InputIcon, Select, Label, Tabs, DualList, TextArea, InputAutocomplete, RSelect, MaskedInput, RSelectAsync, InputMask } from './forms'
 import { Button, ListGroup, ListItem, ListItemButton, Table } from './ui'
 import { BarChart, PieChart } from './charts'
 
@@ -31,6 +31,7 @@ export {
     RSelect,
     MaskedInput,
     RSelectAsync,
+    InputMask,
     /** UI */
     Button,
     ListGroup,
