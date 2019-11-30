@@ -128,6 +128,8 @@ export class Input extends React.Component {
         }
 
         if(mask){
+            e.persist()
+            console.log(e)
             let key = e.key 
             let res1 = e.keyCode === 8
             let res2 = isNotSpecialKey.test(key)
