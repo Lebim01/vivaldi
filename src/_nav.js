@@ -119,7 +119,8 @@ export default {
         },
         {
           name: 'Viajes Planificados Silo',
-          url: '/#/operaciones/viajes-planificados-silo'
+          url: '/#/operaciones/viajes-planificados-silo',
+          permission : 'view_viajes_planificados_silo'
         },
         {
           name: 'Frecuencias',
@@ -129,6 +130,7 @@ export default {
         {
           name: 'Frecuencias por lote',
           url: '/#/operaciones/frecuencias-lote',
+          permission : 'view_frecuencia'
         },
         /*{
           name: 'Consulta Tasa',
@@ -177,11 +179,13 @@ export default {
       children: [
         {
           name: 'Personas',
-          url: '/#/facturacion/personas'
+          url: '/#/facturacion/personas',
+          permission : 'view_persona'
         },
         {
           name: 'Documentos',
-          url: '/#/facturacion/documentos'
+          url: '/#/facturacion/documentos',
+          permission : 'view_detalleventa'
         },
       ],
     },
@@ -191,7 +195,8 @@ export default {
       children : [
         {
           name : 'Diarios',
-          url : '/#/recaudaciones/diario'
+          url : '/#/recaudaciones/diario',
+          permission : 'view_cobros_diarios'
         },
         {
           name : 'Tasas contingencia general',
@@ -285,7 +290,8 @@ export default {
       children : [
         {
           name: 'Registro Acciones',
-          url: '/#/auditoria/registro-acciones'
+          url: '/#/auditoria/registro-acciones',
+          permission : 'view_auditoria'
         },
         /*{
           name : 'Reportes Detallados',
@@ -293,7 +299,8 @@ export default {
         },*/
         {
           name : 'Tipo Emisión Cooperativas',
-          url : '/#/auditoria/tipo-emision-cooperativas'
+          url : '/#/auditoria/tipo-emision-cooperativas',
+          permission : 'view_auditoria'
         },
         /*{
           name : 'Permisos Roles',
