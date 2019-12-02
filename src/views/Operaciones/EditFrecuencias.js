@@ -108,7 +108,17 @@ class MainView extends React.Component {
                         label={{text:'Destino'}}
                         input={{
                             name : 'ruta',
-                            element: <Select onChange={this.onChange('ruta')} value={this.props.ruta} asyncOptions={this.optionsRutas({ cooperativa: this.props.cooperativa })} id="cmb_ruta" />
+                            element: (
+                                <Select 
+                                    { ...this.props.cooperativa
+                                        ? { asyncOptions : this.optionsRutas({ cooperativa: this.props.cooperativa })  }
+                                        : { options : [{ label : 'Seleccione una cooperativa', value : '' }] }
+                                    }
+                                    onChange={this.onChange('ruta')} 
+                                    value={this.props.ruta}
+                                    id="cmb_ruta"
+                                />
+                            )
                         }}
                         validator={{
                             validationRules: {required:"El campo es requerido"},

@@ -113,9 +113,18 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Destino</Label>
                         <div className="col-sm-5">
-                            <Select onChange={this.onChange('ruta')} value={this.props.ruta} asyncOptions={this.optionsRutas({ cooperativa: this.props.cooperativa })} id="cmb_ruta" />
+                            <Select 
+                                { ...this.props.cooperativa
+                                    ? { asyncOptions : this.optionsRutas({ cooperativa: this.props.cooperativa })  }
+                                    : { options : [{ label : 'Seleccione una cooperativa', value : '' }] }
+                                }
+                                onChange={this.onChange('ruta')} 
+                                value={this.props.ruta}
+                                id="cmb_ruta"
+                            />
                         </div>
                     </FormGroup>
+
                     <FormGroup className="row">
                         <Label className="col-sm-3">Tipo</Label>
                         <div className="col-sm-5">
