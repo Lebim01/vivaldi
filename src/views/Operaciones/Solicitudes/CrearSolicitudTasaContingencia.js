@@ -146,6 +146,7 @@ class CrearSolicitudTasaContigencia extends React.Component {
                 btnDelete={{
                     show: false
                 }}
+                key_permission="solicitudtasacontingencia"
             >
                 <MainView {...data} id={id} cantidad_aprobada={cantidad_aprobada} onChangeCantidadAprobada={this.onChangeCantidadAprobada} onChange={this.onChange} />
             </EditPage>

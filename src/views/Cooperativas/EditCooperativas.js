@@ -655,6 +655,7 @@ class EditCooperativas extends React.Component {
                 endpoint={endpoint} 
                 history={this.props.history}
                 parseData={this.parseData}
+                key_permission="cooperativa"
             >
                 <Tabs tab={tab} tabs={tabs} onClickTab={this.changeTab}/>
                 <TabContent activeTab={tab}>

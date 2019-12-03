@@ -86,7 +86,7 @@ class MainView extends React.Component {
     render(){
         const { id, data } = this.props
         return (
-            <EditPage title={`${id ? 'Editar' : 'Crear'} Bus`} parseData={this.props.parseData} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
+            <EditPage title={`${id ? 'Editar' : 'Crear'} Bus`} parseData={this.props.parseData} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history} key_permission="bus">
                 <FormValidate className="mt-4 form-horizontal">
                     <FormElementValidate
                         label={{text:'Disco'}}

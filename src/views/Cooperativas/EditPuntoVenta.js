@@ -415,6 +415,7 @@ class EditPuntoVenta extends React.Component {
                 endpoint={endpoint} 
                 history={this.props.history}
                 parseData={this.parseData}
+                key_permission="puntoventa"
             >
                 <MainView {...data} onChange={this.onChange} />
             </EditPage>

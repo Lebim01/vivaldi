@@ -257,6 +257,7 @@ class MainView extends React.Component {
                 history={this.props.history}
                 customValidation={this.validation}
                 parseData={this.parseData}
+                key_permission="bustipo"
             >
                 <FormValidate className="mt-4 form-horizontal">
                     <FormGroup className="row">

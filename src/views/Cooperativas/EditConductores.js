@@ -148,6 +148,7 @@ class EditConductor extends React.Component {
                 history={this.props.history}
                 parseData={this.parseData}
                 customValidation={this.validation}
+                key_permission="conductor"
             >
                 <FormValidate className="mt-4 form-horizontal">
                     <FormElementValidate

@@ -302,7 +302,7 @@ class EditRoles extends React.Component {
     render(){
         const { data, categories, id, all_add, all_view, all_change, all_delete } = this.state
         return (
-            <EditPage noValidate title={`${id ? 'Editar' : 'Crear'} Rol`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history}>
+            <EditPage noValidate title={`${id ? 'Editar' : 'Crear'} Rol`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history} key_permission="group">
                 <MainView 
                     {...data} 
                     categories={categories} 
