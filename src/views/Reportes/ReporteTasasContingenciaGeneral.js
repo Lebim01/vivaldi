@@ -87,6 +87,20 @@ class ReporteTasasContingenciaGeneral extends React.Component {
                                                 <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
                                             </div>
                                         </FormGroup>
+                                        <FormGroup className="row">
+                                            <Label className="col-sm-3">Tipo</Label>
+                                            <div className="col-sm-8">
+                                                <Select 
+                                                    onChange={this.onChange('tipo')} 
+                                                    value={this.state.tipo} 
+                                                    options={[
+                                                        {label : 'Todos', value:'t'},
+                                                        {label : 'Generadas', value:'g'},
+                                                        {label : 'Vendidas', value:'v'},
+                                                    ]} 
+                                                />
+                                            </div>
+                                        </FormGroup>
                                     </div>
                                 </div>
                                 <div className="row">

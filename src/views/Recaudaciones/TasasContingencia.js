@@ -208,6 +208,7 @@ class TasasContingencia extends React.Component {
                                                 <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
                                             </div>
                                         </FormGroup>
+                                       
                                     </div>
                                 </div>
                                 <div className="row">
