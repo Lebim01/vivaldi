@@ -184,6 +184,7 @@ class EditRoles extends React.Component {
                 }
             }
         }
+
         categories.push({
             id: null,
             name: 'Otros',
@@ -192,21 +193,26 @@ class EditRoles extends React.Component {
 
         // setear permisos por categoria
         for(let i in results){
-            let { id, content_type, name, codename, category } = results[i]
+            let { id, name, codename, category } = results[i]
+
             let type = ''
             if(codename.includes('view')) type = 'view'
             if(codename.includes('add')) type = 'add'
             if(codename.includes('change')) type = 'change'
             if(codename.includes('delete')) type = 'delete'
 
+            let permission_name_group = codename.replace('view', '').replace('add', '').replace('change', '').replace('delete', '')
+
             let indexCategory = categories.findIndex(r => r.id == category)
 
-            if(!categories[indexCategory].permisos[content_type]){
-                categories[indexCategory].permisos[content_type] = {}
+            if(!categories[indexCategory].permisos[permission_name_group]){
+                categories[indexCategory].permisos[permission_name_group] = {}
             }
 
-            categories[indexCategory].permisos[content_type].type = name.split(' ').splice(2, name.split(' ').length-1).join(' ')
-            categories[indexCategory].permisos[content_type][type] = id
+            categories[indexCategory].permisos[permission_name_group].type = name.startsWith('Can') 
+                ? name.split(' ').splice(2, name.split(' ').length-1).join(' ')
+                : name
+            categories[indexCategory].permisos[permission_name_group][type] = id
         }
 
         this.setState({
