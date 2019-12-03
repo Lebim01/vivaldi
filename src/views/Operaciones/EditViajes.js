@@ -261,7 +261,7 @@ function EditViajes(props){
 
     return (
         <Permission key_permission={id ? 'change_viaje' : 'add_viaje'} mode="redirect">
-            <EditPage title={`${id ? 'Editar' : 'Crear'} Viajes`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={props.history} customValidation={validation}>
+            <EditPage title={`${id ? 'Editar' : 'Crear'} Viajes`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={props.history} customValidation={validation} key_permission="viaje">
                 <MainView {...data} onChange={onChange} />
             </EditPage>
         </Permission>

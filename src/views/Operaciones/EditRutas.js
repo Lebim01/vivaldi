@@ -299,7 +299,7 @@ class EditRutas extends React.Component {
         const { data, id } = this.state
         return (
             <Permission key_permission={id ? 'change_ruta' : 'add_ruta'} mode="redirect">
-                <EditPage title={`${id ? 'Editar' : 'Crear'} Rutas`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history} customValidation={this.validation} parseData={this.parseData}>
+                <EditPage title={`${id ? 'Editar' : 'Crear'} Rutas`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history} customValidation={this.validation} parseData={this.parseData} key_permission="ruta">
                     <MainView {...data} onChange={this.onChange} />
                 </EditPage>
             </Permission>
