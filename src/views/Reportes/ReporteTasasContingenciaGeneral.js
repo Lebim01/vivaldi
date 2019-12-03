@@ -128,11 +128,11 @@ class ReporteTasasContingenciaGeneral extends React.Component {
                                         'fecha', 
                                         'concepto', 
                                         'cooperativa_nombre', 
-                                        (row)=> <label style={{float:"right"}}>${moneyFormat(row.generado_cantidad || 0)}</label>, 
+                                        (row)=> <label style={{float:"right"}}>{moneyFormat(row.generado_cantidad || 0)}</label>, 
                                         (row) => <label style={{float:"right"}}>${moneyFormat(row.generado_total || 0)}</label>, 
-                                        (row) => <label style={{float:"right"}}>${moneyFormat(row.vendido_cantidad || 0)}</label>, 
+                                        (row) => <label style={{float:"right"}}>{moneyFormat(row.vendido_cantidad || 0)}</label>, 
                                         (row) => <label style={{float:"right"}}>${moneyFormat(row.vendido_total || 0)}</label>, 
-                                        (row) => <label style={{float:"right"}}>${moneyFormat(row.saldo_cantidad || 0)}</label>,
+                                        (row) => <label style={{float:"right"}}>{moneyFormat(row.saldo_cantidad || 0)}</label>,
                                         (row) => <label style={{float:"right"}}>${moneyFormat(row.saldo_total || 0)}</label>,
                                     ]}
 
