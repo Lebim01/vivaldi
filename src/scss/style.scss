@@ -12,3 +12,8 @@
 
 // ie fixes
 @import "ie-fix";
+
+::placeholder { /* Chrome/Opera/Safari */
+    //color: pink;
+    opacity: 0;
+  }

@@ -122,9 +122,14 @@ class MainView extends React.Component {
                                 />
                             )
                         }}
+
+                        /*input={{
+                            name : 'placa',
+                            element: <Input onChange={this.onChange('placa')} value={this.props.placa} />
+                        }}
                         validator={{
                             validationRules: { required : 'El campo es requerido' }
-                        }}
+                        }}*/
                     />
                     <FormGroup className="row">
                         <Label className="col-sm-3">Cooperativa</Label>
