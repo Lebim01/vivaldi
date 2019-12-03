@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Input, Select, EditPage, TextArea, FormValidate, FormElementValidate, RSelect } from 'temeforest'
+import { Input, Select, EditPage, TextArea, FormValidate, FormElementValidate, RSelect, Permission } from 'temeforest'
 import { baseurl, getParameter, objectToUrl } from 'utils/url'
 import axios from 'axios'
 
@@ -260,9 +260,11 @@ function EditViajes(props){
     const { data, id } = state
 
     return (
-        <EditPage title={`${id ? 'Editar' : 'Crear'} Viajes`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={props.history} customValidation={validation}>
-            <MainView {...data} onChange={onChange} />
-        </EditPage>
+        <Permission key_permission={id ? 'edit_viaje' : 'add_viaje'} mode="redirect">
+            <EditPage title={`${id ? 'Editar' : 'Crear'} Viajes`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={props.history} customValidation={validation}>
+                <MainView {...data} onChange={onChange} />
+            </EditPage>
+        </Permission>
     )
 }
 

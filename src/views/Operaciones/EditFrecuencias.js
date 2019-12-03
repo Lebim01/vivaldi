@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormGroup, Input, Select, Label, EditPage, FormValidate, FormElementValidate } from 'temeforest'
+import { FormGroup, Input, Select, Label, EditPage, FormValidate, FormElementValidate, Permission } from 'temeforest'
 import { baseurl, getParameter, objectToUrl } from 'utils/url'
 import axios from 'axios'
 
@@ -216,7 +216,9 @@ class EditFrecuencias extends React.Component {
     render(){
         const { data, id } = this.state
         return (
-            <MainView id={id} data={data} history={this.props.history} {...data} onChange={this.onChange} />
+            <Permission key_permission={id ? 'edit_frecuencia' : 'add_frecuencia'} mode="redirect">
+                <MainView id={id} data={data} history={this.props.history} {...data} onChange={this.onChange} />
+            </Permission>
         )
     }
 }

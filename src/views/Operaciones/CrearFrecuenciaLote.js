@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Button, FormGroup, Input, Select, Label, FormValidate } from 'temeforest'
+import { Card, CardBody, CardTitle, Button, FormGroup, Input, Select, Label, FormValidate, Permission } from 'temeforest'
 import { baseurl, getParameter, objectToUrl } from 'utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
@@ -282,25 +282,27 @@ class CrearFrecuenciaLote extends React.Component {
     render(){
         const { data, id } = this.state
         return (
-            <div className="animated fadeIn">
-                <Row>
-                    <Col xs="12" md="12">
-                        <Card>
-                            <CardBody>
-                                <CardTitle>Creación Masiva de Frecuencias</CardTitle>
+            <Permission key_permission="add_frecuencia" mode="redirect">
+                <div className="animated fadeIn">
+                    <Row>
+                        <Col xs="12" md="12">
+                            <Card>
                                 <CardBody>
-                                    <MainView {...data} onChange={this.onChange} />
-                                </CardBody>
-                                <div className="row">
-                                    <div className="col-sm-12 text-center">
-                                        <Button type="success" style={{marginRight:5}} onClick={() => this.confirmSave() }>Guardar</Button>
+                                    <CardTitle>Creación Masiva de Frecuencias</CardTitle>
+                                    <CardBody>
+                                        <MainView {...data} onChange={this.onChange} />
+                                    </CardBody>
+                                    <div className="row">
+                                        <div className="col-sm-12 text-center">
+                                            <Button type="success" style={{marginRight:5}} onClick={() => this.confirmSave() }>Guardar</Button>
+                                        </div>
                                     </div>
-                                </div>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                </Row>
-            </div>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                    </Row>
+                </div>
+            </Permission>
         )
     }
 }

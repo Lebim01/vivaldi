@@ -1,6 +1,6 @@
 import React from 'react'
 import {Row} from 'reactstrap'
-import { Button, FormGroup, Input, Select, Label, EditPage, FormValidate, RSelect } from 'temeforest'
+import { Button, FormGroup, Input, Select, Label, EditPage, FormValidate, RSelect, Permission } from 'temeforest'
 import { baseurl, getParameter, objectToUrl } from 'utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
@@ -298,9 +298,11 @@ class EditRutas extends React.Component {
     render(){
         const { data, id } = this.state
         return (
-            <EditPage title={`${id ? 'Editar' : 'Crear'} Rutas`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history} customValidation={this.validation} parseData={this.parseData}>
-                <MainView {...data} onChange={this.onChange} />
-            </EditPage>
+            <Permission key_permission={id ? 'edit_ruta' : 'add_ruta'} mode="redirect">
+                <EditPage title={`${id ? 'Editar' : 'Crear'} Rutas`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history} customValidation={this.validation} parseData={this.parseData}>
+                    <MainView {...data} onChange={this.onChange} />
+                </EditPage>
+            </Permission>
         )
     }
 }
