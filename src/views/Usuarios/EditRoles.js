@@ -81,7 +81,7 @@ class MainView extends React.Component {
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
-                        <div id="table-container" className="col-sm-12" style={{height:300, overflowY:'auto'}}>
+                        <div id="table-container" className="col-sm-12" style={{overflowY:'auto'}}>
                             <table className="table table-hover table-striped header-fixed" id="table">
                                 <thead>
                                     <tr>

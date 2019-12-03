@@ -216,7 +216,7 @@ class EditFrecuencias extends React.Component {
     render(){
         const { data, id } = this.state
         return (
-            <Permission key_permission={id ? 'edit_frecuencia' : 'add_frecuencia'} mode="redirect">
+            <Permission key_permission={id ? 'change_frecuencia' : 'add_frecuencia'} mode="redirect">
                 <MainView id={id} data={data} history={this.props.history} {...data} onChange={this.onChange} />
             </Permission>
         )
