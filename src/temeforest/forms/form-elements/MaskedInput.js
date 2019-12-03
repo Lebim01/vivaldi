@@ -7,9 +7,13 @@ export const REGEX = {
     DIGIT : /^[\d]+$/
 }
 
-function MaskedInput ({ mask, disabled, onBlur, onFocus, onMouseDown, readOnly, onChange, upper, lower, ...props }) {
+function MaskedInput ({ mask, disabled, onBlur, onFocus, onMouseDown, readOnly, onChange, upper, lower, value, ...props }) {
 
     const [maskedValue, setMaskedValue] = useState('')
+
+    useEffect(() => {
+        setMaskedValue(value)
+    }, [value])
 
     useEffect(() => {
         onChange({
