@@ -26,6 +26,10 @@ function Permission({ key_permission, mode, children }){
 
     const available = check(key_permission, permissions, isSuperuser)
 
+    if(key_permission === 'bus'){
+        console.log(permissions)
+    }
+
     return (
         <>
             { available 

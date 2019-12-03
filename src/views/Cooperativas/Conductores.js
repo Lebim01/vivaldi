@@ -4,7 +4,7 @@ import { Card, CardBody, ListPage, Permission } from 'temeforest'
 class Conductores extends React.Component {
     render(){
         return (
-            <Permission key_permission="conductor" mode="redirect">
+            <Permission key_permission="view_conductor" mode="redirect">
                 <div className="animated fadeIn">
                     <div className="row">
                         <div className="col-sm-12">

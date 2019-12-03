@@ -4,7 +4,7 @@ import { Card, CardBody, ListPage, Permission } from 'temeforest'
 class Gremios extends React.Component {
     render(){
         return (
-            <Permission key_permission="gremio" mode="redirect">
+            <Permission key_permission="view_gremio" mode="redirect">
                 <div className="animated fadeIn">
                     <div className="row">
                         <div className="col-sm-12">

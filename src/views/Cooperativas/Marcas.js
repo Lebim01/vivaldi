@@ -4,7 +4,7 @@ import { Card, CardBody, ListPage, Permission } from 'temeforest'
 class Provincias extends React.Component {
     render(){
         return (
-            <Permission>
+            <Permission key_permission="view_marca" mode="redirect">
                 <div className="animated fadeIn">
                     <div className="row">
                         <div className="col-sm-12">
@@ -13,6 +13,8 @@ class Provincias extends React.Component {
                                     <ListPage
                                         title="Listado de Marcas"
 
+                                        key_permission="marca"
+                                        
                                         searchable={true}
                                         searchPlaceholder="Nombre"
 

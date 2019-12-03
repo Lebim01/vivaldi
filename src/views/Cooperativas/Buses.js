@@ -4,7 +4,7 @@ import { Card, CardBody, ListPage, Permission } from 'temeforest'
 class Buses extends React.Component {
     render(){
         return (
-            <Permission key_permission="bus" mode="redirect">
+            <Permission key_permission="view_bus" mode="redirect">
                 <div className="animated fadeIn">
                     <div className="row">
                         <div className="col-sm-12">
