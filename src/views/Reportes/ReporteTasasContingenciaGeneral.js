@@ -127,7 +127,7 @@ class ReporteTasasContingenciaGeneral extends React.Component {
                                     fields={[
                                         'fecha', 
                                         'concepto', 
-                                        'cooperativa_nombre', 
+                                        'cooperativa_nombre',
                                         (row)=> <label style={{float:"right"}}>{(row.generado_cantidad || 0)}</label>, 
                                         (row) => <label style={{float:"right"}}>${moneyFormat(row.generado_total || 0)}</label>, 
                                         (row) => <label style={{float:"right"}}>{(row.vendido_cantidad || 0)}</label>, 

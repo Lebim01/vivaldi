@@ -35,8 +35,12 @@ function MaskedInput ({ mask, disabled, onBlur, onFocus, onMouseDown, readOnly, 
     }
 
     return (
-        <InputMask mask={mask} value={maskedValue} onChange={_onChange}>
+        <InputMask 
+        mask={mask} 
+        value={maskedValue} 
+        onChange={_onChange}>
             <Input {...props} />
+           
         </InputMask>
     )
 }
