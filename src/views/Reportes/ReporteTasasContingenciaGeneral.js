@@ -133,7 +133,7 @@ class ReporteTasasContingenciaGeneral extends React.Component {
                                         (row) => <label style={{float:"right"}}>{(row.vendido_cantidad || 0)}</label>, 
                                         (row) => <label style={{float:"right"}}>${moneyFormat(row.vendido_total || 0)}</label>, 
                                         (row) => <label style={{float:"right"}}>{(row.saldo_cantidad || 0)}</label>,
-                                        (row) => <label style={{float:"right"}}>${moneyFormat(row.saldo_total || 0)}</label>,
+                                        (row) => <label style={{float:"right"}}>${moneyFormat(row.saldo_total || 0)}</label>
                                     ]}
 
                                     
