@@ -215,9 +215,14 @@ class ListPage extends React.Component {
     }
 
     exportExcel = () => {
-        const { id } = this.props
-        if(id){
-            htmlToXlsById(id)
+        const { exportExcel } = this.props
+        if(typeof exportExcel === 'function'){
+            exportExcel(this.state.filtered)
+        }else{
+            const { id } = this.props
+            if(id){
+                htmlToXlsById(id)
+            }
         }
     }
 
@@ -243,6 +248,7 @@ class ListPage extends React.Component {
                                     </Button>
                                 </Permission>
                             }
+                            
                             { exportExcel &&
                                 <Button onClick={this.exportExcel} title="Exportar excel">
                                     <i className="fas fa-file-excel"></i>
