@@ -170,7 +170,7 @@ class AddParadaModal extends React.Component {
         const { errors, tipos_servicio, tipos_clientes, data } = this.state
         const { tarifas } = data
 
-        const tabs = tipos_servicio.map((row) => ({ link: `${row.id}`, text: row.nombre, text: row.nombre1 }))
+        const tabs = tipos_servicio.map((row) => ({ link: `${row.id}`, text: row.nombre }))
 
         return (
             <Modal isOpen={this.props.show} toggle={this.toggle}>
