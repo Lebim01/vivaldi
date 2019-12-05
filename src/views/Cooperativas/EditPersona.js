@@ -131,6 +131,18 @@ class EditPersona extends React.Component {
                                         <Input readOnly={_readOnly} value={data.nombre} onChange={this.onChange('nombre')} />
                                     </div>
                                 </FormGroup>
+                                <FormGroup className="row">
+                                    <Label className="col-sm-3">Dirección</Label>
+                                    <div className="col-sm-5">
+                                        <Input readOnly={_readOnly} value={data.direccion} onChange={this.onChange('direccion')} />
+                                    </div>
+                                </FormGroup>
+                                <FormGroup className="row">
+                                    <Label className="col-sm-3">Teléfono</Label>
+                                    <div className="col-sm-5">
+                                        <Input readOnly={_readOnly} value={data.telefono} onChange={this.onChange('telefono')} />
+                                    </div>
+                                </FormGroup>
                                 <FormElementValidate
                                     label={{text:'Correo'}}
                                     input={{
@@ -146,18 +158,6 @@ class EditPersona extends React.Component {
                                         } : {},
                                     }}
                                 />
-                                <FormGroup className="row">
-                                    <Label className="col-sm-3">Dirección</Label>
-                                    <div className="col-sm-5">
-                                        <Input readOnly={_readOnly} value={data.direccion} onChange={this.onChange('direccion')} />
-                                    </div>
-                                </FormGroup>
-                                <FormGroup className="row">
-                                    <Label className="col-sm-3">Teléfono</Label>
-                                    <div className="col-sm-5">
-                                        <Input readOnly={_readOnly} value={data.telefono} onChange={this.onChange('telefono')} />
-                                    </div>
-                                </FormGroup>
                             </FormValidate>
                         </div>
                     </Col>
