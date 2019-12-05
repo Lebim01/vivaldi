@@ -31,8 +31,9 @@ class RecordRow extends React.Component {
         return (
             <tr key={record.id} onDoubleClick={this.onRowDoubleClick}>
                 {fields.map((field, i) => {
+                    const className = typeof this.props.tdBodyClass === 'function' ? this.props.tdBodyClass(record) : this.props.tdBodyClass
                     return (
-                        <td className={this.props.tdBodyClass} key={i}>
+                        <td className={className} key={i}>
                             {typeof field === 'function' ? field(record) : record[field]}
                         </td>
                     )
