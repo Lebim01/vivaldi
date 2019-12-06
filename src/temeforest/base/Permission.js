@@ -26,10 +26,6 @@ function Permission({ key_permission, mode, children }){
 
     const available = check(key_permission, permissions, isSuperuser)
 
-    if(key_permission === 'bus'){
-        console.log(permissions)
-    }
-
     return (
         <>
             { available 
@@ -54,7 +50,16 @@ Permission.defaultProps = {
 
 export const checkPermission = (key_permission) => {
     const { user_info } = store.getState()
-    return check(key_permission, user_info.permissions, user_info.isSuperuser )
+
+    let _check = check(key_permission, user_info.permissions, user_info.isSuperuser )
+
+    return _check
+}
+
+export const isSet = (key_permission) => {
+    const { user_info } = store.getState()
+    
+    return user_info.permissions.includes(key_permission)
 }
 
 export default Permission

@@ -2,7 +2,7 @@ import React from 'react'
 import { FormGroup, Input, Select, Label, EditPage, FormValidate, FormElementValidate, Permission } from 'temeforest'
 import { baseurl, getParameter, objectToUrl } from 'utils/url'
 import axios from 'axios'
-import { checkPermission } from 'temeforest/base/Permission'
+import { isSet } from 'temeforest/base/Permission'
 
 
 const endpoint = 'frecuencia'
@@ -24,7 +24,7 @@ let __tipos = [
     { value: 2, label : 'Extraordinaria' },
 ]
 
-const ocultar_frecuencia_normal = !checkPermission('add_frecuencia_extra_only')
+const ocultar_frecuencia_normal = isSet('add_frecuencia_extra_only')
 if(ocultar_frecuencia_normal) __tipos = __tipos.filter(r => r.value !== 1)
 
 class MainView extends React.Component {
