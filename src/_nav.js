@@ -201,12 +201,12 @@ export default {
         {
           name : 'Tasas contingencia general',
           url : '/#/recaudaciones/tasas-contingencia',
-          permission : 'generacioncontingencia'
+          permission : 'view_generacioncontingencia'
         },
         {
           name : 'Venta de Tasas',
           url : '/#/recaudaciones/venta-tasas',
-          permission : 'ventacontigencia'
+          permission : 'view_ventacontigencia'
         },
         {
           name : 'Bandeja Tasas Cooperativa',
