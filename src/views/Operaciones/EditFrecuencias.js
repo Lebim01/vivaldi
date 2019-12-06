@@ -2,6 +2,8 @@ import React from 'react'
 import { FormGroup, Input, Select, Label, EditPage, FormValidate, FormElementValidate, Permission } from 'temeforest'
 import { baseurl, getParameter, objectToUrl } from 'utils/url'
 import axios from 'axios'
+import { checkPermission } from 'temeforest/base/Permission'
+
 
 const endpoint = 'frecuencia'
 const urlFront = '/operaciones/frecuencias'
@@ -15,6 +17,15 @@ const dias = [
     'Sábado',
     'Domingo'
 ]
+
+let __tipos = [
+    { value: '', label : 'Seleccione' },
+    { value: 1, label : 'Normal' },
+    { value: 2, label : 'Extraordinaria' },
+]
+
+const ocultar_frecuencia_normal = !checkPermission('add_frecuencia_extra_only')
+if(ocultar_frecuencia_normal) __tipos = __tipos.filter(r => r.value !== 1)
 
 class MainView extends React.Component {
 
@@ -40,11 +51,7 @@ class MainView extends React.Component {
       labelName: 'nombre',
       valueName: 'id'
     }
-    tipos = [
-        { value: '', label : 'Seleccione' },
-        { value: 1, label : 'Normal' },
-        { value: 2, label : 'Extraordinaria' },
-    ]
+    tipos = __tipos
 
     onChange = name => (e) => {
 
@@ -71,6 +78,7 @@ class MainView extends React.Component {
     }
 
     render(){
+        
         return (
             <EditPage title={`${this.props.id ? 'Editar' : 'Crear'} Frecuencias`} data={this.props.data} id={this.props.id} urlFront={urlFront} endpoint={endpoint} history={this.props.history} key_permission="frecuencia">
                 <FormValidate className="mt-4 form-horizontal">
@@ -169,6 +177,7 @@ class EditFrecuencias extends React.Component {
 
     state = {
         id : null,
+        tipo : ocultar_frecuencia_normal ? '' : 1,
         data : {
             dias : [
                 0,1,2,3,4,5,6
