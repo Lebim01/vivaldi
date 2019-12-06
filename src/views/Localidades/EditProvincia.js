@@ -31,6 +31,21 @@ class MainView extends React.Component {
                         }}
                     />
                 </FormValidate>
+                <FormValidate className="mt-4 form-horizontal">
+                    <FormElementValidate
+                        label={{text:'Pais'}}
+                        input={{
+                            name : 'pais',
+                            element: <Input onChange={this.onChange('pais')} value={this.props.pais}
+                           /* element: <Input onChange={this.onChange('pais')} value={this.props.pais}*/ />
+                        }}
+                        validator={{
+                            validationRules: {
+                                required:"El campo es requerido",
+                            },
+                        }}
+                    />
+                </FormValidate>
             </div>
         )
     }

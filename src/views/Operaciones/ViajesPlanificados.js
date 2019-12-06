@@ -23,6 +23,12 @@ class ViajesPlanificados extends React.Component {
         labelName: 'nombre',
         valueName: 'id'
     }
+
+    /*optionsCooperativa = {
+        url : `${baseurl}/cooperativa/`,
+        labelName: 'nombre',
+        valueName: 'id'
+    }*/
     optionsSilo = {
         url : `${baseurl}/silo/`,
         labelName: 'descripcion',
@@ -71,7 +77,7 @@ class ViajesPlanificados extends React.Component {
                                             <FormGroup className="row">
                                                 <Label className="col-sm-3">Cooperativa</Label>
                                                 <div className="col-sm-8">
-                                                    <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={cooperativa_nombre}/>
+                                                    <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa_nombre')} value={cooperativa_nombre}/>
                                                 </div>
                                             </FormGroup>
                                             <FormGroup className="row">
@@ -126,12 +132,27 @@ class ViajesPlanificados extends React.Component {
                                     <br />
                                     <div className="col-sm-12">
                                         <ListPage
+                                            
+                                            
+
                                             searchable={false}
                                             fieldNames={['#','Cooperativa', 'Disco', 'Placa', 'Saldo', 'Vlts', 'Costo', 'Salida', 'Destino']}
-                                            fields={['', 'cooperativa_nombre', 'disco', 'placa', 'saldo', 'vlts', 'costo', 'hora_salida', 'destino']}
+                                            fields={['', 
+                                            'cooperativa_nombre', 
+                                            'disco', 
+                                            'placa',
+                                            /*tdBodyClass={(row) => `no-padding-top-bottom ${row.saldo === 0 ? 'bg-orange' : ''}`},*/ 
+                                            'saldo', 
+                                            'vlts', 
+                                            'costo', 
+                                            'hora_salida',
+                                            'destino']}
+
+                                            tdBodyClass={(row) => `no-padding-top-bottom ${row.saldo === 0 ? 'bg-orange' : ''}`}
 
                                             endpoint='venta/viajes-planificados'
                                             parameters={this.state}
+                                            tdBodyClass="no-padding-top-bottom"
 
                                             history={this.props.history}
                                         />

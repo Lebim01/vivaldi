@@ -1,8 +1,23 @@
-import React from 'react'
-import { Card, CardBody, ListPage, Permission } from 'temeforest'
+import React, { useState } from 'react'
+import { Card, CardBody, ListPage, CardTitle, FormGroup, Label, Select, Permission  } from 'temeforest'
 import { htmlToXls } from 'utils/exportData'
+import { baseurl } from 'utils/url'
 
 const Buses = (props) => {
+
+    const [state, setState] = useState({})
+
+    const optionsCooperativa = {
+        url : `${baseurl}/cooperativa/`,
+        labelName: 'nombre',
+        valueName: 'id'
+    }
+
+    const onChange = name => (e) => {
+        setState({
+            [name]: e.target.value
+        })
+    }
 
     const exportExcel = (data) => {
         const html = `
@@ -39,6 +54,16 @@ const Buses = (props) => {
                     <div className="col-sm-12">
                         <Card>
                             <CardBody>
+                            <div className="row">
+                                    <div className="col-sm-4">
+                                        <FormGroup className="row">
+                                            <Label className="col-sm-6">Cooperativa</Label>
+                                            <div className="col-sm-6">
+                                                <Select asyncOptions={optionsCooperativa} defaultOption="Todos" onChange={onChange('cooperativa')} value={state.cooperativa}/>
+                                            </div>
+                                        </FormGroup>
+                                    </div>
+                                </div>
                                 <ListPage
                                     title="Listado de Buses"
 
