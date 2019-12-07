@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { Card, CardBody, ListPage, CardTitle, FormGroup, Label, Select, Permission  } from 'temeforest'
+import { Card, CardBody, CardTitle, ListPage, FormGroup, Label, Select, Permission  } from 'temeforest'
 import { htmlToXls } from 'utils/exportData'
 import { baseurl } from 'utils/url'
 
-const Buses = (props) => {
+function Buses(props) {
 
     const [state, setState] = useState({})
 
@@ -54,7 +54,11 @@ const Buses = (props) => {
                     <div className="col-sm-12">
                         <Card>
                             <CardBody>
-                            <div className="row">
+                                <CardTitle>
+                                    Listado de Buses
+                                </CardTitle>
+                                <br/>
+                                <div className="row">
                                     <div className="col-sm-4">
                                         <FormGroup className="row">
                                             <Label className="col-sm-6">Cooperativa</Label>
@@ -65,12 +69,13 @@ const Buses = (props) => {
                                     </div>
                                 </div>
                                 <ListPage
-                                    title="Listado de Buses"
-
-                                    key_permission="bus"
-
+                                    /*title="Listado de Buses"*/
+                                    /*exportExcel
+                                    id="buses"*/
                                     searchable={true}
                                     searchPlaceholder="Cooperativa, Placa, Disco"
+                                                              
+                                    key_permission="bus"
 
                                     fieldNames={['Cooperativa', 'Placa', 'Disco']}
                                     fields={['cooperativa_nombre', 'placa', 'disco']}
@@ -80,6 +85,7 @@ const Buses = (props) => {
 
                                     exportExcel={exportExcel}
                                     history={props.history}
+                                    parameters={state}
                                 />
                             </CardBody>
                         </Card>
