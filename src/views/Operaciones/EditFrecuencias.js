@@ -25,7 +25,12 @@ let __tipos = [
 ]
 
 const ocultar_frecuencia_normal = isSet('add_frecuencia_extra_only')
-if(ocultar_frecuencia_normal) __tipos = __tipos.filter(r => r.value !== 1)
+if(ocultar_frecuencia_normal){
+    __tipos = [
+        { value: '', label : 'Seleccione' },
+        { value: 2, label : 'Extraordinaria' },
+    ]
+}
 
 class MainView extends React.Component {
 
