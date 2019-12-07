@@ -110,11 +110,12 @@ class Frecuencias extends React.Component {
                                     <ListPage
                                         exportExcel
                                         id="frecuencia"
+
+                                        key_permission="frecuencia"
+
                                         searchable={false}
                                         fieldNames={['Hora', 'Cooperativa', 'Destino', 'Vía', 'Fecha' ,'Tipo', 'Localidad']}
                                         fields={['hora_salida', 'cooperativa_nombre', 'ciudad_destino', 'ruta_via', 'fecha_validez','tipo_nombre', 'localidad_nombre']}
-                                        
-                                        
                                         
                                         endpoint='frecuencia'
                                         urlFront={'operaciones/frecuencias'}
