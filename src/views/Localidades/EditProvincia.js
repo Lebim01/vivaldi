@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input, FormElementValidate, EditPage, FormValidate } from 'temeforest'
+import { Input, FormElementValidate, Select, EditPage, FormValidate } from 'temeforest'
 import { baseurl, getParameter } from 'utils/url'
 import axios from 'axios'
 
@@ -12,6 +12,12 @@ class MainView extends React.Component {
         if(this.props.onChange){
             this.props.onChange(name, e.target.value)
         }
+    }
+
+    optionsPaises = {
+        url : `${baseurl}/pais/`,
+        labelName : 'nombre',
+        valueName : 'id'
     }
 
     render(){
@@ -36,8 +42,7 @@ class MainView extends React.Component {
                         label={{text:'Pais'}}
                         input={{
                             name : 'pais',
-                            element: <Input onChange={this.onChange('pais')} value={this.props.pais}
-                           /* element: <Input onChange={this.onChange('pais')} value={this.props.pais}*/ />
+                            element: <Select asyncOptions={this.optionsPaises} onChange={this.onChange('pais')} value={this.props.pais} />
                         }}
                         validator={{
                             validationRules: {
@@ -77,6 +82,8 @@ class EditProvincia extends React.Component {
             data
         })
     }
+
+    
 
     render(){
         const { id, data } = this.state

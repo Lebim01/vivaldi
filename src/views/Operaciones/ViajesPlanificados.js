@@ -148,11 +148,19 @@ class ViajesPlanificados extends React.Component {
                                             'hora_salida',
                                             'destino']}
 
-                                            tdBodyClass={(row) => `no-padding-top-bottom ${row.saldo === 0 ? 'bg-orange' : ''}`}
+                                            
+                                            tdBodyClass="margin: 0 !important;padding: 0 !important;"
+                                            //tdBodyClass="bg-orange"
+                                            
+
+                                            tdBodyClass={(row) => `${moment().format('hh:mm') > row.hora_salida ? 'bg-info' : ''}`}
+
+                                            tdBodyClass={(row) => `${row.saldo === '-'  && Clock > row.hora_salida ? 'bg-orange' : ''}`}
+
 
                                             endpoint='venta/viajes-planificados'
                                             parameters={this.state}
-                                            tdBodyClass="no-padding-top-bottom"
+                                            //tdBodyClass="no-padding-top-bottom"
 
                                             history={this.props.history}
                                         />
