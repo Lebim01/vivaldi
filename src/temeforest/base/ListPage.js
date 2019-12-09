@@ -80,9 +80,7 @@ class ListPage extends React.Component {
         }
 
         if(page){
-            this.setState({
-                currentPage : page
-            })
+            this.setPage(page)
         }
 
         if(this.props.filters.persist){
