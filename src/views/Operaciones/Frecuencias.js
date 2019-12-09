@@ -120,6 +120,10 @@ class Frecuencias extends React.Component {
                                         endpoint='frecuencia'
                                         urlFront={'operaciones/frecuencias'}
                                         parameters={this.state}
+                                        filters={{
+                                            persist: true,
+                                            callback: (parameters) => this.setState(parameters)
+                                        }}
                                         history={this.props.history}
                                         
                                     />

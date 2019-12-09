@@ -52,6 +52,10 @@ function Rutas(props) {
                                     urlFront='operaciones/rutas'
                                     history={props.history}
                                     parameters={state}
+                                    filters={{
+                                        persist: true,
+                                        callback: setState
+                                    }}
                                 />
                             </CardBody>
                         </Card>

@@ -45,6 +45,10 @@ class EmisionPorCooperativa extends React.Component {
 
                     endpoint='cooperativa'
                     parameters={this.state}
+                    filters={{
+                        persist: true,
+                        callback: (parameters) => this.setState(parameters)
+                    }}
                     history={this.props.history}
                 />
             </ReportPage>

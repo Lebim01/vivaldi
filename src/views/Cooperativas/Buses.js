@@ -86,6 +86,10 @@ function Buses(props) {
                                     exportExcel={exportExcel}
                                     history={props.history}
                                     parameters={state}
+                                    filters={{
+                                        persist: true,
+                                        callback: setState
+                                    }}
                                 />
                             </CardBody>
                         </Card>

@@ -116,6 +116,10 @@ class ConsultaTasa extends React.Component {
 
                                                 endpoint='consulta-tasa'
                                                 parameters={this.state}
+                                                filters={{
+                                                    persist: true,
+                                                    callback: (parameters) => this.setState(parameters)
+                                                }}
 
                                                 history={this.props.history}
                                             />

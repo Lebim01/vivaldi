@@ -1,8 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Col, Row } from 'reactstrap'
 import { CardTitle, InputIcon, Button, Permission } from 'temeforest'
 import { checkPermission } from 'temeforest/base/Permission'
-import { baseurl, objectToUrl } from 'utils/url'
+import { baseurl, objectToUrl, getParameter, getAllParameters } from 'utils/url'
 import { htmlToXlsById } from 'utils/exportData'
 
 import axios from 'axios'
@@ -16,6 +17,8 @@ const RowsPerPage = 25
 const NumVisibleFooterPages = 5
 
 const DELAY_SEARCH_INPUT = 500
+
+const prefixFilters = 'filters'
 
 class RecordRow extends React.Component {
 
@@ -43,7 +46,6 @@ class RecordRow extends React.Component {
     }
 }
 
-
 class ListPage extends React.Component {
 
     state = { 
@@ -61,6 +63,33 @@ class ListPage extends React.Component {
         // 
         numBeginVisibleFooterPages : 1,
         numEndVisibleFooterPages : 1
+    }
+
+    componentDidMount(){
+        this.setPage(1)
+        this.loadFilters()
+    }
+
+    loadFilters = () => {
+        const { query, page, ...parameters } = getAllParameters()
+
+        if(query){
+            this.setState({
+                search : query
+            })
+        }
+
+        if(page){
+            this.setState({
+                currentPage : page
+            })
+        }
+
+        if(this.props.filters.persist){
+            if(parameters && this.props.filters.callback){
+                this.props.filters.callback(parameters)
+            }
+        }
     }
 
     getVisibleFooterPages = () => {
@@ -142,17 +171,20 @@ class ListPage extends React.Component {
         this.loadList(props.parameters)
     }
 
-    componentDidMount(){
-        this.setPage(1)
-    }
-
     onRowDoubleClick = (id, row) => {
         if(checkPermission(`change_${this.props.key_permission}`)){
             if(this.props.onRowDoubleClick){
                 this.props.onRowDoubleClick(row)
             }
             else if(this.props.urlFront && this.props.redirect){
-                this.props.history.push(`/${this.props.urlFront}/edit?id=${id}`)
+                let parameters = {
+                    ...this.props.parameters,
+                    page : this.state.currentPage
+                }
+                if(this.props.searchable){
+                    parameters.query = this.state.search
+                }
+                this.props.history.push(`/${this.props.urlFront}/edit${objectToUrl(parameters)}&id=${id}`)
             }
         }
     }
@@ -352,6 +384,14 @@ class ListPage extends React.Component {
 ListPage.defaultProps = {
     parameters : {},
     redirect: true,
+    
+    filters : {
+        persist: true,
+        callback : () => {
+
+        },
+    },
+
     fieldNames : [],
     head : [],
     config : {},

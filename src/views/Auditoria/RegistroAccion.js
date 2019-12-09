@@ -102,6 +102,10 @@ class RegistroAccion extends React.Component {
                                     endpoint='auditcrud'
 
                                     parameters={this.state}
+                                    filters={{
+                                        persist: true,
+                                        callback: (parameters) => this.setState(parameters)
+                                    }}
 
                                     refresh={refresh}
                                 />

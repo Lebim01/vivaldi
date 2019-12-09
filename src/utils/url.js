@@ -20,6 +20,34 @@ function getParameter(_name){
     return null
 }
 
+function getAllParameters () {
+	// initialize an empty object
+    let result = {};
+
+    // get URL query string
+    let params = window.location.href;
+
+    // remove the '?' character
+    params = params.substr(window.location.href.indexOf('?')+1, window.location.href.length);
+
+    let queryParamArray = params.split('&');
+
+    // iterate over parameter array
+    queryParamArray.forEach(function(queryParam) {
+      // split the query parameter over '='
+      let item = queryParam.split("=");
+      result[item[0]] = decodeURIComponent(item[1]);
+    });
+
+    Object.keys(result).map(key => {
+        if(!key) delete result[key]
+        else if(!result[key]) delete result[key]
+    })
+
+    // return result object
+    return result;
+};
+
 function objectToUrl(_obj){
     return `?${Object.keys(_obj).filter(key => _obj[key] !== undefined && _obj[key] !== null && _obj[key] !== '').map((key) => `${key}=${_obj[key]}`).join('&')}`
 }
@@ -74,5 +102,6 @@ export {
     objectToUrl,
     getResults,
     downloadFile,
-    canDownload
+    canDownload,
+    getAllParameters
 }

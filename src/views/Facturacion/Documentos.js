@@ -304,6 +304,10 @@ class Documentos extends React.Component {
                     endpoint='venta/documentos'
                     urlFront='/facturacion/documentos'
                     parameters={this.state}
+                    filters={{
+                        persist: true,
+                        callback: (parameters) => this.setState(parameters)
+                    }}
                     history={this.props.history}
                 />
             </ReportPage>

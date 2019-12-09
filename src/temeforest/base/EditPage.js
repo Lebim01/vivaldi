@@ -2,6 +2,7 @@ import React from 'react'
 import { Col, Row } from 'reactstrap'
 import { Card, CardBody, CardTitle, Button, ValidateContext, Permission } from 'temeforest'
 import { confirmEndpoint } from 'utils/dialog'
+import { getAllParameters, objectToUrl } from 'utils/url'
 import useForm from 'react-hook-form'
 import Swal from 'sweetalert2'
 
@@ -49,7 +50,11 @@ function EditPage(props){
                     text : `Eliminado`,
                     type : 'success'
                 })
-                props.history.push(urlFront)
+                
+                let params = getAllParameters()
+                delete params.id;
+
+                props.history.push(`${urlFront}${objectToUrl(params)}`)
             }
         }
     }
@@ -75,7 +80,11 @@ function EditPage(props){
                 text : `Guardado`,
                 type : 'success'
             })
-            props.history.push(urlFront)
+
+            let params = getAllParameters()
+            delete params.id;
+
+            props.history.push(`${urlFront}${objectToUrl(params)}`)
         }
     }
 
