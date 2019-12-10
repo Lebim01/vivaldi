@@ -4,11 +4,18 @@ import { baseurl } from 'utils/url'
 import moment from 'moment'
 import Clock  from 'utils/clock'
 
+function getTdBodyClass(row) {
+    
+  }
+
+
 class ViajesPlanificados extends React.Component {
 
     interval = null
     state = {
         fecha: moment().format('YYYY-MM-DD HH:mm:ss')
+        
+
     }
 
     componentDidMount(){
@@ -54,6 +61,7 @@ class ViajesPlanificados extends React.Component {
         })
     }
 
+    
     refresh = () => {
         this.setState({
 
@@ -62,7 +70,7 @@ class ViajesPlanificados extends React.Component {
     }
 
     render(){
-        const { cooperativa_nombre, silo, localidad, estado, fecha } = this.state
+        const { cooperativa_nombre, silo, localidad, estado, fecha, hora } = this.state
         return (
             <Permission key_permission="view_viajes_planificados" mode="redirect">
                 <div className="animated fadeIn">
@@ -122,6 +130,7 @@ class ViajesPlanificados extends React.Component {
                                     </div>
                                     <div className="col-sm-12 text-center">
                                         <Button onClick={this.refresh.bind(this)}>Configurar</Button>
+                                        
                                     </div>
                                     <br />
                                     <br />
@@ -148,14 +157,18 @@ class ViajesPlanificados extends React.Component {
                                             'hora_salida',
                                             'destino']}
 
+
                                             
                                             tdBodyClass="margin: 0 !important;padding: 0 !important;"
                                             //tdBodyClass="bg-orange"
                                             
+                                            tdBodyClass={(row) => `${row.disco === "17" ? 'bg-orange' : row.disco !== "17" && moment().format('HH:mm:ss') > row.hora_salida ? 'bg-info' : ''}`}
 
-                                            tdBodyClass={(row) => `${moment().format('hh:mm') > row.hora_salida ? 'bg-info' : ''}`}
+                                            //tdBodyClass={(row) => `${row.disco !== "17" && moment().format('HH:mm:ss') > row.hora_salida ? 'bg-info' : ''}`}
 
-                                            tdBodyClass={(row) => `${row.saldo === '-'  && Clock > row.hora_salida ? 'bg-orange' : ''}`}
+                                            
+
+                                            /*tdBodyClass={(row) => `${row.saldo === 0  && moment().format('hh:mm') > row.hora_salida ? 'bg-orange' : ''}`}*/
 
 
                                             endpoint='venta/viajes-planificados'
