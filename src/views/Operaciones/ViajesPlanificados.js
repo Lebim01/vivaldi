@@ -162,7 +162,7 @@ class ViajesPlanificados extends React.Component {
                                             tdBodyClass="margin: 0 !important;padding: 0 !important;"
                                             //tdBodyClass="bg-orange"
                                             
-                                            tdBodyClass={(row) => `${row.disco === "17" ? 'bg-orange' : row.disco !== "17" && moment().format('HH:mm:ss') > row.hora_salida ? 'bg-info' : ''}`}
+                                            tdBodyClass={(row) => `${row.saldo === 0 ? 'bg-orange' : row.saldo !==  0 && moment().format('HH:mm:ss') > row.hora_salida ? 'bg-info' : ''}`}
 
                                             //tdBodyClass={(row) => `${row.disco !== "17" && moment().format('HH:mm:ss') > row.hora_salida ? 'bg-info' : ''}`}
 
