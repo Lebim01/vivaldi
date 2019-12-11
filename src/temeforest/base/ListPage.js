@@ -88,7 +88,8 @@ class ListPage extends React.Component {
             })
         }
 
-        if(page != 1){
+        if(page){
+            console.log('setpage', page)
             this.setPage(page)
         }
     }
