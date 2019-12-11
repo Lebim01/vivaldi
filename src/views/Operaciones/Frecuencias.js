@@ -1,10 +1,6 @@
 import React from 'react'
 import { ListPage, Card, CardBody, CardTitle, FormGroup, Label, Select, ReportPage,Input, Button, Permission } from 'temeforest'
 import { baseurl, objectToUrl } from 'utils/url'
-import { confirmEndpoint } from 'utils/dialog'
-import { checkPermission } from 'temeforest/base/Permission'
-import moment from 'moment'
-import Swal from 'sweetalert2';
 
 class Frecuencias extends React.Component {
 
@@ -32,6 +28,7 @@ class Frecuencias extends React.Component {
     ]
 
     onChange = name => (e) => {
+        console.log('state', name, e.target.value, this.state)
         this.setState({
             [name]: e.target.value
         })
@@ -125,10 +122,12 @@ class Frecuencias extends React.Component {
                                         endpoint='frecuencia'
                                         urlFront={'operaciones/frecuencias'}
                                         parameters={this.state}
-                                        /*filters={{
+                                        filters={{
                                             persist: true,
-                                            callback: (parameters) => this.setState(parameters)
-                                        }}*/
+                                            callback: (parameters) => {
+                                                this.setState(parameters)
+                                            }
+                                        }}
                                         history={this.props.history}
                                         
                                     />

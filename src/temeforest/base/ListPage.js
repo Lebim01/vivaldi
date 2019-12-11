@@ -1,15 +1,16 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Col, Row } from 'reactstrap'
 import { CardTitle, InputIcon, Button, Permission } from 'temeforest'
 import { checkPermission } from 'temeforest/base/Permission'
-import { baseurl, objectToUrl, getParameter, getAllParameters } from 'utils/url'
+import { baseurl, objectToUrl, getAllParameters } from 'utils/url'
 import { htmlToXlsById } from 'utils/exportData'
 
 import axios from 'axios'
 
 import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
+
+const CancelToken = axios.CancelToken;
 
 // numero de filas por pagina
 const RowsPerPage = 25
@@ -62,7 +63,9 @@ class ListPage extends React.Component {
         numPages : 1,
         // 
         numBeginVisibleFooterPages : 1,
-        numEndVisibleFooterPages : 1
+        numEndVisibleFooterPages : 1,
+
+        cancelRequest : null
     }
 
     componentDidMount(){
@@ -73,20 +76,20 @@ class ListPage extends React.Component {
     loadFilters = () => {
         const { query, page, ...parameters } = getAllParameters()
 
+        if(this.props.filters.persist){            
+            if(parameters && this.props.filters.callback){
+                this.props.filters.callback(parameters)
+            }
+        }
+
         if(query){
             this.setState({
                 search : query
             })
         }
 
-        if(page){
+        if(page != 1){
             this.setPage(page)
-        }
-
-        if(this.props.filters.persist){
-            if(parameters && this.props.filters.callback){
-                this.props.filters.callback(parameters)
-            }
         }
     }
 
@@ -126,12 +129,28 @@ class ListPage extends React.Component {
             const { currentPage, search } = this.state
 
             try {
-                const { data } = await axios.get(`${baseurl}/${this.props.endpoint}/${objectToUrl({ ...parameters, searchtext: search, page : currentPage })}`, { ...this.props.config })
-                    let _results = [], 
-                    _count = 0, 
-                    _next = null, 
-                    _previous = null,
-                    _numPages = 1
+                if(this.state.cancelRequest){
+                    this.state.cancelRequest('Operation canceled by the user.');
+                }
+
+                const { data } = await axios.get(
+                    `${baseurl}/${this.props.endpoint}/${objectToUrl({ ...parameters, searchtext: search, page : currentPage })}`, 
+                    { ...this.props.config },
+                    { 
+                        cancelToken: new CancelToken((c) => {
+                            // An executor function receives a cancel function as a parameter
+                            this.setState({
+                                cancelRequest : c
+                            })
+                        })
+                    }
+                )
+
+                let _results = [], 
+                _count = 0, 
+                _next = null, 
+                _previous = null,
+                _numPages = 1
 
                 if(Array.isArray(data)){
                     _results = data
@@ -182,6 +201,7 @@ class ListPage extends React.Component {
                 if(this.props.searchable){
                     parameters.query = this.state.search
                 }
+                
                 this.props.history.push(`/${this.props.urlFront}/edit${objectToUrl(parameters)}&id=${id}`)
             }
         }

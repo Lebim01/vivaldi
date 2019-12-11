@@ -27,6 +27,9 @@ function getAllParameters () {
     // get URL query string
     let params = window.location.href;
 
+    if(window.location.href.indexOf('?') === -1)
+        return {}
+
     // remove the '?' character
     params = params.substr(window.location.href.indexOf('?')+1, window.location.href.length);
 
