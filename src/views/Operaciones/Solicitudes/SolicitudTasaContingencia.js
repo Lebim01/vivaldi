@@ -109,10 +109,10 @@ class SolicitudTasaContingencia extends React.Component {
                                     
                                     history={this.props.history}
                                     parameters={this.state}
-                                    filters={{
+                                    /*filters={{
                                         persist: true,
                                         callback: (parameters) => this.setState(parameters)
-                                    }}
+                                    }}*/
                                     refresh={this.state.refresh}
                                 />
                             </CardBody>

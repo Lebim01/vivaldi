@@ -153,10 +153,10 @@ class Viajes extends React.Component {
                                             endpoint='viaje'
                                             urlFront={'operaciones/viajes'}
                                             parameters={this.state}
-                                            filters={{
+                                            /*filters={{
                                                 persist: true,
                                                 callback: (parameters) => this.setState(parameters)
-                                            }}
+                                            }}*/
                                             
 
                                             history={this.props.history}

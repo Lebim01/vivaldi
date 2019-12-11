@@ -99,10 +99,10 @@ class SolicitudConductores extends React.Component {
                                     endpoint='venta/solicitud_conductor'
                                     urlFront='operaciones/solicitudes/conductores'
                                     parameters={this.state}
-                                    filters={{
+                                    /*filters={{
                                         persist: true,
                                         callback: (parameters) => this.setState(parameters)
-                                    }}
+                                    }}*/
                                     
                                     history={this.props.history}
                                     refresh={refresh}

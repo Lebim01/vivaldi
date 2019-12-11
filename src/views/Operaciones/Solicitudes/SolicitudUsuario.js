@@ -98,10 +98,10 @@ class SolicitudUsuario extends React.Component {
                                     endpoint='venta/solicitud_usuario'
                                     urlFront='operaciones/solicitudes/usuario'
                                     parameters={this.state}
-                                    filters={{
+                                    /*filters={{
                                         persist: true,
                                         callback: (parameters) => this.setState(parameters)
-                                    }}
+                                    }}*/
 
                                     history={this.props.history}
                                     refresh={refresh}
