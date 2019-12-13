@@ -301,16 +301,23 @@ class ListPage extends React.Component {
                                     </Button>
                                 </Permission>
                             }
-                            
+                            {' '}
                             { exportExcel &&
                                 <Button onClick={this.exportExcel} title="Exportar excel">
                                     <i className="fas fa-file-excel"></i>
                                 </Button>
                             }
+                            {' '}
+                            { this.props.actionsButtons.map(element => (
+                                <>
+                                    {element}
+                                    {' '}
+                                </>
+                            )) }
                         </Col>
                     </Row>
                 }
-                { this.props.filtersZone ? this.props.filtersZone : null }
+                { this.props.filtersZone ? <><br/>{this.props.filtersZone}</> : null }
                 <br/>
                 <Row>
                     <Col xs="12" md="12">
