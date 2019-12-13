@@ -9,7 +9,7 @@ import axios from 'axios'
 
 import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
-import { thisExpression } from '@babel/types'
+import './ListPage.css'
 
 const CancelToken = axios.CancelToken;
 
@@ -323,7 +323,7 @@ class ListPage extends React.Component {
                     <Col xs="12" md="12">
                         <BlockUi tag="div" blocking={this.state.loading}>
                             <div className="table-responsive">
-                                <table className="table table-hover table-striped footable footable-5 footable-paging footable-paging-center" id={this.props.id}>
+                                <table className="table table-sm table-hover table-striped footable footable-5 footable-paging footable-paging-center" id={this.props.id}>
                                     <thead>
                                         { (fieldNames.length > 0) &&
                                             <tr>
