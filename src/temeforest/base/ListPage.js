@@ -9,6 +9,7 @@ import axios from 'axios'
 
 import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
+import { thisExpression } from '@babel/types'
 
 const CancelToken = axios.CancelToken;
 
@@ -309,6 +310,7 @@ class ListPage extends React.Component {
                         </Col>
                     </Row>
                 }
+                { this.props.filtersZone ? this.props.filtersZone : null }
                 <br/>
                 <Row>
                     <Col xs="12" md="12">

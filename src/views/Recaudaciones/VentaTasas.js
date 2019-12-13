@@ -17,7 +17,8 @@ class RegistroTasa extends React.Component {
     optionsLocalidad = {
         url : `${baseurl}/localidad/`,
         labelName: 'nombre',
-        valueName: 'id'
+        valueName: 'id',
+        optionProps: ['tarifa_tasa']
     }
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
@@ -40,6 +41,14 @@ class RegistroTasa extends React.Component {
     }
 
     onChange = name => (e) => {
+
+        if(name === 'localidad' && !this.props.id){
+            const selectLocalidad = e.target
+            const valor = selectLocalidad.options[selectLocalidad.options.selectedIndex].attributes['data-tarifa_tasa'].value
+            
+            this.props.onChange('precio', valor)
+        }
+
         if(this.props.onChange){
             this.props.onChange(name, e.target.value)
         }
@@ -66,7 +75,7 @@ class RegistroTasa extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-3">Cooperativa</Label>
                             <div className="col-sm-6">
-                                <Select asyncOptions={this.optionsCooperativa} onChange={this.onChange('cooperativa')} value={this.props.cooperativa} />
+                                <Select id="select-cooperativa" asyncOptions={this.optionsCooperativa} onChange={this.onChange('cooperativa')} value={this.props.cooperativa} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
@@ -197,12 +206,13 @@ class VentaTasas extends React.Component {
     }
 
     fieldEditar = (row) => {
-        if(row.motivo_modificacion === null)
+        if(row.motivo_modificacion === null){
             return (
-                <Button onClick={(e) => this.editarVenta(row)}>
+                <Button onClick={(e) => { console.log(row); this.editarVenta(row) }}>
                     Editar
                 </Button>
             )
+        }
         return null
     }
 
