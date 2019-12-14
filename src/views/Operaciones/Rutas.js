@@ -35,7 +35,6 @@ function Rutas(props) {
 
                                         title='Listado de Rutas'
 
-                                        
                                         filtersZone={
                                             <div className="row">
                                                 <div className="col-sm-4">
@@ -51,8 +50,6 @@ function Rutas(props) {
 
                                         searchable={true}
                                         searchPlaceholder="Ciudad, Vía, Cooperativa"
-
-                                        
 
                                         fieldNames={['Cooperativa', 'Destino', 'Vía']}
                                         fields={['cooperativa_nombre', 'ciudad_destino_nombre', 'via']}

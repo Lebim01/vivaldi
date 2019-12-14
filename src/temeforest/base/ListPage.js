@@ -284,9 +284,7 @@ class ListPage extends React.Component {
         if(typeof imprimirPantalla === 'function'){
             imprimirPantalla(this.state.filtered)
         }else{
-            
-                window.print()
-            
+            window.print()
         }
     }
 
@@ -307,7 +305,7 @@ class ListPage extends React.Component {
                         <Col xs="12" md="6" className="text-right">
                             { searchable &&
                                 <Permission key_permission={`add_${this.props.key_permission}`}>
-                                    <Button style={{'float': 'right'}} onClick={() => this.onRowDoubleClick('', {})}>
+                                    <Button onClick={() => this.onRowDoubleClick('', {})}>
                                         <i className="fa fa-plus"></i>
                                     </Button>
                                 </Permission>
@@ -324,11 +322,10 @@ class ListPage extends React.Component {
                                     <i className="fas fa-print"></i>
                                 </Button>
                             }
-                            {' '}
                             { this.props.actionsButtons.map(element => (
                                 <>
-                                    {element}
                                     {' '}
+                                    {element}
                                 </>
                             )) }
                         </Col>
