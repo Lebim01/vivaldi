@@ -115,6 +115,7 @@ class ReporteTasasNormales extends React.Component {
                                     <ListPage
 
                                         exportExcel
+                                        imprimirPantalla
                                         id="report"
                                         title= "Reporte Tasas Normales"
 

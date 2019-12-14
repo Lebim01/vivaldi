@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { ListPage, Card, CardBody, CardTitle, FormGroup, Label, Select, Button, Permission } from 'temeforest'
-import { baseurl } from 'utils/url'
+import { baseurl, objectToUrl } from 'utils/url'
 
 function Rutas(props) {
 
@@ -28,9 +28,10 @@ function Rutas(props) {
                             <div className="col-sm-12">
                                     <ListPage
                                         exportExcel
-                                        id="table-rutas"
+                                        imprimirPantalla
+                                        id="report"
 
-                                        key_permission="ruta"
+                                        key_permission="viajes"
 
                                         title='Listado de Rutas'
 

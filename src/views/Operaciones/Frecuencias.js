@@ -49,6 +49,7 @@ class Frecuencias extends React.Component {
                             <CardBody>
                                 <div className="col-sm-12"><ListPage
                                         exportExcel
+                                        imprimirPantalla
                                         id="frecuencia"
 
                                         key_permission="frecuencia"

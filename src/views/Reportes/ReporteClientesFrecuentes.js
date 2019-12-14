@@ -51,6 +51,7 @@ class ReporteClientesFrecuentes extends React.Component {
                     <ListPage
                     
                     exportExcel
+                    imprimirPantalla
                     id="report"
                     key_permission="clientes_frecuentes"
 

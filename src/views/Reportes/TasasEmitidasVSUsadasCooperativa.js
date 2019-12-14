@@ -52,6 +52,7 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
                 <ReportPage title="Tasas emitidas VS Usadas por cooperativa">
                 <ListPage
                 exportExcel
+                imprimirPantalla
                 id= "emitidas_usadas"
                 key_permission= "emitidas_usadas"
 

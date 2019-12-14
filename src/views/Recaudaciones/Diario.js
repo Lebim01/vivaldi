@@ -108,7 +108,7 @@ class Diario extends React.Component {
     render(){
         const { refresh } = this.state
         return (
-            <Permission key_permission="view_ruta" mode="redirect">
+            <Permission key_permission="view_diario" mode="redirect">
                 <div className="animated fadeIn">
                     <div className="row">
                         <div className="col-sm-12">
@@ -116,6 +116,7 @@ class Diario extends React.Component {
                             <CardBody>
                                 <ListPage
                                     exportExcel
+                                    imprimirPantalla
                                     id="report"
                                     key_permission="diario"
 

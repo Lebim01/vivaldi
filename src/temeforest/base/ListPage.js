@@ -279,14 +279,25 @@ class ListPage extends React.Component {
         }
     }
 
+    imprimirPantalla = () => {
+        const { imprimirPantalla } = this.props
+        if(typeof imprimirPantalla === 'function'){
+            imprimirPantalla(this.state.filtered)
+        }else{
+            
+                window.print()
+            
+        }
+    }
+
     render(){
-        const { title, searchPlaceholder, fieldNames, fields, searchable, head, exportExcel } = this.props
+        const { title, searchPlaceholder, fieldNames, fields, searchable, head, exportExcel, imprimirPantalla } = this.props
         const { filtered, numPages, next, previous, currentPage, numBeginVisibleFooterPages, numEndVisibleFooterPages, search, loading } = this.state
 
         return (
             <div>
                 { title && <CardTitle>{ title }</CardTitle> }
-                { (searchable || exportExcel) &&
+                { (searchable || exportExcel || imprimirPantalla) &&
                     <Row>
                         <Col xs="12" md="6">
                             { searchable &&
@@ -305,6 +316,12 @@ class ListPage extends React.Component {
                             { exportExcel &&
                                 <Button onClick={this.exportExcel} title="Exportar excel">
                                     <i className="fas fa-file-excel"></i>
+                                </Button>
+                            }
+                            {' '}
+                            { imprimirPantalla &&
+                                <Button onClick={this.imprimirPantalla} title="Imprimir Pantalla">
+                                    <i className="fas fa-print"></i>
                                 </Button>
                             }
                             {' '}

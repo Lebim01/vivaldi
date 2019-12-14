@@ -57,6 +57,7 @@ class TasasUsadasPorViaje extends React.Component {
                                 <CardBody>
                                 <ListPage
                                     exportExcel
+                                    imprimirPantalla
                                     id= "tasas_viaje"
                                     key_permission= "tasas_viaje"
                                     title="Tasas usadas por viaje"

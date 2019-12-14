@@ -120,6 +120,8 @@ class ReporteBoletosTasas extends React.Component {
                             <ListPage
                                 searchable={false}
                                 exportExcel
+                                id="boletos_tasas"
+                                imprimirPantalla
 
                                 fieldNames={['Cooperativa','Boleto normal', 'Boleto especial', 'Normal anulado', 'Especial anulado', 'Total boleto', 'Total tasa']}
                                 fields={['cooperativa','boleto_normal', 'boleto_especial', 'normal_anulado', 'especial_anulado', 'total_boleto', 'total_tasa']}

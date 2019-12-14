@@ -84,6 +84,7 @@ function Buses(props) {
                                     urlFront='cooperativas/buses'
 
                                     exportExcel={exportExcel}
+                                    imprimirPantalla
                                     history={props.history}
                                     parameters={state}
                                     filters={{
