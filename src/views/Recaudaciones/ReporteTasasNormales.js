@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, ReportPage, Input, Button, FormValidate } from 'temeforest'
+import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, ReportPage, Input, Permission, Button, FormValidate } from 'temeforest'
 import moment from 'moment'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { baseurl } from 'utils/url'
@@ -106,70 +106,88 @@ class ReporteTasasNormales extends React.Component {
         const { refresh } = this.state
         return (
 
-            <ReportPage title="Reporte Tasas Normales">
-               
-                <br/>
-                <div className="row">
-                    <div className="col-sm-6">
-                        <FormGroup className="row">
-                            <Label className="col-sm-4">Cooperativa</Label>
-                            <div className="col-sm-8">
-                                <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
-                            </div>
-                        </FormGroup>
-                        <FormGroup className="row">
-                            <Label className="col-sm-4">Localidad</Label>
-                            <div className="col-sm-8">
-                                <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad}/>
-                            </div>
-                        </FormGroup>
-                    </div>
-                    <div className="col-sm-6">
-                        <FormGroup className="row">
-                            <Label className="col-sm-3">Fecha inicio</Label>
-                            <div className="col-sm-8">
-                                <Input asyncOptions={this.optionsFecha} className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
-                            </div>
-                        </FormGroup>
-                        <FormGroup className="row">
-                            <Label className="col-sm-3">Fecha fin</Label>
-                            <div className="col-sm-8">
-                                <Input asyncOptions={this.optionsFecha} className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
-                            </div>
-                        </FormGroup>
+            <Permission key_permission="view_reporte_tasas_normales" mode="redirect">
+                <div className="animated fadeIn">
+                    <div className="row">
+                        <div className="col-sm-12">
+                            <Card>
+                                <CardBody>
+                                    <ListPage
+
+                                        exportExcel
+                                        id="report"
+                                        title= "Reporte Tasas Normales"
+
+                                        filtersZone={
+                                        <div className="row">
+                                            <div className="col-sm-6">
+                                                <FormGroup className="row">
+                                                    <Label className="col-sm-4">Cooperativa</Label>
+                                                    <div className="col-sm-8">
+                                                        <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
+                                                    </div>
+                                                </FormGroup>
+                                                <FormGroup className="row">
+                                                    <Label className="col-sm-4">Localidad</Label>
+                                                    <div className="col-sm-8">
+                                                        <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad}/>
+                                                    </div>
+                                                </FormGroup>
+                                            </div>
+                                            <div className="col-sm-6">
+                                                <FormGroup className="row">
+                                                    <Label className="col-sm-3">Fecha inicio</Label>
+                                                    <div className="col-sm-8">
+                                                        <Input asyncOptions={this.optionsFecha} className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
+                                                    </div>
+                                                </FormGroup>
+                                                <FormGroup className="row">
+                                                    <Label className="col-sm-3">Fecha fin</Label>
+                                                    <div className="col-sm-8">
+                                                        <Input asyncOptions={this.optionsFecha} className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
+                                                    </div>
+                                                </FormGroup>
+                                            </div>
+                                        </div>
+                                        }
+
+                                        /*actionsButtons={[
+                                        <div className="row">
+                                            <div className="col-sm-12 text-center">
+                                                <Button onClick={this.buscar.bind(this)}>
+                                                    Buscar
+                                                </Button>
+                                            </div>
+                                        </div>
+                                        ]}*/                                        
+                                        
+                                            searchable={false}
+                                            
+                                            ref={this.table}
+
+                                            fieldNames={['Localidad', 'Cooperativa','Fecha', 'Usuario', 'Cantidad', 'Valor']}
+                                            fields={[
+                                                'localidad_nombre',
+                                                'cooperativa_nombre', 
+                                                'fecha',
+                                                'usuario_solicitante_nombre',
+                                                (row)=> <label style={{fontWeight: 300}}>{("  " + row.cantidad_aprobada || 0)}</label>,
+                                                (row)=> <label style={{float:"right", fontWeight: 300}}>${moneyFormat(row.valor || 0)}</label>,
+                                                /*this.fieldImprimir*/
+                                            ]}
+
+                                            endpoint={endpoint}
+                                            parameters={this.state}
+
+                                            history={this.props.history}
+                                            refresh={refresh}
+                                        />
+                                </CardBody>
+                            </Card>
+                        </div>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col-sm-12 text-center">
-                        <Button onClick={this.buscar.bind(this)}>
-                            Buscar
-                        </Button>
-                    </div>
-                </div>
-                <ListPage
-                    id="report"
-                    searchable={false}
-                    exportExcel
-                    ref={this.table}
-
-                    fieldNames={['Localidad', 'Cooperativa','Fecha', 'Usuario', 'Cantidad', 'Valor']}
-                    fields={[
-                        'localidad_nombre',
-                        'cooperativa_nombre', 
-                        'fecha',
-                        'usuario_solicitante_nombre',
-                        (row)=> <label style={{fontWeight: 300}}>{("  " + row.cantidad_aprobada || 0)}</label>,
-                        (row)=> <label style={{float:"right", fontWeight: 300}}>${moneyFormat(row.valor || 0)}</label>,
-                        /*this.fieldImprimir*/
-                    ]}
-
-                    endpoint={endpoint}
-                    parameters={this.state}
-
-                    history={this.props.history}
-                    refresh={refresh}
-                />
-            </ReportPage>
+            </Permission>
         )
     }
 }

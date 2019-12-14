@@ -50,6 +50,13 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
         return (
             <Permission key_permission="view_tasas_emitidas_usadas" mode="redirect">
                 <ReportPage title="Tasas emitidas VS Usadas por cooperativa">
+                <ListPage
+                exportExcel
+                id= "emitidas_usadas"
+                key_permission= "emitidas_usadas"
+
+
+                filtersZone= {
                     <div className="row">
                         <div className="col-sm-4">
                             <FormGroup className="row">
@@ -94,9 +101,9 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
                             </FormGroup>
                         </div>
                     </div>
-                    <ListPage
+                }   
                         searchable={false}
-                        exportExcel
+                        
 
                         fieldNames={[(this.state.reporte === 2) ? 'Viaje' : 'Boletero' , 'Emitidas', 'Usadas']}
                         fields={[(this.state.reporte === 2) ? 'viaje' : 'boletero', 'tasas_emitidas', 'tasas_usadas']}

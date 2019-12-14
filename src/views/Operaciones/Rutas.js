@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ListPage, Card, CardBody, CardTitle, FormGroup, Label, Select, Permission } from 'temeforest'
+import { ListPage, Card, CardBody, CardTitle, FormGroup, Label, Select, Button, Permission } from 'temeforest'
 import { baseurl } from 'utils/url'
 
 function Rutas(props) {
@@ -25,38 +25,47 @@ function Rutas(props) {
                     <div className="col-sm-12">
                         <Card>
                             <CardBody>
-                                <CardTitle>
-                                    Listado de Rutas
-                                </CardTitle>
-                                <br/>
-                                <div className="row">
-                                    <div className="col-sm-4">
-                                        <FormGroup className="row">
-                                            <Label className="col-sm-6">Cooperativa</Label>
-                                            <div className="col-sm-6">
-                                                <Select asyncOptions={optionsCooperativa} defaultOption="Todos" onChange={onChange('cooperativa')} value={state.cooperativa}/>
+                            <div className="col-sm-12">
+                                    <ListPage
+                                        exportExcel
+                                        id="table-rutas"
+
+                                        key_permission="ruta"
+
+                                        title='Listado de Rutas'
+
+                                        
+                                        filtersZone={
+                                            <div className="row">
+                                                <div className="col-sm-4">
+                                                    <FormGroup className="row">
+                                                        <Label className="col-sm-6">Cooperativa</Label>
+                                                        <div className="col-sm-6">
+                                                            <Select asyncOptions={optionsCooperativa} defaultOption="Todos" onChange={onChange('cooperativa')} value={state.cooperativa}/>
+                                                        </div>
+                                                    </FormGroup>
+                                                </div>
                                             </div>
-                                        </FormGroup>
-                                    </div>
+                                        }
+
+                                        searchable={true}
+                                        searchPlaceholder="Ciudad, Vía, Cooperativa"
+
+                                        
+
+                                        fieldNames={['Cooperativa', 'Destino', 'Vía']}
+                                        fields={['cooperativa_nombre', 'ciudad_destino_nombre', 'via']}
+
+                                        endpoint='ruta'
+                                        urlFront='operaciones/rutas'
+                                        history={props.history}
+                                        parameters={state}
+                                        filters={{
+                                            persist: true,
+                                            callback: setState
+                                        }}
+                                    />
                                 </div>
-                                <ListPage
-                                    searchable={true}
-                                    searchPlaceholder="Ciudad, Vía, Cooperativa"
-
-                                    key_permission="ruta"
-
-                                    fieldNames={['Cooperativa', 'Destino', 'Vía']}
-                                    fields={['cooperativa_nombre', 'ciudad_destino_nombre', 'via']}
-
-                                    endpoint='ruta'
-                                    urlFront='operaciones/rutas'
-                                    history={props.history}
-                                    parameters={state}
-                                    filters={{
-                                        persist: true,
-                                        callback: setState
-                                    }}
-                                />
                             </CardBody>
                         </Card>
                     </div>
@@ -66,3 +75,4 @@ function Rutas(props) {
     )
 }
 export default Rutas
+

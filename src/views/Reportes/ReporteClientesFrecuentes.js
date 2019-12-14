@@ -48,6 +48,14 @@ class ReporteClientesFrecuentes extends React.Component {
         return (
             <Permission key_permission="view_clientes_frecuentes" mode="redirect">
                 <ReportPage title="Reporte de clientes frecuentes">
+                    <ListPage
+                    
+                    exportExcel
+                    id="report"
+                    key_permission="clientes_frecuentes"
+
+                    
+                    filtersZone= {
                     <div className="row">
                         <FormGroup className="row col-sm-4">
                             <Label className="col-sm-6">Cooperativa</Label>
@@ -92,6 +100,9 @@ class ReporteClientesFrecuentes extends React.Component {
                             </div>
                         </FormGroup>
                     </div>
+                    }
+
+                    /*actionsButtons= {[
                     <div className="row">
                         <div className="col-sm-12 text-center">
                             <Button onClick={this.buscar.bind(this)}>
@@ -99,9 +110,9 @@ class ReporteClientesFrecuentes extends React.Component {
                             </Button>
                         </div>
                     </div>
-                    <ListPage
+                    ]}*/
                         searchable={false}
-                        exportExcel
+                        
 
                         fieldNames={this.state.reporte == 1 ?  ['Pasajero', 'Viajes'] : ['Cliente', 'Cédula/RUC', 'Viajes']}
                         fields={this.state.reporte == 1 ? ['nombre', 'viajes'] : ['nombre', 'identificacion', 'viajes']}

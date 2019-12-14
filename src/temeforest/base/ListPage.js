@@ -412,6 +412,7 @@ class ListPage extends React.Component {
 ListPage.defaultProps = {
     parameters : {},
     redirect: true,
+    actionsButtons: [],
     
     filters : {
         persist: true,

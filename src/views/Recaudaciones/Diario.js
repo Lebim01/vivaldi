@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListPage, Label, FormGroup, Select, Input, ReportPage, Button } from 'temeforest'
+import { ListPage, Label, FormGroup, Select, Input, ReportPage, Button, Permission, Card, CardBody } from 'temeforest'
 import { baseurl } from 'utils/url'
 import { confirmEndpoint } from 'utils/dialog'
 import { printHtml } from 'utils/exportData'
@@ -108,66 +108,84 @@ class Diario extends React.Component {
     render(){
         const { refresh } = this.state
         return (
-            <ReportPage title="Cobros Diarios">
-                <div className="row">
-                    <div className="col-sm-4">
-                        <FormGroup className="row">
-                            <Label className="col-sm-5">Dia</Label>
-                            <div className="col-sm-7">
-                                <Input className="no-clear" type="date" onChange={this.onChange('fecha')} value={this.state.fecha}/>
-                            </div>
-                        </FormGroup>
-                        <FormGroup className="row">
-                            <Label className="col-sm-5">Localidad</Label>
-                            <div className="col-sm-7">
-                                <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad}/>
-                            </div>
-                        </FormGroup>
-                    </div>
-                    <div className="col-sm-4">
-                        <FormGroup className="row">
-                            <Label className="col-sm-6">Cooperativa</Label>
-                            <div className="col-sm-6">
-                                <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
-                            </div>
-                        </FormGroup>
-                        <FormGroup className="row">
-                            <Label className="col-sm-6">Tipo</Label>
-                            <div className="col-sm-6">
-                                <Select options={this.optionsTipos} onChange={this.onChange('tipo')} value={this.state.tipo}/>
-                            </div>
-                        </FormGroup>
-                    </div>
-                    <div className="col-sm-4 text-right">
-                        
+            <Permission key_permission="view_ruta" mode="redirect">
+                <div className="animated fadeIn">
+                    <div className="row">
+                        <div className="col-sm-12">
+                        <Card>
+                            <CardBody>
+                                <ListPage
+                                    exportExcel
+                                    id="report"
+                                    key_permission="diario"
+
+                                    title= "Cobros Diarios"
+
+                                    filtersZone={
+                                        <div className="row">
+                                            <div className="col-sm-4">
+                                                <FormGroup className="row">
+                                                    <Label className="col-sm-5">Dia</Label>
+                                                    <div className="col-sm-7">
+                                                        <Input className="no-clear" type="date" onChange={this.onChange('fecha')} value={this.state.fecha}/>
+                                                    </div>
+                                                </FormGroup>
+                                                <FormGroup className="row">
+                                                    <Label className="col-sm-5">Localidad</Label>
+                                                    <div className="col-sm-7">
+                                                        <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad}/>
+                                                    </div>
+                                                </FormGroup>
+                                            </div>
+                                            <div className="col-sm-4">
+                                                <FormGroup className="row">
+                                                    <Label className="col-sm-6">Cooperativa</Label>
+                                                    <div className="col-sm-6">
+                                                        <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
+                                                    </div>
+                                                </FormGroup>
+                                                <FormGroup className="row">
+                                                    <Label className="col-sm-6">Tipo</Label>
+                                                    <div className="col-sm-6">
+                                                        <Select options={this.optionsTipos} onChange={this.onChange('tipo')} value={this.state.tipo}/>
+                                                    </div>
+                                                </FormGroup>
+                                            </div>
+                                            <div className="col-sm-4 text-right">
+                                                
+                                            </div>
+                                        </div>
+                                    }
+                                
+                                
+                                    searchable={false}
+                                    ref={this.table}
+
+                                    fieldNames={['Cooperativa', 'Localidad', 'Fecha venta', 'Cobrar', 'A cobrar', 'Cobrado', 'Fecha cobro', 'N.C', 'Acción']}
+                                    fields={[
+                                        'cooperativa_nombre', 
+                                        'localidad_nombre', 
+                                        'fecha_venta', 
+                                        this.fieldCobrar, 
+                                        (row) => <label style={{float:"right", fontWeight: 300}}>$ {moneyFormat(row.a_cobrar)}</label>, 
+                                        (row) => <label style={{float:"right", fontWeight: 300}}>$ {moneyFormat(row.cobrado)}</label>,
+                                        (row) => <label style={{float:"right", fontWeight: 300}}>{(row.fecha_cobro)}</label>,
+                                        (row) => <label style={{float:"right", fontWeight: 300}}>$ {moneyFormat(row.nc)}</label>,
+                                    this.fieldImprimir
+                                    ]}
+
+                                    endpoint='venta/cobros-diarios'
+                                    parameters={this.state}
+                                    
+                                    history={this.props.history}
+                                    refresh={refresh}
+                                />
+                            </CardBody>
+                        </Card>
+                        </div>
                     </div>
                 </div>
-                <ListPage
-                    exportExcel
-                    id="report"
-                    searchable={false}
-                    ref={this.table}
-
-                    fieldNames={['Cooperativa', 'Localidad', 'Fecha venta', 'Cobrar', 'A cobrar', 'Cobrado', 'Fecha cobro', 'N.C', 'Acción']}
-                    fields={[
-                        'cooperativa_nombre', 
-                        'localidad_nombre', 
-                        'fecha_venta', 
-                        this.fieldCobrar, 
-                        (row) => <label style={{float:"right", fontWeight: 300}}>$ {moneyFormat(row.a_cobrar)}</label>, 
-                        (row) => <label style={{float:"right", fontWeight: 300}}>$ {moneyFormat(row.cobrado)}</label>,
-                        (row) => <label style={{float:"right", fontWeight: 300}}>{(row.fecha_cobro)}</label>,
-                        (row) => <label style={{float:"right", fontWeight: 300}}>$ {moneyFormat(row.nc)}</label>,
-                       this.fieldImprimir
-                    ]}
-
-                    endpoint='venta/cobros-diarios'
-                    parameters={this.state}
-                    
-                    history={this.props.history}
-                    refresh={refresh}
-                />
-            </ReportPage>
+            </Permission>
         )
     }
 }

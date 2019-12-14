@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button, Permission } from 'temeforest'
+import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button, ReportPage,Permission } from 'temeforest'
 import moment from 'moment'
 import { baseurl } from 'utils/url'
 import store from 'store/auth'
@@ -49,15 +49,19 @@ class TasasUsadasPorViaje extends React.Component {
         const { refresh, timestamp } = this.state
         return (
             <Permission key_permission="view_tasas_viaje" mode="redirect">
+                
                 <div className="animated fadeIn">
                     <div className="row">
                         <div className="col-sm-12">
                             <Card>
                                 <CardBody>
-                                    <CardTitle>
-                                        Tasas usadas por viaje
-                                    </CardTitle>
-                                    <br/>
+                                <ListPage
+                                    exportExcel
+                                    id= "tasas_viaje"
+                                    key_permission= "tasas_viaje"
+                                    title="Tasas usadas por viaje"
+                                   
+                                    filtersZone= {
                                     <div className="row">
                                         <div className="col-sm-4">
                                             <FormGroup className="row">
@@ -101,9 +105,8 @@ class TasasUsadasPorViaje extends React.Component {
                                                 </div>
                                             </FormGroup>
                                         </div>
-                                    </div>
-                                    <br/>
-                                    <div className="row">
+                                    
+                                    
                                         <div className="col-sm-2"></div>
                                         <div className="col-sm-4">
                                             <FormGroup className="row">
@@ -136,9 +139,9 @@ class TasasUsadasPorViaje extends React.Component {
                                         </div>
                                         <div className="col-sm-2"></div>
                                     </div>
-                                    <ListPage
+                                    }
                                         searchable={false}
-                                        exportExcel
+                                        
 
                                         fieldNames={['Tasa (Código)', 'Usada', '# Asiento']}
                                         fields={['', '', '']}
@@ -149,24 +152,14 @@ class TasasUsadasPorViaje extends React.Component {
                                         history={this.props.history}
                                         refresh={refresh}
                                     />
-                                    <br/>
-                                    <div className="row">
-                                        <div className="col-sm-12 text-center">
-                                            Consultado {timestamp} por {user_info.name}
-                                        </div>
-                                    </div>
-                                    <br/>
-                                    <div className="row">
-                                        <div className="col-sm-12 text-center">
-                                            <Button type="success" style={{marginRight:5}}>Imprimir</Button>
-                                            <Button type="info" style={{marginLeft:5}}>Exportar</Button>
-                                        </div>
-                                    </div>
+                                   
+                                    
                                 </CardBody>
                             </Card>
                         </div>
                     </div>
                 </div>
+                
             </Permission>
         )
     }
