@@ -20,8 +20,6 @@ const NumVisibleFooterPages = 5
 
 const DELAY_SEARCH_INPUT = 500
 
-const prefixFilters = 'filters'
-
 class RecordRow extends React.Component {
 
     onRowDoubleClick = () => {
@@ -90,7 +88,6 @@ class ListPage extends React.Component {
         }
 
         if(page){
-            console.log('setpage', page)
             this.setPage(page)
         }
     }
@@ -288,13 +285,52 @@ class ListPage extends React.Component {
         }
     }
 
+    renderActionsButtons = () => {
+        const { searchable, exportExcel, imprimirPantalla, actionsButtons } = this.props
+        return (
+            <div className="pull-right">
+                { searchable &&
+                    <Permission key_permission={`add_${this.props.key_permission}`}>
+                        <Button onClick={() => this.onRowDoubleClick('', {})}>
+                            <i className="fa fa-plus"></i>
+                        </Button>
+                    </Permission>
+                }
+                {' '}
+                { exportExcel &&
+                    <Button onClick={this.exportExcel} title="Exportar excel">
+                        <i className="fas fa-file-excel"></i>
+                    </Button>
+                }
+                {' '}
+                { imprimirPantalla &&
+                    <Button onClick={this.imprimirPantalla} title="Imprimir Pantalla">
+                        <i className="fas fa-print"></i>
+                    </Button>
+                }
+                { actionsButtons.map(element => (
+                    <>
+                        {' '}
+                        {element}
+                    </>
+                )) }
+            </div>
+        )
+    }
+
     render(){
-        const { title, searchPlaceholder, fieldNames, fields, searchable, head, exportExcel, imprimirPantalla } = this.props
+        const { title, searchPlaceholder, fieldNames, fields, head, searchable, exportExcel, imprimirPantalla } = this.props
         const { filtered, numPages, next, previous, currentPage, numBeginVisibleFooterPages, numEndVisibleFooterPages, search, loading } = this.state
 
         return (
             <div>
-                { title && <CardTitle>{ title }</CardTitle> }
+                { title && 
+                    <CardTitle>
+                        { title }
+                        { this.renderActionsButtons() }
+                    </CardTitle> 
+                }
+                { this.props.filtersZone ? <><br/>{this.props.filtersZone}</> : null }
                 { (searchable || exportExcel || imprimirPantalla) &&
                     <Row>
                         <Col xs="12" md="6">
@@ -302,36 +338,8 @@ class ListPage extends React.Component {
                                 <InputIcon placeholder={`Buscar... ${searchPlaceholder}`} onChange={this.onFilterChange} icon={<i className="fa fa-search"></i>} value={search} delay={1000} />   
                             }
                         </Col>
-                        <Col xs="12" md="6" className="text-right">
-                            { searchable &&
-                                <Permission key_permission={`add_${this.props.key_permission}`}>
-                                    <Button onClick={() => this.onRowDoubleClick('', {})}>
-                                        <i className="fa fa-plus"></i>
-                                    </Button>
-                                </Permission>
-                            }
-                            {' '}
-                            { exportExcel &&
-                                <Button onClick={this.exportExcel} title="Exportar excel">
-                                    <i className="fas fa-file-excel"></i>
-                                </Button>
-                            }
-                            {' '}
-                            { imprimirPantalla &&
-                                <Button onClick={this.imprimirPantalla} title="Imprimir Pantalla">
-                                    <i className="fas fa-print"></i>
-                                </Button>
-                            }
-                            { this.props.actionsButtons.map(element => (
-                                <>
-                                    {' '}
-                                    {element}
-                                </>
-                            )) }
-                        </Col>
                     </Row>
                 }
-                { this.props.filtersZone ? <><br/>{this.props.filtersZone}</> : null }
                 <br/>
                 <Row>
                     <Col xs="12" md="12">

@@ -6,6 +6,9 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import moment from 'moment'
 
+import BlockUi from 'react-block-ui';
+import 'react-block-ui/style.css';
+
 const endpoint = 'frecuencia'
 const dias = [
     'Lunes',
@@ -172,7 +175,9 @@ class CrearFrecuenciaLote extends React.Component {
             dias : [
               0,1,2,3,4,5,6
             ]
-        }
+        },
+        loading: false,
+        loadingMessage : ''
     }
 
     componentDidMount(){
@@ -242,6 +247,8 @@ class CrearFrecuenciaLote extends React.Component {
     }
 
     guardarFrecuencias = async () => {
+        this.setState({ loading: true, loadingMessage : 'Generando frecuencias...' })
+
         try {
             const { data } = this.state
             const { hora_fin, hora_inicio, intervalo_hora, intervalo_minuto, ...frecuenciaData } = this.state.data
@@ -255,9 +262,15 @@ class CrearFrecuenciaLote extends React.Component {
             }
             while(fecha_fin.isAfter(fecha_temp) || fecha_fin.isSame(fecha_temp))
 
+            Swal.fire('Guardar frecuencias lote', 'Guardado', 'success')
             this.props.history.push('/operaciones/frecuencias')
         }catch(e){
             Swal.fire('Error', 'contacte a soporte', 'error')
+        }finally {
+            this.setState({
+                loading: false,
+                loadingMessage : ''
+            })
         }
     }
 
@@ -283,25 +296,27 @@ class CrearFrecuenciaLote extends React.Component {
         const { data, id } = this.state
         return (
             <Permission key_permission="add_frecuencia" mode="redirect">
-                <div className="animated fadeIn">
-                    <Row>
-                        <Col xs="12" md="12">
-                            <Card>
-                                <CardBody>
-                                    <CardTitle>Creación Masiva de Frecuencias</CardTitle>
+                <BlockUi tag="div" blocking={this.state.loading} message={this.state.loadingMessage}>
+                    <div className="animated fadeIn">
+                        <Row>
+                            <Col xs="12" md="12">
+                                <Card>
                                     <CardBody>
-                                        <MainView {...data} onChange={this.onChange} />
-                                    </CardBody>
-                                    <div className="row">
-                                        <div className="col-sm-12 text-center">
-                                            <Button type="success" style={{marginRight:5}} onClick={() => this.confirmSave() }>Guardar</Button>
+                                        <CardTitle>Creación Masiva de Frecuencias</CardTitle>
+                                        <CardBody>
+                                            <MainView {...data} onChange={this.onChange} />
+                                        </CardBody>
+                                        <div className="row">
+                                            <div className="col-sm-12 text-center">
+                                                <Button type="success" style={{marginRight:5}} onClick={() => this.confirmSave() }>Guardar</Button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </CardBody>
-                            </Card>
-                        </Col>
-                    </Row>
-                </div>
+                                    </CardBody>
+                                </Card>
+                            </Col>
+                        </Row>
+                    </div>
+                </BlockUi>
             </Permission>
         )
     }
