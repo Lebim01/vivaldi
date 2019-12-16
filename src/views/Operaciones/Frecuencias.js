@@ -59,7 +59,7 @@ class Frecuencias extends React.Component {
                                         
                                         actionsButtons={[
                                             <Permission key_permission="add_frecuencia">
-                                                <Button className="pull-right" onClick={this.nuevo}>
+                                                <Button onClick={this.nuevo}>
                                                     <i className="fa fa-plus" />
                                                 </Button>
                                             </Permission>,

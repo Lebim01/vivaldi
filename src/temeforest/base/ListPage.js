@@ -11,6 +11,9 @@ import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
 import './ListPage.css'
 
+import FileDownload from 'assets/svg/file-download-solid.svg'
+import FileDownloadW from 'assets/svg/file-download-solid-white.svg'
+
 const CancelToken = axios.CancelToken;
 
 // numero de filas por pagina
@@ -298,14 +301,14 @@ class ListPage extends React.Component {
                 }
                 {' '}
                 { exportExcel &&
-                    <Button onClick={this.exportExcel} title="Exportar excel">
-                        <i className="fas fa-file-excel"></i>
+                    <Button onClick={this.exportExcel} title="Exportar excel" style={{color: 'white'}}>
+                        <img src={FileDownloadW} height="14" />
                     </Button>
                 }
                 {' '}
                 { imprimirPantalla &&
                     <Button onClick={this.imprimirPantalla} title="Imprimir Pantalla">
-                        <i className="fas fa-print"></i>
+                        <i className="fa fa-print"></i>
                     </Button>
                 }
                 { actionsButtons.map(element => (
