@@ -262,7 +262,7 @@ class CrearFrecuenciaLote extends React.Component {
             }
             while(fecha_fin.isAfter(fecha_temp) || fecha_fin.isSame(fecha_temp))
 
-            Swal.fire('Guardar frecuencias lote', 'Guardado', 'success')
+            Swal.fire('Guardar frecuencias lote', 'Guardado!', 'success')
             this.props.history.push('/operaciones/frecuencias')
         }catch(e){
             Swal.fire('Error', 'contacte a soporte', 'error')
