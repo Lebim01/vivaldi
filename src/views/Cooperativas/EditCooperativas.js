@@ -318,7 +318,7 @@ class MainView extends React.Component {
                         </FormGroup>
                         <FormGroup className="row">
                         <Label className="col-md-2" style={{"margin-left":"8%"}}>Contribuyente Especial</Label>
-                            <div className="col-sm-2" style={{"margin-left":"2.3%"}}>
+                            <div className="col-sm-2" style={{"margin-left":"0.3%"}}>
                                 <Select options={sino} value={this.props.contribuyente_especial} onChange={this.onChange('contribuyente_especial')} />
                             </div>
                             <div className="col-sm-3">
