@@ -311,14 +311,14 @@ class MainView extends React.Component {
                             }}
                         />
                         <FormGroup className="row">
-                            <Label className="col-sm-5">Obligado a llevar contabilidad</Label>
-                            <div className="col-sm-3">
+                            <Label className="col-sm-3">Obligado a llevar contabilidad</Label>
+                            <div className="col-sm-2" style={{"margin-left":"5%"}}>
                                 <Select options={sino} value={this.props.obligado_contabilidad} onChange={this.onChange('obligado_contabilidad')} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
-                            <Label className="col-sm-5">Contribuyente Especial</Label>
-                            <div className="col-sm-3">
+                        <Label className="col-md-3" style={{"margin-left":"5%"}}>Contribuyente Especial</Label>
+                            <div className="col-sm-2">
                                 <Select options={sino} value={this.props.contribuyente_especial} onChange={this.onChange('contribuyente_especial')} />
                             </div>
                             <div className="col-sm-3">
@@ -326,8 +326,8 @@ class MainView extends React.Component {
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
-                            <Label className="col-sm-5">Emisi&oacute;n Facturas</Label>
-                            <div className="col-sm-3">
+                            <Label className="col-sm-3">Emisi&oacute;n Facturas</Label>
+                            <div className="col-sm-2" style={{"margin-left":"5%"}}>
                                 <Select options={this.tipos_emision} value={this.props.emision_facturacion} onChange={this.onChange('emision_facturacion')} />
                             </div>
                         </FormGroup>
@@ -335,7 +335,7 @@ class MainView extends React.Component {
                             <div>
                             <FormGroup className="row">
                                 <Label className="col-sm-3">Ambiente Facturaci&oacute;n Electr&oacute;nica</Label>
-                                <div className="col-sm-2">
+                                <div className="col-sm-1">
                                     <Select options={this.ambientes_elect} value={this.props.ambiente} onChange={this.onChange('ambiente')} />
                                 </div>
                             </FormGroup>
