@@ -54,10 +54,12 @@ function Buses(props) {
                     <div className="col-sm-12">
                         <Card>
                             <CardBody>
-                                <CardTitle>
-                                    Listado de Buses
-                                </CardTitle>
-                                <br/>
+                            <ListPage
+
+                            title="Listado de Buses"
+
+                            filtersZone= {
+                                
                                 <div className="row">
                                     <div className="col-sm-4">
                                         <FormGroup className="row">
@@ -68,8 +70,8 @@ function Buses(props) {
                                         </FormGroup>
                                     </div>
                                 </div>
-                                <ListPage
-                                    title="Listado de Buses"
+                                }
+                                    
                                     exportExcel
                                     id="buses"
                                     searchable={true}
