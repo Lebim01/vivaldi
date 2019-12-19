@@ -211,7 +211,7 @@ class ListPage extends React.Component {
 
     onFilterChange = (e) => {
         clearTimeout(this.timer)
-        this.timer = setTimeout(this.loadList, DELAY_SEARCH_INPUT)
+        this.timer = setTimeout(() => this.loadList(this.props.parameters), DELAY_SEARCH_INPUT)
 
         let value = e.target.value
 
