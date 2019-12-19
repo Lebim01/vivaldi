@@ -54,11 +54,18 @@ function Buses(props) {
                     <div className="col-sm-12">
                         <Card>
                             <CardBody>
+                            <div className="col-sm-12">
                             <ListPage
+
+                            
+                            //exportExcel
+                            imprimirPantalla  
+                            id="report"
+                            key_permission= "bus"
 
                             title="Listado de Buses"
 
-                            filtersZone= {
+                            filtersZone={
                                 
                                 <div className="row">
                                     <div className="col-sm-4">
@@ -72,12 +79,11 @@ function Buses(props) {
                                 </div>
                                 }
                                     
-                                    exportExcel
-                                    id="buses"
+                                    
                                     searchable={true}
                                     searchPlaceholder="Cooperativa, Placa, Disco"
                                                               
-                                    key_permission="bus"
+                                    //key_permission="bus"
 
                                     fieldNames={['Cooperativa', 'Placa', 'Disco']}
                                     fields={['cooperativa_nombre', 'placa', 'disco']}
@@ -86,7 +92,7 @@ function Buses(props) {
                                     urlFront='cooperativas/buses'
 
                                     exportExcel={exportExcel}
-                                    imprimirPantalla    
+                                      
                                     history={props.history}
                                     parameters={state}
                                     filters={{
@@ -94,9 +100,11 @@ function Buses(props) {
                                         callback: setState
                                     }}
                                 />
+                                </div>
                             </CardBody>
                         </Card>
                     </div>
+                    
                 </div>
             </div>
         </Permission>

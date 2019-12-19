@@ -27,14 +27,14 @@ class RecordRow extends React.Component {
                     </Button>{' '}
                     {this.props.cooperativa_nombre}
                 </td>
-                <td>{this.props.establecimiento}</td>
-                <td>{this.props.punto_emision_boleto}</td>
-                <td>{this.props.secuencia_boleto}</td>
-                <td>{this.props.numero_prueba}</td>
-                <td>{this.props.punto_emision_nota_credito}</td>
-                <td>{this.props.secuencia_nota_credito}</td>
-                <td>{this.props.punto_emision_tasa}</td>
-                <td>{this.props.secuencia_tasa}</td>
+                <td>{(this.props.establecimiento || '').padStart(3, '0')}</td>
+                <td>{(`${this.props.punto_emision_boleto}` || '').padStart(3, '0')}</td>
+                <td>{(`${this.props.secuencia_boleto}` || '').padStart(9, '0')}</td>
+                <td> {(this.props.establecimiento || '').padStart(3, '0')}-{(`${this.props.punto_emision_boleto}` || '').padStart(3, '0')}-{(`${this.props.secuencia_boleto}` || '').padStart(9, '0')}</td>
+                <td>{(`${this.props.punto_emision_nota_credito}` || '').padStart(3, '0')}</td>
+                <td>{(`${this.props.secuencia_nota_credito}` || '').padStart(9, '0')}</td>
+                <td>{(`${this.props.punto_emision_tasa}` || '').padStart(3, '0')}</td>
+                <td>{(`${this.props.secuencia_tasa}` || '').padStart(9, '0')}</td>
             </tr>
         )
     }
@@ -312,7 +312,7 @@ class MainView extends React.Component {
                         </div>
                     ) : (
                         <>
-                            <Label className="col-sm-4">
+                            <Label className="col-sm-6">
                                 Cooperativas e Información tribunaria
                                 <Button size="sm" style={{marginLeft:5}} onClick={this.addCooperativa}>
                                     <i className="fa fa-plus"></i>
