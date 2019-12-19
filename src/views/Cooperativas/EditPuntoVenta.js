@@ -30,6 +30,7 @@ class RecordRow extends React.Component {
                 <td>{this.props.establecimiento}</td>
                 <td>{this.props.punto_emision_boleto}</td>
                 <td>{this.props.secuencia_boleto}</td>
+                <td>{this.props.numero_prueba}</td>
                 <td>{this.props.punto_emision_nota_credito}</td>
                 <td>{this.props.secuencia_nota_credito}</td>
                 <td>{this.props.punto_emision_tasa}</td>

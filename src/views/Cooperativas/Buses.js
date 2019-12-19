@@ -69,9 +69,9 @@ function Buses(props) {
                                     </div>
                                 </div>
                                 <ListPage
-                                    /*title="Listado de Buses"*/
-                                    /*exportExcel
-                                    id="buses"*/
+                                    title="Listado de Buses"
+                                    exportExcel
+                                    id="buses"
                                     searchable={true}
                                     searchPlaceholder="Cooperativa, Placa, Disco"
                                                               
