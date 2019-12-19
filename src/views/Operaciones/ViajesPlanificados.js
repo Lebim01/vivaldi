@@ -3,19 +3,16 @@ import { ListPage, Select, Label, FormGroup, Card, CardBody, CardTitle, Button, 
 import { baseurl } from 'utils/url'
 import moment from 'moment'
 import Clock  from 'utils/clock'
-
-function getTdBodyClass(row) {
-    
-  }
-
+import ViajesModal from './ViajesModal'
 
 class ViajesPlanificados extends React.Component {
 
     interval = null
     state = {
-        fecha: moment().format('YYYY-MM-DD HH:mm:ss')
-        
-
+        fecha: moment().format('YYYY-MM-DD HH:mm:ss'),
+        modal : {
+            show: false
+        }
     }
 
     componentDidMount(){
@@ -69,10 +66,56 @@ class ViajesPlanificados extends React.Component {
         })
     }
 
+    openDialog = (row) => {
+        this.setState({
+            modal : {
+                show: true,
+                id : row.viaje
+            }
+        })
+    }
+
+    toggle = () => {
+        this.setState({
+            modal : {
+                ...this.state.modal,
+                show :  !this.state.modal.show
+            }
+        })
+    }
+
     render(){
         const { cooperativa, silo, localidad, estado, fecha, hora } = this.state
+
+        let headers = ['#','Cooperativa', 'Disco', 'Placa', 'Saldo', 'Duración', 'Salida', 'Destino']
+        let fields = ['', 
+            'cooperativa_nombre', 
+            'disco', 
+            'placa',
+            /*tdBodyClass={(row) => `no-padding-top-bottom ${row.saldo === 0 ? 'bg-orange' : ''}`},*/ 
+            'saldo', 
+            'duracion', 
+            'hora_salida',
+            'destino'
+        ]
+
+        if(!this.state.saldo){
+            fields.splice(fields.indexOf('saldo'), 1)
+            headers.splice(headers.indexOf('Saldo'), 1)
+        }
+
+        if(!this.state.duracion){
+            fields.splice(fields.indexOf('duracion'), 1)
+            headers.splice(headers.indexOf('Duración'), 1)
+        }
+
         return (
             <Permission key_permission="view_viajes_planificados" mode="redirect">
+
+                <ViajesModal
+                    {...this.state.modal}
+                    toggle={this.toggle}
+                />
                 <div className="animated fadeIn">
                     <div className="row">
                         <div className="col-sm-12">
@@ -121,16 +164,12 @@ class ViajesPlanificados extends React.Component {
                                                 <div className="col-sm-3"></div>
                                                 <div className="col-sm-9">
                                                     <div className="custom-control custom-checkbox">
-                                                        <input type="checkbox" className="custom-control-input" id="tiempo_viaje" name="tiempo_viaje" checked={this.state.tiempo_viaje} onChange={this.onChange('tiempo_viaje')} />
-                                                        <Label onlyClassName="custom-control-label" htmlFor="tiempo_viaje">Mostrar tiempo de viaje</Label>
+                                                        <input type="checkbox" className="custom-control-input" id="duracion" name="duracion" checked={this.state.duracion} onChange={this.onChange('duracion')} />
+                                                        <Label onlyClassName="custom-control-label" htmlFor="duracion">Mostrar tiempo de viaje</Label>
                                                     </div>
                                                 </div>
                                             </FormGroup>
                                         </div>
-                                    </div>
-                                    <div className="col-sm-12 text-center">
-                                        <Button onClick={this.refresh.bind(this)}>Configurar</Button>
-                                        
                                     </div>
                                     <br />
                                     <br />
@@ -141,41 +180,16 @@ class ViajesPlanificados extends React.Component {
                                     <br />
                                     <div className="col-sm-12">
                                         <ListPage
-                                            
-                                            
-
                                             searchable={false}
-                                            fieldNames={['#','Cooperativa', 'Disco', 'Placa', 'Saldo', 'Vlts', 'Costo', 'Salida', 'Destino']}
-                                            fields={['', 
-                                            'cooperativa_nombre', 
-                                            'disco', 
-                                            'placa',
-                                            /*tdBodyClass={(row) => `no-padding-top-bottom ${row.saldo === 0 ? 'bg-orange' : ''}`},*/ 
-                                            'saldo', 
-                                            'vlts', 
-                                            'costo', 
-                                            'hora_salida',
-                                            'destino']}
+                                            fieldNames={headers}
+                                            fields={fields}
 
-
-                                            
-                                            tdBodyClass="margin: 0 !important;padding: 0 !important;"
-                                            //tdBodyClass="bg-orange"
-                                            
                                             tdBodyClass={(row) => `${row.saldo === 0 ? 'bg-orange' : row.saldo !==  0 && moment().format('HH:mm:ss') > row.hora_salida ? 'bg-info' : ''}`}
-
-                                            //tdBodyClass={(row) => `${row.disco !== "17" && moment().format('HH:mm:ss') > row.hora_salida ? 'bg-info' : ''}`}
-
-                                            
-
-                                            /*tdBodyClass={(row) => `${row.saldo === 0  && moment().format('hh:mm') > row.hora_salida ? 'bg-orange' : ''}`}*/
-
-
                                             endpoint='venta/viajes-planificados'
                                             parameters={this.state}
-                                            //tdBodyClass="no-padding-top-bottom"
 
                                             history={this.props.history}
+                                            onRowDoubleClick={this.openDialog}
                                         />
                                     </div>
                                 </CardBody>
