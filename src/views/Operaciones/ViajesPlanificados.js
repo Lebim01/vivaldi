@@ -70,7 +70,7 @@ class ViajesPlanificados extends React.Component {
     }
 
     render(){
-        const { cooperativa_nombre, silo, localidad, estado, fecha, hora } = this.state
+        const { cooperativa, silo, localidad, estado, fecha, hora } = this.state
         return (
             <Permission key_permission="view_viajes_planificados" mode="redirect">
                 <div className="animated fadeIn">
@@ -85,7 +85,7 @@ class ViajesPlanificados extends React.Component {
                                             <FormGroup className="row">
                                                 <Label className="col-sm-3">Cooperativa</Label>
                                                 <div className="col-sm-8">
-                                                    <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa_nombre')} value={cooperativa_nombre}/>
+                                                    <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={cooperativa}/>
                                                 </div>
                                             </FormGroup>
                                             <FormGroup className="row">
