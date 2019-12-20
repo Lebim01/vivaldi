@@ -278,7 +278,7 @@ class EditUsuarios extends React.Component {
                             label={{text:'Usuario'}}
                             input={{
                                 name : 'username',
-                                element: <Input onChange={this.onChange('username')} value={data.username} autoComplete="off" />
+                                element: <Input onChange={this.onChange('username')} value={data.username} autoComplete="none" />
                             }}
                             validator={{
                                 validationRules: {
