@@ -78,6 +78,10 @@ class ListPage extends React.Component {
     loadFilters = () => {
         const { query, page, ...parameters } = getAllParameters()
 
+        if(page){
+            this.setPage(Number(page), !this.props.filters)
+        }
+
         if(this.props.filters.persist){            
             if(parameters && this.props.filters.callback){
                 this.props.filters.callback(parameters)
@@ -88,10 +92,6 @@ class ListPage extends React.Component {
             this.setState({
                 search : query
             })
-        }
-
-        if(page){
-            this.setPage(page)
         }
     }
 
@@ -255,14 +255,15 @@ class ListPage extends React.Component {
         }
     }
 
-    setPage = (page) => {
+    setPage = (page, loadList = true) => {
         const { currentPage } = this.state
         if(page !== currentPage){
             const { parameters } = this.props
             this.setState({
                 currentPage : page
             }, () => {
-                this.loadList({ ...parameters, page })
+                if(loadList)
+                    this.loadList({ ...parameters, page })
             })
         }
     }

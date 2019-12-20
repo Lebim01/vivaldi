@@ -55,30 +55,26 @@ function Buses(props) {
                         <Card>
                             <CardBody>
                             <div className="col-sm-12">
-                            <ListPage
+                                <ListPage                            
+                                    //exportExcel
+                                    imprimirPantalla  
+                                    id="report"
+                                    key_permission= "bus"
 
-                            
-                            //exportExcel
-                            imprimirPantalla  
-                            id="report"
-                            key_permission= "bus"
+                                    title="Listado de Buses"
 
-                            title="Listado de Buses"
-
-                            filtersZone={
-                                
-                                <div className="row">
-                                    <div className="col-sm-4">
-                                        <FormGroup className="row">
-                                            <Label className="col-sm-5">Cooperativa</Label>
-                                            <div className="col-sm-7">
-                                                <Select asyncOptions={optionsCooperativa} defaultOption="Todos" onChange={onChange('cooperativa')} value={state.cooperativa}/>
+                                    filtersZone={
+                                        <div className="row">
+                                            <div className="col-sm-4">
+                                                <FormGroup className="row">
+                                                    <Label className="col-sm-5">Cooperativa</Label>
+                                                    <div className="col-sm-7">
+                                                        <Select asyncOptions={optionsCooperativa} defaultOption="Todos" onChange={onChange('cooperativa')} value={state.cooperativa}/>
+                                                    </div>
+                                                </FormGroup>
                                             </div>
-                                        </FormGroup>
-                                    </div>
-                                </div>
-                                }
-                                    
+                                        </div>
+                                    }
                                     
                                     searchable={true}
                                     searchPlaceholder="Cooperativa, Placa, Disco"
