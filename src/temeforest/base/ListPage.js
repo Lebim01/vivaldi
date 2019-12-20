@@ -32,7 +32,7 @@ class RecordRow extends React.Component {
     }
 
     render(){
-        const { fields, record } = this.props
+        const { fields, record, context } = this.props
 
         return (
             <tr key={record.id} onDoubleClick={this.onRowDoubleClick}>
@@ -40,7 +40,7 @@ class RecordRow extends React.Component {
                     const className = typeof this.props.tdBodyClass === 'function' ? this.props.tdBodyClass(record) : this.props.tdBodyClass
                     return (
                         <td className={className} key={i}>
-                            {typeof field === 'function' ? field(record) : record[field]}
+                            {typeof field === 'function' ? field(record, context) : record[field]}
                         </td>
                     )
                 })}
@@ -326,6 +326,10 @@ class ListPage extends React.Component {
         const { title, searchPlaceholder, fieldNames, fields, head, searchable, exportExcel, imprimirPantalla } = this.props
         const { filtered, numPages, next, previous, currentPage, numBeginVisibleFooterPages, numEndVisibleFooterPages, search, loading } = this.state
 
+        const context  = {
+            onRowDoubleClick : this.onRowDoubleClick
+        }
+
         return (
             <div>
                 { title && 
@@ -384,7 +388,7 @@ class ListPage extends React.Component {
                                         }
                                     </thead>
                                     <tbody>
-                                        {filtered.map((record, i) => <RecordRow tdBodyClass={this.props.tdBodyClass} record={record} fields={fields} key={i} onDoubleClick={() => this.onRowDoubleClick(record.id, record)} />)}
+                                        {filtered.map((record, i) => <RecordRow tdBodyClass={this.props.tdBodyClass} record={record} context={context} fields={fields} key={i} onDoubleClick={() => this.onRowDoubleClick(record.id, record)} />)}
                                     </tbody>
                                     { numEndVisibleFooterPages > 2 &&
                                         <tfoot>

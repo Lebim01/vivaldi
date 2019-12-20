@@ -51,6 +51,14 @@ class SolicitudFrecuencias extends React.Component {
             refresh: true
         })
     }
+
+    actions = (row, context) => {
+        return (
+            <Button onClick={() => context.onRowDoubleClick(row.id, row)}>
+                Abrir
+            </Button>
+        )
+    }
     
     render(){
         const { refresh } = this.state
@@ -102,8 +110,8 @@ class SolicitudFrecuencias extends React.Component {
                                 <ListPage
                                     searchable={false}
 
-                                    fieldNames={['Cooperativa', 'Fecha', 'Descripión', 'Tipo de Solicitud', 'Estado']}
-                                    fields={['cooperativa_nombre', 'fecha', 'descripcion', 'tipo_solicitud_nombre', 'estado_nombre']}
+                                    fieldNames={['Cooperativa', 'Fecha', 'Descripión', 'Tipo de Solicitud', 'Estado', '']}
+                                    fields={['cooperativa_nombre', 'fecha', 'descripcion', 'tipo_solicitud_nombre', 'estado_nombre', this.actions]}
 
                                     endpoint='venta/solicitud_frecuencia'
                                     urlFront='operaciones/solicitudes/frecuencias'
