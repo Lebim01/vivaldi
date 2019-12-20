@@ -142,7 +142,7 @@ export default {
             {
               name : 'Usuario',
               url : '/#/operaciones/solicitudes/usuario',
-              permission : 'view_soliictudusuario'
+              permission : 'view_solicitudusuario'
             },
             {
               name : 'Frecuencias',
