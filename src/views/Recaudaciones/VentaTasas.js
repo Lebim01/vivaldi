@@ -44,7 +44,13 @@ class RegistroTasa extends React.Component {
 
         if(name === 'localidad' && !this.props.id){
             const selectLocalidad = e.target
-            const valor = selectLocalidad.options[selectLocalidad.options.selectedIndex].attributes['data-tarifa_tasa'].value
+            const hasData = !!selectLocalidad.options[selectLocalidad.options.selectedIndex].attributes['data-tarifa_tasa']
+            let valor = 0
+
+            if(hasData)
+                valor = selectLocalidad.options[selectLocalidad.options.selectedIndex].attributes['data-tarifa_tasa'].value
+            else
+                valor = 0
             
             this.props.onChange('precio', valor)
         }
