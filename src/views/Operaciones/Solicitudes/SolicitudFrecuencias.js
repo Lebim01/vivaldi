@@ -110,8 +110,8 @@ class SolicitudFrecuencias extends React.Component {
                                 <ListPage
                                     searchable={false}
 
-                                    fieldNames={['Cooperativa', 'Fecha', 'Descripión', 'Tipo de Solicitud', 'Estado', '']}
-                                    fields={['cooperativa_nombre', 'fecha', 'descripcion', 'tipo_solicitud_nombre', 'estado_nombre', this.actions]}
+                                    fieldNames={['Cooperativa', 'Fecha', 'Descripión', 'Tipo de Solicitud', 'Estado']}
+                                    fields={['cooperativa_nombre', 'fecha', 'descripcion', 'tipo_solicitud_nombre', 'estado_nombre']}
 
                                     key_permission="solicitudfrecuencia"
                                     endpoint='venta/solicitud_frecuencia'
