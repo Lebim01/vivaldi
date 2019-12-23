@@ -55,26 +55,30 @@ function Buses(props) {
                         <Card>
                             <CardBody>
                             <div className="col-sm-12">
-                                <ListPage                            
-                                    //exportExcel
-                                    imprimirPantalla  
-                                    id="report"
-                                    key_permission= "bus"
+                            <ListPage
 
-                                    title="Listado de Buses"
+                            
+                            //exportExcel
+                            imprimirPantalla  
+                            id="report"
+                            key_permission= "bus"
 
-                                    filtersZone={
-                                        <div className="row">
-                                            <div className="col-sm-4">
-                                                <FormGroup className="row">
-                                                    <Label className="col-sm-5">Cooperativa</Label>
-                                                    <div className="col-sm-7">
-                                                        <Select asyncOptions={optionsCooperativa} defaultOption="Todos" onChange={onChange('cooperativa')} value={state.cooperativa}/>
-                                                    </div>
-                                                </FormGroup>
+                            //title="Listado de Buses"
+                            title="Listado de Buses"
+                            filtersZone={
+                                
+                                <div className="row">
+                                    <div className="col-sm-4">
+                                        <FormGroup className="row">
+                                            <Label className="col-sm-5">Cooperativa</Label>
+                                            <div className="col-sm-7">
+                                                <Select asyncOptions={optionsCooperativa} defaultOption="Todos" onChange={onChange('cooperativa')} value={state.cooperativa}/>
                                             </div>
-                                        </div>
-                                    }
+                                        </FormGroup>
+                                    </div>
+                                </div>
+                                }
+                                    
                                     
                                     searchable={true}
                                     searchPlaceholder="Cooperativa, Placa, Disco"
