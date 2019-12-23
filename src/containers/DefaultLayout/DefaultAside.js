@@ -58,7 +58,7 @@ class MenuItem extends React.Component {
 
         return (
             <Permission key_permission={permission}>
-                <NavItem className={`sidebar-item`}>
+                <NavItem className={`sidebar-item`} permission={permission}>
                     <NavLink className={`sidebar-link waves-effect waves-dark ${children?'has-arrow':''}`} aria-expanded="false" href={url} style={{marginLeft: margin, whiteSpace:'normal'}} onClick={this.onClick}>
                         { icon && <i className={icon} onClick={this.prevent}></i> }
                         { children ? <span className="hide-menu" onClick={this.prevent}> {name} </span> : name }
