@@ -5,6 +5,8 @@ import moment from 'moment'
 import Clock  from 'utils/clock'
 import ViajesModal from './ViajesModal'
 
+
+
 class ViajesPlanificados extends React.Component {
 
     interval = null
@@ -12,11 +14,8 @@ class ViajesPlanificados extends React.Component {
         fecha: moment().format('YYYY-MM-DD HH:mm:ss'),
         modal : {
             show: false
-        }, 
-        data: {
-            saldo: true, 
-            tiempo_viaje:true
         }
+
     }
 
     componentDidMount(){
@@ -88,31 +87,32 @@ class ViajesPlanificados extends React.Component {
         })
     }
 
+    
+
     render(){
-        const { cooperativa, silo, localidad, estado, fecha, hora } = this.state
+        const { cooperativa_nombre, silo, localidad, estado, fecha, hora } = this.state
 
         let headers = ['#','Cooperativa', 'Disco', 'Placa', 'Saldo', 'Duración', 'Salida', 'Destino']
-        let fields = ['', 
-            'cooperativa_nombre', 
-            'disco', 
-            'placa',
-            /*tdBodyClass={(row) => `no-padding-top-bottom ${row.saldo === 0 ? 'bg-orange' : ''}`},*/ 
-            'saldo', 
-            'duracion', 
-            'hora_salida',
-            'destino'
-        ]
+    let fields = ['', 
+        'cooperativa_nombre', 
+        'disco', 
+        'placa',
+        /*tdBodyClass={(row) => `no-padding-top-bottom ${row.saldo === 0 ? 'bg-orange' : ''}`},*/ 
+        'saldo', 
+        'duracion', 
+        'hora_salida',
+        'destino'
+    ]
 
-        if(!this.state.saldo){
-            fields.splice(fields.indexOf('saldo'), 1)
-            headers.splice(headers.indexOf('Saldo'), 1)
-        }
+    if(!this.state.saldo){
+        fields.splice(fields.indexOf('saldo'), 1)
+        headers.splice(headers.indexOf('Saldo'), 1)
+    }
 
-        if(!this.state.duracion){
-            fields.splice(fields.indexOf('duracion'), 1)
-            headers.splice(headers.indexOf('Duración'), 1)
-        }
-
+    if(!this.state.duracion){
+        fields.splice(fields.indexOf('duracion'), 1)
+        headers.splice(headers.indexOf('Duración'), 1)
+    }
         return (
             <Permission key_permission="view_viajes_planificados" mode="redirect">
 
@@ -132,7 +132,7 @@ class ViajesPlanificados extends React.Component {
                                             <FormGroup className="row">
                                                 <Label className="col-sm-3">Cooperativa</Label>
                                                 <div className="col-sm-8">
-                                                    <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={cooperativa}/>
+                                                    <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa_nombre')} value={cooperativa_nombre}/>
                                                 </div>
                                             </FormGroup>
                                             <FormGroup className="row">
@@ -159,7 +159,7 @@ class ViajesPlanificados extends React.Component {
                                                 <div className="col-sm-3"></div>
                                                 <div className="col-sm-9">
                                                     <div className="custom-control custom-checkbox">
-                                                        <input type="checkbox" className="custom-control-input" id="saldo" name="saldo" checked={this.state.data.saldo} onChange={this.onChange('saldo')} />
+                                                        <input type="checkbox" className="custom-control-input" id="saldo" name="saldo" checked={this.state.saldo} onChange={this.onChange('saldo')} />
                                                         <Label onlyClassName="custom-control-label" htmlFor="saldo">Mostrar saldo</Label>
                                                     </div>
                                                 </div>
@@ -168,8 +168,8 @@ class ViajesPlanificados extends React.Component {
                                                 <div className="col-sm-3"></div>
                                                 <div className="col-sm-9">
                                                     <div className="custom-control custom-checkbox">
-                                                        <input type="checkbox" className="custom-control-input" id="tiempo_viaje" name="tiempo_viaje" checked={this.state.data.tiempo_viaje} onChange={this.onChange('tiempo_viaje')} />
-                                                        <Label onlyClassName="custom-control-label" htmlFor="tiempo_viaje">Mostrar tiempo de viaje</Label>
+                                                        <input type="checkbox" className="custom-control-input" id="duracion" name="duracion" checked={this.state.duracion} onChange={this.onChange('duracion')} />
+                                                        <Label onlyClassName="custom-control-label" htmlFor="duracion">Mostrar tiempo de viaje</Label>
                                                     </div>
                                                 </div>
                                             </FormGroup>
@@ -185,8 +185,11 @@ class ViajesPlanificados extends React.Component {
                                     <br />
                                     <div className="col-sm-12">
                                         <ListPage
+                                            
+                                            
+
                                             searchable={false}
-                                            fieldNames={['#','Cooperativa', 'Disco', 'Placa', 'Saldo', /*'Vlts'*/ 'Duracion', 'Salida', 'Destino']}
+                                            fieldnames={['#','Cooperativa', 'Disco', 'Placa', 'Saldo', /*'Vlts'*/ 'Duracion', 'Salida', 'Destino']}
                                             fields={['', 
                                             'cooperativa_nombre', 
                                             'disco', 
@@ -198,7 +201,8 @@ class ViajesPlanificados extends React.Component {
                                             'hora_salida',
                                             'destino']}
 
-
+                                            fieldNames={headers}
+                                            fields={fields}
                                             
                                             tdBodyClass="margin: 0 !important;padding: 0 !important;"
                                             //tdBodyClass="bg-orange"
@@ -212,12 +216,11 @@ class ViajesPlanificados extends React.Component {
                                             /*tdBodyClass={(row) => `${row.saldo === 0  && moment().format('hh:mm') > row.hora_salida ? 'bg-orange' : ''}`}*/
 
 
-                                            tdBodyClass={(row) => `${row.saldo === 0 ? 'bg-orange' : row.saldo !==  0 && moment().format('HH:mm:ss') > row.hora_salida ? 'bg-info' : ''}`}
                                             endpoint='venta/viajes-planificados'
                                             parameters={this.state}
+                                            //tdBodyClass="no-padding-top-bottom"
 
                                             history={this.props.history}
-                                            onRowDoubleClick={this.openDialog}
                                         />
                                     </div>
                                 </CardBody>

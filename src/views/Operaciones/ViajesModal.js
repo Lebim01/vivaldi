@@ -92,4 +92,4 @@ class ViajesModal extends React.Component {
     }
 }
 
-export default ViajesModal
+export default ViajesModal 
