@@ -12,6 +12,10 @@ class ViajesPlanificados extends React.Component {
         fecha: moment().format('YYYY-MM-DD HH:mm:ss'),
         modal : {
             show: false
+        }, 
+        data: {
+            saldo: true, 
+            tiempo_viaje:true
         }
     }
 
