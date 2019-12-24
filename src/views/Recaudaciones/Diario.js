@@ -87,7 +87,7 @@ class Diario extends React.Component {
                 <table>
                     <tr>
                         <td>Emisior</td>
-                        <td>${this.props.user_info.name}</td>
+                        <td>${this.props.user_info.username}</td>
                     </tr>
                     <tr>
                         <td>Emisión</td>
