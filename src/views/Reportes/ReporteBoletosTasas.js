@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListPage, Label, FormGroup, Select, Input, ReportPage, Permission } from 'temeforest'
+import { ListPage, Label, FormGroup, Select, Input, ReportPage, Permission, Card, CardBody } from 'temeforest'
 import { TabContent, TabPane } from 'reactstrap'
 import moment from 'moment'
 import { baseurl, objectToUrl } from 'utils/url'
@@ -75,136 +75,144 @@ class ReporteBoletosTasas extends React.Component {
 
         return (
             <Permission key_permission="view_boletos_tasas" mode="redirect">
-                <ReportPage >
-                <TabContent activeTab={this.state.tipo_tabla}>
-                        <TabPane tabId="1">
-                            <ListPage
+                <div className="animated fadeIn">
+                    <div className="row">
+                        <div className="col-sm-12">
+                            <Card>
+                                <CardBody>
+                                    <TabContent activeTab={this.state.tipo_tabla}>
+                                        <TabPane tabId="1">
+                                            <ListPage
 
-                            exportExcel
-                            id="boletos_tasas"
-                            imprimirPantalla
-                            title="Reporte de boletos por cooperativa"
-                            filtersZone= {
-                                <div className="row">
-                                    <div className="col-sm-4">
-                                        <FormGroup className="row">
-                                            <Label className="col-sm-5" id='mylabel'>Cooperativa</Label>
-                                            <div className="col-sm-7">
-                                                <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.filters.cooperativa}/>
-                                            </div>
-                                        </FormGroup>
-                                        <FormGroup className="row">
-                                            <Label className="col-sm-5" id='mylabel'>Localidad</Label>
-                                            <div className="col-sm-7">
-                                                <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.filters.localidad}/>
-                                            </div>
-                                        </FormGroup>
-                                    </div>
-                                    <div className="col-sm-4">
-                                        <FormGroup className="row">
-                                            <Label className="col-sm-4" id='mylabel'>Fecha inicio</Label>
-                                            <div className="col-sm-8">
-                                                <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.filters.fecha_inicio} />
-                                            </div>
-                                        </FormGroup>
-                                        <FormGroup className="row">
-                                            <Label className="col-sm-4" id='mylabel'>Fecha fin</Label>
-                                            <div className="col-sm-8">
-                                                <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.filters.fecha_fin} />
-                                            </div>
-                                        </FormGroup>
-                                    </div>
-                                    <div className="col-sm-4">
-                                        <FormGroup className="row">
-                                            <Label className="col-sm-6" id='mylabel'>Forma de pago</Label>
-                                            <div className="col-sm-6">
-                                                <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('forma_de_pago')} value={this.state.filters.forma_de_pago} />
-                                            </div>
-                                        </FormGroup>
-                                    </div>
-                                </div>
-                            }
-                    
-                                searchable={false}
-                                
+                                            exportExcel
+                                            id="boletos_tasas"
+                                            imprimirPantalla
+                                            title="Reporte de boletos por cooperativa"
+                                            filtersZone= {
+                                                <div className="row">
+                                                    <div className="col-sm-4">
+                                                        <FormGroup className="row">
+                                                            <Label className="col-sm-5" id='mylabel'>Cooperativa</Label>
+                                                            <div className="col-sm-7">
+                                                                <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.filters.cooperativa}/>
+                                                            </div>
+                                                        </FormGroup>
+                                                        <FormGroup className="row">
+                                                            <Label className="col-sm-5" id='mylabel'>Localidad</Label>
+                                                            <div className="col-sm-7">
+                                                                <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.filters.localidad}/>
+                                                            </div>
+                                                        </FormGroup>
+                                                    </div>
+                                                    <div className="col-sm-4">
+                                                        <FormGroup className="row">
+                                                            <Label className="col-sm-4" id='mylabel'>Fecha inicio</Label>
+                                                            <div className="col-sm-8">
+                                                                <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.filters.fecha_inicio} />
+                                                            </div>
+                                                        </FormGroup>
+                                                        <FormGroup className="row">
+                                                            <Label className="col-sm-4" id='mylabel'>Fecha fin</Label>
+                                                            <div className="col-sm-8">
+                                                                <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.filters.fecha_fin} />
+                                                            </div>
+                                                        </FormGroup>
+                                                    </div>
+                                                    <div className="col-sm-4">
+                                                        <FormGroup className="row">
+                                                            <Label className="col-sm-6" id='mylabel'>Forma de pago</Label>
+                                                            <div className="col-sm-6">
+                                                                <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('forma_de_pago')} value={this.state.filters.forma_de_pago} />
+                                                            </div>
+                                                        </FormGroup>
+                                                    </div>
+                                                </div>
+                                            }
+                                    
+                                                searchable={false}
+                                                
 
-                                fieldNames={['Cooperativa','Boleto normal', 'Boleto especial', 'Normal anulado', 'Especial anulado', 'Total boleto', 'Total tasa']}
-                                fields={['cooperativa','boleto_normal', 'boleto_especial', 'normal_anulado', 'especial_anulado', 'total_boleto', 'total_tasa']}
+                                                fieldNames={['Cooperativa','Boleto normal', 'Boleto especial', 'Normal anulado', 'Especial anulado', 'Total boleto', 'Total tasa']}
+                                                fields={['cooperativa','boleto_normal', 'boleto_especial', 'normal_anulado', 'especial_anulado', 'total_boleto', 'total_tasa']}
 
-                                endpoint='recaudaciones/boletos-tasas'
-                                parameters={this.state.filters}
+                                                endpoint='recaudaciones/boletos-tasas'
+                                                parameters={this.state.filters}
 
-                                history={this.props.history}
-                                refresh={refresh}
-                            />
-                        </TabPane>
-                        <TabPane tabId="2">
+                                                history={this.props.history}
+                                                refresh={refresh}
+                                            />
+                                        </TabPane>
+                                        <TabPane tabId="2">
                             
-                            <ListPage
-                                searchable={false}
-                                exportExcel
-                                id="boletos_tasas"
-                                imprimirPantalla
-                                title="Reporte de boletos por cooperativa"
-                                
-                               
-                                
-                                filtersZone= {
-                                    <div className="row" >
-                                        <div className="col-sm-4">
-                                            <FormGroup className="row" >
-                                                <Label className="col-sm-5" id='mylabel'>Cooperativa</Label>
-                                                <div className="col-sm-7">
-                                                    <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.filters.cooperativa}/>
-                                                </div>
-                                            </FormGroup>
-                                            <FormGroup className="row">
-                                                <Label className="col-sm-5" id='mylabel'>Localidad</Label>
-                                                <div className="col-sm-7">
-                                                    <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.filters.localidad}/>
-                                                </div>
-                                            </FormGroup>
-                                        </div>
-                                        <div className="col-sm-4">
-                                            <FormGroup className="row">
-                                                <Label className="col-sm-4" id='mylabel'>Fecha inicio</Label>
-                                                <div className="col-sm-8">
-                                                    <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.filters.fecha_inicio} />
-                                                </div>
-                                            </FormGroup>
-                                            <FormGroup className="row">
-                                                <Label className="col-sm-4" id='mylabel'>Fecha fin</Label>
-                                                <div className="col-sm-8">
-                                                    <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.filters.fecha_fin} />
-                                                </div>
-                                            </FormGroup>
-                                        </div>
-                                        <div className="col-sm-4">
-                                            <FormGroup className="row">
-                                                <Label className="col-sm-6" id='mylabel'>Forma de pago</Label>
-                                                <div className="col-sm-6">
-                                                    <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('forma_de_pago')} value={this.state.filters.forma_de_pago} />
-                                                </div>
-                                            </FormGroup>
-                                        </div>
-                                        <Label className="col-sm-3" style={{fontWeight: "normal"}}>Vendidos por cooperativa</Label>
-                                    </div>
-                                    
-                                    
-                                    
-                                }
+                                            <ListPage
+                                                searchable={false}
+                                                exportExcel
+                                                id="boletos_tasas"
+                                                imprimirPantalla
+                                                title="Reporte de boletos por cooperativa"
+                                                
+                                            
+                                                
+                                                filtersZone= {
+                                                    <div className="row" >
+                                                        <div className="col-sm-4">
+                                                            <FormGroup className="row" >
+                                                                <Label className="col-sm-5" id='mylabel'>Cooperativa</Label>
+                                                                <div className="col-sm-7">
+                                                                    <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.filters.cooperativa}/>
+                                                                </div>
+                                                            </FormGroup>
+                                                            <FormGroup className="row">
+                                                                <Label className="col-sm-5" id='mylabel'>Localidad</Label>
+                                                                <div className="col-sm-7">
+                                                                    <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.filters.localidad}/>
+                                                                </div>
+                                                            </FormGroup>
+                                                        </div>
+                                                        <div className="col-sm-4">
+                                                            <FormGroup className="row">
+                                                                <Label className="col-sm-4" id='mylabel'>Fecha inicio</Label>
+                                                                <div className="col-sm-8">
+                                                                    <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.filters.fecha_inicio} />
+                                                                </div>
+                                                            </FormGroup>
+                                                            <FormGroup className="row">
+                                                                <Label className="col-sm-4" id='mylabel'>Fecha fin</Label>
+                                                                <div className="col-sm-8">
+                                                                    <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.filters.fecha_fin} />
+                                                                </div>
+                                                            </FormGroup>
+                                                        </div>
+                                                        <div className="col-sm-4">
+                                                            <FormGroup className="row">
+                                                                <Label className="col-sm-6" id='mylabel'>Forma de pago</Label>
+                                                                <div className="col-sm-6">
+                                                                    <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('forma_de_pago')} value={this.state.filters.forma_de_pago} />
+                                                                </div>
+                                                            </FormGroup>
+                                                        </div>
+                                                        <Label className="col-sm-3" style={{fontWeight: "normal"}}>Vendidos por cooperativa</Label>
+                                                    </div>
+                                                    
+                                                    
+                                                    
+                                                }
 
-                                fieldNames={['Tipo', 'Cantidad', 'Valor unitario', 'Subtotal']}
-                                fields={['tipo_boleto', 'cantidad', 'valor_unitario', 'subtotal']}
+                                                fieldNames={['Tipo', 'Cantidad', 'Valor unitario', 'Subtotal']}
+                                                fields={['tipo_boleto', 'cantidad', 'valor_unitario', 'subtotal']}
 
-                                data={this.state.data}
-                                parameters={this.state.filters}
+                                                data={this.state.data}
+                                                parameters={this.state.filters}
 
-                                history={this.props.history}
-                            />
-                        </TabPane>
-                    </TabContent>
-                </ReportPage>
+                                                history={this.props.history}
+                                            />
+                                        </TabPane>
+                                    </TabContent>
+                                </CardBody>
+                            </Card>
+                        </div>
+                    </div>
+                </div>
             </Permission>
         )
     }
