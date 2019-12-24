@@ -120,69 +120,59 @@ class ReporteTasasNormales extends React.Component {
                                         title= "Reporte Tasas Normales"
 
                                         filtersZone={
-                                        <div className="row">
-                                            <div className="col-sm-6">
-                                                <FormGroup className="row">
-                                                    <Label className="col-sm-4">Cooperativa</Label>
-                                                    <div className="col-sm-8">
-                                                        <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
-                                                    </div>
-                                                </FormGroup>
-                                                <FormGroup className="row">
-                                                    <Label className="col-sm-4">Localidad</Label>
-                                                    <div className="col-sm-8">
-                                                        <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad}/>
-                                                    </div>
-                                                </FormGroup>
+                                            <div className="row">
+                                                <div className="col-sm-6">
+                                                    <FormGroup className="row">
+                                                        <Label className="col-sm-4">Cooperativa</Label>
+                                                        <div className="col-sm-8">
+                                                            <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
+                                                        </div>
+                                                    </FormGroup>
+                                                    <FormGroup className="row">
+                                                        <Label className="col-sm-4">Localidad</Label>
+                                                        <div className="col-sm-8">
+                                                            <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad}/>
+                                                        </div>
+                                                    </FormGroup>
+                                                </div>
+                                                <div className="col-sm-6">
+                                                    <FormGroup className="row">
+                                                        <Label className="col-sm-3">Fecha inicio</Label>
+                                                        <div className="col-sm-8">
+                                                            <Input asyncOptions={this.optionsFecha} className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
+                                                        </div>
+                                                    </FormGroup>
+                                                    <FormGroup className="row">
+                                                        <Label className="col-sm-3">Fecha fin</Label>
+                                                        <div className="col-sm-8">
+                                                            <Input asyncOptions={this.optionsFecha} className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
+                                                        </div>
+                                                    </FormGroup>
+                                                </div>
                                             </div>
-                                            <div className="col-sm-6">
-                                                <FormGroup className="row">
-                                                    <Label className="col-sm-3">Fecha inicio</Label>
-                                                    <div className="col-sm-8">
-                                                        <Input asyncOptions={this.optionsFecha} className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
-                                                    </div>
-                                                </FormGroup>
-                                                <FormGroup className="row">
-                                                    <Label className="col-sm-3">Fecha fin</Label>
-                                                    <div className="col-sm-8">
-                                                        <Input asyncOptions={this.optionsFecha} className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
-                                                    </div>
-                                                </FormGroup>
-                                            </div>
-                                        </div>
                                         }
 
-                                        /*actionsButtons={[
-                                        <div className="row">
-                                            <div className="col-sm-12 text-center">
-                                                <Button onClick={this.buscar.bind(this)}>
-                                                    Buscar
-                                                </Button>
-                                            </div>
-                                        </div>
-                                        ]}*/                                        
+                                        searchable={false}
                                         
-                                            searchable={false}
-                                            
-                                            ref={this.table}
+                                        ref={this.table}
 
-                                            fieldNames={['Localidad', 'Cooperativa','Fecha', 'Usuario', 'Cantidad', 'Valor']}
-                                            fields={[
-                                                'localidad_nombre',
-                                                'cooperativa_nombre', 
-                                                'fecha',
-                                                'usuario_solicitante_nombre',
-                                                (row)=> <label style={{fontWeight: 300}}>{("  " + row.cantidad_aprobada || 0)}</label>,
-                                                (row)=> <label style={{float:"right", fontWeight: 300}}>${moneyFormat(row.valor || 0)}</label>,
-                                                /*this.fieldImprimir*/
-                                            ]}
+                                        fieldNames={['Localidad', 'Cooperativa','Fecha', 'Usuario', 'Cantidad', 'Valor']}
+                                        fields={[
+                                            'localidad_nombre',
+                                            'cooperativa_nombre', 
+                                            'fecha',
+                                            'usuario_solicitante_nombre',
+                                            (row)=> <label style={{fontWeight: 300}}>{("  " + row.cantidad_aprobada || 0)}</label>,
+                                            (row)=> <label style={{float:"right", fontWeight: 300}}>${moneyFormat(row.valor || 0)}</label>,
+                                            /*this.fieldImprimir*/
+                                        ]}
 
-                                            endpoint={endpoint}
-                                            parameters={this.state}
+                                        endpoint={endpoint}
+                                        parameters={this.state}
 
-                                            history={this.props.history}
-                                            refresh={refresh}
-                                        />
+                                        history={this.props.history}
+                                        refresh={refresh}
+                                    />
                                 </CardBody>
                             </Card>
                         </div>

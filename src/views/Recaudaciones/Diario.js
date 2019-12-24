@@ -6,6 +6,7 @@ import { printHtml } from 'utils/exportData'
 import { moneyFormat } from 'utils/number'
 import moment from 'moment'
 import Swal from 'sweetalert2';
+import { connect } from 'react-redux'
 
 class Diario extends React.Component {
 
@@ -74,22 +75,79 @@ class Diario extends React.Component {
     }
 
 
-    rowToHtml(row){
+    rowToHtml = (row) => {
         return `
-            <div style="margin-bottom: 10px; border-bottom: 1px solid black;">
-                <p>Localidad: ${row.localidad_nombre}</p>
-                <p>Cooperativa: ${row.cooperativa_nombre}</p>
-                <p>Fecha venta: ${row.fecha_venta}</p>
-                <p>Valor: $ ${moneyFormat(row.a_cobrar)}</p>
+            <div style="margin-bottom: 10px; border-bottom: 1px solid black; width: 300px; text-align: center; border:unset;">
+                <p style="margin-top: 5px; margin-bottom: 5px;">${row.localidad_nombre}</p>
+                <p style="display:none; margin-top: 5px; margin-bottom: 5px;">${row.cooperativa_nombre}</p>
+                <p style="margin-top: 5px; margin-bottom: 5px;">Ventas por Cooperativa</p>
+            </div>
+            <div style="margin-bottom: 10px; border-bottom: 1px solid black; width: 300px; border:unset;">
+
+                <table>
+                    <tr>
+                        <td>Emisior</td>
+                        <td>${this.props.user_info.name}</td>
+                    </tr>
+                    <tr>
+                        <td>Emisión</td>
+                        <td>${moment().format('YYYY-MM-DD')}</td>
+                    </tr>
+                    <tr>
+                        <td>Fecha venta</td>
+                        <td>${row.fecha_venta}</td>
+                    </tr>
+                    <tr>
+                        <td>Forma de pago:</td>
+                        <td>Todos</td>
+                    </tr>
+                </table>
+                <br/>
+                <table style="width:100%">
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Cant.</th>
+                        <th>v/u</th>
+                        <th>SubTotal</th>
+                    </tr>
+                    <tr>
+                        <td>Tasas</td>
+                        <td>${row.cantidad}</td>
+                        <td>${row.valor_unitario}</td>
+                        <td style="text-align:right">$${moneyFormat(row.a_cobrar)}</td>
+                    </tr>
+                    <tr><td colspan="4"><br/></td></tr>
+                    <tr>
+                        <th>TOTAL</th>
+                        <td style="border-top: 1px solid black;">${row.cantidad}</td>
+                        <td style="border-top: 1px solid black;">${row.valor_unitario}</td>
+                        <td style="text-align:right; border-top: 1px solid black;">$${moneyFormat(row.a_cobrar)}</td>
+                    </tr>
+                </table>
+
+                <p style="margin-top: 5px; margin-bottom: 5px;">
+                    <span style="width: 100px; text-align: left;">Anulados </span>
+                    <span style="width: 100px; text-align: left;">0</span>
+                </p>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <div style="margin-bottom: 10px; border-bottom: 1px solid black; width: 300px; text-align: center; border:unset;">
+                <p style="margin-top: 5px; margin-bottom: 5px;">
+                    _______________________
+                    <br/>
+                    Firma Cliente
+                </p>
             </div>
         `
     }
 
-    toWord(row){
+    toWord = (row) => {
         printHtml(this.rowToHtml(row))
     }
 
-    imprimirTodos(){
+    imprimirTodos = () => {
         let rows = this.table.current.state.filtered
         let html = rows.filter((row) => row.a_cobrar !== 0).map((row) => this.rowToHtml(row)).join('')
         printHtml(html)
@@ -172,7 +230,7 @@ class Diario extends React.Component {
                                         (row) => <label style={{float:"right", fontWeight: 300}}>$ {moneyFormat(row.cobrado)}</label>,
                                         (row) => <label style={{float:"right", fontWeight: 300}}>{(row.fecha_cobro)}</label>,
                                         (row) => <label style={{float:"right", fontWeight: 300}}>$ {moneyFormat(row.nc)}</label>,
-                                    this.fieldImprimir
+                                        this.fieldImprimir
                                     ]}
 
                                     endpoint='venta/cobros-diarios'
@@ -191,4 +249,10 @@ class Diario extends React.Component {
     }
 }
 
-export default Diario
+const mapStateToProps = (state) => {
+    return {
+        user_info : state.user_info
+    }
+}
+
+export default connect(mapStateToProps)(Diario)
