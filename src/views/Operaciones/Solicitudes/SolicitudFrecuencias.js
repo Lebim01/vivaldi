@@ -110,7 +110,7 @@ class SolicitudFrecuencias extends React.Component {
                                         endpoint='venta/solicitud_frecuencia'
                                         urlFront='operaciones/solicitudes/frecuencias'
                                         parameters={this.state}
-                                        filters={{
+                                        filters={{  
                                             persist: true,
                                             callback: (parameters) => this.setState(parameters)
                                         }}
