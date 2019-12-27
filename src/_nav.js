@@ -206,7 +206,7 @@ export default {
         {
           name : 'Venta de Tasas',
           url : '/#/recaudaciones/venta-tasas',
-          permission : 'view_ventacontigencia'
+          permission : 'view_ventacontingencia'
         },
         {
           name : 'Bandeja Tasas Cooperativa',
