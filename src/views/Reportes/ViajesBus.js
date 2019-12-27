@@ -68,9 +68,21 @@ class ViajesBus extends React.Component {
         const {data}= this.state
         return (
             <Permission key_permission="view_viajes_bus" mode="redirect">
-                <ReportPage title="Viaje Bus" /*printButtons={false} */timestamp={false}>
+                <ReportPage printButtons={false} timestamp={false}>
+                { data.map((row) => 
+                                <>
+                        <h3 className="text-center" style={ {position: "relative", top: "198px", marginTop : "-50px"}}>Bus: {row.disco} / {row.placa}</h3>
+                            <ListPage
+
+                            exportExcel
+                            imprimirPantalla
+                            id="report"
+                            key_permission="viaje_bus"
+                            title="Viajes Bus"
+
+                            filtersZone={
                             <div className="row" style={{padding: "0px 0 20px 0"}}>
-                            
+                                
                                 <div className="col-sm-4">
                                     <FormGroup className="row">
                                         <Label className="col-sm-5">Cooperativa</Label>
@@ -99,20 +111,39 @@ class ViajesBus extends React.Component {
                                         </div>
                                     </FormGroup>
                                 </div>
+<<<<<<< HEAD
                             </div>
                             
                            
                     
+=======
+<<<<<<< HEAD
+                            </FormGroup>
+                        </div>
+                    </div>
+
+>>>>>>> botones imprimir y exportar agregados
                     { data.map((row) => 
                                 <>
                         <h3 className="text-center">Bus: {row.disco} / {row.placa}</h3>
                             <ListPage
+<<<<<<< HEAD
 
                             exportExcel
                             imprimirPantalla
                             id="report"
                             key_permission="viajes_bus"
                             //title=" "    
+=======
+=======
+                                
+                            </div>
+                            
+                            }
+                    
+                                
+>>>>>>> botones imprimir y exportar agregados
+>>>>>>> botones imprimir y exportar agregados
                                 searchable={false}
 
                                 fieldNames={['Viaje', 'Destino', 'Tipo', 'Cantidad', 'Valor unitario', 'Total']}
