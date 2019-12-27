@@ -59,7 +59,7 @@ class Viajes extends React.Component {
     render(){
         const { cooperativa, bus, tipo_frecuencia, fecha_inicio, localidad, fecha_fin, estado } = this.state
         return (
-            <Permission key_permission="view_ruta" mode="redirect">
+            <Permission key_permission="view_viaje" mode="redirect">
                 <div className="animated fadeIn">
                     <div className="row">
                         <div className="col-sm-12">
