@@ -4,6 +4,7 @@ import { TabContent, TabPane } from 'reactstrap'
 import moment from 'moment'
 import { baseurl, objectToUrl } from 'utils/url'
 import axios from 'axios'
+import { moneyFormat } from 'utils/number'
 
 class ReporteBoletosTasas extends React.Component {
     state = {
@@ -133,7 +134,15 @@ class ReporteBoletosTasas extends React.Component {
                                                 
 
                                                 fieldNames={['Cooperativa','Boleto normal', 'Boleto especial', 'Normal anulado', 'Especial anulado', 'Total boleto', 'Total tasa']}
-                                                fields={['cooperativa','boleto_normal', 'boleto_especial', 'normal_anulado', 'especial_anulado', 'total_boleto', 'total_tasa']}
+                                                fields={[
+                                                    'cooperativa',
+                                                    (row) => <span style={{float:"right"}}>$ {moneyFormat(row.boleto_normal)}</span>,
+                                                    (row) => <span style={{float:"right"}}>$ {moneyFormat(row.boleto_especial)}</span>,
+                                                    (row) => <span style={{float:"right"}}>$ {moneyFormat(row.normal_anulado)}</span>,
+                                                    (row) => <span style={{float:"right"}}>$ {moneyFormat(row.especial_anulado)}</span>,
+                                                    (row) => <span style={{float:"right"}}>$ {moneyFormat(row.total_boleto)}</span>,
+                                                    (row) => <span style={{float:"right"}}>$ {moneyFormat(row.total_tasas)}</span>,
+                                                ]}
 
                                                 endpoint='recaudaciones/boletos-tasas'
                                                 parameters={this.state.filters}
@@ -199,7 +208,12 @@ class ReporteBoletosTasas extends React.Component {
                                                 }
 
                                                 fieldNames={['Tipo', 'Cantidad', 'Valor unitario', 'Subtotal']}
-                                                fields={['tipo_boleto', 'cantidad', 'valor_unitario', 'subtotal']}
+                                                fields={[
+                                                    'tipo_boleto',
+                                                    (row) => <span style={{float:"right"}}>{row.cantidad}</span>,
+                                                    (row) => <span style={{float:"right"}}>$ {moneyFormat(row.valor_unitario)}</span>,
+                                                    (row) => <span style={{float:"right"}}>$ {moneyFormat(row.subtotal)}</span>,
+                                                ]}
 
                                                 data={this.state.data}
                                                 parameters={this.state.filters}
