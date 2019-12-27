@@ -17,6 +17,10 @@ const mapStateToProps = ({ user_info }) => {
 }
 
 const check = (key_permission, permissions, isSuperuser) => {
+    if(key_permission === 'change_frecuencia')
+        console.log(
+            ( key_permission ? !!(permissions || []).find(p => p === key_permission) : true )  || isSuperuser
+        )
     return ( key_permission ? !!(permissions || []).find(p => p === key_permission) : true )  || isSuperuser
 }
 
