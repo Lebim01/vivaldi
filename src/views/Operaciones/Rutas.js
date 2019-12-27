@@ -31,7 +31,7 @@ function Rutas(props) {
                                         imprimirPantalla
                                         id="report"
 
-                                        key_permission="viajes"
+                                        key_permission="ruta"
 
                                         title='Listado de Rutas'
 

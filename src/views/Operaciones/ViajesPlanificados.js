@@ -93,26 +93,26 @@ class ViajesPlanificados extends React.Component {
         const { cooperativa_nombre, silo, localidad, estado, fecha, hora } = this.state
 
         let headers = ['#','Cooperativa', 'Disco', 'Placa', 'Saldo', 'Duración', 'Salida', 'Destino']
-    let fields = ['', 
-        'cooperativa_nombre', 
-        'disco', 
-        'placa',
-        /*tdBodyClass={(row) => `no-padding-top-bottom ${row.saldo === 0 ? 'bg-orange' : ''}`},*/ 
-        'saldo', 
-        'duracion', 
-        'hora_salida',
-        'destino'
-    ]
+        let fields = ['', 
+            'cooperativa_nombre', 
+            'disco', 
+            'placa',
+            /*tdBodyClass={(row) => `no-padding-top-bottom ${row.saldo === 0 ? 'bg-orange' : ''}`},*/ 
+            'saldo', 
+            'duracion', 
+            'hora_salida',
+            'destino'
+        ]
 
-    if(!this.state.saldo){
-        fields.splice(fields.indexOf('saldo'), 1)
-        headers.splice(headers.indexOf('Saldo'), 1)
-    }
+        if(!this.state.saldo){
+            fields.splice(fields.indexOf('saldo'), 1)
+            headers.splice(headers.indexOf('Saldo'), 1)
+        }
 
-    if(!this.state.duracion){
-        fields.splice(fields.indexOf('duracion'), 1)
-        headers.splice(headers.indexOf('Duración'), 1)
-    }
+        if(!this.state.duracion){
+            fields.splice(fields.indexOf('duracion'), 1)
+            headers.splice(headers.indexOf('Duración'), 1)
+        }
         return (
             <Permission key_permission="view_viajes_planificados" mode="redirect">
 
