@@ -216,7 +216,7 @@ export default {
         {
           name : 'Reporte de tasas normales',
           url : '/#/recaudaciones/reporte-tasas-normales',
-          permission : 'view_tasas_normales'
+          permission : 'view_reporte_tasas_normales'
         }
       ]
     },
