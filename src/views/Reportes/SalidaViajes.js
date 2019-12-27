@@ -2,6 +2,7 @@ import React from 'react'
 import { ListPage, Label, FormGroup, Select, Input, ReportPage, Permission } from 'temeforest'
 import moment from 'moment'
 import { baseurl } from 'utils/url'
+import { moneyFormat } from 'utils/number'
 
 class SalidaViajes extends React.Component {
 
@@ -68,8 +69,17 @@ class SalidaViajes extends React.Component {
                     <ListPage
                         searchable={false}
 
-                        fieldNames={['Viaje', 'Fecha salida', 'Destino', 'Cantidad', 'Valor unitario', 'total']}
-                        fields={['viaje', 'fecha_salida', 'destino', (row) => row.total/row.valor_unitario, 'valor_unitario', 'total']}
+                        fieldNames={['Viaje', 'Cooperativa', 'Fecha salida', 'Destino', 'Tipo cliente', 'Cantidad', 'Valor unitario', 'Total']}
+                        fields={[
+                            'viaje',
+                            'cooperativa',
+                            'fecha_salida',
+                            'destino',
+                            'tipo_cliente',
+                            (row) => <span style={{float:"right"}}>{row.valor_unitario > 0 ? row.total/row.valor_unitario : 0}</span>,
+                            (row) => <span style={{float:"right"}}>${moneyFormat(row.valor_unitario)}</span>,
+                            (row) => <span style={{float:"right"}}>${moneyFormat(row.total)}</span>,
+                        ]}
 
                         endpoint='venta/salida-de-viaje'
                         parameters={this.state}

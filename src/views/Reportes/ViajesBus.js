@@ -3,6 +3,7 @@ import { ListPage, Label, FormGroup, Select, Input, ReportPage, Permission } fro
 import moment from 'moment'
 import { baseurl, objectToUrl } from 'utils/url'
 import axios from 'axios'
+import { moneyFormat } from 'utils/number'
 
 class ViajesBus extends React.Component {
 
@@ -96,12 +97,19 @@ class ViajesBus extends React.Component {
 
                     { data.map((row) => 
                         <>
-                            <h3 className="text-center">Bus: {row.disco} / {row.placa}</h3>
+                            <h3 className="text-center">{row.cooperativa} / Bus: {row.disco} / Placa: {row.placa}</h3>
                             <ListPage
                                 searchable={false}
 
-                                fieldNames={['Viaje', 'Destino', 'Tipo', 'Cantidad', 'v/u', 'Subtotal']}
-                                fields={['viaje', 'destino_nombre', 'tipo_boleto', 'pasajeros', 'valor_unitario', 'total']}
+                                fieldNames={['Viaje', 'Destino', 'Tipo', 'Cantidad', 'Valor unitario', 'Total']}
+                                fields={[
+                                    'viaje',
+                                    'destino',
+                                    'tipo_cliente',
+                                    (row) => <span style={{float:"right"}}>{row.pasajeros}</span>,
+                                    (row) => <span style={{float:"right"}}>${moneyFormat(row.valor_unitario)}</span>,
+                                    (row) => <span style={{float:"right"}}>${moneyFormat(row.total)}</span>,
+                                ]}
 
                                 data={row.data}
                                 parameters={this.state}
