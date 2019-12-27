@@ -106,23 +106,12 @@ class ViajesBus extends React.Component {
                                         </div>
                                     </FormGroup>
                                 </div>
-<<<<<<< HEAD
-                            </FormGroup>
-                        </div>
-                    </div>
-
-                    { data.map((row) => 
-                        <>
-                            <h3 className="text-center">{row.cooperativa} / Bus: {row.disco} / Placa: {row.placa}</h3>
-                            <ListPage
-=======
                                 
                             </div>
                             
                             }
                     
                                 
->>>>>>> botones imprimir y exportar agregados
                                 searchable={false}
 
                                 fieldNames={['Viaje', 'Destino', 'Tipo', 'Cantidad', 'Valor unitario', 'Total']}
@@ -130,9 +119,9 @@ class ViajesBus extends React.Component {
                                     'viaje',
                                     'destino',
                                     'tipo_cliente',
-                                    (row) => <span style={{float:"right"}}>{row.pasajeros}</span>,
-                                    (row) => <span style={{float:"right"}}>${moneyFormat(row.valor_unitario)}</span>,
-                                    (row) => <span style={{float:"right"}}>${moneyFormat(row.total)}</span>,
+                                    (row) => <span style={{float:"center"}}>{row.pasajeros}</span>,
+                                    (row) => <span style={{float:"center"}}>${moneyFormat(row.valor_unitario)}</span>,
+                                    (row) => <span style={{float:"center"}}>${moneyFormat(row.total)}</span>,
                                 ]}
 
                                 data={row.data}
