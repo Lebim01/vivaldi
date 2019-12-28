@@ -64,16 +64,7 @@ class ViajesBus extends React.Component {
         return (
             <Permission key_permission="view_viajes_bus" mode="redirect">
                 <ReportPage printButtons={false} timestamp={false}>
-                { data.map((row) => 
-                                <>
-                        <h3 className="text-center" style={ {position: "relative", top: "198px", marginTop : "-50px"}}>Bus: {row.disco} / {row.placa}</h3>
-                            <ListPage
-
-                            exportExcel
-                            imprimirPantalla
-                            id="report"
-                            key_permission="viaje_bus"
-                            title="Viajes Bus"
+                
 
                             filtersZone={
                             <div className="row" style={{padding: "0px 0 20px 0"}}>
@@ -106,12 +97,20 @@ class ViajesBus extends React.Component {
                                         </div>
                                     </FormGroup>
                                 </div>
-                                
                             </div>
                             
                             }
                     
-                                
+                    { data.map((row) => 
+                                <>
+                        <h3 className="text-center" style={ {position: "relative", top: "198px", marginTop : "-50px"}}>Bus: {row.disco} / {row.placa}</h3>
+                            <ListPage
+
+                            exportExcel
+                            imprimirPantalla
+                            id="report"
+                            key_permission="viaje_bus"
+                            title="Viaje Bus"    
                                 searchable={false}
 
                                 fieldNames={['Viaje', 'Destino', 'Tipo', 'Cantidad', 'Valor unitario', 'Total']}

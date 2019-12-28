@@ -47,13 +47,14 @@ class ReporteClientesFrecuentes extends React.Component {
         const { refresh } = this.state
         return (
             <Permission key_permission="view_clientes_frecuentes" mode="redirect">
-                <ReportPage title="Reporte de clientes frecuentes">
+                <ReportPage printButtons={false} timestamp={false}  >
                     <ListPage
                     
                     exportExcel
                     imprimirPantalla
                     id="report"
                     key_permission="clientes_frecuentes"
+                    title="Reporte de clientes frecuentes"
 
                     
                     filtersZone= {
