@@ -35,51 +35,67 @@ class ViajesFecha extends React.Component {
         return (
             <Permission key_permission="view_viajes_fecha" mode="redirect">
                 <ReportPage printButtons={false} timestamp={false}>
-                <ListPage
+                    <ListPage
+                        exportExcel
+                        imprimirPantalla
+                        id="report"
+                        key_permission="viaje_fecha"
+                        title="Viajes por fecha" 
 
-                exportExcel
-                imprimirPantalla
-                id="report"
-                key_permission="viaje_fecha"
-                title="Viajes por fecha" 
-
-                filtersZone={
-                    <div className="row">
-                        <div className="col-sm-4">
-                            <FormGroup className="row">
-                                <Label className="col-sm-5">Cooperativa</Label>
-                                <div className="col-sm-7">
-                                    <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
+                        filtersZone={
+                            <div className="row">
+                                <div className="col-sm-4">
+                                    <FormGroup className="row">
+                                        <Label className="col-sm-5">Cooperativa</Label>
+                                        <div className="col-sm-7">
+                                            <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
+                                        </div>
+                                    </FormGroup>
+                                    <FormGroup className="row">
+                                        <Label className="col-sm-5">Localidad</Label>
+                                        <div className="col-sm-7">
+                                            <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad}/>
+                                        </div>
+                                    </FormGroup>
                                 </div>
-                            </FormGroup>
-                            <FormGroup className="row">
-                                <Label className="col-sm-5">Localidad</Label>
-                                <div className="col-sm-7">
-                                    <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad}/>
+                                <div className="col-sm-4">
+                                    <FormGroup className="row">
+                                        <Label className="col-sm-5">Fecha inicio</Label>
+                                        <div className="col-sm-7">
+                                            <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
+                                        </div>
+                                    </FormGroup>
+                                    <FormGroup className="row">
+                                        <Label className="col-sm-5">Fecha fin</Label>
+                                        <div className="col-sm-7">
+                                            <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
+                                        </div>
+                                    </FormGroup>
                                 </div>
-                            </FormGroup>
-                        </div>
-                        <div className="col-sm-4">
-                            <FormGroup className="row">
-                                <Label className="col-sm-5">Fecha inicio</Label>
-                                <div className="col-sm-7">
-                                    <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
-                                </div>
-                            </FormGroup>
-                            <FormGroup className="row">
-                                <Label className="col-sm-5">Fecha fin</Label>
-                                <div className="col-sm-7">
-                                    <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
-                                </div>
-                            </FormGroup>
-                        </div>
-                    </div>
-                }
-                    
-                       
+                            </div>
+                        }
                         searchable={false}
 
-                        fieldNames={['Viaje', 'Cooperativa', 'Localidad', 'Fecha salida', 'Fecha creación', 'Usuario', 'Anden', 'Destino', 'Via', 'Disco', 'Placa', 'Pasajeros', 'Total']}
+                        head={[
+                            [
+                                'Viaje', 
+                                'Cooperativa', 
+                                'Localidad', 
+                                'Fecha salida', 
+                                'Fecha creación', 
+                                'Usuario', 
+                                'Anden', 
+                                'Destino', 
+                                {
+                                    title:'Via', 
+                                    style:{ maxWidth: '20%' }
+                                }, 
+                                'Disco', 
+                                'Placa', 
+                                'Pasajeros', 
+                                'Total'
+                            ]
+                        ]}
                         fields={[
                             'viaje',
                             'cooperativa',
