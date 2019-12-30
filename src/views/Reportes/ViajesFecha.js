@@ -69,7 +69,7 @@ class ViajesFecha extends React.Component {
                     <ListPage
                         searchable={false}
 
-                        fieldNames={['Viaje', 'Cooperativa', 'Localidad', 'Fecha salida', 'Fecha creación', 'Usuario', 'Anden', 'Destino', 'Via', 'Disco', 'Pasajeros', 'Total']}
+                        fieldNames={['Viaje', 'Cooperativa', 'Localidad', 'Fecha salida', 'Fecha creación', 'Usuario', 'Anden', 'Destino', 'Via', 'Disco', 'Placa', 'Pasajeros', 'Total']}
                         fields={[
                             'viaje',
                             'cooperativa',
@@ -80,8 +80,9 @@ class ViajesFecha extends React.Component {
                             'anden',
                             'destino',
                             'via',
-                            'pasajeros',
                             'disco',
+                            'placa',
+                            'pasajeros',
                             (row) => <span style={{float:"right"}}>$ {moneyFormat(row.total)}</span>,
                         ]}
 
