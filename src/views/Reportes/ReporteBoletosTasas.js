@@ -136,12 +136,12 @@ class ReporteBoletosTasas extends React.Component {
                                                 fieldNames={['Cooperativa','Boleto normal', 'Boleto especial', 'Normal anulado', 'Especial anulado', 'Total boleto', 'Total tasa']}
                                                 fields={[
                                                     'cooperativa',
-                                                    (row) => <span style={{float:"right"}}>$ {moneyFormat(row.boleto_normal)}</span>,
-                                                    (row) => <span style={{float:"right"}}>$ {moneyFormat(row.boleto_especial)}</span>,
-                                                    (row) => <span style={{float:"right"}}>$ {moneyFormat(row.normal_anulado)}</span>,
-                                                    (row) => <span style={{float:"right"}}>$ {moneyFormat(row.especial_anulado)}</span>,
+                                                    (row) => <span style={{float:"right"}}>{row.boleto_normal}</span>,
+                                                    (row) => <span style={{float:"right"}}>{row.boleto_especial}</span>,
+                                                    (row) => <span style={{float:"right"}}>{row.normal_anulado}</span>,
+                                                    (row) => <span style={{float:"right"}}>{row.especial_anulado}</span>,
                                                     (row) => <span style={{float:"right"}}>$ {moneyFormat(row.total_boleto)}</span>,
-                                                    (row) => <span style={{float:"right"}}>$ {moneyFormat(row.total_tasas)}</span>,
+                                                    (row) => <span style={{float:"right"}}>$ {moneyFormat(row.total_tasa)}</span>,
                                                 ]}
 
                                                 endpoint='recaudaciones/boletos-tasas'
