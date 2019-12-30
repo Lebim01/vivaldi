@@ -69,15 +69,14 @@ class SalidaViajes extends React.Component {
                     <ListPage
                         searchable={false}
 
-                        fieldNames={['Viaje', 'Cooperativa', 'Fecha salida', 'Destino', 'Tipo cliente', 'Cantidad', 'Valor unitario', 'Total']}
+                        fieldNames={['Viaje', 'Cooperativa', 'Fecha salida', 'Destino', 'Parada', 'Cantidad', 'Total']}
                         fields={[
                             'viaje',
                             'cooperativa',
                             'fecha_salida',
                             'destino',
-                            'tipo_cliente',
-                            (row) => <span style={{float:"right"}}>{row.valor_unitario > 0 ? row.total/row.valor_unitario : 0}</span>,
-                            (row) => <span style={{float:"right"}}>${moneyFormat(row.valor_unitario)}</span>,
+                            'parada',
+                            (row) => <span style={{float:"right"}}>{row.pasajeros}</span>,
                             (row) => <span style={{float:"right"}}>${moneyFormat(row.total)}</span>,
                         ]}
 
