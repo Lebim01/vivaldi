@@ -364,7 +364,7 @@ class ListPage extends React.Component {
                                             head.map((r,i) => {
                                                 let row = head[i]
                                                 return (
-                                                    <tr key={i}>
+                                                    <tr key={i} style={row.style}>
                                                         {row.map((col, j) => {
                                                             let _title = '', 
                                                                 _props = {}

@@ -69,7 +69,26 @@ class ViajesFecha extends React.Component {
                     <ListPage
                         searchable={false}
 
-                        fieldNames={['Viaje', 'Cooperativa', 'Localidad', 'Fecha salida', 'Fecha creación', 'Usuario', 'Anden', 'Destino', 'Via', 'Disco', 'Placa', 'Pasajeros', 'Total']}
+                        head={[
+                            [
+                                'Viaje', 
+                                'Cooperativa', 
+                                'Localidad', 
+                                'Fecha salida', 
+                                'Fecha creación', 
+                                'Usuario', 
+                                'Anden', 
+                                'Destino', 
+                                { 
+                                    title : 'Via',
+                                    style : { maxWidth : '20%' }
+                                }, 
+                                'Disco', 
+                                'Placa', 
+                                'Pasajeros', 
+                                'Total'
+                            ]
+                        ]}
                         fields={[
                             'viaje',
                             'cooperativa',
