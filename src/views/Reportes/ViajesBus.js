@@ -108,7 +108,7 @@ class ViajesBus extends React.Component {
                             imprimirPantalla
                             id="report"
                             key_permission="viajes_bus"
-                            title="Viaje Bus"    
+                            title=" "    
                                 searchable={false}
 
                                 fieldNames={['Viaje', 'Destino', 'Tipo', 'Cantidad', 'Valor unitario', 'Total']}
