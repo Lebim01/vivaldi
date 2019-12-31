@@ -63,10 +63,8 @@ class ViajesBus extends React.Component {
         const { data } = this.state
         return (
             <Permission key_permission="view_viajes_bus" mode="redirect">
-                <ReportPage printButtons={false} timestamp={false}>
+                <ReportPage title="Viaje Bus" printButtons={false} timestamp={false}>
                 
-
-                            filtersZone={
                             <div className="row" style={{padding: "0px 0 20px 0"}}>
                                 
                                 <div className="col-sm-4">
@@ -99,7 +97,7 @@ class ViajesBus extends React.Component {
                                 </div>
                             </div>
                             
-                            }
+                           
                     
                     { data.map((row) => 
                                 <>
@@ -109,7 +107,7 @@ class ViajesBus extends React.Component {
                             exportExcel
                             imprimirPantalla
                             id="report"
-                            key_permission="viaje_bus"
+                            key_permission="viajes_bus"
                             title="Viaje Bus"    
                                 searchable={false}
 

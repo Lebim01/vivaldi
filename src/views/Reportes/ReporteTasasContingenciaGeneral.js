@@ -56,10 +56,14 @@ class ReporteTasasContingenciaGeneral extends React.Component {
                         <div className="col-sm-12">
                             <Card>
                                 <CardBody>
-                                    <CardTitle>
-                                        Reporte de tasas de contingencia general
-                                    </CardTitle>
-                                    <br/>
+                                    
+                                    <ListPage 
+                                        title="Reporte tasas de contingencia general"
+                                        exportExcel
+                                        imprimirPantalla
+                                        id="report"
+
+                                    filtersZone= {
                                     <div className="row">
                                         <div className="col-sm-6">
                                             <FormGroup className="row">
@@ -104,15 +108,8 @@ class ReporteTasasContingenciaGeneral extends React.Component {
                                             </FormGroup>
                                         </div>
                                     </div>
-                                    <div className="row">
-                                        <div className="col-sm-12 text-center">
-                                            <Button onClick={this.buscar.bind(this)}>
-                                                Buscar
-                                            </Button>
-                                        </div>
-                                    </div>
+                                    }
                                     
-                                    <ListPage 
                                         searchable={false}
                                         
                                         

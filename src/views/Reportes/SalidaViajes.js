@@ -79,7 +79,7 @@ class SalidaViajes extends React.Component {
                        
                         searchable={false}
 
-                        fieldNames={['Viaje', 'Cooperativa', 'Fecha salida', 'Destino', 'Tipo cliente', 'Cantidad', 'Valor unitario', 'Total']}
+                        fieldNames={['Viaje', 'Cooperativa', 'Fecha salida', 'Destino', 'Parada', 'Cantidad', /*'Valor unitario',*/ 'Total']}
                         fields={[
                             'viaje',
                             'cooperativa',
@@ -87,7 +87,7 @@ class SalidaViajes extends React.Component {
                             'destino',
                             'tipo_cliente',
                             (row) => <span style={{float:"right"}}>{row.valor_unitario > 0 ? row.total/row.valor_unitario : 0}</span>,
-                            (row) => <span style={{float:"right"}}>${moneyFormat(row.valor_unitario)}</span>,
+                            /*(row) => <span style={{float:"right"}}>${moneyFormat(row.valor_unitario)}</span>,*/
                             (row) => <span style={{float:"right"}}>${moneyFormat(row.total)}</span>,
                         ]}
 

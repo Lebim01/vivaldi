@@ -79,11 +79,12 @@ class ViajesFecha extends React.Component {
                        
                         searchable={false}
 
-                        fieldNames={['Viaje', 'Cooperativa', 'Localidad', 'Fecha salida', 'Usuario', 'Destino', 'Disco', 'Total']}
+                        fieldNames={['Viaje', 'Cooperativa', 'Localidad','Fecha inicio', 'Fecha salida', 'Usuario', 'Destino', 'Disco', 'Total']}
                         fields={[
                             'viaje',
                             'cooperativa',
                             'localidad',
+                            'fecha_inicio',
                             'fecha_salida',
                             'usuario',
                             'destino',
