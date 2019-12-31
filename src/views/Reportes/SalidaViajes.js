@@ -34,7 +34,16 @@ class SalidaViajes extends React.Component {
     render(){
         return (
             <Permission key_permission="view_salida_viajes" mode="redirect">
-                <ReportPage title="Salida de viajes" printButtons={false} timestamp={false}>
+                <ReportPage printButtons={false} timestamp={false}>
+                    <ListPage
+
+                    exportExcel
+                    imprimirPantalla
+                    id="report"
+                    key_permission="salida_viajes"
+                    title="Salida de viajes"
+                    
+                    filtersZone={
                     <div className="row">
                         <div className="col-sm-4">
                             <FormGroup className="row">
@@ -65,8 +74,9 @@ class SalidaViajes extends React.Component {
                             </FormGroup>
                         </div>
                     </div>
-
-                    <ListPage
+                    }
+                    
+                       
                         searchable={false}
 
                         fieldNames={['Viaje', 'Cooperativa', 'Fecha salida', 'Destino', 'Parada', 'Cantidad', 'Total']}

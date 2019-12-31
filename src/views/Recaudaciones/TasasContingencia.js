@@ -228,9 +228,9 @@ class TasasContingencia extends React.Component {
                                     fields={[
                                         'fecha', 
                                         'localidad_nombre', 
-                                        (row) => <label style={style_money_label}>${moneyFormat(row.precio)}</label>, 
+                                        (row) => <span style={style_money_label}>${moneyFormat(row.precio)}</span>, 
                                         'cantidad', 
-                                        (row) => <label style={style_money_label}>${moneyFormat(row.total)}</label>, 
+                                        (row) => <span style={style_money_label}>${moneyFormat(row.total)}</span>, 
                                         this.imprimir
                                     ]}
 

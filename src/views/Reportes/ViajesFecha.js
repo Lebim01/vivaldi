@@ -34,7 +34,16 @@ class ViajesFecha extends React.Component {
     render(){
         return (
             <Permission key_permission="view_viajes_fecha" mode="redirect">
-                <ReportPage title="Viajes por fecha" printButtons={false} timestamp={false}>
+                <ReportPage printButtons={false} timestamp={false}>
+                <ListPage
+
+                exportExcel
+                imprimirPantalla
+                id="report"
+                key_permission="viaje_fecha"
+                title="Viajes por fecha" 
+
+                filtersZone={
                     <div className="row">
                         <div className="col-sm-4">
                             <FormGroup className="row">
@@ -65,8 +74,9 @@ class ViajesFecha extends React.Component {
                             </FormGroup>
                         </div>
                     </div>
-
-                    <ListPage
+                }
+                    
+                       
                         searchable={false}
 
                         head={[
@@ -93,6 +103,7 @@ class ViajesFecha extends React.Component {
                             'viaje',
                             'cooperativa',
                             'localidad',
+                            'fecha_inicio',
                             'fecha_salida',
                             'fecha_creacion',
                             'usuario',

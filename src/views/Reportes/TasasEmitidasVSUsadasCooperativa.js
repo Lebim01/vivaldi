@@ -49,13 +49,13 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
         const { refresh } = this.state
         return (
             <Permission key_permission="view_tasas_emitidas_usadas" mode="redirect">
-                <ReportPage title="Tasas emitidas VS Usadas por cooperativa">
+                <ReportPage printButtons={false} timestamp={false}>
                 <ListPage
                 exportExcel
                 imprimirPantalla
                 id= "emitidas_usadas"
                 key_permission= "emitidas_usadas"
-
+                title="Tasas emitidas VS Usadas por cooperativa"
 
                 filtersZone= {
                     <div className="row">
