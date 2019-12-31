@@ -103,7 +103,6 @@ class ViajesFecha extends React.Component {
                             'viaje',
                             'cooperativa',
                             'localidad',
-                            'fecha_inicio',
                             'fecha_salida',
                             'fecha_creacion',
                             'usuario',
