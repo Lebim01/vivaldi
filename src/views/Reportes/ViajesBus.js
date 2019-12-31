@@ -101,7 +101,7 @@ class ViajesBus extends React.Component {
                     
                     { data.map((row) => 
                                 <>
-                        <h3 className="text-center" style={ {position: "relative", top: "198px", marginTop : "-50px"}}>Bus: {row.disco} / {row.placa}</h3>
+                        <h3 className="text-center">Bus: {row.disco} / {row.placa}</h3>
                             <ListPage
 
                             exportExcel
