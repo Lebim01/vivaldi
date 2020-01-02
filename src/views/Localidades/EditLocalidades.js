@@ -388,6 +388,12 @@ class MainView extends React.Component {
                             </FormGroup>
                             </div>
                         }
+                        <FormGroup className="row">
+                            <Label className='col-sm-3'>Punto Emisi&oacute;n Contingencias</Label>
+                            <div className='col-sm-3'>
+                                <Input type='text' value={this.props.punto_emision_contingencias} onChange={this.onChange('punto_emision_contingencias')} />
+                            </div>
+                        </FormGroup>
                     </fieldset>
                     <fieldset>
                       <FormGroup className="row">

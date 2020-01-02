@@ -6,7 +6,6 @@ import { baseurl } from 'utils/url'
 import { confirmEndpoint } from 'utils/dialog'
 import axios from 'axios'
 import Swal from 'sweetalert2'
-
 /**
  * TASAS DE TIPO 2
  * Contingencia general
