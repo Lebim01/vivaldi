@@ -186,8 +186,9 @@ class ListPage extends React.Component {
         }
     }
 
-    componentWillReceiveProps(props){
-        this.loadList(props.parameters)
+    componentDidUpdate(prevProps, prevState){
+        if(prevProps !== this.props)
+            this.loadList(this.props.parameters)
     }
 
     onRowDoubleClick = (id, row) => {

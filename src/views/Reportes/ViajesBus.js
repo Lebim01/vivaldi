@@ -65,43 +65,40 @@ class ViajesBus extends React.Component {
             <Permission key_permission="view_viajes_bus" mode="redirect">
                 <ReportPage title="Viaje Bus" printButtons={false} timestamp={false}>
                 
-                            <div className="row" style={{padding: "0px 0 20px 0"}}>
-                                
-                                <div className="col-sm-4">
-                                    <FormGroup className="row">
-                                        <Label className="col-sm-5">Cooperativa</Label>
-                                        <div className="col-sm-7">
-                                            <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.filters.cooperativa}/>
-                                        </div>
-                                    </FormGroup>
-                                    <FormGroup className="row">
-                                        <Label className="col-sm-5">Localidad</Label>
-                                        <div className="col-sm-7">
-                                            <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.filters.localidad}/>
-                                        </div>
-                                    </FormGroup>
+                    <div className="row" style={{padding: "0px 0 20px 0"}}>
+                        <div className="col-sm-4">
+                            <FormGroup className="row">
+                                <Label className="col-sm-5">Cooperativa</Label>
+                                <div className="col-sm-7">
+                                    <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.filters.cooperativa}/>
                                 </div>
-                                <div className="col-sm-4">
-                                    <FormGroup className="row">
-                                        <Label className="col-sm-5">Fecha inicio</Label>
-                                        <div className="col-sm-7">
-                                            <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.filters.fecha_inicio} />
-                                        </div>
-                                    </FormGroup>
-                                    <FormGroup className="row">
-                                        <Label className="col-sm-5">Fecha fin</Label>
-                                        <div className="col-sm-7">
-                                            <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.filters.fecha_fin} />
-                                        </div>
-                                    </FormGroup>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <Label className="col-sm-5">Localidad</Label>
+                                <div className="col-sm-7">
+                                    <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.filters.localidad}/>
                                 </div>
-                            </div>
-                            
-                           
-                    
-                    { data.map((row) => 
-                                <>
-                        <h3 className="text-center">Bus: {row.disco} / {row.placa}</h3>
+                            </FormGroup>
+                        </div>
+                        <div className="col-sm-4">
+                            <FormGroup className="row">
+                                <Label className="col-sm-5">Fecha inicio</Label>
+                                <div className="col-sm-7">
+                                    <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.filters.fecha_inicio} />
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <Label className="col-sm-5">Fecha fin</Label>
+                                <div className="col-sm-7">
+                                    <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.filters.fecha_fin} />
+                                </div>
+                            </FormGroup>
+                        </div>
+                    </div>
+
+                    { data.map((row, i) => 
+                        <React.Fragment key={i}>
+                            <h3 className="text-center">{row.cooperativa} / Bus: {row.disco} / Placa: {row.placa}</h3>
                             <ListPage
 
                             exportExcel
@@ -126,7 +123,7 @@ class ViajesBus extends React.Component {
                                 
                                 history={this.props.history}
                             />
-                        </>
+                        </React.Fragment>
                     )}
                     { data.length === 0 && <h3>No hay información para mostrar</h3> }
                 </ReportPage>
