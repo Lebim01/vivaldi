@@ -1,13 +1,18 @@
 import React from 'react'
-import { ListPage, Label, FormGroup, Select, Input, ReportPage, Permission } from 'temeforest'
+import { Col, Row } from 'reactstrap'
+import { ListPage, Label, FormGroup, Select, Input,  Button, ReportPage, Permission, CardTitle, InputIcon } from 'temeforest'
 import moment from 'moment'
 import { baseurl, objectToUrl } from 'utils/url'
 import axios from 'axios'
 import { moneyFormat } from 'utils/number'
+import FileDownload from 'assets/svg/file-download-solid.svg'
+import FileDownloadW from 'assets/svg/file-download-solid-white.svg'
+import { htmlToXlsById } from 'utils/exportData'
 
 class ViajesBus extends React.Component {
 
     state = {
+        search: '',
         filters : {
             fecha_inicio : moment().format('YYYY-MM-DD'),
             fecha_fin : moment().format('YYYY-MM-DD'),
@@ -60,13 +65,12 @@ class ViajesBus extends React.Component {
     }
 
     render(){   
-        const { data } = this.state
+        const {data}= this.state
         return (
             <Permission key_permission="view_viajes_bus" mode="redirect">
-                <ReportPage title="Viaje Bus" printButtons={false} timestamp={false}>
-                
+                <ReportPage title="Viaje Bus" /*printButtons={false} */timestamp={false}>
                             <div className="row" style={{padding: "0px 0 20px 0"}}>
-                                
+                            
                                 <div className="col-sm-4">
                                     <FormGroup className="row">
                                         <Label className="col-sm-5">Cooperativa</Label>
@@ -108,7 +112,7 @@ class ViajesBus extends React.Component {
                             imprimirPantalla
                             id="report"
                             key_permission="viajes_bus"
-                            title=" "    
+                            //title=" "    
                                 searchable={false}
 
                                 fieldNames={['Viaje', 'Destino', 'Tipo', 'Cantidad', 'Valor unitario', 'Total']}
@@ -133,6 +137,25 @@ class ViajesBus extends React.Component {
             </Permission>
         )
     }
+}
+
+ListPage.defaultProps = {
+    parameters : {},
+    redirect: true,
+    actionsButtons: [],
+    
+    filters : {
+        persist: true,
+        callback : () => {
+
+        },
+    },
+
+    fieldNames : [],
+    head : [],
+    config : {},
+    headerClass : '',
+    tdBodyClass : ''
 }
 
 export default ViajesBus

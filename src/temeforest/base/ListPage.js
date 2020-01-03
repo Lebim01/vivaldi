@@ -8,8 +8,8 @@ import { htmlToXlsById } from 'utils/exportData'
 import axios from 'axios'
 
 import BlockUi from 'react-block-ui';
-import 'react-block-ui/style.css';
-import './ListPage.css'
+//import 'react-block-ui/style.css';
+//import './ListPage.css'
 
 import FileDownload from 'assets/svg/file-download-solid.svg'
 import FileDownloadW from 'assets/svg/file-download-solid-white.svg'
