@@ -1,13 +1,9 @@
 import React from 'react'
-import { Col, Row } from 'reactstrap'
-import { ListPage, Label, FormGroup, Select, Input,  Button, ReportPage, Permission, CardTitle, InputIcon } from 'temeforest'
+import { ListPage, Label, FormGroup, Select, Input, ReportPage, Permission } from 'temeforest'
 import moment from 'moment'
 import { baseurl, objectToUrl } from 'utils/url'
 import axios from 'axios'
 import { moneyFormat } from 'utils/number'
-import FileDownload from 'assets/svg/file-download-solid.svg'
-import FileDownloadW from 'assets/svg/file-download-solid-white.svg'
-import { htmlToXlsById } from 'utils/exportData'
 
 class ViajesBus extends React.Component {
 
@@ -68,82 +64,48 @@ class ViajesBus extends React.Component {
         const {data}= this.state
         return (
             <Permission key_permission="view_viajes_bus" mode="redirect">
-                <ReportPage printButtons={false} timestamp={false}>
-                { data.map((row) => 
-                                <>
-                        <h3 className="text-center" style={ {position: "relative", top: "198px", marginTop : "-50px"}}>Bus: {row.disco} / {row.placa}</h3>
-                            <ListPage
-
-                            exportExcel
-                            imprimirPantalla
-                            id="report"
-                            key_permission="viaje_bus"
-                            title="Viajes Bus"
-
-                            filtersZone={
-                            <div className="row" style={{padding: "0px 0 20px 0"}}>
-                                
-                                <div className="col-sm-4">
-                                    <FormGroup className="row">
-                                        <Label className="col-sm-5">Cooperativa</Label>
-                                        <div className="col-sm-7">
-                                            <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.filters.cooperativa}/>
-                                        </div>
-                                    </FormGroup>
-                                    <FormGroup className="row">
-                                        <Label className="col-sm-5">Localidad</Label>
-                                        <div className="col-sm-7">
-                                            <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.filters.localidad}/>
-                                        </div>
-                                    </FormGroup>
-                                </div>
-                                <div className="col-sm-4">
-                                    <FormGroup className="row">
-                                        <Label className="col-sm-5">Fecha inicio</Label>
-                                        <div className="col-sm-7">
-                                            <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.filters.fecha_inicio} />
-                                        </div>
-                                    </FormGroup>
-                                    <FormGroup className="row">
-                                        <Label className="col-sm-5">Fecha fin</Label>
-                                        <div className="col-sm-7">
-                                            <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.filters.fecha_fin} />
-                                        </div>
-                                    </FormGroup>
-                                </div>
-<<<<<<< HEAD
-                            </div>
-                            
-                           
+                <ReportPage title="Viaje Bus" timestamp={false}>
+                    <div className="row" style={{padding: "0px 0 20px 0"}}>
                     
-=======
-<<<<<<< HEAD
+                        <div className="col-sm-4">
+                            <FormGroup className="row">
+                                <Label className="col-sm-5">Cooperativa</Label>
+                                <div className="col-sm-7">
+                                    <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.filters.cooperativa}/>
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <Label className="col-sm-5">Localidad</Label>
+                                <div className="col-sm-7">
+                                    <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.filters.localidad}/>
+                                </div>
+                            </FormGroup>
+                        </div>
+                        <div className="col-sm-4">
+                            <FormGroup className="row">
+                                <Label className="col-sm-5">Fecha inicio</Label>
+                                <div className="col-sm-7">
+                                    <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.filters.fecha_inicio} />
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <Label className="col-sm-5">Fecha fin</Label>
+                                <div className="col-sm-7">
+                                    <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.filters.fecha_fin} />
+                                </div>
                             </FormGroup>
                         </div>
                     </div>
-
->>>>>>> botones imprimir y exportar agregados
-                    { data.map((row) => 
-                                <>
-                        <h3 className="text-center">Bus: {row.disco} / {row.placa}</h3>
-                            <ListPage
-<<<<<<< HEAD
-
-                            exportExcel
-                            imprimirPantalla
-                            id="report"
-                            key_permission="viajes_bus"
-                            //title=" "    
-=======
-=======
-                                
-                            </div>
-                            
-                            }
                     
-                                
->>>>>>> botones imprimir y exportar agregados
->>>>>>> botones imprimir y exportar agregados
+                    { data.map((row) => 
+                        <>
+                            <h3 className="text-center">Bus: {row.disco} / {row.placa}</h3>
+                            <ListPage
+                                exportExcel
+                                imprimirPantalla
+                                id="report"
+                                key_permission="viajes_bus"
+                                //title=" " 
                                 searchable={false}
 
                                 fieldNames={['Viaje', 'Destino', 'Tipo', 'Cantidad', 'Valor unitario', 'Total']}
@@ -168,25 +130,6 @@ class ViajesBus extends React.Component {
             </Permission>
         )
     }
-}
-
-ListPage.defaultProps = {
-    parameters : {},
-    redirect: true,
-    actionsButtons: [],
-    
-    filters : {
-        persist: true,
-        callback : () => {
-
-        },
-    },
-
-    fieldNames : [],
-    head : [],
-    config : {},
-    headerClass : '',
-    tdBodyClass : ''
 }
 
 export default ViajesBus
