@@ -37,48 +37,45 @@ class SalidaViajes extends React.Component {
                 <ReportPage printButtons={false} timestamp={false}>
                     <ListPage
 
-                    exportExcel
-                    imprimirPantalla
-                    id="report"
-                    key_permission="salida_viajes"
-                    title="Salida de viajes"
-                    
-                    filtersZone={
-                    <div className="row">
-                        <div className="col-sm-4">
-                            <FormGroup className="row">
-                                <Label className="col-sm-5">Cooperativa</Label>
-                                <div className="col-sm-7">
-                                    <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
+                        exportExcel
+                        imprimirPantalla
+                        id="report"
+                        key_permission="salida_viajes"
+                        title="Salida de viajes"
+                        
+                        filtersZone={
+                            <div className="row">
+                                <div className="col-sm-4">
+                                    <FormGroup className="row">
+                                        <Label className="col-sm-5">Cooperativa</Label>
+                                        <div className="col-sm-7">
+                                            <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
+                                        </div>
+                                    </FormGroup>
+                                    <FormGroup className="row">
+                                        <Label className="col-sm-5">Localidad</Label>
+                                        <div className="col-sm-7">
+                                            <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad}/>
+                                        </div>
+                                    </FormGroup>
                                 </div>
-                            </FormGroup>
-                            <FormGroup className="row">
-                                <Label className="col-sm-5">Localidad</Label>
-                                <div className="col-sm-7">
-                                    <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad}/>
+                                <div className="col-sm-4">
+                                    <FormGroup className="row">
+                                        <Label className="col-sm-5">Fecha inicio</Label>
+                                        <div className="col-sm-7">
+                                            <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
+                                        </div>
+                                    </FormGroup>
+                                    <FormGroup className="row">
+                                        <Label className="col-sm-5">Fecha fin</Label>
+                                        <div className="col-sm-7">
+                                            <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
+                                        </div>
+                                    </FormGroup>
                                 </div>
-                            </FormGroup>
-                        </div>
-                        <div className="col-sm-4">
-                            <FormGroup className="row">
-                                <Label className="col-sm-5">Fecha inicio</Label>
-                                <div className="col-sm-7">
-                                    <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
-                                </div>
-                            </FormGroup>
-                            <FormGroup className="row">
-                                <Label className="col-sm-5">Fecha fin</Label>
-                                <div className="col-sm-7">
-                                    <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
-                                </div>
-                            </FormGroup>
-                        </div>
-                    </div>
-                    }
-                    
-                       
+                            </div>
+                        }
                         searchable={false}
-
                         fieldNames={['Viaje', 'Cooperativa', 'Fecha salida', 'Destino', 'Parada', 'Cantidad', 'Total']}
                         fields={[
                             'viaje',
@@ -87,7 +84,7 @@ class SalidaViajes extends React.Component {
                             'destino',
                             'parada',
                             (row) => <span style={{float:"right"}}>{row.pasajeros}</span>,
-                            (row) => <span style={{float:"right"}}>${moneyFormat(row.total)}</span>,
+                            (row) => <span style={{float:"right"}}>${moneyFormat(row.total || 0)}</span>,
                         ]}
 
                         endpoint='venta/salida-de-viaje'
