@@ -23,12 +23,12 @@ class Diario extends React.Component {
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
         labelName: 'nombre',
-        valueName: 'id' 
+        valueName: 'id'
     }
     optionsLocalidad = {
         url : `${baseurl}/localidad/`,
         labelName: 'nombre',
-        valueName: 'id' 
+        valueName: 'id'
     }
     optionsTipos = [
         {value:'t', label:'Todos'},
@@ -67,8 +67,8 @@ class Diario extends React.Component {
     fieldCobrar = (row) => {
         return (
             <React.Fragment>
-                { row.a_cobrar > 0 && 
-                    <Button outline onClick={() => this.cobrar(row)}>Cobrar</Button> 
+                { row.a_cobrar > 0 &&
+                    <Button outline onClick={() => this.cobrar(row)}>Cobrar</Button>
                 }
             </React.Fragment>
         )
@@ -105,22 +105,22 @@ class Diario extends React.Component {
                 <br/>
                 <table style="width:100%">
                     <tr>
-                        <th>Tipo</th>
-                        <th>Cant.</th>
-                        <th>v/u</th>
-                        <th>SubTotal</th>
+                        <th style="text-align:left">Tipo</th>
+                        <th style="text-align:right">Cant.</th>
+                        <th style="text-align:right">v/u</th>
+                        <th style="text-align:right">SubTotal</th>
                     </tr>
                     <tr>
-                        <td>Tasas</td>
-                        <td>${row.cantidad}</td>
-                        <td>${row.valor_unitario}</td>
+                        <td style="text-align:left">Tasas</td>
+                        <td style="text-align:right">${row.cantidad}</td>
+                        <td style="text-align:right">${row.valor_unitario}</td>
                         <td style="text-align:right">$${moneyFormat(row.a_cobrar)}</td>
                     </tr>
                     <tr><td colspan="4"><br/></td></tr>
                     <tr>
-                        <th>TOTAL</th>
-                        <td style="border-top: 1px solid black;">${row.cantidad}</td>
-                        <td style="border-top: 1px solid black;">${row.valor_unitario}</td>
+                        <th style="text-align:left">TOTAL</th>
+                        <td style="text-align:right;border-top: 1px solid black;">${row.cantidad}</td>
+                        <td style="text-align:right;border-top: 1px solid black;">${row.valor_unitario}</td>
                         <td style="text-align:right; border-top: 1px solid black;">$${moneyFormat(row.a_cobrar)}</td>
                     </tr>
                 </table>
@@ -156,17 +156,17 @@ class Diario extends React.Component {
     fieldImprimir = (row) => {
         return (
             <React.Fragment>
-                { row.a_cobrar !== 0 && 
-                    <Button outline onClick={() => this.toWord(row)}>Imprimir</Button> 
+                { row.a_cobrar !== 0 &&
+                    <Button outline onClick={() => this.toWord(row)}>Imprimir</Button>
                 }
             </React.Fragment>
         )
     }
-    
+
     render(){
         const { refresh } = this.state
         return (
-            <Permission key_permission="view_cobros_diarios" mode="redirect">
+            <Permission key_permission="view_cobros_" mode="redirect">
                 <div className="animated fadeIn">
                     <div className="row">
                         <div className="col-sm-12">
@@ -178,7 +178,7 @@ class Diario extends React.Component {
                                     id="report"
                                     key_permission="diario"
 
-                                    title= "Cobros Diarios"
+                                    title= "Cobros "
 
                                     filtersZone={
                                         <div className="row">
@@ -211,31 +211,31 @@ class Diario extends React.Component {
                                                 </FormGroup>
                                             </div>
                                             <div className="col-sm-4 text-right">
-                                                
+
                                             </div>
                                         </div>
                                     }
-                                
-                                
+
+
                                     searchable={false}
                                     ref={this.table}
 
                                     fieldNames={['Cooperativa', 'Localidad', 'Fecha venta', 'Cobrar', 'A cobrar', 'Cobrado', 'Fecha cobro', 'N.C', 'Acción']}
                                     fields={[
-                                        'cooperativa_nombre', 
-                                        'localidad_nombre', 
-                                        'fecha_venta', 
-                                        this.fieldCobrar, 
-                                        (row) => <label style={{float:"right", fontWeight: 300}}>$ {moneyFormat(row.a_cobrar)}</label>, 
+                                        'cooperativa_nombre',
+                                        'localidad_nombre',
+                                        'fecha_venta',
+                                        this.fieldCobrar,
+                                        (row) => <label style={{float:"right", fontWeight: 300}}>$ {moneyFormat(row.a_cobrar)}</label>,
                                         (row) => <label style={{float:"right", fontWeight: 300}}>$ {moneyFormat(row.cobrado)}</label>,
                                         (row) => <label style={{float:"right", fontWeight: 300}}>{(row.fecha_cobro)}</label>,
                                         (row) => <label style={{float:"right", fontWeight: 300}}>$ {moneyFormat(row.nc)}</label>,
                                         this.fieldImprimir
                                     ]}
 
-                                    endpoint='venta/cobros-diarios'
+                                    endpoint='venta/cobros-'
                                     parameters={this.state}
-                                    
+
                                     history={this.props.history}
                                     refresh={refresh}
                                 />
