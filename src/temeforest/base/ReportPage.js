@@ -4,11 +4,7 @@ import { Card, CardBody, CardTitle, Button } from 'temeforest'
 import store from 'store/auth'
 import { htmlToXlsById } from 'utils/exportData'
 import moment from 'moment'
-import FileDownload from 'assets/svg/file-download-solid.svg'
 import FileDownloadW from 'assets/svg/file-download-solid-white.svg'
-
-import BlockUi from 'react-block-ui';
-import 'react-block-ui/style.css';
 import './ListPage.css'
 
 
@@ -34,25 +30,24 @@ class ReportPage extends React.Component {
                     <Col xs="12" md="12">
                         <Card>
                             <CardBody>
-                                { title && <CardTitle>{title}
-                                { this.props.printButtons &&
-                                    
-                                    <div className="col-sm-12 text-right">
-                                        <Button onClick={this.exportHtml} style={{marginRight:2, opacity:0.88}} title="Exportar excel" >
-                                            <img src={FileDownloadW} height="14" />
-                                        </Button>
-                                        <Button onClick={this.print} style={{marginLeft:3, opacity:0.88}} title="Imprimir Pantalla">
-                                            <i className="fa fa-print"></i>
-                                        </Button>
-                                    </div>
-                               
-                            }
-                                
-                                </CardTitle> }
+                                { title && 
+                                    <CardTitle>
+                                        {title}
+                                        { this.props.printButtons &&
+                                            
+                                            <div className="col-sm-12 text-right">
+                                                <Button onClick={this.exportHtml} style={{marginRight:2, opacity:0.88}} title="Exportar excel" >
+                                                    <img src={FileDownloadW} height="14" />
+                                                </Button>
+                                                <Button onClick={this.print} style={{marginLeft:3, opacity:0.88}} title="Imprimir Pantalla">
+                                                    <i className="fa fa-print"></i>
+                                                </Button>
+                                            </div>
+                                        }
+                                    </CardTitle> 
+                                }
                                 
                                 <CardBody>
-                                
-                                
                                     <br/>
                                     {this.props.children}   
                                     <br/>
