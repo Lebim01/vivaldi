@@ -243,6 +243,7 @@ function EditViajes(props){
         let data = state.data
         data[name] = value
         setState({
+            ...data,
             data
         })
     }
