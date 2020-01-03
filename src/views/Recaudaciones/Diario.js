@@ -77,6 +77,7 @@ class Diario extends React.Component {
 
     rowToHtml = (row) => {
         return `
+            <div style="margin: 0; padding: 0; font-family: Verdana; break-after: always;">
             <div style="margin-bottom: 10px; border-bottom: 1px solid black; width: 300px; text-align: center; border:unset;">
                 <p style="margin-top: 5px; margin-bottom: 5px;">${row.localidad_nombre}</p>
                 <p style="margin-top: 5px; margin-bottom: 5px;">${row.cooperativa_nombre}</p>
@@ -125,10 +126,6 @@ class Diario extends React.Component {
                     </tr>
                 </table>
 
-                <p style="margin-top: 5px; margin-bottom: 5px;">
-                    <span style="width: 100px; text-align: left;">Anulados </span>
-                    <span style="width: 100px; text-align: left;">0</span>
-                </p>
             </div>
             <br/>
             <br/>
@@ -140,6 +137,7 @@ class Diario extends React.Component {
                     Firma Cliente
                 </p>
             </div>
+          </div>
         `
     }
 
