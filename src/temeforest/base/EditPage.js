@@ -60,7 +60,7 @@ function EditPage(props){
     }
 
     const confirmSave = async () => {
-        const { id, data, urlFront, endpoint } = props
+        const { id, data, urlFront, endpoint, method } = props
         let parsed_data = data
 
         if(props.parseData){
@@ -70,6 +70,7 @@ function EditPage(props){
         const options = {
             id,
             endpoint,
+            method,
             text: '¿Seguro de guardar?',
             params : parsed_data,
             showResponse : true
@@ -156,7 +157,8 @@ EditPage.defaultProps = {
     endpoint: '',
     btnSave : {},
     btnDelete : {},
-    noValidate : true
+    noValidate : true,
+    method: 'post'
 }
 
 export default EditPage
