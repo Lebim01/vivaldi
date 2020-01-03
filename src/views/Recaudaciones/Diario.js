@@ -79,7 +79,7 @@ class Diario extends React.Component {
         return `
             <div style="margin-bottom: 10px; border-bottom: 1px solid black; width: 300px; text-align: center; border:unset;">
                 <p style="margin-top: 5px; margin-bottom: 5px;">${row.localidad_nombre}</p>
-                <p style="display:none; margin-top: 5px; margin-bottom: 5px;">${row.cooperativa_nombre}</p>
+                <p style="margin-top: 5px; margin-bottom: 5px;">${row.cooperativa_nombre}</p>
                 <p style="margin-top: 5px; margin-bottom: 5px;">Ventas por Cooperativa</p>
             </div>
             <div style="margin-bottom: 10px; border-bottom: 1px solid black; width: 300px; border:unset;">
@@ -119,8 +119,8 @@ class Diario extends React.Component {
                     <tr><td colspan="4"><br/></td></tr>
                     <tr>
                         <th style="text-align:left">TOTAL</th>
-                        <td style="text-align:right;border-top: 1px solid black;">${row.cantidad}</td>
-                        <td style="text-align:right;border-top: 1px solid black;">${row.valor_unitario}</td>
+                        <td style="text-align:right; border-top: 1px solid black;">${row.cantidad}</td>
+                        <td style="text-align:right; border-top: 1px solid black;">${row.valor_unitario}</td>
                         <td style="text-align:right; border-top: 1px solid black;">$${moneyFormat(row.a_cobrar)}</td>
                     </tr>
                 </table>
@@ -166,7 +166,7 @@ class Diario extends React.Component {
     render(){
         const { refresh } = this.state
         return (
-            <Permission key_permission="view_cobros_" mode="redirect">
+            <Permission key_permission="view_cobros_diarios" mode="redirect">
                 <div className="animated fadeIn">
                     <div className="row">
                         <div className="col-sm-12">
@@ -178,7 +178,7 @@ class Diario extends React.Component {
                                     id="report"
                                     key_permission="diario"
 
-                                    title= "Cobros "
+                                    title= "Cobros Diarios"
 
                                     filtersZone={
                                         <div className="row">
@@ -233,7 +233,7 @@ class Diario extends React.Component {
                                         this.fieldImprimir
                                     ]}
 
-                                    endpoint='venta/cobros-'
+                                    endpoint='venta/cobros-diarios'
                                     parameters={this.state}
 
                                     history={this.props.history}
