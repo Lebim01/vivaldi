@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Col, Row } from 'reactstrap'
 import { Card, CardBody, CardTitle, Button, ValidateContext, Permission } from 'temeforest'
 import { confirmEndpoint } from 'utils/dialog'
@@ -19,11 +19,25 @@ const defaultBtnSave = {
 
 function EditPage(props){
     const { register, handleSubmit, watch, errors, triggerValidation, setValue, ...methods } = useForm()
-    const { id, title, btnDelete, btnSave, key_permission } = props
+    const { id, title, btnDelete, btnSave, key_permission, history, urlFront } = props
 
     const key_add = `add_${key_permission}`
     const key_change = `change_${key_permission}`
     const key_delete = `delete_${key_permission}`
+
+    useEffect(() => {
+        let unblock = history.block((location, action) => {
+            if(location.pathname === urlFront){
+                setTimeout(() => {
+                    unblock()
+                    backToList()
+                }, 500)
+                return false
+            }
+            
+            return true
+        })
+    }, [])
 
     // events
     const onSubmit = async data => {
@@ -33,8 +47,15 @@ function EditPage(props){
         }
     }
 
+    const backToList = () => {
+        let params = getAllParameters()
+        delete params.id;
+
+        history.push(`${urlFront}${objectToUrl(params)}`)
+    }
+
     const confirmDelete = async () => {
-        const { id, data, endpoint, urlFront } = props
+        const { id, data, endpoint } = props
 
         if(id){
             const options = {
@@ -51,16 +72,13 @@ function EditPage(props){
                     type : 'success'
                 })
                 
-                let params = getAllParameters()
-                delete params.id;
-
-                props.history.push(`${urlFront}${objectToUrl(params)}`)
+                backToList()
             }
         }
     }
 
     const confirmSave = async () => {
-        const { id, data, urlFront, endpoint, method } = props
+        const { id, data, endpoint, method } = props
         let parsed_data = data
 
         if(props.parseData){
@@ -82,10 +100,7 @@ function EditPage(props){
                 type : 'success'
             })
 
-            let params = getAllParameters()
-            delete params.id;
-
-            props.history.push(`${urlFront}${objectToUrl(params)}`)
+            backToList()
         }
     }
 

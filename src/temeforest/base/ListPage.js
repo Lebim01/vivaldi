@@ -8,8 +8,8 @@ import { htmlToXlsById } from 'utils/exportData'
 import axios from 'axios'
 
 import BlockUi from 'react-block-ui';
-//import 'react-block-ui/style.css';
-//import './ListPage.css'
+import 'react-block-ui/style.css';
+import './ListPage.css'
 
 import FileDownloadW from 'assets/svg/file-download-solid-white.svg'
 
@@ -186,8 +186,9 @@ class ListPage extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState){
-        if(prevProps !== this.props)
+        if(prevProps !== this.props){
             this.loadList(this.props.parameters)
+        }
     }
 
     onRowDoubleClick = (id, row) => {
