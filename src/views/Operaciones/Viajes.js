@@ -9,7 +9,7 @@ class Viajes extends React.Component {
         fecha_fin : moment().format('YYYY-MM-DD')
     }
     optionsCooperativa = {
-        url : `${baseurl}/cooperativa/`,
+        url : `${baseurl}/cooperativa/?type=select`,
         labelName: 'nombre',
         valueName: 'id'
     }
@@ -101,7 +101,7 @@ class Viajes extends React.Component {
                                                         <FormGroup className="row">
                                                             <Label className="col-sm-3">Bus</Label>
                                                             <div className="col-sm-8">
-                                                                { cooperativa 
+                                                                { cooperativa
                                                                     ? (
                                                                         <RSelectAsync
                                                                             asyncOptions={this.optionsBus({ cooperativa })}
