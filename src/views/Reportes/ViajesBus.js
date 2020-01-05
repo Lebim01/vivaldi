@@ -8,6 +8,7 @@ import { moneyFormat } from 'utils/number'
 class ViajesBus extends React.Component {
 
     state = {
+        search: '',
         filters : {
             fecha_inicio : moment().format('YYYY-MM-DD'),
             fecha_fin : moment().format('YYYY-MM-DD'),
@@ -60,12 +61,12 @@ class ViajesBus extends React.Component {
     }
 
     render(){   
-        const { data } = this.state
+        const {data}= this.state
         return (
             <Permission key_permission="view_viajes_bus" mode="redirect">
-                <ReportPage title="Viaje Bus" printButtons={false} timestamp={false}>
-                
+                <ReportPage title="Viaje Bus" timestamp={false}>
                     <div className="row" style={{padding: "0px 0 20px 0"}}>
+                    
                         <div className="col-sm-4">
                             <FormGroup className="row">
                                 <Label className="col-sm-5">Cooperativa</Label>
@@ -95,36 +96,36 @@ class ViajesBus extends React.Component {
                             </FormGroup>
                         </div>
                     </div>
+                    
+                    <div id="report">
+                        { data.map((row) => 
+                            <>
+                                <h3 className="text-center">Bus: {row.disco} / {row.placa}</h3>
+                                <ListPage
+                                    exportExcel
+                                    imprimirPantalla
+                                    key_permission="viajes_bus"
+                                    //title=" " 
+                                    searchable={false}
 
-                    { data.map((row, i) => 
-                        <React.Fragment key={i}>
-                            <h3 className="text-center">{row.cooperativa} / Bus: {row.disco} / Placa: {row.placa}</h3>
-                            <ListPage
+                                    fieldNames={['Viaje', 'Destino', 'Tipo', 'Cantidad', 'Valor unitario', 'Total']}
+                                    fields={[
+                                        'viaje',
+                                        'destino',
+                                        'tipo_cliente',
+                                        (row) => <span style={{float:"center"}}>{row.pasajeros}</span>,
+                                        (row) => <span style={{float:"center"}}>${moneyFormat(row.valor_unitario)}</span>,
+                                        (row) => <span style={{float:"center"}}>${moneyFormat(row.total)}</span>,
+                                    ]}
 
-                            exportExcel
-                            imprimirPantalla
-                            id="report"
-                            key_permission="viajes_bus"
-                            title=" "    
-                                searchable={false}
-
-                                fieldNames={['Viaje', 'Destino', 'Tipo', 'Cantidad', 'Valor unitario', 'Total']}
-                                fields={[
-                                    'viaje',
-                                    'destino',
-                                    'tipo_cliente',
-                                    (row) => <span style={{float:"center"}}>{row.pasajeros}</span>,
-                                    (row) => <span style={{float:"center"}}>${moneyFormat(row.valor_unitario)}</span>,
-                                    (row) => <span style={{float:"center"}}>${moneyFormat(row.total)}</span>,
-                                ]}
-
-                                data={row.data}
-                                parameters={this.state}
-                                
-                                history={this.props.history}
-                            />
-                        </React.Fragment>
-                    )}
+                                    data={row.data}
+                                    parameters={this.state}
+                                    
+                                    history={this.props.history}
+                                />
+                            </>
+                        )}
+                    </div>
                     { data.length === 0 && <h3>No hay información para mostrar</h3> }
                 </ReportPage>
             </Permission>

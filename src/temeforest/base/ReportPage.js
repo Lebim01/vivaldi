@@ -4,6 +4,9 @@ import { Card, CardBody, CardTitle, Button } from 'temeforest'
 import store from 'store/auth'
 import { htmlToXlsById } from 'utils/exportData'
 import moment from 'moment'
+import FileDownloadW from 'assets/svg/file-download-solid-white.svg'
+import './ListPage.css'
+
 
 const timestamp = moment().format('YYYY-MM-DD HH:mm:ss')
 
@@ -27,7 +30,23 @@ class ReportPage extends React.Component {
                     <Col xs="12" md="12">
                         <Card>
                             <CardBody>
-                                { title && <CardTitle>{title}</CardTitle> }
+                                { title && 
+                                    <CardTitle>
+                                        {title}
+                                        { this.props.printButtons &&
+                                            
+                                            <div className="col-sm-12 text-right">
+                                                <Button onClick={this.exportHtml} style={{marginRight:2, opacity:0.88}} title="Exportar excel" >
+                                                    <img src={FileDownloadW} height="14" />
+                                                </Button>
+                                                <Button onClick={this.print} style={{marginLeft:3, opacity:0.88}} title="Imprimir Pantalla">
+                                                    <i className="fa fa-print"></i>
+                                                </Button>
+                                            </div>
+                                        }
+                                    </CardTitle> 
+                                }
+                                
                                 <CardBody>
                                     <br/>
                                     {this.props.children}   
@@ -40,14 +59,7 @@ class ReportPage extends React.Component {
                                         </div>
                                     }
                                 </CardBody>
-                                { this.props.printButtons &&
-                                    <div className="row">
-                                        <div className="col-sm-12 text-center">
-                                            <Button type="success" className="no-print" style={{marginRight:5}} onClick={this.print}>Imprimir</Button>
-                                            <Button type="info" className="no-print" style={{marginLeft:5}} onClick={this.exportHtml}>Exportar</Button>
-                                        </div>
-                                    </div>
-                                }
+                                
                             </CardBody>
                         </Card>
                     </Col>

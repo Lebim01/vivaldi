@@ -1,7 +1,6 @@
 import React from 'react'
-import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, ReportPage, Input, Permission, Button, FormValidate } from 'temeforest'
+import { ListPage, Card, CardBody, Label, FormGroup, Select, Input, Permission } from 'temeforest'
 import moment from 'moment'
-import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { baseurl } from 'utils/url'
 import { printHtml, barcodeToPng } from 'utils/exportData'
 import axios from 'axios'

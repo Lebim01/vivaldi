@@ -8,10 +8,9 @@ import { htmlToXlsById } from 'utils/exportData'
 import axios from 'axios'
 
 import BlockUi from 'react-block-ui';
-import 'react-block-ui/style.css';
-import './ListPage.css'
+//import 'react-block-ui/style.css';
+//import './ListPage.css'
 
-import FileDownload from 'assets/svg/file-download-solid.svg'
 import FileDownloadW from 'assets/svg/file-download-solid-white.svg'
 
 const CancelToken = axios.CancelToken;
@@ -389,7 +388,16 @@ class ListPage extends React.Component {
                                         }
                                     </thead>
                                     <tbody>
-                                        {filtered.map((record, i) => <RecordRow tdBodyClass={this.props.tdBodyClass} record={record} context={context} fields={fields} key={i} onDoubleClick={() => this.onRowDoubleClick(record.id, record)} />)}
+                                        {filtered.map((record, i) => 
+                                            <RecordRow 
+                                                tdBodyClass={this.props.tdBodyClass} 
+                                                record={record} 
+                                                context={context} 
+                                                fields={fields} 
+                                                key={i} 
+                                                onDoubleClick={() => this.onRowDoubleClick(record.id, record)} 
+                                            />
+                                        )}
                                     </tbody>
                                     { numEndVisibleFooterPages > 2 &&
                                         <tfoot>

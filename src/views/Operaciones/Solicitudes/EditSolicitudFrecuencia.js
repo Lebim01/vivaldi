@@ -75,17 +75,17 @@ class MainView extends React.Component {
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
-                            <Label className="col-sm-3">Ruta</Label>
+                            <Label className="col-sm-3">Destino</Label>
                             <div className="col-sm-5">
                                 <Input value={this.props.frecuencia_ruta_nombre} readOnly />
                             </div>
                         </FormGroup>
-                        <FormGroup className="row">
+                        {/*<FormGroup className="row">
                             <Label className="col-sm-3">Destino</Label>
                             <div className="col-sm-5">
                                 <Input value={this.props.frecuencia_ruta_destino_nombre} readOnly />
                             </div>
-                        </FormGroup>
+                        </FormGroup>*/}
                     </fieldset>
                 </FormValidate>
             </div>

@@ -84,7 +84,7 @@ class SalidaViajes extends React.Component {
                             'destino',
                             'parada',
                             (row) => <span style={{float:"right"}}>{row.pasajeros}</span>,
-                            (row) => <span style={{float:"right"}}>${moneyFormat(row.total || 0)}</span>,
+                            (row) => <span style={{float:"right"}}>${moneyFormat(row.total)}</span>,
                         ]}
 
                         endpoint='venta/salida-de-viaje'

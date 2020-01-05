@@ -1,10 +1,7 @@
 import React from 'react'
-import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button, ReportPage,Permission } from 'temeforest'
+import { ListPage, Card, CardBody, Label, FormGroup, Select, Input, Permission } from 'temeforest'
 import moment from 'moment'
 import { baseurl } from 'utils/url'
-import store from 'store/auth'
-
-const { user_info } = store.getState()
 
 class TasasUsadasPorViaje extends React.Component {
     state = {
@@ -46,7 +43,7 @@ class TasasUsadasPorViaje extends React.Component {
     }
     
     render(){
-        const { refresh, timestamp } = this.state
+        const { refresh } = this.state
         return (
             <Permission key_permission="view_tasas_viaje" mode="redirect">
                 
@@ -55,92 +52,92 @@ class TasasUsadasPorViaje extends React.Component {
                         <div className="col-sm-12">
                             <Card>
                                 <CardBody>
-                                <ListPage
-                                    exportExcel
-                                    imprimirPantalla
-                                    id= "tasas_viaje"
-                                    key_permission= "tasas_viaje"
-                                    title="Tasas usadas por viaje"
-                                   
-                                    filtersZone= {
-                                    <div className="row">
-                                        <div className="col-sm-4">
-                                            <FormGroup className="row">
-                                                <Label className="col-sm-5">Cooperativa</Label>
-                                                <div className="col-sm-7">
-                                                    <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
-                                                </div>
-                                            </FormGroup>
-                                            <FormGroup className="row">
-                                                <Label className="col-sm-5">Localidad</Label>
-                                                <div className="col-sm-7">
-                                                    <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad}/>
-                                                </div>
-                                            </FormGroup>
-                                        </div>
-                                        <div className="col-sm-4">
-                                            <FormGroup className="row">
-                                                <Label className="col-sm-5">Fecha inicio</Label>
-                                                <div className="col-sm-7">
-                                                    <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
-                                                </div>
-                                            </FormGroup>
-                                            <FormGroup className="row">
-                                                <Label className="col-sm-5">Fecha fin</Label>
-                                                <div className="col-sm-7">
-                                                    <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
-                                                </div>
-                                            </FormGroup>
-                                        </div>
-                                        <div className="col-sm-4">
-                                            <FormGroup className="row">
-                                                <Label className="col-sm-6">Forma de pago</Label>
-                                                <div className="col-sm-6">
-                                                    <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('forma_pago')} value={this.state.forma_pago} />
-                                                </div>
-                                            </FormGroup>
-                                            <FormGroup className="row">
-                                                <Label className="col-sm-6">Viaje</Label>
-                                                <div className="col-sm-6">
-                                                    <Select onChange={this.onChange('viaje')} value={this.state.viaje} />
-                                                </div>
-                                            </FormGroup>
-                                        </div>
+                                    <ListPage
+                                        exportExcel
+                                        imprimirPantalla
+                                        id= "tasas_viaje"
+                                        key_permission= "tasas_viaje"
+                                        title="Tasas usadas por viaje"
                                     
-                                    
-                                        <div className="col-sm-2"></div>
-                                        <div className="col-sm-4">
-                                            <FormGroup className="row">
-                                                <Label className="col-sm-4">Viaje</Label>
-                                                <div className="col-sm-8">
-                                                    <Input />
+                                        filtersZone= {
+                                            <div className="row">
+                                                <div className="col-sm-4">
+                                                    <FormGroup className="row">
+                                                        <Label className="col-sm-5">Cooperativa</Label>
+                                                        <div className="col-sm-7">
+                                                            <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
+                                                        </div>
+                                                    </FormGroup>
+                                                    <FormGroup className="row">
+                                                        <Label className="col-sm-5">Localidad</Label>
+                                                        <div className="col-sm-7">
+                                                            <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad}/>
+                                                        </div>
+                                                    </FormGroup>
                                                 </div>
-                                            </FormGroup>
-                                            <FormGroup className="row">
-                                                <Label className="col-sm-4">Salida</Label>
-                                                <div className="col-sm-8">
-                                                    <Input />
+                                                <div className="col-sm-4">
+                                                    <FormGroup className="row">
+                                                        <Label className="col-sm-5">Fecha inicio</Label>
+                                                        <div className="col-sm-7">
+                                                            <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
+                                                        </div>
+                                                    </FormGroup>
+                                                    <FormGroup className="row">
+                                                        <Label className="col-sm-5">Fecha fin</Label>
+                                                        <div className="col-sm-7">
+                                                            <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
+                                                        </div>
+                                                    </FormGroup>
                                                 </div>
-                                            </FormGroup>
-                                        </div>
-                                        <div className="col-sm-4">
-                                            <FormGroup className="row">
-                                                <Label className="col-sm-4">Destino</Label>
-                                                <div className="col-sm-8">
-                                                    <Input />
+                                                <div className="col-sm-4">
+                                                    <FormGroup className="row">
+                                                        <Label className="col-sm-6">Forma de pago</Label>
+                                                        <div className="col-sm-6">
+                                                            <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('forma_pago')} value={this.state.forma_pago} />
+                                                        </div>
+                                                    </FormGroup>
+                                                    <FormGroup className="row">
+                                                        <Label className="col-sm-6">Viaje</Label>
+                                                        <div className="col-sm-6">
+                                                            <Select onChange={this.onChange('viaje')} value={this.state.viaje} />
+                                                        </div>
+                                                    </FormGroup>
                                                 </div>
-                                            </FormGroup>
-                                            <FormGroup className="row">
-                                                <Label className="col-sm-6">Disco/Placa</Label>
-                                                <div className="col-sm-6">
-                                                    <Input />
+                                            
+                                            
+                                                <div className="col-sm-2"></div>
+                                                <div className="col-sm-4">
+                                                    <FormGroup className="row">
+                                                        <Label className="col-sm-4">Viaje</Label>
+                                                        <div className="col-sm-8">
+                                                            <Input />
+                                                        </div>
+                                                    </FormGroup>
+                                                    <FormGroup className="row">
+                                                        <Label className="col-sm-4">Salida</Label>
+                                                        <div className="col-sm-8">
+                                                            <Input />
+                                                        </div>
+                                                    </FormGroup>
                                                 </div>
-                                            </FormGroup>
-                                        
-                                        </div>
-                                        <div className="col-sm-2"></div>
-                                    </div>
-                                    }
+                                                <div className="col-sm-4">
+                                                    <FormGroup className="row">
+                                                        <Label className="col-sm-4">Destino</Label>
+                                                        <div className="col-sm-8">
+                                                            <Input />
+                                                        </div>
+                                                    </FormGroup>
+                                                    <FormGroup className="row">
+                                                        <Label className="col-sm-6">Disco/Placa</Label>
+                                                        <div className="col-sm-6">
+                                                            <Input />
+                                                        </div>
+                                                    </FormGroup>
+                                                
+                                                </div>
+                                                <div className="col-sm-2"></div>
+                                            </div>
+                                        }
                                         searchable={false}
                                         
 
