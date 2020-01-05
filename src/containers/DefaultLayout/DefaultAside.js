@@ -14,6 +14,10 @@ const propTypes = {
   
 const defaultProps = {};
 
+const findRecursivePermissions = (children) => {
+    return children.find(p => p.permission && !p.children ? checkPermission(p.permission) : findRecursivePermissions(p.children))
+}
+
 class MenuItem extends React.Component {
 
     onClick = (e) => {
@@ -45,9 +49,11 @@ class MenuItem extends React.Component {
     render(){
         const { name, icon, children, badge, url, level, permission } = this.props
 
-        if(children && !permission) 
-            if(!children.find(p => checkPermission(p.permission)))
+        if(children && !permission){
+            if(!findRecursivePermissions(children)){
                 return null
+            }
+        }
 
         let margin = (level-1) * 35
         //if(icon) margin -= 35
