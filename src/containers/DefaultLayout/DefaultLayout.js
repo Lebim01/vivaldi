@@ -18,11 +18,7 @@ const DefaultHeader = React.lazy(() => import('./DefaultHeader'));
 
 class DefaultLayout extends Component {
 
-    state = {
-        user_info : store.getState().user_info
-    }
     unlisten = null
-    reduxUnsubscribe = null
 
     loading = () => <div className="animated fadeIn pt-1 text-center">Cargando...</div>
 
@@ -49,20 +45,9 @@ class DefaultLayout extends Component {
         this.unlisten = this.props.history.listen(() => {
             this.makeAuth()
         })
-
-        // refresh user auth data
-        this.reduxUnsubscribe = store.subscribe(() => {
-            const { user_info } = store.getState()
-            if(user_info !== this.state.user_info){
-                this.setState({
-                    user_info
-                })
-            }
-        })
     }
 
     componentWillUnmount(){
-        this.reduxUnsubscribe()
         this.unlisten()
     }
 
@@ -72,11 +57,11 @@ class DefaultLayout extends Component {
             <div className="app">
                 <header className="topbar" data-navbarbg="skin6">
                     <Suspense  fallback={this.loading()}>
-                        <DefaultHeader user_info={this.state.user_info} onLogout={e=>this.signOut(e)}/>
+                        <DefaultHeader onLogout={e=>this.signOut(e)}/>
                     </Suspense>
                 </header>
                 <Suspense fallback={this.loading()}>
-                    <DefaultAside user_info={this.state.user_info} navConfig={navigation} {...this.props} router={router} />
+                    <DefaultAside navConfig={navigation} {...this.props} router={router} />
                 </Suspense>
                 <div className="page-wrapper" style={{display: 'block'}}>
                     <main className="main">

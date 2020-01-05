@@ -6,6 +6,7 @@ import { checkPermission } from 'temeforest/base/Permission'
 import $ from 'jquery'
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import PerfectScrollbar from 'react-perfect-scrollbar'
+import { connect } from 'react-redux'
 
 const propTypes = {
     children: PropTypes.node,
@@ -123,4 +124,10 @@ class Aside extends React.Component {
 Aside.propTypes = propTypes;
 Aside.defaultProps = defaultProps;
 
-export default Aside
+const mapStateToProps = (state) => {
+    return {
+        user_info : state.user_info
+    }
+}
+
+export default connect(mapStateToProps)(Aside)

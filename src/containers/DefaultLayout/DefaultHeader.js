@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import $ from 'jquery'
+import { connect } from 'react-redux'
 
 const propTypes = {
   children: PropTypes.node,
@@ -245,4 +246,10 @@ class DefaultHeader extends Component {
 DefaultHeader.propTypes = propTypes;
 DefaultHeader.defaultProps = defaultProps;
 
-export default DefaultHeader;
+const mapStateToProps = (state) => {
+    return {
+        user_info : state.user_info
+    }
+}
+
+export default connect(mapStateToProps)(DefaultHeader);
