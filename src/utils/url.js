@@ -55,7 +55,7 @@ function objectToUrl(_obj){
     return `?${Object.keys(_obj).filter(key => _obj[key] !== undefined && _obj[key] !== null && _obj[key] !== '').map((key) => `${key}=${_obj[key]}`).join('&')}`
 }
 
-async function getResults(url, no_page = false, headers = {}){
+async function getResults(url, no_page = false, headers = {}, force_full = false){
     try {
         let _url = new URL(url)
         if(no_page){
@@ -63,6 +63,11 @@ async function getResults(url, no_page = false, headers = {}){
             let page_size = _url.searchParams.get('page_size')
             if(page_size === null){
                 _url.searchParams.append('page_size', 0)
+            }
+
+            // no paginated request is stripped unless full is forced
+            if (!page_size && !force_full) {
+                _url.searchParams.append('type', 'select')
             }
         }
 
