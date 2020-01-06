@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'reactstrap'
 import { Card, CardBody, CardTitle, Button, ValidateContext, Permission } from 'temeforest'
 import { confirmEndpoint } from 'utils/dialog'
@@ -17,9 +17,15 @@ const defaultBtnSave = {
     type : 'success'
 }
 
+const isSameLocation = (path, location2) => {
+    return path.pathname !== location2.pathname
+}
+
 function EditPage(props){
     const { register, handleSubmit, watch, errors, triggerValidation, setValue, ...methods } = useForm()
     const { id, title, btnDelete, btnSave, key_permission, history, urlFront } = props
+
+    const [getParams] = useState(getAllParameters())
 
     const key_add = `add_${key_permission}`
     const key_change = `change_${key_permission}`
@@ -34,7 +40,7 @@ function EditPage(props){
                 }, 500)
                 return false
             }
-            
+            unblock()
             return true
         })
     }, [])
@@ -47,11 +53,20 @@ function EditPage(props){
         }
     }
 
-    const backToList = () => {
-        let params = getAllParameters()
-        delete params.id;
+    const navigate = (path) => {
+        let url = new URL(`${window.location.origin}${path}`)
+        
+        if (isSameLocation(url, history.location)) {
+            history.replace(path)
+        } else {
+            history.push(path)
+        }
+    }
 
-        history.go(`${urlFront}${objectToUrl(params)}`)
+    const backToList = () => {
+        let params = { ...getParams }
+        delete params.id;
+        navigate(`${urlFront}${objectToUrl(params)}`)
     }
 
     const confirmDelete = async () => {
