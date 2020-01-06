@@ -51,7 +51,7 @@ function EditPage(props){
         let params = getAllParameters()
         delete params.id;
 
-        history.push(`${urlFront}${objectToUrl(params)}`)
+        history.go(`${urlFront}${objectToUrl(params)}`)
     }
 
     const confirmDelete = async () => {
