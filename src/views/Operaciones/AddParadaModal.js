@@ -10,12 +10,12 @@ class AddParadaModal extends React.Component {
     state = { errors: [], data: {}, tipos_servicio: [], tipos_clientes: [], tab: "1" }
 
     optionsParada = {
-        url : `${baseurl}/ciudad/`,
-        labelName: 'ciudad_provincia',
-        valueName: 'id', 
+        url : `${baseurl}/ciudad/?type=select`,
+        labelName: 'nombre',
+        valueName: 'id',
         optionProps: ['nombre']
     }
-        
+
     componentDidMount(){
         this.getTiposServicios()
         this.getTiposClientes()
@@ -89,11 +89,11 @@ class AddParadaModal extends React.Component {
 
     onChangeTarifa = (tipo_servicio, tipo_cliente) => e => {
         let _data = { ...this.state.data }
-        
+
         if(!_data.tarifas) _data.tarifas = {}
         if(!_data.tarifas[tipo_servicio]) _data.tarifas[tipo_servicio] = {}
         _data.tarifas[tipo_servicio][tipo_cliente] = e.target.value
-        
+
         this.setState({
             data : _data
         })
@@ -189,27 +189,27 @@ class AddParadaModal extends React.Component {
                                 {errors.includes('ciudad') && <span className="text-danger">Este campo es requerido</span>}
                             </div>
                         </FormGroup>
-                        
+
                         <Tabs tab={this.state.tab} tabs={tabs} onClickTab={this.changeTab}/>
                         <TabContent activeTab={this.state.tab}>
-                            {tipos_servicio.map((tipo_servicio) => 
+                            {tipos_servicio.map((tipo_servicio) =>
                                 <TabPane tabId={`${tipo_servicio.id}`}>
-                                    
+
                                     <br/>
-                                    { tipos_clientes.map((tipo_cliente) => 
+                                    { tipos_clientes.map((tipo_cliente) =>
                                         <FormGroup className="row">
                                             <Label className="col-sm-4">{tipo_cliente.nombre}</Label>
                                             <div className="col-sm-6">
                                                 <InputIcon
-                                                    icon={<i className="fas fa-dollar-sign"/>} 
-                                                    type="number" 
-                                                    step="0.1" 
-                                                    onChange={this.onChangeTarifa(tipo_servicio.id, tipo_cliente.id)} 
+                                                    icon={<i className="fas fa-dollar-sign"/>}
+                                                    type="number"
+                                                    step="0.1"
+                                                    onChange={this.onChangeTarifa(tipo_servicio.id, tipo_cliente.id)}
                                                     value={
                                                         tarifas && tarifas[tipo_servicio.id]
                                                             ? tarifas[tipo_servicio.id][tipo_cliente.id]
                                                             : ''
-                                                    } 
+                                                    }
                                                 />
                                             </div>
                                         </FormGroup>
