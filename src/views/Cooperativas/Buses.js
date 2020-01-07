@@ -85,8 +85,8 @@ function Buses(props) {
 
                                     //key_permission="bus"
 
-                                    fieldNames={['Cooperativa', 'Placa', 'Disco', 'Tipo']}
-                                    fields={['cooperativa_nombre', 'placa', 'disco', 'tipo_servicio_nombre']}
+                                    fieldNames={['Cooperativa', 'Placa', 'Disco', 'Tipo', 'Capacidad']}
+                                    fields={['cooperativa_nombre', 'placa', 'disco', 'tipo_servicio_nombre', 'capacidad']}
 
                                     endpoint='bus'
                                     urlFront='cooperativas/buses'
