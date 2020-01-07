@@ -57,16 +57,16 @@ function Buses(props) {
                             <div className="col-sm-12">
                             <ListPage
 
-                            
+
                             //exportExcel
-                            imprimirPantalla  
+                            imprimirPantalla
                             id="report"
                             key_permission= "bus"
 
                             //title="Listado de Buses"
                             title="Listado de Buses"
                             filtersZone={
-                                
+
                                 <div className="row">
                                     <div className="col-sm-4">
                                         <FormGroup className="row">
@@ -78,21 +78,21 @@ function Buses(props) {
                                     </div>
                                 </div>
                                 }
-                                    
-                                    
+
+
                                     searchable={true}
                                     searchPlaceholder="Cooperativa, Placa, Disco"
-                                                              
+
                                     //key_permission="bus"
 
-                                    fieldNames={['Cooperativa', 'Placa', 'Disco']}
-                                    fields={['cooperativa_nombre', 'placa', 'disco']}
+                                    fieldNames={['Cooperativa', 'Placa', 'Disco', 'Tipo']}
+                                    fields={['cooperativa_nombre', 'placa', 'disco', 'tipo_servicio_nombre']}
 
                                     endpoint='bus'
                                     urlFront='cooperativas/buses'
 
                                     exportExcel={exportExcel}
-                                      
+
                                     history={props.history}
                                     parameters={state}
                                     filters={{
@@ -104,7 +104,7 @@ function Buses(props) {
                             </CardBody>
                         </Card>
                     </div>
-                    
+
                 </div>
             </div>
         </Permission>
