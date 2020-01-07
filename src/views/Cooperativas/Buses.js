@@ -86,7 +86,9 @@ function Buses(props) {
                                     //key_permission="bus"
 
                                     fieldNames={['Cooperativa', 'Placa', 'Disco', 'Tipo', 'Capacidad']}
-                                    fields={['cooperativa_nombre', 'placa', 'disco', 'tipo_servicio_nombre', 'capacidad']}
+                                    fields={['cooperativa_nombre', 'placa', 'disco', 'tipo_servicio_nombre', 
+                                    
+                                    (row) => <label style={{float:"center", position:"relative", left: "25%", fontWeight: 300}}>{row.capacidad}</label>]}
 
                                     endpoint='bus'
                                     urlFront='cooperativas/buses'
