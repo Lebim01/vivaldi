@@ -51,7 +51,7 @@ class BandejaTasaCooperativa extends React.Component {
                 <p style="margin-top: 5px; margin-bottom: 5px;">${row.cooperativa_nombre}</p>
                 <p style="margin-top: 5px; margin-bottom: 5px;">Contingencia</p>
                 <p style="margin-top: 5px; margin-bottom: 5px;">
-                    <span style="width: 100px; text-align: left;">Emisión: </span>
+                    <span style="width: 100px; text-align: left;">Fecha de Emisión: </span>
                     <span style="width: 100px; text-align: left;">${row.fecha_hora_venta}</span>
                 </p>
                 <p style="margin-top: 5px; margin-bottom: 5px;">
@@ -59,7 +59,7 @@ class BandejaTasaCooperativa extends React.Component {
                     <span style="width: 100px; text-align: left;">$ ${row.valor}</span>
                 </p>
                 <p style="margin-top: 5px; margin-bottom: 5px;">
-                    <span style="width: 100px; text-align: left;">Oficinista: </span>
+                    <span style="width: 100px; text-align: left;">Usuario: </span>
                     <span style="width: 100px; text-align: left;">${row.usuario_creacion_nombre}</span>
                 </p>
                 <img width="300" src="${barcodeToPng(row.codigo)}"/>
