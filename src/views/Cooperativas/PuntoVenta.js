@@ -4,14 +4,22 @@ import { Card, CardBody, ListPage, Permission } from 'temeforest'
 class PuntoVenta extends React.Component {
 
     renderCooperativas(row){
+        console.log(row)
         return (
-            <ul>
-                {row.puntoventa_cooperativas.map((r, i) => 
-                    <li key={i}>
-                        {r.cooperativa_nombre}
-                    </li>
-                )}
-            </ul>
+            <>
+                { !row.externo &&
+                    <ul>
+                        {row.puntoventa_cooperativas.map((r, i) => 
+                            <li key={i}>
+                                {r.cooperativa_nombre}
+                            </li>
+                        )}
+                    </ul>
+                }
+                { row.externo &&
+                    row.cooperativa_nombre
+                }
+            </>
         )
     }
 
