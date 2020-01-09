@@ -126,12 +126,12 @@ class ReporteTasasContingenciaGeneral extends React.Component {
                                             'fecha', 
                                             'concepto', 
                                             'cooperativa_nombre',
-                                            (row)=> <span style={{float:"right"}}>{(row.generado_cantidad || 0)}</span>, 
-                                            (row) => <span style={{float:"right"}}>${moneyFormat(row.generado_total || 0)}</span>, 
-                                            (row) => <span style={{float:"right"}}>{(row.vendido_cantidad || 0)}</span>, 
-                                            (row) => <span style={{float:"right"}}>${moneyFormat(row.vendido_total || 0)}</span>, 
-                                            (row) => <span style={{float:"right"}}>{(row.saldo_cantidad || 0)}</span>,
-                                            (row) => <span style={{float:"right"}}>${moneyFormat(row.saldo_total || 0)}</span>
+                                            (row)=> <span style={{ textAlign:"right", position: 'relative', right:'-60%'}}>{(row.generado_cantidad || 0)}</span>, 
+                                            (row) => <span style={{textAlign:"right", position: 'relative', right:'-20%'}}>${moneyFormat(row.generado_total || 0)}</span>, 
+                                            (row) => <span style={{textAlign:"right", position: 'relative', right:'-60%'}}>{(row.vendido_cantidad || 0)}</span>, 
+                                            (row) => <span style={{textAlign:"right", position: 'relative', right:'-20%'}}>${moneyFormat(row.vendido_total || 0)}</span>, 
+                                            (row) => <span style={{textAlign:"right", position: 'relative', right:'-60%'}}>{(row.saldo_cantidad || 0)}</span>,
+                                            (row) => <span style={{textAlign:"right",position: 'relative', right:'-20%'}}>${moneyFormat(row.saldo_total || 0)}</span>
                                         ]}
 
                                         
