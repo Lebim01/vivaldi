@@ -87,11 +87,11 @@ class Diario extends React.Component {
 
                 <table>
                     <tr>
-                        <td>Emisior</td>
+                        <td>Usuario</td>
                         <td>${this.props.user_info.username}</td>
                     </tr>
                     <tr>
-                        <td>Emisión</td>
+                        <td>Fecha de Emisión</td>
                         <td>${moment().format('YYYY-MM-DD')}</td>
                     </tr>
                     <tr>
