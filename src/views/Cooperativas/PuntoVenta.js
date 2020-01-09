@@ -16,7 +16,13 @@ class PuntoVenta extends React.Component {
                     </ul>
                 }
                 { row.externo &&
-                    row.cooperativa_nombre
+                    <ul>
+                        { row.cooperativa_nombre &&
+                            <li>
+                                {row.cooperativa_nombre}
+                            </li>
+                        }
+                    </ul>
                 }
             </>
         )
