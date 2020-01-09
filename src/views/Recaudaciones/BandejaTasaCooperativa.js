@@ -94,7 +94,7 @@ class BandejaTasaCooperativa extends React.Component {
                                         Tasa de contigencia de cooperativa (I)
                                     </CardTitle>
                                     <br/>
-                                    <div className="row">
+                                    {/*<div className="row">
                                         <div className="col-sm-6">
                                             <FormGroup className="row">
                                                 <Label className="col-sm-3">Cooperativa</Label>
@@ -109,7 +109,7 @@ class BandejaTasaCooperativa extends React.Component {
                                                 </div>
                                             </FormGroup>
                                         </div>
-                                    </div>
+                                    </div>*/}
                                     <div className="row">
                                         <div className="col-sm-12 text-center">
                                             <Button onClick={this.buscar.bind(this)}>
