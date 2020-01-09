@@ -4,7 +4,6 @@ import { Card, CardBody, ListPage, Permission } from 'temeforest'
 class PuntoVenta extends React.Component {
 
     renderCooperativas(row){
-        console.log(row)
         return (
             <>
                 { !row.externo &&
