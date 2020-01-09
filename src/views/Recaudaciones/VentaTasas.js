@@ -41,7 +41,6 @@ class RegistroTasa extends React.Component {
     }
 
     onChange = name => (e) => {
-
         if(name === 'localidad' && !this.props.id){
             const selectLocalidad = e.target
             const hasData = !!selectLocalidad.options[selectLocalidad.options.selectedIndex].attributes['data-tarifa_tasa']
@@ -214,7 +213,7 @@ class VentaTasas extends React.Component {
     fieldEditar = (row) => {
         if(row.motivo_modificacion === null){
             return (
-                <Button onClick={(e) => { console.log(row); this.editarVenta(row) }}>
+                <Button onClick={(e) => { this.editarVenta(row) }}>
                     Editar
                 </Button>
             )
