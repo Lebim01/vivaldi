@@ -109,14 +109,14 @@ class BandejaTasaCooperativa extends React.Component {
                                                 </div>
                                             </FormGroup>
                                         </div>
-                                    </div>*/}
+                                    </div>
                                     <div className="row">
                                         <div className="col-sm-12 text-center">
                                             <Button onClick={this.buscar.bind(this)}>
                                                 Buscar
                                             </Button>
                                         </div>
-                                    </div>
+                                    </div>*/}
                                     <ListPage
                                         searchable={false}
 
