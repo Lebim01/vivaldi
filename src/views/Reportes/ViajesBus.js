@@ -18,12 +18,12 @@ class ViajesBus extends React.Component {
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
         labelName: 'nombre',
-        valueName: 'id' 
+        valueName: 'id'
     }
     optionsLocalidad = {
         url : `${baseurl}/localidad/`,
         labelName: 'nombre',
-        valueName: 'id' 
+        valueName: 'id'
     }
     onChange = name => (e) => {
         const filters = this.state.filters
@@ -60,13 +60,13 @@ class ViajesBus extends React.Component {
         }
     }
 
-    render(){   
+    render(){
         const {data}= this.state
         return (
             <Permission key_permission="view_viajes_bus" mode="redirect">
                 <ReportPage title="Viaje Bus" timestamp={false}>
                     <div className="row" style={{padding: "0px 0 20px 0"}}>
-                    
+
                         <div className="col-sm-4">
                             <FormGroup className="row">
                                 <Label className="col-sm-5">Cooperativa</Label>
@@ -96,22 +96,22 @@ class ViajesBus extends React.Component {
                             </FormGroup>
                         </div>
                     </div>
-                    
+
                     <div id="report">
-                        { data.map((row) => 
+                        { data.map((row) =>
                             <>
                                 <h3 className="text-center">Bus: {row.disco} / {row.placa}</h3>
                                 <ListPage
                                     exportExcel
                                     imprimirPantalla
                                     key_permission="viajes_bus"
-                                    //title=" " 
+                                    //title=" "
                                     searchable={false}
 
-                                    fieldNames={['Viaje', 'Destino', 'Tipo', 'Cantidad', 'Valor unitario', 'Total']}
+                                    fieldNames={['Viaje', 'Parada', 'Tipo', 'Cantidad', 'Valor unitario', 'Total']}
                                     fields={[
                                         'viaje',
-                                        'destino',
+                                        'parada',
                                         'tipo_cliente',
                                         (row) => <span style={{float:"center"}}>{row.pasajeros}</span>,
                                         (row) => <span style={{float:"center"}}>${moneyFormat(row.valor_unitario)}</span>,
@@ -120,7 +120,7 @@ class ViajesBus extends React.Component {
 
                                     data={row.data}
                                     parameters={this.state}
-                                    
+
                                     history={this.props.history}
                                 />
                             </>
