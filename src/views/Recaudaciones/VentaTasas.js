@@ -42,16 +42,15 @@ class RegistroTasa extends React.Component {
 
     onChange = name => (e) => {
         if(name === 'localidad' && !this.props.id){
-            const selectLocalidad = e.target
-            const hasData = !!selectLocalidad.options[selectLocalidad.options.selectedIndex].attributes['data-tarifa_tasa']
-            let valor = 0
-
-            if(hasData)
-                valor = selectLocalidad.options[selectLocalidad.options.selectedIndex].attributes['data-tarifa_tasa'].value
-            else
-                valor = 0
-            
-            this.props.onChange('precio', valor)
+            if(e.target.value){
+                axios.get(`${baseurl}/localidad/${e.target.value}/`)
+                .then(({data}) => {
+                    this.props.onChange('precio', data.tarifa_tasa)
+                })
+            }
+            else{
+                this.props.onChange('precio', 0)
+            }
         }
 
         if(this.props.onChange){
@@ -92,7 +91,15 @@ class RegistroTasa extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-3">Turno</Label>
                             <div className="col-sm-6">
-                                <Input type="number" onChange={this.onChange('turno')} value={this.props.turno} />
+                                <Select 
+                                    options={[
+                                        {value:'', label:'Seleccione'},
+                                        {value:1, label:'1'},
+                                        {value:2, label:'2'},
+                                        {value:3, label:'3'},
+                                    ]} 
+                                    onChange={this.onChange('turno')} 
+                                    value={this.props.turno} />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
