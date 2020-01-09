@@ -57,7 +57,10 @@ function Rutas(props) {
                                         endpoint='ruta'
                                         urlFront='operaciones/rutas'
                                         history={props.history}
-                                        parameters={state}
+                                        parameters={{
+                                          ...state,
+                                          type: 'list'
+                                        }}
                                         filters={{
                                             persist: true,
                                             callback: setState
