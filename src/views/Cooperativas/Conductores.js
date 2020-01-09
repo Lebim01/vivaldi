@@ -24,6 +24,9 @@ class Conductores extends React.Component {
                                         endpoint='conductor'
                                         urlFront='cooperativas/conductores'
                                         history={this.props.history}
+                                        parameters={{
+                                            type: 'list'
+                                        }}
                                     />
                                 </CardBody>
                             </Card>

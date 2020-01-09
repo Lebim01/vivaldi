@@ -16,12 +16,15 @@ class DistribucionAsientos extends React.Component {
                                         searchable={true}
                                         searchPlaceholder="Nombre"
 
-                                        fieldNames={['Nombre', 'Asientos']}
-                                        fields={['nombre', 'asientos']}
+                                        fieldNames={['Nombre', 'Capacidad']}
+                                        fields={['nombre', 'capacidad']}
 
                                         endpoint='busTipo'
                                         urlFront='cooperativas/distribucion-asientos'
                                         history={this.props.history}
+                                        parameters={{
+                                          type: 'list'
+                                        }}
                                     />
                                 </CardBody>
                             </Card>

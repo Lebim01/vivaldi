@@ -24,6 +24,9 @@ class Cooperativas extends React.Component {
                                         endpoint='cooperativa'
                                         urlFront='cooperativas/cooperativas'
                                         history={this.props.history}
+                                        parameters={{
+                                          type: 'list'
+                                        }}
                                     />
                                 </CardBody>
                             </Card>

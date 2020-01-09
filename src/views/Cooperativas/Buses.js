@@ -86,8 +86,8 @@ function Buses(props) {
                                     //key_permission="bus"
 
                                     fieldNames={['Cooperativa', 'Placa', 'Disco', 'Tipo', 'Capacidad']}
-                                    fields={['cooperativa_nombre', 'placa', 'disco', 'tipo_servicio_nombre', 
-                                    
+                                    fields={['cooperativa_nombre', 'placa', 'disco', 'tipo_servicio_nombre',
+
                                     (row) => <label style={{float:"center", position:"relative", left: "25%", fontWeight: 300}}>{row.capacidad}</label>]}
 
                                     endpoint='bus'
@@ -96,7 +96,10 @@ function Buses(props) {
                                     exportExcel={exportExcel}
 
                                     history={props.history}
-                                    parameters={state}
+                                    parameters={{
+                                                 ...state,
+                                                type: 'list'
+                                    }}
                                     filters={{
                                         persist: true,
                                         callback: setState
