@@ -102,6 +102,10 @@ class Diario extends React.Component {
                         <td>Forma de pago:</td>
                         <td>Todos</td>
                     </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
                 </table>
                 <br/>
                 <table style="width:100%">
@@ -127,6 +131,13 @@ class Diario extends React.Component {
                 </table>
 
             </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
             <br/>
             <br/>
             <br/>
