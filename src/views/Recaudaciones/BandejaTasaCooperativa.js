@@ -16,7 +16,7 @@ const endpoint = 'venta/solicitud_tasacontingencia'
 
 class BandejaTasaCooperativa extends React.Component {
     state = {
-        //fecha : moment().format('YYYY-MM-DD'),
+        fecha : moment().format('YYYY-MM-DD'),
         estado : 1 // aceptado
     }
     optionsCooperativa = {
