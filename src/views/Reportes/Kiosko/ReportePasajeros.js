@@ -67,7 +67,8 @@ const formato = (props) => {
                         <tr>
                             <th>Salida:</th>
                             <td>
-                                ${moment(`${props.fecha} ${props.hora_salida}`).format('DD/MM/YYYY HH:mm:ss')}
+                            ${moment(`${props.fecha} ${props.hora_salida}`).format('DD/MM/YYYY HH:mm:ss')}
+                                
                             </td>
                         </tr>
                         <tr>

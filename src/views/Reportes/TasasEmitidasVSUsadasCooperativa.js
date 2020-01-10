@@ -107,7 +107,10 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
                         
 
                         fieldNames={[(this.state.reporte === 2) ? 'Viaje' : 'Boletero' , 'Emitidas', 'Usadas']}
-                        fields={[(this.state.reporte === 2) ? 'viaje' : 'boletero', 'tasas_emitidas', 'tasas_usadas']}
+                        fields={[(this.state.reporte === 2) ? 'viaje' : 'boletero', 
+                        (row) => <span style={{ textAlign:"right", position: 'relative', right:'-40%'}}>{row.tasas_emitidas}</span>,
+                        (row) => <span style={{ textAlign:"right", position: 'relative', right:'-40%'}}>{row.tasas_usadas}</span>, 
+                        ]}
 
                         endpoint='recaudaciones/tasas-emitidas-usadas'
                         parameters={this.state}

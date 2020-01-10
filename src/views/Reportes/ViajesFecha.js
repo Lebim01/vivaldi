@@ -103,13 +103,13 @@ class ViajesFecha extends React.Component {
                             'fecha_salida',
                             'fecha_creacion',
                             'usuario',
-                            'anden',
+                            (row) => <span style={{ textAlign:"right", position: 'relative', right:'-60%'}}>{row.anden}</span>,
                             'destino',
                             'via',
-                            'disco',
+                            (row) => <span style={{ textAlign:"right", position: 'relative', right:'-60%'}}>{row.disco}</span>,
                             'placa',
-                            'pasajeros',
-                            (row) => <span style={{float:"right"}}>$ {moneyFormat(row.total)}</span>,
+                            (row) => <span style={{ textAlign:"right", position: 'relative', right:'-60%'}}>{row.pasajeros}</span>,
+                            (row) => <span style={{ textAlign:"right", position: 'relative', right:'0%'}}>${moneyFormat(row.total)}</span>
                         ]}
 
                         endpoint='venta/viajes-por-fecha'

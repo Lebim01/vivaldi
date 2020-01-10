@@ -113,9 +113,10 @@ class ViajesBus extends React.Component {
                                         'viaje',
                                         'parada',
                                         'tipo_cliente',
-                                        (row) => <span style={{float:"center"}}>{row.pasajeros}</span>,
-                                        (row) => <span style={{float:"center"}}>${moneyFormat(row.valor_unitario)}</span>,
-                                        (row) => <span style={{float:"center"}}>${moneyFormat(row.total)}</span>,
+                                        (row) => <span style={{ textAlign:"right", position: 'relative', right:'-40%'}}>{row.pasajeros}</span>,
+                                        (row) => <span style={{ textAlign:"right", position: 'relative', right:'-40%'}}>${moneyFormat(row.valor_unitario)}</span>,
+                                        (row) => <span style={{ textAlign:"right", position: 'relative', right:'-40%'}}>${moneyFormat(row.total)}</span>
+                                        
                                     ]}
 
                                     data={row.data}
