@@ -1,8 +1,8 @@
 import React from 'react'
-import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button, Permission } from 'temeforest'
+import { ListPage, Card, CardBody, CardTitle, Button, Permission } from 'temeforest'
 import moment from 'moment'
 import { baseurl } from 'utils/url'
-import { printHtml, barcodeToPng } from 'utils/exportData'
+import { printHtml, qrcodeToPng } from 'utils/exportData'
 import axios from 'axios'
 
 const endpoint = 'venta/solicitud_tasacontingencia'
@@ -16,7 +16,7 @@ const endpoint = 'venta/solicitud_tasacontingencia'
 
 class BandejaTasaCooperativa extends React.Component {
     state = {
-        fecha : moment().format('YYYY-MM-DD'),
+        //fecha : moment().format('YYYY-MM-DD'),
         estado : 1 // aceptado
     }
     optionsCooperativa = {
@@ -44,7 +44,8 @@ class BandejaTasaCooperativa extends React.Component {
         })
     }
 
-    rowToHtml(row){
+    async rowToHtml(row){
+        const qr = await qrcodeToPng(row.codigo)
         return `
             <div style="margin-bottom: 10px; border-bottom: 1px solid black; width: 300px; text-align: center;">
                 <p style="margin-top: 5px; margin-bottom: 5px;">${row.localidad_nombre}</p>
@@ -62,14 +63,19 @@ class BandejaTasaCooperativa extends React.Component {
                     <span style="width: 100px; text-align: left;">Usuario: </span>
                     <span style="width: 100px; text-align: left;">${row.usuario_creacion_nombre}</span>
                 </p>
-                <img width="300" src="${barcodeToPng(row.codigo)}"/>
+                <img width="150" src="${qr}"/>
             </div>
         `
     }
 
     async toWord(row){
         const res = await axios.get(`${baseurl}/venta/solicitud_tasacontingencia/${row.id}/tasas`)
-        const html = res.data.map((row) => this.rowToHtml(row))
+        let html = ''
+
+        for(let i in res.data){
+            let row = res.data[i]
+            html += await this.rowToHtml(row)
+        }
 
         const actualizar = await axios.post(`${baseurl}/venta/solicitud_tasacontingencia/${row.id}/`, { estado : 3 })
 

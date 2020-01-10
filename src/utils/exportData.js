@@ -96,11 +96,23 @@ function barcodeToPng(code = ''){
     return canvas.toDataURL("image/png");
 }
 
+function qrcodeToPng(code = '', options = {}){
+    return new Promise((resolve, reject) => {
+        var QRCode = require('qrcode')
+        
+        QRCode.toDataURL(code, options, function (error, url) {
+            if (error) reject(error)
+            resolve(url)
+        })
+    })
+}
+
 export {
     htmlToXlsById,
     htmlToXls,
     Export2Doc,
     Export2DocFromHtml,
     printHtml,
-    barcodeToPng
+    barcodeToPng,
+    qrcodeToPng
 }
