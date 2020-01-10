@@ -70,10 +70,15 @@ class BandejaTasaCooperativa extends React.Component {
     async toWord(row){
         const res = await axios.get(`${baseurl}/venta/solicitud_tasacontingencia/${row.id}/tasas`)
         const html = res.data.map((row) => this.rowToHtml(row))
+
+        const actualizar = await axios.post(`${baseurl}/venta/solicitud_tasacontingencia/${row.id}/`, { estado : 3 })
+
         printHtml(html)
     }
 
     fieldImprimir = (row) => {
+        if(row.estado === 3) return null
+
         return (
             <React.Fragment>
                 <Button outline onClick={() => this.toWord(row)}>Imprimir</Button>
