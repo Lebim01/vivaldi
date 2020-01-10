@@ -103,7 +103,9 @@ class SolicitudTasaContingencia extends React.Component {
                                         searchable={false}
 
                                         fieldNames={['Cooperativa', 'Fecha', 'Descripión', 'Tipo de Solicitud', 'Cantidad', 'Estado']}
-                                        fields={['cooperativa_nombre', 'fecha', 'descripcion', 'tipo_solicitud_nombre', 'cantidad_pedida', 'estado_nombre']}
+                                        fields={['cooperativa_nombre', 'fecha', 'descripcion', 'tipo_solicitud_nombre', 
+                                        (row) => <span style={{textAlign:"right", position: 'relative', right:'-60%'}}>{row.cantidad_pedida}</span>,                     
+                                         'estado_nombre']}
 
 
                                         key_permission="solicitudtasacontingencia"
