@@ -58,7 +58,7 @@
     "simple-line-icons": "^2.4.1",
     "sweetalert2": "^8.11.7",
     "sweetalert2-react": "^0.8.1",
-    "webpack": "^4.41.2"
+    "webpack": "^4.29.6"
   },
   "devDependencies": {
     "react-scripts": "^3.0.1"
