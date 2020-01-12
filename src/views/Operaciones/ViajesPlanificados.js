@@ -11,11 +11,12 @@ class ViajesPlanificados extends React.Component {
 
     interval = null
     state = {
-        fecha: moment().format('YYYY-MM-DD HH:mm:ss'),
+        data : {
+            //fecha: moment().format('YYYY-MM-DD HH:mm:ss'),
+        },
         modal : {
             show: false
         }
-
     }
 
     componentDidMount(){
@@ -30,12 +31,6 @@ class ViajesPlanificados extends React.Component {
         labelName: 'nombre',
         valueName: 'id'
     }
-
-    /*optionsCooperativa = {
-        url : `${baseurl}/cooperativa/`,
-        labelName: 'nombre',
-        valueName: 'id'
-    }*/
     optionsSilo = {
         url : `${baseurl}/silo/`,
         labelName: 'descripcion',
@@ -57,7 +52,10 @@ class ViajesPlanificados extends React.Component {
         if(e.target.type === 'checkbox') value = e.target.checked
 
         this.setState({
-            [name]: value
+            data : {
+                ...this.state.data,
+                [name]: value
+            }
         })
     }
 
@@ -86,8 +84,6 @@ class ViajesPlanificados extends React.Component {
             }
         })
     }
-
-    
 
     render(){
         const { cooperativa_nombre, silo, localidad, estado, fecha, hora } = this.state
@@ -175,7 +171,6 @@ class ViajesPlanificados extends React.Component {
                                             </FormGroup>
                                         </div>
                                     </div>
-                                    
                                     <br />
                                     <br />
                                     <div>
@@ -185,41 +180,24 @@ class ViajesPlanificados extends React.Component {
                                     <br />
                                     <div className="col-sm-12">
                                         <ListPage
-                                            
-                                            
-
                                             searchable={false}
-                                            fieldnames={['#','Cooperativa', 'Disco', 'Placa', 'Saldo', /*'Vlts'*/ 'Duracion', 'Salida', 'Destino']}
-                                            fields={['', 
-                                            'cooperativa_nombre', 
-                                            'disco', 
-                                            'placa',
-                                            /*tdBodyClass={(row) => `no-padding-top-bottom ${row.saldo === 0 ? 'bg-orange' : ''}`},*/ 
-                                            'saldo', 
-                                            /*'vlts', */,
-                                            'duracion',
-                                            'hora_salida',
-                                            'destino']}
-
+                                            fieldnames={['#','Cooperativa', 'Disco', 'Placa', 'Saldo', 'Duracion', 'Salida', 'Destino']}
+                                            fields={[
+                                                '', 
+                                                'cooperativa_nombre', 
+                                                'disco', 
+                                                'placa',
+                                                'saldo', 
+                                                'duracion',
+                                                'hora_salida',
+                                                'destino'
+                                            ]}
                                             fieldNames={headers}
                                             fields={fields}
-                                            
                                             tdBodyClass="margin: 0 !important;padding: 0 !important;"
-                                            //tdBodyClass="bg-orange"
-                                            
                                             tdBodyClass={(row) => `${row.saldo === 0 ? 'bg-orange' : row.saldo !==  0 && moment().format('HH:mm:ss') > row.hora_salida ? 'bg-info' : ''}`}
-
-                                            //tdBodyClass={(row) => `${row.disco !== "17" && moment().format('HH:mm:ss') > row.hora_salida ? 'bg-info' : ''}`}
-
-                                            
-
-                                            /*tdBodyClass={(row) => `${row.saldo === 0  && moment().format('hh:mm') > row.hora_salida ? 'bg-orange' : ''}`}*/
-
-
                                             endpoint='venta/viajes-planificados'
-                                            parameters={this.state}
-                                            //tdBodyClass="no-padding-top-bottom"
-
+                                            parameters={this.state.data}
                                             history={this.props.history}
                                         />
                                     </div>

@@ -9,7 +9,6 @@ class ViajesModal extends React.Component {
     state = {}
 
     componentDidUpdate(prevProps){
-        console.log(this.props)
         if(prevProps.show !== this.props.show && this.props.show && this.props.id){
             this.getData()
         }
@@ -23,7 +22,6 @@ class ViajesModal extends React.Component {
     }
 
     render(){
-        console.log(this.state)
         return (
             <Modal isOpen={this.props.show} toggle={this.toggle}>
                 <ModalHeader toggle={this.toggle}>Viaje #{this.props.id}</ModalHeader>
