@@ -3,6 +3,16 @@ import { Provider } from 'react-redux'
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import './App.scss'
 import store from './store/auth'
+import axios from 'axios'
+import moment from 'moment'
+
+axios.interceptors.request.use((config) => {
+    if(config.method.toLocaleLowerCase() === 'get'){
+        config.params = config.params || {};
+        config.params['t'] = moment().valueOf();
+    }
+    return config;
+});
 
 const loading = () => <div className="animated fadeIn pt-3 text-center">Cargando...</div>;
 

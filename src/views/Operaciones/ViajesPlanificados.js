@@ -12,7 +12,7 @@ class ViajesPlanificados extends React.Component {
     interval = null
     state = {
         data : {
-            //fecha: moment().format('YYYY-MM-DD HH:mm:ss'),
+            fecha: moment().format('YYYY-MM-DD'),
         },
         modal : {
             show: false
@@ -59,10 +59,8 @@ class ViajesPlanificados extends React.Component {
         })
     }
 
-    
     refresh = () => {
         this.setState({
-
             refresh: true
         })
     }
@@ -93,19 +91,18 @@ class ViajesPlanificados extends React.Component {
             'cooperativa_nombre', 
             'disco', 
             'placa',
-            /*tdBodyClass={(row) => `no-padding-top-bottom ${row.saldo === 0 ? 'bg-orange' : ''}`},*/ 
             'saldo', 
             'duracion', 
             'hora_salida',
             'destino'
         ]
 
-        if(!this.state.saldo){
+        if(!this.state.data.saldo){
             fields.splice(fields.indexOf('saldo'), 1)
             headers.splice(headers.indexOf('Saldo'), 1)
         }
 
-        if(!this.state.duracion){
+        if(!this.state.data.duracion){
             fields.splice(fields.indexOf('duracion'), 1)
             headers.splice(headers.indexOf('Duración'), 1)
         }
@@ -179,19 +176,10 @@ class ViajesPlanificados extends React.Component {
                                     <br />
                                     <br />
                                     <div className="col-sm-12">
+                                        <div className="bg-orange" style={{width:20, height:10}}>{' '}</div><span>saldo = 0</span><br/>
+                                        <div className="bg-info" style={{width:20}}>{' '}</div><span>saldo > 0 y el viaje ya salio</span>
                                         <ListPage
                                             searchable={false}
-                                            fieldnames={['#','Cooperativa', 'Disco', 'Placa', 'Saldo', 'Duracion', 'Salida', 'Destino']}
-                                            fields={[
-                                                '', 
-                                                'cooperativa_nombre', 
-                                                'disco', 
-                                                'placa',
-                                                'saldo', 
-                                                'duracion',
-                                                'hora_salida',
-                                                'destino'
-                                            ]}
                                             fieldNames={headers}
                                             fields={fields}
                                             tdBodyClass="margin: 0 !important;padding: 0 !important;"
