@@ -94,16 +94,9 @@ class ViajesPlanificadosSilo extends React.Component {
                                         </FormGroup>
                                     </div>
                                 </div>
-                                <div className="col-sm-12 text-center">
-                                    <Button onClick={this.refresh.bind(this)}>Configurar</Button>
+                                <div className="col-md-12 text-center">
+                                    <Clock/>
                                 </div>
-                                <br />
-                                <br />
-                                <div>
-                                  <Clock/>
-                                </div>
-                                <br />
-                                <br />
                                 <div className="col-sm-12">
                                     <ListPage
                                         searchable={false}

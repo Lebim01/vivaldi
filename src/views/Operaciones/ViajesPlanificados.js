@@ -168,22 +168,35 @@ class ViajesPlanificados extends React.Component {
                                             </FormGroup>
                                         </div>
                                     </div>
-                                    <br />
-                                    <br />
-                                    <div>
-                                    <Clock/>
+                                    <div className="col-md-12">
+                                        <div className="row">
+                                            <div className="col-lg-3 col-md-4 col-sm-6">
+                                                <Clock className="d-inline-block"/>
+                                            </div>
+                                            <div className="col-md-4 col-sm-6">
+                                                {' '}<div className="bg-orange d-inline-block" style={{width:20, height:10}}>{' '}</div>
+                                                <span>{' '}No tiene saldo</span>
+                                                <div className="bg-info d-inline-block" style={{width:20, height:10, marginLeft: 20}}>{' '}</div>
+                                                <span>Viaje ya salió</span>
+                                                <div className="bg-danger d-inline-block" style={{width:20, height:10, marginLeft: 20}}>{' '}</div>
+                                                <span>Conductor sin puntos</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <br />
-                                    <br />
                                     <div className="col-sm-12">
-                                        <div className="bg-orange" style={{width:20, height:10}}>{' '}</div><span>saldo = 0</span><br/>
-                                        <div className="bg-info" style={{width:20}}>{' '}</div><span>saldo > 0 y el viaje ya salio</span>
                                         <ListPage
                                             searchable={false}
                                             fieldNames={headers}
                                             fields={fields}
                                             tdBodyClass="margin: 0 !important;padding: 0 !important;"
-                                            tdBodyClass={(row) => `${row.saldo === 0 ? 'bg-orange' : row.saldo !==  0 && moment().format('HH:mm:ss') > row.hora_salida ? 'bg-info' : ''}`}
+                                            tdBodyClass={(row) => {
+                                                let ya_salio = moment(`${moment().format('YYYY-MM-DD')} ${row.hora_salida}`).isAfter(moment());
+
+                                                if(row.conductor_puntos === 0) return 'bg-danger'
+                                                if(row.saldo === 0) return 'bg-orange'
+                                                if(ya_salio) return 'bg-info'
+                                                return ''
+                                            }}
                                             endpoint='venta/viajes-planificados'
                                             parameters={this.state.data}
                                             history={this.props.history}

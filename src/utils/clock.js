@@ -30,9 +30,7 @@ class Clock extends React.Component {
 
   render() {
     return (
-      <div className="col-sm-12 text-center">
-        <h2>{this.state.time}</h2>
-      </div>
+      <h2 {...this.props}>{this.state.time}</h2>
     )
   }
 }
