@@ -47,7 +47,7 @@ class MenuItem extends React.Component {
     }
 
     render(){
-        const { name, icon, children, badge, url, level, permission } = this.props
+        const { name, icon, children, badge, url, level, permission, ...otherProps } = this.props
 
         if(children && !permission){
             if(!findRecursivePermissions(children)){
@@ -66,7 +66,7 @@ class MenuItem extends React.Component {
         return (
             <Permission key_permission={permission}>
                 <NavItem className={`sidebar-item`} permission={permission}>
-                    <NavLink className={`sidebar-link waves-effect waves-dark ${children?'has-arrow':''}`} aria-expanded="false" href={url} style={{marginLeft: margin, whiteSpace:'normal'}} onClick={this.onClick}>
+                    <NavLink className={`sidebar-link waves-effect waves-dark ${children?'has-arrow':''}`} aria-expanded="false" href={url} style={{marginLeft: margin, whiteSpace:'normal'}} onClick={this.onClick} {...otherProps}>
                         { icon && <i className={icon} onClick={this.prevent}></i> }
                         { children ? <span className="hide-menu" onClick={this.prevent}> {name} </span> : name }
                         { badge && <span class={`badge badge-pill badge-${badge.variant} float-right`} onClick={this.prevent}>{badge.text}</span> }

@@ -114,13 +114,15 @@ export default {
         },
         {
           name: 'Viajes Planificados',
-          url: '/#/operaciones/viajes-planificados',
-          permission : 'view_viajes_planificados'
+          url: '/#/viajes-planificados',
+          permission : 'view_viajes_planificados',
+          target : '_blank'
         },
         {
           name: 'Viajes Planificados Silo',
-          url: '/#/operaciones/viajes-planificados-silo',
-          permission : 'view_viajes_planificados_silo'
+          url: '/#/viajes-planificados-silo',
+          permission : 'view_viajes_planificados_silo',
+          target : '_blank'
         },
         {
           name: 'Frecuencias',
