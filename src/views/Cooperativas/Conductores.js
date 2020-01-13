@@ -16,10 +16,10 @@ class Conductores extends React.Component {
                                         key_permission="conductor"
 
                                         searchable={true}
-                                        searchPlaceholder="Cooperativa, Nombre"
+                                        searchPlaceholder="Cooperativa, Nombre, Identificación"
 
-                                        fieldNames={['Cooperativa', 'Nombre']}
-                                        fields={['cooperativa_nombre', 'nombre']}
+                                        fieldNames={['Cooperativa', 'Nombre', 'Identificación']}
+                                        fields={['cooperativa_nombre', 'nombre', 'identificacion']}
 
                                         endpoint='conductor'
                                         urlFront='cooperativas/conductores'
