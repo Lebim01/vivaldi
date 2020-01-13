@@ -160,7 +160,7 @@ class ViajesPlanificados extends React.Component {
                                                 </div>
                                             </FormGroup>
                                             <FormGroup className="row">
-                                                <div className="col-sm-3"></div>
+                                                <div className="col-sm-6"></div>
                                                 <div className="col-sm-9">
                                                     <div className="custom-control custom-checkbox">
                                                         <input type="checkbox" className="custom-control-input" id="duracion" name="duracion" checked={this.state.duracion} onChange={this.onChange('duracion')} />
@@ -175,7 +175,7 @@ class ViajesPlanificados extends React.Component {
                                             <div className="col-lg-3 col-md-4 col-sm-6">
                                                 <Clock className="d-inline-block"/>
                                             </div>
-                                            <div className="col-md-4 col-sm-6">
+                                            <div className="col-md-6 col-sm-6">
                                                 {' '}<div className="bg-orange d-inline-block" style={{width:20, height:10}}>{' '}</div>
                                                 <span>{' '}No tiene saldo</span>
                                                 <div className="bg-info d-inline-block" style={{width:20, height:10, marginLeft: 20}}>{' '}</div>
