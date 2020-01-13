@@ -17,7 +17,9 @@ class DistribucionAsientos extends React.Component {
                                         searchPlaceholder="Nombre"
 
                                         fieldNames={['Nombre', 'Capacidad']}
-                                        fields={['nombre', 'capacidad']}
+                                        fields={['nombre', 
+                                        (row) => <span style={{textAlign:"right", position: 'relative', right:'-15%'}}>{row.capacidad}</span>
+                                        ]}
 
                                         endpoint='busTipo'
                                         urlFront='cooperativas/distribucion-asientos'
