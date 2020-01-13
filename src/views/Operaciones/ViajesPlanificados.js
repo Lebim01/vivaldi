@@ -22,7 +22,7 @@ class ViajesPlanificados extends React.Component {
     }
 
     componentDidMount(){
-        this.interval = setInterval(this.refresh, 3 * 1000)
+        this.interval = setInterval(this.refresh, 30 * 1000)
     }
     componentWillUnmount(){
         clearInterval(this.interval)
