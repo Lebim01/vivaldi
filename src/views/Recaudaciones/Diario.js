@@ -1,5 +1,6 @@
 import React from 'react'
-import { ListPage, Label, FormGroup, Select, Input, ReportPage, Button, Permission, Card, CardBody } from 'temeforest'
+import { ListPage, Label, FormGroup, Select, Input, ReportPage, Button, Permission, Card, CardBody, FormValidate } from 'temeforest'
+import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { baseurl } from 'utils/url'
 import { confirmEndpoint } from 'utils/dialog'
 import { printHtml } from 'utils/exportData'
@@ -7,6 +8,10 @@ import { moneyFormat } from 'utils/number'
 import moment from 'moment'
 import Swal from 'sweetalert2';
 import { connect } from 'react-redux'
+
+const style_money_label = {
+    float:'right'
+}
 
 class Diario extends React.Component {
 
@@ -229,16 +234,21 @@ class Diario extends React.Component {
                                     searchable={false}
                                     ref={this.table}
 
-                                    fieldNames={['Cooperativa', 'Localidad', 'Fecha venta', 'Cobrar', 'A cobrar', 'Cobrado', 'Fecha cobro', 'N.C', 'Acción']}
+                                    headerClass="text-center"
+                                    tdBodyClass="text-center"
+
+                                    fieldNames={['Cooperativa', 'Localidad', 'Fecha venta', 'Cobrar', 'A cobrar', 'Cobrado', 'Fecha cobro', 'N.C', 'Total', 'Acción']}
                                     fields={[
                                         'cooperativa_nombre',
                                         'localidad_nombre',
                                         'fecha_venta',
                                         this.fieldCobrar,
-                                        (row) => <label style={{float:"right", fontWeight: 300}}>$ {moneyFormat(row.a_cobrar)}</label>,
-                                        (row) => <label style={{float:"right", fontWeight: 300}}>$ {moneyFormat(row.cobrado)}</label>,
-                                        (row) => <label style={{float:"right", fontWeight: 300}}>{(row.fecha_cobro)}</label>,
-                                        (row) => <label style={{float:"right", fontWeight: 300}}>$ {moneyFormat(row.nc)}</label>,
+                                        (row) => <span style={style_money_label}>${moneyFormat(row.a_cobrar)}</span>,
+                                        (row) => <span style={style_money_label}>${moneyFormat(row.cobrado)}</span>,
+                                        
+                                        (row) => <span style={{float:"right", fontWeight: 300}}>{(row.fecha_cobro)}</span>,
+                                        (row) => <span style={style_money_label}>${moneyFormat(row.nc)}</span>,
+                                        (row) => <span style={style_money_label}>${moneyFormat(row.TOTAL)}</span>,
                                         this.fieldImprimir
                                     ]}
 
