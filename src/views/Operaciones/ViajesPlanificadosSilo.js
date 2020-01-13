@@ -3,6 +3,10 @@ import { ListPage, Select, Label, FormGroup, Card, CardBody, CardTitle, Button }
 import { baseurl } from 'utils/url'
 import moment from 'moment'
 import Clock  from 'utils/clock'
+import store from 'store/auth'
+import axios from 'axios'
+
+axios.defaults.headers.common['Authorization'] = `JWT ${store.getState().token}`
 
 class ViajesPlanificadosSilo extends React.Component {
 

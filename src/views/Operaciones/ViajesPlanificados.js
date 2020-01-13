@@ -1,11 +1,13 @@
 import React from 'react'
-import { ListPage, Select, Label, FormGroup, Card, CardBody, CardTitle, Button, Permission } from 'temeforest'
+import { ListPage, Select, Label, FormGroup, Card, CardBody, CardTitle, Permission } from 'temeforest'
 import { baseurl } from 'utils/url'
 import moment from 'moment'
 import Clock  from 'utils/clock'
 import ViajesModal from './ViajesModal'
+import store from 'store/auth'
+import axios from 'axios'
 
-
+axios.defaults.headers.common['Authorization'] = `JWT ${store.getState().token}`
 
 class ViajesPlanificados extends React.Component {
 
