@@ -248,7 +248,7 @@ class Diario extends React.Component {
                                         
                                         (row) => <span style={{float:"right", fontWeight: 300}}>{(row.fecha_cobro)}</span>,
                                         (row) => <span style={style_money_label}>${moneyFormat(row.nc)}</span>,
-                                        (row) => <span style={style_money_label}>${moneyFormat(row.TOTAL)}</span>,
+                                        (row) => <span style={style_money_label}>${moneyFormat(row.total)}</span>,
                                         this.fieldImprimir
                                     ]}
 

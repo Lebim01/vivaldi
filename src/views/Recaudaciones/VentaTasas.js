@@ -291,7 +291,11 @@ class VentaTasas extends React.Component {
                                     searchable={false}
 
                                     fieldNames={['Fecha venta', 'Turno', 'Localidad', 'Cooperativa', 'Cantidad', 'Valor unitario', 'Valor total', 'Acción']}
-                                    fields={['fecha', 'turno', 'localidad_nombre', 'cooperativa_nombre', 'cantidad', 'precio', 'total' , this.fieldEditar]}
+                                    fields={['fecha', 'turno', 'localidad_nombre', 'cooperativa_nombre',
+                                    (row) => <span style={{textAlign:"right", position: 'relative', right:'-50%'}}>{row.cantidad}</span>,
+                                    (row) => <span style={{textAlign:"right", position: 'relative', right:'-50%'}}>{row.precio}</span>,
+                                    (row) => <span style={{textAlign:"right", position: 'relative', right:'-50%'}}>{row.total}</span>,
+                                    this.fieldEditar]}
                                     onRowDoubleClick={this.editarVenta}
 
                                     endpoint='venta/venta_contingencia'
