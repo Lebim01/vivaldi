@@ -179,9 +179,9 @@ class ViajesPlanificados extends React.Component {
                                                 {' '}<div className="bg-orange d-inline-block" style={{width:20, height:10}}>{' '}</div>
                                                 <span>{' '}No tiene saldo</span>
                                                 <div className="bg-info d-inline-block" style={{width:20, height:10, marginLeft: 20}}>{' '}</div>
-                                                <span>Viaje ya salió</span>
+                                                <span>{' '}Viaje ya salió</span>
                                                 <div className="bg-danger d-inline-block" style={{width:20, height:10, marginLeft: 20}}>{' '}</div>
-                                                <span>Conductor sin puntos</span>
+                                                <span>{' '}Conductor sin puntos</span>
                                             </div>
                                         </div>
                                     </div>
