@@ -13,7 +13,7 @@ class Roles extends React.Component {
                                 <ListPage
                                     title="Listado de Roles"
 
-                                    key_permission="user"
+                                    key_permission="group"
 
 
                                     searchable={true}
