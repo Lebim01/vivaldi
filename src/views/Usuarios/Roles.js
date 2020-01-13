@@ -13,6 +13,9 @@ class Roles extends React.Component {
                                 <ListPage
                                     title="Listado de Roles"
 
+                                    key_permission="user"
+
+
                                     searchable={true}
                                     searchPlaceholder="Rol, Descripción"
                                     searchFields={['name', 'description']}
