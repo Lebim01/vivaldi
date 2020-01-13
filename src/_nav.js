@@ -48,7 +48,7 @@ export default {
         {
           name : 'Usuarios',
           url : '/#/usuarios/usuarios',
-          permission : 'view_usuariocooperativa'
+          permission : 'view_user'
         },
         {
           name : 'Roles',
