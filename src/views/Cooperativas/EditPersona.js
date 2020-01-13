@@ -17,7 +17,7 @@ class EditPersona extends React.Component {
     componentWillReceiveProps(props){
         if(props.id !== this.state.id){
             this.setState({
-                data : props.persona
+                data : props.persona || {}
             })
         }
     }
@@ -96,7 +96,7 @@ class EditPersona extends React.Component {
 
     render(){
         const { data, readOnly, loading } = this.state
-        let _readOnly = (readOnly || loading) && !data.id || !this.props.editable
+        let _readOnly = (readOnly || loading) && (!data || !data.id) || !this.props.editable
 
         return (
             <div className="animated fadeIn">
