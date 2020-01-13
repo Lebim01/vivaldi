@@ -13,6 +13,8 @@ class Usuarios extends React.Component {
                                 <ListPage
                                     title="Listado de Usuarios"
 
+                                    key_permission="user"
+
                                     searchable={true}
                                     searchPlaceholder="Usuario, Nombre"
 
