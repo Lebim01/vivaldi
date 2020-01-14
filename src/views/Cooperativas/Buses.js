@@ -85,11 +85,13 @@ function Buses(props) {
 
                                     //key_permission="bus"
 
-                                    fieldNames={['Cooperativa', 'Placa', 'Disco', 'Tipo', 'Capacidad']}
-                                    fields={['cooperativa_nombre', 'placa', 
+                                    fieldNames={['Cooperativa', 'Placa', 'Disco', 'Tipo', 'Capacidad', 'Dueño', 'Saldo']}
+                                    fields={['cooperativa_nombre', 'placa',
                                     (row) => <span style={{textAlign:"right", position: 'relative', right:'-40%'}}>{row.disco}</span>,
                                     'tipo_servicio_nombre',
-                                     (row) => <label style={{float:"center", position:"relative", left: "25%", fontWeight: 300}}>{row.capacidad}</label>]}
+                                    (row) => <label style={{float:"center", position:"relative", left: "25%", fontWeight: 300}}>{row.capacidad}</label>,
+                                    (row) => <label style={{float:"center", position:"relative", left: "25%", fontWeight: 300}}>{row.propietario_nombre}</label>,
+                                    (row) => <label style={{float:"center", position:"relative", left: "25%", fontWeight: 300}}>{row.saldo}</label>]}
 
                                     endpoint='bus'
                                     urlFront='cooperativas/buses'
