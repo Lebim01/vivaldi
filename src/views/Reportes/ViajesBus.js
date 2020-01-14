@@ -108,15 +108,15 @@ class ViajesBus extends React.Component {
                                     //title=" "
                                     searchable={false}
 
-                                    fieldNames={['Viaje', 'Parada', 'Tipo', 'Cantidad', 'Valor unitario', 'Total']}
+                                    fieldNames={['Viaje', 'Fecha Salida', 'Localidad', 'Vendedor', 'Pasajeros', 'Total']}
                                     fields={[
                                         'viaje',
-                                        'parada',
-                                        'tipo_cliente',
+                                        'fecha_salida',
+                                        'localidad',
+                                        'vendedor',
                                         (row) => <span style={{ textAlign:"right", position: 'relative', right:'-40%'}}>{row.pasajeros}</span>,
-                                        (row) => <span style={{ textAlign:"right", position: 'relative', right:'-40%'}}>${moneyFormat(row.valor_unitario)}</span>,
                                         (row) => <span style={{ textAlign:"right", position: 'relative', right:'-40%'}}>${moneyFormat(row.total)}</span>
-                                        
+
                                     ]}
 
                                     data={row.data}
