@@ -66,7 +66,7 @@ async function getResults(url, no_page = false, headers = {}, force_full = false
             }
 
             // no paginated request is stripped unless full is forced
-            if (!page_size && !force_full) {
+            if (!page_size && !force_full && !_url.searchParams.get('type')) {
                 _url.searchParams.append('type', 'select')
             }
         }
