@@ -4,6 +4,7 @@ import moment from 'moment'
 import { baseurl, objectToUrl } from 'utils/url'
 import axios from 'axios'
 import { moneyFormat } from 'utils/number'
+import store from 'store/auth'
 
 class ViajesBus extends React.Component {
 
@@ -13,7 +14,8 @@ class ViajesBus extends React.Component {
             fecha_inicio : moment().format('YYYY-MM-DD'),
             fecha_fin : moment().format('YYYY-MM-DD'),
         },
-        data : []
+        data : [], 
+        reporte: 1
     }
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
@@ -25,6 +27,20 @@ class ViajesBus extends React.Component {
         labelName: 'nombre',
         valueName: 'id'
     }
+
+    optionsFormapago = {
+        url : `${baseurl}/formaDePago/`,
+        labelName: 'nombre',
+        valueName: 'id' 
+    }
+
+    optionsUsuarios = {
+        url : `${baseurl}/usuario/?tipo=1`,
+        labelName: 'tipo_usuario_puntoventa_nombre', 
+        valueName: 'id' , 
+
+    }
+
     onChange = name => (e) => {
         const filters = this.state.filters
         this.setState({
@@ -94,6 +110,21 @@ class ViajesBus extends React.Component {
                                     <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.filters.fecha_fin} />
                                 </div>
                             </FormGroup>
+                            
+                        </div>
+                        <div className="col-sm-4">
+                            <FormGroup className="row">
+                                <Label className="col-sm-6">Forma de pago</Label>
+                                <div className="col-sm-6">
+                                    <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('forma_de_pago')} value={this.state.filters.forma_de_pago}/>
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <Label className="col-sm-6">Tipo Vendedor</Label>
+                                <div className="col-sm-6">
+                                    <Select asyncOptions={this.optionsUsuarios} onChange={this.onChange('tipo_vendedor')} value={this.state.filters.tipo_vendedor}/>
+                                </div>
+                            </FormGroup>
                         </div>
                     </div>
 
@@ -108,16 +139,26 @@ class ViajesBus extends React.Component {
                                     //title=" "
                                     searchable={false}
 
+<<<<<<< HEAD
                                     fieldNames={['Viaje', 'Fecha Salida', 'Localidad', 'Vendedor', 'Pasajeros', 'Total']}
                                     fields={[
                                         'viaje',
                                         'fecha_salida',
                                         'localidad',
                                         'vendedor',
+=======
+                                    fieldNames={['Viaje', 'Fecha salida', 'Localidad', 'Usuario', 'Pasaje', 'Total']}
+                                    fields={[
+                                        
+                                        'viaje', 
+                                        'fecha_salida', 
+                                        'localidad',
+>>>>>>> reportes viajes por bus filtros
                                         (row) => <span style={{ textAlign:"right", position: 'relative', right:'-40%'}}>{row.pasajeros}</span>,
                                         (row) => <span style={{ textAlign:"right", position: 'relative', right:'-40%'}}>${moneyFormat(row.total)}</span>
 
                                     ]}
+
 
                                     data={row.data}
                                     parameters={this.state}
