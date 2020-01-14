@@ -166,8 +166,8 @@ class ReporteTasasNormales extends React.Component {
                                             'cooperativa_nombre', 
                                             'fecha',
                                             'usuario_solicitante_nombre',
-                                            (row)=> <label style={{fontWeight: 300}}>{("  " + row.cantidad_aprobada || 0)}</label>,
-                                            (row)=> <label style={{float:"right", fontWeight: 300}}>${moneyFormat(row.valor || 0)}</label>,
+                                            (row)=> <span style={{textAlign:"right", position: 'relative', right:'-60%'}}>{("  " + row.cantidad_aprobada || 0)}</span>,
+                                            (row)=> <span style={{textAlign:"right", position: 'relative', right:'-40%'}}>${moneyFormat(row.valor || 0)}</span>,
                                             /*this.fieldImprimir*/
                                         ]}
 
