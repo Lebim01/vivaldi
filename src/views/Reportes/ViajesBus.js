@@ -139,21 +139,12 @@ class ViajesBus extends React.Component {
                                     //title=" "
                                     searchable={false}
 
-<<<<<<< HEAD
-                                    fieldNames={['Viaje', 'Fecha Salida', 'Localidad', 'Vendedor', 'Pasajeros', 'Total']}
-                                    fields={[
-                                        'viaje',
-                                        'fecha_salida',
-                                        'localidad',
-                                        'vendedor',
-=======
                                     fieldNames={['Viaje', 'Fecha salida', 'Localidad', 'Usuario', 'Pasaje', 'Total']}
                                     fields={[
                                         
                                         'viaje', 
                                         'fecha_salida', 
                                         'localidad',
->>>>>>> reportes viajes por bus filtros
                                         (row) => <span style={{ textAlign:"right", position: 'relative', right:'-40%'}}>{row.pasajeros}</span>,
                                         (row) => <span style={{ textAlign:"right", position: 'relative', right:'-40%'}}>${moneyFormat(row.total)}</span>
 
