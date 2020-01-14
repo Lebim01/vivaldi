@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Card, CardBody, CardTitle, ListPage, FormGroup, Label, Select, Permission  } from 'temeforest'
 import { htmlToXls } from 'utils/exportData'
 import { baseurl } from 'utils/url'
+import { moneyFormat } from 'utils/number'
 
 function Buses(props) {
 
@@ -90,8 +91,8 @@ function Buses(props) {
                                     (row) => <span style={{textAlign:"right", position: 'relative', right:'-40%'}}>{row.disco}</span>,
                                     'tipo_servicio_nombre',
                                     (row) => <label style={{float:"center", position:"relative", left: "25%", fontWeight: 300}}>{row.capacidad}</label>,
-                                    (row) => <label style={{float:"center", position:"relative", left: "25%", fontWeight: 300}}>{row.propietario_nombre}</label>,
-                                    (row) => <label style={{float:"center", position:"relative", left: "25%", fontWeight: 300}}>{row.saldo}</label>]}
+                                    'propietario_nombre',
+                                    (row) => <label style={{float:"center", position:"relative", left: "25%", fontWeight: 300}}>${moneyFormat(row.saldo)}</label>]}
 
                                     endpoint='bus'
                                     urlFront='cooperativas/buses'
