@@ -34,12 +34,22 @@ class ViajesBus extends React.Component {
         valueName: 'id' 
     }
 
-    optionsUsuarios = {
+    /*optionsUsuarios = {
         url : `${baseurl}/usuario/?tipo=1`,
         labelName: 'tipo_usuario_puntoventa_nombre', 
         valueName: 'id' , 
 
-    }
+    }*/
+
+    optionsUsuarios = [
+        { value: 1, label: 'Boletero' },
+        { value: 2, label: 'Supervisor' },
+    ]
+
+    optionsReporte = [
+        { value: 1, label: 'Boletero' },
+        { value: 2, label: 'Viaje' },
+    ]
 
     onChange = name => (e) => {
         const filters = this.state.filters
@@ -122,7 +132,7 @@ class ViajesBus extends React.Component {
                             <FormGroup className="row">
                                 <Label className="col-sm-6">Tipo Vendedor</Label>
                                 <div className="col-sm-6">
-                                    <Select asyncOptions={this.optionsUsuarios} onChange={this.onChange('tipo_vendedor')} value={this.state.filters.tipo_vendedor}/>
+                                <Select options={this.optionsUsuarios} onChange={this.onChange('usuarios')} value={this.state.usuarios} />
                                 </div>
                             </FormGroup>
                         </div>
@@ -146,8 +156,9 @@ class ViajesBus extends React.Component {
                                         'fecha_salida', 
                                         'localidad',
                                         (row) => <span style={{ textAlign:"right", position: 'relative', right:'-40%'}}>{row.pasajeros}</span>,
+                                        (row) => <span style={{ textAlign:"right", position: 'relative', right:'-40%'}}>${moneyFormat(row.valor_unitario)}</span>,
                                         (row) => <span style={{ textAlign:"right", position: 'relative', right:'-40%'}}>${moneyFormat(row.total)}</span>
-
+                                        
                                     ]}
 
 
