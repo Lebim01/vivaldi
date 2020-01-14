@@ -41,15 +41,15 @@ class ViajesBus extends React.Component {
 
     }*/
 
-    optionsUsuarios = [
+    optionsReporte = [
         { value: 1, label: 'Boletero' },
         { value: 2, label: 'Supervisor' },
     ]
 
-    optionsReporte = [
+    /*optionsReporte = [
         { value: 1, label: 'Boletero' },
         { value: 2, label: 'Viaje' },
-    ]
+    ]*/
 
     onChange = name => (e) => {
         const filters = this.state.filters
@@ -132,7 +132,7 @@ class ViajesBus extends React.Component {
                             <FormGroup className="row">
                                 <Label className="col-sm-6">Tipo Vendedor</Label>
                                 <div className="col-sm-6">
-                                <Select options={this.optionsUsuarios} onChange={this.onChange('usuarios')} value={this.state.usuarios} />
+                                <Select options={this.optionsReporte} onChange={this.onChange('usuarios')} value={this.state.usuarios} />
                                 </div>
                             </FormGroup>
                         </div>
