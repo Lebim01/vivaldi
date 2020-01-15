@@ -14,6 +14,24 @@ function Buses(props) {
         valueName: 'id'
     }
 
+    /*const optionsEstado = {
+        url : `${baseurl}/bus/cooperativa?`,
+        labelName: 'is_enable', 
+        valueName: 'id' , 
+
+    }*/
+
+    /*const optionsEstado = [
+
+        { value : '1', label : 'Activo' },
+        { value : '2', label : 'Inactivo' },
+    ]*/
+
+   const optionsEstado = [
+        { value:0, label: 'Pendiente' },
+        { value:1, label: 'Aceptado' },
+    ]
+
     const onChange = name => (e) => {
         setState({
             [name]: e.target.value
@@ -47,7 +65,7 @@ function Buses(props) {
         `
         htmlToXls(html)
     }
-
+    //const { estado } = this.state
     return (
         <Permission key_permission="view_bus" mode="redirect">
             <div className="animated fadeIn">
@@ -74,6 +92,14 @@ function Buses(props) {
                                             <Label className="col-sm-5">Cooperativa</Label>
                                             <div className="col-sm-7">
                                                 <Select asyncOptions={optionsCooperativa} defaultOption="Todos" onChange={onChange('cooperativa')} value={state.cooperativa}/>
+                                            </div>
+                                        </FormGroup>
+                                    </div>
+                                    <div className="col-sm-4">
+                                        <FormGroup className="row">
+                                            <Label className="col-sm-5">Estado</Label>
+                                            <div className="col-sm-7">
+                                                <Select asyncOptions={optionsEstado} defaultOption="Todos" onChange={onChange('estado')} value={state.estado} /> 
                                             </div>
                                         </FormGroup>
                                     </div>

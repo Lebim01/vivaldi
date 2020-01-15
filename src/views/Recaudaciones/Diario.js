@@ -237,7 +237,7 @@ class Diario extends React.Component {
                                     headerClass="text-center"
                                     tdBodyClass="text-center"
 
-                                    fieldNames={['Cooperativa', 'Localidad', 'Fecha venta', 'Cobrar', 'A cobrar', 'Cobrado', 'Fecha cobro', 'N.C', 'Total', 'Acción']}
+                                    fieldNames={['Cooperativa', 'Localidad', 'Fecha venta', 'Cobrar', 'A cobrar', 'Cobrado', 'Fecha cobro', 'N.C', 'Acción']}
                                     fields={[
                                         'cooperativa_nombre',
                                         'localidad_nombre',
@@ -248,7 +248,6 @@ class Diario extends React.Component {
                                         
                                         (row) => <span style={{float:"right", fontWeight: 300}}>{(row.fecha_cobro)}</span>,
                                         (row) => <span style={style_money_label}>${moneyFormat(row.nc)}</span>,
-                                        (row) => <span style={style_money_label}>${moneyFormat(row.total)}</span>,
                                         this.fieldImprimir
                                     ]}
 

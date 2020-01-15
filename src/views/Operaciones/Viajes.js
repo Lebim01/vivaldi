@@ -32,6 +32,7 @@ class Viajes extends React.Component {
         { value:'', label: 'Todos' },
         { value:1, label: 'Finalizados' }
     ]
+  
 
     onChange = name => (e) => {
         let value = e.target.value
