@@ -80,7 +80,7 @@ class Frecuencias extends React.Component {
                                                                 <Select 
                                                                     { ...this.state.cooperativa
                                                                         ? { asyncOptions : this.optionsCiudad({ cooperativa: this.state.cooperativa })  }
-                                                                        : { options : [{ label : 'Seleccione una cooperativa', value : '' }] }
+                                                                        : { options : [{ label : 'Seleccione un vendedor', value : '' }] }
                                                                     }
                                                                     onChange={this.onChange('ruta')} 
                                                                     value={this.state.ruta}

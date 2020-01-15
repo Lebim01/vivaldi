@@ -34,16 +34,16 @@ class ViajesBus extends React.Component {
         valueName: 'id' 
     }
 
-    /*optionsUsuarios = {
-        url : `${baseurl}/usuario/?tipo=1`,
-        labelName: 'tipo_usuario_puntoventa_nombre', 
+    optionsUsuarios  = (obj) => ({
+        url : `${baseurl}/usuario/${objectToUrl(obj)}`,
+        labelName: 'first_name', 
         valueName: 'id' , 
 
-    }*/
+    })
 
     optionsReporte = [
         { value: 1, label: 'Boletero' },
-        { value: 2, label: 'Supervisor' },
+        
     ]
 
     /*optionsReporte = [
@@ -130,9 +130,16 @@ class ViajesBus extends React.Component {
                                 </div>
                             </FormGroup>
                             <FormGroup className="row">
-                                <Label className="col-sm-6">Tipo Vendedor</Label>
+                                <Label className="col-sm-6">Vendedor</Label>
                                 <div className="col-sm-6">
-                                <Select options={this.optionsReporte} onChange={this.onChange('usuarios')} value={this.state.usuarios} />
+                                    <Select 
+                                        { ...this.state.cooperativa
+                                            ? { asyncOptions : this.optionsUsuarios({ cooperativa: this.state.cooperativa, tipo: 1 })  }
+                                            : { options : [{ label : 'Seleccione un vendedor', value : '' }] }
+                                        }
+                                        onChange={this.onChange('vendedor')} 
+                                        value={this.state.vendedor}
+                                    />
                                 </div>
                             </FormGroup>
                         </div>
