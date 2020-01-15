@@ -72,7 +72,7 @@ class Diario extends React.Component {
     fieldCobrar = (row) => {
         return (
             <React.Fragment>
-                { row.a_cobrar > 0 /*&& row.a_cobrar < 500*/ &&
+                { row.a_cobrar > 0 && row.cooperativa !== "(TOTAL)" &&
                     <Button outline onClick={() => this.cobrar(row)}>Cobrar</Button>
                 }
             </React.Fragment>
@@ -170,7 +170,7 @@ class Diario extends React.Component {
     fieldImprimir = (row) => {
         return (
             <React.Fragment>
-                { row.a_cobrar !== 0 /*&& row.a_cobrar < 8 */ &&
+                { row.a_cobrar !== 0 && row.cooperativa !== "(TOTAL)" &&
                     <Button outline onClick={() => this.toWord(row)}>Imprimir</Button>
                 }
             </React.Fragment>
