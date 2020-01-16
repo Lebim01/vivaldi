@@ -162,7 +162,7 @@ class EditConductor extends React.Component {
                         }}
                     />
                     <EditPersona 
-                        lengthCedula={10} 
+                        lengthCedula={[10,13]}
                         id={this.state.data.persona ? this.state.data.persona.id : null} 
                         persona={this.state.data.persona}
                         readOnly={this.state.data.readOnlyPersona} 
