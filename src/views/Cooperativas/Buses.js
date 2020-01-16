@@ -28,6 +28,7 @@ function Buses(props) {
     ]*/
 
    const optionsEstado = [
+        { value:'', label: 'Todos'},
         { value:'true', label: 'Habilitado' },
         { value:'false', label: 'Deshabilitado' },
     ]
@@ -96,7 +97,7 @@ function Buses(props) {
                                                     <FormGroup className="row">
                                                         <Label className="col-sm-5">Estado</Label>
                                                         <div className="col-sm-7">
-                                                            <Select asyncOptions={optionsEstado} defaultOption="Todos" onChange={onChange('estado')} value={state.estado} /> 
+                                                            <Select options={optionsEstado} defaultOption="Todos" onChange={onChange('estado')} value={state.estado} /> 
                                                         </div>
                                                     </FormGroup>
                                                 </div>
