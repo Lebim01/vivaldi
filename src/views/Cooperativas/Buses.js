@@ -97,7 +97,7 @@ function Buses(props) {
                                                     <FormGroup className="row">
                                                         <Label className="col-sm-5">Estado</Label>
                                                         <div className="col-sm-7">
-                                                            <Select options={optionsEstado} defaultOption="Todos" onChange={onChange('estado')} value={state.estado} /> 
+                                                            <Select options={optionsEstado} defaultOption="Todos" onChange={onChange('status')} value={state.status} /> 
                                                         </div>
                                                     </FormGroup>
                                                 </div>
