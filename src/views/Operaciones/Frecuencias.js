@@ -27,6 +27,12 @@ class Frecuencias extends React.Component {
         { value:2, label: 'Extraordinaria' },
     ]
 
+    optionsEstado = [
+        { value:'', label: 'Todos'},
+        { value:'true', label: 'Habilitado' },
+        { value:'false', label: 'Deshabilitado' },
+    ]
+
     onChange = name => (e) => {
         this.setState({
             [name]: e.target.value
@@ -113,6 +119,14 @@ class Frecuencias extends React.Component {
                                                             <Label className="col-sm-6">Fecha validez hasta</Label>
                                                             <div className="col-sm-6">
                                                                 <Input type="date" onChange={this.onChange('fecha_validez_hasta')} value={this.state.fecha_validez_hasta} />
+                                                            </div>
+                                                        </FormGroup>
+                                                    </div>
+                                                    <div className="col-sm-4">
+                                                        <FormGroup className="row">
+                                                            <Label className="col-sm-5">Estado</Label>
+                                                            <div className="col-sm-7">
+                                                                <Select options={this.optionsEstado} defaultOption="Todos" onChange={this.onChange('status')} value={this.state.status} /> 
                                                             </div>
                                                         </FormGroup>
                                                     </div>

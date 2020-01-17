@@ -280,7 +280,7 @@ class EditBuses extends React.Component {
     }
 
     getData = async (id) => {
-        const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/`)
+        const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/?full=1`)
 
         data.conductor = data.conductor || {}
         data.propietario = data.propietario || {}

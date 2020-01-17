@@ -91,7 +91,7 @@ class MainView extends React.Component {
 
     getEstablecimientoLocalidad = async (id) => {
         if(id){
-            const res = await axios.get(`${baseurl}/localidad/${id}`)
+            const res = await axios.get(`${baseurl}/localidad/${id}/`)
             this.setState({
                 establecimientoLocalidad: res.data.establecimiento
             })
@@ -381,7 +381,7 @@ class EditPuntoVenta extends React.Component {
     }
 
     getData = async (id) => {
-        const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/`)
+        const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/?full=1`)
         this.setState({
             id,
             data

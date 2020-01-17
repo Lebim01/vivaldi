@@ -12,6 +12,12 @@ function Rutas(props) {
         valueName: 'id'
     }
 
+    const optionsEstado = [
+        { value:'', label: 'Todos'},
+        { value:'true', label: 'Habilitado' },
+        { value:'false', label: 'Deshabilitado' },
+    ]
+
     const onChange = name => (e) => {
         setState({
             [name]: e.target.value
@@ -45,6 +51,14 @@ function Rutas(props) {
                                                         </div>
                                                     </FormGroup>
                                                 </div>
+                                                <div className="col-sm-4">
+                                                        <FormGroup className="row">
+                                                            <Label className="col-sm-5">Estado</Label>
+                                                            <div className="col-sm-7">
+                                                                <Select options={optionsEstado} defaultOption="Todos" onChange={onChange('status')} value={state.status} /> 
+                                                            </div>
+                                                        </FormGroup>
+                                                    </div>
                                             </div>
                                         }
 

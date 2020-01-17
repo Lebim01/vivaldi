@@ -14,6 +14,12 @@ function Conductores(props) {
         valueName: 'id'
     }
 
+    const optionsEstado = [
+        { value:'', label: 'Todos'},
+        { value:'true', label: 'Habilitado' },
+        { value:'false', label: 'Deshabilitado' },
+    ]
+
     const onChange = name => (e) => {
         setState({
             [name]: e.target.value
@@ -30,9 +36,9 @@ function Conductores(props) {
                             <ListPage
                                 exportExcel
                                 imprimirPantalla
-                                id="report"
+                                id="conductor"
                                 title="Listado de Conductores"
-                                showStatus= {true}
+                                
                                 key_permission="conductor"
 
                                 filtersZone = {
@@ -45,9 +51,18 @@ function Conductores(props) {
                                                 </div>
                                             </FormGroup>
                                         </div>
+                                        <div className="col-sm-4">
+                                                    <FormGroup className="row">
+                                                        <Label className="col-sm-5">Estado</Label>
+                                                        <div className="col-sm-7">
+                                                            <Select options={optionsEstado} defaultOption="Todos" onChange={onChange('status')} value={state.status} /> 
+                                                        </div>
+                                                    </FormGroup>
+                                                </div>
                                     </div>
                                 }
 
+                                showStatus= {true}
                                 searchable={true}
                                 searchPlaceholder="Cooperativa, Nombre, Identificación"
 

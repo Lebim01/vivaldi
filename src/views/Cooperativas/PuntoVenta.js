@@ -1,27 +1,33 @@
-import React from 'react'
-import { Card, CardBody, CardTitle, ListPage, FormGroup, Label, Select, Permission  } from 'temeforest'
+import React, {useState} from 'react'
+import { Card, CardBody, CardTitle, ListPage, Permission, FormGroup, Label, Select } from 'temeforest'
 import { htmlToXls } from 'utils/exportData'
 import { baseurl, objectToUrl } from 'utils/url'
 import { moneyFormat } from 'utils/number'
 
-class PuntoVenta extends React.Component {
+function PuntoVenta(props) {
 
-    //const [state, setState] = useState({})
-    state = {}
+    const [state, setState] = useState({})
+    
 
-    optionsCooperativa = {
+    const optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
         labelName: 'nombre',
         valueName: 'id' 
     }
 
-    onChange = name => (e) => {
-        this.setState({
+    const optionsEstado = [
+        { value:'', label: 'Todos'},
+        { value:'true', label: 'Habilitado' },
+        { value:'false', label: 'Deshabilitado' },
+    ]
+
+    const onChange = name => (e) => {
+        setState({
             [name]: e.target.value
         })
     }
 
-    renderCooperativas= (row)=>{
+    const renderCooperativas= (row)=>{
         return (
             <>
                 { !row.externo &&
@@ -46,8 +52,8 @@ class PuntoVenta extends React.Component {
         )
     }
  
-    render() {
-        const { state } = this.state
+   
+        
         return (
         <Permission key_permission="view_puntoventa" mode="redirect">
                 <div className="animated fadeIn">
@@ -68,7 +74,15 @@ class PuntoVenta extends React.Component {
                                                     <FormGroup className="row">
                                                         <Label className="col-sm-5">Cooperativa</Label>
                                                         <div className="col-sm-7">
-                                                            <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
+                                                            <Select asyncOptions={optionsCooperativa} defaultOption="Todos" onChange={onChange('cooperativa')} value={state.cooperativa}/>
+                                                        </div>
+                                                    </FormGroup>
+                                                </div>
+                                                <div className="col-sm-4">
+                                                    <FormGroup className="row">
+                                                        <Label className="col-sm-5">Estado</Label>
+                                                        <div className="col-sm-7">
+                                                            <Select options={optionsEstado} defaultOption="Todos" onChange={onChange('status')} value={state.status} /> 
                                                         </div>
                                                     </FormGroup>
                                                 </div>
@@ -80,7 +94,7 @@ class PuntoVenta extends React.Component {
                                         searchPlaceholder="Descripción, Cooperativa, Localidad"
 
                                         fieldNames={['Nombre', 'Cooperativa', 'Localidad']}
-                                        fields={['descripcion', this.renderCooperativas/* 'cooperativa_nombre', */,'localidad_nombre']}
+                                        fields={['descripcion', /*this.renderCooperativas*/, 'cooperativa_nombre', ,'localidad_nombre']}
 
                                         endpoint='venta/puntoventa'
                                         urlFront='cooperativas/punto-venta'
@@ -89,16 +103,16 @@ class PuntoVenta extends React.Component {
 
                                         
                                         parameters={
-                                            this.state
+                                            state
                                           }
 
                                         filters={{
                                             persist: true,
                                             callback: (parameters) => {
-                                                this.setState(parameters)
+                                                setState(parameters)
                                             }
                                         }}
-                                        history={this.props.history}
+                                        history={props.history}
                                     />
                                 </CardBody>
                             </Card>
@@ -108,7 +122,7 @@ class PuntoVenta extends React.Component {
             </Permission>
         )
     }
-}
+
 
 
 export default PuntoVenta

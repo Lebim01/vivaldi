@@ -1,8 +1,24 @@
-import React from 'react'
-import { Card, CardBody, ListPage, Permission } from 'temeforest'
+import React, { useState } from 'react'
+import { Card, CardBody, ListPage, Permission, Select, Label, FormGroup } from 'temeforest'
 
-class Gremios extends React.Component {
-    render(){
+
+function Gremios(props) {
+
+    const [state, setState] = useState({})
+
+    const optionsEstado = [
+        { value:'', label: 'Todos'},
+        { value:'true', label: 'Habilitado' },
+        { value:'false', label: 'Deshabilitado' },
+    ]
+
+    const onChange = name => (e) => {
+        setState({
+            [name]: e.target.value
+        })
+    }
+
+    
         return (
             <Permission key_permission="view_gremio" mode="redirect">
                 <div className="animated fadeIn">
@@ -15,6 +31,20 @@ class Gremios extends React.Component {
 
                                         key_permission="gremio"
 
+                                        filtersZone={
+
+                                            <div className="row">
+                                                <div className="col-sm-4">
+                                                    <FormGroup className="row">
+                                                        <Label className="col-sm-5">Estado</Label>
+                                                        <div className="col-sm-7">
+                                                            <Select options={optionsEstado} defaultOption="Todos" onChange={onChange('status')} value={state.status} /> 
+                                                        </div>
+                                                    </FormGroup>
+                                                </div>
+                                            </div>
+                                        }
+
                                         showStatus={true}
                                         searchable={true}
                                         searchPlaceholder="Nombre, Descripcion"
@@ -24,7 +54,7 @@ class Gremios extends React.Component {
 
                                         endpoint='gremio'
                                         urlFront='cooperativas/gremios'
-                                        history={this.props.history}
+                                        history={props.history}
                                     />
                                 </CardBody>
                             </Card>
@@ -34,6 +64,6 @@ class Gremios extends React.Component {
             </Permission>
         )
     }
-}
+
 
 export default Gremios

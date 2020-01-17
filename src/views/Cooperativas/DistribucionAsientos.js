@@ -1,8 +1,21 @@
-import React from 'react'
-import { Card, CardBody, ListPage, Permission } from 'temeforest'
+import React, { useState } from 'react'
+import { Card, CardBody, CardTitle, ListPage, FormGroup, Label, Select, Permission } from 'temeforest'
 
-class DistribucionAsientos extends React.Component {
-    render(){
+function DistribucionAsientos(props) {
+
+    const [state, setState] = useState({})
+
+    const optionsEstado = [
+        { value:'', label: 'Todos'},
+        { value:'true', label: 'Habilitado' },
+        { value:'false', label: 'Deshabilitado' },
+    ]
+
+    const onChange = name => (e) => {
+        setState({
+            [name]: e.target.value
+        })
+    }
         return (
             <Permission key_permission="view_bustipo" mode="redirect">
                 <div className="animated fadeIn">
@@ -17,6 +30,17 @@ class DistribucionAsientos extends React.Component {
                                         searchable={true}
                                         searchPlaceholder="Nombre"
 
+                                        filtersZone = {
+                                            <div className="col-sm-4">
+                                                    <FormGroup className="row">
+                                                        <Label className="col-sm-5">Estado</Label>
+                                                        <div className="col-sm-7">
+                                                            <Select options={optionsEstado} defaultOption="Todos" onChange={onChange('status')} value={state.status} /> 
+                                                        </div>
+                                                    </FormGroup>
+                                                </div>
+                                        }
+
                                         fieldNames={['Nombre', 'Capacidad']}
                                         fields={['nombre', 
                                         (row) => <span style={{textAlign:"right", position: 'relative', right:'-15%'}}>{row.capacidad}</span>
@@ -24,7 +48,7 @@ class DistribucionAsientos extends React.Component {
 
                                         endpoint='busTipo'
                                         urlFront='cooperativas/distribucion-asientos'
-                                        history={this.props.history}
+                                        history={props.history}
                                         parameters={{
                                           type: 'list'
                                         }}
@@ -36,7 +60,7 @@ class DistribucionAsientos extends React.Component {
                 </div>
             </Permission>
         )
-    }
+    
 }
 
 export default DistribucionAsientos
