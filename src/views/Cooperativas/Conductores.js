@@ -15,6 +15,7 @@ class Conductores extends React.Component {
 
                                         key_permission="conductor"
 
+                                        showStatus={true}
                                         searchable={true}
                                         searchPlaceholder="Cooperativa, Nombre, Identificación"
 

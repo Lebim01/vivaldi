@@ -104,7 +104,7 @@ function Buses(props) {
                                             </div>
                                         }
 
-
+                                        showStatus={true}
                                         searchable={true}
                                         searchPlaceholder="Cooperativa, Placa, Disco"
 

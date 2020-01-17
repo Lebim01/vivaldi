@@ -51,7 +51,7 @@ class Frecuencias extends React.Component {
                                             exportExcel
                                             imprimirPantalla
                                             id="frecuencia"
-
+                                            showStatus={true}
                                             key_permission="frecuencia"
 
                                         

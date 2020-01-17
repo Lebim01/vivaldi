@@ -41,6 +41,7 @@ class PuntoVenta extends React.Component {
 
                                         key_permission="puntoventa"
                                         
+                                        showStatus={true}
                                         searchable={true}
                                         searchPlaceholder="Descripción, Cooperativa, Localidad"
 

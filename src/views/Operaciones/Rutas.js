@@ -30,7 +30,7 @@ function Rutas(props) {
                                         exportExcel
                                         imprimirPantalla
                                         id="report"
-
+                                        showStatus={true}
                                         key_permission="ruta"
 
                                         title='Listado de Rutas'

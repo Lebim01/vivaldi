@@ -15,6 +15,7 @@ class Gremios extends React.Component {
 
                                         key_permission="gremio"
 
+                                        showStatus={true}
                                         searchable={true}
                                         searchPlaceholder="Nombre, Descripcion"
 

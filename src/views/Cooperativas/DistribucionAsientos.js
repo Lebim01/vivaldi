@@ -13,6 +13,7 @@ class DistribucionAsientos extends React.Component {
                                     <ListPage
                                         title="Listado de Distribución de Asientos"
 
+                                        showStatus={true}
                                         searchable={true}
                                         searchPlaceholder="Nombre"
 

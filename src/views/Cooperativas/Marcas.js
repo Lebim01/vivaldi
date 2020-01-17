@@ -15,6 +15,7 @@ class Provincias extends React.Component {
 
                                         key_permission="marca"
                                         
+                                        showStatus={true}
                                         searchable={true}
                                         searchPlaceholder="Nombre"
 
