@@ -32,7 +32,7 @@ function Conductores(props) {
                                 imprimirPantalla
                                 id="report"
                                 title="Listado de Conductores"
-
+                                showStatus= {true}
                                 key_permission="conductor"
 
                                 filtersZone = {
