@@ -15,6 +15,7 @@ class Usuarios extends React.Component {
 
                                     key_permission="user"
 
+                                    showStatus={true}
                                     searchable={true}
                                     searchPlaceholder="Usuario, Nombre"
 

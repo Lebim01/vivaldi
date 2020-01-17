@@ -15,6 +15,7 @@ class Ciudades extends React.Component {
 
                                         key_permission="ciudad"
 
+                                        showStatus={true}
                                         searchable={true}
                                         searchPlaceholder="Nombre, Provincia"
 

@@ -25,6 +25,7 @@ function Andenes(props) {
 
                                     key_permission="anden"
 
+                                    showStatus={true}
                                     searchable={true}
                                     searchPlaceholder="Descripción"
 

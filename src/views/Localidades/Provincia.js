@@ -15,6 +15,7 @@ class Provincias extends React.Component {
 
                                         key_permission='provincia'
 
+                                        showStatus={true}
                                         searchable={true}
                                         searchPlaceholder="Nombre"
 

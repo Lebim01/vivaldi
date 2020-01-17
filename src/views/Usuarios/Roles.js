@@ -15,7 +15,7 @@ class Roles extends React.Component {
 
                                     key_permission="group"
 
-
+                                    showStatus={true}
                                     searchable={true}
                                     searchPlaceholder="Rol, Descripción"
                                     searchFields={['name', 'description']}
