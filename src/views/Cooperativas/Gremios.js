@@ -8,8 +8,8 @@ function Gremios(props) {
 
     const optionsEstado = [
         { value:'', label: 'Todos'},
-        { value:'true', label: 'Habilitado' },
-        { value:'false', label: 'Deshabilitado' },
+        { value:'true', label: 'Activo' },
+        { value:'false', label: 'Inactivo' },
     ]
 
     const onChange = name => (e) => {

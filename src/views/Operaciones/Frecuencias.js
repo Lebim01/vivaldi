@@ -29,8 +29,8 @@ class Frecuencias extends React.Component {
 
     optionsEstado = [
         { value:'', label: 'Todos'},
-        { value:'true', label: 'Habilitado' },
-        { value:'false', label: 'Deshabilitado' },
+        { value:'true', label: 'Activo' },
+        { value:'false', label: 'Inactivo' },
     ]
 
     onChange = name => (e) => {
