@@ -31,7 +31,7 @@ class RecordRow extends React.Component {
     }
 
     render(){
-        const { fields, record, context } = this.props
+        const { fields, record, context, showStatus } = this.props
 
         return (
             <tr key={record.id} onDoubleClick={this.onRowDoubleClick}>
@@ -43,6 +43,7 @@ class RecordRow extends React.Component {
                         </td>
                     )
                 })}
+                { showStatus && <td className={record.className}>{record['is_active'] ? 'Activo' : 'Inactivo'}</td> }
             </tr>
         )
     }
@@ -65,7 +66,6 @@ class ListPage extends React.Component {
         // 
         numBeginVisibleFooterPages : 1,
         numEndVisibleFooterPages : 1,
-
         cancelRequest : null
     }
 
@@ -135,7 +135,7 @@ class ListPage extends React.Component {
                 }
 
                 const { data } = await axios.get(
-                    `${baseurl}/${this.props.endpoint}/${objectToUrl({ ...parameters, searchtext: search, page : currentPage })}`, 
+                    `${baseurl}/${this.props.endpoint}/${objectToUrl({ ...parameters, searchtext: search, page : currentPage, full: 1})}`,
                     { ...this.props.config },
                     { 
                         cancelToken: new CancelToken((c) => {
@@ -359,6 +359,7 @@ class ListPage extends React.Component {
                                         { (fieldNames.length > 0) &&
                                             <tr>
                                                 {fieldNames.map((fieldName, i) => <th className={this.props.headerClass} key={i} scope="col">{fieldName}</th>)}
+                                                {this.props.showStatus && <th scope="col">Estado</th>}
                                             </tr>
                                         }
                                         { (head.length > 0) &&
@@ -396,6 +397,7 @@ class ListPage extends React.Component {
                                                 context={context} 
                                                 fields={fields} 
                                                 key={i} 
+                                                showStatus={this.props.showStatus}
                                                 onDoubleClick={() => this.onRowDoubleClick(record.id, record)} 
                                             />
                                         )}
@@ -453,7 +455,7 @@ ListPage.defaultProps = {
     parameters : {},
     redirect: true,
     actionsButtons: [],
-    
+    showStatus: false,
     filters : {
         persist: true,
         callback : () => {
