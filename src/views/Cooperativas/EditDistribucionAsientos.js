@@ -302,7 +302,7 @@ class EditDistribucionAsientos extends React.Component {
     }
 
     getData = async (id) => {
-        const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/?full = 1`)
+        const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/?full=1`)
 
         data.niveles = []
         for(let i in data.filas){

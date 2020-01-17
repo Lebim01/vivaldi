@@ -14,6 +14,12 @@ function Usuarios(props) {
         valueName: 'id'
     }
 
+    const optionsEstado = [
+        { value:'', label: 'Todos'},
+        { value:'true', label: 'Activo' },
+        { value:'false', label: 'Inactivo' },
+    ]
+
     const onChange = name => (e) => {
         setState({
             [name]: e.target.value
@@ -42,6 +48,14 @@ function Usuarios(props) {
                                                 <Label className="col-sm-5">Cooperativa</Label>
                                                 <div className="col-sm-7">
                                                     <Select asyncOptions={optionsCooperativa} defaultOption="Todos" onChange={onChange('cooperativa')} value={state.cooperativa}/>
+                                                </div>
+                                            </FormGroup>
+                                        </div>
+                                        <div className="col-sm-4">
+                                            <FormGroup className="row">
+                                                <Label className="col-sm-5">Estado</Label>
+                                                <div className="col-sm-7">
+                                                    <Select options={optionsEstado} defaultOption="Todos" onChange={onChange('status')} value={state.status} /> 
                                                 </div>
                                             </FormGroup>
                                         </div>

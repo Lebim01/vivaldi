@@ -1,7 +1,15 @@
-import React from 'react'
-import { ListPage, Card, CardBody, Permission } from 'temeforest'
+import React, {useState} from 'react'
+import { ListPage, Card, CardBody, Permission, FormGroup, Label, Select } from 'temeforest'
 
 function Andenes(props) {
+
+    const [state, setState] = useState({})
+
+    const optionsEstado = [
+        { value:'', label: 'Todos'},
+        { value:'true', label: 'Activo' },
+        { value:'false', label: 'Inactivo' },
+    ]
 
     const puertasAndenes = (row) => {
         return (
@@ -11,6 +19,12 @@ function Andenes(props) {
                 )}
             </ul>
         )
+    }
+
+    const onChange = name => (e) => {
+        setState({
+            [name]: e.target.value
+        })
     }
 
     return (
@@ -24,6 +38,17 @@ function Andenes(props) {
                                     title="Listado de Andenes"
 
                                     key_permission="anden"
+
+                                    filtersZone = {
+                                        <div className="col-sm-4">
+                                            <FormGroup className="row">
+                                                <Label className="col-sm-5">Estado</Label>
+                                                <div className="col-sm-7">
+                                                    <Select options={optionsEstado} defaultOption="Todos" onChange={onChange('status')} value={state.status} /> 
+                                                </div>
+                                            </FormGroup>
+                                        </div>
+                                    }
 
                                     showStatus={true}
                                     searchable={true}

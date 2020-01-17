@@ -37,7 +37,7 @@ class MainView extends React.Component {
     }
 
     getNiveles = async (id)  => {
-        const results = await getResults(`${baseurl}/localidadnivel/?localidad=${id}`)
+        const results = await getResults(`${baseurl}/localidadnivel/?localidad=${id}/`)
         let options = [...this.seleccione, ...results.map((r) => { return { value : r.id, label : r.nombre } })]
         this.setState({
             niveles : options
@@ -127,7 +127,7 @@ class EditAndenes extends React.Component {
     }
 
     getData = async (id) => {
-        const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/`)
+        const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/?full=1`)
         this.setState({
             id,
             data

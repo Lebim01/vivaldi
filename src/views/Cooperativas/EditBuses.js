@@ -203,8 +203,8 @@ class MainView extends React.Component {
                             element: <Input type="date" onChange={this.onChange('fecha_vencimiento_matricula')} value={this.props.fecha_vencimiento_matricula} />
                         }}
                     />
-
-                    
+                    <br></br>
+                    <br></br>
 
                     {/** PROPIETARIO Y CONDUCTOR  */}
                     <div className="row">
