@@ -27,7 +27,7 @@ function Usuarios(props) {
     }
 
     return (
-        <Permission key_permission="view_usuarios" mode="redirect">
+        
         <div className="animated fadeIn">
                 <div className="row">
                     <div className="col-sm-12">
@@ -36,10 +36,10 @@ function Usuarios(props) {
                                 <ListPage
                                     title="Listado de Usuarios"
 
-                                    key_permission="user"
-                                    exportExcel
-                                    imprimirPantalla
-                                    id="report"
+                                    key_permission="users"
+                                    //exportExcel
+                                    //imprimirPantalla
+                                    //id="report"
                                
                                     filtersZone = {
                                     <div className="row">
@@ -97,7 +97,7 @@ function Usuarios(props) {
                     </div>
                 </div>
             </div>
-    </Permission>
+    
     )
 }
 
