@@ -4,11 +4,11 @@ import { htmlToXls } from 'utils/exportData'
 import { baseurl } from 'utils/url'
 import { moneyFormat } from 'utils/number'
 
-function Buses(props) {
+class Buses extends React.Component{
 
-    const [state, setState] = useState({})
+    state = {}
 
-    const optionsCooperativa = {
+    optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
         labelName: 'nombre',
         valueName: 'id'
@@ -27,19 +27,19 @@ function Buses(props) {
         { value : '2', label : 'Inactivo' },
     ]*/
 
-   const optionsEstado = [
+    optionsEstado = [
         { value:'', label: 'Todos'},
         { value:'true', label: 'Activo' },
         { value:'false', label: 'Inactivo' },
     ]
 
-    const onChange = name => (e) => {
-        setState({
+    onChange = name => (e) => {
+        this.setState({
             [name]: e.target.value
         })
     }
 
-    const exportExcel = (data) => {
+    exportExcel = (data) => {
         const html = `
             <table>
                 <tr>
@@ -67,6 +67,7 @@ function Buses(props) {
         htmlToXls(html)
     }
     //const { estado } = this.state
+    render(){
     return (
         <Permission key_permission="view_bus" mode="redirect">
             <div className="animated fadeIn">
@@ -76,7 +77,7 @@ function Buses(props) {
                             <CardBody>
                                 <div className="col-sm-12">
                                     <ListPage
-                                        //exportExcel
+                                        exportExcel
                                         imprimirPantalla
                                         id="report"
                                         key_permission= "bus"
@@ -89,7 +90,7 @@ function Buses(props) {
                                                     <FormGroup className="row">
                                                         <Label className="col-sm-5">Cooperativa</Label>
                                                         <div className="col-sm-7">
-                                                            <Select asyncOptions={optionsCooperativa} defaultOption="Todos" onChange={onChange('cooperativa')} value={state.cooperativa}/>
+                                                            <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
                                                         </div>
                                                     </FormGroup>
                                                 </div>
@@ -97,7 +98,7 @@ function Buses(props) {
                                                     <FormGroup className="row">
                                                         <Label className="col-sm-5">Estado</Label>
                                                         <div className="col-sm-7">
-                                                            <Select options={optionsEstado} defaultOption="Todos" onChange={onChange('status')} value={state.status} /> 
+                                                            <Select options={this.optionsEstado} defaultOption="Todos" onChange={this.onChange('status')} value={this.state.status} /> 
                                                         </div>
                                                     </FormGroup>
                                                 </div>
@@ -121,17 +122,21 @@ function Buses(props) {
                                         endpoint='bus'
                                         urlFront='cooperativas/buses'
 
-                                        exportExcel={exportExcel}
+                                        //exportExcel={exportExcel}
 
-                                        history={props.history}
-                                        parameters={{
-                                            ...state,
-                                            type: 'list'
-                                        }}
+                                         
+                                        parameters={
+                                            this.state
+                                          }
+
                                         filters={{
                                             persist: true,
-                                            callback: setState
+                                            callback: (parameters) => {
+                                                this.setState(parameters)
+                                            }
                                         }}
+                                        history={this.props.history}
+                                        
                                     />
                                 </div>
                             </CardBody>
@@ -142,6 +147,7 @@ function Buses(props) {
             </div>
         </Permission>
     )
+}
 }
 
 export default Buses

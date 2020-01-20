@@ -4,28 +4,29 @@ import { htmlToXls } from 'utils/exportData'
 import { baseurl } from 'utils/url'
 import { moneyFormat } from 'utils/number'
 
-function Conductores(props) {
+class Conductores extends React.Component {
 
-    const [state, setState] = useState({})
+    state = {}
 
-    const optionsCooperativa = {
+    optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
         labelName: 'nombre',
         valueName: 'id'
     }
 
-    const optionsEstado = [
+    optionsEstado = [
         { value:'', label: 'Todos'},
         { value:'true', label: 'Activo' },
         { value:'false', label: 'Inactivo' },
     ]
 
-    const onChange = name => (e) => {
-        setState({
+    onChange = name => (e) => {
+        this.setState({
             [name]: e.target.value
         })
     }
 
+    render() {
     return (
         <Permission key_permission="view_conductor" mode="redirect">
         <div className="animated fadeIn">
@@ -47,7 +48,7 @@ function Conductores(props) {
                                             <FormGroup className="row">
                                                 <Label className="col-sm-5">Cooperativa</Label>
                                                 <div className="col-sm-7">
-                                                    <Select asyncOptions={optionsCooperativa} defaultOption="Todos" onChange={onChange('cooperativa')} value={state.cooperativa}/>
+                                                    <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
                                                 </div>
                                             </FormGroup>
                                         </div>
@@ -55,7 +56,7 @@ function Conductores(props) {
                                                     <FormGroup className="row">
                                                         <Label className="col-sm-5">Estado</Label>
                                                         <div className="col-sm-7">
-                                                            <Select options={optionsEstado} defaultOption="Todos" onChange={onChange('status')} value={state.status} /> 
+                                                            <Select options={this.optionsEstado} defaultOption="Todos" onChange={this.onChange('status')} value={this.state.status} /> 
                                                         </div>
                                                     </FormGroup>
                                                 </div>
@@ -74,15 +75,17 @@ function Conductores(props) {
 
                                 //exportExcel={exportExcel}
 
-                                history={props.history}
-                                parameters={{
-                                    ...state,
-                                    type: 'list'
-                                }}
+                                parameters={
+                                    this.state
+                                  }
+
                                 filters={{
-                                persist: true,
-                                callback: setState
+                                    persist: true,
+                                    callback: (parameters) => {
+                                        this.setState(parameters)
+                                    }
                                 }}
+                                history={this.props.history}
                             />
                         </CardBody>
                     </Card>
@@ -91,6 +94,7 @@ function Conductores(props) {
         </div>
     </Permission>
     )
+}
 }
 
 export default Conductores

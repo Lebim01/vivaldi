@@ -2,28 +2,29 @@ import React, { useState } from 'react'
 import { ListPage, Card, CardBody, CardTitle, FormGroup, Label, Select, Button, Permission } from 'temeforest'
 import { baseurl, objectToUrl } from 'utils/url'
 
-function Rutas(props) {
+class Rutas extends React.Component{
 
-    const [state, setState] = useState({})
+    state = {}
 
-    const optionsCooperativa = {
+    optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
         labelName: 'nombre',
         valueName: 'id'
     }
 
-    const optionsEstado = [
+    optionsEstado = [
         { value:'', label: 'Todos'},
         { value:'true', label: 'Activo' },
         { value:'false', label: 'Inactivo' },
     ]
 
-    const onChange = name => (e) => {
-        setState({
+    onChange = name => (e) => {
+        this.setState({
             [name]: e.target.value
         })
     }
 
+    render(){
     return (
         <Permission key_permission="view_ruta" mode="redirect">
             <div className="animated fadeIn">
@@ -47,7 +48,7 @@ function Rutas(props) {
                                                     <FormGroup className="row">
                                                         <Label className="col-sm-6">Cooperativa</Label>
                                                         <div className="col-sm-6">
-                                                            <Select asyncOptions={optionsCooperativa} defaultOption="Todos" onChange={onChange('cooperativa')} value={state.cooperativa}/>
+                                                            <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
                                                         </div>
                                                     </FormGroup>
                                                 </div>
@@ -55,7 +56,7 @@ function Rutas(props) {
                                                         <FormGroup className="row">
                                                             <Label className="col-sm-5">Estado</Label>
                                                             <div className="col-sm-7">
-                                                                <Select options={optionsEstado} defaultOption="Todos" onChange={onChange('status')} value={state.status} /> 
+                                                                <Select options={this.optionsEstado} defaultOption="Todos" onChange={this.onChange('status')} value={this.state.status} /> 
                                                             </div>
                                                         </FormGroup>
                                                     </div>
@@ -70,15 +71,20 @@ function Rutas(props) {
 
                                         endpoint='ruta'
                                         urlFront='operaciones/rutas'
-                                        history={props.history}
-                                        parameters={{
-                                          ...state,
-                                          type: 'list'
-                                        }}
+                                        
+
+                                        parameters={
+                                            this.state
+                                          }
+
                                         filters={{
                                             persist: true,
-                                            callback: setState
+                                            callback: (parameters) => {
+                                                this.setState(parameters)
+                                            }
                                         }}
+                                        history={this.props.history}
+                                        
                                     />
                                 </div>
                             </CardBody>
@@ -89,5 +95,7 @@ function Rutas(props) {
         </Permission>
     )
 }
+}
+
 export default Rutas
 
