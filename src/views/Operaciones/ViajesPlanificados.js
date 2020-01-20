@@ -15,10 +15,13 @@ class ViajesPlanificados extends React.Component {
     state = {
         data : {
             fecha: moment().format('YYYY-MM-DD'),
+            saldo : true
+            
         },
         modal : {
             show: false
         }
+        
     }
 
     componentDidMount(){
@@ -87,6 +90,7 @@ class ViajesPlanificados extends React.Component {
 
     render(){
         const { cooperativa, localidad, silo, estado } = this.state.data
+        
 
         let headers = ['#','Cooperativa', 'Disco', 'Placa', 'Saldo', 'Duración', 'Salida', 'Destino']
         let fields = ['', 
@@ -154,13 +158,13 @@ class ViajesPlanificados extends React.Component {
                                                 <div className="col-sm-3"></div>
                                                 <div className="col-sm-9">
                                                     <div className="custom-control custom-checkbox">
-                                                        <input type="checkbox" className="custom-control-input" id="saldo" name="saldo" checked={this.state.saldo} onChange={this.onChange('saldo')} />
+                                                        <input type="checkbox" className="custom-control-input" id="saldo" name="saldo" checked={this.state.data.saldo} onChange={this.onChange('saldo')} />
                                                         <Label onlyClassName="custom-control-label" htmlFor="saldo">Mostrar saldo</Label>
                                                     </div>
                                                 </div>
                                             </FormGroup>
                                             <FormGroup className="row">
-                                                <div className="col-sm-6"></div>
+                                                <div className="col-sm-3"></div>
                                                 <div className="col-sm-9">
                                                     <div className="custom-control custom-checkbox">
                                                         <input type="checkbox" className="custom-control-input" id="duracion" name="duracion" checked={this.state.duracion} onChange={this.onChange('duracion')} />
@@ -192,7 +196,7 @@ class ViajesPlanificados extends React.Component {
                                             fields={fields}
                                             tdBodyClass="margin: 0 !important;padding: 0 !important;"
                                             tdBodyClass={(row) => {
-                                                let ya_salio = moment(`${moment().format('YYYY-MM-DD')} ${row.hora_salida}`).isAfter(moment());
+                                                let ya_salio = moment(`${moment('YYYY-MM-DD')} ${row.hora_salida}`).isAfter(moment());
 
                                                 if(row.conductor_puntos === 0) return 'bg-danger'
                                                 if(row.saldo === 0) return 'bg-orange'
