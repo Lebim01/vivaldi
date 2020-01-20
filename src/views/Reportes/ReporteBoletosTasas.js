@@ -133,13 +133,15 @@ class ReporteBoletosTasas extends React.Component {
                                                 searchable={false}
                                                 
 
-                                                fieldNames={['Cooperativa','Boleto normal', 'Boleto especial', 'Normal anulado', 'Especial anulado', 'Total boleto', 'Total tasa']}
+                                                fieldNames={['Cooperativa',
+                                                'Boleto normal', 'Boleto especial', 'Normal anulado', 'Especial anulado', 'Total boleto', 'Total tasa']}
                                                 fields={[
                                                     'cooperativa',
-                                                    (row) => <span style={{float:"right"}}>{row.boleto_normal}</span>,
-                                                    (row) => <span style={{float:"right"}}>{row.boleto_especial}</span>,
-                                                    (row) => <span style={{float:"right"}}>{row.normal_anulado}</span>,
-                                                    (row) => <span style={{float:"right"}}>{row.especial_anulado}</span>,
+                                                    (row) => <span style={{ textAlign:"right", position: 'relative', right:'-70%'}}>{row.boleto_normal}</span>,
+
+                                                    (row) => <span style={{textAlign:"right", position: 'relative', right:'-80%'}}>{row.boleto_especial}</span>,
+                                                    (row) => <span style={{textAlign:"right", position: 'relative', right:'-80%'}}>{row.normal_anulado}</span>,
+                                                    (row) => <span style={{textAlign:"right", position: 'relative', right:'-80%'}}>{row.especial_anulado}</span>,
                                                     (row) => <span style={{float:"right"}}>$ {moneyFormat(row.total_boleto)}</span>,
                                                     (row) => <span style={{float:"right"}}>$ {moneyFormat(row.total_tasa)}</span>,
                                                 ]}
