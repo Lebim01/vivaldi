@@ -94,7 +94,7 @@ class PuntoVenta extends React.Component{
                                         searchPlaceholder="Descripción, Cooperativa, Localidad"
 
                                         fieldNames={['Nombre', 'Cooperativa', 'Localidad']}
-                                        fields={['descripcion', this.renderCooperativas /*, 'cooperativa_nombre', ,'localidad_nombre'*/]}
+                                        fields={['descripcion', this.renderCooperativas /*, 'cooperativa_nombre',*/ ,'localidad_nombre']}
 
                                         endpoint='venta/puntoventa'
                                         urlFront='cooperativas/punto-venta'
