@@ -102,9 +102,10 @@ class PuntoVenta extends React.Component{
                                         //exportExcel={exportExcel}
 
                                         
-                                        parameters={
-                                            this.state
-                                          }
+                                        parameters={{
+                                            ...this.state,
+                                            type: 'list'
+                                          }}
 
                                         filters={{
                                             persist: true,

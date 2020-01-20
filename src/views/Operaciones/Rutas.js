@@ -73,9 +73,10 @@ class Rutas extends React.Component{
                                         urlFront='operaciones/rutas'
                                         
 
-                                        parameters={
-                                            this.state
-                                          }
+                                        parameters={{
+                                            ...this.state,
+                                            type: 'list'
+                                          }}
 
                                         filters={{
                                             persist: true,
