@@ -201,7 +201,7 @@ class ViajesPlanificados extends React.Component {
                                                 if(row.conductor_puntos === 0) return 'bg-danger'
                                                 if(row.saldo === 0) return 'bg-orange-300'
                                                 if(ya_salio) return 'bg-info'
-                                                return ''
+                                                return 'bg-info'
                                             }}
                                             endpoint='venta/viajes-planificados'
                                             parameters={this.state.data}
