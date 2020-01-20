@@ -153,8 +153,8 @@ class Viajes extends React.Component {
                                             }
 
                                             searchable={false}
-                                            fieldNames={['Frecuencia','Hora salida', 'Cooperativa', 'Disco', 'Ruta']}
-                                            fields={['frecuencia_nombre', 'hora_salida', 'cooperativa_nombre',
+                                            fieldNames={['Fecha', 'Frecuencia','Hora salida', 'Pasajeros','Cooperativa', 'Disco', 'Ruta']}
+                                            fields={['fecha','frecuencia_nombre', 'hora_salida', 'pasajeros', 'cooperativa_nombre',
                                             (row) => <span style={{textAlign:"right", position: 'relative', right:'-40%'}}>{row.bus_disco}</span>,
                                             'ruta_nombre']}
 
