@@ -239,13 +239,13 @@ class Diario extends React.Component {
 
                                     fieldNames={['Cooperativa', 'Localidad', 'Fecha venta', 'Cobrar', 'A cobrar', 'Cobrado', 'Fecha cobro', 'N.C', 'Acción']}
                                     fields={[
-                                        'cooperativa_nombre',
+                                        (row) => <span style={{float:"left", fontWeight: 300}}>{(row.cooperativa_nombre)}</span>,
                                         'localidad_nombre',
                                         'fecha_venta',
                                         this.fieldCobrar,
                                         (row) => <span style={style_money_label}>${moneyFormat(row.a_cobrar)}</span>,
                                         (row) => <span style={style_money_label}>${moneyFormat(row.cobrado)}</span>,
-                                        
+
                                         (row) => <span style={{float:"right", fontWeight: 300}}>{(row.fecha_cobro)}</span>,
                                         (row) => <span style={style_money_label}>${moneyFormat(row.nc)}</span>,
                                         this.fieldImprimir
