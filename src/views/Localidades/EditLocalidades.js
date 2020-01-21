@@ -381,6 +381,12 @@ class MainView extends React.Component {
                                 </div>
                             </FormGroup>
                             <FormGroup className="row">
+                                <Label className='col-sm-3'>Punto Emisi&oacute;n Solicitudes Contingencia</Label>
+                                <div className='col-sm-2'>
+                                    <Input type='text' value={this.props.punto_emision_contingencias} onChange={this.onChange('punto_emision_contingencias')} />
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
                                 <Label className='col-sm-3'>Leyenda Ride</Label>
                                 <div className='col-sm-5'>
                                     <Input type='textarea' rows='9' value={this.props.leyenda_ride} onChange={this.onChange('leyenda_ride')} />
@@ -388,12 +394,6 @@ class MainView extends React.Component {
                             </FormGroup>
                             </div>
                         }
-                        <FormGroup className="row">
-                            <Label className='col-sm-3'>Punto Emisi&oacute;n Contingencias</Label>
-                            <div className='col-sm-3'>
-                                <Input type='text' value={this.props.punto_emision_contingencias} onChange={this.onChange('punto_emision_contingencias')} />
-                            </div>
-                        </FormGroup>
                     </fieldset>
                     <fieldset>
                       <FormGroup className="row">

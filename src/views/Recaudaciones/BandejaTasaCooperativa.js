@@ -69,11 +69,61 @@ class BandejaTasaCooperativa extends React.Component {
     }
 
     async toWord(row){
-        const res = await axios.get(`${baseurl}/venta/solicitud_tasacontingencia/${row.id}/tasas`)
-        let html = ''
+        const res = await axios.get(`${baseurl}/venta/solicitud_tasacontingencia/${row.id}/tasas/`)
+        let valor = (res.data.tasas.length * res.data.tasas[0].valor).toFixed(2);
+        let unitario = res.data.tasas[0].valor.toFixed(2);
+        let html = `
+            <div style="margin-bottom: 10px; border-bottom: 1px solid black; width: 300px; text-align: center;">
+            <p style="margin-top: 5px; margin-bottom: 5px;">${res.data.localidad_razon_social}</p>
+            <p style="margin-top: 5px; margin-bottom: 5px;">RUC: ${res.data.localidad_ruc}</p>
+            <p style="margin-top: 5px; margin-bottom: 5px;">Direccion: ${res.data.localidad_direccion}</p>
+            <div style="padding-top: 5px; margin-bottom: 10px; border-bottom: 0.5px dotted black; width: 300px; text-align:left">
+                <p style="margin-top: 5px; margin-bottom: 5px;">Fecha: ${res.data.fecha_emision}</p>
+                <p style="margin-top: 5px; margin-bottom: 5px;">Nombre: ${res.data.cooperativa_nombre}</p>
+                <p style="margin-top: 5px; margin-bottom: 5px;">RUC: ${res.data.cooperativa_ruc}</p>
+                <p style="margin-top: 5px; margin-bottom: 5px;">Factura: ${res.data.numero}</p>
+                <p style="margin-top: 5px; margin-bottom: 5px;word-break: break-all;">${res.data.clave_acceso}</p>
+            </div>
+            <div style="padding-top: 5px; margin-bottom: 10px; width: 300px; text-align:left">
+                <table>
+                    <thead>
+                        <tr>
+                        <th>Cant</th>
+                        <th>Descripcion</th>
+                        <th>Valor</th>
+                        <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <td>${res.data.tasas.length}</td>
+                        <td>TASAS DE CONTINGENCIA</td>
+                        <td>${unitario}</td>
+                        <td>$${valor}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="padding-top: 5px; margin-bottom: 10px; width: 300px; text-align:right;">
+                <table style="margin:0 0 0 auto;">
+                    <tr>
+                        <th>Subtotal</th>
+                        <td>$${valor}</td>
+                    </tr>
+                    <tr>
+                        <th>IVA 12%</th>
+                        <td>$0.00</td>
+                    </tr>
+                    <tr>
+                        <th>Total</th>
+                        <td>$${valor}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>`
 
-        for(let i in res.data){
-            let row = res.data[i]
+        for(let i in res.data.tasas){
+            let row = res.data.tasas[i]
             html += await this.rowToHtml(row)
         }
 
