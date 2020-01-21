@@ -197,11 +197,12 @@ class ViajesPlanificados extends React.Component {
                                             tdBodyClass="margin: 0 !important;padding: 0 !important;"
                                             tdBodyClass={(row) => {
                                                 let ya_salio = moment(`${moment('YYYY-MM-DD')} ${row.hora_salida}`).isAfter(moment());
+                                                //let no_salio = moment(`${moment('YYYY-MM-DD')} ${row.hora_salida}`).isBefore(moment());
 
                                                 if(row.conductor_puntos === 0) return 'bg-danger'
                                                 if(row.saldo === 0) return 'bg-orange-300'
                                                 if(ya_salio) return 'bg-info'
-                                                return 'bg-info'
+                                                /*if(no_salio) */ return ''
                                             }}
                                             endpoint='venta/viajes-planificados'
                                             parameters={this.state.data}

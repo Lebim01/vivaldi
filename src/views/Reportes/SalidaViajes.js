@@ -76,15 +76,16 @@ class SalidaViajes extends React.Component {
                             </div>
                         }
                         searchable={false}
-                        fieldNames={['Viaje', 'Cooperativa', 'Fecha salida', 'Destino', 'Parada', 'Cantidad', 'Total']}
+                        fieldNames={['Viaje', 'Cooperativa', 'Fecha salida', 'Destino', 'Parada', '  Cantidad', 
+                        '   Total']}
                         fields={[
                             'viaje',
                             'cooperativa',
                             'fecha_salida',
                             'destino',
                             'parada',
-                            (row) => <span style={{ textAlign:"right", position: 'relative', right:'-50%'}}>{row.pasajeros}</span>,
-                            (row) => <span style={{ textAlign:"right", position: 'relative', right:'-40%'}}>{row.total}</span>
+                            (row) => <span style={{ textAlign:"right", position: 'relative', right:'-60%'}}>{row.pasajeros}</span>,
+                            (row) => <span style={{ textAlign:"right", position: 'relative', right:'-50%'}}>${moneyFormat(row.total)}</span>
                             
                         ]}
 
