@@ -65,7 +65,7 @@ class EditMarcas extends React.Component {
     render(){
         const { id, data } = this.state
         return (
-            <MainView id={id} data={data} {...data} history={this.props.history} onChange={this.onChange} />
+            <MainView id={id} data={data} {...data} history={this.props.history} onChange={this.onChange} key_permission="marca" />
         )
     }
 }

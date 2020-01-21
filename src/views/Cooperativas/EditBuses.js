@@ -320,7 +320,7 @@ class EditBuses extends React.Component {
     render(){
         const { id, data } = this.state
         return (
-            <MainView id={id} history={this.props.history} parseData={this.parseData} data={data} {...data} onChange={this.onChange} onChangeFile={this.onChangeFile}/>
+            <MainView id={id} history={this.props.history} parseData={this.parseData} data={data} {...data} onChange={this.onChange} onChangeFile={this.onChangeFile} key_permission="bus"/>
         )
     }
 }

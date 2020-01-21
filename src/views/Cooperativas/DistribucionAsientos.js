@@ -32,18 +32,19 @@ function DistribucionAsientos(props) {
 
                                         filtersZone = {
                                             <div className="col-sm-4">
-                                                    <FormGroup className="row">
-                                                        <Label className="col-sm-5">Estado</Label>
-                                                        <div className="col-sm-7">
-                                                            <Select options={optionsEstado} defaultOption="Todos" onChange={onChange('status')} value={state.status} /> 
-                                                        </div>
-                                                    </FormGroup>
-                                                </div>
+                                                <FormGroup className="row">
+                                                    <Label className="col-sm-5">Estado</Label>
+                                                    <div className="col-sm-7">
+                                                        <Select options={optionsEstado} defaultOption="Todos" onChange={onChange('status')} value={state.status} /> 
+                                                    </div>
+                                                </FormGroup>
+                                            </div>
                                         }
+                                        key_permission="bustipo"
 
                                         fieldNames={['Nombre', 'Capacidad']}
                                         fields={['nombre', 
-                                        (row) => <span style={{textAlign:"right", position: 'relative', right:'-15%'}}>{row.capacidad}</span>
+                                            (row) => <span style={{textAlign:"right", position: 'relative', right:'-15%'}}>{row.capacidad}</span>
                                         ]}
 
                                         endpoint='busTipo'

@@ -53,13 +53,13 @@ class Conductores extends React.Component {
                                             </FormGroup>
                                         </div>
                                         <div className="col-sm-4">
-                                                    <FormGroup className="row">
-                                                        <Label className="col-sm-5">Estado</Label>
-                                                        <div className="col-sm-7">
-                                                            <Select options={this.optionsEstado} defaultOption="Todos" onChange={this.onChange('status')} value={this.state.status} /> 
-                                                        </div>
-                                                    </FormGroup>
+                                            <FormGroup className="row">
+                                                <Label className="col-sm-5">Estado</Label>
+                                                <div className="col-sm-7">
+                                                    <Select options={this.optionsEstado} defaultOption="Todos" onChange={this.onChange('status')} value={this.state.status} /> 
                                                 </div>
+                                            </FormGroup>
+                                        </div>
                                     </div>
                                 }
 

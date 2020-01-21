@@ -331,7 +331,7 @@ class EditDistribucionAsientos extends React.Component {
     render(){
         const { id, data, pisos } = this.state
         return (
-            <MainView id={id} data={data} history={this.props.history} {...data} onChange={this.onChange} pisos={pisos} />
+            <MainView id={id} data={data} history={this.props.history} {...data} onChange={this.onChange} pisos={pisos} key_permission={'bustipo'} />
         )
     }
 }

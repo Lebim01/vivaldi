@@ -84,7 +84,6 @@ class Buses extends React.Component{
 
                                         title="Listado de Buses"
                                         filtersZone={
-
                                             <div className="row">
                                                 <div className="col-sm-4">
                                                     <FormGroup className="row">

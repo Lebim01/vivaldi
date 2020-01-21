@@ -211,7 +211,7 @@ class EditPuertas extends React.Component {
     render(){
         const { data, id } = this.state
         return (
-            <MainView id={id} data={data} history={this.props.history} {...data} onChange={this.onChange} />
+            <MainView id={id} data={data} history={this.props.history} {...data} onChange={this.onChange} key_permission="puerta" />
         )
     }
 }
