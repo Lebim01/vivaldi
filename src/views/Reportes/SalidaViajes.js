@@ -76,8 +76,15 @@ class SalidaViajes extends React.Component {
                             </div>
                         }
                         searchable={false}
-                        fieldNames={['Viaje', 'Cooperativa', 'Fecha salida', 'Destino', 'Parada', '  Cantidad', 
-                        '   Total']}
+                        head={[['Viaje', 'Cooperativa', 'Fecha salida', 'Destino', 'Parada', 
+                         {
+                            title:'Cantidad', 
+                            style:{textAlign:"right", position: 'relative', right:'0%' }
+                        },
+                         {
+                            title:'Total', 
+                            style:{textAlign:"right", position: 'relative', right:'0%' }
+                        } ]]}
                         fields={[
                             'viaje',
                             'cooperativa',
