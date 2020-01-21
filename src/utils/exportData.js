@@ -78,7 +78,14 @@ function Export2DocFromHtml(html){
 
 function printHtml(html){
     let _window = window.open('','')
-    _window.document.write(html)
+    _window.document.write(`
+        ${html}
+        <script>
+            window.onafterprint = function(){
+                window.close()
+            }
+        </script>
+    `)
     _window.document.close();
 
     _window.focus();

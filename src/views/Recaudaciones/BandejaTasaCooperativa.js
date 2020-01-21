@@ -45,27 +45,35 @@ class BandejaTasaCooperativa extends React.Component {
     }
 
     async rowToHtml(row){
-        const qr = await qrcodeToPng(row.codigo)
-        return `
-            <div style="margin-bottom: 10px; border-bottom: 1px solid black; width: 300px; text-align: center;">
-                <p style="margin-top: 5px; margin-bottom: 5px;">${row.localidad_nombre}</p>
-                <p style="margin-top: 5px; margin-bottom: 5px;">${row.cooperativa_nombre}</p>
-                <p style="margin-top: 5px; margin-bottom: 5px;">Contingencia</p>
-                <p style="margin-top: 5px; margin-bottom: 5px;">
-                    <span style="width: 100px; text-align: left;">Fecha de Emisión: </span>
-                    <span style="width: 100px; text-align: left;">${row.fecha_hora_venta}</span>
-                </p>
-                <p style="margin-top: 5px; margin-bottom: 5px;">
-                    <span style="width: 100px; text-align: left;">Tasa: </span>
-                    <span style="width: 100px; text-align: left;">$ ${row.valor}</span>
-                </p>
-                <p style="margin-top: 5px; margin-bottom: 5px;">
-                    <span style="width: 100px; text-align: left;">Usuario: </span>
-                    <span style="width: 100px; text-align: left;">${row.usuario_creacion_nombre}</span>
-                </p>
-                <img width="150" src="${qr}"/>
-            </div>
-        `
+        try {
+            let qr
+
+            if(row.codigo)
+                qr = await qrcodeToPng(row.codigo)
+
+            return `
+                <div style="margin-bottom: 10px; border-bottom: 1px solid black; width: 300px; text-align: center;">
+                    <p style="margin-top: 5px; margin-bottom: 5px;">${row.localidad_nombre}</p>
+                    <p style="margin-top: 5px; margin-bottom: 5px;">${row.cooperativa_nombre}</p>
+                    <p style="margin-top: 5px; margin-bottom: 5px;">Contingencia</p>
+                    <p style="margin-top: 5px; margin-bottom: 5px;">
+                        <span style="width: 100px; text-align: left;">Fecha de Emisión: </span>
+                        <span style="width: 100px; text-align: left;">${row.fecha_hora_venta}</span>
+                    </p>
+                    <p style="margin-top: 5px; margin-bottom: 5px;">
+                        <span style="width: 100px; text-align: left;">Tasa: </span>
+                        <span style="width: 100px; text-align: left;">$ ${row.valor}</span>
+                    </p>
+                    <p style="margin-top: 5px; margin-bottom: 5px;">
+                        <span style="width: 100px; text-align: left;">Usuario: </span>
+                        <span style="width: 100px; text-align: left;">${row.usuario_creacion_nombre}</span>
+                    </p>
+                    ${qr ? `<img width="150" src="${qr}"/>` : `<span>Sin codigo</span>`}
+                </div>
+            `
+        }catch(err){
+            console.error(row.id, err)
+        }
     }
 
     async toWord(row){
