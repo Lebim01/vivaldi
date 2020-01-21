@@ -1,13 +1,13 @@
 import React from 'react'
-import { ListPage, Label, FormGroup, Select, Input, ReportPage, Permission } from 'temeforest'
+import { ListPage, Label, FormGroup, Select, Input, ReportPage, Permission, Button } from 'temeforest'
 import moment from 'moment'
 import { baseurl, objectToUrl } from 'utils/url'
 import axios from 'axios'
 import { moneyFormat } from 'utils/number'
-import store from 'store/auth'
 
 class ViajesBus extends React.Component {
 
+    table = React.createRef()
     state = {
         search: '',
         filters : {
@@ -38,18 +38,11 @@ class ViajesBus extends React.Component {
         url : `${baseurl}/usuario/${objectToUrl(obj)}`,
         labelName: 'first_name', 
         valueName: 'id' , 
-
     })
 
     optionsReporte = [
-        { value: 1, label: 'Boletero' },
-        
+        { value: 1, label: 'Boletero' },   
     ]
-
-    /*optionsReporte = [
-        { value: 1, label: 'Boletero' },
-        { value: 2, label: 'Viaje' },
-    ]*/
 
     onChange = name => (e) => {
         const filters = this.state.filters
@@ -60,17 +53,9 @@ class ViajesBus extends React.Component {
             }
         })
     }
-    buscar(){
-        this.setState({
-            refresh: true
-        })
-    }
 
-    componentDidMount(){
-        this.loadList()
-    }
-    componentDidUpdate(prevProps, prevState){
-        if(prevState.filters !== this.state.filters)
+    buscar = () => {
+        if(this.state.filters.cooperativa)
             this.loadList()
     }
 
@@ -95,9 +80,9 @@ class ViajesBus extends React.Component {
 
                         <div className="col-sm-4">
                             <FormGroup className="row">
-                                <Label className="col-sm-5">Cooperativa</Label>
+                                <Label className={"col-md-5 " + (this.state.filters.cooperativa ? "" : "text-danger")}>Cooperativa</Label>
                                 <div className="col-sm-7">
-                                    <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.filters.cooperativa}/>
+                                    <Select asyncOptions={this.optionsCooperativa} defaultOption="Seleccione una cooperativa" onChange={this.onChange('cooperativa')} value={this.state.filters.cooperativa}/>
                                 </div>
                             </FormGroup>
                             <FormGroup className="row">
@@ -144,10 +129,16 @@ class ViajesBus extends React.Component {
                             </FormGroup>
                         </div>
                     </div>
-
+                    <div className="row">
+                        <div className="col-md-12 text-center">
+                            <Button onClick={this.buscar} disabled={!this.state.filters.cooperativa}>
+                                Consultar
+                            </Button>
+                        </div>
+                    </div>
                     <div id="report">
-                        { data.map((row) =>
-                            <>
+                        { data.map((row, i) =>
+                            <React.Fragment key={i}>
                                 <h3 className="text-center">Bus: {row.disco} / {row.placa}</h3>
                                 <ListPage
                                     exportExcel
@@ -158,7 +149,6 @@ class ViajesBus extends React.Component {
 
                                     fieldNames={['Viaje', 'Fecha salida', 'Localidad', 'Usuario', 'Parada', 'Pasaje', 'Total']}
                                     fields={[
-                                        
                                         'viaje', 
                                         'fecha_salida', 
                                         'localidad',
@@ -166,16 +156,16 @@ class ViajesBus extends React.Component {
                                         'parada',
                                         (row) => <span style={{ textAlign:"right", position: 'relative', right:'-40%'}}>${moneyFormat(row.valor_unitario)}</span>,
                                         (row) => <span style={{ textAlign:"right", position: 'relative', right:'-40%'}}>${moneyFormat(row.total)}</span>
-                                        
                                     ]}
 
+                                    ref={this.table}
+                                    autoRefresh={false}
 
                                     data={row.data}
                                     parameters={this.state}
-
                                     history={this.props.history}
                                 />
-                            </>
+                            </React.Fragment>
                         )}
                     </div>
                     { data.length === 0 && <h3>No hay información para mostrar</h3> }
