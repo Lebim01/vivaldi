@@ -28,7 +28,7 @@ const isSameLocation = (path, location2) => {
 
 function EditPage(props){
     const { register, handleSubmit, watch, errors, triggerValidation, setValue, ...methods } = useForm()
-    const { id, title, btnDelete, btnSave, key_permission, history, urlFront } = props
+    const { id, title, btnDelete, btnSave, btnEnable, key_permission, history, urlFront } = props
 
     const [getParams] = useState(getAllParameters())
 
@@ -166,12 +166,11 @@ function EditPage(props){
 
     // btn enable
     const _btnEnable = {
-        ...defaultBtnEnable
+        ...defaultBtnEnable,
+        ...btnEnable
     }
     const btnEnableShow = _btnEnable.show
     delete _btnEnable.show
-
-    console.log(props.data)
 
     return (
         <ValidateContext.Provider
@@ -194,7 +193,7 @@ function EditPage(props){
                                 <div className="row">
                                     <div className="col-sm-12 text-center">
                                         <Permission key_permission={id ? key_change : key_add}>
-                                            { (btnSaveShow && props.data.is_active) &&
+                                            { (btnSaveShow && (props.data.is_active || !id)) &&
                                                 <Button style={{marginRight:5}} onClick={onSubmit} {..._btnSave}>
                                                     {_btnSave.text}
                                                 </Button>

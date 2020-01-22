@@ -146,6 +146,12 @@ class CrearSolicitudTasaContigencia extends React.Component {
                 btnDelete={{
                     show: false
                 }}
+                btnEnable={{
+                    show: false
+                }}
+                btnSave={{
+                    text : 'Guardar'
+                }}
                 key_permission="solicitudtasacontingencia"
             >
                 <MainView {...data} id={id} cantidad_aprobada={cantidad_aprobada} onChangeCantidadAprobada={this.onChangeCantidadAprobada} onChange={this.onChange} />
