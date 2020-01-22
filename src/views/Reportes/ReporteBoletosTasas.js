@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListPage, Label, FormGroup, Select, Input, ReportPage, Permission, Card, CardBody } from 'temeforest'
+import { ListPage, Label, FormGroup, Select, Input, ReportPage, Permission, Card, CardBody, SelectLocalidad } from 'temeforest'
 import { TabContent, TabPane } from 'reactstrap'
 import moment from 'moment'
 import { baseurl, objectToUrl } from 'utils/url'
@@ -101,7 +101,7 @@ class ReporteBoletosTasas extends React.Component {
                                                             <FormGroup className="row">
                                                                 <Label className="col-sm-5" id='mylabel'>Localidad</Label>
                                                                 <div className="col-sm-7">
-                                                                    <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.filters.localidad}/>
+                                                                    <SelectLocalidad onChange={this.onChange('localidad')} value={this.state.localidad}/>
                                                                 </div>
                                                             </FormGroup>
                                                         </div>

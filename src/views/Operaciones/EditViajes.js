@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Input, Select, EditPage, TextArea, FormValidate, FormElementValidate, RSelect, Permission } from 'temeforest'
+import { Input, Select, EditPage, TextArea, FormValidate, FormElementValidate, RSelect, Permission, SelectLocalidad } from 'temeforest'
 import { baseurl, getParameter, objectToUrl } from 'utils/url'
 import axios from 'axios'
 
@@ -81,7 +81,7 @@ class MainView extends React.Component {
                         label={{text:'Localidad'}}
                         input={{
                             name : 'localidad_origen',
-                            element: <Select onChange={this.onChange('localidad_origen')} value={this.props.localidad_origen} asyncOptions={this.optionsLocalidad} />
+                            element: <SelectLocalidad onChange={this.onChange('localidad')} value={this.props.localidad}/>
                         }}
                         validator={{
                             validationRules: { required:"El campo es requerido", },

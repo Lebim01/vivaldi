@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button, Permission } from 'temeforest'
+import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button, Permission, SelectLocalidad} from 'temeforest'
 import moment from 'moment'
 import { baseurl } from 'utils/url'
 import { moneyFormat } from 'utils/number'
@@ -75,7 +75,7 @@ class ReporteTasasContingenciaGeneral extends React.Component {
                                             <FormGroup className="row">
                                                 <Label className="col-sm-3">Localidad</Label>
                                                 <div className="col-sm-8">
-                                                    <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad}/>
+                                                    <SelectLocalidad onChange={this.onChange('localidad')} value={this.state.localidad}/>
                                                 </div>
                                             </FormGroup>
                                         </div>

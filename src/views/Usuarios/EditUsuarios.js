@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, FormGroup, Input, Label, EditPage, Select, FormElementValidate, FormValidate } from 'temeforest'
+import { Button, FormGroup, Input, Label, EditPage, Select, FormElementValidate, FormValidate, SelectLocalidad } from 'temeforest'
 import EditPersona from './../Cooperativas/EditPersona'
 import { baseurl, getParameter, canDownload, downloadFile } from 'utils/url'
 import { fileToBase64 } from 'utils/file'
@@ -314,7 +314,7 @@ class EditUsuarios extends React.Component {
                             <FormGroup className="row">
                                 <Label className="col-sm-3">Localidad</Label>
                                 <div className="col-sm-5">
-                                    <Select onChange={this.onChange('localidad')} value={data.localidad} asyncOptions={this.optionsLocalidad} />
+                                   <SelectLocalidad onChange={this.onChange('localidad')} value={this.state.localidad}/>
                                 </div>
                             </FormGroup>
                         }

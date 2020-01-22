@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Select, FormGroup, Label, Input, BarChart, PieChart, Table, Button, FormValidate, Permission } from 'temeforest'
+import { Card, CardBody, CardTitle, Select, FormGroup, Label, Input, BarChart, PieChart, Table, Button, FormValidate, Permission, SelectLocalidad } from 'temeforest'
 import { config } from 'config'
 import { objectToUrl } from 'utils/url'
 import axios from 'axios'
@@ -65,7 +65,7 @@ class FormularioFiltros extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-6">Localidad</Label>
                             <div className="col-sm-6">
-                                <Select onChange={this.onChange('localidad')} value={this.props.localidad} asyncOptions={this.optionsLocalidad} />
+                                <SelectLocalidad onChange={this.onChange('localidad')} value={this.props.localidad}/>
                             </div>
                         </FormGroup>
                     </Col>

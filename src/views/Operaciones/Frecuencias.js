@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListPage, Card, CardBody, FormGroup, Label, Select, Input, Button, Permission } from 'temeforest'
+import { ListPage, Card, CardBody, FormGroup, Label, Select, Input, Button, Permission, SelectLocalidad } from 'temeforest'
 import { baseurl, objectToUrl } from 'utils/url'
 
 class Frecuencias extends React.Component {
@@ -104,7 +104,7 @@ class Frecuencias extends React.Component {
                                                         <FormGroup className="row">
                                                             <Label className="col-sm-5">Localidad</Label>
                                                             <div className="col-sm-7">
-                                                                <Select asyncOptions={this.optionsLocalidad} defaultOption="Todos" onChange={this.onChange('localidad')} value={this.state.localidad}/>
+                                                                <SelectLocalidad onChange={this.onChange('localidad')} value={this.state.localidad}/>
                                                             </div>
                                                         </FormGroup>
                                                     </div>

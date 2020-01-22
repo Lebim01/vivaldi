@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormGroup, Input, Label, EditPage, FormValidate, Select } from 'temeforest'
+import { FormGroup, Input, Label, EditPage, FormValidate, Select, SelectLocalidad } from 'temeforest'
 import { baseurl, getParameter, objectToUrl } from 'utils/url'
 import axios from 'axios'
 
@@ -57,7 +57,7 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Localidad</Label>
                         <div className="col-sm-5">
-                            <Select asyncOptions={this.optionsLocalidad} value={this.props.localidad} onChange={this.onChange('localidad')} />
+                            <SelectLocalidad onChange={this.onChange('localidad')} value={this.props.localidad}/>
                         </div>
                     </FormGroup>
                     <FormGroup className="row">

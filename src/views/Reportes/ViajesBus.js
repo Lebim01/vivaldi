@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListPage, Label, FormGroup, Select, Input, ReportPage, Permission, Button } from 'temeforest'
+import { ListPage, Label, FormGroup, Select, Input, ReportPage, Permission, Button, SelectLocalidad} from 'temeforest'
 import moment from 'moment'
 import { baseurl, objectToUrl } from 'utils/url'
 import axios from 'axios'
@@ -88,7 +88,7 @@ class ViajesBus extends React.Component {
                             <FormGroup className="row">
                                 <Label className="col-sm-5">Localidad</Label>
                                 <div className="col-sm-7">
-                                    <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.filters.localidad}/>
+                                    <SelectLocalidad onChange={this.onChange('localidad')} value={this.state.localidad}/>
                                 </div>
                             </FormGroup>
                         </div>

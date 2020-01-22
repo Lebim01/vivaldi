@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormGroup, Input, Select, Label, EditPage, FormValidate, FormElementValidate, Permission } from 'temeforest'
+import { FormGroup, Input, Select, Label, EditPage, FormValidate, FormElementValidate, Permission, SelectLocalidad } from 'temeforest'
 import { baseurl, getParameter, objectToUrl } from 'utils/url'
 import axios from 'axios'
 import { isSet } from 'temeforest/base/Permission'
@@ -101,7 +101,7 @@ class MainView extends React.Component {
                         label={{text:'Localidad'}}
                         input={{
                             name : 'localidad',
-                            element: <Select onChange={this.onChange('localidad')} value={this.props.localidad} asyncOptions={this.optionsLocalidad}/>
+                            element: <SelectLocalidad onChange={this.onChange('localidad')} value={this.props.localidad}/>
                         }}
                         validator={{
                             validationRules: {required:"El campo es requerido"},

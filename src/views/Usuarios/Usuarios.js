@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Card, CardBody, CardTitle, ListPage, FormGroup, Label, Select, Permission, ReportPage  } from 'temeforest'
+import { Card, CardBody, CardTitle, ListPage, FormGroup, Label, Select, Permission, ReportPage } from 'temeforest'
 import { htmlToXls } from 'utils/exportData'
 import { baseurl } from 'utils/url'
 import { moneyFormat } from 'utils/number'

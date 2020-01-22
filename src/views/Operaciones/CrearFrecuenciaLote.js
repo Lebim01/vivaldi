@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { Card, CardBody, CardTitle, Button, FormGroup, Input, Select, Label, FormValidate, Permission } from 'temeforest'
+import { Card, CardBody, CardTitle, Button, FormGroup, Input, Select, Label, FormValidate, Permission, SelectLocalidad} from 'temeforest'
 import { baseurl, getParameter, objectToUrl } from 'utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
@@ -104,7 +104,8 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Localidad</Label>
                         <div className="col-sm-5">
-                            <Select onChange={this.onChange('localidad')} value={this.props.localidad} asyncOptions={this.optionsLocalidad}/>
+                            
+                            <SelectLocalidad onChange={this.onChange('localidad')} value={this.props.localidad} asyncOptions={this.optionsLocalidad}/>
                         </div>
                     </FormGroup>
                     <FormGroup className="row">

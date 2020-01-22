@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormGroup, Input, Label, ApprovePage, FormValidate, Select } from 'temeforest'
+import { FormGroup, Input, Label, ApprovePage, FormValidate, Select, SelectLocalidad} from 'temeforest'
 import { baseurl, getParameter } from 'utils/url'
 import axios from 'axios'
 

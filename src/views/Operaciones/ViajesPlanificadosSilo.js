@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListPage, Select, Label, FormGroup, Card, CardBody, CardTitle, Button } from 'temeforest'
+import { ListPage, Select, Label, FormGroup, Card, CardBody, CardTitle, Button, SelectLocalidad } from 'temeforest'
 import { baseurl } from 'utils/url'
 import moment from 'moment'
 import Clock  from 'utils/clock'
@@ -79,7 +79,7 @@ class ViajesPlanificadosSilo extends React.Component {
                                         <FormGroup className="row">
                                             <Label className="col-sm-3">Localidad</Label>
                                             <div className="col-sm-8">
-                                                <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={localidad}/>
+                                                <SelectLocalidad onChange={this.onChange('localidad')} value={this.state.localidad}/>
                                             </div>
                                         </FormGroup>
                                     </div>

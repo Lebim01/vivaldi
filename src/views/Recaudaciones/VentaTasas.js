@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button, FormValidate } from 'temeforest'
+import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button, FormValidate, SelectLocalidad} from 'temeforest'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import moment from 'moment'
 import { baseurl } from 'utils/url'
@@ -84,7 +84,7 @@ class RegistroTasa extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-3">Localidad</Label>
                             <div className="col-sm-6">
-                                <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.props.localidad} />
+                                <SelectLocalidad onChange={this.onChange('localidad')} value={this.props.localidad}/>
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
@@ -260,7 +260,7 @@ class VentaTasas extends React.Component {
                                         <FormGroup className="row">
                                             <Label className="col-sm-4">Localidad</Label>
                                             <div className="col-sm-8">
-                                                <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad}/>
+                                                <SelectLocalidad onChange={this.onChange('localidad')} value={this.state.localidad}/>
                                             </div>
                                         </FormGroup>
                                     </div>

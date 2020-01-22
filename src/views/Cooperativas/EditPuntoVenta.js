@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, FormGroup, Input, Label, Select, FormElementValidate, FormValidate, EditPage } from 'temeforest'
+import { Button, FormGroup, Input, Label, Select, FormElementValidate, FormValidate, EditPage, SelectLocalidad} from 'temeforest'
 import { baseurl, getParameter, getResults } from 'utils/url'
 import { generateHexadecimal } from 'utils/string'
 import Swal from 'sweetalert2'
@@ -213,7 +213,7 @@ class MainView extends React.Component {
                         label={{text:'Localidad'}}
                         input={{
                             name : 'localidad',
-                            element: <Select asyncOptions={this.optionsLocalidades} onChange={this.onChange('localidad')} value={this.props.localidad} />
+                            element: <SelectLocalidad onChange={this.onChange('localidad')} value={this.state.localidad}/>
                         }}
                         validator={{
                             validationRules: {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button } from 'temeforest'
+import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button , SelectLocalidad} from 'temeforest'
 import { baseurl } from 'utils/url'
 
 class RegistroAccion extends React.Component {
@@ -57,7 +57,7 @@ class RegistroAccion extends React.Component {
                                         <FormGroup className="row">
                                             <Label className="col-sm-5">Localidad</Label>
                                             <div className="col-sm-6">
-                                                <Select asyncOptions={this.optionsLocalidad} value={this.state.cooperativa}/>
+                                                <SelectLocalidad onChange={this.onChange('localidad')} value={this.state.localidad}/>
                                             </div>
                                         </FormGroup>
                                     </div>

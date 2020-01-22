@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListPage, Label, FormGroup, Select, Input, Button, ReportPage, Permission } from 'temeforest'
+import { ListPage, Label, FormGroup, Select, Input, Button, ReportPage, Permission, SelectLocalidad} from 'temeforest'
 import { baseurl } from 'utils/url'
 class ReporteClientesFrecuentes extends React.Component {
 
@@ -80,7 +80,7 @@ class ReporteClientesFrecuentes extends React.Component {
                         <FormGroup className="row col-sm-4">
                             <Label className="col-sm-6" style={{ marginLeft: '-20px' }} >Localidad</Label>
                             <div className="col-sm-6" style={{ marginLeft: '20px' }}>
-                                <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad} />
+                               <SelectLocalidad onChange={this.onChange('localidad')} value={this.state.localidad}/>
                             </div>
                         </FormGroup>
                         <FormGroup className="row col-sm-4">

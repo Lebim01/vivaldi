@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Row, Button, UncontrolledTooltip } from 'reactstrap'
-import { ListPage, Select, Label, FormGroup, Input, ReportPage, CardTitle, InputIcon, RecordRow } from 'temeforest'
+import { ListPage, Select, Label, FormGroup, Input, ReportPage, CardTitle, InputIcon, RecordRow, SelectLocalidad} from 'temeforest'
 import moment from 'moment'
 import Swal from 'sweetalert2'
 import axios from 'axios'
@@ -266,7 +266,7 @@ class Documentos extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-xl-3 col-sm-5">Localidad</Label>
                             <div className="col-sm-7">
-                                <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad}/>
+                                <SelectLocalidad onChange={this.onChange('localidad')} value={this.state.localidad}/>
                             </div>
                         </FormGroup>
                     </div>

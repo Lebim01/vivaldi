@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormGroup, Input, Label, DualList, EditPage, FormElementValidate, FormValidate, Select } from 'temeforest'
+import { FormGroup, Input, Label, DualList, EditPage, FormElementValidate, FormValidate, Select, SelectLocalidad } from 'temeforest'
 import { baseurl, getParameter, getResults } from 'utils/url'
 import axios from 'axios'
 import { validate } from 'utils/validate'
@@ -78,7 +78,7 @@ class MainView extends React.Component {
                         label={{text:'Localidad'}}
                         input={{
                             name : 'localidad',
-                            element: <Select asyncOptions={this.optionsLocalidades} onChange={this.onChange('localidad')} value={this.props.localidad} />
+                            element: <SelectLocalidad onChange={this.onChange('localidad')} value={this.props.localidad}/>
                         }}
                         validator={{
                             validationRules: {
