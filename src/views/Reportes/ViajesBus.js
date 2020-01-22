@@ -136,6 +136,9 @@ class ViajesBus extends React.Component {
                             </Button>
                         </div>
                     </div>
+                    <div>
+                        <br></br>
+                    </div>
                     <div id="report">
                         { data.map((row, i) =>
                             <React.Fragment key={i}>
@@ -147,14 +150,23 @@ class ViajesBus extends React.Component {
                                     //title=" "
                                     searchable={false}
 
-                                    fieldNames={['Viaje', 'Fecha salida', 'Localidad', 'Usuario', 'Parada', 'Pasaje', 'Total']}
+                                    head={[['Viaje', 'Fecha salida', 'Localidad', 'Pasajeros', 'Parada',
+                                    
+                                    {
+                                        title:'Valor del Pasaje', 
+                                        style:{textAlign:"right", position: 'relative', right:'0%' }
+                                    }, 
+                                    {
+                                        title:'Total', 
+                                        style:{textAlign:"right", position: 'relative', right:'0%' }
+                                    }]]}
                                     fields={[
                                         'viaje', 
                                         'fecha_salida', 
                                         'localidad',
                                         (row) => <span style={{ textAlign:"right", position: 'relative', right:'-40%'}}>{row.pasajeros}</span>,
                                         'parada',
-                                        (row) => <span style={{ textAlign:"right", position: 'relative', right:'-40%'}}>${moneyFormat(row.valor_unitario)}</span>,
+                                        (row) => <span style={{ textAlign:"right", position: 'relative', right:'-80%'}}>${moneyFormat(row.valor_unitario)}</span>,
                                         (row) => <span style={{ textAlign:"right", position: 'relative', right:'-40%'}}>${moneyFormat(row.total)}</span>
                                     ]}
 

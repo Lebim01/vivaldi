@@ -58,7 +58,9 @@ class Andenes extends React.Component {
                                     searchPlaceholder="Descripción"
 
                                     fieldNames={['Descripcion', 'Silos', 'Puertas de acceso', 'Localidad', 'Nivel']}
-                                    fields={['descripcion', 'silos_nombre', this.puertasAndenes, 'localidad_nombre','localidad_nivel_nombre']}
+                                    fields={['descripcion', 'silos_nombre', this.puertasAndenes, 'localidad_nombre',
+                                    (row) => <span style={{ textAlign:"right", position: 'relative', right:'-45%'}}>{row.localidad_nivel_nombre}</span>,
+                                    ]}
 
                                     endpoint='anden'
                                     urlFront='localidades/andenes'

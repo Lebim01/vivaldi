@@ -49,7 +49,7 @@ class BandejaTasaCooperativa extends React.Component {
             let qr
 
             if(row.codigo)
-                qr = await qrcodeToPng(row.codigo)
+                qr = await qrcodeToPng(row.codigo) 
 
             return `
                 <div style="margin-bottom: 10px; border-bottom: 1px solid black; width: 300px; text-align: center;">
@@ -68,7 +68,9 @@ class BandejaTasaCooperativa extends React.Component {
                         <span style="width: 100px; text-align: left;">Usuario: </span>
                         <span style="width: 100px; text-align: left;">${row.usuario_creacion_nombre}</span>
                     </p>
-                    ${qr ? `<img width="150" src="${qr}"/>` : `<span>Sin codigo</span>`}
+                    
+                    ${qr ? `<img width="140" src="${qr}"/>` : `<img width="140" src="${qr}"/>`}
+                    
                 </div>
             `
         }catch(err){

@@ -115,7 +115,7 @@ class Buses extends React.Component{
                                             'tipo_servicio_nombre',
                                             (row) => <label style={{float:"center", position:"relative", left: "25%", fontWeight: 300}}>{row.capacidad}</label>,
                                             'propietario_nombre',
-                                            (row) => <label style={{float:"center", position:"relative", left: "25%", fontWeight: 300}}>${moneyFormat(row.saldo)}</label>
+                                            (row) => <label style={{float:"center", position:"relative", left: "8%", fontWeight: 300}}>${moneyFormat(row.saldo)}</label>
                                         ]}
 
                                         endpoint='bus'
