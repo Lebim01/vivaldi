@@ -8,13 +8,18 @@ import Swal from 'sweetalert2'
 
 const defaultBtnDelete = {
     show : true,
-    text : 'Eliminar',
+    text : 'Inhabilitar',
     type : 'danger'
 }
 const defaultBtnSave = {
     show : true,
     text : 'Guardar',
     type : 'success'
+}
+const defaultBtnEnable = {
+    show : true,
+    text : 'Habilitar',
+    type : 'secondary'
 }
 
 const isSameLocation = (path, location2) => {
@@ -119,6 +124,30 @@ function EditPage(props){
         }
     }
 
+    const confirmEnable = async () => {
+        const { id, endpoint } = props
+
+        if(id){
+            const options = {
+                id,
+                endpoint,
+                text: '¿Seguro de habilitar?',
+                params : { is_active : 1 },
+                params_get : { full : 1 },
+                method : 'post'
+            }
+
+            if(await confirmEndpoint(options)){
+                Swal.fire({
+                    text : `Habilitado`,
+                    type : 'success'
+                })
+                
+                backToList()
+            }
+        }
+    }
+
     // btn save
     const _btnSave = {
         ...defaultBtnSave,
@@ -134,6 +163,15 @@ function EditPage(props){
     }
     const btnDeleteShow = _btnDelete.show
     delete _btnDelete.show
+
+    // btn enable
+    const _btnEnable = {
+        ...defaultBtnEnable
+    }
+    const btnEnableShow = _btnEnable.show
+    delete _btnEnable.show
+
+    console.log(props.data)
 
     return (
         <ValidateContext.Provider
@@ -163,9 +201,16 @@ function EditPage(props){
                                             }
                                         </Permission>
                                         <Permission key_permission={key_delete}>
-                                            { btnDeleteShow &&
+                                            { (btnDeleteShow && props.data.is_active) &&
                                                 <Button style={{marginLeft:5}} disabled={!id} onClick={() => confirmDelete()} {..._btnDelete}>
                                                     { _btnDelete.text }
+                                                </Button>
+                                            }
+                                        </Permission>
+                                        <Permission key_permission={key_delete}>
+                                            { (btnEnableShow && !props.data.is_active) &&
+                                                <Button style={{marginLeft:5}} disabled={!id} onClick={() => confirmEnable()} {..._btnEnable}>
+                                                    { _btnEnable.text }
                                                 </Button>
                                             }
                                         </Permission>

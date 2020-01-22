@@ -1,6 +1,6 @@
 import Swal from 'sweetalert2'
 import axios from 'axios'
-import { baseurl } from 'utils/url'
+import { baseurl, objectToUrl } from 'utils/url'
 
 const confirmarDefault = {
     text: '¿Seguro de guardar?',
@@ -71,7 +71,7 @@ async function confirmEndpoint(options){
         showCancelButton: true,
         showLoaderOnConfirm: true,
         preConfirm: () => {
-            return axios[_options.method](`${baseurl}/${_options.endpoint}/${_options.id ? `${_options.id}/` : ``}`, _options.params)
+            return axios[_options.method](`${baseurl}/${_options.endpoint}/${_options.id ? `${_options.id}/` : ``}${_options.params_get ? `${objectToUrl(_options.params_get)}` : ''}`, _options.params)
             .then(response => {
                 if (response.status >= 400 && response.status < 500){
                     // SHOW eg. {'tarifa_tasa' : ['A valid number is required.'] }                    
