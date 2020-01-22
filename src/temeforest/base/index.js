@@ -7,9 +7,10 @@ import FormElementValidate from './FormElementValidate'
 import FormValidate from './FormValidate'
 import ValidateContext from './ValidateContext'
 import Permission from './Permission'
+import SelectLocalidad from './SelectLocalidad'
 
 export {
     Card, CardBody, CardTitle, CardSubtitle, ListPage, EditPage, ReportPage,
     FormElementValidate, FormValidate, ValidateContext, ApprovePage, RecordRow,
-    Permission
+    Permission, SelectLocalidad
 }
