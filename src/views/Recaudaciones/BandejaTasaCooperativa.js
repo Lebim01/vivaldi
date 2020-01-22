@@ -189,8 +189,8 @@ class BandejaTasaCooperativa extends React.Component {
                                     <ListPage
                                         searchable={false}
 
-                                        fieldNames={['Cooperativa', 'Fecha', 'Descripcion', 'Tipo de solicitud', 'Cantidad', 'Acción']}
-                                        fields={['cooperativa_nombre', 'fecha', 'descripcion', 'tipo_solicitud_nombre', 'cantidad_aprobada', this.fieldImprimir]}
+                                        fieldNames={['Cooperativa', 'Fecha', 'Descripcion', 'Usuario solicitante', 'Usuario aprobación', 'Cantidad', 'Acción']}
+                                        fields={['cooperativa_nombre', 'fecha', 'descripcion', 'usuario_solicitante_username', 'usuario_aprobacion_username', 'cantidad_aprobada', this.fieldImprimir]}
 
                                         endpoint={endpoint}
                                         parameters={this.state}
