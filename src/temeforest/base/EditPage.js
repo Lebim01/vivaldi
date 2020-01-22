@@ -194,7 +194,7 @@ function EditPage(props){
                                 <div className="row">
                                     <div className="col-sm-12 text-center">
                                         <Permission key_permission={id ? key_change : key_add}>
-                                            { btnSaveShow &&
+                                            { (btnSaveShow && props.data.is_active) &&
                                                 <Button style={{marginRight:5}} onClick={onSubmit} {..._btnSave}>
                                                     {_btnSave.text}
                                                 </Button>
