@@ -27,7 +27,7 @@ class PuntoVenta extends React.Component{
         })
     }
 
-    renderCooperativas(row){
+    renderCooperativas= (row) =>{
         return (
             <>
                 { !row.externo &&
@@ -104,7 +104,7 @@ class PuntoVenta extends React.Component{
                                         
                                         parameters={{
                                             ...this.state,
-                                            type: 'list'
+                                            
                                           }}
 
                                         filters={{

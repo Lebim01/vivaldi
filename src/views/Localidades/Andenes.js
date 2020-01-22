@@ -1,32 +1,35 @@
 import React, {useState} from 'react'
 import { ListPage, Card, CardBody, Permission, FormGroup, Label, Select } from 'temeforest'
 
-function Andenes(props) {
+class Andenes extends React.Component {
 
-    const [state, setState] = useState({})
+    state = {}
 
-    const optionsEstado = [
+    optionsEstado = [
         { value:'', label: 'Todos'},
         { value:'true', label: 'Activo' },
         { value:'false', label: 'Inactivo' },
     ]
 
-    const puertasAndenes = (row) => {
+    puertasAndenes= (row) => {
         return (
+            
             <ul>
                 {row.puertas_acceso.map((p) => 
                     <li>{p}</li>
                 )}
             </ul>
+            
         )
     }
 
-    const onChange = name => (e) => {
-        setState({
+    onChange = name => (e) => {
+        this.setState({
             [name]: e.target.value
         })
     }
 
+    render(){
     return (
         <Permission key_permission="view_anden" mode="redirect">
             <div className="animated fadeIn">
@@ -44,7 +47,7 @@ function Andenes(props) {
                                             <FormGroup className="row">
                                                 <Label className="col-sm-5">Estado</Label>
                                                 <div className="col-sm-7">
-                                                    <Select options={optionsEstado} defaultOption="Todos" onChange={onChange('status')} value={state.status} /> 
+                                                    <Select options={this.optionsEstado} defaultOption="Todos" onChange={this.onChange('status')} value={this.state.status} /> 
                                                 </div>
                                             </FormGroup>
                                         </div>
@@ -55,11 +58,24 @@ function Andenes(props) {
                                     searchPlaceholder="Descripción"
 
                                     fieldNames={['Descripcion', 'Silos', 'Puertas de acceso', 'Localidad', 'Nivel']}
-                                    fields={['descripcion', 'silos_nombre', puertasAndenes, 'localidad_nombre','localidad_nivel_nombre']}
+                                    fields={['descripcion', 'silos_nombre', this.puertasAndenes, 'localidad_nombre','localidad_nivel_nombre']}
 
                                     endpoint='anden'
                                     urlFront='localidades/andenes'
-                                    history={props.history}
+
+                                    parameters={{
+                                        ...this.state,
+                                       
+                                      }}
+
+                                    filters={{
+                                        persist: true,
+                                        callback: (parameters) => {
+                                            this.setState(parameters)
+                                        }
+                                    }}
+
+                                    history={this.props.history}
                                 />
                             </CardBody>
                         </Card>
@@ -68,5 +84,6 @@ function Andenes(props) {
             </div>
         </Permission>
     )
+}
 }
 export default Andenes

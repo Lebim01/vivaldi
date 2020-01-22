@@ -2,23 +2,23 @@ import React, { useState } from 'react'
 import { Card, CardBody, ListPage, Permission, FormGroup, Label, Select } from 'temeforest'
 
 
-function Marcas(props) {
+class Marcas extends React.Component {
 
-    const [state, setState] = useState({})
+    state = {}
 
-    const optionsEstado = [
+    optionsEstado = [
         { value:'', label: 'Todos'},
         { value:'true', label: 'Activo' },
         { value:'false', label: 'Inactivo' },
     ]
 
-    const onChange = name => (e) => {
-        setState({
+    onChange = name => (e) => {
+        this.setState({
             [name]: e.target.value
         })
     }
 
-    
+    render(){
         return (
             <Permission key_permission="view_marca" mode="redirect">
                 <div className="animated fadeIn">
@@ -36,7 +36,7 @@ function Marcas(props) {
                                                     <FormGroup className="row">
                                                         <Label className="col-sm-5">Estado</Label>
                                                         <div className="col-sm-7">
-                                                            <Select options={optionsEstado} defaultOption="Todos" onChange={onChange('status')} value={state.status} /> 
+                                                            <Select options={this.optionsEstado} defaultOption="Todos" onChange={this.onChange('status')} value={this.state.status} /> 
                                                         </div>
                                                     </FormGroup>
                                             </div>
@@ -51,7 +51,20 @@ function Marcas(props) {
 
                                         endpoint='marca'
                                         urlFront='cooperativas/marcas'
-                                        history={props.history}
+
+                                        parameters={{
+                                            ...this.state,
+                                           
+                                          }}
+
+                                        filters={{
+                                            persist: true,
+                                            callback: (parameters) => {
+                                                this.setState(parameters)
+                                            }
+                                        }}
+
+                                        history={this.props.history}
                                     />
                                 </CardBody>
                             </Card>
@@ -62,5 +75,5 @@ function Marcas(props) {
         )
     }
 
-
+}
 export default Marcas

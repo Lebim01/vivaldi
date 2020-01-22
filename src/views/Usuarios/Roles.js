@@ -1,22 +1,23 @@
 import React, {useState} from 'react'
 import { Card, CardBody, ListPage , FormGroup, Select, Label} from 'temeforest'
 
-function Roles (props) {
-    const [state, setState] = useState({})
+class Roles extends React.Component{
+    
+    state= {}
 
-    const optionsEstado = [
+    optionsEstado = [
         { value:'', label: 'Todos'},
         { value:'true', label: 'Activo' },
         { value:'false', label: 'Inactivo' },
     ]
 
-    const onChange = name => (e) => {
-        setState({
+    onChange = name => (e) => {
+        this.setState({
             [name]: e.target.value
         })
     }
 
-    
+    render(){
         return (
             <div className="animated fadeIn">
                 <div className="row">
@@ -33,7 +34,7 @@ function Roles (props) {
                                             <FormGroup className="row">
                                                 <Label className="col-sm-5">Estado</Label>
                                                 <div className="col-sm-7">
-                                                    <Select options={optionsEstado} defaultOption="Todos" onChange={onChange('status')} value={state.status} /> 
+                                                    <Select options={this.optionsEstado} defaultOption="Todos" onChange={this.onChange('status')} value={this.state.status} /> 
                                                 </div>
                                             </FormGroup>
                                         </div>
@@ -49,7 +50,19 @@ function Roles (props) {
 
                                     endpoint='rol'
                                     urlFront='usuarios/roles'
-                                    history={props.history}
+
+                                    parameters={{
+                                        ...this.state,
+                                      }}
+
+                                    filters={{
+                                        persist: true,
+                                        callback: (parameters) => {
+                                            this.setState(parameters)
+                                        }
+                                    }}
+
+                                    history={this.props.history}
                                 />
                             </CardBody>
                         </Card>
@@ -57,7 +70,7 @@ function Roles (props) {
                 </div>
             </div>
         )
-    
+    }
 }
 
 export default Roles

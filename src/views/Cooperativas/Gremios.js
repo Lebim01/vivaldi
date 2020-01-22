@@ -2,23 +2,23 @@ import React, { useState } from 'react'
 import { Card, CardBody, ListPage, Permission, Select, Label, FormGroup } from 'temeforest'
 
 
-function Gremios(props) {
+class Gremios extends React.Component {
 
-    const [state, setState] = useState({})
+    state = {}
 
-    const optionsEstado = [
+    optionsEstado = [
         { value:'', label: 'Todos'},
         { value:'true', label: 'Activo' },
         { value:'false', label: 'Inactivo' },
     ]
 
-    const onChange = name => (e) => {
-        setState({
+    onChange = name => (e) => {
+        this.setState({
             [name]: e.target.value
         })
     }
 
-    
+    render(){
         return (
             <Permission key_permission="view_gremio" mode="redirect">
                 <div className="animated fadeIn">
@@ -38,7 +38,7 @@ function Gremios(props) {
                                                     <FormGroup className="row">
                                                         <Label className="col-sm-5">Estado</Label>
                                                         <div className="col-sm-7">
-                                                            <Select options={optionsEstado} defaultOption="Todos" onChange={onChange('status')} value={state.status} /> 
+                                                            <Select options={this.optionsEstado} defaultOption="Todos" onChange={this.onChange('status')} value={this.state.status} /> 
                                                         </div>
                                                     </FormGroup>
                                                 </div>
@@ -54,7 +54,20 @@ function Gremios(props) {
 
                                         endpoint='gremio'
                                         urlFront='cooperativas/gremios'
-                                        history={props.history}
+
+                                        parameters={{
+                                            ...this.state,
+                                           
+                                          }}
+
+                                        filters={{
+                                            persist: true,
+                                            callback: (parameters) => {
+                                                this.setState(parameters)
+                                            }
+                                        }}
+
+                                        history={this.props.history}
                                     />
                                 </CardBody>
                             </Card>
@@ -65,5 +78,6 @@ function Gremios(props) {
         )
     }
 
+}
 
 export default Gremios

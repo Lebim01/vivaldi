@@ -126,7 +126,7 @@ class Buses extends React.Component{
                                          
                                         parameters={{
                                             ...this.state,
-                                            type: 'list'
+                                           
                                           }}
 
                                         filters={{

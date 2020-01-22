@@ -1,23 +1,23 @@
 import React, {useState} from 'react'
 import { Card, CardBody, ListPage, Permission, Select, FormGroup, Label } from 'temeforest'
 
-function Provincias (props) {
+class Provincias extends React.Component{
 
-    const [state, setState] = useState({})
+    state = {}
 
-    const optionsEstado = [
+    optionsEstado = [
         { value:'', label: 'Todos'},
         { value:'true', label: 'Activo' },
         { value:'false', label: 'Inactivo' },
     ]
 
-    const onChange = name => (e) => {
-        setState({
+    onChange = name => (e) => {
+        this.setState({
             [name]: e.target.value
         })
     }
 
-    
+    render(){
         return (
             <Permission key_permission="view_provincia" mode="redirect">
                 <div className="animated fadeIn">
@@ -35,7 +35,7 @@ function Provincias (props) {
                                                 <FormGroup className="row">
                                                     <Label className="col-sm-5">Estado</Label>
                                                     <div className="col-sm-7">
-                                                        <Select options={optionsEstado} defaultOption="Todos" onChange={onChange('status')} value={state.status} /> 
+                                                        <Select options={this.optionsEstado} defaultOption="Todos" onChange={this.onChange('status')} value={this.state.status} /> 
                                                     </div>
                                                 </FormGroup>
                                             </div>
@@ -50,7 +50,21 @@ function Provincias (props) {
 
                                         endpoint='provincia'
                                         urlFront='localidades/provincia'
-                                        history={props.history}
+
+
+                                        parameters={{
+                                            ...this.state,
+                                            
+                                          }}
+
+                                        filters={{
+                                            persist: true,
+                                            callback: (parameters) => {
+                                                this.setState(parameters)
+                                            }
+                                        }}
+
+                                        history={this.props.history}
                                     />
                                 </CardBody>
                             </Card>
@@ -59,7 +73,7 @@ function Provincias (props) {
                 </div>
             </Permission>
         )
-    
+    }
 }
 
 export default Provincias

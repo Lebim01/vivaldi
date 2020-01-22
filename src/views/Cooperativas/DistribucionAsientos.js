@@ -1,21 +1,23 @@
 import React, { useState } from 'react'
 import { Card, CardBody, CardTitle, ListPage, FormGroup, Label, Select, Permission } from 'temeforest'
 
-function DistribucionAsientos(props) {
+class DistribucionAsientos extends React.Component {
 
-    const [state, setState] = useState({})
+    state = {}
 
-    const optionsEstado = [
+    optionsEstado = [
         { value:'', label: 'Todos'},
         { value:'true', label: 'Activo' },
         { value:'false', label: 'Inactivo' },
     ]
 
-    const onChange = name => (e) => {
-        setState({
+    onChange = name => (e) => {
+        this.setState({
             [name]: e.target.value
         })
     }
+
+    render(){
         return (
             <Permission key_permission="view_bustipo" mode="redirect">
                 <div className="animated fadeIn">
@@ -35,7 +37,7 @@ function DistribucionAsientos(props) {
                                                 <FormGroup className="row">
                                                     <Label className="col-sm-5">Estado</Label>
                                                     <div className="col-sm-7">
-                                                        <Select options={optionsEstado} defaultOption="Todos" onChange={onChange('status')} value={state.status} /> 
+                                                        <Select options={this.optionsEstado} defaultOption="Todos" onChange={this.onChange('status')} value={this.state.status} /> 
                                                     </div>
                                                 </FormGroup>
                                             </div>
@@ -49,9 +51,17 @@ function DistribucionAsientos(props) {
 
                                         endpoint='busTipo'
                                         urlFront='cooperativas/distribucion-asientos'
-                                        history={props.history}
+                                        history={this.props.history}
                                         parameters={{
-                                          type: 'list'
+                                            ...this.state,
+                                           
+                                          }}
+                            
+                                        filters={{
+                                            persist: true,
+                                            callback: (parameters) => {
+                                                this.setState(parameters)
+                                            }
                                         }}
                                     />
                                 </CardBody>
@@ -61,7 +71,7 @@ function DistribucionAsientos(props) {
                 </div>
             </Permission>
         )
-    
+    }
 }
 
 export default DistribucionAsientos
