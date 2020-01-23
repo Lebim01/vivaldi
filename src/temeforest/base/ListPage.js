@@ -193,7 +193,7 @@ class ListPage extends React.Component {
     }
 
     replaceUrlParams = () => {
-        let search = 
+        let search = objectToUrl(this.props.parameters)
         this.props.history.replace({  
             search
         })
