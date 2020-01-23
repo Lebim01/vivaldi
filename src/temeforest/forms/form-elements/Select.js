@@ -3,7 +3,7 @@ import React from 'react'
 import FormGroup from './FormGroup'
 import { getResults } from 'utils/url';
 import axios from 'axios'
-
+import _ from 'lodash'
 import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
 
@@ -29,7 +29,7 @@ class Select extends React.Component {
                 this.setValue()
             }
         }
-        if(prevProps.options !== this.props.options || prevProps.asyncOptions !== this.props.asyncOptions){
+        if(prevProps.options !== this.props.options || !_.isEqual(prevProps.asyncOptions, this.props.asyncOptions)){
             this.setValue()
         }
     }
