@@ -171,6 +171,17 @@ class Diario extends React.Component {
         )
     }
 
+    fieldImprimirTodos = (row ) => {
+        return (
+            <React.Fragment>
+                {
+                    row.a_cobrar!== 0 && row.cooperativa === "(TOTAL)" &&
+                    <Button outline onClick={() => this.imprimirTodos()}>Imprimir Todos</Button>
+                }
+            </React.Fragment>
+        )
+    }
+
     render(){
         const { refresh } = this.state
         return (
@@ -242,7 +253,7 @@ class Diario extends React.Component {
 
                                         (row) => <span style={{float:"right", fontWeight: 300}}>{(row.fecha_cobro)}</span>,
                                         (row) => <span style={style_money_label}>${moneyFormat(row.nc)}</span>,
-                                        this.fieldImprimir
+                                        this.fieldImprimir, this.fieldImprimirTodos
                                     ]}
 
                                     endpoint='venta/cobros-diarios'

@@ -137,7 +137,7 @@ class ViajesPlanificados extends React.Component {
                                             <FormGroup className="row">
                                                 <Label className="col-sm-3">Localidad</Label>
                                                 <div className="col-sm-8">
-                                                    <SelectLocalidad onChange={this.onChange('localidad')} value={this.state.localidad}/>
+                                                    <SelectLocalidad onChange={this.onChange('localidad')} value={localidad}/>
                                                 </div>
                                             </FormGroup>
                                         </div>

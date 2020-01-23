@@ -213,7 +213,7 @@ class MainView extends React.Component {
                         label={{text:'Localidad'}}
                         input={{
                             name : 'localidad',
-                            element: <SelectLocalidad onChange={this.onChange('localidad')} value={this.state.localidad}/>
+                            element: <SelectLocalidad onChange={this.onChange('localidad')} value={this.props.localidad} />
                         }}
                         validator={{
                             validationRules: {

@@ -314,7 +314,7 @@ class EditUsuarios extends React.Component {
                             <FormGroup className="row">
                                 <Label className="col-sm-3">Localidad</Label>
                                 <div className="col-sm-5">
-                                   <SelectLocalidad onChange={this.onChange('localidad')} value={this.state.localidad}/>
+                                    <SelectLocalidad onChange={this.onChange('localidad')} value={data.localidad} />
                                 </div>
                             </FormGroup>
                         }
