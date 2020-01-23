@@ -4,9 +4,8 @@ import { CardTitle, InputIcon, Button, Permission } from 'temeforest'
 import { checkPermission } from 'temeforest/base/Permission'
 import { baseurl, objectToUrl, getAllParameters } from 'utils/url'
 import { htmlToXlsById } from 'utils/exportData'
-
+import _ from 'lodash'
 import axios from 'axios'
-
 import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
 import './ListPage.css'
@@ -187,7 +186,7 @@ class ListPage extends React.Component {
 
     componentDidUpdate(prevProps, prevState){
         if(prevProps !== this.props){
-            if(prevProps.parameters !== this.props.parameters) this.replaceUrlParams()
+            if(!_.isEqual(prevProps.parameters, this.props.parameters)) this.replaceUrlParams()
             this.loadList(this.props.parameters)
         }
     }
