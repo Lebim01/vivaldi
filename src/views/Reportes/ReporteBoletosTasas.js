@@ -209,12 +209,13 @@ class ReporteBoletosTasas extends React.Component {
                                                     
                                                 }
 
-                                                fieldNames={['Tipo', 'Cantidad', 'Valor unitario', 'Subtotal']}
+                                                fieldNames={['Tipo', 'Cantidad', 'Cantidad anulado', 'Total boleto', 'Total tasa']}
                                                 fields={[
                                                     'tipo_boleto',
                                                     (row) => <span style={{float:"right"}}>{row.cantidad}</span>,
-                                                    (row) => <span style={{float:"right"}}>$ {moneyFormat(row.valor_unitario)}</span>,
-                                                    (row) => <span style={{float:"right"}}>$ {moneyFormat(row.subtotal)}</span>,
+                                                    (row) => <span style={{float:"right"}}>{row.cantidad_anulado}</span>,
+                                                    (row) => <span style={{float:"right"}}>$ {moneyFormat(row.total_boleto)}</span>,
+                                                    (row) => <span style={{float:"right"}}>$ {moneyFormat(row.total_tasa)}</span>,
                                                 ]}
 
                                                 data={this.state.data}
