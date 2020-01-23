@@ -187,8 +187,16 @@ class ListPage extends React.Component {
 
     componentDidUpdate(prevProps, prevState){
         if(prevProps !== this.props){
+            if(prevProps.parameters !== this.props.parameters) this.replaceUrlParams()
             this.loadList(this.props.parameters)
         }
+    }
+
+    replaceUrlParams = () => {
+        let search = 
+        this.props.history.replace({  
+            search
+        })
     }
 
     onRowDoubleClick = (id, row) => {
@@ -205,7 +213,10 @@ class ListPage extends React.Component {
                     parameters.query = this.state.search
                 }
                 
-                this.props.history.push(`/${this.props.urlFront}/edit${objectToUrl(parameters)}&id=${id}`)
+                this.props.history.push({
+                    pathname : `/${this.props.urlFront}/edit/`,
+                    search : objectToUrl({ ...this.props.parameters, id })
+                })
             }
         }
     }

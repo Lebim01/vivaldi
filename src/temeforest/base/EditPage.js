@@ -36,19 +36,6 @@ function EditPage(props){
     const key_change = `change_${key_permission}`
     const key_delete = `delete_${key_permission}`
 
-    useEffect(() => {
-        let unblock = history.block((location, action) => {
-            if(location.pathname === urlFront){
-                setTimeout(() => {
-                    unblock()
-                    backToList()
-                }, 500)
-                return false
-            }
-            unblock()
-            return true
-        })
-    }, [])
 
     // events
     const onSubmit = async data => {
@@ -58,20 +45,10 @@ function EditPage(props){
         }
     }
 
-    const navigate = (path) => {
-        let url = new URL(`${window.location.origin}${path}`)
-        
-        if (isSameLocation(url, history.location)) {
-            history.replace(path)
-        } else {
-            history.push(path)
-        }
-    }
-
     const backToList = () => {
-        let params = { ...getParams }
-        delete params.id;
-        navigate(`${urlFront}${objectToUrl(params)}`)
+        history.push({
+            pathname : urlFront
+        })
     }
 
     const confirmDelete = async () => {
