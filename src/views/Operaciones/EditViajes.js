@@ -74,6 +74,7 @@ class MainView extends React.Component {
     }
 
     render(){
+        console.log(this.props)
         return (
             <div>
                 <FormValidate className="mt-4 form-horizontal">
@@ -81,7 +82,7 @@ class MainView extends React.Component {
                         label={{text:'Localidad'}}
                         input={{
                             name : 'localidad_origen',
-                            element: <SelectLocalidad onChange={this.onChange('localidad')} value={this.props.localidad}/>
+                            element: <SelectLocalidad onChange={this.onChange('localidad_origen')} value={this.props.localidad_origen}/>
                         }}
                         validator={{
                             validationRules: { required:"El campo es requerido", },
