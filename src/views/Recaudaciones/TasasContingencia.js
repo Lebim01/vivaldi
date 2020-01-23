@@ -1,13 +1,11 @@
 import React from 'react'
-import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button, FormValidate, SelectLocalidad } from 'temeforest'
+import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Input, Button, FormValidate, SelectLocalidad } from 'temeforest'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import moment from 'moment'
 import Swal from 'sweetalert2'
-import axios from 'axios'
 import { baseurl } from 'utils/url'
 import { moneyFormat } from 'utils/number'
 import { confirmEndpoint } from 'utils/dialog'
-import { printHtml, barcodeToPng } from 'utils/exportData'
 
 const style_money_label = {
     float:'right'
@@ -130,33 +128,11 @@ class TasasContingencia extends React.Component {
         })
     }
 
-    rowToHtml(row, id){
-        return `
-            <div style="margin-bottom: 10px; border-bottom: 1px solid black; width: 300px; text-align: center;">
-                <p style="margin-top: 5px; margin-bottom: 5px;">${row.localidad_nombre}</p>
-                <p style="margin-top: 5px; margin-bottom: 5px;">Contingencia general</p>
-                <p style="display:none; margin-top: 5px; margin-bottom: 5px;">Bloque #${row.bloque} - Tasa #${id}</p>
-                <p style="margin-top: 5px; margin-bottom: 5px;">
-                    <span style="width: 100px; text-align: left;">Emisión: </span>
-                    <span style="width: 100px; text-align: left;">${moment().format('DD/MM/YYYY')}</span>
-                </p>
-                <p style="margin-top: 5px; margin-bottom: 5px;">
-                    <span style="width: 100px; text-align: left;">Tasa: </span>
-                    <span style="width: 100px; text-align: left;">$ ${row.valor}</span>
-                </p>
-                <p style="margin-top: 5px; margin-bottom: 5px;">
-                    <span style="width: 100px; text-align: left;">Oficinista: </span>
-                    <span style="width: 100px; text-align: left;">${row.usuario_creacion_nombre}</span>
-                </p>
-                <img src="${barcodeToPng(row.codigo)}" width="300"/>
-            </div>
-        `
-    }
-
     print = async (row) => {
-        const res = await axios.get(`${baseurl}/venta/generacion_contingencia/${row.id}/tasas`)
-        const html = res.data.map((row) => this.rowToHtml(row, row.id))
-        printHtml(html)
+        const link = document.createElement('a')
+        link.download = true
+        link.href = `${baseurl}/venta/generacion_contingencia/${row.id}/imprimir`
+        link.click()
     }
 
     imprimir = (row) => {
