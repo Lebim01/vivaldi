@@ -13,6 +13,7 @@ import './ListPage.css'
 import FileDownloadW from 'assets/svg/file-download-solid-white.svg'
 
 const CancelToken = axios.CancelToken;
+let cancel;
 
 // numero de filas por pagina
 const RowsPerPage = 25
@@ -129,19 +130,13 @@ class ListPage extends React.Component {
             const { currentPage, search } = this.state
 
             try {
-                if(this.state.cancelRequest){
-                    this.state.cancelRequest('Operation canceled by the user.');
-                }
+                cancel && cancel()
 
                 const { data } = await axios.get(
                     `${baseurl}/${this.props.endpoint}/${objectToUrl({ ...parameters, searchtext: search, page : currentPage, full: 1})}`,
-                    { ...this.props.config },
-                    { 
+                    { ...this.props.config, 
                         cancelToken: new CancelToken((c) => {
-                            // An executor function receives a cancel function as a parameter
-                            this.setState({
-                                cancelRequest : c
-                            })
+                            cancel = c
                         })
                     }
                 )
@@ -151,6 +146,7 @@ class ListPage extends React.Component {
                 _next = null, 
                 _previous = null,
                 _numPages = 1
+                cancel = undefined
 
                 if(Array.isArray(data)){
                     _results = data
@@ -186,13 +182,19 @@ class ListPage extends React.Component {
 
     componentDidUpdate(prevProps, prevState){
         if(prevProps !== this.props){
-            if(!_.isEqual(prevProps.parameters, this.props.parameters)) this.replaceUrlParams()
+            if(!_.isEqual(prevProps.parameters, this.props.parameters) || 
+                prevState.currentPage !== this.state.currentPage ||
+                prevState.search !== this.state.search
+            ){
+                this.replaceUrlParams()
+            }
             this.loadList(this.props.parameters)
         }
     }
 
     replaceUrlParams = () => {
-        let search = objectToUrl(this.props.parameters)
+        const { currentPage: page, search: searchtext } = this.state
+        let search = objectToUrl({ ...this.props.parameters, searchtext, page })
         this.props.history.replace({  
             search
         })
@@ -214,7 +216,7 @@ class ListPage extends React.Component {
                 
                 this.props.history.push({
                     pathname : `/${this.props.urlFront}/edit/`,
-                    search : objectToUrl({ ...this.props.parameters, id })
+                    search : objectToUrl({ id })
                 })
             }
         }
