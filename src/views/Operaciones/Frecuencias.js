@@ -77,7 +77,7 @@ class Frecuencias extends React.Component {
                                                         <FormGroup className="row">
                                                             <Label className="col-sm-5">Cooperativa</Label>
                                                             <div className="col-sm-7">
-                                                            <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
+                                                                <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
                                                             </div>
                                                         </FormGroup>
                                                         <FormGroup className="row">
@@ -104,7 +104,7 @@ class Frecuencias extends React.Component {
                                                         <FormGroup className="row">
                                                             <Label className="col-sm-5">Localidad</Label>
                                                             <div className="col-sm-7">
-                                                                <SelectLocalidad onChange={this.onChange('localidad')} value={this.state.localidad}/>
+                                                                {/*<SelectLocalidad onChange={this.onChange('localidad')} value={this.state.localidad}/>*/}
                                                             </div>
                                                         </FormGroup>
                                                     </div>
