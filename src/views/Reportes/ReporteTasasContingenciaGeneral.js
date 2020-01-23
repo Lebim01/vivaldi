@@ -120,7 +120,13 @@ class ReporteTasasContingenciaGeneral extends React.Component {
                                                 {colSpan:2,title:'Vendido',style:style_text_center},
                                                 {colSpan:2,title:'Saldo',style:style_text_center}
                                             ],
-                                            ['Fecha', 'Concepto', 'Cooperativa', 'Cantidad', 'Total', 'Cantidad', 'Total', 'Cantidad', 'Total']
+                                            ['Fecha', 'Concepto', 'Cooperativa', 
+                                            'Cantidad', 
+                                            'Total', 
+                                            'Cantidad', 
+                                            'Total', 
+                                            'Cantidad', 
+                                            'Total']
                                         ]}
                                         fields={[
                                             'fecha', 

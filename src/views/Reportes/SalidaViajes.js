@@ -91,7 +91,7 @@ class SalidaViajes extends React.Component {
                             'fecha_salida',
                             'destino',
                             'parada',
-                            (row) => <span style={{ textAlign:"right", position: 'relative', right:'-60%'}}>{row.pasajeros}</span>,
+                            (row) => <span style={{ textAlign:"right", position: 'relative', right:'-90%'}}>{row.pasajeros}</span>,
                             (row) => <span style={{ textAlign:"right", position: 'relative', right:'-50%'}}>${moneyFormat(row.total)}</span>
                             
                         ]}

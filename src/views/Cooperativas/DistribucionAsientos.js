@@ -46,7 +46,7 @@ class DistribucionAsientos extends React.Component {
 
                                         fieldNames={['Nombre', 'Capacidad']}
                                         fields={['nombre', 
-                                            (row) => <span style={{textAlign:"right", position: 'relative', right:'-15%'}}>{row.capacidad}</span>
+                                            (row) => <span style={{textAlign:"right", position: 'relative', right:'-25%'}}>{row.capacidad}</span>
                                         ]}
 
                                         endpoint='busTipo'

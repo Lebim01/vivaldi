@@ -224,7 +224,24 @@ class TasasContingencia extends React.Component {
                                     headerClass="text-center"
                                     tdBodyClass="text-center"
 
-                                    fieldNames={['Fecha', 'Localidad', 'Precio', 'Cantidad', 'Total', 'Acción']}
+                                    head={[['Fecha', 'Localidad', 
+                                    {
+                                        title:'Precio', 
+                                        style:{textAlign:"right", position: 'relative', right:'0%' }
+                                    }, 
+                                    {
+                                        title:'Cantidad', 
+                                        style:{textAlign:"right", position: 'relative', right:'0%' }
+                                    },
+                                    {
+                                        title:'Total', 
+                                        style:{textAlign:"right", position: 'relative', right:'0%' }
+                                    }, 
+                                    {
+                                        title:'Acción', 
+                                        style:{textAlign:"right", position: 'relative', right:'8%' }
+                                    }
+                                ]]}
                                     fields={[
                                         'fecha', 
                                         'localidad_nombre', 

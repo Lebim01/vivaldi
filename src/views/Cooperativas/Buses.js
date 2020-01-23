@@ -113,7 +113,7 @@ class Buses extends React.Component{
                                             'cooperativa_nombre', 'placa',
                                             (row) => <span style={{textAlign:"right", position: 'relative', right:'-40%'}}>{row.disco}</span>,
                                             'tipo_servicio_nombre',
-                                            (row) => <label style={{float:"center", position:"relative", left: "25%", fontWeight: 300}}>{row.capacidad}</label>,
+                                            (row) => <label style={{float:"center", position:"relative", left: "70%", fontWeight: 300}}>{row.capacidad}</label>,
                                             'propietario_nombre',
                                             (row) => <label style={{float:"center", position:"relative", left: "8%", fontWeight: 300}}>${moneyFormat(row.saldo)}</label>
                                         ]}
