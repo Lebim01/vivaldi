@@ -84,10 +84,10 @@ class Frecuencias extends React.Component {
                                                             <Label className="col-sm-5">Destino</Label>
                                                             <div className="col-sm-7">
                                                                 <Select 
-                                                                    { ...this.state.cooperativa
+                                                                    { ...(this.state.cooperativa
                                                                         ? { asyncOptions : this.optionsCiudad({ cooperativa: this.state.cooperativa })  }
                                                                         : { options : [{ label : 'Seleccione una cooperativa', value : '' }] }
-                                                                    }
+                                                                    )}
                                                                     onChange={this.onChange('ruta')} 
                                                                     value={this.state.ruta}
                                                                 />
@@ -104,7 +104,7 @@ class Frecuencias extends React.Component {
                                                         <FormGroup className="row">
                                                             <Label className="col-sm-5">Localidad</Label>
                                                             <div className="col-sm-7">
-                                                                {/*<SelectLocalidad onChange={this.onChange('localidad')} value={this.state.localidad}/>*/}
+                                                                <SelectLocalidad onChange={this.onChange('localidad')} value={this.state.localidad}/>
                                                             </div>
                                                         </FormGroup>
                                                     </div>
