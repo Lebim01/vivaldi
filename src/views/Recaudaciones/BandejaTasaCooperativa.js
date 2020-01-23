@@ -2,7 +2,7 @@ import React from 'react'
 import { ListPage, Card, CardBody, CardTitle, Button, Permission } from 'temeforest'
 import moment from 'moment'
 import { baseurl } from 'utils/url'
-import { printHtml, qrcodeToPng } from 'utils/exportData'
+import { printHtml } from 'utils/exportData'
 import axios from 'axios'
 
 const endpoint = 'venta/solicitud_tasacontingencia'
@@ -46,11 +46,6 @@ class BandejaTasaCooperativa extends React.Component {
 
     async rowToHtml(row){
         try {
-            let qr
-
-            if(row.codigo)
-                qr = await qrcodeToPng(row.codigo) 
-
             return `
                 <div style="margin-bottom: 10px; border-bottom: 1px solid black; width: 300px; text-align: center;">
                     <p style="margin-top: 5px; margin-bottom: 5px;">${row.localidad_nombre}</p>
@@ -69,7 +64,7 @@ class BandejaTasaCooperativa extends React.Component {
                         <span style="width: 100px; text-align: left;">${row.usuario_creacion_nombre}</span>
                     </p>
                     
-                    ${qr ? `<img width="140" src="${qr}"/>` : `<img width="140" src="${qr}"/>`}
+                    <img width="140" src="${baseurl}/qr/?key=${row.codigo}"/>
                     
                 </div>
             `
@@ -137,7 +132,7 @@ class BandejaTasaCooperativa extends React.Component {
             html += await this.rowToHtml(row)
         }
 
-        //const actualizar = await axios.post(`${baseurl}/venta/solicitud_tasacontingencia/${row.id}/`, { estado : 3 })
+        const actualizar = await axios.post(`${baseurl}/venta/solicitud_tasacontingencia/${row.id}/`, { estado : 3 })
 
         printHtml(html)
     }
