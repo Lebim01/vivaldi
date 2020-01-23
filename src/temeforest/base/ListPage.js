@@ -414,7 +414,7 @@ class ListPage extends React.Component {
                                             />
                                         )}
                                     </tbody>
-                                    { numEndVisibleFooterPages > 2 &&
+                                    { numEndVisibleFooterPages >= 2 &&
                                         <tfoot>
                                             <tr className="footable-paging">
                                                 <td colSpan="10">
