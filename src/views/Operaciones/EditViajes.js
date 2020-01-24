@@ -196,7 +196,7 @@ class MainView extends React.Component {
                             element: (
                                 <Select
                                     onChange={this.onChange('conductor2')}
-                                    value={this.props.conductor}
+                                    value={this.props.conductor2}
                                     { ...(this.props.cooperativa
                                         ? { asyncOptions : this.optionsConductor({ cooperativa: this.props.cooperativa }) }
                                         : { options : [{ label: 'Seleccione un cooperativa', value : '' }] }
