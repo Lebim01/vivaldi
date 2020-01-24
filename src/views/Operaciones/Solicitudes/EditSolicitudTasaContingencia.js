@@ -109,7 +109,7 @@ class EditSolicitudTasaContigencia extends React.Component {
         const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/`)
         this.setState({
             id,
-            cantidad_aprobada: (data.estado == 1) ? data.cantidad_aprobada : 0,
+            cantidad_aprobada: (data.estado == 1) ? data.cantidad_aprobada : data.cantidad_pedida,
             data
         })
     }
