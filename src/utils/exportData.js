@@ -81,6 +81,9 @@ function printHtml(html){
     _window.document.write(`
         ${html}
         <script>
+            window.onload = function(){
+                window.print()
+            }
             window.onafterprint = function(){
                 window.close()
             }
@@ -89,8 +92,6 @@ function printHtml(html){
     _window.document.close();
 
     _window.focus();
-    _window.print()
-    //_window.close()
 }
 
 function barcodeToPng(code = ''){
