@@ -74,7 +74,6 @@ class MainView extends React.Component {
     }
 
     render(){
-        console.log(this.props)
         return (
             <div>
                 <FormValidate className="mt-4 form-horizontal">
@@ -178,6 +177,25 @@ class MainView extends React.Component {
                             element: (
                                 <Select
                                     onChange={this.onChange('conductor')}
+                                    value={this.props.conductor}
+                                    { ...(this.props.cooperativa
+                                        ? { asyncOptions : this.optionsConductor({ cooperativa: this.props.cooperativa }) }
+                                        : { options : [{ label: 'Seleccione un cooperativa', value : '' }] }
+                                    )}
+                                />
+                            )
+                        }}
+                        validator={{
+                            validationRules: { },
+                        }}
+                    />
+                    <FormElementValidate
+                        label={{text:'Asistente'}}
+                        input={{
+                            name : 'conductor2',
+                            element: (
+                                <Select
+                                    onChange={this.onChange('conductor2')}
                                     value={this.props.conductor}
                                     { ...(this.props.cooperativa
                                         ? { asyncOptions : this.optionsConductor({ cooperativa: this.props.cooperativa }) }
