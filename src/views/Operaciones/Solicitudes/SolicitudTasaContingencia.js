@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListPage, Card, CardBody, CardTitle, FormGroup, Input, Label, Select, Button, Permission } from 'temeforest'
+import { ListPage, Card, CardBody, CardTitle, FormGroup, Input, Label, Select, Button, Permission , SelectLocalidad} from 'temeforest'
 import moment from 'moment'
 import { baseurl } from 'utils/url'
 
