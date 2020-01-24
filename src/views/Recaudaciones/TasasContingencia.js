@@ -61,6 +61,11 @@ class RegistroTasa extends React.Component {
                 text : `Guardado`,
                 type : 'success'
             })
+            this.setState({
+                cantidad : '',
+                bloques : '',
+                localidad : 0
+            })
             this.toggle()
         }
     }
