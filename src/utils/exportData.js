@@ -80,6 +80,11 @@ function printHtml(html){
     let _window = window.open('','')
     _window.document.write(`
         ${html}
+        <style>
+            body {
+                font-family : arial;
+            }
+        </style>
         <script>
             window.onload = function(){
                 window.print()
