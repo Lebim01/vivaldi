@@ -186,6 +186,9 @@ class ListPage extends React.Component {
                 prevState.currentPage !== this.state.currentPage ||
                 prevState.search !== this.state.search
             ){
+                if(!_.isEqual(prevProps.parameters, this.props.parameters)){
+                    this.setPage(1, false)
+                }
                 this.replaceUrlParams()
             }
             this.loadList(this.props.parameters)
