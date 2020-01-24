@@ -79,9 +79,7 @@ class BandejaTasaCooperativa extends React.Component {
         let unitario = res.data.tasas[0].valor.toFixed(2);
         let html = `
             <style>
-                @media print {
-                    .pagebreak { page-break-before: always; } /* page-break-after works, as well */
-                }
+                .pagebreak { break-after: always; }
             </style>
             <div style="margin-bottom: 10px; border-bottom: 1px solid black; width: 300px; text-align: center;">
             <p style="margin-top: 5px; margin-bottom: 5px;">${res.data.localidad_razon_social}</p>

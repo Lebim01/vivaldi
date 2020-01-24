@@ -82,7 +82,7 @@ function printHtml(html){
         ${html}
         <style>
             body {
-                font-family : arial;
+                font-family : Arial;
             }
         </style>
         <script>
