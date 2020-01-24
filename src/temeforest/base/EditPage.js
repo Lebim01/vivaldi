@@ -184,7 +184,7 @@ function EditPage(props){
                                             }
                                         </Permission>
                                         <Permission key_permission={key_delete}>
-                                            { (btnEnableShow && !props.data.is_active) &&
+                                            { (btnEnableShow && id && !props.data.is_active) &&
                                                 <Button style={{marginLeft:5}} disabled={!id} onClick={() => confirmEnable()} {..._btnEnable}>
                                                     { _btnEnable.text }
                                                 </Button>
