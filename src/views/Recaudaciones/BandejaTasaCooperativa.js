@@ -47,7 +47,7 @@ class BandejaTasaCooperativa extends React.Component {
     async rowToHtml(row){
         try {
             return `
-                <div style="margin-bottom: 10px; border-bottom: 1px solid black; width: 300px; text-align: center;">
+                <div style="margin-bottom: 10px; border-bottom: 1px solid black; width: 300px; text-align: center;" class="pagebreak">
                     <p style="margin-top: 5px; margin-bottom: 5px;">${row.localidad_nombre}</p>
                     <p style="margin-top: 5px; margin-bottom: 5px;">${row.cooperativa_nombre}</p>
                     <p style="margin-top: 5px; margin-bottom: 5px;">Contingencia</p>
@@ -78,6 +78,11 @@ class BandejaTasaCooperativa extends React.Component {
         let valor = (res.data.tasas.length * res.data.tasas[0].valor).toFixed(2);
         let unitario = res.data.tasas[0].valor.toFixed(2);
         let html = `
+            <style>
+                @media print {
+                    .pagebreak { page-break-before: always; } /* page-break-after works, as well */
+                }
+            </style>
             <div style="margin-bottom: 10px; border-bottom: 1px solid black; width: 300px; text-align: center;">
             <p style="margin-top: 5px; margin-bottom: 5px;">${res.data.localidad_razon_social}</p>
             <p style="margin-top: 5px; margin-bottom: 5px;">RUC: ${res.data.localidad_ruc}</p>
