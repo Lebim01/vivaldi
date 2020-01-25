@@ -55,7 +55,7 @@ class BandejaTasaCooperativa extends React.Component {
     async rowToHtml(row, solicitud, tasa){
         try {
             return `
-                <div style="margin-bottom: 10px; border-bottom: 1px solid black; width: 300px; text-align: center;" class="pagebreak">
+                <div style="margin-bottom: 10px; width: 300px; text-align: center;" class="pagebreak">
                     <p style="margin-top: 5px; margin-bottom: 5px;">Solicitud #${solicitud} Tasa #${tasa}</p>
                     <p style="margin-top: 5px; margin-bottom: 5px;">${row.localidad_nombre}</p>
                     <p style="margin-top: 5px; margin-bottom: 5px;">${row.cooperativa_nombre}</p>
@@ -74,7 +74,6 @@ class BandejaTasaCooperativa extends React.Component {
                     </p>
                     
                     <img width="140" src="${baseurl}/qr/?key=${row.codigo}"/>
-                    
                 </div>
             `
         }catch(err){
@@ -144,7 +143,7 @@ class BandejaTasaCooperativa extends React.Component {
             html += await this.rowToHtml(row, row.id, i)
         }
 
-        const actualizar = await axios.post(`${baseurl}/venta/solicitud_tasacontingencia/${row.id}/`, { estado : 3 })
+        //const actualizar = await axios.post(`${baseurl}/venta/solicitud_tasacontingencia/${row.id}/`, { estado : 3 })
 
         printHtml(html)
     }
