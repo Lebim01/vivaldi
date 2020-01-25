@@ -25,6 +25,14 @@ class BandejaTasaCooperativa extends React.Component {
         valueName: 'id'
     }
 
+    componentDidMount(){
+        this.interval = setInterval(this.buscar, 15 * 1000)
+    }
+
+    componentWillUnmount(){
+        clearInterval(this.interval)
+    }
+
     onChange = name => (e) => {
         this.setState({
             [name]: e.target.value
@@ -44,10 +52,11 @@ class BandejaTasaCooperativa extends React.Component {
         })
     }
 
-    async rowToHtml(row){
+    async rowToHtml(row, solicitud, tasa){
         try {
             return `
                 <div style="margin-bottom: 10px; border-bottom: 1px solid black; width: 300px; text-align: center;" class="pagebreak">
+                    <p style="margin-top: 5px; margin-bottom: 5px;">Solicitud #${solicitud} Tasa #${tasa}</p>
                     <p style="margin-top: 5px; margin-bottom: 5px;">${row.localidad_nombre}</p>
                     <p style="margin-top: 5px; margin-bottom: 5px;">${row.cooperativa_nombre}</p>
                     <p style="margin-top: 5px; margin-bottom: 5px;">Contingencia</p>
@@ -132,7 +141,7 @@ class BandejaTasaCooperativa extends React.Component {
 
         for(let i in res.data.tasas){
             let row = res.data.tasas[i]
-            html += await this.rowToHtml(row)
+            html += await this.rowToHtml(row, row.id, i)
         }
 
         const actualizar = await axios.post(`${baseurl}/venta/solicitud_tasacontingencia/${row.id}/`, { estado : 3 })
