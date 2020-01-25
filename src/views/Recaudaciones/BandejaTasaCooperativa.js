@@ -69,6 +69,10 @@ class BandejaTasaCooperativa extends React.Component {
                         <span style="width: 100px; text-align: left;">$ ${row.valor}</span>
                     </p>
                     <p style="margin-top: 5px; margin-bottom: 5px;">
+                        <span style="width: 100px; text-align: left;">Silo: ${row.silos}</span>
+                        <span style="width: 100px; text-align: left;">Andenes: ${row.andenes}</span>
+                    </p>
+                    <p style="margin-top: 5px; margin-bottom: 5px;">
                         <span style="width: 100px; text-align: left;">Usuario: </span>
                         <span style="width: 100px; text-align: left;">${row.usuario_creacion_nombre}</span>
                     </p>
@@ -143,7 +147,7 @@ class BandejaTasaCooperativa extends React.Component {
             html += await this.rowToHtml(row, row.id, i)
         }
 
-        const actualizar = await axios.post(`${baseurl}/venta/solicitud_tasacontingencia/${row.id}/`, { estado : 3 })
+        //const actualizar = await axios.post(`${baseurl}/venta/solicitud_tasacontingencia/${row.id}/`, { estado : 3 })
 
         printHtml(html)
     }
