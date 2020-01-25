@@ -93,14 +93,31 @@ class RegistroAccion extends React.Component {
                                 </div>
                                 <ListPage
                                     searchable={false}
-                                    fieldNames={['Fecha/Hora', 'Usuario', 'Nombre', 'Departamento',
-                                                'Tabla', 'Evento', 'Usuario Afectado',
-                                                'Área Modificada', 'Descripción']}
-                                    fields = {['datetime', 'user', 'object_repr', '', 'content_type',
-                                            'event_type', '', '', '' ]}
+                                    fieldNames={[
+                                        'Fecha/Hora', 
+                                        'Usuario', 
+                                        'Nombre', 
+                                        'Departamento',
+                                        'Tabla', 
+                                        'Evento', 
+                                        'Usuario Afectado',
+                                        'Área Modificada', 
+                                        'Descripción'
+                                    ]}
+                                    fields = {[
+                                        'datetime', 
+                                        'user', 
+                                        'object_repr', 
+                                        '', 
+                                        'content_type',
+                                        'event_type', 
+                                        '', 
+                                        '', 
+                                        '' 
+                                    ]}
 
                                     endpoint='auditcrud'
-
+                                    history={this.props.history}
                                     parameters={this.state}
                                     filters={{
                                         persist: true,
