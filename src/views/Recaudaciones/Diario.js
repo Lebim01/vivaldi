@@ -167,11 +167,15 @@ class Diario extends React.Component {
                 { row.a_cobrar !== 0 && row.cooperativa !== "(TOTAL)" &&
                     <Button outline onClick={() => this.toWord(row)}>Imprimir</Button>
                 }
+                {
+                    row.a_cobrar!== 0 && row.cooperativa === "(TOTAL)" &&
+                    <Button outline onClick={() => this.imprimirTodos()}>Imprimir Todos</Button>
+                }
             </React.Fragment>
         )
     }
 
-    fieldImprimirTodos = (row ) => {
+    /*fieldImprimirTodos = (row ) => {
         return (
             <React.Fragment>
                 {
@@ -180,7 +184,7 @@ class Diario extends React.Component {
                 }
             </React.Fragment>
         )
-    }
+    }*/
 
     render(){
         const { refresh } = this.state
@@ -253,7 +257,7 @@ class Diario extends React.Component {
 
                                         (row) => <span style={{float:"right", fontWeight: 300}}>{(row.fecha_cobro)}</span>,
                                         (row) => <span style={style_money_label}>${moneyFormat(row.nc)}</span>,
-                                        this.fieldImprimir, this.fieldImprimirTodos
+                                        this.fieldImprimir/*, this.fieldImprimirTodos*/
                                     ]}
 
                                     endpoint='venta/cobros-diarios'
