@@ -196,7 +196,9 @@ class ViajesPlanificados extends React.Component {
                                             fields={fields}
                                             tdBodyClass="margin: 0 !important;padding: 0 !important;"
                                             tdBodyClass={(row) => {
-                                                let ya_salio = moment(`${moment().format('YYYY-MM-DD')} ${row.hora_salida}`).isAfter(moment());
+                                                let hora_salida = moment(`${moment().format('YYYY-MM-DD')} ${row.hora_salida}`)
+                                                let ahorita = moment()
+                                                let ya_salio = hora_salida.isBefore(ahorita)
 
                                                 if(row.conductor_puntos === 0) return 'bg-danger'
                                                 if(row.saldo === 0) return 'bg-orange-300'
