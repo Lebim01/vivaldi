@@ -110,8 +110,9 @@ class Buses extends React.Component{
 
                                         fieldNames={['Cooperativa', 'Disco', 'Placa', 'Capacidad', 'Tipo',  'Dueño', 'Saldo']}
                                         fields={[
+                                            'cooperativa_nombre',
                                             (row) => <span style={{textAlign:"right", position: 'relative', right:'-40%'}}>{row.disco}</span>,
-                                            'cooperativa_nombre', 'placa',
+                                             'placa',
                                             (row) => <label style={{float:"center", position:"relative", left: "70%", fontWeight: 300}}>{row.capacidad}</label>,
                                             'tipo_servicio_nombre',
                                             'propietario_nombre',
