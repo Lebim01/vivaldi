@@ -157,7 +157,7 @@ class Diario extends React.Component {
 
     imprimirTodos = () => {
         let rows = this.table.current.state.filtered
-        let html = rows.filter((row) => row.a_cobrar !== 0).map((row) => this.rowToHtml(row)).join('')
+        let html = rows.filter((row) => row.a_cobrar !== 0 && row.cooperativa !== "(TOTAL)").map((row) => this.rowToHtml(row)).join('')
         printHtml(html)
     }
 
@@ -174,17 +174,6 @@ class Diario extends React.Component {
             </React.Fragment>
         )
     }
-
-    /*fieldImprimirTodos = (row ) => {
-        return (
-            <React.Fragment>
-                {
-                    row.a_cobrar!== 0 && row.cooperativa === "(TOTAL)" &&
-                    <Button outline onClick={() => this.imprimirTodos()}>Imprimir Todos</Button>
-                }
-            </React.Fragment>
-        )
-    }*/
 
     render(){
         const { refresh } = this.state
