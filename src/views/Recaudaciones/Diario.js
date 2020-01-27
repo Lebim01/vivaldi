@@ -57,9 +57,9 @@ class Diario extends React.Component {
             text : '¿Seguro de cobrar?',
             endpoint: 'venta/cobro/crear_cobro_por_fecha'
         }
+        
         if(await confirmEndpoint(options)){
             this.refresh()
-            Swal.fire('Cobrado', 'Exitosamente', 'success')
         }
     }
 
@@ -243,10 +243,9 @@ class Diario extends React.Component {
                                         this.fieldCobrar,
                                         (row) => <span style={style_money_label}>${moneyFormat(row.a_cobrar)}</span>,
                                         (row) => <span style={style_money_label}>${moneyFormat(row.cobrado)}</span>,
-
                                         (row) => <span style={{float:"right", fontWeight: 300}}>{(row.fecha_cobro)}</span>,
                                         (row) => <span style={style_money_label}>${moneyFormat(row.nc)}</span>,
-                                        this.fieldImprimir/*, this.fieldImprimirTodos*/
+                                        this.fieldImprimir
                                     ]}
 
                                     endpoint='venta/cobros-diarios'
