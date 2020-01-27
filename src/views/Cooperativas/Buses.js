@@ -16,8 +16,8 @@ class Buses extends React.Component{
 
     /*const optionsEstado = {
         url : `${baseurl}/bus/cooperativa?`,
-        labelName: 'is_enable', 
-        valueName: 'id' , 
+        labelName: 'is_enable',
+        valueName: 'id' ,
 
     }*/
 
@@ -97,7 +97,7 @@ class Buses extends React.Component{
                                                     <FormGroup className="row">
                                                         <Label className="col-sm-5">Estado</Label>
                                                         <div className="col-sm-7">
-                                                            <Select options={this.optionsEstado} defaultOption="Todos" onChange={this.onChange('status')} value={this.state.status} /> 
+                                                            <Select options={this.optionsEstado} defaultOption="Todos" onChange={this.onChange('status')} value={this.state.status} />
                                                         </div>
                                                     </FormGroup>
                                                 </div>
@@ -108,12 +108,12 @@ class Buses extends React.Component{
                                         searchable={true}
                                         searchPlaceholder="Cooperativa, Placa, Disco"
 
-                                        fieldNames={['Cooperativa', 'Placa', 'Disco', 'Tipo', 'Capacidad', 'Dueño', 'Saldo']}
+                                        fieldNames={['Cooperativa', 'Disco', 'Placa', 'Capacidad', 'Tipo',  'Dueño', 'Saldo']}
                                         fields={[
-                                            'cooperativa_nombre', 'placa',
                                             (row) => <span style={{textAlign:"right", position: 'relative', right:'-40%'}}>{row.disco}</span>,
-                                            'tipo_servicio_nombre',
+                                            'cooperativa_nombre', 'placa',
                                             (row) => <label style={{float:"center", position:"relative", left: "70%", fontWeight: 300}}>{row.capacidad}</label>,
+                                            'tipo_servicio_nombre',
                                             'propietario_nombre',
                                             (row) => <label style={{float:"center", position:"relative", left: "8%", fontWeight: 300}}>${moneyFormat(row.saldo)}</label>
                                         ]}
@@ -123,10 +123,10 @@ class Buses extends React.Component{
 
                                         //exportExcel={exportExcel}
 
-                                         
+
                                         parameters={{
                                             ...this.state,
-                                           
+
                                           }}
 
                                         filters={{
@@ -136,7 +136,7 @@ class Buses extends React.Component{
                                             }
                                         }}
                                         history={this.props.history}
-                                        
+
                                     />
                                 </div>
                             </CardBody>
