@@ -6,7 +6,9 @@ import { moneyFormat } from 'utils/number'
 
 class PuntoVenta extends React.Component{
 
-    state = {}
+    state = {
+        status: 'true'
+    }
     
 
     optionsCooperativa = {

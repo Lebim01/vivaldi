@@ -4,7 +4,9 @@ import { Card, CardBody, ListPage, Permission, Select, Label, FormGroup } from '
 
 class Gremios extends React.Component {
 
-    state = {}
+    state = {
+        status: 'true'
+    }
 
     optionsEstado = [
         { value:'', label: 'Todos'},

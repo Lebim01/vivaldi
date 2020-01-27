@@ -4,7 +4,9 @@ import { Card, CardBody, ListPage, Permission, FormGroup, Label, Select } from '
 
 class Marcas extends React.Component {
 
-    state = {}
+    state = {
+        status: 'true'
+    }
 
     optionsEstado = [
         { value:'', label: 'Todos'},

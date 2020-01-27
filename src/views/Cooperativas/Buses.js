@@ -6,7 +6,9 @@ import { moneyFormat } from 'utils/number'
 
 class Buses extends React.Component{
 
-    state = {}
+    state = {
+        status: 'true'
+    }
 
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,

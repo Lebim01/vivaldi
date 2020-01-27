@@ -4,7 +4,9 @@ import { baseurl } from 'utils/url'
 
 class Rutas extends React.Component{
 
-    state = {}
+    state = {
+        status: 'true'
+    }
 
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,

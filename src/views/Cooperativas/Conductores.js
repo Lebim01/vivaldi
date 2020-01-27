@@ -6,7 +6,9 @@ import { moneyFormat } from 'utils/number'
 
 class Conductores extends React.Component {
 
-    state = {}
+    state = {
+        status: 'true'
+    }
 
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,

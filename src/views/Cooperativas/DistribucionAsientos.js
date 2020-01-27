@@ -3,7 +3,9 @@ import { Card, CardBody, CardTitle, ListPage, FormGroup, Label, Select, Permissi
 
 class DistribucionAsientos extends React.Component {
 
-    state = {}
+    state = {
+        status: 'true'
+    }
 
     optionsEstado = [
         { value:'', label: 'Todos'},

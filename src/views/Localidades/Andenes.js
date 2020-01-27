@@ -3,7 +3,9 @@ import { ListPage, Card, CardBody, Permission, FormGroup, Label, Select } from '
 
 class Andenes extends React.Component {
 
-    state = {}
+    state = {
+        status: 'true'
+    }
 
     optionsEstado = [
         { value:'', label: 'Todos'},

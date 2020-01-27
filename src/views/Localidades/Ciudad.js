@@ -3,7 +3,7 @@ import { Card, CardBody, ListPage, Permission, FormGroup, Label, Select } from '
 
 function Ciudades(props) {
 
-    const [state, setState] = useState({})
+    const [state, setState] = useState({ status: 'true'})
 
     const optionsEstado = [
         { value:'', label: 'Todos'},
