@@ -40,7 +40,6 @@ class Roles extends React.Component{
                                         </div>
                                     }
 
-                                    showStatus={true}
                                     searchable={true}
                                     searchPlaceholder="Rol, Descripción"
                                     searchFields={['name', 'description']}
