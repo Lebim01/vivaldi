@@ -170,7 +170,7 @@ function EditPage(props){
                                 <div className="row">
                                     <div className="col-sm-12 text-center">
                                         <Permission key_permission={id ? key_change : key_add}>
-                                            { (btnSaveShow && (props.data.is_active || !id)) &&
+                                            { (btnSaveShow && (props.data.is_active || typeof props.data.is_active === 'undefined' || !id)) &&
                                                 <Button style={{marginRight:5}} onClick={onSubmit} {..._btnSave}>
                                                     {_btnSave.text}
                                                 </Button>
@@ -184,7 +184,7 @@ function EditPage(props){
                                             }
                                         </Permission>
                                         <Permission key_permission={key_delete}>
-                                            { (btnEnableShow && id && !props.data.is_active) &&
+                                            { (btnEnableShow && id && !props.data.is_active && typeof props.data.is_active !== 'undefined') &&
                                                 <Button style={{marginLeft:5}} disabled={!id} onClick={() => confirmEnable()} {..._btnEnable}>
                                                     { _btnEnable.text }
                                                 </Button>
