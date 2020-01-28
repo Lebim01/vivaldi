@@ -25,8 +25,20 @@ class ListadoCooperativas extends React.Component {
         try {
             const res = await axios.get(`${baseurl}/venta/viajes-planificados/?page_size=0&localidad=${this.props.localidad}`)
 
+            let cooperativas = []
+            for(let i in res.data){
+                let viaje = res.data[i]
+                let indexExists = cooperativas.find(row => row.cooperativa === viaje.cooperativa)
+                if(indexExists === -1){
+                    cooperativas.push({
+                        cooperativa : viaje.cooperativa,
+                        cooperativa_nombre : viaje.cooperativa_nombre
+                    })
+                }
+            }
+
             this.setState({
-                cooperativas: res.data
+                cooperativas
             })
 
         }catch({ response }){
