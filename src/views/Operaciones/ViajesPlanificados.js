@@ -6,6 +6,7 @@ import Clock  from 'utils/clock'
 import ViajesModal from './ViajesModal'
 import store from 'store/auth'
 import axios from 'axios'
+import './ViajesPlanificados.css'
 
 axios.defaults.headers.common['Authorization'] = `JWT ${store.getState().token}`
 
