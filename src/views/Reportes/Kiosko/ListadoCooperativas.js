@@ -28,7 +28,7 @@ class ListadoCooperativas extends React.Component {
             let cooperativas = []
             for(let i in res.data){
                 let viaje = res.data[i]
-                let indexExists = cooperativas.find(row => row.cooperativa === viaje.cooperativa)
+                let indexExists = cooperativas.findIndex(row => row.cooperativa === viaje.cooperativa)
                 if(indexExists === -1){
                     cooperativas.push({
                         cooperativa : viaje.cooperativa,
