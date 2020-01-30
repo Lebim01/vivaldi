@@ -75,10 +75,16 @@ class ListPage extends React.Component {
     }
 
     loadFilters = () => {
-        const { query, page, ...parameters } = getAllParameters()
+        const { query, page, searchtext, ...parameters } = getAllParameters()
 
         if(page){
             this.setPage(Number(page), !this.props.filters)
+        }
+
+        if(searchtext){
+            this.setState({
+                search :  searchtext
+            })
         }
 
         if(this.props.filters.persist){            
@@ -181,7 +187,7 @@ class ListPage extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState){
-        if(prevProps !== this.props){
+        if(!_.isEqual(prevProps, this.props) || prevState.search !== this.state.search){
             if(!_.isEqual(prevProps.parameters, this.props.parameters) || 
                 prevState.currentPage !== this.state.currentPage ||
                 prevState.search !== this.state.search
