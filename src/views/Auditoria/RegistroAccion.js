@@ -65,13 +65,13 @@ class RegistroAccion extends React.Component {
                                         <FormGroup className="row">
                                             <Label className="col-sm-4">Fecha Inicio</Label>
                                             <div className="col-sm-6">
-                                                <Input className="no-clear" type="date" value={this.state.fecha} />
+                                                <Input className="no-clear" type="date" value={this.state.from_date} onChange={this.onChange('from_date')} />
                                             </div>
                                         </FormGroup>
                                         <FormGroup className="row">
                                             <Label className="col-sm-4">Fecha Fin</Label>
                                             <div className="col-sm-6">
-                                                <Input className="no-clear" type="date" value={this.state.fecha} />
+                                                <Input className="no-clear" type="date" value={this.state.to_date} onChange={this.onChange('to_date')} />
                                             </div>
                                         </FormGroup>
                                     </div>
