@@ -38,6 +38,7 @@ class MainView extends React.Component {
             this.getAndenes()
         }
     }
+    
 
     onChange = name => (e) => {
         if(this.props.onChange){
@@ -189,7 +190,7 @@ class EditSilo extends React.Component {
     }
 
     getData = async (id) => {
-        const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/`)
+        const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/?full=1`)
         this.setState({
             id,
             data
