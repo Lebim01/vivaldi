@@ -64,6 +64,7 @@ class MainView extends React.Component {
     }
 
     render(){
+        
         return (
             <div>
                 <FormValidate className="mt-4 form-horizontal">
@@ -123,6 +124,12 @@ class EditAndenes extends React.Component {
         let id = getParameter('id')
         if(id){
             this.getData(id)
+        }
+    }
+
+    componentDidUpdate(prevProps){
+        if(prevProps.id !== this.props.id){
+            this.getAndenes(this.props.localidad_nivel)
         }
     }
 

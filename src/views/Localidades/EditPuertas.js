@@ -24,7 +24,7 @@ class ListAndenes extends React.Component {
 class MainView extends React.Component {
     seleccione = [{label:'Seleccione', value:''}]
     state = {}
-
+    
     optionsLocalidades = {
         url : `${baseurl}/localidad/`,
         labelName: 'nombre',
@@ -69,16 +69,19 @@ class MainView extends React.Component {
     }
 
     getAndenes = async (localidad_nivel)  => {
+        if(localidad_nivel){
         const { data } = await axios.get(`${baseurl}/anden/?localidad_nivel=${localidad_nivel}`)
         let options = [...data.results.map((r) => { return { value : r.id, label : r.descripcion } })]
         this.setState({
             andenes : options
         })
+        }
     }
 
     toggleAndenes = (selected) => {
         this.props.onChange('andenes', selected)
     }
+    
 
     onChangeLocalidad = name => (e) => {
         if(this.props.onChange){
@@ -96,18 +99,21 @@ class MainView extends React.Component {
     }
 
     getLocalidades = async (id)  => {
-        const results = await getResults(`${baseurl}/localidad/`)
-        let options = [...this.seleccione, ...results.map((r) => { return { value : r.id, label : r.nombre } })]
-        this.setState({
-            localidades : options
-        }, ()=>{
-            if(this.props.localidad === undefined){
-                this.props.onChange('localidad', this.state.localidades[1].value)
-                this.getNiveles(this.state.localidades[1].value)
-            }else{
-                this.getNiveles(this.props.localidad)
-            }
-        })
+        
+            const results = await getResults(`${baseurl}/localidad/`)
+            let options = [...this.seleccione, ...results.map((r) => { return { value : r.id, label : r.nombre } })]
+            this.setState({
+                localidades : options
+            }, ()=>{
+                if(this.props.localidad === undefined){
+                    this.props.onChange('localidad', this.state.localidades[1].value)
+                    this.getNiveles(this.state.localidades[1].value)
+                }else
+                {
+                    this.getNiveles(this.props.localidad)
+                }
+            })
+        
     }
 
     render(){

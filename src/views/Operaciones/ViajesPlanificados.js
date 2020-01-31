@@ -93,7 +93,7 @@ class ViajesPlanificados extends React.Component {
         const { cooperativa, localidad, silo, estado } = this.state.data
         
 
-        let headers = ['#','Cooperativa', 'Disco', 'Placa', 'Saldo', 'Duración', 'Salida', 'Destino']
+        let headers = ['#','Cooperativa', 'Disco', 'Placa', 'Saldo', 'Duración', 'Salida', 'Destino', 'Puntos', 'Kit']
         let fields = ['', 
             'cooperativa_nombre', 
             'disco', 
@@ -101,7 +101,10 @@ class ViajesPlanificados extends React.Component {
             'saldo', 
             'duracion', 
             'hora_salida',
-            'destino'
+            'destino', 
+            'puntos',
+            (row) => <span style={{ float: 'right',position: 'relative', right:'75%'}}>{row.kit_seguro}</span>
+            
         ]
 
         if(!this.state.data.saldo){
@@ -180,13 +183,15 @@ class ViajesPlanificados extends React.Component {
                                             <div className="col-lg-3 col-md-4 col-sm-6">
                                                 <Clock className="d-inline-block"/>
                                             </div>
-                                            <div className="col-md-6 col-sm-6">
+                                            <div className="col-md-8 col-sm-8">
                                                 {' '}<div className="bg-orange d-inline-block" style={{width:20, height:10}}>{' '}</div>
                                                 <span>{' '}No tiene saldo</span>
                                                 <div className="bg-info d-inline-block" style={{width:20, height:10, marginLeft: 20}}>{' '}</div>
                                                 <span>{' '}Viaje ya salió</span>
                                                 <div className="bg-danger d-inline-block" style={{width:20, height:10, marginLeft: 20}}>{' '}</div>
                                                 <span>{' '}Conductor sin puntos</span>
+                                                <div className="bg-green d-inline-block" style={{width:20, height:10, marginLeft: 20, backgroundColor: 'lightgreen '}}>{' '}</div>
+                                                <span>{' '}Kit es verdadero</span>
                                             </div>
                                         </div>
                                     </div>
@@ -206,6 +211,7 @@ class ViajesPlanificados extends React.Component {
                                                 if(ya_salio) return 'bg-info'
                                                 return ''
                                             }}
+                                            
                                             endpoint='venta/viajes-planificados'
                                             parameters={this.state.data}
                                             history={this.props.history}
