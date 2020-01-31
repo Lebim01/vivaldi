@@ -1,3 +1,11 @@
 .bg-orange-300 {
     background-color: #fbd38d;
 }
+
+body {
+    font-weight: bold !important;
+}
+
+td, :not(.footable-pagination) span, label {
+    color: black !important;
+}
