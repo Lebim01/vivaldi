@@ -101,10 +101,22 @@ class ViajesPlanificados extends React.Component {
             'saldo', 
             'duracion', 
             'hora_salida',
-            'destino', 
-            'puntos',
-            (row) => <span style={{ float: 'right',position: 'relative', right:'75%'}}>{row.kit_seguro}</span>
-            
+            'destino',
+            (row) => {
+                return (
+                    <div style={{width: 80, height: 30}} className={row.puntos === 0 ? 'bg-danger' : 'bg-success'}>
+
+                    </div>
+                )
+            },
+            (row) => {
+                return (
+                    <div style={{width: 80, height: 30}} className={!row.kit_seguro ? 'bg-danger' : 'bg-success'}>
+
+                    </div>
+                )
+                return 'bg-danger'
+            }
         ]
 
         if(!this.state.data.saldo){
