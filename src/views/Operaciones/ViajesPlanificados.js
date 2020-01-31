@@ -115,7 +115,6 @@ class ViajesPlanificados extends React.Component {
 
                     </div>
                 )
-                return 'bg-danger'
             }
         ]
 
@@ -200,10 +199,6 @@ class ViajesPlanificados extends React.Component {
                                                 <span>{' '}No tiene saldo</span>
                                                 <div className="bg-info d-inline-block" style={{width:20, height:10, marginLeft: 20}}>{' '}</div>
                                                 <span>{' '}Viaje ya salió</span>
-                                                <div className="bg-danger d-inline-block" style={{width:20, height:10, marginLeft: 20}}>{' '}</div>
-                                                <span>{' '}Conductor sin puntos</span>
-                                                <div className="bg-green d-inline-block" style={{width:20, height:10, marginLeft: 20, backgroundColor: 'lightgreen '}}>{' '}</div>
-                                                <span>{' '}Kit es verdadero</span>
                                             </div>
                                         </div>
                                     </div>
@@ -218,7 +213,6 @@ class ViajesPlanificados extends React.Component {
                                                 let ahorita = moment()
                                                 let ya_salio = hora_salida.isBefore(ahorita)
 
-                                                if(row.conductor_puntos === 0) return 'bg-danger'
                                                 if(row.saldo === 0) return 'bg-orange-300'
                                                 if(ya_salio) return 'bg-info'
                                                 return ''
