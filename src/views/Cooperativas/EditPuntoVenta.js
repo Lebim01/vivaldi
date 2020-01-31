@@ -382,6 +382,12 @@ class EditPuntoVenta extends React.Component {
 
     getData = async (id) => {
         const { data } = await axios.get(`${baseurl}/${endpoint}/${id}/?full=1`)
+        let editedPVC = data.puntoventa_cooperativas.map((obj)=>{
+            obj.secuencia_boleto = obj.gen_secuencia_boleto
+            obj.secuencia_tasa = obj.gen_secuencia_tasa
+            return obj
+        })
+        data.puntoventa_cooperativas = editedPVC
         this.setState({
             id,
             data
