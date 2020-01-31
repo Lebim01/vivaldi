@@ -88,8 +88,7 @@ class Login2 extends React.Component {
                     <div id="loginform">
                         <div className="logo">
                             <span className="db"><img src="assets/img/LOGO-ICON-TEXTO.png" height="50" alt="logo"/></span>
-                            <h5 className="font-medium m-b-20">Ingresa a tu cuenta</h5>
-                            <h6 className="font-medium m-b-20 font-blue">El sistema contable más vendido en todo Ecuador</h6>
+                            <h5 className="font-medium py-2">Ingresa a tu cuenta</h5>
                         </div>
                         <div className="row">
                             <div className="col-12">
@@ -107,10 +106,10 @@ class Login2 extends React.Component {
                                             </div>
                                             <input type="password" className="form-control form-control-lg" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="basic-addon1" onChange={this.onChange('pass')} />
                                         </div>
-                                        
+
                                         <div className="form-group text-center">
                                             <div className="col-xs-12 p-b-20">
-                                                { this.state.error && 
+                                                { this.state.error &&
                                                     <b><span className="text-danger">{this.state.error}</span> </b>
                                                 }
                                                 <button className="btn btn-block btn-lg btn-info" type="submit" onClick={(e) => this.login(e)}>Ingresar</button>
