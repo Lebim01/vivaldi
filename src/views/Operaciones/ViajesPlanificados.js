@@ -6,6 +6,7 @@ import Clock  from 'utils/clock'
 import ViajesModal from './ViajesModal'
 import store from 'store/auth'
 import axios from 'axios'
+import { moneyFormat } from 'utils/number'
 import './ViajesPlanificados.css'
 
 axios.defaults.headers.common['Authorization'] = `JWT ${store.getState().token}`
@@ -93,34 +94,24 @@ class ViajesPlanificados extends React.Component {
         const { cooperativa, localidad, silo, estado } = this.state.data
         
 
-        let headers = ['#','Cooperativa', 'Disco', 'Placa', 'Saldo', 'Duración', 'Salida', 'Destino', 'Puntos', 'Kit']
+        let headers = ['#','Cooperativa', 'Disco', 'Placa', 'Vueltas', 'Saldo', 'Duración', 'Salida', 'Destino', 'Puntos', 'Kit']
         let fields = ['', 
             'cooperativa_nombre', 
             'disco', 
             'placa',
-            'saldo', 
+            'vlts',
+            (row) => (<span>${moneyFormat(row.saldo)}</span>), 
             'duracion', 
             'hora_salida',
             'destino',
-            (row) => {
-                return (
-                    <div style={{width: 80, height: 30}} className={row.puntos === 0 ? 'bg-danger' : 'bg-success'}>
-
-                    </div>
-                )
-            },
-            (row) => {
-                return (
-                    <div style={{width: 80, height: 30}} className={!row.kit_seguro ? 'bg-danger' : 'bg-success'}>
-
-                    </div>
-                )
-            }
+            (row) => (<div style={{width: 50, height: 20}} className={row.puntos === 0 ? 'bg-danger' : 'bg-success'}></div>),
+            (row) => (<div style={{width: 50, height: 20}} className={!row.kit_seguro ? 'bg-danger' : 'bg-success'}></div>)
         ]
 
         if(!this.state.data.saldo){
-            fields.splice(fields.indexOf('saldo'), 1)
-            headers.splice(headers.indexOf('Saldo'), 1)
+            let indexSaldo = 4
+            fields.splice(indexSaldo, 1)
+            headers.splice(indexSaldo, 1)
         }
 
         if(!this.state.data.duracion){
@@ -198,7 +189,7 @@ class ViajesPlanificados extends React.Component {
                                                 {' '}<div className="bg-orange d-inline-block" style={{width:20, height:10}}>{' '}</div>
                                                 <span>{' '}No tiene saldo</span>
                                                 <div className="bg-info d-inline-block" style={{width:20, height:10, marginLeft: 20}}>{' '}</div>
-                                                <span>{' '}Viaje ya salió</span>
+                                                <span>{' '}Viaje atrasado</span>
                                             </div>
                                         </div>
                                     </div>
