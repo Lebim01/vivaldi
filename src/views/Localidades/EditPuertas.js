@@ -36,7 +36,7 @@ class MainView extends React.Component {
     }
 
     componentDidUpdate(prevProps){
-        if(prevProps.id !== this.props.id){
+        if(prevProps.id !== this.props.id && this.props.localidad_nivel){
             this.getAndenes(this.props.localidad_nivel)
         }
     }
@@ -46,6 +46,7 @@ class MainView extends React.Component {
             this.props.onChange(name, e.target.value)
 
             if(name === 'localidad'){
+                console.log('3')
                 this.getNiveles(e.target.value)
                 this.setState({
                     andenes : []
@@ -70,11 +71,11 @@ class MainView extends React.Component {
 
     getAndenes = async (localidad_nivel)  => {
         if(localidad_nivel){
-        const { data } = await axios.get(`${baseurl}/anden/?localidad_nivel=${localidad_nivel}`)
-        let options = [...data.results.map((r) => { return { value : r.id, label : r.descripcion } })]
-        this.setState({
-            andenes : options
-        })
+            const { data } = await axios.get(`${baseurl}/anden/?localidad_nivel=${localidad_nivel}`)
+            let options = [...data.results.map((r) => { return { value : r.id, label : r.descripcion } })]
+            this.setState({
+                andenes : options
+            })
         }
     }
 
@@ -85,30 +86,28 @@ class MainView extends React.Component {
 
     onChangeLocalidad = name => (e) => {
         if(this.props.onChange){
-          this.getNiveles(e.target.value)
-          this.props.onChange('localidad', e.target.value)
+            this.props.onChange('localidad', e.target.value)
+            this.getNiveles(e.target.value)
         }
     }
 
     getNiveles = async (id)  => {
-        const results = await getResults(`${baseurl}/localidadnivel/?localidad=${id}`)
-        let options = [...this.seleccione, ...results.map((r) => { return { value : r.id, label : r.nombre } })]
-        this.setState({
-          niveles : options
-        })
+        if(id){
+            const results = await getResults(`${baseurl}/localidadnivel/?localidad=${id}`)
+            let options = [...this.seleccione, ...results.map((r) => { return { value : r.id, label : r.nombre } })]
+            this.setState({
+                niveles : options
+            })
+        }
     }
 
-    getLocalidades = async (id)  => {
+    getLocalidades = async ()  => {
         const results = await getResults(`${baseurl}/localidad/`)
         let options = [...this.seleccione, ...results.map((r) => { return { value : r.id, label : r.nombre } })]
         this.setState({
             localidades : options
         }, ()=>{
-            if(this.props.localidad === undefined){
-                this.props.onChange('localidad', this.state.localidades[1].value)
-                this.getNiveles(this.state.localidades[1].value)
-            }else
-            {
+            if(this.props.localidad !== undefined){
                 this.getNiveles(this.props.localidad)
             }
         })
