@@ -96,7 +96,11 @@ class MainView extends React.Component {
                         label={{text:'Nivel'}}
                         input={{
                             name : 'localidad_nivel',
-                            element: <Select onChange={this.onChange('localidad_nivel')} value={this.props.localidad_nivel} options={this.props.localidad ? this.state.niveles : this.seleccione} />
+                            element: <Select 
+                                        onChange={this.onChange('localidad_nivel')} 
+                                        value={this.props.localidad_nivel} 
+                                        options={this.props.localidad ? this.state.niveles : this.seleccione} 
+                                     />
                         }}
                         validator={{
                             validationRules: {
