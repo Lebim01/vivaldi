@@ -100,7 +100,7 @@ class ViajesPlanificados extends React.Component {
             'disco', 
             'placa',
             'vlts',
-            (row) => (<span>${moneyFormat(row.saldo)} </span>), 
+            (row) => (<span>{row.saldo === '-' ? row.saldo : '$ ' + moneyFormat(row.saldo)} </span>),
             'duracion', 
             'hora_salida',
             'destino',
