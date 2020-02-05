@@ -100,7 +100,7 @@ class ViajesPlanificados extends React.Component {
             'disco', 
             'placa',
             'vlts',
-            (row) => (<span>${moneyFormat(row.saldo)}</span>), 
+            (row) => (<span>${moneyFormat(row.saldo)} </span>), 
             'duracion', 
             'hora_salida',
             'destino',
@@ -189,7 +189,7 @@ class ViajesPlanificados extends React.Component {
                                                 {' '}<div className="bg-orange d-inline-block" style={{width:20, height:10}}>{' '}</div>
                                                 <span>{' '}No tiene saldo</span>
                                                 <div className="bg-info d-inline-block" style={{width:20, height:10, marginLeft: 20}}>{' '}</div>
-                                                <span>{' '}Viaje atrasado</span>
+                                                <span>{' '}Viaje atrasado </span>
                                             </div>
                                         </div>
                                     </div>
