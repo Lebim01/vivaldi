@@ -1,4 +1,5 @@
 import React from 'react'
+import { Row, Col } from 'reactstrap'
 import { Button, FormGroup, Input, Label, Select, FormElementValidate, FormValidate, EditPage, MaskedInput } from 'temeforest'
 import { baseurl, getParameter, canDownload, downloadFile } from 'utils/url'
 import { fileToBase64 } from 'utils/file'
@@ -105,32 +106,46 @@ class MainView extends React.Component {
                             }
                         }}
                     />
-                    <FormElementValidate
-                        label={{text:'Placa'}}
-                        input={{
-                            name : 'placa',
-                            element: (
-                                <MaskedInput 
-                                    onChange={this.onChange('placa')} 
-                                    value={this.props.placa}
-                                    upper={true}
-                                    placeholder="ABC-1234"
-                                    mask={
-                                        //'ddd-cccc'
-                                        [LETTER, LETTER, LETTER, '-', DIGIT, DIGIT, DIGIT, DIGIT]
-                                    }
-                                />
-                            )
-                        }}
-
-                        /*input={{
-                            name : 'placa',
-                            element: <Input onChange={this.onChange('placa')} value={this.props.placa} />
-                        }}
-                        validator={{
-                            validationRules: { required : 'El campo es requerido' }
-                        }}*/
-                    />
+                    <Row>
+                        <Col md={{ size: 6, offset: 3 }}>
+                            <div className="custom-control custom-checkbox">
+                                <input type="checkbox" className="custom-control-input" id="internacional" name="internacional" checked={this.props.internacional} onChange={this.onChange('internacional')} />
+                                <Label onlyClassName="custom-control-label" htmlFor="internacional">Internacional</Label>
+                            </div>
+                        </Col>
+                    </Row>
+                    { !this.props.internacional &&
+                        <FormElementValidate
+                            label={{text:'Placa'}}
+                            input={{
+                                name : 'placa',
+                                element: (
+                                    <MaskedInput 
+                                        onChange={this.onChange('placa')} 
+                                        value={this.props.placa}
+                                        upper={true}
+                                        placeholder="ABC-1234"
+                                        mask={
+                                            //'ddd-cccc'
+                                            [LETTER, LETTER, LETTER, '-', DIGIT, DIGIT, DIGIT, DIGIT]
+                                        }
+                                    />
+                                )
+                            }}
+                        />
+                    }
+                    <div style={{ display : !this.props.internacional ? 'none' : 'unset' }}>
+                        <FormElementValidate
+                            label={{text: 'Placa'}}
+                            input={{
+                                name : 'placa',
+                                element: <Input onChange={this.onChange('placa')} value={this.props.placa} />
+                            }}
+                            validator={{
+                                validationRules: { required : 'El campo es requerido' }
+                            }}
+                        />
+                    </div>
                     <FormGroup className="row">
                         <Label className="col-sm-3">Cooperativa</Label>
                         <div className="col-sm-5">
@@ -274,6 +289,7 @@ class EditBuses extends React.Component {
 
     state = {
         data:{
+            internacional : false,
             propietario : {},
             conductor : {}
         }
