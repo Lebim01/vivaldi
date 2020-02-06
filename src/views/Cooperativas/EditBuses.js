@@ -138,7 +138,7 @@ class MainView extends React.Component {
                             }}
                         />
                     }
-                    { !!this.props.internacional &&
+                    <div style={{ display : !!this.props.internacional ? 'unset' : 'none' }}>
                         <FormElementValidate
                             label={{text: 'Placa'}}
                             input={{
@@ -149,7 +149,7 @@ class MainView extends React.Component {
                                 validationRules: { required : 'El campo es requerido' }
                             }}
                         />
-                    }
+                    </div> 
                     <FormGroup className="row">
                         <Label className="col-sm-3">Cooperativa</Label>
                         <div className="col-sm-5">
