@@ -190,19 +190,27 @@ class MainView extends React.Component {
                         }} 
                     />
                     <FormElementValidate
-                        label={{text:'Venc. Matricula'}}
+                        label={{text:'Fecha de revisión'}}
+                        input={{
+                            name : 'fecha_revision',
+                            element: <Input type="date" onChange={this.onChange('fecha_revision')} value={this.props.fecha_} />
+                        }}
+                    />
+                    <FormElementValidate
+                        label={{text:'Emis. Matricula'}}
                         input={{
                             name : 'fecha_emision_matricula',
                             element: <Input type="date" onChange={this.onChange('fecha_emision_matricula')} value={this.props.fecha_emision_matricula} />
                         }}
                     />
                     <FormElementValidate
-                        label={{text:'Emis. Matricula'}}
+                        label={{text:'Venc. Matricula'}}
                         input={{
                             name : 'fecha_vencimiento_matricula',
                             element: <Input type="date" onChange={this.onChange('fecha_vencimiento_matricula')} value={this.props.fecha_vencimiento_matricula} />
                         }}
                     />
+                    
                     <FormGroup className="row">
                         <div className="col-sm-2"></div>
                         <div className="col-sm-2">
