@@ -193,7 +193,7 @@ class MainView extends React.Component {
                         label={{text:'Fecha de revisión'}}
                         input={{
                             name : 'fecha_revision',
-                            element: <Input type="date" onChange={this.onChange('fecha_revision')} value={this.props.fecha_} />
+                            element: <Input type="date" onChange={this.onChange('fecha_revision')} value={this.props.fecha_revision} />
                         }}
                     />
                     <FormElementValidate
