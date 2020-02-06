@@ -62,6 +62,10 @@ class MainView extends React.Component {
                 }
                 this.props.onChange(name, e.target.value)
             }
+
+            if(name === 'internacional'){
+                this.props.onChange('placa', '')
+            }
         }
     }
 
