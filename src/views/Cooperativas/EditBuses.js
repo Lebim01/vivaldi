@@ -143,7 +143,7 @@ class MainView extends React.Component {
                             label={{text: 'Placa'}}
                             input={{
                                 name : 'placa',
-                                element: <Input onChange={this.onChange('placa')} value={this.props.placa} />
+                                element: <Input {...!!this.props.internacional ? {onChange: this.onChange('placa'), value : this.props.placa} : {} } />
                             }}
                             validator={{
                                 validationRules: { required : 'El campo es requerido' }
