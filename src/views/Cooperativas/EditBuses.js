@@ -93,11 +93,11 @@ class MainView extends React.Component {
         return (
             <EditPage title={`${id ? 'Editar' : 'Crear'} Bus`} parseData={this.props.parseData} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history} key_permission="bus">
                 <FormValidate className="mt-4 form-horizontal">
-                    <FormElementValidate
-                        label={{text:'Disco'}}
+                    <FormElementValidate 
+                        label={{text:'Disco'}} 
                         input={{
                             name : 'disco',
-                            element: <Input onChange={this.onChange('disco')} value={this.props.disco} />
+                            element: <Input  onChange={this.onChange('disco')} value={this.props.disco} />
                         }}
                         validator={{
                             validationRules: { 
@@ -113,25 +113,25 @@ class MainView extends React.Component {
                     <Row>
                         
                             <div className="custom-control custom-checkbox" >
-                                <input  type="checkbox" className="custom-control-input" id="internacional" name="internacional" checked={this.props.internacional} onChange={this.onChange('internacional')} />
-                                <Label style={{position: 'absolute', top: 29, left:185}} onlyClassName="custom-control-label" htmlFor="internacional">Internacional</Label>
+                                <input type="checkbox" className="custom-control-input" id="internacional" name="internacional" checked={this.props.internacional} onChange={this.onChange('internacional')} />
+                                <Label  style={{position: 'absolute', top: 26, left:50, width: '110px'}} onlyClassName="custom-control-label" htmlFor="internacional">Internacional</Label>
                             </div>
                        
                         
                     </Row>
                     
                     
-                    <div style={{ position: 'relative', left:'20%', display : !this.props.internacional ? 'unset' : 'none' }}>
+                    <div style={{ position: 'relative', left:'18%', display : !this.props.internacional ? 'unset' : 'none' }}>
                     
 
                    
                     
-                        <FormElementValidate 
-                            label ={{text:'Placa'}}
+                        <FormElementValidate
+                            label ={{text:'Placa',  width: '10px', color:'red'}}
                             input={{
                                 name : 'placa',
                                 element: (
-                                    <MaskedInput style= {{ width: '175px'}}
+                                    <MaskedInput style= {{ width: '192px'}}
                                         onChange={this.onChange('placa')}
                                         value={this.props.placa}
                                         upper={true}
@@ -145,14 +145,14 @@ class MainView extends React.Component {
                             }}
                         />
                     </div>
-                    <div style={{ position: 'relative', left:'20%', display : !!this.props.internacional ? 'unset' : 'none' }}>
+                    <div style={{ position: 'relative', left:'18%', display : !!this.props.internacional ? 'unset' : 'none' }}>
                         
-                        <FormElementValidate 
-                            label ={{text: 'Placa'}}
+                        <FormElementValidate style={{ width: '0%'}}
+                            label ={{text: 'Placa', width: '30px'}}
                             
                             input={{
                                name : 'placa',
-                                element: <Input style= {{ width: '175px'}} onChange={this.onChange('placa')} value={this.props.placa} />
+                                element: <Input style= {{ width: '192px'}} onChange={this.onChange('placa')} value={this.props.placa} />
                             }}
                             validator={{
                                 validationRules : { 
