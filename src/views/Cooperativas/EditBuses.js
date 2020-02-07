@@ -146,7 +146,9 @@ class MainView extends React.Component {
                                 element: <Input {...!!this.props.internacional ? {onChange: this.onChange('placa'), value : this.props.placa} : {} } />
                             }}
                             validator={{
-                                validationRules: { required : 'El campo es requerido' }
+                                validationRules : {
+                                    ...!!this.props.internacional ? { required : 'El campo es requerido' } : {} 
+                                }
                             }}
                         />
                     </div> 
