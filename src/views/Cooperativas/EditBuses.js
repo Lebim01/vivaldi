@@ -118,24 +118,26 @@ class MainView extends React.Component {
                             </div>
                         </Col>
                     </Row>
-                    <FormElementValidate
-                        label={{text:'Placa'}}
-                        input={{
-                            name : 'placa',
-                            element: (
-                                <MaskedInput 
-                                    onChange={this.onChange('placa')}
-                                    { ...!this.props.internacional ? { value : this.props.placa } : {}}
-                                    upper={true}
-                                    placeholder="ABC-1234"
-                                    mask={
-                                        //'ddd-cccc'
-                                        [LETTER, LETTER, LETTER, '-', DIGIT, DIGIT, DIGIT, DIGIT]
-                                    }
-                                />
-                            )
-                        }}
-                    />
+                    <div style={{ display : !this.props.internacional ? 'unset' : 'none' }}>
+                        <FormElementValidate
+                            label={{text:'Placa'}}
+                            input={{
+                                name : 'placa',
+                                element: (
+                                    <MaskedInput 
+                                        onChange={this.onChange('placa')}
+                                        { ...!this.props.internacional ? { value : this.props.placa } : {}}
+                                        upper={true}
+                                        placeholder="ABC-1234"
+                                        mask={
+                                            //'ddd-cccc'
+                                            [LETTER, LETTER, LETTER, '-', DIGIT, DIGIT, DIGIT, DIGIT]
+                                        }
+                                    />
+                                )
+                            }}
+                        />
+                    </div>
                     <div style={{ display : !!this.props.internacional ? 'unset' : 'none' }}>
                         <FormElementValidate
                             label={{text: 'Placa'}}
