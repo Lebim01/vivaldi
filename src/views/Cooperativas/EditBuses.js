@@ -126,13 +126,18 @@ class MainView extends React.Component {
                                 element: (
                                     <MaskedInput 
                                         onChange={this.onChange('placa')}
-                                        { ...!this.props.internacional ? { value : this.props.placa } : {}}
+                                        value={this.props.placa}
                                         upper={true}
                                         placeholder="ABC-1234"
                                         mask={
                                             //'ddd-cccc'
                                             [LETTER, LETTER, LETTER, '-', DIGIT, DIGIT, DIGIT, DIGIT]
                                         }
+                                        validator={{
+                                            validationRules : {
+                                                ...!this.props.internacional ? { required : 'El campo es requerido' } : {} 
+                                            }
+                                        }}
                                     />
                                 )
                             }}
@@ -143,7 +148,7 @@ class MainView extends React.Component {
                             label={{text: 'Placa'}}
                             input={{
                                 name : 'placa',
-                                element: <Input {...!!this.props.internacional ? {onChange: this.onChange('placa'), value : this.props.placa} : {} } />
+                                element: <Input onChange={this.onChange('placa')} value={this.props.placa} />
                             }}
                             validator={{
                                 validationRules : {
