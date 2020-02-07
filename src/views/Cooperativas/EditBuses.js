@@ -120,7 +120,11 @@ class MainView extends React.Component {
                     </Row>
                     <div style={{ display : !this.props.internacional ? 'unset' : 'none' }}>
                         <FormElementValidate
-                            label={{text:'Placa'}}
+                            label={{text: (
+                                <div>
+                                    Placa<span className="text-danger">*</span>
+                                </div>
+                            )}}
                             input={{
                                 name : 'placa',
                                 element: (
@@ -133,11 +137,6 @@ class MainView extends React.Component {
                                             //'ddd-cccc'
                                             [LETTER, LETTER, LETTER, '-', DIGIT, DIGIT, DIGIT, DIGIT]
                                         }
-                                        validator={{
-                                            validationRules : {
-                                                ...!this.props.internacional ? { required : 'El campo es requerido' } : {} 
-                                            }
-                                        }}
                                     />
                                 )
                             }}
