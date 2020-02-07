@@ -111,24 +111,27 @@ class MainView extends React.Component {
                         }}
                     />
                     <Row>
-                        <Col md={{ size: 6, offset: 3 }}>
-                            <div className="custom-control custom-checkbox">
-                                <input type="checkbox" className="custom-control-input" id="internacional" name="internacional" checked={this.props.internacional} onChange={this.onChange('internacional')} />
-                                <Label onlyClassName="custom-control-label" htmlFor="internacional">Internacional</Label>
+                        
+                            <div className="custom-control custom-checkbox" >
+                                <input  type="checkbox" className="custom-control-input" id="internacional" name="internacional" checked={this.props.internacional} onChange={this.onChange('internacional')} />
+                                <Label style={{position: 'absolute', top: 29, left:185}} onlyClassName="custom-control-label" htmlFor="internacional">Internacional</Label>
                             </div>
-                        </Col>
+                       
+                        
                     </Row>
-                    <div style={{ display : !this.props.internacional ? 'unset' : 'none' }}>
-                        <FormElementValidate
-                            label={{text: (
-                                <div>
-                                    Placa<span className="text-danger">*</span>
-                                </div>
-                            )}}
+                    
+                    
+                    <div style={{ position: 'relative', left:'20%', display : !this.props.internacional ? 'unset' : 'none' }}>
+                    
+
+                   
+                    
+                        <FormElementValidate 
+                            label ={{text:'Placa'}}
                             input={{
                                 name : 'placa',
                                 element: (
-                                    <MaskedInput 
+                                    <MaskedInput style= {{ width: '175px'}}
                                         onChange={this.onChange('placa')}
                                         value={this.props.placa}
                                         upper={true}
@@ -142,15 +145,17 @@ class MainView extends React.Component {
                             }}
                         />
                     </div>
-                    <div style={{ display : !!this.props.internacional ? 'unset' : 'none' }}>
-                        <FormElementValidate
-                            label={{text: 'Placa'}}
+                    <div style={{ position: 'relative', left:'20%', display : !!this.props.internacional ? 'unset' : 'none' }}>
+                        
+                        <FormElementValidate 
+                            label ={{text: 'Placa'}}
+                            
                             input={{
-                                name : 'placa',
-                                element: <Input onChange={this.onChange('placa')} value={this.props.placa} />
+                               name : 'placa',
+                                element: <Input style= {{ width: '175px'}} onChange={this.onChange('placa')} value={this.props.placa} />
                             }}
                             validator={{
-                                validationRules : {
+                                validationRules : { 
                                     ...!!this.props.internacional ? { required : 'El campo es requerido' } : {} 
                                 }
                             }}
