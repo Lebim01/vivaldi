@@ -124,7 +124,8 @@ class MainView extends React.Component {
                             name : 'placa',
                             element: (
                                 <MaskedInput 
-                                    { ...!this.props.internacional ? { onChange : this.onChange('placa'), value : this.props.placa } : {}}
+                                    onChange={this.onChange('placa')}
+                                    { ...!this.props.internacional ? { value : this.props.placa } : {}}
                                     upper={true}
                                     placeholder="ABC-1234"
                                     mask={
