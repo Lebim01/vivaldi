@@ -172,7 +172,7 @@ class TasasContingencia extends React.Component {
                             <Card>
                                 <CardBody>
                                     <CardTitle>
-                                        Tasas contingencia
+                                        Tasas contingencia General
                                         <Button className="pull-right" onClick={this.toggle}>
                                             <i className="fa fa-plus" /> Contingencia general
                                         </Button>
