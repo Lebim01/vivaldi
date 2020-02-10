@@ -114,7 +114,7 @@ class MainView extends React.Component {
                         
                             <div className="custom-control custom-checkbox" >
                                 <input type="checkbox" className="custom-control-input" id="internacional" name="internacional" checked={this.props.internacional} onChange={this.onChange('internacional')} />
-                                <Label  style={{position: 'absolute', top: 26, left:50, width: '110px'}} onlyClassName="custom-control-label" htmlFor="internacional">Internacional</Label>
+                                <Label  style={{position: 'absolute', top: 10, left:190, width: '110px'}} onlyClassName="custom-control-label" htmlFor="internacional">Internacional</Label>
                             </div>
                        
                         
