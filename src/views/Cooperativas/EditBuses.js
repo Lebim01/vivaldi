@@ -110,52 +110,87 @@ class MainView extends React.Component {
                             }
                         }}
                     />
-                    <Row>
+                    
+                    
+                    
+                    <div style={{  display : !this.props.internacional ? 'unset' : 'none' }}>
+                    
                         
-                            <div className="custom-control custom-checkbox" >
-                                <input type="checkbox" className="custom-control-input" id="internacional" name="internacional" checked={this.props.internacional} onChange={this.onChange('internacional')} />
-                                <Label  style={{position: 'absolute', top: 10, left:190, width: '110px'}} onlyClassName="custom-control-label" htmlFor="internacional">Internacional</Label>
-                            </div>
+                    <FormElementValidate 
+                        label ={{text:'Placa'}}
+                        
+                        input={{
+                            name : 'placa',
+                            element: (
+                                <MaskedInput style= {{ width: '175px'}}
+                                    onChange={this.onChange('placa')}
+                                    value={this.props.placa}
+                                    upper={true}
+                                    placeholder="ABC-1234"
+                                    mask={
+                                        //'ddd-cccc'
+                                        [LETTER, LETTER, LETTER, '-', DIGIT, DIGIT, DIGIT, DIGIT]
+                                    }
+                                />
+                            ),   
+                            
+                            button: (
+                                
+                                <div className="custom-control custom-checkbox">
+                                    <input type="checkbox" className="custom-control-input" 
+                                    id="internacional" name="internacional" 
+                                    checked={this.props.internacional} 
+                                    onChange={this.onChange('internacional')} />
+                                    <Label style={{position: 'relative', top: 8,right: '80%' }} onlyClassName="custom-control-label" 
+                                    htmlFor="internacional">Internacional</Label>
+                                </div>
+                                
+                            ) 
+                        }}
+                        validator={{
+                            validationRules : { 
+                                ...!!this.props.internacional ? { required : 'El campo es requerido' } : {} 
+                        }, 
                        
                         
-                    </Row>
-                    
-                    
-                    <div style={{ position: 'relative', left:'18%', display : !this.props.internacional ? 'unset' : 'none' }}>
-                    
-
-                   
-                    
-                        <FormElementValidate
-                            label ={{text:'Placa',  width: '10px', color:'red'}}
-                            input={{
-                                name : 'placa',
-                                element: (
-                                    <MaskedInput style= {{ width: '192px'}}
-                                        onChange={this.onChange('placa')}
-                                        value={this.props.placa}
-                                        upper={true}
-                                        placeholder="ABC-1234"
-                                        mask={
-                                            //'ddd-cccc'
-                                            [LETTER, LETTER, LETTER, '-', DIGIT, DIGIT, DIGIT, DIGIT]
-                                        }
-                                    />
-                                )
-                            }}
-                        />
+                            
+                            
+                        }}
+                    />
                     </div>
-                    <div style={{ position: 'relative', left:'18%', display : !!this.props.internacional ? 'unset' : 'none' }}>
                         
-                        <FormElementValidate style={{ width: '0%'}}
-                            label ={{text: 'Placa', width: '30px'}}
+                    <div style={{ display : !!this.props.internacional ? 'unset' : 'none' }}>
+                        
+                        <FormElementValidate 
+                            label ={{text: 'Placa'}}
                             
                             input={{
                                name : 'placa',
-                                element: <Input style= {{ width: '192px'}} onChange={this.onChange('placa')} value={this.props.placa} />
+                                element: 
+                                <Input style= {{ width: '175px'}}
+                                onChange={this.onChange('placa')} 
+                                value={this.props.placa} />, 
+                                button: (
+                                
+                                    <div className="custom-control custom-checkbox">
+                                        <input type="checkbox" className="custom-control-input" 
+                                        id="internacional" name="internacional" 
+                                        checked={this.props.internacional} 
+                                        onChange={this.onChange('internacional')} />
+                                        <Label style={{position: 'relative', top: 8,right: '80%' }}onlyClassName="custom-control-label" 
+                                        htmlFor="internacional">Internacional</Label>
+                                    </div>
+                                    
+                                    
+                                    
+                                )
+                                
+                               
+                                
                             }}
+                            
                             validator={{
-                                validationRules : { 
+                                validationRules : {
                                     ...!!this.props.internacional ? { required : 'El campo es requerido' } : {} 
                                 }
                             }}
