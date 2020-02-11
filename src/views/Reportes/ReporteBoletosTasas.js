@@ -212,19 +212,19 @@ class ReporteBoletosTasas extends React.Component {
                                                 head={[['Tipo',
                                                 {
                                                     title:'Cantidad', 
-                                                    style:{textAlign:"right", float:"right" }
+                                                    style:{textAlign:"right", position: 'relative', right:'50%' }
                                                 }, 
                                                 {
                                                     title: 'Cantidad anulado', 
-                                                    style:{textAlign:"right", position: 'relative', right:'10%' }
+                                                    style:{textAlign:"right", position: 'relative', right:'50%' }
                                                 },
                                                 {
                                                     title: 'Total boleto',
-                                                    style:{textAlign:"right", position: 'relative', right:'10%' }
+                                                    style:{textAlign:"right", position: 'relative', right:'50%' }
                                                 },
                                                 {
                                                     title: 'Total tasa', 
-                                                    style:{textAlign:"right", position: 'relative', right:'10%' }
+                                                    style:{textAlign:"right", position: 'relative', right:'50%' }
                                                 }
                                                 ]]}
                                                 fields={[
