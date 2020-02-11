@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import {Row} from 'reactstrap'
 import { Button, FormGroup, Input, Select, Label, EditPage, FormValidate, RSelect, Permission } from 'temeforest'
 import { baseurl, getParameter, objectToUrl } from 'utils/url'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import AddParadaModal from './AddParadaModal'
-import { forStatement } from '@babel/types'
 
 const endpoint = 'ruta'
 const urlFront = '/operaciones/rutas'
@@ -30,7 +29,7 @@ class RecordRow extends React.Component {
                 </td>
                 <td>
                     <div className="custom-control custom-checkbox">
-                        <input type="checkbox" className="custom-control-input" id={name_input} name={name_input} checked={this.props.is_enable} onChange={this.props.onChange('is_enable')} />
+                        <input type="checkbox" className="custom-control-input" id={name_input} name={name_input} checked={this.props.is_active} onChange={this.props.onChange('is_active')} />
                         <Label onlyClassName="custom-control-label" htmlFor={name_input}></Label>
                     </div>
                 </td>
@@ -83,7 +82,7 @@ class MainView extends React.Component {
     onChangeParada = index => name => (e) => {
         let paradas = this.props.paradas
         let value = e.target.value
-        if(name === 'is_enable') value = e.target.checked
+        if(name === 'is_active') value = e.target.checked
         paradas[index][name] = value
         this.props.onChange('paradas', paradas)
     }
@@ -121,7 +120,7 @@ class MainView extends React.Component {
             paradas[data.index] = data
         }
         else {
-            paradas.push({ ...data, is_enable: true })
+            paradas.push({ ...data, is_active: true })
         }
         this.props.onChange('paradas', paradas)
         this.toggleModal({})
