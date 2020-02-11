@@ -212,7 +212,7 @@ class ReporteBoletosTasas extends React.Component {
                                                 head={[['Tipo',
                                                 {
                                                     title:'Cantidad', 
-                                                    style:{textAlign:"right", float="right" }
+                                                    style:{textAlign:"right", float:"right" }
                                                 }, 
                                                 {
                                                     title: 'Cantidad anulado', 
