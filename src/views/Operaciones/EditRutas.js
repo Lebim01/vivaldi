@@ -22,9 +22,9 @@ class RecordRow extends React.Component {
         return (
             <tr onDoubleClick={this.props.edit}>
                 <td>
-                    <Button outline={true} type="danger" size="sm" rounded={true} onClick={this.delete}>
+                    {/*<Button outline={true} type="danger" size="sm" rounded={true} onClick={this.delete}>
                         <i className="fa fa-times"></i>
-                    </Button>{' '}
+                    </Button>{' '}*/}
                     {this.props.ciudad_nombre}
                 </td>
                 <td>
