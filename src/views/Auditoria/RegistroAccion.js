@@ -51,7 +51,8 @@ class RegistroAccion extends React.Component {
                                         <FormGroup className="row">
                                             <Label className="col-sm-5">Cooperativa</Label>
                                             <div className="col-sm-6">
-                                                <Select readOnly={this.state.tabla !== 'cooperativa'} onChange={this.onChange('object_id')} asyncOptions={this.optionsCooperativa} defaultOption="Todos" value={this.state.cooperativa}/>
+                                                
+                                                <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
                                             </div>
                                         </FormGroup>
                                         <FormGroup className="row">
