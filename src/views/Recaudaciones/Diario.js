@@ -202,8 +202,8 @@ class Diario extends React.Component {
                                                     </div>
                                                 </FormGroup>
                                                 <FormGroup className="row">
-                                                    <Label className="col-sm-5">Localidad</Label>
-                                                    <div className="col-sm-7">
+                                                    <Label className="col-sm-6">Localidad</Label>
+                                                    <div className="col-sm-6">
                                                         <SelectLocalidad onChange={this.onChange('localidad')} value={this.state.localidad}/>
                                                     </div>
                                                 </FormGroup>
@@ -216,8 +216,8 @@ class Diario extends React.Component {
                                                     </div>
                                                 </FormGroup>
                                                 <FormGroup className="row">
-                                                    <Label className="col-sm-6">Tipo</Label>
-                                                    <div className="col-sm-6">
+                                                    <Label className="col-sm-5">Tipo</Label>
+                                                    <div className="col-sm-7">
                                                         <Select options={this.optionsTipos} onChange={this.onChange('tipo')} value={this.state.tipo}/>
                                                     </div>
                                                 </FormGroup>
@@ -235,14 +235,33 @@ class Diario extends React.Component {
                                     headerClass="text-center"
                                     tdBodyClass="text-center"
 
-                                    fieldNames={['Cooperativa', 'Localidad', 'Fecha venta', 'Cobrar', 'A cobrar', 'Cobrado', 'Fecha cobro', 'N.C', 'Acción']}
+                                    head={[['Cooperativa', 'Localidad', 'Fecha venta', 
+                                    'Cobrar', 
+                                    {
+                                        title:'A cobrar', 
+                                        style:{textAlign:"right", position: 'relative', right:'0%' }
+                                    },
+                                    {
+                                        title:'Cobrado', 
+                                        style:{textAlign:"right", position: 'relative', right:'0%' }
+                                    },
+                                    'Fecha cobro', 
+                                    {
+                                        title:'N.c', 
+                                        style:{textAlign:"right", position: 'relative', right:'0%' }
+                                    },
+                                    {
+                                        title:'Acción', 
+                                        style:{textAlign:"center", position: 'relative', right:'0%' }
+                                    }
+                                ]]}
                                     fields={[
                                         (row) => <span style={{float:"left", fontWeight: 300}}>{(row.cooperativa_nombre)}</span>,
                                         'localidad_nombre',
                                         'fecha_venta',
                                         this.fieldCobrar,
-                                        (row) => <span style={style_money_label}>${moneyFormat(row.a_cobrar)}</span>,
-                                        (row) => <span style={style_money_label}>${moneyFormat(row.cobrado)}</span>,
+                                        (row) => <span style={{position: 'relative', right:'-20%'}}>${moneyFormat(row.a_cobrar)}</span>,
+                                        (row) => <span style={{position: 'relative', right:'-20%'}}>${moneyFormat(row.cobrado)}</span>,
                                         (row) => <span style={{float:"right", fontWeight: 300}}>{(row.fecha_cobro)}</span>,
                                         (row) => <span style={style_money_label}>${moneyFormat(row.nc)}</span>,
                                         this.fieldImprimir
