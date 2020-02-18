@@ -65,11 +65,13 @@ class Diario extends React.Component {
 
     fieldCobrar = (row) => {
         return (
-            <React.Fragment>
-                { row.a_cobrar > 0 && row.cooperativa !== "(TOTAL)" &&
-                    <Button outline onClick={() => this.cobrar(row)}>Cobrar</Button>
-                }
-            </React.Fragment>
+            <Permission key_permission="can_collect"  mode="redirect">
+                <React.Fragment>
+                    { row.a_cobrar > 0 && row.cooperativa !== "(TOTAL)" &&
+                        <Button outline onClick={() => this.cobrar(row)}>Cobrar</Button>
+                    }
+                </React.Fragment>
+            </Permission>
         )
     }
 
@@ -178,7 +180,7 @@ class Diario extends React.Component {
     render(){
         const { refresh } = this.state
         return (
-            <Permission key_permission="view_cobros_diarios" mode="redirect">
+            <Permission key_permission="view_cobros_diarios"  mode="redirect">
                 <div className="animated fadeIn">
                     <div className="row">
                         <div className="col-sm-12">
@@ -189,6 +191,7 @@ class Diario extends React.Component {
                                     imprimirPantalla
                                     id="report"
                                     key_permission="diario"
+                                   
 
                                     title= "Cobros Diarios"
 
