@@ -65,7 +65,7 @@ class Diario extends React.Component {
 
     fieldCobrar = (row) => {
         return (
-            <Permission key_permission="can_collect"  mode="redirect">
+            <Permission key_permission="can_collect">
                 <React.Fragment>
                     { row.a_cobrar > 0 && row.cooperativa !== "(TOTAL)" &&
                         <Button outline onClick={() => this.cobrar(row)}>Cobrar</Button>
@@ -180,7 +180,7 @@ class Diario extends React.Component {
     render(){
         const { refresh } = this.state
         return (
-            <Permission key_permission="view_cobros_diarios"  mode="redirect">
+            <Permission key_permission="view_cobros_diarios" mode="redirect">
                 <div className="animated fadeIn">
                     <div className="row">
                         <div className="col-sm-12">
@@ -250,12 +250,12 @@ class Diario extends React.Component {
                                     },
                                     {
                                         title:'Cobrado', 
-                                        style:{textAlign:"right", position: 'relative', right:'0%' }
+                                        style:{float: "right" }
                                     },
                                     'Fecha cobro', 
                                     {
                                         title:'N.c', 
-                                        style:{textAlign:"right", position: 'relative', right:'0%' }
+                                        style:{textAlign:"right", position: 'relative', right:'-2%' }
                                     },
                                     {
                                         title:'Acción', 
@@ -267,10 +267,10 @@ class Diario extends React.Component {
                                         'localidad_nombre',
                                         'fecha_venta',
                                         this.fieldCobrar,
-                                        (row) => <span  style={{textAlign:"right", position: 'relative', right:'0%' }}>${moneyFormat(row.a_cobrar)}</span>,
-                                        (row) => <span style={{textAlign:"right", position: 'relative', right:'0%'}}>${moneyFormat(row.cobrado)}</span>,
+                                        (row) => <span  style={{float: "right" }}>${moneyFormat(row.a_cobrar)}</span>,
+                                        (row) => <span style={{float: "right"}}>${moneyFormat(row.cobrado)}</span>,
                                         'fecha_cobro',
-                                        (row) => <span style={{textAlign:"right", position: 'relative', right:'0%'}}>${moneyFormat(row.nc)}</span>,
+                                        (row) => <span style={{textAlign:"right", position: 'absolute', right:'16%'}}>${moneyFormat(row.nc)}</span>,
                                         this.fieldImprimir
                                     ]}
 
