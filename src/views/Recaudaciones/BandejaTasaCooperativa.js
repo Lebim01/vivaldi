@@ -4,8 +4,11 @@ import moment from 'moment'
 import { baseurl } from 'utils/url'
 import { printHtml } from 'utils/exportData'
 import axios from 'axios'
+import store from 'store/auth'
 
 const endpoint = 'venta/solicitud_tasacontingencia'
+
+const { user_info } = store.getState()
 
 /**
  * TASAS DE CONTINGENCIA TIPO 1
@@ -74,7 +77,7 @@ class BandejaTasaCooperativa extends React.Component {
                     </p>
                     <p style="margin-top: 5px; margin-bottom: 5px;">
                         <span style="width: 100px; text-align: left;">Usuario: </span>
-                        <span style="width: 100px; text-align: left;">${row.usuario_impresion_username}</span>
+                        <span style="width: 100px; text-align: left;">${user_info.username}</span>
                     </p>
                     
                     <img width="140" src="${baseurl}/qr/?key=${row.codigo}"/>
