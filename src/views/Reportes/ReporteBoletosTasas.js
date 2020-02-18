@@ -86,7 +86,8 @@ class ReporteBoletosTasas extends React.Component {
                                             <ListPage
 
                                                 exportExcel
-                                                id="boletos_tasas"
+                                                //id="boletos_tasas"
+                                                id="boletos"
                                                 imprimirPantalla
                                                 title="Reporte de boletos por cooperativa"
                                                 filtersZone= {
@@ -154,11 +155,12 @@ class ReporteBoletosTasas extends React.Component {
                                             />
                                         </TabPane>
                                         <TabPane tabId="2">
-                            
+                                       
                                             <ListPage
                                                 searchable={false}
-                                                exportExcel
+                                                //exportExcel
                                                 id="boletos_tasas"
+                                                key_permission= "boletos_tasas"
                                                 imprimirPantalla
                                                 title="Reporte de boletos por cooperativa"
                                                 
@@ -234,12 +236,13 @@ class ReporteBoletosTasas extends React.Component {
                                                     (row) => <span style={{float:"right"}}>$ {moneyFormat(row.total_boleto)}</span>,
                                                     (row) => <span style={{float:"right"}}>$ {moneyFormat(row.total_tasa)}</span>,
                                                 ]}
-
+                                                exportExcel
                                                 data={this.state.data}
                                                 parameters={this.state.filters}
 
                                                 history={this.props.history}
                                             />
+                                            
                                         </TabPane>
                                     </TabContent>
                                 </CardBody>

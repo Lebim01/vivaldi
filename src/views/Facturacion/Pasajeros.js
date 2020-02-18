@@ -1,7 +1,13 @@
 import React from 'react'
-import { Card, CardBody, ListPage } from 'temeforest'
+import { Card, CardBody, ListPage, Button } from 'temeforest'
 
 class Pasajeros extends React.Component {
+
+    buscar = () => {
+        this.setState({
+            refresh: true
+        })
+    }
     render(){
         return (
             <div className="animated fadeIn">
@@ -14,6 +20,7 @@ class Pasajeros extends React.Component {
 
                                     searchable={true}
                                     searchPlaceholder="Identificación, Nombre"
+
 
                                     fieldNames={['Identificación', 'Nombre']}
                                     fields={['identificacion', 'nombre']}
