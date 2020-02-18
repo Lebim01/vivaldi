@@ -16,15 +16,26 @@ function htmlToXls(tableHTML){
     downloadLink = document.createElement("a");
     
     document.body.appendChild(downloadLink);
+
+    const htmlToExport = `
+        <html>
+            <head>
+                <meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8">
+            </head>
+            <body>
+                ${tableHTML}
+            </body>
+        </html>
+    `
     
     if(navigator.msSaveOrOpenBlob){
-        let blob = new Blob(['\ufeff', tableHTML], {
+        let blob = new Blob(['\ufeff', htmlToExport], {
             type: dataType
         });
         navigator.msSaveOrOpenBlob( blob, filename);
     }else{
         // Create a link to the file
-        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+        downloadLink.href = 'data:' + dataType + ', ' + htmlToExport;
     
         // Setting the file name
         downloadLink.download = filename;
