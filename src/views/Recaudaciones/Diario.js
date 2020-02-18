@@ -236,7 +236,11 @@ class Diario extends React.Component {
                                     tdBodyClass="text-center"
 
                                     head={[['Cooperativa', 'Localidad', 'Fecha venta', 
-                                    'Cobrar', 
+                                    
+                                    {
+                                        title:'Cobrar', 
+                                        style:{textAlign:"center", position: 'relative', right:'0%' }
+                                    },
                                     {
                                         title:'A cobrar', 
                                         style:{textAlign:"right", position: 'relative', right:'0%' }
@@ -260,10 +264,10 @@ class Diario extends React.Component {
                                         'localidad_nombre',
                                         'fecha_venta',
                                         this.fieldCobrar,
-                                        (row) => <span style={{position: 'relative', right:'-20%'}}>${moneyFormat(row.a_cobrar)}</span>,
-                                        (row) => <span style={{position: 'relative', right:'-20%'}}>${moneyFormat(row.cobrado)}</span>,
-                                        (row) => <span style={{float:"right", fontWeight: 300}}>{(row.fecha_cobro)}</span>,
-                                        (row) => <span style={style_money_label}>${moneyFormat(row.nc)}</span>,
+                                        (row) => <span  style={{textAlign:"right", position: 'relative', right:'0%' }}>${moneyFormat(row.a_cobrar)}</span>,
+                                        (row) => <span style={{textAlign:"right", position: 'relative', right:'0%'}}>${moneyFormat(row.cobrado)}</span>,
+                                        'fecha_cobro',
+                                        (row) => <span style={{textAlign:"right", position: 'relative', right:'0%'}}>${moneyFormat(row.nc)}</span>,
                                         this.fieldImprimir
                                     ]}
 

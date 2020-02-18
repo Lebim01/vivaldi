@@ -60,6 +60,7 @@ class ReporteTasasContingenciaGeneral extends React.Component {
                                     <ListPage 
                                         title="Reporte tasas de contingencia general"
                                         exportExcel
+                                        key_permission= "tasas_contingencia"
                                         imprimirPantalla
                                         id="report"
 
