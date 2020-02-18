@@ -145,7 +145,7 @@ class BandejaTasaCooperativa extends React.Component {
 
         for(let i in res.data.tasas){
             let row = res.data.tasas[i]
-            html += await this.rowToHtml(row, row.id, i)
+            html += await this.rowToHtml(row, row.id, i+1)
         }
 
         const actualizar = await axios.post(`${baseurl}/venta/solicitud_tasacontingencia/${row.id}/`, { estado : 3 })
