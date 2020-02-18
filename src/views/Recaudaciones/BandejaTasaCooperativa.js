@@ -140,7 +140,8 @@ class BandejaTasaCooperativa extends React.Component {
                     </tr>
                 </table>
             </div>
-        </div>`
+        </div>
+        <p style="page-break-before: always">`
 
         for(let i in res.data.tasas){
             let row = res.data.tasas[i]
