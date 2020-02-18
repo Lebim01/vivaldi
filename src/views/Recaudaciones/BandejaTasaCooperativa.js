@@ -9,6 +9,7 @@ import store from 'store/auth'
 const endpoint = 'venta/solicitud_tasacontingencia'
 
 const { user_info } = store.getState()
+console.log(store.getState())
 
 /**
  * TASAS DE CONTINGENCIA TIPO 1
