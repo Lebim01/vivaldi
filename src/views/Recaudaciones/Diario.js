@@ -70,13 +70,13 @@ class Diario extends React.Component {
 
     fieldCobrar = (row) => {
         return (
-            <Permission key_permission="can_add">
+            
                 <React.Fragment>
                     { row.a_cobrar > 0 && row.cooperativa !== "(TOTAL)" &&
                         <Button outline onClick={() => this.cobrar(row)}>Cobrar</Button>
                     }
                 </React.Fragment>
-            </Permission>
+            
         )
     }
 
@@ -168,7 +168,7 @@ class Diario extends React.Component {
 
     fieldImprimir = (row) => {
         return (
-            <Permission key_permission="can_print_cobro">
+            
                 <React.Fragment>
                     { row.a_cobrar !== 0 && row.cooperativa !== "(TOTAL)" &&
                         <Button outline onClick={() => this.toWord(row)}>Imprimir</Button>
@@ -178,7 +178,7 @@ class Diario extends React.Component {
                         <Button outline onClick={() => this.imprimirTodos()}>Imprimir Todos</Button>
                     }
                 </React.Fragment>
-            </Permission>
+            
         )
     }
 
@@ -186,7 +186,7 @@ class Diario extends React.Component {
         const { refresh } = this.state
 
 
-        let headers=[
+        /*let headers=[
             <span style={{float:"left"}}>{('Cooperativa')}</span>,
             <span style={{float:"left"}}>{('Localidad')}</span>,
             <span style={{float:"left"}}>{('Fecha venta')}</span>,
@@ -219,7 +219,7 @@ class Diario extends React.Component {
             if(!checkPermission('can_print_cobro')) {
                 fields.splice(fields.indexOf(this.fieldImprimir), 1)
                 headers.splice(headers.indexOf('Accion'), 1)
-            }
+            }*/
 
         return (
             <Permission key_permission="view_cobros_diarios" mode="redirect">
@@ -279,19 +279,16 @@ class Diario extends React.Component {
                                     ref={this.table}
 
                                     
-                                    fieldNames={headers}
+                                    /*fieldNames={headers}
                                     
-                                    fields={fields}
+                                    fields={fields}*/
+
                                     //tdBodyClass="margin: 0 !important;padding: 0 !important;"
                                     headerClass="text-center"
                                     tdBodyClass="text-right"
 
                                     
-                                    /*headerClass="text-center"
-                                    tdBodyClass="text-center"
-
-                                    
-
+                                   
                                     head={[['Cooperativa', 'Localidad', 'Fecha venta', 
                                     
                                     {
@@ -326,7 +323,7 @@ class Diario extends React.Component {
                                         'fecha_cobro',
                                         (row) => <span style={{textAlign:"right", position: 'absolute', right:'16%'}}>${moneyFormat(row.nc)}</span>,
                                         this.fieldImprimir
-                                    ]}*/
+                                    ]}
 
                                     endpoint='venta/cobros-diarios'
                                     parameters={this.state}
