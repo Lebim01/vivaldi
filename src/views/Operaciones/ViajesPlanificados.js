@@ -89,7 +89,7 @@ class ViajesPlanificados extends React.Component {
             }
         })
     }
-
+ 
     render(){
         const { cooperativa, localidad, silo, estado } = this.state.data
         
@@ -109,7 +109,7 @@ class ViajesPlanificados extends React.Component {
         ]
 
         if(!this.state.data.saldo){
-            let indexSaldo = 4
+            let indexSaldo = 5
             fields.splice(indexSaldo, 1)
             headers.splice(indexSaldo, 1)
         }

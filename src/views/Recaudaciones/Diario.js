@@ -1,12 +1,17 @@
 import React from 'react'
 import { ListPage, Label, FormGroup, Select, Input, Button, Permission, Card, CardBody, SelectLocalidad } from 'temeforest'
 import { baseurl } from 'utils/url'
+import { checkPermission } from 'temeforest/base/Permission'
 import { confirmEndpoint } from 'utils/dialog'
 import { printHtml } from 'utils/exportData'
 import { moneyFormat } from 'utils/number'
 import moment from 'moment'
+import store from 'store/auth'
+import axios from 'axios'
 import Swal from 'sweetalert2';
 import { connect } from 'react-redux'
+
+axios.defaults.headers.common['Authorization'] = `JWT ${store.getState().token}`
 
 const style_money_label = {
     float:'right'
@@ -65,7 +70,7 @@ class Diario extends React.Component {
 
     fieldCobrar = (row) => {
         return (
-            <Permission key_permission="can_collect">
+            <Permission key_permission="can_add">
                 <React.Fragment>
                     { row.a_cobrar > 0 && row.cooperativa !== "(TOTAL)" &&
                         <Button outline onClick={() => this.cobrar(row)}>Cobrar</Button>
@@ -85,7 +90,6 @@ class Diario extends React.Component {
                 <p style="margin-top: 5px; margin-bottom: 5px;">Ventas por Cooperativa</p>
             </div>
             <div style="margin-bottom: 10px; border-bottom: 1px solid black; width: 300px; border:unset;">
-
                 <table>
                     <tr>
                         <td>Usuario</td>
@@ -130,7 +134,6 @@ class Diario extends React.Component {
                         <td style="text-align:right; border-top: 1px solid black;">$${moneyFormat(row.a_cobrar)}</td>
                     </tr>
                 </table>
-
             </div>
             <br/>
             <br/>
@@ -165,20 +168,59 @@ class Diario extends React.Component {
 
     fieldImprimir = (row) => {
         return (
-            <React.Fragment>
-                { row.a_cobrar !== 0 && row.cooperativa !== "(TOTAL)" &&
-                    <Button outline onClick={() => this.toWord(row)}>Imprimir</Button>
-                }
-                {
-                    row.a_cobrar!== 0 && row.cooperativa === "(TOTAL)" &&
-                    <Button outline onClick={() => this.imprimirTodos()}>Imprimir Todos</Button>
-                }
-            </React.Fragment>
+            <Permission key_permission="can_print_cobro">
+                <React.Fragment>
+                    { row.a_cobrar !== 0 && row.cooperativa !== "(TOTAL)" &&
+                        <Button outline onClick={() => this.toWord(row)}>Imprimir</Button>
+                    }
+                    {
+                        row.a_cobrar!== 0 && row.cooperativa === "(TOTAL)" &&
+                        <Button outline onClick={() => this.imprimirTodos()}>Imprimir Todos</Button>
+                    }
+                </React.Fragment>
+            </Permission>
         )
     }
 
     render(){
         const { refresh } = this.state
+
+
+        let headers=[
+            <span style={{float:"left"}}>{('Cooperativa')}</span>,
+            <span style={{float:"left"}}>{('Localidad')}</span>,
+            <span style={{float:"left"}}>{('Fecha venta')}</span>,
+            'Cobrar',
+            <span style={{float:"right"}}>{('A cobrar')}</span>,
+            <span style={{float:"right"}}>{('Cobrado')}</span>, 
+            <span style={{float:"left"}}>{('Fecha Cobro')}</span>,
+            <span style={{float:"right", textAlign: "right"}}>{('N.c')}</span>,  
+            <span style={{textAlign:"center", position: 'relative', right:'-17%'}}>{('Accion')}</span>     
+            
+        ]
+
+            let fields=[
+                (row) => <span style={{float:"left"}}>{(row.cooperativa_nombre)}</span>,
+                (row) => <span style={{float:"left"}}>{(row.localidad_nombre)}</span>,
+                (row) => <span style={{float:"left"}}>{(row.fecha_venta)}</span>,
+                this.fieldCobrar,
+                (row) => <span  style={{float: "right" }}>${moneyFormat(row.a_cobrar)}</span>,
+                (row) => <span style={{float:"right"}}>${moneyFormat(row.cobrado)}</span>,
+                (row) => <span style={{float:"left"}}>{(row.fecha_cobro)}</span>,
+                (row) => <span style={{float: "right"}}>${moneyFormat(row.nc)}</span>,
+                this.fieldImprimir
+            ]
+
+            if(!checkPermission('can_add')) {
+                fields.splice(fields.indexOf(this.fieldCobrar), 1)
+                headers.splice(headers.indexOf('Cobrar'), 1)
+            }
+
+            if(!checkPermission('can_print_cobro')) {
+                fields.splice(fields.indexOf(this.fieldImprimir), 1)
+                headers.splice(headers.indexOf('Accion'), 1)
+            }
+
         return (
             <Permission key_permission="view_cobros_diarios" mode="redirect">
                 <div className="animated fadeIn">
@@ -229,14 +271,26 @@ class Diario extends React.Component {
 
                                             </div>
                                         </div>
+                                        
                                     }
 
-
+                                    
                                     searchable={false}
                                     ref={this.table}
 
+                                    
+                                    fieldNames={headers}
+                                    
+                                    fields={fields}
+                                    //tdBodyClass="margin: 0 !important;padding: 0 !important;"
                                     headerClass="text-center"
+                                    tdBodyClass="text-right"
+
+                                    
+                                    /*headerClass="text-center"
                                     tdBodyClass="text-center"
+
+                                    
 
                                     head={[['Cooperativa', 'Localidad', 'Fecha venta', 
                                     
@@ -272,7 +326,7 @@ class Diario extends React.Component {
                                         'fecha_cobro',
                                         (row) => <span style={{textAlign:"right", position: 'absolute', right:'16%'}}>${moneyFormat(row.nc)}</span>,
                                         this.fieldImprimir
-                                    ]}
+                                    ]}*/
 
                                     endpoint='venta/cobros-diarios'
                                     parameters={this.state}
