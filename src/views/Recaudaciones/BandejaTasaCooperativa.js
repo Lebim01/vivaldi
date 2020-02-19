@@ -90,6 +90,10 @@ class BandejaTasaCooperativa extends React.Component {
     }
 
     async toWord(row){
+        this.setState({
+            actualizados : [...this.state.actualizados, row.id]
+        })
+        
         if(!this.state.actualizados.includes(row.id)){
             const res = await axios.get(`${baseurl}/venta/solicitud_tasacontingencia/${row.id}/tasas/`)
             let valor = (res.data.tasas.length * res.data.tasas[0].valor).toFixed(2);
@@ -154,10 +158,6 @@ class BandejaTasaCooperativa extends React.Component {
             }
 
             const actualizar = await axios.post(`${baseurl}/venta/solicitud_tasacontingencia/${row.id}/`, { estado : 3 })
-
-            this.setState({
-                actualizados : [...this.state.actualizados, row.id]
-            })
 
             printHtml(html)
         }
