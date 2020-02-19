@@ -70,13 +70,13 @@ class Diario extends React.Component {
 
     fieldCobrar = (row) => {
         return (
-            <Permission key_permission="can_add">
+            
                 <React.Fragment>
                     { row.a_cobrar > 0 && row.cooperativa !== "(TOTAL)" &&
                         <Button outline onClick={() => this.cobrar(row)}>Cobrar</Button>
                     }
                 </React.Fragment>
-            </Permission>
+            
         )
     }
 
@@ -168,7 +168,7 @@ class Diario extends React.Component {
 
     fieldImprimir = (row) => {
         return (
-            <Permission key_permission="can_print_cobro">
+            
                 <React.Fragment>
                     { row.a_cobrar !== 0 && row.cooperativa !== "(TOTAL)" &&
                         <Button outline onClick={() => this.toWord(row)}>Imprimir</Button>
@@ -178,7 +178,7 @@ class Diario extends React.Component {
                         <Button outline onClick={() => this.imprimirTodos()}>Imprimir Todos</Button>
                     }
                 </React.Fragment>
-            </Permission>
+            
         )
     }
 
@@ -287,12 +287,8 @@ class Diario extends React.Component {
                                     tdBodyClass="text-right"
 
                                     
-                                    /*headerClass="text-center"
-                                    tdBodyClass="text-center"
-
-                                    
-
-                                    head={[['Cooperativa', 'Localidad', 'Fecha venta', 
+                                   
+                                    /*head={[['Cooperativa', 'Localidad', 'Fecha venta', 
                                     
                                     {
                                         title:'Cobrar', 
