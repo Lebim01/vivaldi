@@ -20,7 +20,8 @@ const { user_info } = store.getState()
 class BandejaTasaCooperativa extends React.Component {
     state = {
         fecha : moment().format('YYYY-MM-DD'),
-        estado : 1 // aceptado
+        estado : 1, // aceptado
+        actualizados : []
     }
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
@@ -89,73 +90,77 @@ class BandejaTasaCooperativa extends React.Component {
     }
 
     async toWord(row){
-        const res = await axios.get(`${baseurl}/venta/solicitud_tasacontingencia/${row.id}/tasas/`)
-        let valor = (res.data.tasas.length * res.data.tasas[0].valor).toFixed(2);
-        let unitario = res.data.tasas[0].valor.toFixed(2);
-        let html = `
-            <style>
-                .pagebreak { page-break-after: always; }
-            </style>
-            <div style="margin-bottom: 10px; border-bottom: 1px solid black; width: 300px; text-align: center;">
-            <p style="margin-top: 5px; margin-bottom: 5px;">${res.data.localidad_razon_social}</p>
-            <p style="margin-top: 5px; margin-bottom: 5px;">RUC: ${res.data.localidad_ruc}</p>
-            <p style="margin-top: 5px; margin-bottom: 5px;">Direccion: ${res.data.localidad_direccion}</p>
-            <div style="padding-top: 5px; margin-bottom: 10px; border-bottom: 0.5px dotted black; width: 300px; text-align:left">
-                <p style="margin-top: 5px; margin-bottom: 5px;">Fecha: ${res.data.fecha_emision}</p>
-                <p style="margin-top: 5px; margin-bottom: 5px;">Cliente: CONSUMIDOR FINAL </p>
-                <p style="margin-top: 5px; margin-bottom: 5px;">Cooperativa: ${res.data.cooperativa_nombre} </p>
-                <p style="margin-top: 5px; margin-bottom: 5px;">Factura: ${res.data.numero}</p>
-                <p style="margin-top: 5px; margin-bottom: 5px;word-break: break-all;">Clave de acceso: ${res.data.clave_acceso}</p>
-            </div>
-            <div style="padding-top: 5px; margin-bottom: 10px; width: 300px; text-align:left">
-                <table>
-                    <thead>
+        if(!this.state.actualizados.includes(row.id)){
+            const res = await axios.get(`${baseurl}/venta/solicitud_tasacontingencia/${row.id}/tasas/`)
+            let valor = (res.data.tasas.length * res.data.tasas[0].valor).toFixed(2);
+            let unitario = res.data.tasas[0].valor.toFixed(2);
+            let html = `
+                <style>
+                    .pagebreak { page-break-after: always; }
+                </style>
+                <div style="margin-bottom: 10px; border-bottom: 1px solid black; width: 300px; text-align: center;">
+                <p style="margin-top: 5px; margin-bottom: 5px;">${res.data.localidad_razon_social}</p>
+                <p style="margin-top: 5px; margin-bottom: 5px;">RUC: ${res.data.localidad_ruc}</p>
+                <p style="margin-top: 5px; margin-bottom: 5px;">Direccion: ${res.data.localidad_direccion}</p>
+                <div style="padding-top: 5px; margin-bottom: 10px; border-bottom: 0.5px dotted black; width: 300px; text-align:left">
+                    <p style="margin-top: 5px; margin-bottom: 5px;">Fecha: ${res.data.fecha_emision}</p>
+                    <p style="margin-top: 5px; margin-bottom: 5px;">Cliente: CONSUMIDOR FINAL </p>
+                    <p style="margin-top: 5px; margin-bottom: 5px;">Cooperativa: ${res.data.cooperativa_nombre} </p>
+                    <p style="margin-top: 5px; margin-bottom: 5px;">Factura: ${res.data.numero}</p>
+                    <p style="margin-top: 5px; margin-bottom: 5px;word-break: break-all;">Clave de acceso: ${res.data.clave_acceso}</p>
+                </div>
+                <div style="padding-top: 5px; margin-bottom: 10px; width: 300px; text-align:left">
+                    <table>
+                        <thead>
+                            <tr>
+                            <th>Cant</th>
+                            <th>Descripcion</th>
+                            <th>Valor</th>
+                            <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            <td>${res.data.tasas.length}</td>
+                            <td>TASAS DE CONTINGENCIA</td>
+                            <td>${unitario}</td>
+                            <td>$${valor}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="padding-top: 5px; margin-bottom: 10px; width: 300px; text-align:right;">
+                    <table style="margin:0 0 0 auto;">
                         <tr>
-                        <th>Cant</th>
-                        <th>Descripcion</th>
-                        <th>Valor</th>
-                        <th>Total</th>
+                            <th>Subtotal</th>
+                            <td>$${valor}</td>
                         </tr>
-                    </thead>
-                    <tbody>
                         <tr>
-                        <td>${res.data.tasas.length}</td>
-                        <td>TASAS DE CONTINGENCIA</td>
-                        <td>${unitario}</td>
-                        <td>$${valor}</td>
+                            <th>IVA 12%</th>
+                            <td>$0.00</td>
                         </tr>
-                    </tbody>
-                </table>
+                        <tr>
+                            <th>Total</th>
+                            <td>$${valor}</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-            <div style="padding-top: 5px; margin-bottom: 10px; width: 300px; text-align:right;">
-                <table style="margin:0 0 0 auto;">
-                    <tr>
-                        <th>Subtotal</th>
-                        <td>$${valor}</td>
-                    </tr>
-                    <tr>
-                        <th>IVA 12%</th>
-                        <td>$0.00</td>
-                    </tr>
-                    <tr>
-                        <th>Total</th>
-                        <td>$${valor}</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <p style="page-break-before: always">`
+            <p style="page-break-before: always">`
 
-        for(let i in res.data.tasas){
-            let _row = res.data.tasas[i]
-            html += await this.rowToHtml(_row, row.id, Number(i)+1)
+            for(let i in res.data.tasas){
+                let _row = res.data.tasas[i]
+                html += await this.rowToHtml(_row, row.id, Number(i)+1)
+            }
+
+            const actualizar = await axios.post(`${baseurl}/venta/solicitud_tasacontingencia/${row.id}/`, { estado : 3 })
+
+            this.setState({
+                actualizados : [...this.state.actualizados, row.id]
+            })
+
+            printHtml(html)
         }
-
-        const actualizar = await axios.post(`${baseurl}/venta/solicitud_tasacontingencia/${row.id}/`, { estado : 3 })
-
-        this.buscar()
-
-        printHtml(html)
     }
 
     fieldImprimir = (row) => {
