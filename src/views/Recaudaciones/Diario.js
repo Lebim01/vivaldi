@@ -186,7 +186,7 @@ class Diario extends React.Component {
         const { refresh } = this.state
 
 
-        let headers=[
+        /*let headers=[
             <span style={{float:"left"}}>{('Cooperativa')}</span>,
             <span style={{float:"left"}}>{('Localidad')}</span>,
             <span style={{float:"left"}}>{('Fecha venta')}</span>,
@@ -219,7 +219,7 @@ class Diario extends React.Component {
             if(!checkPermission('can_print_cobro')) {
                 fields.splice(fields.indexOf(this.fieldImprimir), 1)
                 headers.splice(headers.indexOf('Accion'), 1)
-            }
+            }*/
 
         return (
             <Permission key_permission="view_cobros_diarios" mode="redirect">
@@ -279,16 +279,17 @@ class Diario extends React.Component {
                                     ref={this.table}
 
                                     
-                                    fieldNames={headers}
+                                    /*fieldNames={headers}
                                     
-                                    fields={fields}
+                                    fields={fields}*/
+
                                     //tdBodyClass="margin: 0 !important;padding: 0 !important;"
                                     headerClass="text-center"
                                     tdBodyClass="text-right"
 
                                     
                                    
-                                    /*head={[['Cooperativa', 'Localidad', 'Fecha venta', 
+                                    head={[['Cooperativa', 'Localidad', 'Fecha venta', 
                                     
                                     {
                                         title:'Cobrar', 
@@ -322,7 +323,7 @@ class Diario extends React.Component {
                                         'fecha_cobro',
                                         (row) => <span style={{textAlign:"right", position: 'absolute', right:'16%'}}>${moneyFormat(row.nc)}</span>,
                                         this.fieldImprimir
-                                    ]}*/
+                                    ]}
 
                                     endpoint='venta/cobros-diarios'
                                     parameters={this.state}
