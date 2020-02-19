@@ -164,7 +164,7 @@ class BandejaTasaCooperativa extends React.Component {
     }
 
     fieldImprimir = (row) => {
-        if(row.estado === 2) return null
+        if(row.estado === 3) return null
 
         return (
             <React.Fragment>
