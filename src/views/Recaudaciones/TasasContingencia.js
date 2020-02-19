@@ -110,8 +110,7 @@ class TasasContingencia extends React.Component {
         fecha_inicio : moment().format('YYYY-MM-DD'),
         fecha_fin : moment().format('YYYY-MM-DD'),
         openModal: false,
-        loading: false,
-        actualizados : []
+        loading: false
     }
     optionsLocalidad = {
         url : `${baseurl}/localidad/`,
@@ -139,31 +138,25 @@ class TasasContingencia extends React.Component {
     }
 
     print = async (row) => {
-        this.setState({
-            actualizados : [...this.state.actualizados, row.id]
-        })
+        this.setState({loading: true})
+        const response = await axios.get(`${baseurl}/venta/generacion_contingencia/${row.id}/imprimir/`)
         
-        if(!this.state.actualizados.includes(row.id)){
-            this.setState({loading: true})
-            const response = await axios.get(`${baseurl}/venta/generacion_contingencia/${row.id}/imprimir/`)
-            
-            const url = window.URL.createObjectURL(new Blob([response.data]));
-            const link = document.createElement('a');
-            link.href = url;
-            link.setAttribute('download', 'file.pdf');
-            document.body.appendChild(link);
-            link.click();
-            this.setState({loading: false})
-        }
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'file.pdf');
+        document.body.appendChild(link);
+        link.click();
+        this.setState({loading: false})
     }
 
     imprimir = (row) => {
         return (
-            <Permission key_permission="add_solicitudtasacontingencia">
+            
                 <Button onClick={() => this.print(row)}>
                     Imprimir
                 </Button>
-            </Permission>
+           
         )
     }
 
@@ -228,7 +221,12 @@ class TasasContingencia extends React.Component {
                                         headerClass="text-center"
                                         tdBodyClass="text-center"
 
-                                        head={[['Fecha', 'Localidad', 
+                                        head={[[
+                                            {
+                                                title:'Fecha', 
+                                                style:{float:"left"}
+                                            },
+                                            'Localidad', 
                                             {
                                                 title:'Precio', 
                                                 style:{textAlign:"right", position: 'relative', right:'0%' }
@@ -247,11 +245,11 @@ class TasasContingencia extends React.Component {
                                             }
                                         ]]}
                                         fields={[
-                                            'fecha', 
-                                            'localidad_nombre', 
-                                            (row) => <span style={style_money_label}>${moneyFormat(row.precio)}</span>, 
-                                            (row) => <span style={style_money_label}>{row.cantidad}</span>, 
-                                            (row) => <span style={style_money_label}>${moneyFormat(row.total)}</span>, 
+                                            (row) => <span style={{float: "left"}}>{(row.fecha)}</span>, 
+                                            (row) => <span style={{float: "left"}}>{(row.localidad_nombre)}</span>, 
+                                            (row) => <span style={{float: "right"}}>${moneyFormat(row.precio)}</span>, 
+                                            (row) => <span style={{float: "right"}}>{row.cantidad}</span>, 
+                                            (row) => <span style={{float: "right"}}>${moneyFormat(row.total)}</span>, 
                                             this.imprimir
                                         ]}
 
