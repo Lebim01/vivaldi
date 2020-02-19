@@ -110,7 +110,8 @@ class TasasContingencia extends React.Component {
         fecha_inicio : moment().format('YYYY-MM-DD'),
         fecha_fin : moment().format('YYYY-MM-DD'),
         openModal: false,
-        loading: false
+        loading: false,
+        actualizados : []
     }
     optionsLocalidad = {
         url : `${baseurl}/localidad/`,
@@ -138,16 +139,22 @@ class TasasContingencia extends React.Component {
     }
 
     print = async (row) => {
-        this.setState({loading: true})
-        const response = await axios.get(`${baseurl}/venta/generacion_contingencia/${row.id}/imprimir/`)
+        this.setState({
+            actualizados : [...this.state.actualizados, row.id]
+        })
         
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', 'file.pdf');
-        document.body.appendChild(link);
-        link.click();
-        this.setState({loading: false})
+        if(!this.state.actualizados.includes(row.id)){
+            this.setState({loading: true})
+            const response = await axios.get(`${baseurl}/venta/generacion_contingencia/${row.id}/imprimir/`)
+            
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'file.pdf');
+            document.body.appendChild(link);
+            link.click();
+            this.setState({loading: false})
+        }
     }
 
     imprimir = (row) => {
