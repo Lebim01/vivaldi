@@ -153,6 +153,8 @@ class BandejaTasaCooperativa extends React.Component {
 
         const actualizar = await axios.post(`${baseurl}/venta/solicitud_tasacontingencia/${row.id}/`, { estado : 3 })
 
+        this.buscar()
+
         printHtml(html)
     }
 
@@ -206,9 +208,16 @@ class BandejaTasaCooperativa extends React.Component {
                                         searchable={false}
 
                                         fieldNames={['Cooperativa', 'Fecha', 'Descripcion', 'Usuario solicitante', 'Usuario aprobación', 'Cantidad', 'Acción']}
-                                        fields={['cooperativa_nombre', 'fecha', 'descripcion', 'usuario_solicitante_username', 'usuario_aprobacion_username', 
-                                        (row) => <span style={{textAlign:"right", position: 'relative', right:'-60%'}}>{row.cantidad_aprobada}</span>, , 
-                                        this.fieldImprimir]}
+                                        fields={[
+                                            'cooperativa_nombre', 
+                                            'fecha', 
+                                            'descripcion', 
+                                            'usuario_solicitante_username', 
+                                            'usuario_aprobacion_username', 
+                                            (row) => <span style={{textAlign:"right", position: 'relative', right:'-60%'}}>{row.cantidad_aprobada}</span>, 
+                                            , 
+                                            this.fieldImprimir
+                                        ]}
 
                                         endpoint={endpoint}
                                         parameters={this.state}
