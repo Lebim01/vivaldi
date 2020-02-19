@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Input, Button, FormValidate, SelectLocalidad } from 'temeforest'
+import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Input, Button, Permission, FormValidate, SelectLocalidad } from 'temeforest'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import moment from 'moment'
 import Swal from 'sweetalert2'
@@ -152,15 +152,18 @@ class TasasContingencia extends React.Component {
 
     imprimir = (row) => {
         return (
-            <Button onClick={() => this.print(row)}>
-                Imprimir
-            </Button>
+            <Permission key_permission="add_solicitudtasacontingencia">
+                <Button onClick={() => this.print(row)}>
+                    Imprimir
+                </Button>
+            </Permission>
         )
     }
 
     render(){
         const { refresh, loading, ...state } = this.state
         return (
+            <Permission key_permission="view_tasacontingenciageneral" mode="redirect">
             <BlockUi tag="div" blocking={loading}>
                 <div className="animated fadeIn">
                     <RegistroTasa
@@ -212,6 +215,8 @@ class TasasContingencia extends React.Component {
                                     </div>
                                     <ListPage
                                         searchable={false}
+                                        id="tasacontingenciageneral"
+                                        key_permission="tasacontingenciageneral"
 
                                         headerClass="text-center"
                                         tdBodyClass="text-center"
@@ -256,6 +261,7 @@ class TasasContingencia extends React.Component {
                     </div>
                 </div>
             </BlockUi>
+            </Permission>
         )
     }
 }
