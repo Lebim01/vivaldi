@@ -274,25 +274,11 @@ class Diario extends React.Component {
                                             <div className="col-sm-4 text-right">
 
                                             </div>
-                                        </div>
-                                        
+                                        </div>   
                                     }
-
-                                    
                                     searchable={false}
                                     ref={this.table}
-
-                                    
-                                    /*fieldNames={headers}
-                                    
-                                    fields={fields}*/
-
-                                    //tdBodyClass="margin: 0 !important;padding: 0 !important;"
                                     headerClass="text-center"
-                                    tdBodyClass="text-right"
-
-                                    
-                                   
                                     head={[
                                         [
                                             'Cooperativa', 
