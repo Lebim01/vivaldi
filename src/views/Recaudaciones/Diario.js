@@ -52,31 +52,34 @@ class Diario extends React.Component {
         })
     }
 
-    cobrar = async ({ localidad, cooperativa, fecha_venta }) => {
-        const options = {
-            params : {
-                localidad,
-                cooperativa,
-                fecha_venta
-            },
-            text : '¿Seguro de cobrar?',
-            endpoint: 'venta/cobro/crear_cobro_por_fecha'
-        }
-        
-        if(await confirmEndpoint(options)){
-            this.refresh()
+    cobrar = async ({ id, localidad, cooperativa, fecha_venta }) => {
+        if(!this.state.cobrados.includes(id)){
+            this.setState({
+                cobrados : [...this.state.cobrados, id]
+            })
+            const options = {
+                params : {
+                    localidad,
+                    cooperativa,
+                    fecha_venta
+                },
+                text : '¿Seguro de cobrar?',
+                endpoint: 'venta/cobro/crear_cobro_por_fecha'
+            }
+            
+            if(await confirmEndpoint(options)){
+                this.refresh()
+            }
         }
     }
 
     fieldCobrar = (row) => {
         return (
-            
-                <React.Fragment>
-                    { row.a_cobrar > 0 && row.cooperativa !== "(TOTAL)" &&
-                        <Button outline onClick={() => this.cobrar(row)}>Cobrar</Button>
-                    }
-                </React.Fragment>
-            
+            <React.Fragment>
+                { ((row.a_cobrar > 0 && row.cooperativa !== "(TOTAL)") || this.state.cobrados.includes(row.id)) &&
+                    <Button outline onClick={() => this.cobrar(row)}>Cobrar</Button>
+                }
+            </React.Fragment>
         )
     }
 
@@ -289,30 +292,34 @@ class Diario extends React.Component {
 
                                     
                                    
-                                    head={[['Cooperativa', 'Localidad', 'Fecha venta', 
-                                    
-                                    {
-                                        title:'Cobrar', 
-                                        style:{textAlign:"center", position: 'relative', right:'0%' }
-                                    },
-                                    {
-                                        title:'A cobrar', 
-                                        style:{textAlign:"right", position: 'relative', right:'0%' }
-                                    },
-                                    {
-                                        title:'Cobrado', 
-                                        style:{float: "right" }
-                                    },
-                                    'Fecha cobro', 
-                                    {
-                                        title:'N.c', 
-                                        style:{textAlign:"right", position: 'relative', right:'-2%' }
-                                    },
-                                    {
-                                        title:'Acción', 
-                                        style:{textAlign:"center", position: 'relative', right:'0%' }
-                                    }
-                                ]]}
+                                    head={[
+                                        [
+                                            'Cooperativa', 
+                                            'Localidad', 
+                                            'Fecha venta', 
+                                            {
+                                                title:'Cobrar', 
+                                                style:{textAlign:"center" }
+                                            },
+                                            {
+                                                title:'A cobrar', 
+                                                style:{textAlign:"right" }
+                                            },
+                                            {
+                                                title:'Cobrado', 
+                                                style:{textAlign: "right" }
+                                            },
+                                            'Fecha cobro', 
+                                            {
+                                                title:'N.c', 
+                                                style:{textAlign:"right" }
+                                            },
+                                            {
+                                                title:'Acción', 
+                                                style:{textAlign:"right" }
+                                            }
+                                        ]
+                                    ]}
                                     fields={[
                                         (row) => <span style={{float:"left", fontWeight: 300}}>{(row.cooperativa_nombre)}</span>,
                                         'localidad_nombre',
