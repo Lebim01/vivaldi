@@ -1,7 +1,6 @@
 import React from 'react'
 import { ListPage, Label, FormGroup, Select, Input, Button, Permission, Card, CardBody, SelectLocalidad } from 'temeforest'
 import { baseurl } from 'utils/url'
-import { checkPermission } from 'temeforest/base/Permission'
 import { confirmEndpoint } from 'utils/dialog'
 import { printHtml } from 'utils/exportData'
 import { moneyFormat } from 'utils/number'
@@ -53,10 +52,10 @@ class Diario extends React.Component {
         })
     }
 
-    cobrar = async ({ id, localidad, cooperativa, fecha_venta }) => {
-        if(!this.state.cobrados.includes(id)){
+    cobrar = async ({ localidad, cooperativa, fecha_venta, ...row }) => {
+        if(!this.state.cobrados.includes(row.cobro_id)){
             this.setState({
-                cobrados : [...this.state.cobrados, id]
+                cobrados : [...this.state.cobrados, row.cobro_id]
             })
             const options = {
                 params : {
@@ -77,7 +76,7 @@ class Diario extends React.Component {
     fieldCobrar = (row) => {
         return (
             <React.Fragment>
-                { ((row.a_cobrar > 0 && row.cooperativa !== "(TOTAL)") || this.state.cobrados.includes(row.id)) &&
+                { ((row.a_cobrar > 0 && row.cooperativa !== "(TOTAL)") || row.cobro_id) &&
                     <Button outline onClick={() => this.cobrar(row)}>Cobrar</Button>
                 }
             </React.Fragment>
