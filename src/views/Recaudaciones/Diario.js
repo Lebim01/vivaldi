@@ -282,10 +282,7 @@ class Diario extends React.Component {
                                             'Cooperativa', 
                                             'Localidad', 
                                             'Fecha venta', 
-                                            {
-                                                title:'Cobrar', 
-                                                style:{textAlign:"center" }
-                                            },
+                                            'Cobrar',
                                             {
                                                 title:'A cobrar', 
                                                 style:{textAlign:"right" }
