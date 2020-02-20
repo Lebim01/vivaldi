@@ -307,7 +307,7 @@ class Diario extends React.Component {
                                         (row) => <span  style={{float: "right" }}>${moneyFormat(row.a_cobrar)}</span>,
                                         (row) => <span style={{float: "right"}}>${moneyFormat(row.cobrado)}</span>,
                                         'fecha_cobro',
-                                        (row) => <span style={{textAlign:"right"}}>${moneyFormat(row.nc)}</span>,
+                                        (row) => <span style={{float:"right"}}>${moneyFormat(row.nc)}</span>,
                                         this.fieldImprimir
                                     ]}
 
