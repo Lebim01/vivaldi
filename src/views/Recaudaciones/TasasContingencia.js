@@ -111,8 +111,8 @@ class TasasContingencia extends React.Component {
         fecha_fin : moment().format('YYYY-MM-DD'),
         openModal: false,
         loading: false, 
-        estado : 0 // aceptado
-        //actualizados : []
+        estado : 0, // aceptado
+        actualizados : []
     }
     optionsLocalidad = {
         url : `${baseurl}/localidad/`,
@@ -140,147 +140,138 @@ class TasasContingencia extends React.Component {
     }
 
     print = async (row) => {
-        this.setState({loading: true/*, 
-        actualizados : [...this.state.actualizados, row.id]*/})
-
-        
-        const response = await axios.get(`${baseurl}/venta/generacion_contingencia/${row.id}/imprimir/`)
-        
-        
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', 'file.pdf');
-        document.body.appendChild(link);
-        link.click();
-        this.setState({loading: false})
+        this.setState({loading: true, actualizados : [...this.state.actualizados, row.id] })
+        if(!this.state.actualizados.includes(row.id)){
+            const response = await axios.get(`${baseurl}/venta/generacion_contingencia/${row.id}/imprimir/`)
+            
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'file.pdf');
+            document.body.appendChild(link);
+            link.click();
+            this.setState({loading: false})
 
 
-        const actualizar = await axios.post(`${baseurl}/venta/generacion_contingencia/${row.id}/`, { estado : 3})
-        
+            const actualizar = await axios.post(`${baseurl}/venta/generacion_contingencia/${row.id}/`, { estado : 3})
+        }
     }
 
     imprimir = (row) => {
-        debugger
-        if(row.estado !== 3) return null
+        if(row.estado === 3) return null
         return (
-            
             <Button onClick={() => this.print(row)}>
                 Imprimir
             </Button>
-       
-        )   
-        
-        
-        
+        )
     }
 
     render(){
         const { refresh, loading, ...state } = this.state
         return (
             <Permission key_permission="view_tasacontingenciageneral" mode="redirect">
-            <BlockUi tag="div" blocking={loading}>
-                <div className="animated fadeIn">
-                    <RegistroTasa
-                        show={this.state.openModal}
-                        toggle={this.toggle}
-                    />
-                    <div className="row">
-                        <div className="col-sm-12">
-                            <Card>
-                                <CardBody>
-                                    <CardTitle>
-                                        Tasas contingencia General
-                                        <Button className="pull-right" onClick={this.toggle}>
-                                            <i className="fa fa-plus" /> Contingencia general
-                                        </Button>
-                                    </CardTitle>
-                                    <br/>
-                                    <div className="row">
-                                        <div className="col-sm-6">
-                                            <FormGroup className="row">
-                                                <Label className="col-sm-3">Localidad</Label>
-                                                <div className="col-sm-8">
-                                                    <SelectLocalidad onChange={this.onChange('localidad')} value={this.state.localidad}/>
-                                                </div>
-                                            </FormGroup>
-                                        </div>
-                                        <div className="col-sm-6">
-                                            <FormGroup className="row">
-                                                <Label className="col-sm-3">Fecha inicio</Label>
-                                                <div className="col-sm-8">
-                                                    <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
-                                                </div>
-                                            </FormGroup>
-                                            <FormGroup className="row">
-                                                <Label className="col-sm-3">Fecha fin</Label>
-                                                <div className="col-sm-8">
-                                                    <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
-                                                </div>
-                                            </FormGroup>
-                                        
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-sm-12 text-center">
-                                            <Button onClick={this.buscar.bind(this)}>
-                                                Buscar
+                <BlockUi tag="div" blocking={loading}>
+                    <div className="animated fadeIn">
+                        <RegistroTasa
+                            show={this.state.openModal}
+                            toggle={this.toggle}
+                        />
+                        <div className="row">
+                            <div className="col-sm-12">
+                                <Card>
+                                    <CardBody>
+                                        <CardTitle>
+                                            Tasas contingencia General
+                                            <Button className="pull-right" onClick={this.toggle}>
+                                                <i className="fa fa-plus" /> Contingencia general
                                             </Button>
+                                        </CardTitle>
+                                        <br/>
+                                        <div className="row">
+                                            <div className="col-sm-6">
+                                                <FormGroup className="row">
+                                                    <Label className="col-sm-3">Localidad</Label>
+                                                    <div className="col-sm-8">
+                                                        <SelectLocalidad onChange={this.onChange('localidad')} value={this.state.localidad}/>
+                                                    </div>
+                                                </FormGroup>
+                                            </div>
+                                            <div className="col-sm-6">
+                                                <FormGroup className="row">
+                                                    <Label className="col-sm-3">Fecha inicio</Label>
+                                                    <div className="col-sm-8">
+                                                        <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
+                                                    </div>
+                                                </FormGroup>
+                                                <FormGroup className="row">
+                                                    <Label className="col-sm-3">Fecha fin</Label>
+                                                    <div className="col-sm-8">
+                                                        <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
+                                                    </div>
+                                                </FormGroup>
+                                            
+                                            </div>
                                         </div>
-                                    </div>
-                                    <ListPage
-                                        searchable={false}
-                                        id="tasacontingenciageneral"
-                                        key_permission="tasacontingenciageneral"
+                                        <div className="row">
+                                            <div className="col-sm-12 text-center">
+                                                <Button onClick={this.buscar.bind(this)}>
+                                                    Buscar
+                                                </Button>
+                                            </div>
+                                        </div>
+                                        <ListPage
+                                            searchable={false}
+                                            id="tasacontingenciageneral"
+                                            key_permission="tasacontingenciageneral"
 
-                                        headerClass="text-center"
-                                        tdBodyClass="text-center"
+                                            headerClass="text-center"
+                                            tdBodyClass="text-center"
 
-                                        head={[[
-                                            {
-                                                title:'Fecha', 
-                                                style:{float:"left"}
-                                            },
-                                            'Localidad', 
-                                            {
-                                                title:'Precio', 
-                                                style:{textAlign:"right", position: 'relative', right:'0%' }
-                                            }, 
-                                            {
-                                                title:'Cantidad', 
-                                                style:{textAlign:"right", position: 'relative', right:'0%' }
-                                            },
-                                            {
-                                                title:'Total', 
-                                                style:{textAlign:"right", position: 'relative', right:'0%' }
-                                            }, 
-                                            {
-                                                title:'Acción', 
-                                                style:{textAlign:"right", position: 'relative', right:'8%' }
-                                            }
-                                        ]]}
-                                        fields={[
-                                            (row) => <span style={{float: "left"}}>{(row.fecha)}</span>, 
-                                            (row) => <span style={{float: "left"}}>{(row.localidad_nombre)}</span>, 
-                                            (row) => <span style={{float: "right"}}>${moneyFormat(row.precio)}</span>, 
-                                            (row) => <span style={{float: "right"}}>{row.cantidad}</span>, 
-                                            (row) => <span style={{float: "right"}}>${moneyFormat(row.total)}</span>, 
-                                            this.imprimir
-                                        ]}
+                                            head={[[
+                                                {
+                                                    title:'Fecha', 
+                                                    style:{float:"left"}
+                                                },
+                                                'Localidad', 
+                                                {
+                                                    title:'Precio', 
+                                                    style:{textAlign:"right", position: 'relative', right:'0%' }
+                                                }, 
+                                                {
+                                                    title:'Cantidad', 
+                                                    style:{textAlign:"right", position: 'relative', right:'0%' }
+                                                },
+                                                {
+                                                    title:'Total', 
+                                                    style:{textAlign:"right", position: 'relative', right:'0%' }
+                                                }, 
+                                                {
+                                                    title:'Acción', 
+                                                    style:{textAlign:"right", position: 'relative', right:'8%' }
+                                                }
+                                            ]]}
+                                            fields={[
+                                                (row) => <span style={{float: "left"}}>{(row.fecha)}</span>, 
+                                                (row) => <span style={{float: "left"}}>{(row.localidad_nombre)}</span>, 
+                                                (row) => <span style={{float: "right"}}>${moneyFormat(row.precio)}</span>, 
+                                                (row) => <span style={{float: "right"}}>{row.cantidad}</span>, 
+                                                (row) => <span style={{float: "right"}}>${moneyFormat(row.total)}</span>, 
+                                                this.imprimir
+                                            ]}
 
-                                        endpoint='venta/generacion_contingencia'
-                                        parameters={state}
+                                            endpoint='venta/generacion_contingencia'
+                                            parameters={state}
 
-                                        history={this.props.history}
-                                        refresh={refresh}
-                                    />
-                                    
-                                </CardBody>
-                            </Card>
+                                            history={this.props.history}
+                                            refresh={refresh}
+                                        />
+                                        
+                                    </CardBody>
+                                </Card>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </BlockUi>
+                </BlockUi>
             </Permission>
         )
     }
