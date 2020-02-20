@@ -158,7 +158,7 @@ class TasasContingencia extends React.Component {
     }
 
     imprimir = (row) => {
-        if(row.estado === 3) return null
+        if(row.estado === 3 || this.state.actualizados.includes(row.id)) return null
         return (
             <Button onClick={() => this.print(row)}>
                 Imprimir
