@@ -110,7 +110,9 @@ class TasasContingencia extends React.Component {
         fecha_inicio : moment().format('YYYY-MM-DD'),
         fecha_fin : moment().format('YYYY-MM-DD'),
         openModal: false,
-        loading: false
+        loading: false, 
+        estado : 0 // aceptado
+        //actualizados : []
     }
     optionsLocalidad = {
         url : `${baseurl}/localidad/`,
@@ -138,8 +140,12 @@ class TasasContingencia extends React.Component {
     }
 
     print = async (row) => {
-        this.setState({loading: true})
+        this.setState({loading: true/*, 
+        actualizados : [...this.state.actualizados, row.id]*/})
+
+        
         const response = await axios.get(`${baseurl}/venta/generacion_contingencia/${row.id}/imprimir/`)
+        
         
         const url = window.URL.createObjectURL(new Blob([response.data]));
         const link = document.createElement('a');
@@ -148,16 +154,25 @@ class TasasContingencia extends React.Component {
         document.body.appendChild(link);
         link.click();
         this.setState({loading: false})
+
+
+        const actualizar = await axios.post(`${baseurl}/venta/generacion_contingencia/${row.id}/`, { estado : 3})
+        
     }
 
     imprimir = (row) => {
+        debugger
+        if(row.estado !== 3) return null
         return (
             
-                <Button onClick={() => this.print(row)}>
-                    Imprimir
-                </Button>
-           
-        )
+            <Button onClick={() => this.print(row)}>
+                Imprimir
+            </Button>
+       
+        )   
+        
+        
+        
     }
 
     render(){
