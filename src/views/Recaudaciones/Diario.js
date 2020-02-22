@@ -54,9 +54,6 @@ class Diario extends React.Component {
 
     cobrar = async ({ localidad, cooperativa, fecha_venta, ...row }) => {
         if(!this.state.cobrados.includes(row.cobro_id)){
-            this.setState({
-                cobrados : [...this.state.cobrados, row.cobro_id]
-            })
             const options = {
                 params : {
                     localidad,
@@ -68,6 +65,10 @@ class Diario extends React.Component {
             }
             
             if(await confirmEndpoint(options)){
+                this.setState({
+                    cobrados : [...this.state.cobrados, row.cobro_id]
+                })
+                
                 this.refresh()
             }
         }
