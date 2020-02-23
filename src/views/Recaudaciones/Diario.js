@@ -7,7 +7,6 @@ import { moneyFormat } from 'utils/number'
 import moment from 'moment'
 import store from 'store/auth'
 import axios from 'axios'
-import Swal from 'sweetalert2';
 import { connect } from 'react-redux'
 
 axios.defaults.headers.common['Authorization'] = `JWT ${store.getState().token}`
@@ -25,8 +24,7 @@ class Diario extends React.Component {
 
     state = {
         fecha : moment().format('YYYY-MM-DD'),
-        tipo: 'p',
-        cobrados : []
+        tipo: 'p'
     }
 
     optionsCooperativa = {
@@ -61,14 +59,12 @@ class Diario extends React.Component {
                     fecha_venta
                 },
                 text : '¿Seguro de cobrar?',
-                endpoint: 'venta/cobro/crear_cobro_por_fecha'
+                endpoint: 'venta/cobro/crear_cobro_por_fecha',
+                getValue : true
             }
             
-            if(await confirmEndpoint(options)){
-                this.setState({
-                    cobrados : [...this.state.cobrados, row.cobro_id]
-                })
-                
+            let res = await confirmEndpoint(options)
+            if(typeof res === 'object' && res.data && res.data.cobro_id){
                 this.refresh()
             }
         }
@@ -77,7 +73,7 @@ class Diario extends React.Component {
     fieldCobrar = (row) => {
         return (
             <React.Fragment>
-                { ((row.a_cobrar > 0 && row.cooperativa !== "(TOTAL)") || row.cobro_id) &&
+                { ((row.a_cobrar > 0 && row.cooperativa !== "(TOTAL)") && !row.cobro_id) &&
                     <Button outline onClick={() => this.cobrar(row)}>Cobrar</Button>
                 }
             </React.Fragment>

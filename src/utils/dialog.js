@@ -99,7 +99,7 @@ async function confirmEndpoint(options){
     })
 
     if (result.value) {
-        return true
+        return _options.getValue ? result.value : true
     }
     return false
 }
