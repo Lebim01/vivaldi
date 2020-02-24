@@ -24,7 +24,8 @@ class Diario extends React.Component {
 
     state = {
         fecha : moment().format('YYYY-MM-DD'),
-        tipo: 'p'
+        tipo: 'p',
+        cobrados : []
     }
 
     optionsCooperativa = {
