@@ -216,7 +216,7 @@ class MainView extends React.Component {
                         validator={{
                             validationRules : {required:"El campo es requerido"}
                         }}
-                    /> 
+                    />
 
                     <FormGroup className="row">
                         <Label className="col-sm-3">Cortesia por viaje</Label>
@@ -230,7 +230,7 @@ class MainView extends React.Component {
                             <Input id="logo_cooperativa_form" type="file" style={{display:'none'}} onChange={this._onChangeLogo} helperText="Imagen png o jpg"/>
                             <Button type="success" style={{marginRight:5}} onClick={this.UploadLogo}>Subir Logo</Button>
                         </div>
-                        { this.props.logo_url && 
+                        { this.props.logo_url &&
                             <div className="col-sm-3">
                                 <Badge className="mr-2" id="logo_badge" color="info" href={baseMediaUrl + this.props.logo_url} target="_blank" >Ya existe logo.</Badge>
                                 <UncontrolledTooltip placement="top" target="logo_badge">
@@ -350,17 +350,19 @@ class MainView extends React.Component {
                     </fieldset>
                     <fieldset>
                         <legend>Venta</legend>
-                        <FormGroup className="row">
-                            <div className="col-sm-2"></div>
+
+                      <FormGroup className="row">
+                            <div className="col-sm-2"/>
                             <div className="col-sm-2">
                                 <div className="custom-control custom-checkbox">
-                                    <input type="checkbox" className="custom-control-input" id="asume_tasa" name="asume_tasa" checked={this.props.asume_tasa} onChange={this.onChange('asume_tasa')} />
-                                    <Label onlyClassName="custom-control-label" htmlFor="asume_tasa">Asume Tasa</Label>
+                                    <input type="checkbox" className="custom-control-input" id="validar_tarifa" name="validar_tarifa" checked={this.props.validar_tarifa} onChange={this.onChange('validar_tarifa')} />
+                                    <Label onlyClassName="custom-control-label" htmlFor="validar_tarifa">Validar Tarifas</Label>
                                 </div>
                             </div>
                         </FormGroup>
+
                         <FormGroup className="row">
-                            <div className="col-sm-2"></div>
+                            <div className="col-sm-2"/>
                             <div className="col-sm-2">
                                 <div className="custom-control custom-checkbox">
                                     <input type="checkbox" className="custom-control-input" id="omitir_pasajeros" name="omitir_pasajeros" checked={this.props.omitir_pasajeros} onChange={this.onChange('omitir_pasajeros')} />
@@ -395,10 +397,10 @@ class MainView extends React.Component {
                         <div className="col-sm-1"></div>
                         <div className="col-sm-10">
                             <Tabs tab={tab} tabs={tabsLocalidades} onClickTab={this.changeTab.bind(this)} />
-                            <ListAdenes 
-                                selected={this.props.localidades_andenes[tab]} 
+                            <ListAdenes
+                                selected={this.props.localidades_andenes[tab]}
                                 onChange={this.toggleAndenes}
-                                andenes={localidades[tab] ? localidades[tab].andenes : []} 
+                                andenes={localidades[tab] ? localidades[tab].andenes : []}
                             />
                         </div>
                     </div>
@@ -423,7 +425,7 @@ class EditCooperativas extends React.Component {
             contribuyente_especial : 'no',
             obligado_contabilidad : 'no',
             emision_facturacion : "FISI",
-            ambiente: "1", 
+            ambiente: "1",
         },
         data_firma: {
             file_firma : '',
@@ -647,12 +649,12 @@ class EditCooperativas extends React.Component {
         }
 
         return(
-            <EditPage 
-                title={`${id ? 'Editar' : 'Crear'} Cooperativas`} 
-                data={data} 
-                id={id} 
-                urlFront={urlFront} 
-                endpoint={endpoint} 
+            <EditPage
+                title={`${id ? 'Editar' : 'Crear'} Cooperativas`}
+                data={data}
+                id={id}
+                urlFront={urlFront}
+                endpoint={endpoint}
                 history={this.props.history}
                 parseData={this.parseData}
                 key_permission="cooperativa"
@@ -661,12 +663,12 @@ class EditCooperativas extends React.Component {
                 <TabContent activeTab={tab}>
                     <TabPane tabId="main">
                         <MainView
-                            {...data} 
+                            {...data}
                             onChange={this.onChange}
                             tabsLocalidades={tabsLocalidades}
                             localidades={localidades}
-                            onChangeLogo={this.onChangeLogo} 
-                            tieneFacturacionElectronica={this.tieneFacturacionElectronica}  
+                            onChangeLogo={this.onChangeLogo}
+                            tieneFacturacionElectronica={this.tieneFacturacionElectronica}
                         />
                     </TabPane>
                     <TabPane tabId="firma">
