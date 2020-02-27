@@ -128,6 +128,7 @@ class ReporteBoletosTasas extends React.Component {
                                                                 </div>
                                                             </FormGroup>
                                                         </div>
+                                                        
                                                     </div>
                                                 }
                                         

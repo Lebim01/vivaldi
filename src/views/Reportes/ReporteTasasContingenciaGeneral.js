@@ -68,14 +68,14 @@ class ReporteTasasContingenciaGeneral extends React.Component {
                                     <div className="row">
                                         <div className="col-sm-6">
                                             <FormGroup className="row">
-                                                <Label className="col-sm-3">Cooperativa</Label>
-                                                <div className="col-sm-8">
+                                                <Label className="col-sm-4">Cooperativa</Label>
+                                                <div className="col-sm-7">
                                                     <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
                                                 </div>
                                             </FormGroup>
                                             <FormGroup className="row">
-                                                <Label className="col-sm-3">Localidad</Label>
-                                                <div className="col-sm-8">
+                                                <Label className="col-sm-4">Localidad</Label>
+                                                <div className="col-sm-7">
                                                     <SelectLocalidad onChange={this.onChange('localidad')} value={this.state.localidad}/>
                                                 </div>
                                             </FormGroup>
