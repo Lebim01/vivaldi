@@ -18,7 +18,7 @@ class Localidades extends React.Component {
                                         searchable={true}
                                         searchPlaceholder="Nombre, Ciudad"
 
-                                        fieldNames={['Nombre', 'Ciudad', 'Puertas', '# Andenes']}
+                                        fieldNames={['Nombre', 'Ciudad', 'Puertas', 'Nivel: #Andenes']}
                                         fields={['nombre', 'ciudad_nombre', 'puertas_nombre', 'andenes_nombre']}
 
                                         endpoint='localidad'
