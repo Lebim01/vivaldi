@@ -167,7 +167,7 @@ export default {
               permission : 'view_solicitudconductor'
             },
             {
-              name : 'Tasas de contigencia',
+              name : 'Tasas de contingencia',
               url : '/#/operaciones/solicitudes/tasas-contingencia',
               permission : 'view_solicitudtasacontingencia'
             },

@@ -286,6 +286,18 @@ class MainView extends React.Component {
                         </div>
                     </FormGroup>
 
+                    { !id &&
+                    <FormGroup className="row">
+                        <div className="col-sm-2"></div>
+                        <div className="col-sm-5">
+                            <div className="custom-control custom-checkbox">
+                                <input type="checkbox" className="custom-control-input" id="saldo_inicializado_cero" name="saldo_inicializado_cero" checked={this.props.saldo_inicializado_cero} onChange={this.onChange('saldo_inicializado_cero')} />
+                                <Label onlyClassName="custom-control-label" htmlFor="saldo_inicializado_cero">Iniciar saldo en cero</Label>
+                            </div>
+                        </div>
+                    </FormGroup>
+                    }
+
                     {/** PROPIETARIO Y CONDUCTOR  */}
                     <div className="row">
                         <div className="col-sm-6">

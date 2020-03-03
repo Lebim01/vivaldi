@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'reactstrap'
 import { Card, CardBody, CardTitle, Button, ValidateContext, Permission } from 'temeforest'
 import { confirmEndpoint } from 'utils/dialog'
-import { getAllParameters, objectToUrl } from 'utils/url'
+import { getAllParameters, objectToUrl, baseurl } from 'utils/url'
 import useForm from 'react-hook-form'
 import Swal from 'sweetalert2'
 
@@ -106,10 +106,9 @@ function EditPage(props){
 
         if(id){
             const options = {
-                id,
-                endpoint,
+                
+                endpoint: `${endpoint}/${id}/habilitar`,
                 text: '¿Seguro de habilitar?',
-                params : { is_active : 1 },
                 params_get : { full : 1 },
                 method : 'post'
             }
@@ -122,8 +121,12 @@ function EditPage(props){
                 
                 backToList()
             }
+
         }
     }
+
+    
+
 
     // btn save
     const _btnSave = {
