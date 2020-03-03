@@ -18,15 +18,8 @@ class TrafficControl extends React.Component {
                                         searchable={true}
                                         searchPlaceholder="Descripción, IP, Localidad"
 
-                                        head={[['Descripción',
-                                        {
-                                            title:'Dirección IP', 
-                                            style:{textAlign:"right", position: 'relative', right:'8%' }
-                                        }, , 
-                                         'Localidad']]}
-                                        fields={['descripcion', 
-                                        (row) => <span style={{ textAlign:"right", position: 'relative', right:'-40%'}}>{row.ip}</span>,, 
-                                        'localidad_nombre']}
+                                        head={[['Descripción', 'Dirección IP', 'Localidad']]}
+                                        fields={['descripcion', 'ip', 'localidad_nombre']}
 
                                         endpoint='trafficControl'
                                         urlFront='localidades/traffic-control'
@@ -42,4 +35,4 @@ class TrafficControl extends React.Component {
     }
 }
 
-export default TrafficControl 
+export default TrafficControl
