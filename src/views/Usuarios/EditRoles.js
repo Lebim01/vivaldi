@@ -16,7 +16,7 @@ class _Row extends React.Component {
                     { view &&
                         <div className="custom-control custom-checkbox">
                             <input type="checkbox" className="custom-control-input" name={`permiso_${view}`} id={`permiso_${view}`} checked={permissions.includes(view)} onChange={() => this.props.toggle(view, 'view')} />
-                            <Label onlyClassName="custom-control-label" htmlFor={`permiso_${view}`}></Label>
+                            <Label onlyClassName="custom-control-label" htmlFor={`permiso_${view}`}/>
                         </div>
                     }
                 </td>
@@ -24,7 +24,7 @@ class _Row extends React.Component {
                     { add &&
                         <div className="custom-control custom-checkbox">
                             <input type="checkbox" className="custom-control-input" name={`permiso_${add}`} id={`permiso_${add}`} checked={permissions.includes(add)} onChange={() => this.props.toggle(add, 'add')} />
-                            <Label onlyClassName="custom-control-label" htmlFor={`permiso_${add}`}></Label>
+                            <Label onlyClassName="custom-control-label" htmlFor={`permiso_${add}`}/>
                         </div>
                     }
                 </td>
@@ -32,7 +32,7 @@ class _Row extends React.Component {
                     { change &&
                         <div className="custom-control custom-checkbox">
                             <input type="checkbox" className="custom-control-input" name={`permiso_${change}`} id={`permiso_${change}`} checked={permissions.includes(change)} onChange={() => this.props.toggle(change, 'change')} />
-                            <Label onlyClassName="custom-control-label" htmlFor={`permiso_${change}`}></Label>
+                            <Label onlyClassName="custom-control-label" htmlFor={`permiso_${change}`}/>
                         </div>
                     }
                 </td>
@@ -40,7 +40,7 @@ class _Row extends React.Component {
                     { this.props.delete &&
                         <div className="custom-control custom-checkbox">
                             <input type="checkbox" className="custom-control-input" name={`permiso_${this.props.delete}`} id={`permiso_${this.props.delete}`} checked={permissions.includes(this.props.delete)} onChange={() => this.props.toggle(this.props.delete, 'delete')} />
-                            <Label onlyClassName="custom-control-label" htmlFor={`permiso_${this.props.delete}`}></Label>
+                            <Label onlyClassName="custom-control-label" htmlFor={`permiso_${this.props.delete}`}/>
                         </div>
                     }
                 </td>
@@ -82,7 +82,7 @@ class MainView extends React.Component {
                     </FormGroup>
                     <FormGroup className="row">
                         <div id="table-container" className="col-sm-12" style={{overflowY:'auto'}}>
-                            <table className="table table-hover table-striped header-fixed" id="table">
+                            <table className="table table-hover table-striped header-fixed table-sm" id="table">
                                 <thead>
                                     <tr>
                                         <th width="50%" scope="col">Permisos disponibles</th>
@@ -96,31 +96,31 @@ class MainView extends React.Component {
                                         <td className="text-center">
                                             <div className="custom-control custom-checkbox">
                                                 <input type="checkbox" className="custom-control-input" name={`all_view`} id={`all_view`} checked={this.props.all_view} onChange={this.props.onChangeSelectAll('view')} />
-                                                <Label onlyClassName="custom-control-label" htmlFor={`all_view`}></Label>
+                                                <Label onlyClassName="custom-control-label" htmlFor={`all_view`}/>
                                             </div>
                                         </td>
                                         <td className="text-center">
                                             <div className="custom-control custom-checkbox">
                                                 <input type="checkbox" className="custom-control-input" name={`all_add`} id={`all_add`} checked={this.props.all_add} onChange={this.props.onChangeSelectAll('add')} />
-                                                <Label onlyClassName="custom-control-label" htmlFor={`all_add`}></Label>
+                                                <Label onlyClassName="custom-control-label" htmlFor={`all_add`}/>
                                             </div>
                                         </td>
                                         <td className="text-center">
                                             <div className="custom-control custom-checkbox">
                                                 <input type="checkbox" className="custom-control-input" name={`all_change`} id={`all_change`} checked={this.props.all_change} onChange={this.props.onChangeSelectAll('change')} />
-                                                <Label onlyClassName="custom-control-label" htmlFor={`all_change`}></Label>
+                                                <Label onlyClassName="custom-control-label" htmlFor={`all_change`}/>
                                             </div>
                                         </td>
                                         <td className="text-center">
                                             <div className="custom-control custom-checkbox">
                                                 <input type="checkbox" className="custom-control-input" name={`all_delete`} id={`all_delete`} checked={this.props.all_delete} onChange={this.props.onChangeSelectAll('delete')} />
-                                                <Label onlyClassName="custom-control-label" htmlFor={`all_delete`}></Label>
+                                                <Label onlyClassName="custom-control-label" htmlFor={`all_delete`}/>
                                             </div>
                                         </td>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    { categories.map((record, i) => 
+                                    { categories.map((record, i) =>
                                         [
                                             <tr key={i}>
                                                 <th colSpan="5">{record.name}</th>
@@ -209,7 +209,7 @@ class EditRoles extends React.Component {
                 categories[indexCategory].permisos[permission_name_group] = {}
             }
 
-            categories[indexCategory].permisos[permission_name_group].type = name.startsWith('Can') 
+            categories[indexCategory].permisos[permission_name_group].type = name.startsWith('Can')
                 ? name.split(' ').splice(2, name.split(' ').length-1).join(' ')
                 : name
             categories[indexCategory].permisos[permission_name_group][type] = id
@@ -239,7 +239,7 @@ class EditRoles extends React.Component {
                 // deseleccionar el checkbox de todos
                 let _type = `all_${type}`
                 this.setState({
-                    [_type]: false 
+                    [_type]: false
                 })
             }
         }else{
@@ -309,12 +309,12 @@ class EditRoles extends React.Component {
         const { data, categories, id, all_add, all_view, all_change, all_delete } = this.state
         return (
             <EditPage noValidate title={`${id ? 'Editar' : 'Crear'} Rol`} data={data} id={id} urlFront={urlFront} endpoint={endpoint} history={this.props.history} key_permission="group">
-                <MainView 
-                    {...data} 
-                    categories={categories} 
-                    onChange={this.onChange} 
-                    togglePermission={this.togglePermission} 
-                    onChangeSelectAll={this.onChangeSelectAll} 
+                <MainView
+                    {...data}
+                    categories={categories}
+                    onChange={this.onChange}
+                    togglePermission={this.togglePermission}
+                    onChangeSelectAll={this.onChangeSelectAll}
                     all_add={all_add}
                     all_view={all_view}
                     all_change={all_change}

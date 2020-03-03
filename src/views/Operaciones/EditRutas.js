@@ -30,7 +30,7 @@ class RecordRow extends React.Component {
                 <td>
                     <div className="custom-control custom-checkbox">
                         <input type="checkbox" className="custom-control-input" id={name_input} name={name_input} checked={this.props.is_active} onChange={this.props.onChange('is_active')} />
-                        <Label onlyClassName="custom-control-label" htmlFor={name_input}></Label>
+                        <Label onlyClassName="custom-control-label" htmlFor={name_input}/>
                     </div>
                 </td>
             </tr>
@@ -52,7 +52,7 @@ class MainView extends React.Component {
         valueName: 'id'
     }
 
-    optionsAnden = ({ cooperativa, ...obj }) => ({    
+    optionsAnden = ({ cooperativa, ...obj }) => ({
         url : `${baseurl}/anden/${objectToUrl({  cooperativas: cooperativa, ...obj })}`,
         labelName : 'descripcion',
         valueName : 'id'
@@ -63,7 +63,7 @@ class MainView extends React.Component {
         labelName: 'nombre',
         valueName: 'id'
     }
-    
+
     onChange = name => (e) => {
         if(this.props.onChange){
             let value = e.target.value
@@ -99,9 +99,9 @@ class MainView extends React.Component {
     agregarParada = ({ onChange, ...data }) => {
         let paradas = this.props.paradas
         let _continue = !paradas.some(
-            (r, i) => 
-                Number(r.ciudad) === Number(data.ciudad) && 
-                Number(r.id) !== Number(data.id) && 
+            (r, i) =>
+                Number(r.ciudad) === Number(data.ciudad) &&
+                Number(r.id) !== Number(data.id) &&
                 Number(i) !== Number(data.index)
         )
         if(!_continue){
@@ -197,11 +197,11 @@ class MainView extends React.Component {
                         <h4>
                             Paradas
                             <Button style={{marginLeft: 10}} onClick={() => this.toggleModal()}>
-                                <i className="fa fa-plus"></i>
+                                <i className="fa fa-plus"/>
                             </Button>
                         </h4>
                         <div className="col-sm-12">
-                            <table className="table table-striped">
+                            <table className="table table-striped table-sm">
                                 <thead>
                                     <tr>
                                         <th>Parada</th>
@@ -209,13 +209,13 @@ class MainView extends React.Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    { this.props.paradas.map((record, i) => 
-                                        <RecordRow 
+                                    { this.props.paradas.map((record, i) =>
+                                        <RecordRow
                                             key={i}
                                             index={i}
                                             {...record}
-                                            onChange={this.onChangeParada(i)} 
-                                            delete={() => this.deleteParada(i)} 
+                                            onChange={this.onChangeParada(i)}
+                                            delete={() => this.deleteParada(i)}
                                             edit={() => this.editParada({ ...record, index: i })}
                                         />
                                     )}
@@ -223,10 +223,10 @@ class MainView extends React.Component {
                             </table>
                         </div>
                     </FormGroup>
-                    <AddParadaModal 
+                    <AddParadaModal
                         guardar={(data) => this.agregarParada(data)}
-                        {...this.state.modal} 
-                        toggle={this.toggleModal} 
+                        {...this.state.modal}
+                        toggle={this.toggleModal}
                     />
                 </FormValidate>
             </div>
