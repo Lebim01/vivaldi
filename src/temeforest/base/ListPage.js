@@ -3,12 +3,13 @@ import { Col, Row } from 'reactstrap'
 import { CardTitle, InputIcon, Button, Permission } from 'temeforest'
 import { checkPermission } from 'temeforest/base/Permission'
 import { baseurl, objectToUrl, getAllParameters } from 'utils/url'
-import { htmlToXlsById } from 'utils/exportData'
+import { htmlToXlsById, htmlToXls } from 'utils/exportData'
 import _ from 'lodash'
 import axios from 'axios'
 import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
 import './ListPage.css'
+import ReactDOMServer from "react-dom/server";
 
 import FileDownloadW from 'assets/svg/file-download-solid-white.svg'
 
@@ -302,6 +303,27 @@ class ListPage extends React.Component {
         }
     }
 
+    exportExcelAll = async () => {
+        const { parameters } = this.props
+        const { search } = this.state
+
+        // All data ?no_page
+        const { data } = await axios.get(
+            `${baseurl}/${this.props.endpoint}/${objectToUrl({ ...parameters, searchtext: search, full: 1, page_size: 0})}`,
+            this.props.config
+        )
+
+        const html = `
+            <table id='to-export' style='display:none;'>
+
+                ${ReactDOMServer.renderToString(this.renderHeader())}
+                ${ReactDOMServer.renderToString(this.renderBody(data))}
+            </table>
+        `
+        document.body.insertAdjacentHTML('afterend', html)
+        htmlToXlsById('to-export')
+    }
+
     imprimirPantalla = () => {
         const { imprimirPantalla } = this.props
         if(typeof imprimirPantalla === 'function'){
@@ -324,8 +346,15 @@ class ListPage extends React.Component {
                 }
                 {' '}
                 { exportExcel &&
-                    <Button onClick={this.exportExcel} title="Exportar excel" style={{color: 'white'}}>
+                    <Button onClick={this.exportExcel} title="Exportar excel, actual" style={{color: 'white'}}>
                         <img src={FileDownloadW} height="14" />
+                    </Button>
+                }
+                {' '}
+                { exportExcel &&
+                    <Button onClick={this.exportExcelAll} title="Exportar excel, todos" style={{color: 'white'}}>
+                        <img src={FileDownloadW} height="14" />{' '}
+                        <i className="fas fa-sort-numeric-down" />
                     </Button>
                 }
                 {' '}
@@ -344,13 +373,71 @@ class ListPage extends React.Component {
         )
     }
 
-    render(){
-        const { title, searchPlaceholder, fieldNames, fields, head, searchable, exportExcel, imprimirPantalla } = this.props
-        const { filtered, numPages, next, previous, currentPage, numBeginVisibleFooterPages, numEndVisibleFooterPages, search, loading } = this.state
+    renderHeader = () => {
+        const { fieldNames, head } = this.props
+        return (
+            <thead>
+                { (fieldNames.length > 0) &&
+                    <tr>
+                        {fieldNames.map((fieldName, i) => <th className={this.props.headerClass} key={i} scope="col">{fieldName}</th>)}
+                        {this.props.showStatus && <th scope="col">Estado</th>}
+                    </tr>
+                }
+                { (head.length > 0) &&
+                    head.map((r,i) => {
+                        let row = head[i]
+                        return (
+                            <tr key={i} style={row.style}>
+                                {row.map((col, j) => {
+                                    let _title = '', 
+                                        _props = {}
 
+                                    if(typeof col === 'string' || React.isValidElement(col)){
+                                        _title = col
+                                    }
+                                    else{
+                                        const { title, ...props } = col
+                                        _title = title
+                                        _props = props
+                                    }
+
+                                    return (
+                                        <th key={j} {..._props} scope="col">{_title}</th>
+                                    )
+                                })}
+                            </tr>
+                        )
+                    })
+                }
+            </thead>
+        )
+    }
+
+    renderBody = (data) => {
+        const { fields } = this.props
         const context  = {
             onRowDoubleClick : this.onRowDoubleClick
         }
+        return (
+            <tbody>
+                {data.map((record, i) => 
+                    <RecordRow 
+                        tdBodyClass={this.props.tdBodyClass} 
+                        record={record} 
+                        context={context} 
+                        fields={fields} 
+                        key={i} 
+                        showStatus={this.props.showStatus}
+                        onDoubleClick={() => this.onRowDoubleClick(record.id, record)} 
+                    />
+                )}
+            </tbody>
+        )
+    }
+
+    render(){
+        const { title, searchPlaceholder, searchable, exportExcel, imprimirPantalla } = this.props
+        const { filtered, numPages, next, previous, currentPage, numBeginVisibleFooterPages, numEndVisibleFooterPages, search, loading } = this.state
 
         return (
             <div>
@@ -376,53 +463,8 @@ class ListPage extends React.Component {
                         <BlockUi tag="div" blocking={this.state.loading}>
                             <div className="table-responsive">
                                 <table className="table table-sm table-hover table-striped footable footable-5 footable-paging footable-paging-center" id={this.props.id}>
-                                    <thead>
-                                        { (fieldNames.length > 0) &&
-                                            <tr>
-                                                {fieldNames.map((fieldName, i) => <th className={this.props.headerClass} key={i} scope="col">{fieldName}</th>)}
-                                                {this.props.showStatus && <th scope="col">Estado</th>}
-                                            </tr>
-                                        }
-                                        { (head.length > 0) &&
-                                            head.map((r,i) => {
-                                                let row = head[i]
-                                                return (
-                                                    <tr key={i} style={row.style}>
-                                                        {row.map((col, j) => {
-                                                            let _title = '', 
-                                                                _props = {}
-
-                                                            if(typeof col === 'string' || React.isValidElement(col)){
-                                                                _title = col
-                                                            }
-                                                            else{
-                                                                const { title, ...props } = col
-                                                                _title = title
-                                                                _props = props
-                                                            }
-
-                                                            return (
-                                                                <th key={j} {..._props} scope="col">{_title}</th>
-                                                            )
-                                                        })}
-                                                    </tr>
-                                                )
-                                            })
-                                        }
-                                    </thead>
-                                    <tbody>
-                                        {filtered.map((record, i) => 
-                                            <RecordRow 
-                                                tdBodyClass={this.props.tdBodyClass} 
-                                                record={record} 
-                                                context={context} 
-                                                fields={fields} 
-                                                key={i} 
-                                                showStatus={this.props.showStatus}
-                                                onDoubleClick={() => this.onRowDoubleClick(record.id, record)} 
-                                            />
-                                        )}
-                                    </tbody>
+                                    { this.renderHeader() }
+                                    { this.renderBody(filtered) }
                                     { numEndVisibleFooterPages >= 2 &&
                                         <tfoot>
                                             <tr className="footable-paging">
