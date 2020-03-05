@@ -65,7 +65,7 @@ class BandejaTasaCooperativa extends React.Component {
                     <p style="margin-top: 5px; margin-bottom: 5px;">${row.cooperativa_nombre}</p>
                     <p style="margin-top: 5px; margin-bottom: 5px;">Contingencia Tipo 1</p>
                     <p style="margin-top: 5px; margin-bottom: 5px;">
-                        <span style="width: 100px; text-align: left;">Fecha de Emisión: </span>
+                        <span style="width: 100px; text-align: left;">Emisión: </span>
                         <span style="width: 100px; text-align: left;">${row.fecha_hora_venta}</span>
                     </p>
                     <p style="margin-top: 5px; margin-bottom: 5px;">
@@ -93,7 +93,7 @@ class BandejaTasaCooperativa extends React.Component {
         this.setState({
             actualizados : [...this.state.actualizados, row.id]
         })
-        
+
         if(!this.state.actualizados.includes(row.id)){
             const res = await axios.get(`${baseurl}/venta/solicitud_tasacontingencia/${row.id}/tasas/`)
             let valor = (res.data.tasas.length * res.data.tasas[0].valor).toFixed(2);
@@ -183,7 +183,7 @@ class BandejaTasaCooperativa extends React.Component {
                             <Card>
                                 <CardBody>
                                     <CardTitle>
-                                        Tasa de contigencia de cooperativa (I)
+                                        Tasa de contingencia de cooperativa (I)
                                     </CardTitle>
                                     <br/>
                                     {/*<div className="row">
@@ -214,13 +214,13 @@ class BandejaTasaCooperativa extends React.Component {
 
                                         fieldNames={['Cooperativa', 'Fecha', 'Descripcion', 'Usuario solicitante', 'Usuario aprobación', 'Cantidad', 'Acción']}
                                         fields={[
-                                            'cooperativa_nombre', 
-                                            'fecha', 
-                                            'descripcion', 
-                                            'usuario_solicitante_username', 
-                                            'usuario_aprobacion_username', 
-                                            (row) => <span style={{textAlign:"right", position: 'relative', right:'-60%'}}>{row.cantidad_aprobada}</span>, 
-                                            , 
+                                            'cooperativa_nombre',
+                                            'fecha',
+                                            'descripcion',
+                                            'usuario_solicitante_username',
+                                            'usuario_aprobacion_username',
+                                            (row) => <span style={{textAlign:"right", position: 'relative', right:'-60%'}}>{row.cantidad_aprobada}</span>,
+                                            ,
                                             this.fieldImprimir
                                         ]}
 
