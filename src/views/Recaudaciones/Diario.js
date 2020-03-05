@@ -7,13 +7,10 @@ import { moneyFormat } from 'utils/number'
 import moment from 'moment'
 import store from 'store/auth'
 import axios from 'axios'
-import { connect } from 'react-redux'
 
 axios.defaults.headers.common['Authorization'] = `JWT ${store.getState().token}`
 
-const style_money_label = {
-    float:'right'
-}
+const user_info = store.getState().user_info
 
 class Diario extends React.Component {
 
@@ -94,7 +91,7 @@ class Diario extends React.Component {
                 <table>
                     <tr>
                         <td>Usuario</td>
-                        <td>${this.props.user_info.username}</td>
+                        <td>${user_info.username}</td>
                     </tr>
                     <tr>
                         <td>Fecha de Emisión</td>
@@ -324,10 +321,4 @@ class Diario extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        user_info : state.user_info
-    }
-}
-
-export default connect(mapStateToProps)(Diario)
+export default Diario

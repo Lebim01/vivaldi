@@ -3,7 +3,7 @@ import { Col, Row } from 'reactstrap'
 import { CardTitle, InputIcon, Button, Permission } from 'temeforest'
 import { checkPermission } from 'temeforest/base/Permission'
 import { baseurl, objectToUrl, getAllParameters } from 'utils/url'
-import { htmlToXlsById, htmlToXls } from 'utils/exportData'
+import { htmlToXlsById } from 'utils/exportData'
 import _ from 'lodash'
 import axios from 'axios'
 import BlockUi from 'react-block-ui';
@@ -12,6 +12,9 @@ import './ListPage.css'
 import ReactDOMServer from "react-dom/server";
 
 import FileDownloadW from 'assets/svg/file-download-solid-white.svg'
+
+import { Provider } from 'react-redux'
+import store from 'store/auth'
 
 const CancelToken = axios.CancelToken;
 let cancel;
@@ -315,9 +318,12 @@ class ListPage extends React.Component {
 
         const html = `
             <table id='to-export' style='display:none;'>
-
                 ${ReactDOMServer.renderToString(this.renderHeader())}
-                ${ReactDOMServer.renderToString(this.renderBody(data))}
+                ${ReactDOMServer.renderToString(
+                    <Provider store={store}>
+                        {this.renderBody(data)}
+                    </Provider>
+                )}
             </table>
         `
         document.body.insertAdjacentHTML('afterend', html)
