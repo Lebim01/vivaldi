@@ -76,6 +76,7 @@ class ReporteBoletosTasas extends React.Component {
 
         return (
             <Permission key_permission="view_boletos_tasas" mode="redirect">
+<<<<<<< HEAD
                 <div className="animated fadeIn">
                     <div className="row">
                         <div className="col-sm-12">
@@ -93,6 +94,23 @@ class ReporteBoletosTasas extends React.Component {
                                                 filtersZone= {
                                                     <div className="row">
                                                         <div className="col-sm-4">
+=======
+                 <ReportPage  timestamp={false} >
+                        
+                                    <TabContent activeTab={this.state.tipo_tabla}>
+                                        <TabPane tabId="1">
+                                            <ListPage 
+
+                                                exportExcel
+                                                 //id="boletos_tasas"
+                                                id="boletos"
+                                                imprimirPantalla
+                                                title="Reporte de boletos por cooperativa" 
+
+                                                    filtersZone ={
+                                                        <div className="row">
+                                                        <div className="col-sm-3">
+>>>>>>> 342ef96d... correccion imprimir todos en modulo reportes
                                                             <FormGroup className="row">
                                                                 <Label className="col-sm-5" id='mylabel'>Cooperativa</Label>
                                                                 <div className="col-sm-7">
@@ -128,9 +146,29 @@ class ReporteBoletosTasas extends React.Component {
                                                                 </div>
                                                             </FormGroup>
                                                         </div>
+<<<<<<< HEAD
                                                         
                                                     </div>
                                                 }
+=======
+                                                        <div className="row">
+                                                            <div className="col-md-12 text-center">
+                                                                <Button style={{position:"relative", left: "400px", bottom: "0px"}}onClick={this.buscar}>
+                                                                    Consultar
+                                                                </Button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    }
+                                                    
+                                                    
+                                                
+                                                
+                                                ref={this.table}
+                                                autoLoad={false}
+                                               
+                                                //
+>>>>>>> 342ef96d... correccion imprimir todos en modulo reportes
                                         
                                                 searchable={false}
                                                 
@@ -156,6 +194,7 @@ class ReporteBoletosTasas extends React.Component {
                                             />
                                         </TabPane>
                                         <TabPane tabId="2">
+<<<<<<< HEAD
                                        
                                             <ListPage
                                                 searchable={false}
@@ -173,6 +212,22 @@ class ReporteBoletosTasas extends React.Component {
                                                             <FormGroup className="row" >
                                                                 <Label className="col-sm-5" id='mylabel'>Cooperativa</Label>
                                                                 <div className="col-sm-7">
+=======
+                                             <ListPage
+                                                
+                                                exportExcel
+                                                id="boletos_tasas"
+                                                //key_permission= "boletos_tasas"
+                                                imprimirPantalla
+                                                title="Reporte de boletos por cooperativa"
+
+                                                    filtersZone = {
+                                                        <div className="row" >
+                                                        <div className="col-sm-3">
+                                                            <FormGroup className="row">
+                                                                <Label className="col-sm-6" id='mylabel'>Cooperativa</Label>
+                                                                <div className="col-sm-6">
+>>>>>>> 342ef96d... correccion imprimir todos en modulo reportes
                                                                     <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.filters.cooperativa}/>
                                                                 </div>
                                                             </FormGroup>
@@ -205,12 +260,41 @@ class ReporteBoletosTasas extends React.Component {
                                                                 </div>
                                                             </FormGroup>
                                                         </div>
+<<<<<<< HEAD
                                                         <Label className="col-sm-3" style={{fontWeight: "normal"}}>Vendidos por cooperativa</Label>
                                                     </div>
                                                     
                                                     
                                                     
                                                 }
+=======
+                                                        <div className="row">
+                                                            <div className="col-md-12 text-center">
+                                                                <Button style={{position:"relative", left: "400px", bottom: "0px"}} onClick={this.buscar2}>
+                                                                    Consultar
+                                                                </Button>
+                                                                
+                                                            </div>
+                                                            <br></br>
+                                                            <br></br>
+                                                        </div>
+                                                        <br></br>
+                                                        <br></br>
+                                                        <Label className="col-sm-3" style={{position:"relative", left: "-100px", bottom: "-20px",fontWeight: "normal"}}>Vendidos por cooperativa</Label>
+                                                    </div>
+                                                    
+                                                    }
+                                                   
+                                                    
+
+
+                                                
+                                                ref={this.table2}
+                                                autoLoad={false}
+                                                searchable={false}
+                                                
+                                               
+>>>>>>> 342ef96d... correccion imprimir todos en modulo reportes
 
                                                 head={[['Tipo',
                                                 {
@@ -237,7 +321,7 @@ class ReporteBoletosTasas extends React.Component {
                                                     (row) => <span style={{float:"right"}}>$ {moneyFormat(row.total_boleto)}</span>,
                                                     (row) => <span style={{float:"right"}}>$ {moneyFormat(row.total_tasa)}</span>,
                                                 ]}
-                                                exportExcel
+                                                
                                                 data={this.state.data}
                                                 parameters={this.state.filters}
 

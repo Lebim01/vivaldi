@@ -34,6 +34,7 @@ class ViajesFecha extends React.Component {
     render(){
         return (
             <Permission key_permission="view_viajes_fecha" mode="redirect">
+<<<<<<< HEAD
                 <ReportPage printButtons={false} timestamp={false}>
                     <ListPage
                         exportExcel
@@ -44,6 +45,18 @@ class ViajesFecha extends React.Component {
 
                         filtersZone={
                             <div className="row">
+=======
+                <ReportPage  printButtons={false} timestamp={false}>
+                    <ListPage 
+                             exportExcel
+                             imprimirPantalla
+                             id="report"
+                             key_permission="viaje_fecha"
+                             title="Viajes por fecha"
+
+                            filtersZone = {
+                                <div className="row">
+>>>>>>> 342ef96d... correccion imprimir todos en modulo reportes
                                 <div className="col-sm-4">
                                     <FormGroup className="row">
                                         <Label className="col-sm-5">Cooperativa</Label>
@@ -71,10 +84,29 @@ class ViajesFecha extends React.Component {
                                             <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
                                         </div>
                                     </FormGroup>
+                                    <br></br><br></br>
                                 </div>
+<<<<<<< HEAD
                             </div>
                         }
                         searchable={false}
+=======
+                                <div className="row">
+                                    <div className="col-md-12 text-center">
+                                        <Button style={{position:"relative", left: "-200px", bottom: "-120px"}} onClick={this.buscar}>
+                                            Consultar
+                                        </Button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            } 
+                            
+                           
+                            ref={this.table}
+                            autoLoad={false}    
+                            searchable={false}
+>>>>>>> 342ef96d... correccion imprimir todos en modulo reportes
 
                         head={[
                             [

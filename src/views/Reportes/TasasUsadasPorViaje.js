@@ -46,7 +46,10 @@ class TasasUsadasPorViaje extends React.Component {
         const { refresh } = this.state
         return (
             <Permission key_permission="view_tasas_viaje" mode="redirect">
+<<<<<<< HEAD
                 
+=======
+>>>>>>> 342ef96d... correccion imprimir todos en modulo reportes
                 <div className="animated fadeIn">
                     <div className="row">
                         <div className="col-sm-12">
@@ -55,12 +58,21 @@ class TasasUsadasPorViaje extends React.Component {
                                     <ListPage
                                         exportExcel
                                         imprimirPantalla
+<<<<<<< HEAD
                                         id= "tasas_viaje"
                                         key_permission= "tasas_viaje"
                                         title="Tasas usadas por viaje"
                                     
                                         filtersZone= {
                                             <div className="row">
+=======
+                                        id= "report"
+                                        key_permission= "tasas_viaje"
+                                        title = "Tasas Usadas por Viaje"
+
+                                            filtersZone = {
+                                                <div className="row">
+>>>>>>> 342ef96d... correccion imprimir todos en modulo reportes
                                                 <div className="col-sm-4">
                                                     <FormGroup className="row">
                                                         <Label className="col-sm-5">Cooperativa</Label>
@@ -133,11 +145,28 @@ class TasasUsadasPorViaje extends React.Component {
                                                             <Input />
                                                         </div>
                                                     </FormGroup>
+                                                    <br></br>
+                                                </div>
                                                 
+                                                <div className="row">
+                                                    <div className="col-md-12 text-center">
+                                                        <Button style={{position:"relative", left: "-400px", bottom: "-105px"}} onClick={this.buscar}>
+                                                            Consultar
+                                                        </Button>
+                                                    </div>
                                                 </div>
                                                 <div className="col-sm-2"></div>
                                             </div>
+<<<<<<< HEAD
                                         }
+=======
+                                            }
+                                            
+                                            
+                                        
+                                        ref={this.table}
+                                        autoLoad={false}
+>>>>>>> 342ef96d... correccion imprimir todos en modulo reportes
                                         searchable={false}
                                         
 
@@ -157,7 +186,10 @@ class TasasUsadasPorViaje extends React.Component {
                         </div>
                     </div>
                 </div>
+<<<<<<< HEAD
                 
+=======
+>>>>>>> 342ef96d... correccion imprimir todos en modulo reportes
             </Permission>
         )
     }

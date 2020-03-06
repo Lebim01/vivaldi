@@ -34,17 +34,16 @@ class SalidaViajes extends React.Component {
     render(){
         return (
             <Permission key_permission="view_salida_viajes" mode="redirect">
-                <ReportPage printButtons={false} timestamp={false}>
-                    <ListPage
+                <ReportPage  printButtons={false} timestamp={false}>
+                        <ListPage
+                            exportExcel
+                            imprimirPantalla
+                            id="report"
+                            key_permission="salida_viajes"
+                            title="Salida de viajes"
 
-                        exportExcel
-                        imprimirPantalla
-                        id="report"
-                        key_permission="salida_viajes"
-                        title="Salida de viajes"
-                        
-                        filtersZone={
-                            <div className="row">
+                            filtersZone = {
+                                <div className="row">
                                 <div className="col-sm-4">
                                     <FormGroup className="row">
                                         <Label className="col-sm-5">Cooperativa</Label>
@@ -72,10 +71,24 @@ class SalidaViajes extends React.Component {
                                             <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
                                         </div>
                                     </FormGroup>
+                                    <br></br><br></br>
+                                </div>
+                                <div className="row">
+                                    <div className="col-md-12 text-center">
+                                        <Button style={{position:"relative", left: "-250px", bottom: "-115px"}} onClick={this.buscar}>
+                                            Consultar
+                                        </Button>
+                                    </div>
                                 </div>
                             </div>
-                        }
+                            
+                            }
+
+                        
+                        ref={this.table}
+                        autoLoad={false}                     
                         searchable={false}
+
                         head={[['Viaje', 'Cooperativa', 'Fecha salida', 'Destino', 'Parada', 
                          {
                             title:'Cantidad', 

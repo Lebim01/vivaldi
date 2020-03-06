@@ -147,7 +147,7 @@ class ViajesBus extends React.Component {
                                     exportExcel
                                     imprimirPantalla
                                     key_permission="viajes_bus"
-                                    //title=" "
+                                    title="Viaje Bus"
                                     searchable={false}
 
                                     head={[['Viaje', 'Fecha salida', 'Localidad', 'Pasajeros', 'Parada',

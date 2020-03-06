@@ -47,6 +47,7 @@ class ReporteClientesFrecuentes extends React.Component {
         const { refresh } = this.state
         return (
             <Permission key_permission="view_clientes_frecuentes" mode="redirect">
+<<<<<<< HEAD
                 <ReportPage printButtons={false} timestamp={false}  >
                     <ListPage
                     
@@ -59,6 +60,21 @@ class ReporteClientesFrecuentes extends React.Component {
                     
                     filtersZone= {
                     <div className="row">
+=======
+                <ReportPage printButtons={false} timestamp={false} >
+                
+                <ListPage
+                        
+                        id="report"
+                        key_permission="clientes_frecuentes"
+                        title="Reporte de clientes frecuentes"
+                        exportExcel
+                        imprimirPantalla
+
+
+                    filtersZone = {
+                        <div className="row">
+>>>>>>> 342ef96d... correccion imprimir todos en modulo reportes
                         <FormGroup className="row col-sm-4">
                             <Label className="col-sm-6">Cooperativa</Label>
                             <div className="col-sm-6">
@@ -101,6 +117,7 @@ class ReporteClientesFrecuentes extends React.Component {
                                 <Select options={this.optionsReporte} onChange={this.onChange('reporte')} value={this.state.reporte} />
                             </div>
                         </FormGroup>
+<<<<<<< HEAD
                     </div>
                     }
 
@@ -113,6 +130,26 @@ class ReporteClientesFrecuentes extends React.Component {
                         </div>
                     </div>
                     ]}*/
+=======
+                        <div>
+                        <br></br>
+                        <br></br>
+                        <div className="row">
+                            <div className="col-md-16 text-center">
+                                <Button style={{position:"relative", left: "100px", bottom: "0px"}} onClick={this.buscar}>
+                                    Consultar
+                                </Button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                   
+
+                    }
+                    
+                        ref={this.table}
+                        autoLoad={false}
+>>>>>>> 342ef96d... correccion imprimir todos en modulo reportes
                         searchable={false}
                         
 
