@@ -21,7 +21,7 @@ class ReporteTasasNormales extends React.Component {
         fecha_inicio : moment().format('YYYY-MM-DD'),
         fecha_fin : moment().format('YYYY-MM-DD'),
         estado : 3, // impreso
-        
+        calc: 1
     }
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
