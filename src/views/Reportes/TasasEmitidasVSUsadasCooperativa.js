@@ -1,9 +1,10 @@
 import React from 'react'
-import { ListPage, Label, FormGroup, Select, Input, ReportPage, Permission, Button, SelectLocalidad } from 'temeforest'
+import { ListPage, Label, FormGroup, Select, Input, ReportPage, Permission, SelectLocalidad, Button } from 'temeforest'
 import moment from 'moment'
 import { baseurl } from 'utils/url'
 
 class TasasEmitidasVSUsadasCooperativa extends React.Component {
+    table = React.createRef()
     state = {
         fecha_inicio : moment().format('YYYY-MM-DD'),
         fecha_fin : moment().format('YYYY-MM-DD')
@@ -39,14 +40,12 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
         })
     }
 
-    buscar(){
-        this.setState({
-            refresh: true
-        })
+    buscar = () =>{
+        this.table.current.refresh()
     }
     
     render(){
-        const { refresh } = this.state
+        
         return (
             <Permission key_permission="view_tasas_emitidas_usadas" mode="redirect">
                 <ReportPage  printButtons={false} timestamp={false}>
@@ -135,7 +134,7 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
                         parameters={this.state}
                         
                         history={this.props.history}
-                        refresh={refresh}
+                        //refresh={refresh}
                     />
                 </ReportPage>
             </Permission>

@@ -1,11 +1,12 @@
 import React from 'react'
-import { ListPage, Label, FormGroup, Select, Input, ReportPage, Permission, Button, SelectLocalidad } from 'temeforest'
+import { ListPage, Label, FormGroup, Select, Input, ReportPage, Permission, SelectLocalidad, Button } from 'temeforest'
 import moment from 'moment'
 import { baseurl } from 'utils/url'
 import { moneyFormat } from 'utils/number'
 
 class ViajesFecha extends React.Component {
 
+    table = React.createRef()
     state = {
         fecha_inicio : moment().format('YYYY-MM-DD'),
         fecha_fin : moment().format('YYYY-MM-DD'),
@@ -25,10 +26,9 @@ class ViajesFecha extends React.Component {
             [name]: e.target.value
         })
     }
-    buscar(){
-        this.setState({
-            refresh: true
-        })
+    buscar = () => {
+        console.log(this.table)
+        this.table.current.refresh()
     }
 
     render(){
@@ -89,46 +89,46 @@ class ViajesFecha extends React.Component {
                             autoLoad={false}    
                             searchable={false}
 
-                        head={[
-                            [
-                                'Viaje', 
-                                'Cooperativa', 
-                                'Localidad', 
-                                'Fecha salida', 
-                                'Fecha creación', 
-                                'Usuario', 
-                                'Anden', 
-                                'Destino', 
-                                {
-                                    title:'Via', 
-                                    style:{ maxWidth: '20%' }
-                                }, 
-                                'Disco', 
-                                'Placa', 
-                                'Pasajeros', 
-                                'Total'
-                            ]
-                        ]}
-                        fields={[
-                            'viaje',
-                            'cooperativa',
-                            'localidad',
-                            'fecha_salida',
-                            'fecha_creacion',
-                            'usuario',
-                            (row) => <span style={{ textAlign:"right", position: 'relative', right:'-60%'}}>{row.anden}</span>,
-                            'destino',
-                            'via',
-                            (row) => <span style={{ textAlign:"right", position: 'relative', right:'-60%'}}>{row.disco}</span>,
-                            'placa',
-                            (row) => <span style={{ textAlign:"right", position: 'relative', right:'-60%'}}>{row.pasajeros}</span>,
-                            (row) => <span style={{ textAlign:"right", position: 'relative', right:'0%'}}>${moneyFormat(row.total)}</span>
-                        ]}
+                            head={[
+                                [
+                                    'Viaje', 
+                                    'Cooperativa', 
+                                    'Localidad', 
+                                    'Fecha salida', 
+                                    'Fecha creación', 
+                                    'Usuario', 
+                                    'Anden', 
+                                    'Destino', 
+                                    {
+                                        title:'Via', 
+                                        style:{ maxWidth: '20%' }
+                                    }, 
+                                    'Disco', 
+                                    'Placa', 
+                                    'Pasajeros', 
+                                    'Total'
+                                ]
+                            ]}
+                            fields={[
+                                'viaje',
+                                'cooperativa',
+                                'localidad',
+                                'fecha_salida',
+                                'fecha_creacion',
+                                'usuario',
+                                (row) => <span style={{ textAlign:"right", position: 'relative', right:'-60%'}}>{row.anden}</span>,
+                                'destino',
+                                'via',
+                                (row) => <span style={{ textAlign:"right", position: 'relative', right:'-60%'}}>{row.disco}</span>,
+                                'placa',
+                                (row) => <span style={{ textAlign:"right", position: 'relative', right:'-60%'}}>{row.pasajeros}</span>,
+                                (row) => <span style={{ textAlign:"right", position: 'relative', right:'0%'}}>${moneyFormat(row.total)}</span>
+                            ]}
 
-                        endpoint='venta/viajes-por-fecha'
-                        parameters={this.state}
-                        
-                        history={this.props.history}
+                            endpoint='venta/viajes-por-fecha'
+                            parameters={this.state}
+                            
+                            history={this.props.history}
                     />
                 </ReportPage>
             </Permission>

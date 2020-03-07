@@ -33,14 +33,22 @@ class FormularioFiltros extends React.Component {
         }
     }
 
+    /*buscar=()=>{
+        console.log(this.table)
+        
+        this.table.current.refresh()
+       
+    }*/
+
+
     render(){
         return (
             <FormValidate className="form-horizontal">
                 <Row>
                     <Col md="4" xs="6">
                         <FormGroup className="row">
-                            <Label className="col-sm-6">Cooperativa</Label>
-                            <div className="col-sm-6">
+                            <Label className="col-sm-5">Cooperativa</Label>
+                            <div className="col-sm-7">
                                 <Select onChange={this.onChange('cooperativa')} defaultOption="Todos" value={this.props.cooperativa} asyncOptions={this.optionsCooperativas} />
                             </div>
                         </FormGroup>
@@ -55,16 +63,16 @@ class FormularioFiltros extends React.Component {
                     </Col>
                     <Col md="4" xs="6">
                         <FormGroup className="row">
-                            <Label className="col-sm-4">Forma pago</Label>
-                            <div className="col-sm-8">
+                            <Label className="col-sm-5">Forma pago</Label>
+                            <div className="col-sm-7">
                                 <Select onChange={this.onChange('forma_de_pago')} value={this.props.forma_de_pago} asyncOptions={this.optionsFormapago} />
                             </div>
                         </FormGroup>
                     </Col>
                     <Col md="4" xs="6">
                         <FormGroup className="row">
-                            <Label className="col-sm-6">Localidad</Label>
-                            <div className="col-sm-6">
+                            <Label className="col-sm-5">Localidad</Label>
+                            <div className="col-sm-7">
                                 <SelectLocalidad onChange={this.onChange('localidad')} value={this.props.localidad}/>
                             </div>
                         </FormGroup>
@@ -77,10 +85,9 @@ class FormularioFiltros extends React.Component {
                             </div>
                         </FormGroup>
                     </Col>
-                    <Col md="4" xs="6">
-                        <Button onClick={this.onChange('refresh')}>Actualizar</Button>
-                    </Col>
+                   
                 </Row>
+                
             </FormValidate>
         )
     }
@@ -89,8 +96,9 @@ class FormularioFiltros extends React.Component {
 class GraficasBarras extends React.Component {
     render(){
         const { boleto, tasa, viaje } = this.props
+
         return (
-            <Row>
+            <Row >
                 <Col md="4" xs="12">
                     <BarChart data={viaje} nameBars={['cantidad']} yAxis={{ label: {value:'Viajes',angle:-90, position:'insideLeft'} }} />
                 </Col>
@@ -144,16 +152,16 @@ class GraficasPie extends React.Component {
 
 class PanelRecaudaciones extends React.Component {
 
+    //table = React.createRef()
     state = {
         filtros : {
             fecha_inicio : moment().format('YYYY-MM-DD'),
-            fecha_fin : moment().format('YYYY-MM-DD')
+            fecha_fin : moment().format('YYYY-MM-DD'), 
+            //fecha_venta: moment().format('YYYY-MM-DD')
         }
     }
 
-    componentDidMount(){
-        this.load()
-    }
+    
 
     load = async () => {
         const { data } = await axios.get(`${baseurl}/venta/panel-recaudaciones/${objectToUrl(this.state.filtros)}`)
@@ -168,7 +176,48 @@ class PanelRecaudaciones extends React.Component {
                 ...this.state.filtros,
                 [name] : value
             }
-        }, this.load)
+        }/*, this.load*/)
+    }
+
+    buscar=()=>{
+        console.log(this.table)
+        //this.load()
+        //this.table.current.refresh()
+        this.render=()=>{
+            return (
+                <Permission key_permission="view_panel_recaudacion" mode="redirect">
+                    <div className="animated fadeIn">
+                        <Row>
+                            <Col xs="12" md="12">
+                                <Card>
+                                    <CardBody>
+                                        <CardTitle>Panel de Recaudaciones</CardTitle>
+                                        
+                                        <FormularioFiltros {...this.state.filtros} onChange={this.onChange} />
+                                        <div className="row">
+                                            <div className="col-md-12 text-center">
+                                                <Button onClick={this.buscar}>Consultar</Button>
+                                            </div>
+                                        </div>
+                                        <GraficasBarras  {...this.state.horario} />
+                                        <br />
+                                        <GraficasPie  {...this.state.conteo} />
+                                        <br />
+                                        <Tablas {...this.state.top} />
+                                    </CardBody>
+                                    
+                                </Card>
+                            </Col>
+                        </Row>
+                    </div>
+                </Permission>
+            )
+        }
+        
+        //componentDidMount(){
+            this.load()
+        //}
+       
     }
 
     render(){
@@ -180,13 +229,16 @@ class PanelRecaudaciones extends React.Component {
                             <Card>
                                 <CardBody>
                                     <CardTitle>Panel de Recaudaciones</CardTitle>
+                                    
                                     <FormularioFiltros {...this.state.filtros} onChange={this.onChange} />
-                                    <GraficasBarras {...this.state.horario} />
-                                    <br />
-                                    <GraficasPie {...this.state.conteo} />
-                                    <br />
-                                    <Tablas {...this.state.top} />
+                                    <div className="row">
+                                        <div className="col-md-12 text-center">
+                                            <Button onClick={this.buscar}>Consultar</Button>
+                                        </div>
+                                    </div>
+                                   
                                 </CardBody>
+                                
                             </Card>
                         </Col>
                     </Row>

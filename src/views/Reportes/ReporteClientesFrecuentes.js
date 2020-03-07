@@ -1,9 +1,13 @@
 import React from 'react'
 import { ListPage, Label, FormGroup, Select, Input, Button, ReportPage, Permission, SelectLocalidad} from 'temeforest'
 import { baseurl } from 'utils/url'
+import moment from 'moment'
 class ReporteClientesFrecuentes extends React.Component {
 
+    table = React.createRef()
     state = {
+        fecha_inicio : moment().format('YYYY-MM-DD'), 
+        fecha_fin : moment().format('YYYY-MM-DD'),
         reporte: 1
     }
     optionsCooperativa = {
@@ -37,14 +41,12 @@ class ReporteClientesFrecuentes extends React.Component {
         })
     }
 
-    buscar(){
-        this.setState({
-            refresh: true
-        })
+    buscar = () => {
+        console.log(this.table)
+        this.table.current.refresh()
     }
 
     render(){
-        const { refresh } = this.state
         return (
             <Permission key_permission="view_clientes_frecuentes" mode="redirect">
                 <ReportPage printButtons={false} timestamp={false} >
@@ -67,8 +69,8 @@ class ReporteClientesFrecuentes extends React.Component {
                             </div>
                         </FormGroup>
                         <FormGroup className="row col-sm-4">
-                            <Label className="col-sm-6" >Fecha inicio</Label>
-                            <div className="col-sm-6">
+                            <Label className="col-sm-4" >Fecha inicio</Label>
+                            <div className="col-sm-8">
                                 <Input type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
                             </div>
                         </FormGroup>
@@ -85,8 +87,8 @@ class ReporteClientesFrecuentes extends React.Component {
                             </div>
                         </FormGroup>
                         <FormGroup className="row col-sm-4">
-                            <Label className="col-sm-6" >Fecha fin</Label>
-                            <div className="col-sm-6" >
+                            <Label className="col-sm-4" >Fecha fin</Label>
+                            <div className="col-sm-8" >
                                 <Input type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
                             </div>
                         </FormGroup>
@@ -124,14 +126,16 @@ class ReporteClientesFrecuentes extends React.Component {
                         
 
                         fieldNames={this.state.reporte == 1 ?  ['Pasajero', 'Viajes'] : ['Cliente', 'Cédula/RUC', 'Viajes']}
-                        fields={this.state.reporte == 1 ? ['nombre', (row) => <span style={{ float: 'right',position: 'relative', right:'75%'}}>{row.viajes}</span>] : ['nombre', 'identificacion', 'viajes'
-                        ]}
+                        fields={
+                            this.state.reporte == 1 
+                                ? ['nombre', (row) => <span style={{ float: 'right',position: 'relative', right:'75%'}}>{row.viajes}</span>] 
+                                : ['nombre', 'identificacion', 'viajes']
+                        }
 
                         endpoint='venta/clientes-frecuentes'
                         parameters={this.state}
                         
                         history={this.props.history}
-                        refresh={refresh}
                     />
                 </ReportPage>
             </Permission>

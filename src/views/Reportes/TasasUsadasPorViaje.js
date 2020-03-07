@@ -1,9 +1,10 @@
 import React from 'react'
-import { ListPage, Card, CardBody, Label, FormGroup, Select, Input, Permission, Button,  SelectLocalidad } from 'temeforest'
+import { ListPage, Card, CardBody, Label, FormGroup, Select, Input, Permission, SelectLocalidad, Button, ReportPage } from 'temeforest'
 import moment from 'moment'
 import { baseurl } from 'utils/url'
 
 class TasasUsadasPorViaje extends React.Component {
+    table = React.createRef()
     state = {
         fecha_inicio : moment().format('YYYY-MM-DD'),
         fecha_fin : moment().format('YYYY-MM-DD'),
@@ -36,14 +37,12 @@ class TasasUsadasPorViaje extends React.Component {
         })
     }
 
-    buscar(){
-        this.setState({
-            refresh: true
-        })
+    buscar= () =>{
+       this.table.current.refresh()
     }
     
     render(){
-        const { refresh } = this.state
+        
         return (
             <Permission key_permission="view_tasas_viaje" mode="redirect">
                 <div className="animated fadeIn">
@@ -160,7 +159,7 @@ class TasasUsadasPorViaje extends React.Component {
                                         parameters={this.state}
                                         
                                         history={this.props.history}
-                                        refresh={refresh}
+                                       
                                     />
                                    
                                     

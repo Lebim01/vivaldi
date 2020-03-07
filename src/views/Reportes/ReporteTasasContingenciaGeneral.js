@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button, Permission, SelectLocalidad} from 'temeforest'
+import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, Select, Input, Button, ReportPage, Permission, SelectLocalidad} from 'temeforest'
 import moment from 'moment'
 import { baseurl } from 'utils/url'
 import { moneyFormat } from 'utils/number'
@@ -7,6 +7,8 @@ import { moneyFormat } from 'utils/number'
 const style_text_center = { textAlign: 'center' }
 
 class ReporteTasasContingenciaGeneral extends React.Component {
+
+    table = React.createRef()
     state = {
         fecha_inicio : moment().format('YYYY-MM-DD'),
         fecha_fin : moment().format('YYYY-MM-DD'),
@@ -34,10 +36,9 @@ class ReporteTasasContingenciaGeneral extends React.Component {
         })
     }
 
-    buscar(){
-        this.setState({
-            refresh: true
-        })
+    buscar = () => {
+        console.log(this.table)
+        this.table.current.refresh()
     }
 
     toggle(){
@@ -48,7 +49,7 @@ class ReporteTasasContingenciaGeneral extends React.Component {
     }
     
     render(){
-        const { refresh } = this.state
+       
         return (
             <Permission key_permission="view_tasas_contingencia" mode="redirect">
                  
