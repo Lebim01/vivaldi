@@ -47,20 +47,6 @@ class ReporteClientesFrecuentes extends React.Component {
         const { refresh } = this.state
         return (
             <Permission key_permission="view_clientes_frecuentes" mode="redirect">
-<<<<<<< HEAD
-                <ReportPage printButtons={false} timestamp={false}  >
-                    <ListPage
-                    
-                    exportExcel
-                    imprimirPantalla
-                    id="report"
-                    key_permission="clientes_frecuentes"
-                    title="Reporte de clientes frecuentes"
-
-                    
-                    filtersZone= {
-                    <div className="row">
-=======
                 <ReportPage printButtons={false} timestamp={false} >
                 
                 <ListPage
@@ -74,7 +60,6 @@ class ReporteClientesFrecuentes extends React.Component {
 
                     filtersZone = {
                         <div className="row">
->>>>>>> 342ef96d... correccion imprimir todos en modulo reportes
                         <FormGroup className="row col-sm-4">
                             <Label className="col-sm-6">Cooperativa</Label>
                             <div className="col-sm-6">
@@ -117,20 +102,6 @@ class ReporteClientesFrecuentes extends React.Component {
                                 <Select options={this.optionsReporte} onChange={this.onChange('reporte')} value={this.state.reporte} />
                             </div>
                         </FormGroup>
-<<<<<<< HEAD
-                    </div>
-                    }
-
-                    /*actionsButtons= {[
-                    <div className="row">
-                        <div className="col-sm-12 text-center">
-                            <Button onClick={this.buscar.bind(this)}>
-                                Buscar
-                            </Button>
-                        </div>
-                    </div>
-                    ]}*/
-=======
                         <div>
                         <br></br>
                         <br></br>
@@ -149,7 +120,6 @@ class ReporteClientesFrecuentes extends React.Component {
                     
                         ref={this.table}
                         autoLoad={false}
->>>>>>> 342ef96d... correccion imprimir todos en modulo reportes
                         searchable={false}
                         
 

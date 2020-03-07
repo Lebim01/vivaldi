@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListPage, Label, FormGroup, Select, Input, ReportPage, Permission, SelectLocalidad } from 'temeforest'
+import { ListPage, Label, FormGroup, Select, Input, ReportPage, Permission, Button, SelectLocalidad } from 'temeforest'
 import moment from 'moment'
 import { baseurl } from 'utils/url'
 
@@ -49,18 +49,6 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
         const { refresh } = this.state
         return (
             <Permission key_permission="view_tasas_emitidas_usadas" mode="redirect">
-<<<<<<< HEAD
-                <ReportPage printButtons={false} timestamp={false}>
-                <ListPage
-                exportExcel
-                imprimirPantalla
-                id= "emitidas_usadas"
-                key_permission= "emitidas_usadas"
-                title="Tasas emitidas VS Usadas por cooperativa"
-
-                filtersZone= {
-                    <div className="row">
-=======
                 <ReportPage  printButtons={false} timestamp={false}>
                 <ListPage
 
@@ -72,7 +60,6 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
 
                     filtersZone = {
                         <div className="row">
->>>>>>> 342ef96d... correccion imprimir todos en modulo reportes
                         <div className="col-sm-4">
                             <FormGroup className="row">
                                 <Label className="col-sm-5">Cooperativa</Label>
@@ -115,10 +102,6 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
                                 </div>
                             </FormGroup>
                         </div>
-<<<<<<< HEAD
-                    </div>
-                }   
-=======
                         <div className="row">
                             <div className="col-md-12 text-center">
                                 <Button style={{position:"relative", left: "400px", bottom: "0px"}} onClick={this.buscar}>
@@ -130,7 +113,6 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
                     }  
                         ref= {this.table}
                         autoLoad={false}
->>>>>>> 342ef96d... correccion imprimir todos en modulo reportes
                         searchable={false}
                         
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListPage, Label, FormGroup, Select, Input, ReportPage, Permission, SelectLocalidad } from 'temeforest'
+import { ListPage, Label, FormGroup, Select, Input, ReportPage, Permission, Button, SelectLocalidad } from 'temeforest'
 import moment from 'moment'
 import { baseurl } from 'utils/url'
 import { moneyFormat } from 'utils/number'
