@@ -5,6 +5,7 @@ import { baseurl } from 'utils/url'
 import { printHtml } from 'utils/exportData'
 import axios from 'axios'
 import store from 'store/auth'
+import { moneyFormat } from 'utils/number'
 
 const endpoint = 'venta/solicitud_tasacontingencia'
 
@@ -213,7 +214,7 @@ class BandejaTasaCooperativa extends React.Component {
                                     <ListPage
                                         searchable={false}
 
-                                        fieldNames={['#', 'Cooperativa', 'Fecha', 'Descripcion', 'Usuario solicitante', 'Usuario aprobación', 'Cantidad', 'Acción']}
+                                        fieldNames={['#', 'Cooperativa', 'Fecha', 'Descripcion', 'Usuario solicitante', 'Usuario aprobación', 'Cantidad', 'Valor', 'Acción']}
                                         fields={[
                                             'id',
                                             'cooperativa_nombre',
@@ -222,7 +223,7 @@ class BandejaTasaCooperativa extends React.Component {
                                             'usuario_solicitante_username',
                                             'usuario_aprobacion_username',
                                             (row) => <span style={{textAlign:"right", position: 'relative', right:'-60%'}}>{row.cantidad_aprobada}</span>,
-                                            ,
+                                            (row)=> <span style={{textAlign:"right", position: 'relative', right:'-40%'}}>${moneyFormat(row.valor || 0)}</span>,
                                             this.fieldImprimir
                                         ]}
 
