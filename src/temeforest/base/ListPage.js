@@ -132,62 +132,68 @@ class ListPage extends React.Component {
         })
     }
 
-    loadList = async (parameters = {}) => {
-        if(this.props.endpoint){        
-            this.setState({
-                loading: true
-            })
-            const { currentPage, search } = this.state
-
-            try {
-                cancel && cancel()
-
-                const { data } = await axios.get(
-                    `${baseurl}/${this.props.endpoint}/${objectToUrl({ ...parameters, searchtext: search, page : currentPage, full: 1})}`,
-                    { ...this.props.config, 
-                        cancelToken: new CancelToken((c) => {
-                            cancel = c
-                        })
-                    }
-                )
-
-                let _results = [], 
-                _count = 0, 
-                _next = null, 
-                _previous = null,
-                _numPages = 1
-                cancel = undefined
-
-                if(Array.isArray(data)){
-                    _results = data
-                    _count = data.length
-                }else{
-                    const { results, count, next, previous } = data
-                    _results = results
-                    _count = count
-                    _next = next
-                    _previous = previous
-                    _numPages = Math.ceil(_count / RowsPerPage)
-                }
-                
+    loadList = async (parameters = {}, autoLoad = this.props.autoLoad) => {
+        if(autoLoad){
+            if(this.props.endpoint){        
                 this.setState({
-                    results : _results,
-                    filtered : _results,
-                    count : _count,
-                    numPages : _numPages,
-                    next : _next,
-                    previous : _previous,
-                    loading: false
-                }, this.getVisibleFooterPages)
-            }catch(e){
-                console.error(e)
+                    loading: true
+                })
+                const { currentPage, search } = this.state
+
+                try {
+                    cancel && cancel()
+
+                    const { data } = await axios.get(
+                        `${baseurl}/${this.props.endpoint}/${objectToUrl({ ...parameters, searchtext: search, page : currentPage, full: 1})}`,
+                        { ...this.props.config, 
+                            cancelToken: new CancelToken((c) => {
+                                cancel = c
+                            })
+                        }
+                    )
+
+                    let _results = [], 
+                    _count = 0, 
+                    _next = null, 
+                    _previous = null,
+                    _numPages = 1
+                    cancel = undefined
+
+                    if(Array.isArray(data)){
+                        _results = data
+                        _count = data.length
+                    }else{
+                        const { results, count, next, previous } = data
+                        _results = results
+                        _count = count
+                        _next = next
+                        _previous = previous
+                        _numPages = Math.ceil(_count / RowsPerPage)
+                    }
+                    
+                    this.setState({
+                        results : _results,
+                        filtered : _results,
+                        count : _count,
+                        numPages : _numPages,
+                        next : _next,
+                        previous : _previous,
+                        loading: false
+                    }, this.getVisibleFooterPages)
+                }catch(e){
+                    console.error(e)
+                }
+            }
+            else {
+                this.setState({
+                    filtered : this.props.data
+                })
             }
         }
-        else {
-            this.setState({
-                filtered : this.props.data
-            })
-        }
+    }
+
+    refresh = () => {
+        this.loadList(this.props.parameters, true)
     }
 
     componentDidUpdate(prevProps, prevState){
@@ -536,7 +542,8 @@ ListPage.defaultProps = {
     head : [],
     config : {},
     headerClass : '',
-    tdBodyClass : ''
+    tdBodyClass : '',
+    autoLoad : true
 }
 
 export {ListPage, RecordRow}
