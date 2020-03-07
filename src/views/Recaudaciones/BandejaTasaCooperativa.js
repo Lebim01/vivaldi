@@ -110,6 +110,7 @@ class BandejaTasaCooperativa extends React.Component {
                     <p style="margin-top: 5px; margin-bottom: 5px;">Fecha: ${res.data.fecha_emision}</p>
                     <p style="margin-top: 5px; margin-bottom: 5px;">Cliente: CONSUMIDOR FINAL </p>
                     <p style="margin-top: 5px; margin-bottom: 5px;">Cooperativa: ${res.data.cooperativa_nombre} </p>
+                    <p style="margin-top: 5px; margin-bottom: 5px;">Solicitud #: ${res.data.id} </p>
                     <p style="margin-top: 5px; margin-bottom: 5px;">Factura: ${res.data.numero}</p>
                     <p style="margin-top: 5px; margin-bottom: 5px;word-break: break-all;">Clave de acceso: ${res.data.clave_acceso}</p>
                 </div>
@@ -212,8 +213,9 @@ class BandejaTasaCooperativa extends React.Component {
                                     <ListPage
                                         searchable={false}
 
-                                        fieldNames={['Cooperativa', 'Fecha', 'Descripcion', 'Usuario solicitante', 'Usuario aprobación', 'Cantidad', 'Acción']}
+                                        fieldNames={['#', 'Cooperativa', 'Fecha', 'Descripcion', 'Usuario solicitante', 'Usuario aprobación', 'Cantidad', 'Acción']}
                                         fields={[
+                                            'id',
                                             'cooperativa_nombre',
                                             'fecha',
                                             'descripcion',
