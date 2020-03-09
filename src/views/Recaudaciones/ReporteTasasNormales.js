@@ -120,6 +120,7 @@ class ReporteTasasNormales extends React.Component {
                                         exportExcel
                                         imprimirPantalla
                                         id="report"
+                                        key_permission= "tasas_normales"
                                         title= "Reporte Tasas Normales"
 
                                         filtersZone={
