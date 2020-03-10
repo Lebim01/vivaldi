@@ -111,7 +111,7 @@ class ReporteTasasContingenciaGeneral extends React.Component {
                                                 </FormGroup>
                                                 <div className="row">
                                                     <div className="col-md-12 text-center">
-                                                        <Button style={{position:"relative", left: "-250px"}} onClick={this.buscar}>
+                                                        <Button style={{position:"relative", left: "-240px"}} onClick={this.buscar}>
                                                             Consultar
                                                         </Button>
                                                     </div>
