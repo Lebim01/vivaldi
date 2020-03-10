@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListPage, Card, CardBody, Label, FormGroup, Select, Input, Permission, SelectLocalidad} from 'temeforest'
+import { ListPage, Card, CardBody, Label, FormGroup, Select, Input, Permission, ReportPage,SelectLocalidad} from 'temeforest'
 import moment from 'moment'
 import { baseurl } from 'utils/url'
 import { printHtml } from 'utils/exportData'
@@ -110,6 +110,7 @@ class ReporteTasasNormales extends React.Component {
         return (
 
             <Permission key_permission="view_reporte_tasas_normales" mode="redirect">
+                
                 <div className="animated fadeIn">
                     <div className="row">
                         <div className="col-sm-12">
@@ -120,7 +121,7 @@ class ReporteTasasNormales extends React.Component {
                                         exportExcel
                                         imprimirPantalla
                                         id="report"
-                                        key_permission= "tasas_normales"
+                                        key_permission="tasas_normales"
                                         title= "Reporte Tasas Normales"
 
                                         filtersZone={
@@ -157,20 +158,19 @@ class ReporteTasasNormales extends React.Component {
                                         }
 
                                         searchable={false}
-
+                                        
                                         ref={this.table}
 
-                                        fieldNames={['#', 'Localidad', 'Cooperativa','Fecha', 'Usuario solicitante', 'Usuario aprobación', 'Usuario impresión', 'Cantidad', 'Valor']}
+                                        fieldNames={['Localidad', 'Cooperativa','Fecha', 'Usuario solicitante', 'Usuario aprobación', 'Usuario impresión', 'Cantidad', 'Valor']}
                                         fields={[
-                                            'id',
                                             'localidad_nombre',
-                                            'cooperativa_nombre',
+                                            'cooperativa_nombre', 
                                             'fecha',
                                             'usuario_solicitante_username',
                                             'usuario_aprobacion_username',
                                             'usuario_impresion_username',
-                                            (row)=> <span style={{textAlign:"right", position: 'relative', right:'-60%'}}>{("  " + row.cantidad_aprobada || 0)}</span>,
-                                            (row)=> <span style={{textAlign:"right", position: 'relative', right:'-40%'}}>${moneyFormat(row.valor || 0)}</span>,
+                                            (row)=> <span style={{textAlign:"right", float: "right"}}>{("  " + row.cantidad_aprobada || 0)}</span>,
+                                            (row)=> <span style={{textAlign:"right", float: "right"}}>${moneyFormat(row.valor || 0)}</span>,
                                             /*this.fieldImprimir*/
                                         ]}
 
@@ -185,6 +185,7 @@ class ReporteTasasNormales extends React.Component {
                         </div>
                     </div>
                 </div>
+                
             </Permission>
         )
     }
