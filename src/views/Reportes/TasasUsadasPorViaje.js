@@ -50,6 +50,13 @@ class TasasUsadasPorViaje extends React.Component {
                         <div className="col-sm-12">
                             <Card>
                                 <CardBody>
+                                    <div className="row">
+                                        <div className="col-sm-12 text-center">
+                                            <Button style={{bottom: "-300px"}} onClick={this.buscar}>
+                                                Consultar
+                                            </Button>
+                                        </div>
+                                    </div>
                                     <ListPage
                                         exportExcel
                                         imprimirPantalla
@@ -134,13 +141,7 @@ class TasasUsadasPorViaje extends React.Component {
                                                     <br></br>
                                                 </div>
                                                 
-                                                <div className="row">
-                                                    <div className="col-md-12 text-center">
-                                                        <Button style={{position:"relative", left: "-356px", bottom: "-105px"}} onClick={this.buscar}>
-                                                            Consultar
-                                                        </Button>
-                                                    </div>
-                                                </div>
+                                               
                                                 <div className="col-sm-2"></div>
                                             </div>
                                             }

@@ -130,8 +130,8 @@ class ViajesBus extends React.Component {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-md-12 text-center">
-                            <Button onClick={this.buscar} style={{position:"relative", left: "-1000x"}} disabled={!this.state.filters.cooperativa}>
+                        <div className="col-sm-12 text-center">
+                            <Button onClick={this.buscar} style={{marginLeft: '-0.3rem'}} disabled={!this.state.filters.cooperativa}>
                                 Consultar
                             </Button>
                         </div>

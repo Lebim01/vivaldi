@@ -52,13 +52,18 @@ class ReporteTasasContingenciaGeneral extends React.Component {
        
         return (
             <Permission key_permission="view_tasas_contingencia" mode="redirect">
-                 
-
-                    <div className="animated fadeIn">
-                        <div className="row">
-                            <div className="col-sm-12">
-                                <Card>
-                                    <CardBody>
+                <div className="animated fadeIn">
+                    <div className="row">
+                        <div className="col-sm-12">
+                            <Card>
+                                <CardBody>
+                                    <div className="row">
+                                        <div className="col-sm-12 text-center">
+                                            <Button style={{bottom: "-250px"}} onClick={this.buscar}>
+                                                Consultar
+                                            </Button>
+                                        </div>
+                                    </div>
                                     <ListPage 
                                         title="Reporte tasas de contingencia general" 
                                         exportExcel
@@ -109,13 +114,7 @@ class ReporteTasasContingenciaGeneral extends React.Component {
                                                         />
                                                     </div>
                                                 </FormGroup>
-                                                <div className="row">
-                                                    <div className="col-md-12 text-center">
-                                                        <Button style={{position:"relative", left: "-234px"}} onClick={this.buscar}>
-                                                            Consultar
-                                                        </Button>
-                                                    </div>
-                                                </div>
+                                               <br></br><br></br>
                                             </div>
                                         </div>
                                         }

@@ -89,10 +89,21 @@ class ReporteBoletosTasas extends React.Component {
     render(){
         return (
             <Permission key_permission="view_boletos_tasas" mode="redirect">
-                 <ReportPage  timestamp={false} >
+                    <div className="animated fadeIn">
+                        <div className="row">
+                            <div className="col-sm-12">
+                                <Card>
+                                    <CardBody>
                         
                                     <TabContent activeTab={this.state.tipo_tabla}>
                                         <TabPane tabId="1">
+                                            <div className="row">
+                                                <div className="col-sm-12 text-center">
+                                                    <Button style={{bottom: "-220px"}} onClick={this.buscar}>
+                                                        Consultar
+                                                    </Button>
+                                                </div>
+                                            </div>
                                             <ListPage 
 
                                                 exportExcel
@@ -143,15 +154,13 @@ class ReporteBoletosTasas extends React.Component {
                                                                 <div className="col-sm-6">
                                                                     <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('forma_de_pago')} value={this.state.filters.forma_de_pago} />
                                                                 </div>
-                                                            </FormGroup>
-                                                            
+                                                                
+                                                            </FormGroup>  
                                                         </div>
-                                                        <div className="row">
-                                                            <div className="col-md-12 text-center">
-                                                                <Button style={{position:"relative", left: "397px", bottom: "0px"}}onClick={this.buscar}>
-                                                                    Consultar
-                                                                </Button>
-                                                            </div>
+                                                        <div className="col-sm-4">
+                                                        <FormGroup className="row">
+                                                            <br></br><br></br>
+                                                        </FormGroup> 
                                                         </div>
                                                     </div>
                                                     }
@@ -301,10 +310,15 @@ class ReporteBoletosTasas extends React.Component {
                                             
                                         </TabPane>
                                     </TabContent>
-                               
+                                    </CardBody>
+                                </Card>
+                            </div>
+                        </div>
+                    </div>
+                
                           
                        
-                </ReportPage>
+               
             </Permission>
         )
     }
