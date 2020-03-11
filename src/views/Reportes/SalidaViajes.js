@@ -74,7 +74,7 @@ class SalidaViajes extends React.Component {
                                 </div>
                                 <div className="row">
                                     <div className="col-md-12 text-center">
-                                        <Button style={{position:"relative", left: "-208px", bottom: "-115px"}} onClick={this.buscar}>
+                                        <Button style={{position:"relative", left: "-195px", bottom: "-115px"}} onClick={this.buscar}>
                                             Consultar
                                         </Button>
                                     </div>

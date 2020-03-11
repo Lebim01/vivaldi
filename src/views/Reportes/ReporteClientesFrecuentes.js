@@ -108,8 +108,8 @@ class ReporteClientesFrecuentes extends React.Component {
                         <br></br>
                         <br></br>
                         <div className="row">
-                            <div className="col-md-16 text-center">
-                                <Button style={{position:"relative", left: "133px", bottom: "0px"}} onClick={this.buscar}>
+                            <div className="col-md-12 text-center">
+                                <Button style={{position:"relative", left: "122px", bottom: "0px"}} onClick={this.buscar}>
                                     Consultar
                                 </Button>
                             </div>

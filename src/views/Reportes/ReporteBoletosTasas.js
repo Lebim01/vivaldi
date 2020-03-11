@@ -148,7 +148,7 @@ class ReporteBoletosTasas extends React.Component {
                                                         </div>
                                                         <div className="row">
                                                             <div className="col-md-12 text-center">
-                                                                <Button style={{position:"relative", left: "400px", bottom: "0px"}}onClick={this.buscar}>
+                                                                <Button style={{position:"relative", left: "397px", bottom: "0px"}}onClick={this.buscar}>
                                                                     Consultar
                                                                 </Button>
                                                             </div>

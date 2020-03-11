@@ -233,7 +233,7 @@ class PanelRecaudaciones extends React.Component {
                                     <FormularioFiltros {...this.state.filtros} onChange={this.onChange} />
                                     <div className="row">
                                         <div className="col-md-12 text-center">
-                                            <Button onClick={this.buscar}>Consultar</Button>
+                                            <Button onClick={this.buscar} >Consultar</Button>
                                         </div>
                                     </div>
                                    
