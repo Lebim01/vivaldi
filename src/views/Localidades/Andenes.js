@@ -66,7 +66,7 @@ class Andenes extends React.Component {
                                             <FormGroup className="row">
                                                 <Label className="col-sm-5">Localidad</Label>
                                                     <div className="col-sm-7">
-                                                        <SelectLocalidad onChange={this.onChange('localidad')} value={this.state.localidad}/>
+                                                        <Select asyncOptions={this.optionsLocalidad} onChange={this.onChange('localidad')} value={this.state.localidad}/>
                                                     </div>
                                             </FormGroup>
                                         </div>
