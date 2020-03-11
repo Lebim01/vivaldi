@@ -159,7 +159,8 @@ class ReporteBoletosTasas extends React.Component {
                                                         </div>
                                                         <div className="col-sm-4">
                                                         <FormGroup className="row">
-                                                            <br></br><br></br>
+                                                            <br></br><br></br><br></br>
+                                                        <br></br>
                                                         </FormGroup> 
                                                         </div>
                                                     </div>
@@ -256,8 +257,7 @@ class ReporteBoletosTasas extends React.Component {
                                                                 </Button>
                                                                 
                                                             </div>
-                                                            <br></br>
-                                                            <br></br>
+                                                            <br></br><br></br>
                                                         </div>
                                                         <br></br>
                                                         <br></br>
