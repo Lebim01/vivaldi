@@ -1,10 +1,18 @@
 import React, {useState} from 'react'
-import { ListPage, Card, CardBody, Permission, FormGroup, Label, Select } from 'temeforest'
+import { ListPage, Card, CardBody, Permission, FormGroup, Label, Select, SelectLocalidad } from 'temeforest'
+import { baseurl, objectToUrl } from 'utils/url'
+
 
 class Andenes extends React.Component {
 
     state = {
         status: 'true'
+    }
+
+    optionsLocalidad = {
+        url : `${baseurl}/localidad/`,
+        labelName: 'nombre',
+        valueName: 'id'
     }
 
     optionsEstado = [
@@ -45,14 +53,25 @@ class Andenes extends React.Component {
                                     key_permission="anden"
 
                                     filtersZone = {
+                                    <div className="row">
                                         <div className="col-sm-4">
                                             <FormGroup className="row">
                                                 <Label className="col-sm-5">Estado</Label>
-                                                <div className="col-sm-7">
-                                                    <Select options={this.optionsEstado} defaultOption="Todos" onChange={this.onChange('status')} value={this.state.status} /> 
-                                                </div>
+                                                    <div className="col-sm-7">
+                                                        <Select options={this.optionsEstado} defaultOption="Todos" onChange={this.onChange('status')} value={this.state.status} /> 
+                                                    </div>
                                             </FormGroup>
                                         </div>
+                                        <div className="col-sm-4">
+                                            <FormGroup className="row">
+                                                <Label className="col-sm-5">Localidad</Label>
+                                                    <div className="col-sm-7">
+                                                        <SelectLocalidad onChange={this.onChange('localidad')} value={this.state.localidad}/>
+                                                    </div>
+                                            </FormGroup>
+                                        </div>
+                                    </div>
+                                        
                                     }
 
                                     showStatus={true}
