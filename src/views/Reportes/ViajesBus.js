@@ -144,10 +144,10 @@ class ViajesBus extends React.Component {
                             <React.Fragment key={i}>
                                 <h3 className="text-center">Bus: {row.disco} / {row.placa}</h3>
                                 <ListPage
-                                    exportExcel
-                                    imprimirPantalla
+                                    //exportExcel
+                                    //imprimirPantalla
                                     key_permission="viajes_bus"
-                                    title="Viaje Bus"
+                                    //title="Viaje Bus"
                                     searchable={false}
 
                                     head={[['Viaje', 'Fecha salida', 'Localidad', 'Pasajeros', 'Parada',

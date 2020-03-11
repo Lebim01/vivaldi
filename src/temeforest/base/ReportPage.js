@@ -39,6 +39,10 @@ class ReportPage extends React.Component {
                                                 <Button onClick={this.exportHtml} style={{marginRight:2, opacity:0.88}} title="Exportar excel" >
                                                     <img src={FileDownloadW} height="14" />
                                                 </Button>
+                                                <Button onClick={this.exportHtml} title="Exportar excel, todos" style={{marginLeft:3, opacity:0.88}}>
+                                                    <img src={FileDownloadW} height="14" />{' '}
+                                                    <i className="fas fa-sort-numeric-down" />
+                                                </Button>
                                                 <Button onClick={this.print} style={{marginLeft:3, opacity:0.88}} title="Imprimir Pantalla">
                                                     <i className="fa fa-print"></i>
                                                 </Button>
