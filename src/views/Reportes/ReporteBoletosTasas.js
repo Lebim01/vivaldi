@@ -159,8 +159,10 @@ class ReporteBoletosTasas extends React.Component {
                                                         </div>
                                                         <div className="col-sm-4">
                                                         <FormGroup className="row">
-                                                            <br></br><br></br><br></br>
-                                                        <br></br>
+                                                        <div >
+                                                            <Label className="col-sm-4" style={{ bottom: "-290px",    margin: "0 10px 0 66px"}} ></Label>
+                                                            <Label className="col-sm-4" style={{ bottom: "-290px",    margin: "0 10px 0 66px"}} ></Label>
+                                                        </div>
                                                         </FormGroup> 
                                                         </div>
                                                     </div>
