@@ -56,7 +56,7 @@ class ReporteClientesFrecuentes extends React.Component {
                                 <CardBody> 
                                 <div className="row">
                                     <div className="col-md-12 text-center">
-                                        <Button style={{ bottom: "-260px"}} onClick={this.buscar}>
+                                        <Button style={{ bottom: "-250px",    margin: "0 10px 0 0px",}} onClick={this.buscar}>
                                             Consultar
                                         </Button>
                                     </div>
@@ -113,9 +113,10 @@ class ReporteClientesFrecuentes extends React.Component {
                                             <div className="col-sm-8" >
                                                 <Select options={this.optionsReporte} onChange={this.onChange('reporte')} value={this.state.reporte} />
                                             </div>
-                                            <br></br><br></br>
-                                            <br></br><br></br>
-                                            <br></br><br></br>
+                                            <div >
+                                                <Label className="col-sm-4" style={{ bottom: "-290px",    margin: "0 10px 0 66px"}} ></Label>
+                                                <Label className="col-sm-4" style={{ bottom: "-290px",    margin: "0 10px 0 66px"}} ></Label>
+                                            </div>
                                         
                                         </FormGroup>
                                         
