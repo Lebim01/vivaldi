@@ -68,6 +68,7 @@ const ReporteTasasNormales = React.lazy(() => import('views/Recaudaciones/Report
 
 /** REPORTES */
 const PanelRecaudaciones = React.lazy(() => import('views/Reportes/PanelRecaudaciones'))
+const DashboardInit = React.lazy(() => import('views/Reportes/DashboardInit'))
 const ReporteClientesFrecuentes = React.lazy(() => import('views/Reportes/ReporteClientesFrecuentes'))
 const ReporteTasasVendidas = React.lazy(() => import('views/Reportes/ReporteTasasVendidas'))
 const ReporteTasasGeneradas = React.lazy(() => import('views/Reportes/ReporteTasasGeneradas'))
@@ -107,7 +108,7 @@ const EmisionPorCooperativa = React.lazy(() => import('views/Auditoria/EmisionPo
 const routes = [
   { path: '/', name: 'Home' },
   { path: '/401', name: '401', component: Page401 },
-  { path: '/dashboard', name: 'Dashboard', component: PanelRecaudaciones, exact: true  },
+  { path: '/dashboard', name: 'Dashboard', component: DashboardInit, exact: true  },
 
   { path: '/localidades/localidades', name: 'Localidades', component: Localidades, exact : true },
   { path: '/localidades/localidades/edit', name: 'Crear/Editar Localidades', component: EditLocalidades, exact : true },
@@ -176,6 +177,7 @@ const routes = [
   { path: '/facturacion/documentos', name: 'Documentos', component: Documentos, exact: true },
 
   { path: '/reportes/panel', name: 'Panel de Recaudaciones', component: PanelRecaudaciones, exact: true },
+  { path: '/reportes/dashboard', name: 'Panel de Recaudaciones', component: DashboardInit, exact: true },
   { path: '/reportes/tasas-contingencia-general', name: 'Reporte tasas contingencia general', component: ReporteTasasContingenciaGeneral, exact: true },
   { path: '/reportes/reporte-tasas-vendidas', name: 'Tasas vendidas', component: ReporteTasasVendidas, exact: true },
   { path: '/reportes/reporte-tasas-generadas', name: 'Tasas generadas', component: ReporteTasasGeneradas, exact: true },

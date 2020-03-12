@@ -231,6 +231,11 @@ export default {
           url : '/#/reportes/panel',
           permission : 'view_panel_recaudacion'
         },
+        /*{
+          name : 'Panel de recaudación',
+          url : '/#/reportes/dashboard',
+          permission : 'view_panel_recaudacion'
+        },*/
         {
           name : 'Clientes frecuentes',
           url : '/#/reportes/clientes-frecuentes',
