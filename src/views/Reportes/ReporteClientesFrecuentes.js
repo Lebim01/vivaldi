@@ -79,8 +79,8 @@ class ReporteClientesFrecuentes extends React.Component {
                                             </div>
                                         </FormGroup>
                                         <FormGroup className="row col-sm-4">
-                                            <Label className="col-sm-4" >Fecha inicio</Label>
-                                            <div className="col-sm-8">
+                                            <Label className="col-sm-5" >Fecha inicio</Label>
+                                            <div className="col-sm-7">
                                                 <Input type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
                                             </div>
                                         </FormGroup>
@@ -97,8 +97,8 @@ class ReporteClientesFrecuentes extends React.Component {
                                             </div>
                                         </FormGroup>
                                         <FormGroup className="row col-sm-4">
-                                            <Label className="col-sm-4" >Fecha fin</Label>
-                                            <div className="col-sm-8" >
+                                            <Label className="col-sm-5" >Fecha fin</Label>
+                                            <div className="col-sm-7" >
                                                 <Input type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
                                             </div>
                                         </FormGroup>
