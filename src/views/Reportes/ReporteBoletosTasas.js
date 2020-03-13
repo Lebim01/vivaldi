@@ -122,28 +122,28 @@ class ReporteBoletosTasas extends React.Component {
                                                                 </div>
                                                             </FormGroup>
                                                             <FormGroup className="row">
-                                                                <Label className="col-sm-5" id='mylabel'>Localidad</Label>
-                                                                <div className="col-sm-7">
+                                                                <Label className="col-sm-6" id='mylabel'>Localidad</Label>
+                                                                <div className="col-sm-6">
                                                                     <SelectLocalidad onChange={this.onChange('localidad')} value={this.state.filters.localidad}/>
                                                                 </div>
                                                             </FormGroup>
                                                         </div>
                                                         <div className="col-sm-5">
                                                             <FormGroup className="row">
-                                                                <Label className="col-sm-3" id='mylabel'>Fecha inicio</Label>
+                                                                <Label className="col-sm-4" id='mylabel'>Fecha inicio</Label>
                                                                 <div className="col-sm-5">
                                                                     <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.filters.fecha_inicio} />
                                                                 </div>
-                                                                <div className="col-sm-4">
+                                                                <div className="col-sm-3">
                                                                     <Input className="no-clear" type="time" onChange={this.onChange('hora_inicio')} value={this.state.filters.hora_inicio} />
                                                                 </div>
                                                             </FormGroup>
                                                             <FormGroup className="row">
-                                                                <Label className="col-sm-3" id='mylabel'>Fecha fin</Label>
+                                                                <Label className="col-sm-4" id='mylabel'>Fecha fin</Label>
                                                                 <div className="col-sm-5">
                                                                     <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.filters.fecha_fin} />
                                                                 </div>
-                                                                <div className="col-sm-4">
+                                                                <div className="col-sm-3">
                                                                     <Input className="no-clear" type="time" onChange={this.onChange('hora_fin')} value={this.state.filters.hora_fin} />
                                                                 </div>
                                                             </FormGroup>
@@ -218,8 +218,8 @@ class ReporteBoletosTasas extends React.Component {
                                                                 </div>
                                                             </FormGroup>
                                                             <FormGroup className="row">
-                                                                <Label className="col-sm-5" id='mylabel'>Localidad</Label>
-                                                                <div className="col-sm-7">
+                                                                <Label className="col-sm-6" id='mylabel'>Localidad</Label>
+                                                                <div className="col-sm-6">
                                                                     <SelectLocalidad onChange={this.onChange('localidad')} value={this.state.filters.localidad}/>
                                                                 </div>
                                                             </FormGroup>
@@ -227,19 +227,19 @@ class ReporteBoletosTasas extends React.Component {
                                                         <div className="col-sm-5">
                                                             <FormGroup className="row">
                                                                 <Label className="col-sm-4" id='mylabel'>Fecha inicio</Label>
-                                                                <div className="col-sm-4">
+                                                                <div className="col-sm-5">
                                                                     <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.filters.fecha_inicio} />
                                                                 </div>
-                                                                <div className="col-sm-4">
+                                                                <div className="col-sm-3">
                                                                     <Input className="no-clear" type="time" onChange={this.onChange('hora_inicio')} value={this.state.filters.hora_inicio} />
                                                                 </div>
                                                             </FormGroup>
                                                             <FormGroup className="row">
                                                                 <Label className="col-sm-4" id='mylabel'>Fecha fin</Label>
-                                                                <div className="col-sm-4">
+                                                                <div className="col-sm-5">
                                                                     <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.filters.fecha_fin} />
                                                                 </div>
-                                                                <div className="col-sm-4">
+                                                                <div className="col-sm-3">
                                                                     <Input className="no-clear" type="time" onChange={this.onChange('hora_fin')} value={this.state.filters.hora_fin} />
                                                                 </div>
                                                             </FormGroup>
