@@ -85,8 +85,8 @@ class ReporteClientesFrecuentes extends React.Component {
                                             </div>
                                         </FormGroup>
                                         <FormGroup className="row col-sm-4">
-                                            <Label className="col-sm-7" >Metodo de pago</Label>
-                                            <div className="col-sm-5">
+                                            <Label className="col-sm-6" >Metodo de pago</Label>
+                                            <div className="col-sm-6">
                                                 <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('forma_de_pago')} value={this.state.forma_de_pago}/>
                                             </div>
                                         </FormGroup>
@@ -103,14 +103,14 @@ class ReporteClientesFrecuentes extends React.Component {
                                             </div>
                                         </FormGroup>
                                         <FormGroup className="row col-sm-4" >
-                                            <Label className="col-sm-5" >Destino</Label>
-                                            <div className="col-sm-7" >
+                                            <Label className="col-sm-6" >Destino</Label>
+                                            <div className="col-sm-6" >
                                                 <Select asyncOptions={this.optionsDestino} onChange={this.onChange('destino')} value={this.state.destino} />
                                             </div>
                                         </FormGroup>
                                         <FormGroup className="row col-sm-4">
-                                            <Label className="col-sm-4" >Reporte</Label>
-                                            <div className="col-sm-8" >
+                                            <Label className="col-sm-6" >Reporte</Label>
+                                            <div className="col-sm-6" >
                                                 <Select options={this.optionsReporte} onChange={this.onChange('reporte')} value={this.state.reporte} />
                                             </div>
                                             <div >

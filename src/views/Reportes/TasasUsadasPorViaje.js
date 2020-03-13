@@ -127,14 +127,14 @@ class TasasUsadasPorViaje extends React.Component {
                                                 </div>
                                                 <div className="col-sm-4">
                                                     <FormGroup className="row">
-                                                        <Label className="col-sm-4">Destino</Label>
-                                                        <div className="col-sm-8">
+                                                        <Label className="col-sm-5">Disco/Placa</Label>
+                                                        <div className="col-sm-7">
                                                             <Input />
                                                         </div>
                                                     </FormGroup>
                                                     <FormGroup className="row">
-                                                        <Label className="col-sm-6">Disco/Placa</Label>
-                                                        <div className="col-sm-6">
+                                                        <Label className="col-sm-5">Destino</Label>
+                                                        <div className="col-sm-7">
                                                             <Input />
                                                         </div>
                                                     </FormGroup>
