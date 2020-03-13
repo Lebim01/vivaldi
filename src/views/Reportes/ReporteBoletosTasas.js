@@ -226,8 +226,8 @@ class ReporteBoletosTasas extends React.Component {
                                                         </div>
                                                         <div className="col-sm-5">
                                                             <FormGroup className="row">
-                                                                <Label className="col-sm-3" id='mylabel'>Fecha inicio</Label>
-                                                                <div className="col-sm-5">
+                                                                <Label className="col-sm-4" id='mylabel'>Fecha inicio</Label>
+                                                                <div className="col-sm-4">
                                                                     <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.filters.fecha_inicio} />
                                                                 </div>
                                                                 <div className="col-sm-4">
@@ -235,8 +235,8 @@ class ReporteBoletosTasas extends React.Component {
                                                                 </div>
                                                             </FormGroup>
                                                             <FormGroup className="row">
-                                                                <Label className="col-sm-3" id='mylabel'>Fecha fin</Label>
-                                                                <div className="col-sm-5">
+                                                                <Label className="col-sm-4" id='mylabel'>Fecha fin</Label>
+                                                                <div className="col-sm-4">
                                                                     <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.filters.fecha_fin} />
                                                                 </div>
                                                                 <div className="col-sm-4">
