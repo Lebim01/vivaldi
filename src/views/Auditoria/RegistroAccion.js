@@ -119,7 +119,10 @@ class RegistroAccion extends React.Component {
 
                                     endpoint='auditcrud'
                                     history={this.props.history}
-                                    parameters={this.state}
+                                    parameters={{
+                                        ...this.state,
+                                        type: 'list'
+                                    }}
                                     filters={{
                                         persist: true,
                                         callback: (parameters) => this.setState(parameters)
