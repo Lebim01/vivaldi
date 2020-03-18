@@ -34,6 +34,7 @@ class Diario extends React.Component {
         {value:'t', label:'Todos'},
         {value:'p', label:'Pendientes'},
         {value:'c', label:'Cobrados'},
+        {value:'v', label:'Vendidos'},
     ]
 
     onChange = name => (e) => {
