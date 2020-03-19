@@ -35,6 +35,16 @@ export const functions = {
         }else{
             return length === compare
         }
+    },
+
+    lengthDouble : (value, { compare,compare2 }) => {
+        let length = value.length
+
+        if(Array.isArray(compare) || Array.isArray(compare2)){
+            return !!compare.find(val => val === length) || !!compare2.find(val => val === length)
+        }else{
+            return length === compare || length === compare2
+        }
     }
 }
 
