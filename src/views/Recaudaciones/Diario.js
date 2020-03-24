@@ -61,7 +61,7 @@ class Diario extends React.Component {
                 endpoint: 'venta/cobro/crear_cobro_por_fecha',
                 getValue : true
             }
-            
+
             let res = await confirmEndpoint(options)
             if(typeof res === 'object' && res.data && res.data.cobro_id){
                 this.refresh()
@@ -73,7 +73,7 @@ class Diario extends React.Component {
         return (
             <React.Fragment>
                 { ((row.a_cobrar > 0 && row.cooperativa !== "(TOTAL)") && !row.cobro_id) &&
-                    <Button outline onClick={() => this.cobrar(row)}>Cobrar</Button>
+                    <Button style={{display:"block", margin:"auto"}} outline onClick={() => this.cobrar(row)}>Cobrar</Button>
                 }
             </React.Fragment>
         )
@@ -169,11 +169,11 @@ class Diario extends React.Component {
         return (
             <React.Fragment>
                 { row.a_cobrar !== 0 && row.cooperativa !== "(TOTAL)" &&
-                    <Button outline onClick={() => this.toWord(row)}>Imprimir</Button>
+                    <Button style={{display:"block", margin:"auto"}} outline onClick={() => this.toWord(row)}>Imprimir</Button>
                 }
                 {
                     row.a_cobrar!== 0 && row.cooperativa === "(TOTAL)" &&
-                    <Button outline onClick={() => this.imprimirTodos()}>Imprimir Todos</Button>
+                    <Button style={{display:"block", margin:"auto"}} outline onClick={() => this.imprimirTodos()}>Imprimir Todos</Button>
                 }
             </React.Fragment>
         )
@@ -189,11 +189,11 @@ class Diario extends React.Component {
             <span style={{float:"left"}}>{('Fecha venta')}</span>,
             'Cobrar',
             <span style={{float:"right"}}>{('A cobrar')}</span>,
-            <span style={{float:"right"}}>{('Cobrado')}</span>, 
+            <span style={{float:"right"}}>{('Cobrado')}</span>,
             <span style={{float:"left"}}>{('Fecha Cobro')}</span>,
-            <span style={{float:"right", textAlign: "right"}}>{('N.c')}</span>,  
-            <span style={{textAlign:"center", position: 'relative', right:'-17%'}}>{('Accion')}</span>     
-            
+            <span style={{float:"right", textAlign: "right"}}>{('N.c')}</span>,
+            <span style={{textAlign:"center", position: 'relative', right:'-17%'}}>{('Accion')}</span>
+
         ]
 
             let fields=[
@@ -230,7 +230,7 @@ class Diario extends React.Component {
                                     imprimirPantalla
                                     id="report"
                                     key_permission="diario"
-                                   
+
 
                                     title= "Cobros Diarios"
 
@@ -267,41 +267,32 @@ class Diario extends React.Component {
                                             <div className="col-sm-4 text-right">
 
                                             </div>
-                                        </div>   
+                                        </div>
                                     }
                                     searchable={false}
                                     ref={this.table}
                                     headerClass="text-center"
                                     head={[
                                         [
-                                            'Cooperativa', 
-                                            'Localidad', 
-                                            'Fecha venta', 
-                                            'Cobrar',
-                                            {
-                                                title:'A cobrar', 
-                                                style:{textAlign:"right" }
-                                            },
-                                            {
-                                                title:'Cobrado', 
-                                                style:{textAlign: "right" }
-                                            },
-                                            'Fecha cobro', 
-                                            {
-                                                title:'N.c', 
-                                                style:{textAlign:"right" }
-                                            },
-                                            'Acción'
+                                            'Cooperativa',
+                                            { title:'Localidad', style:{textAlign:"center" } },
+                                            { title:'Fecha venta', style:{textAlign:"center" } },
+                                            { title:'Cobrar', style:{textAlign:"center" } },
+                                            { title:'A cobrar', style:{textAlign:"right" } },
+                                            { title:'Cobrado', style:{textAlign: "right" } },
+                                            { title:'Fecha cobro', style:{textAlign:"center" } },
+                                            { title:'N.C', style:{textAlign:"right" } },
+                                            { title:'Acción', style:{textAlign:"center" } }
                                         ]
                                     ]}
                                     fields={[
                                         (row) => <span style={{float:"left", fontWeight: 300}}>{(row.cooperativa_nombre)}</span>,
-                                        'localidad_nombre',
-                                        'fecha_venta',
+                                        (row) => <span  style={{display:"block", "text-align":"center", margin:0}}>{row.localidad_nombre}</span>,
+                                        (row) => <span  style={{display:"block", "text-align":"center", margin:0}}>{row.fecha_venta}</span>,
                                         this.fieldCobrar,
-                                        (row) => <span  style={{float: "right" }}>${moneyFormat(row.a_cobrar)}</span>,
+                                        (row) => <span style={{float: "right" }}>${moneyFormat(row.a_cobrar)}</span>,
                                         (row) => <span style={{float: "right"}}>${moneyFormat(row.cobrado)}</span>,
-                                        'fecha_cobro',
+                                        (row) => <span  style={{display:"block", "text-align":"center", margin:0}}>{row.fecha_cobro}</span>,
                                         (row) => <span style={{float:"right"}}>${moneyFormat(row.nc)}</span>,
                                         this.fieldImprimir
                                     ]}
