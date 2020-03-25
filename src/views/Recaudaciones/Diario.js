@@ -254,7 +254,7 @@ class Diario extends React.Component {
                                                 <FormGroup className="row">
                                                     <Label className="col-sm-5">Dia</Label>
                                                     <div className="col-sm-7">
-                                                        <Input className="no-clear" type="date" onChange={this.onChange('fecha')} value={this.state.fecha}/>
+                                                        <Input type="date" onChange={this.onChange('fecha')} value={this.state.fecha}/>
                                                     </div>
                                                 </FormGroup>
                                                 <FormGroup className="row">
