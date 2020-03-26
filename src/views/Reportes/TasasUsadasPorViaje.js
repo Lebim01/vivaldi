@@ -148,13 +148,13 @@ class TasasUsadasPorViaje extends React.Component {
                                             
                                             
                                         
-                                        ref={this.table}
-                                        autoLoad={false}
-                                        searchable={false}
+                                         ref={this.table}
+                                         autoLoad={false}
+                                         searchable={false}
                                         
 
                                         fieldNames={['Tasa (Código)', 'Usada', '# Asiento']}
-                                        fields={['', '', '']}
+                                        fields={['codigo', 'usado', 'asiento']}
 
                                         endpoint='recaudaciones/tasas_emitidas_vs_usadas_cooperativa'
                                         parameters={this.state}
