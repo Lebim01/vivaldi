@@ -110,7 +110,7 @@ class ReporteTasasNormales extends React.Component {
         return (
 
             <Permission key_permission="view_reporte_tasas_normales" mode="redirect">
-                
+
                 <div className="animated fadeIn">
                     <div className="row">
                         <div className="col-sm-12">
@@ -158,16 +158,17 @@ class ReporteTasasNormales extends React.Component {
                                         }
 
                                         searchable={false}
-                                        
+
                                         ref={this.table}
 
-                                        fieldNames={['Localidad', 'Cooperativa','Fecha', 'Usuario solicitante', 'Usuario aprobación', 'Usuario impresión', 
-                                        <span style={{float: "right"}}>Cantidad</span>,
+                                        fieldNames={['#', 'Localidad', 'Cooperativa','Fecha', 'Solicitante', 'Aprobación', 'Impresión',
+                                        <span style={{float: "right"}}>Cantidad</span>, 
                                         <span style={{float: "right"}}>Valor</span>]}
                                         fields={[
+                                            'id',
                                             'localidad_nombre',
-                                            'cooperativa_nombre', 
-                                            'fecha',
+                                            'cooperativa_nombre',
+                                            'actualizacion',
                                             'usuario_solicitante_username',
                                             'usuario_aprobacion_username',
                                             'usuario_impresion_username',
@@ -187,7 +188,7 @@ class ReporteTasasNormales extends React.Component {
                         </div>
                     </div>
                 </div>
-                
+
             </Permission>
         )
     }
