@@ -162,9 +162,7 @@ class ReporteTasasNormales extends React.Component {
                                         ref={this.table}
 
                                         fieldNames={['#', 'Localidad', 'Cooperativa','Fecha', 'Solicitante', 'Aprobación', 'Impresión',
-                                          { title:'Cantidad', style:{textAlign:"right" }},
-                                          { title:'Valor', style:{textAlign:"right" } }
-                                          ]}
+                                          'Cantidad', 'Valor']}
                                         fields={[
                                             'id',
                                             'localidad_nombre',
