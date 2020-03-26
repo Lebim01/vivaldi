@@ -161,7 +161,9 @@ class ReporteTasasNormales extends React.Component {
                                         
                                         ref={this.table}
 
-                                        fieldNames={['Localidad', 'Cooperativa','Fecha', 'Usuario solicitante', 'Usuario aprobación', 'Usuario impresión', 'Cantidad', 'Valor']}
+                                        fieldNames={['Localidad', 'Cooperativa','Fecha', 'Usuario solicitante', 'Usuario aprobación', 'Usuario impresión', 
+                                        <span style={{float: "right"}}>Cantidad</span>,
+                                        <span style={{float: "right"}}>Valor</span>]}
                                         fields={[
                                             'localidad_nombre',
                                             'cooperativa_nombre', 
@@ -169,8 +171,8 @@ class ReporteTasasNormales extends React.Component {
                                             'usuario_solicitante_username',
                                             'usuario_aprobacion_username',
                                             'usuario_impresion_username',
-                                            (row)=> <span style={{textAlign:"right", float: "right"}}>{("  " + row.cantidad_aprobada || 0)}</span>,
-                                            (row)=> <span style={{textAlign:"right", float: "right"}}>${moneyFormat(row.valor || 0)}</span>,
+                                            (row)=> <span style={{float: "right"}}>{("  " + row.cantidad_aprobada || 0)}</span>,
+                                            (row)=> <span style={{float: "right"}}>${moneyFormat(row.valor || 0)}</span>,
                                             /*this.fieldImprimir*/
                                         ]}
 
