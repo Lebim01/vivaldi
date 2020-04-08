@@ -276,15 +276,6 @@ class MainView extends React.Component {
                         }}
                     />
                     
-                    <FormGroup className="row">
-                        <div className="col-sm-2"></div>
-                        <div className="col-sm-2">
-                            <div className="custom-control custom-checkbox">
-                                <input type="checkbox" className="custom-control-input" id="is_enable" name="is_enable" checked={this.props.is_enable} onChange={this.onChange('is_enable')} />
-                                <Label onlyClassName="custom-control-label" htmlFor="is_enable">Habilitado</Label>
-                            </div>
-                        </div>
-                    </FormGroup>
 
                     { !id &&
                     <FormGroup className="row">
