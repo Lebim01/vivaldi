@@ -110,7 +110,7 @@ class ReporteTasasNormales extends React.Component {
         return (
 
             <Permission key_permission="view_reporte_tasas_normales" mode="redirect">
-
+                
                 <div className="animated fadeIn">
                     <div className="row">
                         <div className="col-sm-12">
@@ -158,22 +158,19 @@ class ReporteTasasNormales extends React.Component {
                                         }
 
                                         searchable={false}
-
+                                        
                                         ref={this.table}
 
-                                        fieldNames={['#', 'Localidad', 'Cooperativa','Fecha', 'Solicitante', 'Aprobación', 'Impresión',
-                                        <span style={{float: "right"}}>Cantidad</span>, 
-                                        <span style={{float: "right"}}>Valor</span>]}
+                                        fieldNames={['Localidad', 'Cooperativa','Fecha', 'Usuario solicitante', 'Usuario aprobación', 'Usuario impresión', 'Cantidad', 'Valor']}
                                         fields={[
-                                            'id',
                                             'localidad_nombre',
-                                            'cooperativa_nombre',
-                                            'actualizacion',
+                                            'cooperativa_nombre', 
+                                            'fecha',
                                             'usuario_solicitante_username',
                                             'usuario_aprobacion_username',
                                             'usuario_impresion_username',
-                                            (row)=> <span style={{float: "right"}}>{("  " + row.cantidad_aprobada || 0)}</span>,
-                                            (row)=> <span style={{float: "right"}}>${moneyFormat(row.valor || 0)}</span>,
+                                            (row)=> <span style={{textAlign:"right", float: "right"}}>{("  " + row.cantidad_aprobada || 0)}</span>,
+                                            (row)=> <span style={{textAlign:"right", float: "right"}}>${moneyFormat(row.valor || 0)}</span>,
                                             /*this.fieldImprimir*/
                                         ]}
 
@@ -188,7 +185,7 @@ class ReporteTasasNormales extends React.Component {
                         </div>
                     </div>
                 </div>
-
+                
             </Permission>
         )
     }
