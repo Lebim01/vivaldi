@@ -70,15 +70,9 @@ class MainView extends React.Component {
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
-                            <Label className="col-sm-3">Apellidos</Label>
-                            <div className="col-sm-5">
-                                <Input value={this.props.conductor_apellidos} readOnly />
-                            </div>
-                        </FormGroup>
-                        <FormGroup className="row">
                             <Label className="col-sm-3">Nombres</Label>
                             <div className="col-sm-5">
-                                <Input value={this.props.conductor_nombres} readOnly />
+                                <Input value={this.props.conductor_nombre} readOnly />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
