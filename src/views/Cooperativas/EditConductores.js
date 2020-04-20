@@ -174,6 +174,18 @@ class EditConductor extends React.Component {
                             <Select options={tipos} onChange={this._onChange('tipo')} value={this.state.data.tipo} />
                         </div>
                     </FormGroup>
+                    {/*<FormGroup className="row">
+                    <Label className="col-sm-3">F. emisión licencia</Label>
+                        <div className="col-sm-5">
+                            <Input className="no-clear" type="date" onChange={this._onChange('fecha_emision_licencia')} value={this.state.data.fecha_emision_licencia} />
+                        </div>
+                    </FormGroup>
+                    <FormGroup className="row">
+                      <Label className="col-sm-3">F. validez licencia</Label>
+                        <div className="col-sm-5">
+                            <Input className="no-clear" type="date" onChange={this._onChange('fecha_vencimiento_licencia')} value={this.state.data.fecha_vencimiento_licencia} />
+                        </div>
+                    </FormGroup>*/}
                     <FormGroup className="row">
                         <div className="col-sm-12 text-center">
                             <Input id="documentation" name="documentacion" type="file" style={{display:'none'}} onChange={this._onChangeFile} />
