@@ -18,9 +18,13 @@ class EditConductor extends React.Component {
             persona:{}, 
             documentacion:'none',
             readOnlyPersona : true,
-            tipo : '1'
+            tipo : '1',
+            
         }, 
-        tipos: this.tipos
+        tipos: this.tipos, 
+        /*fecha_vencimiento_licencia : this.fecha_emision_licencia,
+        fecha_emision_licencia : this.fecha_vencimiento_licencia*/
+        
     }
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
@@ -137,7 +141,7 @@ class EditConductor extends React.Component {
     }
 
     render(){
-        const { id, data, tipos } = this.state
+        const { id, data, tipos} = this.state
         return (
             <EditPage 
                 title={`${id ? 'Editar' : 'Crear'} Conductores`} 
@@ -177,7 +181,11 @@ class EditConductor extends React.Component {
                     {/*<FormGroup className="row">
                     <Label className="col-sm-3">F. emisión licencia</Label>
                         <div className="col-sm-5">
+<<<<<<< HEAD
                             <Input className="no-clear" type="date" onChange={this._onChange('fecha_emision_licencia')} value={this.state.data.fecha_emision_licencia} />
+=======
+                            <Input  className="no-clear" type="date" onChange={this._onChange('fecha_emision_licencia')} value={this.state.data.fecha_emision_licencia} />
+>>>>>>> 77785752... correccion guardado de fechas emision y vencimiento en conductores
                         </div>
                     </FormGroup>
                     <FormGroup className="row">
