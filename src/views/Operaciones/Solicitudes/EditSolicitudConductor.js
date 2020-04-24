@@ -76,6 +76,12 @@ class MainView extends React.Component {
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
+                            <Label className="col-sm-3">Dirección</Label>
+                            <div className="col-sm-5">
+                                <Input value={this.props.conductor_direccion} readOnly />
+                            </div>
+                        </FormGroup>
+                        <FormGroup className="row">
                             <Label className="col-sm-3">Tipo</Label>
                             <div className="col-sm-5">
                                 <Input value={this.props.conductor_tipo} readOnly />
