@@ -14,6 +14,19 @@ class MainView extends React.Component {
         valueName: 'id'
     }
 
+    optionsDescripcion = [
+        { value:'0', label: 'descripcion 1' },
+        { value:'1', label: 'descripcion 2' },
+        { value:'2', label: 'descripcion 3' },
+        { value:'3', label: 'descripcion 4' },
+    ]
+
+    optionsDescripciones = {
+        url : `${baseurl}/venta/catalogo-detalle/?catalogo=&descripcion=&codigo=STC`, 
+        labelName : 'descripcion', 
+        valueName : 'descripcion'
+    }
+
     onChangeCantidadAprobada = (e) => {
         this.props.onChangeCantidadAprobada(e.target.value)
     }
@@ -51,6 +64,7 @@ class MainView extends React.Component {
                     <FormGroup className="row">
                         <Label className="col-sm-3">Descripción</Label>
                         <div className="col-sm-5">
+                           
                             <Input value={this.props.descripcion} readOnly={readOnly} />
                         </div>
                     </FormGroup>
