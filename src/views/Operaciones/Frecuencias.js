@@ -1,11 +1,13 @@
 import React from 'react'
 import { ListPage, Card, CardBody, FormGroup, Label, Select, Input, Button, Permission, SelectLocalidad } from 'temeforest'
 import { baseurl, objectToUrl } from 'utils/url'
-
+import moment from 'moment'
 class Frecuencias extends React.Component {
 
     state = {
-        status: 'true'
+        status: 'true', 
+        fecha_validez_desde : moment().format('YYYY-MM-DD'),
+        fecha_validez_hasta : moment().format('YYYY-MM-DD')
     }
 
     optionsCooperativa = {
