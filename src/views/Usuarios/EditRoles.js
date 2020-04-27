@@ -187,7 +187,7 @@ class EditRoles extends React.Component {
 
         categories.push({
             id: null,
-            name: 'Otros',
+            //name: 'Otros',
             permisos : []
         })
 
