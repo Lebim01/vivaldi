@@ -118,12 +118,16 @@ class ViajesBus extends React.Component {
                                 <Label className="col-sm-6">Vendedor</Label>
                                 <div className="col-sm-6">
                                     <Select 
-                                        { ...this.state.cooperativa
-                                            ? { asyncOptions : this.optionsUsuarios({ cooperativa: this.state.cooperativa, tipo: 1 })  }
+
+                                        { ...this.state.filters.cooperativa && this.state.filters.localidad 
+                                            && this.state.filters.fecha_inicio && this.state.filters.fecha_fin
+                                            ? { asyncOptions : this.optionsUsuarios({ cooperativa: this.state.filters.cooperativa, 
+                                                localidad: this.state.filters.localidad, fecha_inicio : this.state.filters.fecha_inicio, 
+                                            fecha_fin: this.state.filters.fecha_fin})  }
                                             : { options : [{ label : 'Seleccione un vendedor', value : '' }] }
                                         }
-                                        onChange={this.onChange('vendedor')} 
-                                        value={this.state.vendedor}
+                                        onChange={this.onChange('usuario')} 
+                                        value={this.state.filters.usuario}
                                     />
                                 </div>
                             </FormGroup>
