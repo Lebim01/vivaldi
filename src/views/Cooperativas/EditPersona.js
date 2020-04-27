@@ -41,6 +41,14 @@ class EditPersona extends React.Component {
                 _readOnly = false
                 loading = true
                 this.searchPersona(_data.identificacion)
+            }if(
+                Array.isArray(this.props.lengthRuc)
+                ? this.props.lengthRuc.find(val => _data.identificacion.length === val)
+                : _data.identificacion.length === this.props.lengthRuc
+            ){
+                _readOnly = false
+                loading = true
+                this.searchPersona(_data.identificacion)
             }else{
                 const { identificacion } = _data
                 _id = null
@@ -115,12 +123,21 @@ class EditPersona extends React.Component {
                                             required:"El campo es requerido", 
                                             validate: validate({
                                                 number : 'Solo se aceptan números',
-                                                length : {
-                                                    compare : this.props.lengthCedula,
-                                                    message : Array.isArray(this.props.lengthCedula)
+                                                /*length : {
+                                                    compare : this.props.lengthCedula ,
+                                                    message : Array.isArray(this.props.lengthCedula ) 
                                                         ? `El valor debe tener una longitud de [${this.props.lengthCedula.join(',')}]`
                                                         : `El valor debe tener una longitud de ${this.props.lengthCedula}`
-                                                }
+                                                },*/
+                                                lengthDouble : {
+                                                    compare : this.props.lengthCedula ,
+                                                    compare2: this.props.lengthRuc,
+                                                    message : Array.isArray(this.props.lengthRuc ) 
+                                                        ? `El valor debe tener una longitud de [${this.props.lengthRuc.join(',')}]`
+                                                        : `El valor debe tener una longitud de ${this.props.lengthCedula} 
+                                                        o ${this.props.lengthRuc}`
+                                                },
+                                                
                                             }),
                                         }
                                     } : {}}
@@ -171,6 +188,8 @@ EditPersona.defaultProps = {
     readOnly : false,
     editable : true,
     lengthCedula : 10,
+    lengthRuc : 13,
+    lenghtCedulaRuc: [10, 13],
     endpoint: 'persona',
     persona : {},
     required : true,
