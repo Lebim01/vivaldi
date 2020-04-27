@@ -39,6 +39,9 @@ class EmisionPorCooperativa extends React.Component {
                 </div>
                 <ListPage
                     searchable={false}
+                    id="report"
+                    exportExcel
+                    imprimirPantalla
 
                     fieldNames={['Cooperativa', 'Api', 'Sistema externo']}
                     fields={['nombre', this.usaapi, 'sistema_externo']}
