@@ -142,7 +142,7 @@ class TasasContingencia extends React.Component {
     print = async (row) => {
         this.setState({loading: true, actualizados : [...this.state.actualizados, row.id] })
         if(!this.state.actualizados.includes(row.id)){
-            /*const response = await axios.get(`${baseurl}/venta/generacion_contingencia/${row.id}/imprimir/`)
+            const response = await axios.get(`${baseurl}/venta/generacion_contingencia/${row.id}/imprimir/`)
             
             const url = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement('a');
@@ -153,31 +153,7 @@ class TasasContingencia extends React.Component {
             this.setState({loading: false})
 
 
-            */
-
-            try {
-                const res= await axios.get(`${baseurl}/venta/generacion_contingencia/${row.id}/imprimir`)
-                //const url = window.URL.createObjectURL());
-                Swal.fire(res.data.info)
-
-                
-                
-                setTimeout(function(){ 
-                    window.open(res.data.reporte)
-                    //Swal.fire("El reporte ha sido generado con éxito!.")
-                }, 5000);
-
-                //
-
-               // const actualizar = await axios.post(`${baseurl}/venta/generacion_contingencia/${row.id}/`, { estado : 3})
-
-            } catch(err){
-                window.alert(err.res.data.error );
-                Swal.fire(err.res.data.detail);
-            }
-            this.setState({loading: false})
-            
-
+            const actualizar = await axios.post(`${baseurl}/venta/generacion_contingencia/${row.id}/`, { estado : 3})
         }
     }
 
