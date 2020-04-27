@@ -137,7 +137,9 @@ class ReporteClientesFrecuentes extends React.Component {
                                         fields={
                                             this.state.reporte == 1 
                                                 ? ['nombre', (row) => <span style={{ float: 'right',position: 'relative', right:'75%'}}>{row.viajes}</span>] 
-                                                : ['nombre', 'identificacion', 'viajes']
+                                                : ['nombre', 
+                                                 'identificacion', 
+                                                 'viajes']
                                         }
 
                                         endpoint='venta/clientes-frecuentes'
