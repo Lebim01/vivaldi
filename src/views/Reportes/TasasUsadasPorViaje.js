@@ -1,14 +1,19 @@
-import React from 'react'
-import { ListPage, Card, CardBody, Label, FormGroup, Select, Input, Permission, SelectLocalidad, Button, ReportPage } from 'temeforest'
+import React, { useState, useEffect } from 'react'
+import { ListPage, Card, CardBody, Label, FormGroup, Select, Input, Permission, SelectLocalidad, InputIcon, Button, ReportPage } from 'temeforest'
 import moment from 'moment'
-import { baseurl } from 'utils/url'
+import { baseurl, getParameter, objectToUrl } from 'utils/url'
+import axios from 'axios'
 
 class TasasUsadasPorViaje extends React.Component {
     table = React.createRef()
+
     state = {
         fecha_inicio : moment().format('YYYY-MM-DD'),
         fecha_fin : moment().format('YYYY-MM-DD'),
-        timestamp: moment().format('YYYY-MM-DD HH:mm:ss')
+        timestamp: moment().format('YYYY-MM-DD HH:mm:ss'), 
+        viaje : '',
+        error : '',
+        data : {}
     }
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
@@ -31,18 +36,62 @@ class TasasUsadasPorViaje extends React.Component {
         valueName: 'id' 
     }
 
-    onChange = name => (e) => {
-        this.setState({
-            [name]: e.target.value
-        })
+    optionsViaje = {
+        url : `${baseurl}/viaje/?full=1`,
+        labelName: 'hora_salida',
+        valueName: 'id', 
     }
 
+    optionsViajes  = (obj) => ({
+        url : `${baseurl}/viaje/${objectToUrl(obj)}`,
+        labelName: 'hora_salida', 
+        valueName: 'id' , 
+        optionProps: ['ruta']
+    })
+
+
+    onChange = name => (e) => {
+        this.setState({
+            [name]: e.target.value,
+            ruta: this.state.ruta
+        })
+        
+          
+        
+    }
+    
+    
     buscar= () =>{
        this.table.current.refresh()
     }
+
+    enterViaje = (e) => {
+        
+        this.searchViaje()
+        
+    }
+
+    searchViaje = async () => {
+        const { viaje } = this.state
+        if(viaje){
+            try {
+                const res = await axios.get(`${baseurl}/viaje/${viaje}`)
+                this.setState({
+                    error: '',
+                    data : res.data
+                })
+            }
+            catch({ response }){
+                this.setState({
+                    error: response.data.detail
+                })
+            }
+        }
+    }
+    
     
     render(){
-        
+        const { refresh } = this.state
         return (
             <Permission key_permission="view_tasas_viaje" mode="redirect">
                 <div className="animated fadeIn">
@@ -101,11 +150,27 @@ class TasasUsadasPorViaje extends React.Component {
                                                             <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('forma_pago')} value={this.state.forma_pago} />
                                                         </div>
                                                     </FormGroup>
+                                                    
                                                     <FormGroup className="row">
-                                                        <Label className="col-sm-6">Viaje</Label>
-                                                        <div className="col-sm-6">
-                                                            <Select onChange={this.onChange('viaje')} value={this.state.viaje} />
-                                                        </div>
+                                                    <Label className="col-sm-6">Viaje</Label>
+                                                    <div className="col-sm-6">
+                                                        <Select 
+                                                            { ...this.state.cooperativa && this.state.localidad && this.state.fecha_inicio && this.state.fecha_fin
+                                                                ? { asyncOptions : this.optionsViajes({ cooperativa: this.state.cooperativa, 
+                                                                    localidad: this.state.localidad, fecha_inicio : this.state.fecha_inicio, 
+                                                                fecha_fin: this.state.fecha_fin})  }
+                                                                : { options : [{ label : 'Seleccione un viaje', value : '' }] } 
+                                                                /*ruta = select_tipo.options[select_tipo.options.selectedIndex].attributes['data-ruta'].value
+                                                                this.props.onChange('ruta', ruta)*/
+                                                               
+                                                            }
+                                                            onChange={this.onChange('viaje')} 
+                                                            onClick={this.enterViaje}
+                                                            value={this.state.viaje}
+
+                                                        />
+
+                                                    </div>
                                                     </FormGroup>
                                                 </div>
                                             
@@ -115,13 +180,13 @@ class TasasUsadasPorViaje extends React.Component {
                                                     <FormGroup className="row">
                                                         <Label className="col-sm-4">Viaje</Label>
                                                         <div className="col-sm-8">
-                                                            <Input />
+                                                            <Input readOnly value={this.state.data.ruta} />
                                                         </div>
                                                     </FormGroup>
                                                     <FormGroup className="row">
                                                         <Label className="col-sm-4">Salida</Label>
                                                         <div className="col-sm-8">
-                                                            <Input />
+                                                            <Input readOnly value={this.state.data.hora_salida}/>
                                                         </div>
                                                     </FormGroup>
                                                 </div>
@@ -129,13 +194,13 @@ class TasasUsadasPorViaje extends React.Component {
                                                     <FormGroup className="row">
                                                         <Label className="col-sm-5">Disco/Placa</Label>
                                                         <div className="col-sm-7">
-                                                            <Input />
+                                                            <Input readOnly value={this.state.data.bus_disco}/>
                                                         </div>
                                                     </FormGroup>
                                                     <FormGroup className="row">
                                                         <Label className="col-sm-5">Destino</Label>
                                                         <div className="col-sm-7">
-                                                            <Input />
+                                                            <Input readOnly value={this.state.data.ruta_nombre}/>
                                                         </div>
                                                     </FormGroup>
                                                     <br></br>
@@ -148,9 +213,9 @@ class TasasUsadasPorViaje extends React.Component {
                                             
                                             
                                         
-                                         ref={this.table}
-                                         autoLoad={false}
-                                         searchable={false}
+                                        ref={this.table}
+                                        autoLoad={false}
+                                        searchable={false}
                                         
 
                                         fieldNames={['Tasa (Código)', 'Usada', '# Asiento']}
@@ -174,4 +239,6 @@ class TasasUsadasPorViaje extends React.Component {
     }
 }
 
+
 export default TasasUsadasPorViaje
+
