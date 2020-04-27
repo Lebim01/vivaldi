@@ -7,7 +7,9 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
     table = React.createRef()
     state = {
         fecha_inicio : moment().format('YYYY-MM-DD'),
-        fecha_fin : moment().format('YYYY-MM-DD')
+        fecha_fin : moment().format('YYYY-MM-DD'), 
+        reporte : 1, 
+        buscar: this.buscar
     }
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
@@ -45,7 +47,7 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
     }
     
     render(){
-        
+        const {refresh}= this.state
         return (
             <Permission key_permission="view_tasas_emitidas_usadas" mode="redirect">
                 <div className="animated fadeIn">
@@ -108,7 +110,7 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
                                             <FormGroup className="row">
                                                 <Label className="col-sm-6">Reporte</Label>
                                                 <div className="col-sm-6">
-                                                    <Select options={this.optionsReporte} onChange={this.onChange('reporte')} value={this.state.reporte} />
+                                                    <Select options={this.optionsReporte} onChange={this.onChange('reporte')} value={this.state.reporte} onClick={this.buscar}/>
                                                 </div>
                                             </FormGroup>
                                             <br></br><br></br>
@@ -119,9 +121,29 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
                                         ref= {this.table}
                                         autoLoad={false}
                                         searchable={false}
+
+                                        fieldNames={this.state.reporte == 1 ? 
+                                         ['Boletero',
+                                         <span style={{ float: 'right'}}>Emitidas</span>, 
+                                         <span style={{ float: 'right'}}>Usadas</span>,
+                                         ] : 
+                                        ['Viaje', 
+                                        <span style={{ float: 'right'}}>Emitidas</span>, 
+                                        <span style={{ float: 'right'}}>Usadas</span>,
+                                        ]}
+                                        fields={
+                                            this.state.reporte == 1 
+                                                ? ['boletero', 
+                                                    (row) => <span style={{ float: 'right'}}>{row.tasas_emitidas}</span>, 
+                                                    (row) => <span style={{ float: 'right'}}>{row.tasas_usadas}</span> ] 
+                                            
+                                                : ['viaje', 
+                                                    (row) => <span style={{ float: 'right'}}>{row.tasas_emitidas}</span>,
+                                                    (row) => <span style={{ float: 'right'}}>{row.tasas_usadas}</span> ]
+                                        }
                                         
 
-                                        head={[[(this.state.reporte === 2) ? 'Viaje' : 'Boletero' , 
+                                        /*head={[[(this.state.reporte === 2) ? 'Viaje' : 'Boletero' , 
                                         {
                                             title:'Emitidas', 
                                             style:{textAlign:"right", position: 'relative', right:'0%' }
@@ -134,7 +156,7 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
                                         fields={[(this.state.reporte === 2) ? 'viaje' : 'boletero', 
                                         (row) => <span style={{ textAlign:"right", position: 'relative', right:'-90%'}}>{row.tasas_emitidas}</span>,
                                         (row) => <span style={{ textAlign:"right", position: 'relative', right:'-90%'}}>{row.tasas_usadas}</span>, 
-                                        ]}
+                                        ]}*/
 
                                         endpoint='recaudaciones/tasas-emitidas-usadas'
                                         parameters={this.state}
