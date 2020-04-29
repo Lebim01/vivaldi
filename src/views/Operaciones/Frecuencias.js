@@ -6,8 +6,6 @@ class Frecuencias extends React.Component {
 
     state = {
         status: 'true', 
-        fecha_validez_desde : moment().format('YYYY-MM-DD'),
-        fecha_validez_hasta : moment().format('YYYY-MM-DD')
     }
 
     optionsCooperativa = {
