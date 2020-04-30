@@ -9,6 +9,11 @@ import moment from 'moment'
 
 class RegistroTasa extends React.Component {
 
+    constructor(props){
+        super(props)
+        this.table = React.createRef();
+    }
+
     state ={
         from_date: moment().format('YYYY-MM-DD'),
         to_date: moment().format('YYYY-MM-DD'),
@@ -50,7 +55,8 @@ class RegistroTasa extends React.Component {
             [name]: e.target.value
         })
     }
-    buscar(){
+
+    refresh = () => {
         this.setState({
             refresh: true
         })
@@ -101,21 +107,21 @@ class RegistroTasa extends React.Component {
 
                   
                     ref={this.table}
-                    autoLoad={false}
+                    autoLoad={true}
                     searchable={false}
 
 
                     fieldNames={this.props.event_type == 'Create' ?  ['Id object', 'Valor'] : ['Objeto', 'Anterior', 'Actual']}
                     fields={
-                        this.state.reporte == 1 
-                            ? ['nombre', (row) => <span style={{ float: 'right',position: 'relative', right:'75%'}}>{row.viajes}</span>] 
-                            : ['nombre', 'identificacion', 'viajes']
+                        this.props.event_type == 'Create'
+                            ? ['object_id', 'object_repr'] 
+                            : ['id', 'user_id', 'user']
                     }
-
-                    endpoint='venta/clientes-frecuentes'
+                    endpoint='auditcrud'
                     parameters={this.state}
 
                     history={this.props.history}
+                    refresh={refresh}
                 />
                 </ModalBody>
                 <ModalFooter>
