@@ -175,33 +175,23 @@ class TasasUsadasPorViaje extends React.Component {
                                                 </div>
                                             
                                             
-                                                <div className="col-sm-2"></div>
-                                                <div className="col-sm-4">
+                                                <div className="col-sm-1"></div>
+                                                <div className="col-sm-3">
                                                     <FormGroup className="row">
-                                                        <Label className="col-sm-4">Viaje</Label>
-                                                        <div className="col-sm-8">
-                                                            <Input readOnly value={this.state.data.ruta} />
-                                                        </div>
-                                                    </FormGroup>
-                                                    <FormGroup className="row">
-                                                        <Label className="col-sm-4">Salida</Label>
-                                                        <div className="col-sm-8">
-                                                            <Input readOnly value={this.state.data.hora_salida}/>
-                                                        </div>
+                                                        <Label className="col-sm-5" style={{fontSize: '12px'}}>Viaje: </Label>
+                                                        <Label className="col-sm-2" style={{fontSize: '12px'}}>{this.state.data.ruta}</Label>
                                                     </FormGroup>
                                                 </div>
-                                                <div className="col-sm-4">
+                                                <div className="col-sm-3">
                                                     <FormGroup className="row">
-                                                        <Label className="col-sm-5">Disco/Placa</Label>
-                                                        <div className="col-sm-7">
-                                                            <Input readOnly value={this.state.data.bus_disco}/>
-                                                        </div>
+                                                        <Label className="col-sm-5">Disco/Placa: </Label>
+                                                        <Label className="col-sm-2">{this.state.data.bus_disco}</Label>
                                                     </FormGroup>
+                                                </div>
+                                                <div className="col-sm-3">
                                                     <FormGroup className="row">
-                                                        <Label className="col-sm-5">Destino</Label>
-                                                        <div className="col-sm-7">
-                                                            <Input readOnly value={this.state.data.ruta_nombre}/>
-                                                        </div>
+                                                        <Label className="col-sm-5">Destino: </Label>
+                                                        <Label className="col-sm-7">{this.state.data.ruta_nombre}</Label>
                                                     </FormGroup>
                                                     <br></br>
                                                 </div>
