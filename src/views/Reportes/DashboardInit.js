@@ -83,7 +83,7 @@ class FormularioFiltros extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-4">Fecha inicio</Label>
                             <div className="col-sm-8">
-                                <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.filters.fecha_inicio} />
+                                <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.filters.fecha_inicio} asyncOptions={this.optionsLocalidad}/>
                             </div>
                         </FormGroup>
                     </Col>
