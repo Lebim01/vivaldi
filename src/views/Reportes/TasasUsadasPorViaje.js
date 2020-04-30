@@ -101,7 +101,7 @@ class TasasUsadasPorViaje extends React.Component {
                                 <CardBody>
                                     <div className="row">
                                         <div className="col-sm-12 text-center">
-                                            <Button style={{bottom: "-300px"}} onClick={this.buscar}>
+                                            <Button style={{bottom: "-270px",  margin: "40px 20px 0px 40px"}} onClick={this.buscar}>
                                                 Consultar
                                             </Button>
                                         </div>
@@ -172,6 +172,7 @@ class TasasUsadasPorViaje extends React.Component {
 
                                                     </div>
                                                     </FormGroup>
+                                                    <br></br>
                                                 </div>
                                             
                                             
@@ -184,16 +185,16 @@ class TasasUsadasPorViaje extends React.Component {
                                                 </div>
                                                 <div className="col-sm-3">
                                                     <FormGroup className="row">
-                                                        <Label className="col-sm-5">Disco/Placa: </Label>
-                                                        <Label className="col-sm-2">{this.state.data.bus_disco}</Label>
+                                                        <Label className="col-sm-5" style={{fontSize: '12px'}}>Disco/Placa: </Label>
+                                                        <Label className="col-sm-2" style={{fontSize: '12px'}}>{this.state.data.bus_disco}</Label>
                                                     </FormGroup>
                                                 </div>
                                                 <div className="col-sm-3">
                                                     <FormGroup className="row">
-                                                        <Label className="col-sm-5">Destino: </Label>
-                                                        <Label className="col-sm-7">{this.state.data.ruta_nombre}</Label>
+                                                        <Label className="col-sm-5" style={{fontSize: '12px'}}>Destino: </Label>
+                                                        <Label className="col-sm-7" style={{fontSize: '12px'}}>{this.state.data.ruta_nombre}</Label>
                                                     </FormGroup>
-                                                    <br></br>
+                                                    <br></br><br></br>
                                                 </div>
                                                 
                                                
@@ -201,12 +202,12 @@ class TasasUsadasPorViaje extends React.Component {
                                             </div>
                                             }
                                             
-                                            
+                                        
                                         
                                         ref={this.table}
                                         autoLoad={false}
                                         searchable={false}
-                                        
+                                            
 
                                         fieldNames={['Tasa (Código)', 'Usada', '# Asiento']}
                                         fields={['codigo', 'usado', 'asiento']}
