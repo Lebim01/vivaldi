@@ -373,7 +373,7 @@ class RegistroAccion extends React.Component {
                                                 <FormGroup className="row">
                                                     <Label className="col-sm-3">Tabla</Label>
                                                     <div className="col-sm-6">
-                                                        <Select asyncOptions={this.optionsTable} onChange={this.onChange('content_type')} value={this.state.cooperativa}/>
+                                                        <Select asyncOptions={this.optionsTable} onChange={this.onChange('tables')} value={this.state.tables}/>
                                                     </div>
                                                     <div className="col-sm-2"></div>
                                                     
