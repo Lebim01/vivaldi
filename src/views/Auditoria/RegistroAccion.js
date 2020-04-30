@@ -72,32 +72,28 @@ class RegistroTasa extends React.Component {
                                         
                     <div className="col-sm-6">
                         <FormGroup className="row">
-                            <Label className="col-sm-4">Fecha/Hora</Label>
-                            <div className="col-sm-6">
-                                <Input readOnly className="no-clear" type="datetime" onChange={this.onChange('datetime')} value={this.props.datetime} />
-                            </div>
+                            <Label className="col-sm-4"  style={{fontSize: '12px'}}>Fecha/Hora: </Label>
+                            <Label className="col-sm-7"  style={{fontSize: '12px'}}>{this.props.datetime}</Label>
+                               
                         </FormGroup>
                         <FormGroup className="row">
-                            <Label className="col-sm-4">Usuario</Label>
-                            <div className="col-sm-6">
-                                <Input readOnly value={this.props.user} />
-                            </div>
-                            
+                            <Label className="col-sm-3"  style={{fontSize: '12px'}}>Model: </Label>
+                            <Label className="col-sm-8"  style={{fontSize: '12px'}}>{this.props.model}</Label>
+                           
                         </FormGroup>
+                        
                     </div>
                     <div className="col-sm-6">
                         <FormGroup className="row">
-                            <Label className="col-sm-4">Model</Label>
-                            <div className="col-sm-8">
-                                
-                                <Input readOnly className="no-clear" value={this.props.model}/>
-                            </div>
+                            <Label className="col-sm-6"  style={{fontSize: '12px'}}>Usuario: </Label>
+                            <Label className="col-sm-3"  style={{fontSize: '12px'}}>{this.props.user}</Label>
+                               
                         </FormGroup>
+                        
                         <FormGroup className="row">
-                            <Label className="col-sm-5">Evento</Label>
-                            <div className="col-sm-6">
-                                <Input readOnly value={this.props.event_type} />
-                            </div>
+                            <Label className="col-sm-6" style={{fontSize: '12px'}}>  Evento: </Label>
+                            <Label className="col-sm-3"  style={{fontSize: '12px'}}>{this.props.event_type}</Label>
+                               
                         </FormGroup>
                     </div>                      
                 </div>
@@ -109,7 +105,7 @@ class RegistroTasa extends React.Component {
                     searchable={false}
 
 
-                    fieldNames={this.props.event_type == 'Create' ?  ['Id object', 'Valor'] : ['Cliente', 'Cédula/RUC', 'Viajes']}
+                    fieldNames={this.props.event_type == 'Create' ?  ['Id object', 'Valor'] : ['Objeto', 'Anterior', 'Actual']}
                     fields={
                         this.state.reporte == 1 
                             ? ['nombre', (row) => <span style={{ float: 'right',position: 'relative', right:'75%'}}>{row.viajes}</span>] 
