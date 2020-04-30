@@ -54,9 +54,9 @@ class MainView extends React.Component {
                                 <Input value={this.props.motivo} readOnly />
                             </div>
                         </FormGroup>
-                    }
+                    } 
                     <fieldset>
-                        <legend>Usuario afectado</legend>
+                        {this.props.tipo_solicitud_nombre === "Inhabilitar" ? <legend>Inhabilitar Usuario</legend> : <legend>Usuario nuevo</legend>  }
                         <FormGroup className="row">
                             <Label className="col-sm-3">Usuario</Label>
                             <div className="col-sm-5">
@@ -72,7 +72,7 @@ class MainView extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-3">Nombre</Label>
                             <div className="col-sm-5">
-                                <Input value={this.props.usuario_nombres} readOnly />
+                                <Input value={this.props.usuario_nombre} readOnly />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
@@ -85,6 +85,12 @@ class MainView extends React.Component {
                             <Label className="col-sm-3">Teléfono</Label>
                             <div className="col-sm-5">
                                 <Input value={this.props.usuario_telefono} readOnly />
+                            </div>
+                        </FormGroup>
+                        <FormGroup className="row">
+                            <Label className="col-sm-3">Documentación</Label>
+                            <div className="col-sm-5">
+                                <Input value={this.props.documentacion_url} readOnly />
                             </div>
                         </FormGroup>
                     </fieldset>
