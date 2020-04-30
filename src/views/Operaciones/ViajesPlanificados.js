@@ -94,8 +94,10 @@ class ViajesPlanificados extends React.Component {
         const { cooperativa, localidad, silo, estado } = this.state.data
         
 
-        let headers = ['#','Cooperativa', 'Disco', 'Placa', 'Vueltas', 'Saldo', 'Duración', 'Salida', 'Destino', 'Puntos', 'Kit']
+        let headers = ['#','Fecha', 'Usuario Creación', 'Cooperativa', 'Disco', 'Placa', 'Vueltas', 'Saldo', 'Duración', 'Salida', 'Destino', 'Puntos', 'Kit']
         let fields = ['', 
+            'fecha_creacion', 
+            'usuario_creacion_nombre', 
             'cooperativa_nombre', 
             'disco', 
             'placa',
