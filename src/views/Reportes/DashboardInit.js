@@ -73,7 +73,7 @@ class FormularioFiltros extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-5">Localidad</Label>
                             <div className="col-sm-7">
-                                <SelectLocalidad onChange={this.onChange('localidad')} value={this.props.localidad} asyncOptions={this.optionsLocalidad}/>
+                                <Select onChange={this.onChange('localidad')} value={this.props.localidad} asyncOptions={this.optionsLocalidad}/>
                             </div>
                         </FormGroup>
                     </Col>
