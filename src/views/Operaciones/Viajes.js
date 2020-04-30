@@ -153,10 +153,10 @@ class Viajes extends React.Component {
                                             }
 
                                             searchable={false}
-                                            fieldNames={['Fecha', 'Frecuencia','Hora salida', 'Pasajeros','Cooperativa', 'Disco', 'Ruta', 'Usuario creación', 'Fecha creación']}
+                                            fieldNames={['Fecha', 'Frecuencia','Hora salida', 'Pasajeros','Cooperativa', 'Disco', 'Ruta']}
                                             fields={['fecha','frecuencia_nombre', 'hora_salida', 'pasajeros', 'cooperativa_nombre',
                                             (row) => <span style={{textAlign:"right", position: 'relative', right:'-5%'}}>{row.bus_disco}</span>,
-                                            'ruta_nombre', 'usuario_creacion_username', 'creacion',]}
+                                            'ruta_nombre']}
 
                                             endpoint='viaje'
                                             urlFront={'operaciones/viajes'}
