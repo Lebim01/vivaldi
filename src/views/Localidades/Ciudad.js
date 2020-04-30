@@ -49,6 +49,13 @@ function Ciudades(props) {
                                     fields={['nombre', 'provincia_nombre']}
                                     parameters={state}
 
+                                    filters={{
+                                        persist: true,
+                                        callback: (parameters) => {
+                                            setState(parameters)
+                                        }
+                                    }}
+
                                     endpoint='ciudad'
                                     urlFront='localidades/ciudad'
                                     history={props.history}
