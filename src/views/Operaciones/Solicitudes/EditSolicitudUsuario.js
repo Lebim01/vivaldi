@@ -1,6 +1,6 @@
 import React from 'react'
-import { FormGroup, Input, Label, ApprovePage, FormValidate } from 'temeforest'
-import { baseurl, getParameter } from 'utils/url'
+import { FormGroup, Input, Label, ApprovePage, FormValidate, Button } from 'temeforest'
+import { baseurl, getParameter, canDownload, downloadFile } from 'utils/url'
 import axios from 'axios'
 
 const urlFront = '/operaciones/solicitudes/usuario/'
@@ -90,9 +90,8 @@ class MainView extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-3">Descargar archivo</Label>
                             <div className="col-sm-5">
-                                <a href={"http://45.55.250.4:8000" + this.props.documentacion_url} download>http://45.55.250.4:8000{this.props.documentacion_url}</a>
+                                <a class="btn btn-success" href={this.props.documentacion_url} download>Descargar Archivo</a>
                             </div>
-
                         </FormGroup>
                     </fieldset>
                 </FormValidate>
