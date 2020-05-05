@@ -88,10 +88,11 @@ class MainView extends React.Component {
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
-                            <Label className="col-sm-3">Documentación</Label>
+                            <Label className="col-sm-3">Descargar archivo</Label>
                             <div className="col-sm-5">
-                                <Input value={this.props.documentacion_url} readOnly />
+                                <a href={"http://45.55.250.4:8000" + this.props.documentacion_url} download>http://45.55.250.4:8000{this.props.documentacion_url}</a>
                             </div>
+
                         </FormGroup>
                     </fieldset>
                 </FormValidate>
