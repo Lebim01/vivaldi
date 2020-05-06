@@ -195,7 +195,10 @@ class EditConductor extends React.Component {
                             <Input id="documentation" name="documentacion" type="file" style={{display:'none'}} onChange={this._onChangeFile} />
                             <Button type="success" style={{marginRight:5}} onClick={this.uploadFile}>Subir Documentación</Button>
                             { this.state.data.documentacion_url &&
-                                <Button type="success" style={{marginLeft:5}} onClick={() => downloadFile(this.state.data.documentacion_url)} disabled={canDownload(this.state.data.documentacion_url)}>Ver Documentación</Button>
+                                <Button type="success" style={{marginLeft:5, marginRight:5}} onClick={() => downloadFile(this.state.data.documentacion_url)} disabled={canDownload(this.state.data.documentacion_url)}>Ver Documentación</Button>
+                            }
+                            {
+                                <a class="btn btn-success" style={{ color: 'white' }} href={this.props.documentacion_url} download> <i className="fa fa-download"/> Descargar Documentación</a>
                             }
                         </div>
                     </FormGroup>

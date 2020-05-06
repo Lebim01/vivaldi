@@ -378,8 +378,7 @@ class EditUsuarios extends React.Component {
                                     </div>
                                 </FormGroup>
                                 <FormGroup className="row">
-                                    <div className="col-sm-3"></div>
-                                    <div className="col-sm-3 text-right">
+                                    <div className="col-sm-6 text-right">
                                         <input id="documentation" type="file" style={{display:'none'}} onChange={this._onChangeFile}/>
                                         <Button type="success" style={{marginRight:5}} onClick={this.uploadFile}>Subir Documentación</Button>
                                     </div>
@@ -393,8 +392,29 @@ class EditUsuarios extends React.Component {
                                             >
                                                 Ver Documentación
                                             </Button>
+
                                         }
+                                        
                                     </div>
+                                    
+                                </FormGroup>
+                                <FormGroup>
+                                <div className="col-sm-12 text-center">
+                                    <Input id="documentation" type="file" style={{display:'none'}} onChange={this.onChangeFile}/>
+                                    <Button type="success" style={{marginRight:5}} onClick={this.UploadFile}>
+                                        <i className="fa fa-upload"/> Subir Documentación
+                                    </Button>
+                                    { this.state.data.documentacion_url &&
+                                        <Button type="success" style={{marginLeft:5, marginRight: 5}} onClick={() => downloadFile(this.state.data.documentacion_url)} disabled={canDownload(this.state.data.documentacion_url)}>
+                                            <i className="fa fa-download"/> Ver Documentación
+                                        </Button>
+                                    }
+                                    {
+                                        <a class="btn btn-success" style={{ color: 'white' }} href={this.state.data.documentacion_url} download> <i className="fa fa-download"/> Descargar Documentación</a>
+                                    }
+                                    
+                                </div>
+                                   
                                 </FormGroup>
                             </div>
                         }
