@@ -88,9 +88,8 @@ class MainView extends React.Component {
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
-                            <Label className="col-sm-3">Descargar archivo</Label>
                             <div className="col-sm-5">
-                                <a class="btn btn-success" href={this.props.documentacion_url} download>Descargar Archivo</a>
+                                <a class="btn btn-success" style={{ color: 'white' }} href={this.props.documentacion_url} download> <i className="fa fa-download"/> Descargar Documentación</a>
                             </div>
                         </FormGroup>
                     </fieldset>
