@@ -107,17 +107,12 @@ class MainView extends React.Component {
                                 <Input value={this.props.bus_fecha_vencimiento_matricula} readOnly />
                             </div>
                         </FormGroup>
-                        <FormGroup className="row">
-                            <Label className="col-sm-3">Descargar archivo</Label>
-                            <div className="col-sm-5">
-                                <a class="btn btn-success" href={this.props.documentacion_url} download>Descargar Archivo</a>
-                            </div>
-                        </FormGroup>
+
                         <FormGroup className="row">
                             <div className="col-sm-12 text-center">
-                                { this.props.documentacion_url &&
-                                    <a class="btn btn-success" style={{ color: 'white' }} href={this.props.documentacion_url} download> <i className="fa fa-download"/> Descargar Documentación</a>
-                                }
+                                
+                                <a class="btn btn-success" style={{ color: 'white' }} href={this.props.documentacion_url} download> <i className="fa fa-download"/> Descargar Documentación</a>
+                                
                             </div>
                         </FormGroup>
                     </fieldset>
