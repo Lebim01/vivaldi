@@ -325,11 +325,7 @@ class MainView extends React.Component {
                             <Button type="success" style={{marginRight:5}} onClick={this.UploadFile}>
                                 <i className="fa fa-upload"/> Subir Documentación
                             </Button>
-                            { 
-                                <Button type="success" style={{marginLeft:5, marginRight: 10}} onClick={() => downloadFile(this.props.documentacion_url)} disabled={canDownload(this.props.documentacion_url)}>
-                                    <i className="fa fa-download"/> Ver Documentación
-                                </Button>
-                            }
+                            
                             {
                                 <a class="btn btn-success" style={{ color: 'white' }} href={this.props.documentacion_url} download> <i className="fa fa-download"/> Descargar Documentación</a>
                             }
