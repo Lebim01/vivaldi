@@ -5,9 +5,15 @@ import { baseurl } from 'utils/url'
 
 class SolicitudUsuario extends React.Component {
 
+    constructor(props){
+        super(props)
+        this.table = React.createRef();
+    }
+
     state = {
         fecha : moment().format('YYYY-MM-DD'),
-        estado: 0
+        estado: 0, 
+        tipo_solicitud_nombre: "Nuevo"
     }
     optionsCooperativa = {
         url : `${baseurl}/cooperativa/`,
@@ -90,10 +96,15 @@ class SolicitudUsuario extends React.Component {
                                     </div>
                                 </div>
                                 <ListPage
+                                    ref={this.table}
                                     searchable={false}
 
-                                    fieldNames={['Cooperativa', 'Fecha', 'Descripión', 'Tipo de Solicitud', 'Estado']}
-                                    fields={['cooperativa_nombre', 'fecha', 'descripcion', 'tipo_solicitud_nombre', 'estado_nombre']}
+                                    fieldNames={ this.state.tipo_solicitud_nombre == "Nuevo" ? 
+                                    ['Cooperativa', 'Fecha', 'Tipo de Solicitud', 'Estado'] : 
+                                    ['Cooperativa', 'Fecha', 'Descripción', 'Tipo de Solicitud', 'Estado']}
+                                    fields={this.state.tipo_solicitud_nombre == "Nuevo" ?
+                                    ['cooperativa_nombre', 'fecha', 'tipo_solicitud_nombre', 'estado_nombre'] :
+                                    ['cooperativa_nombre', 'fecha', 'descripcion', 'tipo_solicitud_nombre', 'estado_nombre']}
 
                                     endpoint='venta/solicitud_usuario'
                                     urlFront='operaciones/solicitudes/usuario'
@@ -103,7 +114,7 @@ class SolicitudUsuario extends React.Component {
                                         callback: (parameters) => this.setState(parameters)
                                     }}
 
-                                    history={this.props.history}
+                                    history={this.props.history}                                    
                                     refresh={refresh}
                                 />
                             </CardBody>
