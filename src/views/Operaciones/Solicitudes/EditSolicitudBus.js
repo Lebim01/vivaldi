@@ -63,6 +63,69 @@ class MainView extends React.Component {
                             <Input value={this.props.fecha} readOnly />
                         </div>
                     </FormGroup>
+
+                    { this.props.tipo_solicitud === 'REE' &&
+                        <fieldset>
+                            <legend>
+                                <a href={`/cooperativas/buses/edit?=${this.props.bus_detalle.id}`}>Bus anterior</a>
+                            </legend>
+                            <FormGroup className="row">
+                                <Label className="col-sm-3">Bus</Label>
+                                <div className="col-sm-5">
+                                    <Input value={this.props.bus_detalle.disco} readOnly />
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <Label className="col-sm-3">Placa</Label>
+                                <div className="col-sm-5">
+                                    <Input value={this.props.bus_detalle.placa} readOnly />
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <Label className="col-sm-3">Marca</Label>
+                                <div className="col-sm-5">
+                                    <Input value={this.props.bus_detalle.marca_nombre} readOnly />
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <Label className="col-sm-3">Propietario</Label>
+                                <div className="col-sm-5">
+                                    <Input value={this.props.bus_detalle.propietario_nombre} readOnly />
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <Label className="col-sm-3">Distribución</Label>
+                                <div className="col-sm-5">
+                                    <Input value={this.props.bus_detalle.distribucion_nombre} readOnly />
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <Label className="col-sm-3">F. emisión matricula</Label>
+                                <div className="col-sm-5">
+                                    <Input value={this.props.bus_detalle.fecha_emision_matricula} readOnly />
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <Label className="col-sm-3">F. vencimiento matricula</Label>
+                                <div className="col-sm-5">
+                                    <Input value={this.props.bus_detalle.fecha_vencimiento_matricula} readOnly />
+                                </div>
+                            </FormGroup>
+
+                            <FormGroup className="row">
+                                { this.props.bus_detalle.documentacion_url && !this.props.bus_detalle.documentacion_url.toLowerCase().includes('none')
+                                    ? (
+                                        <div className="col-sm-12 text-center">
+                                            <a class="btn btn-success" style={{ color: 'white' }} href={this.props.bus_detalle.documentacion_url} download> <i className="fa fa-download"/> Descargar Documentación</a>
+                                        </div>
+                                    ) : (
+                                        <Label className="text-danger col-sm-12 text-center">Sin documentación</Label>
+                                    )
+                                }
+                            </FormGroup>
+                        </fieldset>
+                    }
+
                     <fieldset>
                         <legend>Bus</legend>
                         <FormGroup className="row">
@@ -109,11 +172,15 @@ class MainView extends React.Component {
                         </FormGroup>
 
                         <FormGroup className="row">
-                            <div className="col-sm-12 text-center">
-                                
-                                <a class="btn btn-success" style={{ color: 'white' }} href={this.props.documentacion_url} download> <i className="fa fa-download"/> Descargar Documentación</a>
-                                
-                            </div>
+                            { this.props.documentacion_url && !this.props.documentacion_url.toLowerCase().includes('none')
+                                ? (
+                                    <div className="col-sm-12 text-center">
+                                        <a class="btn btn-success" style={{ color: 'white' }} href={this.props.documentacion_url} download> <i className="fa fa-download"/> Descargar Documentación</a>
+                                    </div>
+                                ) : (
+                                    <Label className="text-danger col-sm-12 text-center">Sin documentación</Label>
+                                )
+                            }
                         </FormGroup>
                     </fieldset>
                 </FormValidate>

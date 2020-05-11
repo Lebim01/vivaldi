@@ -88,16 +88,16 @@ class MainView extends React.Component {
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
-                        <Label className="col-sm-3"></Label>
-                        { this.props.documentacion_url && !this.props.documentacion_url.toLowerCase().includes('none')
-                            ? (
-                                <div className="col-sm-5">
-                                    <a class="btn btn-success" style={{ color: 'white' }} href={this.props.documentacion_url} download> <i className="fa fa-download"/> Descargar Documentación</a>
-                                </div>
-                            ) : (
-                                <Label className="text-danger">Sin documentación</Label>
-                            )
-                        }
+                            <Label className="col-sm-3"></Label>
+                            { this.props.documentacion_url && !this.props.documentacion_url.toLowerCase().includes('none')
+                                ? (
+                                    <div className="col-sm-5">
+                                        <a class="btn btn-success" style={{ color: 'white' }} href={this.props.documentacion_url} download> <i className="fa fa-download"/> Descargar Documentación</a>
+                                    </div>
+                                ) : (
+                                    <Label className="text-danger">Sin documentación</Label>
+                                )
+                            }
                         </FormGroup>
                     </fieldset>
                 </FormValidate>
