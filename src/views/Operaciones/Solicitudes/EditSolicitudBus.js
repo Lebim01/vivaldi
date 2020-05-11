@@ -128,24 +128,24 @@ class MainView extends React.Component {
                         <>
                             <fieldset>
                                 <legend>
-                                    Propietario actual
+                                    Propietario nuevo
                                 </legend>
                                 <FormGroup className="row">
                                     <Label className="col-sm-3">Nombre</Label>
                                     <div className="col-sm-5">
-                                        <Input value={this.props.bus_detalle.propietario.nombre} readOnly />
+                                        <Input value={this.props.bus_propietario_nombre} readOnly />
                                     </div>
                                 </FormGroup>
                                 <FormGroup className="row">
                                     <Label className="col-sm-3">Correo</Label>
                                     <div className="col-sm-5">
-                                        <Input value={this.props.bus_detalle.propietario.correo} readOnly />
+                                        <Input value={this.props.bus_propietario_correo} readOnly />
                                     </div>
                                 </FormGroup>
                                 <FormGroup className="row">
                                     <Label className="col-sm-3">Identificación</Label>
                                     <div className="col-sm-5">
-                                        <Input value={this.props.bus_detalle.propietario.identificacion} readOnly />
+                                        <Input value={this.props.bus_propietario_cedula} readOnly />
                                     </div>
                                 </FormGroup>
                             </fieldset>
