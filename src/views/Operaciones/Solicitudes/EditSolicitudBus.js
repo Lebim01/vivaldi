@@ -128,7 +128,7 @@ class MainView extends React.Component {
                         <>
                             <fieldset>
                                 <legend>
-                                    <a href={`/usuarios/usuarios/edit?=${this.props.bus_detalle.id}`}>Propietario actual</a>
+                                    Propietario actual
                                 </legend>
                                 <FormGroup className="row">
                                     <Label className="col-sm-3">Nombre</Label>
