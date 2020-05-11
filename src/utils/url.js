@@ -86,8 +86,9 @@ async function getResults(url, no_page = false, headers = {}, force_full = false
 
 function downloadFile(url){
     if (url){
-        let file_path = baseMediaUrl + url;
-        let a = document.createElement('A');
+        let file_path = (url.includes('http') ? '' : baseMediaUrl) + url;
+        console.log(file_path)
+        let a = document.createElement('a');
         a.target = '_blank';
         a.download = true;
         a.href = file_path;
