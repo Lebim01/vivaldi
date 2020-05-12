@@ -138,7 +138,7 @@ class MainView extends React.Component {
                     { this.props.tipo_solicitud === 'REE' &&
                         <fieldset>
                             <legend>
-                                <a href={`#/cooperativas/buses/edit?=${this.props.bus_detalle.id}`} target="_blank">Bus a inactivar</a>
+                                <a href={`#/cooperativas/buses/edit?id=${this.props.bus_detalle.id}`} target="_blank">Bus a inactivar</a>
                             </legend>
                             <FormGroup className="row">
                                 <Label className="col-sm-3">Bus</Label>
