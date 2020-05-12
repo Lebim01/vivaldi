@@ -228,7 +228,7 @@ class EditUsuarios extends React.Component {
     onChangeFile = async (value) => {
         try {
             let data = this.state.data
-            data.documentacion = await fileToBase64(value)
+            data.documentacion = await fileToBase64(value.target.files[0])
             this.setState({
                 data
             })
