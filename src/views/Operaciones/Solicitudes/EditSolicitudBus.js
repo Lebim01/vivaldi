@@ -92,7 +92,14 @@ class MainView extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-3">Identificación propietario</Label>
                             <div className="col-sm-5">
-                                <Input value={this.props.bus_propietario_cedula} readOnly />
+                                <Input 
+                                    value={
+                                        this.props.tipo_solicitud !== 'INH'
+                                            ? this.props.bus_propietario_cedula
+                                            : this.props.bus_detalle.propietario.identificacion
+                                    } 
+                                    readOnly 
+                                />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
