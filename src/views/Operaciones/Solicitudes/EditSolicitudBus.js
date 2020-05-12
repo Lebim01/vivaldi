@@ -7,7 +7,7 @@ const endpoint = 'venta/solicitud_bus'
 const urlFront = '/operaciones/solicitudes/buses/'
 
 const textoBus = {
-    'INH' : 'a inactivar',
+    'INH' : 'a Inactivar',
     'REE' : 'Nuevo',
 }
 
