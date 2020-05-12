@@ -84,7 +84,7 @@ class MainView extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-3">Tipo</Label>
                             <div className="col-sm-5">
-                                <Input value={this.props.conductor_tipo} readOnly />
+                                <Input value={this.props.conductor_tipo_nombre} readOnly />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
