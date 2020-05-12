@@ -105,7 +105,7 @@ class MainView extends React.Component {
                             <FormGroup className="row">
                                 <Label className="col-sm-3">Distribución</Label>
                                 <div className="col-sm-5">
-                                    <Input value={this.props.bus_detalle ? this.props.bus_detalle.bus_tipo_nombre : ''} readOnly />
+                                    <Input value={this.props.bus_distribucion_nombre} readOnly />
                                 </div>
                             </FormGroup>
                             <FormGroup className="row">
@@ -173,7 +173,7 @@ class MainView extends React.Component {
                             <FormGroup className="row">
                                 <Label className="col-sm-3">Distribución</Label>
                                 <div className="col-sm-5">
-                                    <Input value={this.props.bus_detalle.distribucion_nombre} readOnly />
+                                    <Input value={this.props.bus_detalle ? this.props.bus_detalle.bus_tipo_nombre : ''} readOnly />
                                 </div>
                             </FormGroup>
                             <FormGroup className="row">
