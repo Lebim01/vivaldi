@@ -10,6 +10,7 @@ import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
 import './ListPage.css'
 import ReactDOMServer from "react-dom/server";
+import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 
 import FileDownloadW from 'assets/svg/file-download-solid-white.svg'
 
@@ -28,10 +29,25 @@ const DELAY_SEARCH_INPUT = 500
 
 class RecordRow extends React.Component {
 
+    state = {
+        randomid : ''
+    }
+
+    componentDidMount(){
+        this.setState({
+            randomid: `#${Math.random()}-${this.props.record.id}`
+        })
+    }
+
     onRowDoubleClick = () => {
         if (this.props.onDoubleClick){
             this.props.onDoubleClick(this.props.record.id)
-        }     
+        }
+    }
+
+    onRowRightClick = (e) => {
+        e.preventDefault()
+        this.props.onDoubleClick(this.props.record.id, {}, true)
     }
 
     render(){
@@ -43,10 +59,20 @@ class RecordRow extends React.Component {
                     const className = typeof this.props.tdBodyClass === 'function' ? this.props.tdBodyClass(record) : this.props.tdBodyClass
                     return (
                         <td className={className} key={i}>
-                            {typeof field === 'function' ? field(record, context) : record[field]}
+                            <ContextMenuTrigger id={this.state.randomid} key={record.id} style={{ width: '100%', height: '100%' }}>
+                                {typeof field === 'function' ? field(record, context) : record[field]}
+                            </ContextMenuTrigger>
                         </td>
                     )
                 })}
+
+                <ContextMenu id={this.state.randomid} style={{ backgroundColor: '#eee', padding: 15 }}>
+                    <MenuItem onClick={this.onRowRightClick}>
+                        <label className="text-info" style={{cursor: 'pointer'}}>
+                            Abrir en otra pestaña
+                        </label>
+                    </MenuItem>
+                </ContextMenu>
                 { showStatus && <td className={record.className}>{record['is_active'] ? 'Activo' : 'Inactivo'}</td> }
             </tr>
         )
@@ -219,24 +245,21 @@ class ListPage extends React.Component {
         })
     }
 
-    onRowDoubleClick = (id, row) => {
+    onRowDoubleClick = (id, row, newWindow = false) => {
         if(checkPermission(`change_${this.props.key_permission}`)){
             if(this.props.onRowDoubleClick){
                 this.props.onRowDoubleClick(row)
             }
             else if(this.props.urlFront && this.props.redirect){
-                let parameters = {
-                    ...this.props.parameters,
-                    page : this.state.currentPage
-                }
-                if(this.props.searchable){
-                    parameters.query = this.state.search
-                }
                 
-                this.props.history.push({
-                    pathname : `/${this.props.urlFront}/edit/`,
-                    search : objectToUrl({ id })
-                })
+                if(newWindow){
+                    window.open(`#/${this.props.urlFront}/edit/?id=${id}`, '_blank')
+                }else{   
+                    this.props.history.push({
+                        pathname : `/${this.props.urlFront}/edit/`,
+                        search : objectToUrl({ id })
+                    })
+                }
             }
         }
     }
@@ -440,7 +463,7 @@ class ListPage extends React.Component {
                         fields={fields} 
                         key={i} 
                         showStatus={this.props.showStatus}
-                        onDoubleClick={() => this.onRowDoubleClick(record.id, record)} 
+                        onDoubleClick={(_id, newWindow) => this.onRowDoubleClick(record.id, record, newWindow)} 
                     />
                 )}
             </tbody>
