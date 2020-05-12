@@ -1,10 +1,15 @@
 import React from 'react'
 import { FormGroup, Input, Label, ApprovePage, FormValidate, Button } from 'temeforest'
-import { baseurl, getParameter, canDownload, downloadFile } from 'utils/url'
+import { baseurl, getParameter } from 'utils/url'
 import axios from 'axios'
 
 const endpoint = 'venta/solicitud_bus'
 const urlFront = '/operaciones/solicitudes/buses/'
+
+const textoBus = {
+    'INH' : 'a inactivar',
+    'REE' : 'Nuevo',
+}
 
 class MainView extends React.Component {
     render(){
@@ -63,18 +68,12 @@ class MainView extends React.Component {
                             <Input value={this.props.fecha} readOnly />
                         </div>
                     </FormGroup>
-                    <FormGroup className="row">
-                        <Label className="col-sm-3">Identificación propietario</Label>
-                        <div className="col-sm-5">
-                            <Input value={this.props.bus_propietario_cedula} readOnly />
-                        </div>
-                    </FormGroup>
 
                     { this.props.tipo_solicitud !== 'CPR' &&
                         <fieldset>
                             <legend>Bus</legend>
                             <FormGroup className="row">
-                                <Label className="col-sm-3">Bus</Label>
+                                <Label className="col-sm-3">Bus {textoBus[this.props.tipo_solicitud]}</Label>
                                 <div className="col-sm-5">
                                     <Input value={this.props.bus_numero} readOnly />
                                 </div>
@@ -89,6 +88,12 @@ class MainView extends React.Component {
                                 <Label className="col-sm-3">Marca</Label>
                                 <div className="col-sm-5">
                                     <Input value={this.props.bus_marca_nombre} readOnly />
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <Label className="col-sm-3">Identificación propietario</Label>
+                                <div className="col-sm-5">
+                                    <Input value={this.props.bus_propietario_cedula} readOnly />
                                 </div>
                             </FormGroup>
                             <FormGroup className="row">
@@ -133,7 +138,7 @@ class MainView extends React.Component {
                     { this.props.tipo_solicitud === 'REE' &&
                         <fieldset>
                             <legend>
-                                <a href={`/cooperativas/buses/edit?=${this.props.bus_detalle.id}`}>Bus anterior</a>
+                                <a href={`#/cooperativas/buses/edit?=${this.props.bus_detalle.id}`} target="_blank">Bus a inactivar</a>
                             </legend>
                             <FormGroup className="row">
                                 <Label className="col-sm-3">Bus</Label>
@@ -151,6 +156,12 @@ class MainView extends React.Component {
                                 <Label className="col-sm-3">Marca</Label>
                                 <div className="col-sm-5">
                                     <Input value={this.props.bus_detalle.marca_nombre} readOnly />
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <Label className="col-sm-3">Propietario</Label>
+                                <div className="col-sm-5">
+                                    <Input value={this.props.bus_detalle.propietario.identificacion} readOnly />
                                 </div>
                             </FormGroup>
                             <FormGroup className="row">
