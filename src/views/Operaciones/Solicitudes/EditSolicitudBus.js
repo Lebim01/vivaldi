@@ -71,9 +71,9 @@ class MainView extends React.Component {
 
                     { this.props.tipo_solicitud !== 'CPR' &&
                         <fieldset>
-                            <legend>Bus</legend>
+                            <legend>Bus {textoBus[this.props.tipo_solicitud]}</legend>
                             <FormGroup className="row">
-                                <Label className="col-sm-3">Bus {textoBus[this.props.tipo_solicitud]}</Label>
+                                <Label className="col-sm-3">Bus</Label>
                                 <div className="col-sm-5">
                                     <Input value={this.props.bus_numero} readOnly />
                                 </div>
