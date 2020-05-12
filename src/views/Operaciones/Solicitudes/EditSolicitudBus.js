@@ -63,6 +63,12 @@ class MainView extends React.Component {
                             <Input value={this.props.fecha} readOnly />
                         </div>
                     </FormGroup>
+                    <FormGroup className="row">
+                        <Label className="col-sm-3">Identificación propietario</Label>
+                        <div className="col-sm-5">
+                            <Input value={this.props.bus_propietario_cedula} readOnly />
+                        </div>
+                    </FormGroup>
 
                     { this.props.tipo_solicitud !== 'CPR' &&
                         <fieldset>
