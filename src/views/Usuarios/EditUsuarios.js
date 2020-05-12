@@ -243,7 +243,7 @@ class EditUsuarios extends React.Component {
         }
     }
 
-    uploadFile = (e) => {
+    UploadFile = (e) => {
         let el = document.getElementById("documentation");
         if (el) {
             el.click();
