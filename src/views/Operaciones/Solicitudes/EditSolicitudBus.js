@@ -1,10 +1,15 @@
 import React from 'react'
 import { FormGroup, Input, Label, ApprovePage, FormValidate, Button } from 'temeforest'
-import { baseurl, getParameter, canDownload, downloadFile } from 'utils/url'
+import { baseurl, getParameter } from 'utils/url'
 import axios from 'axios'
 
 const endpoint = 'venta/solicitud_bus'
 const urlFront = '/operaciones/solicitudes/buses/'
+
+const textoBus = {
+    'INH' : 'a Inactivar',
+    'REE' : 'Nuevo',
+}
 
 class MainView extends React.Component {
     render(){
@@ -64,70 +69,8 @@ class MainView extends React.Component {
                         </div>
                     </FormGroup>
 
-                    { this.props.tipo_solicitud === 'REE' &&
-                        <fieldset>
-                            <legend>
-                                <a href={`/cooperativas/buses/edit?=${this.props.bus_detalle.id}`}>Bus anterior</a>
-                            </legend>
-                            <FormGroup className="row">
-                                <Label className="col-sm-3">Bus</Label>
-                                <div className="col-sm-5">
-                                    <Input value={this.props.bus_detalle.disco} readOnly />
-                                </div>
-                            </FormGroup>
-                            <FormGroup className="row">
-                                <Label className="col-sm-3">Placa</Label>
-                                <div className="col-sm-5">
-                                    <Input value={this.props.bus_detalle.placa} readOnly />
-                                </div>
-                            </FormGroup>
-                            <FormGroup className="row">
-                                <Label className="col-sm-3">Marca</Label>
-                                <div className="col-sm-5">
-                                    <Input value={this.props.bus_detalle.marca_nombre} readOnly />
-                                </div>
-                            </FormGroup>
-                            <FormGroup className="row">
-                                <Label className="col-sm-3">Propietario</Label>
-                                <div className="col-sm-5">
-                                    <Input value={this.props.bus_detalle.propietario_nombre} readOnly />
-                                </div>
-                            </FormGroup>
-                            <FormGroup className="row">
-                                <Label className="col-sm-3">Distribución</Label>
-                                <div className="col-sm-5">
-                                    <Input value={this.props.bus_detalle.distribucion_nombre} readOnly />
-                                </div>
-                            </FormGroup>
-                            <FormGroup className="row">
-                                <Label className="col-sm-3">F. emisión matricula</Label>
-                                <div className="col-sm-5">
-                                    <Input value={this.props.bus_detalle.fecha_emision_matricula} readOnly />
-                                </div>
-                            </FormGroup>
-                            <FormGroup className="row">
-                                <Label className="col-sm-3">F. vencimiento matricula</Label>
-                                <div className="col-sm-5">
-                                    <Input value={this.props.bus_detalle.fecha_vencimiento_matricula} readOnly />
-                                </div>
-                            </FormGroup>
-
-                            <FormGroup className="row">
-                                { this.props.bus_detalle.documentacion_url && !this.props.bus_detalle.documentacion_url.toLowerCase().includes('none')
-                                    ? (
-                                        <div className="col-sm-12 text-center">
-                                            <a class="btn btn-success" style={{ color: 'white' }} href={this.props.bus_detalle.documentacion_url} download> <i className="fa fa-download"/> Descargar Documentación</a>
-                                        </div>
-                                    ) : (
-                                        <Label className="text-danger col-sm-12 text-center">Sin documentación</Label>
-                                    )
-                                }
-                            </FormGroup>
-                        </fieldset>
-                    }
-
                     <fieldset>
-                        <legend>Bus</legend>
+                        <legend>Bus {textoBus[this.props.tipo_solicitud]}</legend>
                         <FormGroup className="row">
                             <Label className="col-sm-3">Bus</Label>
                             <div className="col-sm-5">
@@ -144,6 +87,19 @@ class MainView extends React.Component {
                             <Label className="col-sm-3">Marca</Label>
                             <div className="col-sm-5">
                                 <Input value={this.props.bus_marca_nombre} readOnly />
+                            </div>
+                        </FormGroup>
+                        <FormGroup className="row">
+                            <Label className="col-sm-3">Identificación propietario</Label>
+                            <div className="col-sm-5">
+                                <Input 
+                                    value={
+                                        this.props.tipo_solicitud !== 'INH'
+                                            ? this.props.bus_propietario_cedula
+                                            : this.props.bus_detalle.propietario.identificacion
+                                    } 
+                                    readOnly 
+                                />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
@@ -183,6 +139,125 @@ class MainView extends React.Component {
                             }
                         </FormGroup>
                     </fieldset>
+
+                    { this.props.tipo_solicitud === 'REE' &&
+                        <fieldset>
+                            <legend>
+                                <a href={`#/cooperativas/buses/edit?id=${this.props.bus_detalle.id}`} target="_blank">Bus a Inactivar</a>
+                            </legend>
+                            <FormGroup className="row">
+                                <Label className="col-sm-3">Bus</Label>
+                                <div className="col-sm-5">
+                                    <Input value={this.props.bus_detalle.disco} readOnly />
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <Label className="col-sm-3">Placa</Label>
+                                <div className="col-sm-5">
+                                    <Input value={this.props.bus_detalle.placa} readOnly />
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <Label className="col-sm-3">Marca</Label>
+                                <div className="col-sm-5">
+                                    <Input value={this.props.bus_detalle.marca_nombre} readOnly />
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <Label className="col-sm-3">Identificación propietario</Label>
+                                <div className="col-sm-5">
+                                    <Input value={this.props.bus_detalle.propietario.identificacion} readOnly />
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <Label className="col-sm-3">Propietario</Label>
+                                <div className="col-sm-5">
+                                    <Input value={this.props.bus_detalle.propietario_nombre} readOnly />
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <Label className="col-sm-3">Distribución</Label>
+                                <div className="col-sm-5">
+                                    <Input value={this.props.bus_detalle ? this.props.bus_detalle.bus_tipo_nombre : ''} readOnly />
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <Label className="col-sm-3">F. emisión matricula</Label>
+                                <div className="col-sm-5">
+                                    <Input value={this.props.bus_detalle.fecha_emision_matricula} readOnly />
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <Label className="col-sm-3">F. vencimiento matricula</Label>
+                                <div className="col-sm-5">
+                                    <Input value={this.props.bus_detalle.fecha_vencimiento_matricula} readOnly />
+                                </div>
+                            </FormGroup>
+
+                            <FormGroup className="row">
+                                { this.props.bus_detalle.documentacion_url && !this.props.bus_detalle.documentacion_url.toLowerCase().includes('none')
+                                    ? (
+                                        <div className="col-sm-12 text-center">
+                                            <a class="btn btn-success" style={{ color: 'white' }} href={this.props.bus_detalle.documentacion_url} download> <i className="fa fa-download"/> Descargar Documentación</a>
+                                        </div>
+                                    ) : (
+                                        <Label className="text-danger col-sm-12 text-center">Sin documentación</Label>
+                                    )
+                                }
+                            </FormGroup>
+                        </fieldset>
+                    }
+                    
+                    { this.props.tipo_solicitud === 'CPR' &&
+                        <>
+                            <fieldset>
+                                <legend>
+                                    Propietario nuevo
+                                </legend>
+                                <FormGroup className="row">
+                                    <Label className="col-sm-3">Nombre</Label>
+                                    <div className="col-sm-5">
+                                        <Input value={this.props.bus_propietario_nombre} readOnly />
+                                    </div>
+                                </FormGroup>
+                                <FormGroup className="row">
+                                    <Label className="col-sm-3">Correo</Label>
+                                    <div className="col-sm-5">
+                                        <Input value={this.props.bus_propietario_correo} readOnly />
+                                    </div>
+                                </FormGroup>
+                                <FormGroup className="row">
+                                    <Label className="col-sm-3">Identificación</Label>
+                                    <div className="col-sm-5">
+                                        <Input value={this.props.bus_propietario_cedula} readOnly />
+                                    </div>
+                                </FormGroup>
+                            </fieldset>
+                            <fieldset>
+                                <legend>
+                                    Propietario anterior
+                                </legend>
+                                <FormGroup className="row">
+                                    <Label className="col-sm-3">Nombre</Label>
+                                    <div className="col-sm-5">
+                                        <Input value={this.props.bus_detalle.propietario.nombre} readOnly />
+                                    </div>
+                                </FormGroup>
+                                <FormGroup className="row">
+                                    <Label className="col-sm-3">Correo</Label>
+                                    <div className="col-sm-5">
+                                        <Input value={this.props.bus_detalle.propietario.correo} readOnly />
+                                    </div>
+                                </FormGroup>
+                                <FormGroup className="row">
+                                    <Label className="col-sm-3">Identificación</Label>
+                                    <div className="col-sm-5">
+                                        <Input value={this.props.bus_detalle.propietario.identificacion} readOnly />
+                                    </div>
+                                </FormGroup>
+                            </fieldset>
+                        </>
+                    }
                 </FormValidate>
             </div>
         )
