@@ -94,7 +94,7 @@ class MainView extends React.Component {
                             <div className="col-sm-5">
                                 <Input 
                                     value={
-                                        ['ACT'].includes(this.props.tipo_solicitud)
+                                        ['ACT', 'INH'].includes(this.props.tipo_solicitud)
                                             ? this.props.bus_detalle.propietario.identificacion
                                             : this.props.bus_propietario_cedula
                                     } 
