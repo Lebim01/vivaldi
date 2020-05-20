@@ -68,10 +68,10 @@ class RecordRow extends React.Component {
                             <ContextMenuTrigger id={this.state.randomid} key={record.id} style={{ width: '100%', height: '100%' }}>
                                
                                 {typeof field === 'function' ? field(record, context) : record[field]}
-                                <ContextMenu id={this.state.randomid}  style={{ width: '5%', height: '5%', 
-                                backgroundImage: `url(${"../../assets/images/abrirNuevaPestana.png"})` , backgroundSize: 'cover'  }}
+                                <ContextMenu id={this.state.randomid}  style={{ width: '10%', height: '4.8%', 
+                                backgroundImage: `url(${"https://i.ibb.co/tLKgTx8/pestana.png"})` , backgroundSize: 'cover'
+                                 }}
                                 >
-                                
                                     <label for = "Name"></label>
                                 </ContextMenu>
                             </ContextMenuTrigger>
