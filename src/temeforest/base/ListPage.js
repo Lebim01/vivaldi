@@ -46,33 +46,41 @@ class RecordRow extends React.Component {
     }
 
     onRowRightClick = (e) => {
+        //document.getElementById('t1').innerHTML = '  Abrir en nueva pestaña';
         e.preventDefault()
+        //alert("Se abrirá en una nueva pestaña");
         this.props.onDoubleClick(this.props.record.id, {}, true)
+        
+        
     }
 
     render(){
         const { fields, record, context, showStatus } = this.props
-
+        
         return (
-            <tr key={record.id} onDoubleClick={this.onRowDoubleClick}>
+            
+            <tr key={record.id} onDoubleClick={this.onRowDoubleClick} onClick={this.onRowRightClick}>
                 {fields.map((field, i) => {
                     const className = typeof this.props.tdBodyClass === 'function' ? this.props.tdBodyClass(record) : this.props.tdBodyClass
                     return (
-                        <td className={className} key={i}>
+                        <td className={className} key={i} >
+                             
                             <ContextMenuTrigger id={this.state.randomid} key={record.id} style={{ width: '100%', height: '100%' }}>
+                               
                                 {typeof field === 'function' ? field(record, context) : record[field]}
+                                <ContextMenu id={this.state.randomid}  style={{ width: '5%', height: '5%', 
+                                backgroundImage: `url(${"../../assets/images/abrirNuevaPestana.png"})` , backgroundSize: 'cover'  }}
+                                >
+                                
+                                    <label for = "Name"></label>
+                                </ContextMenu>
                             </ContextMenuTrigger>
+                            
                         </td>
                     )
                 })}
 
-                <ContextMenu id={this.state.randomid} style={{ backgroundColor: '#eee', padding: 15 }}>
-                    <MenuItem onClick={this.onRowRightClick}>
-                        <label className="text-info" style={{cursor: 'pointer'}}>
-                            Abrir en otra pestaña
-                        </label>
-                    </MenuItem>
-                </ContextMenu>
+                
                 { showStatus && <td className={record.className}>{record['is_active'] ? 'Activo' : 'Inactivo'}</td> }
             </tr>
         )
