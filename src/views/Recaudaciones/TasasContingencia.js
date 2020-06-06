@@ -154,26 +154,26 @@ class TasasContingencia extends React.Component {
 
 
             */
+           
+            
+           const res= await axios.get(`${baseurl}/venta/generacion_contingencia/${row.id}/imprimir`)
+           const comparacion = await axios.get(`${baseurl}/venta/generacion_contingencia/${row.id}/`)
+           let data = Object.keys(res.data)[0]
 
             try {
-                const res= await axios.get(`${baseurl}/venta/generacion_contingencia/${row.id}/imprimir`)
-                const comparacion = await axios.get(`${baseurl}/venta/generacion_contingencia/${row.id}/`)
-                //const url = window.URL.createObjectURL());
-               // Swal.fire(res.data.info)
-                if(comparacion.data.estado === 3 || res.data.estado ===1){
-                    setTimeout(function(){ 
-                        window.open(res.data.reporte)
-                        //Swal.fire("El reporte ha sido generado con éxito!.")
-                    }, 5000);
-                }else {
-                    Swal.fire(res.data.info)
-                }
                 
-               // const actualizar = await axios.post(`${baseurl}/venta/generacion_contingencia/${row.id}/`, { estado : 3})
-
+                if(comparacion.data.estado === 3 ){
+                   
+                         window.open(res.data.reporte)
+                        console.log("estado primero :" + comparacion.data.estado)
+                       
+                    
+                }                  
+               
             } catch(err){
-                window.alert(err.res.data.error );
-                //Swal.fire(err.res.data.detail);
+                
+                //window.alert(err.res.data.error );
+                Swal.fire( '' , res.data[data], data);
             }
             this.setState({loading: false})
             
@@ -181,13 +181,36 @@ class TasasContingencia extends React.Component {
         }
     }
 
+
+    alert = async (row) => {
+       
+        const res= await axios.get(`${baseurl}/venta/generacion_contingencia/${row.id}/imprimir`)
+        const comparacion = await axios.get(`${baseurl}/venta/generacion_contingencia/${row.id}/`)
+        let data = Object.keys(res.data)[0]
+
+        if(comparacion.data.estado === 3 ){
+            window.open(res.data.reporte)
+           console.log("estado primero :" + comparacion.data.estado)
+       
+        } else                
+        //Swal.fire({title: "INFO", icon: 'success', text: "El reporte se está generando!"})
+        Swal.fire( '' , res.data[data], data);
+    }
+
     imprimir = (row) => {
         if(row.estado === 3) return null
+        else if(row.estado === 1) {
         return (
             <Button onClick={() => this.print(row)}>
                 Imprimir
-            </Button>
-        )
+            </Button> 
+        )}
+        else if (row.estado === 0 ) {
+        return (
+            <Button onClick={() => this.alert(row)}> Imprimir
+            </Button> 
+        )}
+   
     }
 
     render(){
