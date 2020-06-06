@@ -1,48 +1,15 @@
-import React, { Component } from 'react'
-import { ListPage, Card, CardBody, CardTitle, Label, FormGroup, FormValidate, Select, Input, Button ,Permission, SelectLocalidad} from 'temeforest'
-import { baseurl, objectToUrl } from 'utils/url'
+import React from 'react'
+import { ListPage, Card, CardBody, Label, FormGroup, Select, Input, Button ,Permission, SelectLocalidad} from 'temeforest'
+import { baseurl } from 'utils/url'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
-import { printHtml } from 'utils/exportData'
-import axios from 'axios'
 import moment from 'moment'
 
 
-class RegistroTasa extends React.Component {
+class ModalDetalle extends React.Component {
 
-    constructor(props){
-        super(props)
-        this.table = React.createRef();
-    }
+    state = {
 
-    state ={
-        from_date: moment().format('YYYY-MM-DD'),
-        to_date: moment().format('YYYY-MM-DD'),
     }
-
-
-    optionsLocalidad = {
-        url : `${baseurl}/localidad/`,
-        labelName: 'nombre',
-        valueName: 'id',
-    }
-    optionsCooperativa = {
-        url : `${baseurl}/cooperativa/`,
-        labelName: 'nombre',
-        valueName: 'id'
-    }
-
-    cantidad= (row) => {
-        return (
-            <ul>
-            {row.object_json_repr.map(({ fields}, index) => 
-                <li>{fields.cantidad}</li>
-            )}
-        </ul>
-        
-        )
-        
-    }
-    
 
     toggle = () => {
         if(this.props.toggle){
@@ -50,83 +17,66 @@ class RegistroTasa extends React.Component {
         }
     }
 
-    onChange = name => (e) => {
-        this.setState({
-            [name]: e.target.value
-        })
-    }
-
-    refresh = () => {
-        this.setState({
-            refresh: true
-        })
-    }
-
-    guardar = () => {
-        if(this.props.guardar){
-            this.props.guardar()
-        }
-    }
-
     render(){
-        const { refresh } = this.state      
         return (
-            <Modal isOpen={this.props.show} toggle={this.toggle}>
-                <ModalHeader toggle={this.toggle}>Detalle Registro Accion</ModalHeader>
+            <Modal isOpen={this.props.show} toggle={this.toggle} size={'lg'}>
+                <ModalHeader toggle={this.toggle}>Detalle Registro Accion <b>{this.props.event_type}</b></ModalHeader>
                 <ModalBody>
-                <div className="row">
-                                        
-                    <div className="col-sm-6">
-                        <FormGroup className="row">
-                            <Label className="col-sm-4"  style={{fontSize: '12px'}}>Fecha/Hora: </Label>
-                            <Label className="col-sm-7"  style={{fontSize: '12px'}}>{this.props.datetime}</Label>
-                               
-                        </FormGroup>
-                        <FormGroup className="row">
-                            <Label className="col-sm-3"  style={{fontSize: '12px'}}>Model: </Label>
-                            <Label className="col-sm-8"  style={{fontSize: '12px'}}>{this.props.model}</Label>
-                           
-                        </FormGroup>
-                        
+                    <div className="row">        
+                        <div className="col-sm-6">
+                            <FormGroup className="row">
+                                <Label className="col-sm-4">Fecha/Hora</Label>
+                                <div className="col-sm-6">
+                                    <Input readOnly className="no-clear" type="datetime" value={this.props.datetime} />
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <Label className="col-sm-4">Usuario</Label>
+                                <div className="col-sm-6">
+                                    <Input readOnly value={this.props.user} />
+                                </div>
+                                
+                            </FormGroup>
+                        </div>
+                        <div className="col-sm-6">
+                            <FormGroup className="row">
+                                <Label className="col-sm-4">Model</Label>
+                                <div className="col-sm-6">
+                                    
+                                    <Input readOnly className="no-clear" value={this.props.model}/>
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <Label className="col-sm-4">Evento</Label>
+                                <div className="col-sm-6">
+                                    <Input readOnly value={this.props.event_type} />
+                                </div>
+                            </FormGroup>
+                        </div>
+                        <div className="col-sm-12">
+                            <table className="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Clave</th>
+                                        <th>Valor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    { this.props.object_json_repr && this.props.object_json_repr[0] && this.props.object_json_repr[0].fields &&
+                                        Object.keys(this.props.object_json_repr[0].fields).map((key) => 
+                                            <tr>
+                                                <td>{key}</td>
+                                                <td>{this.props.object_json_repr[0].fields[key]}</td>
+                                            </tr>
+                                        )
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div className="col-sm-6">
-                        <FormGroup className="row">
-                            <Label className="col-sm-6"  style={{fontSize: '12px'}}>Usuario: </Label>
-                            <Label className="col-sm-3"  style={{fontSize: '12px'}}>{this.props.user}</Label>
-                               
-                        </FormGroup>
-                        
-                        <FormGroup className="row">
-                            <Label className="col-sm-6" style={{fontSize: '12px'}}>  Evento: </Label>
-                            <Label className="col-sm-3"  style={{fontSize: '12px'}}>{this.props.event_type}</Label>
-                               
-                        </FormGroup>
-                    </div>                      
-                </div>
-                <ListPage
-
-                  
-                    ref={this.table}
-                    autoLoad={true}
-                    searchable={false}
-
-
-                    fieldNames={this.props.event_type == 'Create' ?  ['Id object', 'Valor'] : ['Objeto', 'Anterior', 'Actual']}
-                    fields={
-                        this.props.event_type == 'Create'
-                            ? ['object_id', 'object_repr'] 
-                            : ['id', 'user_id', 'user']
-                    }
-                    endpoint='auditcrud'
-                    parameters={this.state}
-
-                    history={this.props.history}
-                    refresh={refresh}
-                />
                 </ModalBody>
                 <ModalFooter>
-                    <Button type="success" onClick={this.guardar}>Aceptar</Button>{' '}
-                    <Button type="secondary" onClick={this.toggle}>Cancelar</Button>
+                    <Button type="secondary" onClick={this.toggle}>Cerrar</Button>
                 </ModalFooter>
             </Modal>
         )
@@ -148,12 +98,6 @@ class RegistroAccion extends React.Component {
         labelName: 'nombre',
         valueName: 'id'
     }
-
-    optionsLocalidad = {
-        url : `${baseurl}/localidad/`,
-        labelName: 'nombre',
-        valueName: 'id'
-        }
 
     optionsTable = {
         url : `${baseurl}/tables/`,
@@ -177,143 +121,39 @@ class RegistroAccion extends React.Component {
         })
     }
 
-    propietario= (row) => {
-        return (
-            <ul>
-            {row.object_json_repr.map(({ fields}, index) => 
-                <li>{fields.propietario}</li>
-            )}
-        </ul>
-        
-        )
-        
-    }
-
-    PrimerNombre= (row) => {
-        return (
-            <ul>
-            {row.object_json_repr.map(({ fields}, index) => 
-                <li>{fields.first_name}</li>
-            )}
-        </ul>
-        
-        )
-        
-    }
-
-    usuarioPrimero= (row) => {
-        return (
-            
-        <ul>
-            {row.object_json_repr.map(({fields}, index) => 
-                <li>{fields.nombre}</li>
-            )}
-        </ul>
-        
-        )
-        
-    }
-
-    todos = (row)=> {
-        
-            row.object_json_repr.map(({ fields}, index ) =>{
-                return(
-                <ul>
-                    {Object.keys(fields).map(fieldNames => {
-                        return(
-                            <li>
-                                {fieldNames} : {fields[fieldNames]}
-                            </li>
-                        )
-
-                    })}
-                </ul>
-                )
-              })      
-    }
-
-    fechaEmision = (row) => {
-        return (
-            <ul>
-            {row.object_json_repr.map(({ fields}, index) => 
-                <li>{fields.fecha_emision}</li>
-            )}
-        </ul>
-        
-        )
-        
-    }
-
-    direccion = (row) => {
-        return (
-            <ul>
-            {row.object_json_repr.map(({ fields}, index) => 
-                <li>{fields.direccion}</li>
-            )}
-        </ul>
-        
-        )
-        
-    }
-
-    identificacion= (row) => {
-        return (
-            <ul>
-            {row.object_json_repr.map(({ fields}, index) => 
-                <li>{fields.identificacion}</li>
-            )}
-        </ul>
-        
-        )
-        
-    }
-
-    cantidad= (row) => {
-        return (
-            <ul>
-            {row.object_json_repr.map(({ fields}, index) => 
-                <li>{fields.cantidad}</li>
-            )}
-        </ul>
-        
-        )
-        
-    }
-
-    editarVenta = (venta) => {
-            this.setState({
-                venta
-            }, this.toggle)
-        
-    }
-
-    fieldEditar = (row) => {
-            return (
-                <Button onClick={(e) => { this.editarVenta(row) }}>
-                    Ver detalle
-                </Button>
-            )
-        
-        return null
-    }
     onChange = name => (e) => {
         this.setState({
             [name]: e.target.value
         })
     }
 
-    buscar(){
+    buscar = () => {
         this.setState({
             refresh: true
         })
+    }
+
+    editarVenta = (venta) => {
+        this.setState({
+            venta
+        }, this.toggle)
+    }
+  
+
+    fieldEditar = (row) => {
+        return (
+            <Button onClick={(e) => { this.editarVenta(row) }}>
+                Ver detalle
+            </Button>
+        )
     }
 
     render() {
         const { refresh } = this.state      
         return (
             <Permission key_permission="view_diario" mode="redirect">
-            <div className="animated fadeIn">
-                 <RegistroTasa
+                <div className="animated fadeIn">
+                 <ModalDetalle
                     toggle={this.toggle}
                     guardar={this.guardarVenta}
                     show={this.state.openModal}
@@ -326,121 +166,100 @@ class RegistroAccion extends React.Component {
                             <CardBody>
                                 <div className="row">
                                     <div className="col-sm-12 text-center">
-                                        <Button style={{ bottom: "-206px", }} onClick={this.buscar.bind(this)}>
-                                            Buscar
-                                        </Button>
-                                    </div>
-                                </div>
-                                <ListPage
-
-                                    exportExcel
-                                    imprimirPantalla
-                                    id="report"
-                                    key_permission="diario"
-
-                                    title= "Registro Acciones"
-                                
-                                filtersZone = {
-                                    <div className="row">
-                                        <div className="col-sm-4">
-                                            <FormGroup className="row">
-                                                <Label className="col-sm-5">Cooperativa</Label>
-                                                <div className="col-sm-6">
-                                                    
-                                                    <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
-                                                </div>
-                                            </FormGroup>
-                                            <FormGroup className="row">
-                                                <Label className="col-sm-5">Localidad</Label>
-                                                <div className="col-sm-6">
-                                                    <SelectLocalidad onChange={this.onChange('localidad')} value={this.state.localidad}/>
-                                                </div>
-                                            </FormGroup>
+                                            <Button style={{ bottom: "-206px", }} onClick={this.buscar}>
+                                                Buscar
+                                            </Button>
                                         </div>
-                                            <div className="col-sm-4">
-                                                <FormGroup className="row">
-                                                    <Label className="col-sm-4">Fecha Inicio</Label>
-                                                    <div className="col-sm-6">
-                                                        <Input className="no-clear" type="date" value={this.state.from_date} onChange={this.onChange('from_date')} />
-                                                    </div>
-                                                </FormGroup>
-                                                <FormGroup className="row">
-                                                    <Label className="col-sm-4">Fecha Fin</Label>
-                                                    <div className="col-sm-6">
-                                                        <Input className="no-clear" type="date" value={this.state.to_date} onChange={this.onChange('to_date')} />
-                                                    </div>
-                                                    <div >
-                                                        <Label className="col-sm-4" style={{ bottom: "-290px",    margin: "0 10px 0 66px"}} ></Label>
-                                                        <Label className="col-sm-4" style={{ bottom: "-290px",    margin: "0 10px 0 66px"}} ></Label>
-                                                    </div>
-                                                </FormGroup>
-                                            </div>
-                                            <div className="col-sm-4">
-                                                <FormGroup className="row">
-                                                    <Label className="col-sm-3">Tabla</Label>
-                                                    <div className="col-sm-6">
-                                                        <Select asyncOptions={this.optionsTable} onChange={this.onChange('tables')} value={this.state.tables}/>
-                                                    </div>
-                                                    <div className="col-sm-2"></div>
-                                                    
-                                                </FormGroup>
-                                                
-
-                                            </div>
-                                        
                                     </div>
-                                        
-                                }         
+
+                                    <ListPage
+                                        exportExcel
+                                        imprimirPantalla
+                                        id="report"
+                                        key_permission="diario"
+
+                                        title= "Registro Acciones"
                                     
-                                    //showStatus={true}
-                                    ref={this.table}
-                                    searchable={false}
-                                    headerClass="text-center"
-                                    head={[[
-                                        'Fecha/Hora', 
-                                        'username', 
-                                        'model', 
-                                        'Id tabla',
-                                        //'Codigo',
-                                        //'Propietario',
-                                        //'Tabla', 
-                                        //'Dirección',
-                                        'Evento', 
-                                        //'Identificación',
-                                        //'Departamento', 
-                                        /*'Descripción'*/
-                                    //'Fecha emisión',
-                                        'Detalle'
-                                    ]]}
-                                    fields = {[
-                                        'datetime', 
-                                        'user', 
-                                        'model', 
-                                        'object_id',
-                                        //'object_id',
-                                        //'placa',
-                                        //'content_type',
-                                    // this.direccion,
-                                        'event_type', 
-                                    // this.identificacion, 
-                                        //'object_repr', 
-                                        //this.fechaEmision
-                                        this.fieldEditar
-                                    ]}
-                                    onRowDoubleClick={this.editarVenta}
+                                        filtersZone = {
+                                            <div className="row">
+                                                <div className="col-sm-4">
+                                                    <FormGroup className="row">
+                                                        <Label className="col-sm-5">Cooperativa</Label>
+                                                        <div className="col-sm-6">
+                                                            
+                                                            <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
+                                                        </div>
+                                                    </FormGroup>
+                                                    <FormGroup className="row">
+                                                        <Label className="col-sm-5">Localidad</Label>
+                                                        <div className="col-sm-6">
+                                                            <SelectLocalidad onChange={this.onChange('localidad')} value={this.state.localidad}/>
+                                                        </div>
+                                                    </FormGroup>
+                                                </div>
+                                                <div className="col-sm-4">
+                                                    <FormGroup className="row">
+                                                        <Label className="col-sm-4">Fecha Inicio</Label>
+                                                        <div className="col-sm-6">
+                                                            <Input className="no-clear" type="date" value={this.state.from_date} onChange={this.onChange('from_date')} />
+                                                        </div>
+                                                    </FormGroup>
+                                                    <FormGroup className="row">
+                                                        <Label className="col-sm-4">Fecha Fin</Label>
+                                                        <div className="col-sm-6">
+                                                            <Input className="no-clear" type="date" value={this.state.to_date} onChange={this.onChange('to_date')} />
+                                                        </div>
+                                                        <div >
+                                                            <Label className="col-sm-4" style={{ bottom: "-290px",    margin: "0 10px 0 66px"}} ></Label>
+                                                            <Label className="col-sm-4" style={{ bottom: "-290px",    margin: "0 10px 0 66px"}} ></Label>
+                                                        </div>
+                                                    </FormGroup>
+                                                </div>
+                                                <div className="col-sm-4">
+                                                    <FormGroup className="row">
+                                                        <Label className="col-sm-3">Tabla</Label>
+                                                        <div className="col-sm-6">
+                                                            <Select asyncOptions={this.optionsTable} onChange={this.onChange('content_type')} value={this.state.cooperativa}/>
+                                                        </div>
+                                                        <div className="col-sm-2"></div>
+                                                    </FormGroup>
+                                                </div>
+                                            </div>
+                                        }
+
+                                        ref={this.table}
+                                        searchable={false}
+                                        headerClass="text-center"
+                                        head={[[
+                                            'Fecha/Hora', 
+                                            'username', 
+                                            'model', 
+                                            'Id tabla',
+                                            'Evento', 
+                                            'Detalle'
+                                        ]]}
+                                        fields = {[
+                                            'datetime', 
+                                            'user', 
+                                            'model', 
+                                            'object_id',
+                                            'event_type', 
+                                            this.fieldEditar
+                                        ]}
+                                        onRowDoubleClick={this.editarVenta}
 
 
-                                    endpoint='auditcrud'
-                                    parameters={this.state}
+                                        endpoint='auditcrud'
+                                        parameters={this.state}
 
-                                    history={this.props.history}
-                                    refresh={refresh}
-                                />
-                            </CardBody>
-                        </Card>
+                                        history={this.props.history}
+                                        refresh={refresh}
+                                    />
+                                </CardBody>
+                            </Card>
+                        </div>
                     </div>
                 </div>
-            </div>
             </Permission>
         )
     }
