@@ -53,26 +53,67 @@ class ModalDetalle extends React.Component {
                                 </div>
                             </FormGroup>
                         </div>
-                        <div className="col-sm-12">
-                            <table className="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Clave</th>
-                                        <th>Valor</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    { this.props.object_json_repr && this.props.object_json_repr[0] && this.props.object_json_repr[0].fields &&
-                                        Object.keys(this.props.object_json_repr[0].fields).map((key) => 
+
+                        { this.props.event_type === 'Create' &&
+                            <div className="col-sm-12">
+                                <label className="col-sm-12 text-center">Campos</label>
+                                <table className="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Clave</th>
+                                            <th>Valor</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        { this.props.object_json_repr && this.props.object_json_repr[0] && this.props.object_json_repr[0].fields &&
+                                            Object.keys(this.props.object_json_repr[0].fields).map((key) => 
+                                                <tr>
+                                                    <td>{key}</td>
+                                                    <td>{this.props.object_json_repr[0].fields[key]}</td>
+                                                </tr>
+                                            )
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+
+                        { this.props.event_type === 'Update' &&
+                            <div className="col-sm-12">
+                                <label className="col-sm-12 text-center">Campos</label>
+                                <table className="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Objecto</th>
+                                            <th>Anterior</th>
+                                            <th>Actual</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        { this.props.changes  && 
+                                            Object.keys(this.props.changes).map((key) => 
+                                                <tr>
+                                                    <td>{key}</td>
+                                                    <td>{this.props.changes[key][0]}</td>
+                                                    <td>{this.props.changes[key][1]}</td>
+                                                </tr>
+                                            )
+                                        }
+                                        { (this.props.changes === 'Sin Cambios' || this.props.changes === null) && 
                                             <tr>
-                                                <td>{key}</td>
-                                                <td>{this.props.object_json_repr[0].fields[key]}</td>
+                                                <td>{""}</td>
+                                                <td>{"Sin cambios"}</td>
+                                                <td>{"Sin cambios"}</td>
                                             </tr>
-                                        )
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
+                                        
+                                            
+                                        }
+                                        
+                                    </tbody>
+                                    
+                                </table>
+                            </div>
+                        }
                     </div>
                 </ModalBody>
                 <ModalFooter>
@@ -219,7 +260,7 @@ class RegistroAccion extends React.Component {
                                                     <FormGroup className="row">
                                                         <Label className="col-sm-3">Tabla</Label>
                                                         <div className="col-sm-6">
-                                                            <Select asyncOptions={this.optionsTable} onChange={this.onChange('content_type')} value={this.state.cooperativa}/>
+                                                            <Select asyncOptions={this.optionsTable} onChange={this.onChange('content_type')} value={this.state.content_type}/>
                                                         </div>
                                                         <div className="col-sm-2"></div>
                                                     </FormGroup>
