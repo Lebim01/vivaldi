@@ -97,13 +97,7 @@ class ReporteBoletosTasas extends React.Component {
                         
                                     <TabContent activeTab={this.state.tipo_tabla}>
                                         <TabPane tabId="1">
-                                            <div className="row">
-                                                <div className="col-sm-12 text-center">
-                                                    <Button style={{bottom: "-220px"}} onClick={this.buscar}>
-                                                        Consultar
-                                                    </Button>
-                                                </div>
-                                            </div>
+                                            
                                             <ListPage 
 
                                                 exportExcel
@@ -164,6 +158,13 @@ class ReporteBoletosTasas extends React.Component {
                                                             <Label className="col-sm-4" style={{ bottom: "-290px",    margin: "0 10px 0 66px"}} ></Label>
                                                         </div>
                                                         </FormGroup> 
+                                                        <div className="row">
+                                                            <div className="col-sm-12 text-center">
+                                                                <Button style={{position: "relative", top: "0px", left: "367px"}} onClick={this.buscar}>
+                                                                    Consultar
+                                                                </Button>
+                                                            </div>
+                                                        </div>
                                                         </div>
                                                     </div>
                                                     }

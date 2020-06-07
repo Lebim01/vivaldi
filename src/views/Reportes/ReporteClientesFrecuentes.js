@@ -54,13 +54,7 @@ class ReporteClientesFrecuentes extends React.Component {
                         <div className="col-sm-12">
                             <Card>
                                 <CardBody> 
-                                <div className="row">
-                                    <div className="col-md-12 text-center">
-                                        <Button style={{ bottom: "-250px",    margin: "0 10px 0 0px",}} onClick={this.buscar}>
-                                            Consultar
-                                        </Button>
-                                    </div>
-                                </div>
+                                
                                 <ListPage
                                         
                                         id="report"
@@ -119,13 +113,23 @@ class ReporteClientesFrecuentes extends React.Component {
                                             </div>
                                         
                                         </FormGroup>
+                                        <div className="row">
+                                            <div className="col-md-12 text-center">
+                                                <Button style={{ position: "relative", top: "55px", left: "150px", margin: "10px 10px 10px 10px"}} onClick={this.buscar}>
+                                                    Consultar
+                                                </Button>
+                                            </div>
+                                            <br></br>
+                                            <br></br>
+                                        </div>
                                         
                                         
-                                        
+                                        <br></br>
+                                            <br></br>
                                         
                                     </div>
                                 
-
+                                
                                     }
                                     
                                         ref={this.table}

@@ -38,13 +38,6 @@ class SalidaViajes extends React.Component {
                             <div className="col-sm-12">
                                 <Card>
                                     <CardBody>
-                                        <div className="row">
-                                            <div className="col-sm-12 text-center">
-                                                <Button style={{ bottom: "-205px"}} onClick={this.buscar}>
-                                                    Consultar
-                                                </Button>
-                                            </div>
-                                        </div>
                                         <ListPage
                                             exportExcel
                                             imprimirPantalla
@@ -81,6 +74,13 @@ class SalidaViajes extends React.Component {
                                                             <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
                                                         </div>
                                                     </FormGroup>
+                                                    <div className="row">
+                                                        <div className="col-sm-12 text-center">
+                                                            <Button style={{ position: "relative", top: "45px"}} onClick={this.buscar}>
+                                                                Consultar
+                                                            </Button>
+                                                        </div>
+                                                    </div>
                                                     <br></br><br></br>
                                                 </div>
                                                 

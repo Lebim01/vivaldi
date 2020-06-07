@@ -403,9 +403,10 @@ class ListPage extends React.Component {
                 {' '}
                 { imprimirPantalla &&
                     <Button onClick={this.imprimirPantalla} title="Imprimir Pantalla">
-                        <i className="fa fa-print"></i>
+                        <i className="fa fa-print"/>
                     </Button>
                 }
+                {' '}
                 { actionsButtons.map(element => (
                     <>
                         {' '}
