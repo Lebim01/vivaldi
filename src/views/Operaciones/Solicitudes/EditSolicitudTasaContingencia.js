@@ -89,7 +89,7 @@ class MainView extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-3">Cantidad aprobada</Label>
                             <div className="col-sm-5">
-                                <Input value={this.props.cantidad_aprobada} onChange={this.onChangeCantidadAprobada} />
+                                <Input type="number" value={this.props.cantidad_aprobada} onChange={this.onChangeCantidadAprobada} min="1" />
                             </div>
                         </FormGroup>
                     </fieldset>
