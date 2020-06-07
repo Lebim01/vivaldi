@@ -88,6 +88,19 @@ class TasasUsadasPorViaje extends React.Component {
             }
         }
     }
+
+    usaapi = (row) => {
+        if(row.usado==true){
+        return (
+            <input type="checkbox" checked={row.usado===true} />
+            
+        )} else
+        return(
+            <label class="fas fa-times" checked={row.usado===false}> 
+            </label>
+        )
+
+    }
     
     
     render(){
