@@ -101,7 +101,8 @@ class TasasUsadasPorViaje extends React.Component {
                                 <CardBody>
                                     <div className="row">
                                         <div className="col-sm-12 text-center">
-                                            <Button style={{bottom: "-270px",  margin: "40px 20px 0px 40px"}} onClick={this.buscar}>
+                                            <Button style={{bottom: "-270px",  margin: "40px 20px 0px 40px"}} 
+                                            onClick={this.buscar} /*disabled={!this.state.cooperativa}*/>
                                                 Consultar
                                             </Button>
                                         </div>
@@ -117,7 +118,7 @@ class TasasUsadasPorViaje extends React.Component {
                                                 <div className="row">
                                                 <div className="col-sm-4">
                                                     <FormGroup className="row">
-                                                        <Label className="col-sm-5">Cooperativa</Label>
+                                                        <Label className={"col-md-5 " /*+ (this.state.cooperativa ? "" : "text-danger")*/}>Cooperativa</Label>
                                                         <div className="col-sm-7">
                                                             <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
                                                         </div>
@@ -209,8 +210,11 @@ class TasasUsadasPorViaje extends React.Component {
                                         searchable={false}
                                             
 
-                                        fieldNames={['Tasa (Código)', 'Usada', '# Asiento']}
-                                        fields={['codigo', 'usado', 'asiento']}
+                                        fieldNames={['Tasa (Código)', 'Usada', 'Pasajero', '# Asiento']}
+                                        fields={['codigo', 
+                                        this.usaapi, 
+                                        'pasajero',
+                                        'asiento']}
 
                                         endpoint='recaudaciones/tasas_emitidas_vs_usadas_cooperativa'
                                         parameters={this.state}
