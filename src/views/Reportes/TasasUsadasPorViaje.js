@@ -99,14 +99,7 @@ class TasasUsadasPorViaje extends React.Component {
                         <div className="col-sm-12">
                             <Card>
                                 <CardBody>
-                                    <div className="row">
-                                        <div className="col-sm-12 text-center">
-                                            <Button style={{bottom: "-270px",  margin: "40px 20px 0px 40px"}} 
-                                            onClick={this.buscar} /*disabled={!this.state.cooperativa}*/>
-                                                Consultar
-                                            </Button>
-                                        </div>
-                                    </div>
+                                    
                                     <ListPage
                                         exportExcel
                                         imprimirPantalla
@@ -118,7 +111,7 @@ class TasasUsadasPorViaje extends React.Component {
                                                 <div className="row">
                                                 <div className="col-sm-4">
                                                     <FormGroup className="row">
-                                                        <Label className={"col-md-5 " /*+ (this.state.cooperativa ? "" : "text-danger")*/}>Cooperativa</Label>
+                                                        <Label className={"col-md-5 " + (this.state.cooperativa ? "" : "text-danger")}>Cooperativa</Label>
                                                         <div className="col-sm-7">
                                                             <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
                                                         </div>
@@ -153,7 +146,7 @@ class TasasUsadasPorViaje extends React.Component {
                                                     </FormGroup>
                                                     
                                                     <FormGroup className="row">
-                                                    <Label className="col-sm-6">Viaje</Label>
+                                                    <Label className={"col-md-6 " + (this.state.viaje ? "" : "text-danger")}>Viaje</Label>
                                                     <div className="col-sm-6">
                                                         <Select 
                                                             { ...this.state.cooperativa && this.state.localidad && this.state.fecha_inicio && this.state.fecha_fin
@@ -172,6 +165,7 @@ class TasasUsadasPorViaje extends React.Component {
                                                         />
 
                                                     </div>
+                                                   
                                                     </FormGroup>
                                                     <br></br>
                                                 </div>
@@ -200,6 +194,14 @@ class TasasUsadasPorViaje extends React.Component {
                                                 
                                                
                                                 <div className="col-sm-2"></div>
+                                                <div className="row">
+                                                    <div className="col-sm-12 text-center">
+                                                        <Button style={{position: "relative", left: "490px" ,margin: "0px 0px 0px 0px"}} 
+                                                        onClick={this.buscar} disabled={!this.state.cooperativa, !this.state.viaje}>
+                                                            Consultar
+                                                        </Button>
+                                                    </div>
+                                                </div>
                                             </div>
                                             }
                                             
