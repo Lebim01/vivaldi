@@ -68,8 +68,8 @@ class ModalDetalle extends React.Component {
                                         { this.props.object_json_repr && this.props.object_json_repr[0] && this.props.object_json_repr[0].fields &&
                                             Object.keys(this.props.object_json_repr[0].fields).map((key) => 
                                                 <tr>
-                                                    <td>{key}</td>
-                                                    <td>{this.props.object_json_repr[0].fields[key]}</td>
+                                                    <td style={{"padding" : "0.1rem"}}>{key}</td>
+                                                    <td style={{"padding" : "0.1rem"}}>{this.props.object_json_repr[0].fields[key]}</td>
                                                 </tr>
                                             )
                                         }
@@ -84,7 +84,7 @@ class ModalDetalle extends React.Component {
                                 <table className="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Objecto</th>
+                                            <th>Objeto</th>
                                             <th>Anterior</th>
                                             <th>Actual</th>
                                         </tr>
@@ -92,18 +92,18 @@ class ModalDetalle extends React.Component {
                                     <tbody>
                                         { this.props.changes  && 
                                             Object.keys(this.props.changes).map((key) => 
-                                                <tr>
-                                                    <td>{key}</td>
-                                                    <td>{this.props.changes[key][0]}</td>
-                                                    <td>{this.props.changes[key][1]}</td>
+                                                <tr >
+                                                    <td style={{"padding" : "0.1rem"}}>{key}</td>
+                                                    <td style={{"padding" : "0.1rem"}}>{this.props.changes[key][0]}</td>
+                                                    <td style={{"padding" : "0.1rem"}}>{this.props.changes[key][1]}</td>
                                                 </tr>
                                             )
                                         }
                                         { (this.props.changes === 'Sin Cambios' || this.props.changes === null) && 
                                             <tr>
-                                                <td>{""}</td>
-                                                <td>{"Sin cambios"}</td>
-                                                <td>{"Sin cambios"}</td>
+                                                <td style={{"padding" : "0.1rem"}}>{""}</td>
+                                                <td style={{"padding" : "0.1rem"}}>{"Sin cambios"}</td>
+                                                <td style={{"padding" : "0.1rem"}}>{"Sin cambios"}</td>
                                             </tr>
                                         
                                             
