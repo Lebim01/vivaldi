@@ -162,9 +162,9 @@ class TasasUsadasPorViaje extends React.Component {
                                                     <Label className={"col-md-6 " + (this.state.viaje ? "" : "text-danger")}>Viaje</Label>
                                                     <div className="col-sm-6">
                                                         <Select 
-                                                            { ...this.state.cooperativa && this.state.localidad && this.state.fecha_inicio && this.state.fecha_fin
+                                                            { ...this.state.cooperativa  && this.state.fecha_inicio && this.state.fecha_fin
                                                                 ? { asyncOptions : this.optionsViajes({ cooperativa: this.state.cooperativa, 
-                                                                    localidad: this.state.localidad, fecha_inicio : this.state.fecha_inicio, 
+                                                                     fecha_inicio : this.state.fecha_inicio, 
                                                                 fecha_fin: this.state.fecha_fin})  }
                                                                 : { options : [{ label : 'Seleccione un viaje', value : '' }] } 
                                                                 /*ruta = select_tipo.options[select_tipo.options.selectedIndex].attributes['data-ruta'].value
