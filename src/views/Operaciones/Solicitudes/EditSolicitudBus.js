@@ -72,7 +72,7 @@ class MainView extends React.Component {
                     <fieldset>
                         <legend>Bus {textoBus[this.props.tipo_solicitud]}</legend>
                         <FormGroup className="row">
-                            <Label className="col-sm-3">Bus</Label>
+                            <Label className="col-sm-3">Disco</Label>
                             <div className="col-sm-5">
                                 <Input value={this.props.bus_numero} readOnly />
                             </div>
@@ -126,6 +126,18 @@ class MainView extends React.Component {
                                 <Input value={this.props.bus_fecha_vencimiento_matricula} readOnly />
                             </div>
                         </FormGroup>
+                        <FormGroup className="row">
+                                <Label className="col-sm-3">F. emisión RTV</Label>
+                                <div className="col-sm-5">
+                                    <Input value={this.props.bus_fecha_emision_rtv} readOnly />
+                                </div>
+                            </FormGroup>
+                        <FormGroup className="row">
+                            <Label className="col-sm-3">F. vencimiento RTV</Label>
+                            <div className="col-sm-5">
+                                <Input value={this.props.bus_fecha_vencimiento_rtv} readOnly />
+                            </div>
+                        </FormGroup>
 
                         <FormGroup className="row">
                             { this.props.documentacion_url && !this.props.documentacion_url.toLowerCase().includes('none')
@@ -146,7 +158,7 @@ class MainView extends React.Component {
                                 <a href={`#/cooperativas/buses/edit?id=${this.props.bus_detalle.id}`} target="_blank">Bus a Inactivar</a>
                             </legend>
                             <FormGroup className="row">
-                                <Label className="col-sm-3">Bus</Label>
+                                <Label className="col-sm-3">Disco</Label>
                                 <div className="col-sm-5">
                                     <Input value={this.props.bus_detalle.disco} readOnly />
                                 </div>
@@ -191,6 +203,18 @@ class MainView extends React.Component {
                                 <Label className="col-sm-3">F. vencimiento matricula</Label>
                                 <div className="col-sm-5">
                                     <Input value={this.props.bus_detalle.fecha_vencimiento_matricula} readOnly />
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <Label className="col-sm-3">F. emisión RTV</Label>
+                                <div className="col-sm-5">
+                                    <Input value={this.props.bus_detalle_fecha_emision_rtv} readOnly />
+                                </div>
+                            </FormGroup>
+                            <FormGroup className="row">
+                                <Label className="col-sm-3">F. vencimiento RTV</Label>
+                                <div className="col-sm-5">
+                                    <Input value={this.props.bus_detalle_fecha_vencimiento_rtv} readOnly />
                                 </div>
                             </FormGroup>
 
