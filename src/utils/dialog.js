@@ -70,6 +70,8 @@ async function confirmEndpoint(options){
         text : _options.text,
         showCancelButton: true,
         showLoaderOnConfirm: true,
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar',
         preConfirm: () => {
             return axios[_options.method](`${baseurl}/${_options.endpoint}/${_options.id ? `${_options.id}/` : ``}${_options.params_get ? `${objectToUrl(_options.params_get)}` : ''}`, _options.params)
             .then(response => {
@@ -83,6 +85,16 @@ async function confirmEndpoint(options){
                 }
 
                 return response
+            })
+            .catch(response => {
+                if(response.status >= 400 && response.status < 500){
+                    Swal.showValidationMessage(response.response.data)
+                }
+                else {
+                    Swal.showValidationMessage(
+                        ` ${"Ocurrió un error inesperado, ¡Por favor contáctese con el administrador!"}`
+                    )
+                }
             })
             .catch(error => {
                 if(error.response.status >= 400 && error.response.status < 500){
