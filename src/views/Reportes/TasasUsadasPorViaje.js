@@ -112,7 +112,6 @@ class TasasUsadasPorViaje extends React.Component {
                         <div className="col-sm-12">
                             <Card>
                                 <CardBody>
-                                    
                                     <ListPage
                                         exportExcel
                                         imprimirPantalla
