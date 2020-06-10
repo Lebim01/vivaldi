@@ -154,7 +154,7 @@ class ViajesBus extends React.Component {
                                     //title="Viaje Bus"
                                     searchable={false}
 
-                                    head={[['Viaje', 'Fecha salida', 'Localidad', 'Pasajeros', 'Parada',
+                                    head={[['Viaje', 'Fecha', 'Frecuencia', 'Parada', 'Pasajeros', 'Localidad',
                                     
                                     {
                                         title:'Valor del Pasaje', 
@@ -166,10 +166,11 @@ class ViajesBus extends React.Component {
                                     }]]}
                                     fields={[
                                         'viaje', 
-                                        'fecha_salida', 
-                                        'localidad',
-                                        (row) => <span style={{ textAlign:"right", position: 'relative', right:'-40%'}}>{row.pasajeros}</span>,
+                                        'fecha', 
+                                        'frecuencia',
                                         'parada',
+                                        (row) => <span style={{ textAlign:"right", position: 'relative', right:'-40%'}}>{row.pasajeros}</span>,
+                                        'localidad',
                                         (row) => <span style={{ textAlign:"right", position: 'relative', right:'-80%'}}>${moneyFormat(row.valor_unitario)}</span>,
                                         (row) => <span style={{ textAlign:"right", position: 'relative', right:'-40%'}}>${moneyFormat(row.total)}</span>
                                     ]}
