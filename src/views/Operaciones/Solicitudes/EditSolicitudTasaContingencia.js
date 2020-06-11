@@ -27,6 +27,22 @@ class MainView extends React.Component {
         valueName : 'descripcion'
     }
 
+    handleKeypress (e) {
+        const characterCode = e.key
+        if (characterCode === 'Backspace') return
+    
+        const characterNumber = Number(characterCode)
+        if (characterNumber >= 0 && characterNumber <= 9) {
+          if (e.currentTarget.value && e.currentTarget.value.length) {
+            return
+          } else if (characterNumber === 0) {
+            e.preventDefault()
+          }
+        } else {
+          e.preventDefault()
+        }
+      }
+
     onChangeCantidadAprobada = (e) => {
         this.props.onChangeCantidadAprobada(e.target.value)
     }
@@ -89,7 +105,7 @@ class MainView extends React.Component {
                         <FormGroup className="row">
                             <Label className="col-sm-3">Cantidad aprobada</Label>
                             <div className="col-sm-5">
-                                <Input type="number" value={this.props.cantidad_aprobada} onChange={this.onChangeCantidadAprobada} min="1" />
+                                <Input type="number" value={this.props.cantidad_aprobada} onKeyDown={this.handleKeypress} onChange={this.onChangeCantidadAprobada} min="1" />
                             </div>
                         </FormGroup>
                     </fieldset>
