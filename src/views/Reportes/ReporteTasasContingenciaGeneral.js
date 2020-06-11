@@ -51,17 +51,23 @@ class ReporteTasasContingenciaGeneral extends React.Component {
     render(){
        
         return (
-            <Permission key_permission="view_tasas_contingencia" mode="redirect">
+            <Permission key_permission="view_reporte_contigencia_general" mode="redirect">
                 <div className="animated fadeIn">
                     <div className="row">
                         <div className="col-sm-12">
                             <Card>
                                 <CardBody>
-                                    
+                                    <div className="row">
+                                        <div className="col-sm-12 text-center">
+                                            <Button style={{bottom: "-250px"}} onClick={this.buscar}>
+                                                Consultar
+                                            </Button>
+                                        </div>
+                                    </div>
                                     <ListPage 
                                         title="Reporte tasas de contingencia general" 
                                         exportExcel
-                                        key_permission= "tasas_contingencia"
+                                        key_permission= "reporte_contingencia_general"
                                         imprimirPantalla
                                         id="report"
                                         
@@ -108,13 +114,6 @@ class ReporteTasasContingenciaGeneral extends React.Component {
                                                         />
                                                     </div>
                                                 </FormGroup>
-                                                <div className="row">
-                                                    <div className="col-sm-12 text-center">
-                                                        <Button style={{position: "relative", right: "260px", top: "32px"}} onClick={this.buscar}>
-                                                            Consultar
-                                                        </Button>
-                                                    </div>
-                                                </div>
                                                <br></br><br></br>
                                             </div>
                                         </div>
