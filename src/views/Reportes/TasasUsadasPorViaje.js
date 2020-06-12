@@ -44,8 +44,8 @@ class TasasUsadasPorViaje extends React.Component {
 
     optionsViajes  = (obj) => ({
         url : `${baseurl}/viaje/${objectToUrl(obj)}`,
-        labelName: 'frecuencia_ruta', 
-        valueName: 'id' , 
+        labelName: 'frecuencia_ruta',
+        valueName: 'id' ,
         optionProps: ['ruta']
     })
 
