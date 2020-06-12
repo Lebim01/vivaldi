@@ -127,6 +127,7 @@ class ModalDetalle extends React.Component {
 
 class RegistroAccion extends React.Component {
 
+    table = React.createRef()
     state = {
         from_date: moment().format('YYYY-MM-DD'),
         to_date: moment().format('YYYY-MM-DD'),
@@ -153,15 +154,6 @@ class RegistroAccion extends React.Component {
         })
     }
 
-    onChangeVenta = (name, value) => {
-        let venta = this.state.venta
-        venta[name] = value
-
-        this.setState({
-            venta
-        })
-    }
-
     onChange = name => (e) => {
         this.setState({
             [name]: e.target.value
@@ -169,9 +161,9 @@ class RegistroAccion extends React.Component {
     }
 
     buscar = () => {
-        this.setState({
-            refresh: true
-        })
+        
+            this.table.current.refresh()
+    
     }
 
     editarVenta = (venta) => {
@@ -196,9 +188,7 @@ class RegistroAccion extends React.Component {
                 <div className="animated fadeIn">
                  <ModalDetalle
                     toggle={this.toggle}
-                    guardar={this.guardarVenta}
                     show={this.state.openModal}
-                    onChange={this.onChangeVenta}
                     {...this.state.venta}
                 />
                 <div className="row">
@@ -267,8 +257,8 @@ class RegistroAccion extends React.Component {
                                                 </div>
                                             </div>
                                         }
-
                                         ref={this.table}
+                                        autoLoad={false}
                                         searchable={false}
                                         headerClass="text-center"
                                         head={[[
@@ -287,14 +277,14 @@ class RegistroAccion extends React.Component {
                                             'event_type', 
                                             this.fieldEditar
                                         ]}
-                                        onRowDoubleClick={this.editarVenta}
+                                        onClick={this.editarVenta}
 
-
+                                        
                                         endpoint='auditcrud'
                                         parameters={this.state}
+                                        
 
                                         history={this.props.history}
-                                        refresh={refresh}
                                     />
                                 </CardBody>
                             </Card>
