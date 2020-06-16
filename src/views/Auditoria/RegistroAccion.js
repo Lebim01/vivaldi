@@ -99,7 +99,8 @@ class ModalDetalle extends React.Component {
                                                 </tr>
                                             )
                                         }
-                                        { (this.props.changes === 'Sin Cambios' || this.props.changes === null) && 
+                                        { (this.props.changes === 'Sin Cambios' || this.props.changes === null) &&
+                                             
                                             <tr>
                                                 <td style={{"padding" : "0.1rem"}}>{""}</td>
                                                 <td style={{"padding" : "0.1rem"}}>{"Sin cambios"}</td>
@@ -107,6 +108,44 @@ class ModalDetalle extends React.Component {
                                             </tr>
                                         
                                             
+                                        }
+                                        
+                                    </tbody>
+                                    
+                                </table>
+                            </div>
+                        }
+
+                        { this.props.event_type === 'Many-to-Many Change' &&
+                            <div className="col-sm-12">
+                                <label className="col-sm-12 text-center">Campos</label>
+                                <table className="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Objeto</th>
+                                            <th>Anterior</th>
+                                            <th>Actual</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        { this.props.changes  && 
+                                            Object.keys(this.props.changes).map((key) => 
+                                                <tr >
+                                                    <td style={{"padding" : "0.1rem"}}>{key}</td>
+                                                    <td style={{"padding" : "0.1rem"}}>{this.props.changes[key][0]}</td>
+                                                    <td style={{"padding" : "0.1rem"}}>{this.props.changes[key][1]}</td>
+                                                </tr>
+                                            )
+                                        }
+                                        { (this.props.changes === 'Sin Cambios' || this.props.changes === null) &&
+                                             Object.keys(this.props.changes).map((key) => 
+                                            <tr>
+                                                <td style={{"padding" : "0.1rem"}}>{key}</td>
+                                                <td style={{"padding" : "0.1rem"}}>{"Sin cambios"}</td>
+                                                <td style={{"padding" : "0.1rem"}}>{"Sin cambios"}</td>
+                                            </tr>
+                                        
+                                            )
                                         }
                                         
                                     </tbody>
