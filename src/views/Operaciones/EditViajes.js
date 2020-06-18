@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Input, Select, EditPage, TextArea, FormValidate, FormElementValidate, RSelect, Permission, SelectLocalidad } from 'temeforest'
 import { baseurl, getParameter, objectToUrl } from 'utils/url'
 import axios from 'axios'
-
+import moment from 'moment'
 const endpoint = 'viaje'
 const urlFront = '/operaciones/viajes'
 
@@ -16,6 +16,10 @@ const getTipoFrecuencia = async (id_frecuencia) => {
 }
 
 class MainView extends React.Component {
+    state= {
+        fecha_validez_desde : moment().format('YYYY-MM-DD'),
+        fecha_validez_hasta : moment().format('YYYY-MM-DD')
+    }
     optionsLocalidad = {
         url : `${baseurl}/localidad/`,
         labelName: 'nombre',
@@ -101,7 +105,7 @@ class MainView extends React.Component {
                         label={{text:'Fecha salida'}}
                         input={{
                             name : 'fecha_salida',
-                            element: <Input onChange={this.onChange('fecha_salida')} value={this.props.fecha} type="date" maxLength="8"/>
+                            element: <Input onChange={this.onChange('fecha_salida')} value={this.state.fecha_validez_desde} type="date" readonly="true" maxLength="8"/>
                         }}
                         validator={{
                             validationRules: { required:"El campo es requerido", },
@@ -133,8 +137,9 @@ class MainView extends React.Component {
                                 <RSelect
                                     onChange={(value) => this.onChangeValue('frecuencia', value)}
                                     value={this.props.frecuencia}
-                                    { ...(this.props.cooperativa && this.props.ruta
-                                        ? { asyncOptions : this.optionsFrecuencia({ cooperativa: this.props.cooperativa, ruta: this.props.ruta }) }
+                                    { ...(this.props.cooperativa && this.props.ruta && this.state.fecha_validez_desde && this.state.fecha_validez_hasta
+                                        ? { asyncOptions : this.optionsFrecuencia({ cooperativa: this.props.cooperativa, ruta: this.props.ruta, 
+                                            fecha_validez_desde: this.state.fecha_validez_desde, fecha_validez_hasta : this.state.fecha_validez_hasta}) }
                                         : { options : [{ label: 'Seleccione un cooperativa y destino', value : '' }] }
                                     )}
                                 />
