@@ -137,26 +137,20 @@ class TasasUsadasPorViaje extends React.Component {
                                                 </div>
                                                 <div className="col-sm-4">
                                                     <FormGroup className="row">
-                                                        <Label className="col-sm-5">Fecha inicio</Label>
-                                                        <div className="col-sm-7">
-                                                            <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
-                                                        </div>
-                                                    </FormGroup>
-                                                    <FormGroup className="row">
-                                                        <Label className="col-sm-5">Fecha fin</Label>
-                                                        <div className="col-sm-7">
-                                                            <Input className="no-clear" type="date" onChange={this.onChange('fecha_fin')} value={this.state.fecha_fin} />
-                                                        </div>
-                                                    </FormGroup>
-                                                </div>
-                                                <div className="col-sm-4">
-                                                    <FormGroup className="row">
                                                         <Label className="col-sm-6">Forma de pago</Label>
                                                         <div className="col-sm-6">
                                                             <Select asyncOptions={this.optionsFormapago} onChange={this.onChange('forma_pago')} value={this.state.forma_pago} />
                                                         </div>
                                                     </FormGroup>
-                                                    
+                                                    <FormGroup className="row">
+                                                        <Label className="col-sm-6">Fecha</Label>
+                                                        <div className="col-sm-6">
+                                                            <Input className="no-clear" type="date" onChange={this.onChange('fecha_inicio')} value={this.state.fecha_inicio} />
+                                                        </div>
+                                                    </FormGroup>  
+                                                </div>
+                                                <div className="col-sm-4">
+                                                   
                                                     <FormGroup className="row">
                                                     <Label className={"col-md-6 " + (this.state.viaje ? "" : "text-danger")}>Viaje</Label>
                                                     <div className="col-sm-6">
