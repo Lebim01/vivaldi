@@ -55,6 +55,14 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
                             <div className="col-sm-12">
                                 <Card>
                                     <CardBody>
+                                <div className="row">
+                                    <div className="col-sm-12 text-center">
+                                        <Button style={{ bottom: "-210px"}} onClick={this.buscar}
+                                        disabled={!this.state.cooperativa}>
+                                            Consultar
+                                        </Button>
+                                    </div>
+                                </div>
                                 <ListPage
 
                                     exportExcel
@@ -66,10 +74,11 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
                                     filtersZone = {
                                         <div className="row">
                                         <div className="col-sm-4">
+                                            
                                             <FormGroup className="row">
-                                                <Label className="col-sm-5">Cooperativa</Label>
+                                                <Label className={"col-md-5 " + (this.state.cooperativa ? "" : "text-danger")}>Cooperativa</Label>
                                                 <div className="col-sm-7">
-                                                    <Select asyncOptions={this.optionsCooperativa} defaultOption="Todos" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
+                                                    <Select asyncOptions={this.optionsCooperativa} defaultOption="Seleccione una cooperativa" onChange={this.onChange('cooperativa')} value={this.state.cooperativa}/>
                                                 </div>
                                             </FormGroup>
                                             <FormGroup className="row">
@@ -106,11 +115,6 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
                                                     <Select options={this.optionsReporte} onChange={this.onChange('reporte')} value={this.state.reporte} onClick={this.buscar}/>
                                                 </div>
                                             </FormGroup>
-                                            <div className="col-sm-12 text-center">
-                                                <Button style={{ position: "relative", right: "348px", top: "40px"}} onClick={this.buscar}>
-                                                    Consultar
-                                                </Button>
-                                            </div>
                                             <br></br><br></br>
                                         </div>
                                         
