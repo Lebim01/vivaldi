@@ -55,14 +55,6 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
                             <div className="col-sm-12">
                                 <Card>
                                     <CardBody>
-                                <div className="row">
-                                    <div className="col-sm-12 text-center">
-                                        <Button style={{ bottom: "-210px"}} onClick={this.buscar}
-                                        disabled={!this.state.cooperativa}>
-                                            Consultar
-                                        </Button>
-                                    </div>
-                                </div>
                                 <ListPage
 
                                     exportExcel
@@ -115,6 +107,14 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
                                                     <Select options={this.optionsReporte} onChange={this.onChange('reporte')} value={this.state.reporte} onClick={this.buscar}/>
                                                 </div>
                                             </FormGroup>
+                                            <div className="row">
+                                                <div className="col-sm-12 text-center">
+                                                    <Button style={{position: "relative", top: "40px", right: "348px"}} onClick={this.buscar}
+                                                    disabled={!this.state.cooperativa}>
+                                                        Consultar
+                                                    </Button>
+                                                </div>
+                                            </div>
                                             <br></br><br></br>
                                         </div>
                                         

@@ -202,7 +202,7 @@ class TasasUsadasPorViaje extends React.Component {
                                                 <div className="col-sm-2"></div>
                                                 <div className="row">
                                                     <div className="col-sm-12 text-center">
-                                                        <Button style={{position: "relative", left: "490px" ,margin: "0px 0px 0px 0px"}} 
+                                                        <Button style={{position: "relative", left: "500px" ,margin: "0px 0px 0px 0px"}} 
                                                         onClick={this.buscar} disabled={!this.state.cooperativa, !this.state.viaje}>
                                                             Consultar
                                                         </Button>

@@ -76,7 +76,7 @@ class ViajesBus extends React.Component {
         return (
             <Permission key_permission="view_viajes_bus" mode="redirect">
                 <ReportPage title="Viaje Bus" timestamp={false}>
-                    <div className="row" style={{padding: "0px 0 20px 0"}}>
+                    <div className="row" style={{padding: "30px 0 -30px 0"}}>
 
                         <div className="col-sm-4">
                             <FormGroup className="row">
@@ -135,7 +135,7 @@ class ViajesBus extends React.Component {
                     </div>
                     <div className="row">
                         <div className="col-sm-12 text-center">
-                            <Button onClick={this.buscar} style={{marginLeft: '-0.3rem'}} disabled={!this.state.filters.cooperativa}>
+                            <Button onClick={this.buscar} style={{marginLeft: '1rem'}} disabled={!this.state.filters.cooperativa}>
                                 Consultar
                             </Button>
                         </div>
