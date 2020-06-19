@@ -93,7 +93,7 @@ class SalidaViajes extends React.Component {
                                         autoLoad={false}                     
                                         searchable={false}
 
-                                        head={[['Viaje', 'Fecha', 'Frecuencia', 'Cooperativa',  , 'Destino', 'Parada', 
+                                        head={[['Viaje', 'Fecha', 'Frecuencia', 'Cooperativa',  'Destino', 'Parada', 
                                         {
                                             title:'Cantidad', 
                                             style:{textAlign:"right", position: 'relative', right:'0%' }
