@@ -6,6 +6,10 @@ function htmlToXlsById(tableID){
 }
 
 function htmlToXls(tableHTML){
+    while(tableHTML.includes('Abrir%20nueva%20pestaña')){
+        tableHTML = tableHTML.replace('Abrir%20nueva%20pestaña', '')
+    }
+
     let downloadLink;
     let dataType = 'application/vnd.ms-excel';
     

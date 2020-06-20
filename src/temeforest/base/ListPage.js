@@ -52,7 +52,6 @@ class RecordRow extends React.Component {
         //alert("Se abrirá en una nueva pestaña");
         this.props.onDoubleClick(this.props.record.id, {}, true)
         
-        
     }
 
     render(){
@@ -69,11 +68,8 @@ class RecordRow extends React.Component {
                             <ContextMenuTrigger id={this.state.randomid} key={record.id} style={{ width: '100%', height: '100%' }}>
                                
                                 {typeof field === 'function' ? field(record, context) : record[field]}
-                                <ContextMenu id={this.state.randomid}  style={{ width: '10%', height: '4.8%', 
-                                backgroundImage: `url(${"https://i.ibb.co/tLKgTx8/pestana.png"})` , backgroundSize: 'cover'
-                                 }}
-                                >
-                                    <label for = "Name"></label>
+                                <ContextMenu id={this.state.randomid}  style={{ width: '10%', height: '4.8%', }}>
+                                    <label for="Name">Abrir nueva pestaña</label>
                                 </ContextMenu>
                             </ContextMenuTrigger>
                             
