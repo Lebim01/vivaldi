@@ -4,6 +4,7 @@ import { CardTitle, InputIcon, Button, Permission } from 'temeforest'
 import { checkPermission } from 'temeforest/base/Permission'
 import { baseurl, objectToUrl, getAllParameters } from 'utils/url'
 import { htmlToXlsById } from 'utils/exportData'
+import Swal from 'sweetalert2'
 import _ from 'lodash'
 import axios from 'axios'
 import BlockUi from 'react-block-ui';
@@ -347,12 +348,17 @@ class ListPage extends React.Component {
         const { parameters } = this.props
         const { search } = this.state
 
+        //debugger;
+
         // All data ?no_page
+        
+        try {
         const { data } = await axios.get(
             `${baseurl}/${this.props.endpoint}/${objectToUrl({ ...parameters, searchtext: search, full: 1, page_size: 0})}`,
-            this.props.config
+            this.props.configs
+           
         )
-
+    
         const html = `
             <table id='to-export' style='display:none;'>
                 ${ReactDOMServer.renderToString(this.renderHeader())}
@@ -365,6 +371,23 @@ class ListPage extends React.Component {
         `
         document.body.insertAdjacentHTML('afterend', html)
         htmlToXlsById('to-export')
+        }
+        catch(cooperativa) {
+            /*if(cooperativa.response.status > 400 && cooperativa.response.status < 500){
+                Swal.showValidationMessage(cooperativa.response.data)
+                console.log("1" + cooperativa.response.data)
+            }*/
+            if (cooperativa.response.status==400) {
+                Swal.fire('', 
+                    ` ${cooperativa.response.data.cooperativa}`, 'error'
+                   // console.log("2" + cooperativa.response.data.cooperativa)
+                )  
+                
+            }
+        }
+    
+
+        
     }
 
     imprimirPantalla = () => {
