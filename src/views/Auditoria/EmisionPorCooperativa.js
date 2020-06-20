@@ -26,22 +26,26 @@ class EmisionPorCooperativa extends React.Component {
 
     render(){
         return (
-            <ReportPage title="Emisión por cooperativa">
-                <div className="row">
-                    <div className="col-sm-4">
-                        <FormGroup className="row">
-                            <Label className="col-sm-4">Localidad</Label>
-                            <div className="col-sm-8">
-                                <SelectLocalidad onChange={this.onChange('localidad')} value={this.state.localidad}/>
-                            </div>
-                        </FormGroup>
-                    </div>
-                </div>
                 <ListPage
                     searchable={false}
                     id="report"
                     exportExcel
                     imprimirPantalla
+                    title="Emisión por cooperativa" 
+
+                    filtersZone = {
+                        <div className="row">
+                            <div className="col-sm-4">
+                                <FormGroup className="row">
+                                    <Label className="col-sm-4">Localidad</Label>
+                                    <div className="col-sm-8">
+                                        <SelectLocalidad onChange={this.onChange('localidad')} value={this.state.localidad}/>
+                                    </div>
+                                </FormGroup>
+                            </div>
+                        </div>
+                    }
+                
 
                     fieldNames={['Cooperativa', 'Api', 'Sistema externo']}
                     fields={['nombre', this.usaapi, 'sistema_externo']}
@@ -53,8 +57,9 @@ class EmisionPorCooperativa extends React.Component {
                         callback: (parameters) => this.setState(parameters)
                     }}
                     history={this.props.history}
+                    
                 />
-            </ReportPage>
+           
         )
     }
 }
