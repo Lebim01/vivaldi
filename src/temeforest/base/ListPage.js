@@ -3,7 +3,7 @@ import { Col, Row } from 'reactstrap'
 import { CardTitle, InputIcon, Button, Permission } from 'temeforest'
 import { checkPermission } from 'temeforest/base/Permission'
 import { baseurl, objectToUrl, getAllParameters } from 'utils/url'
-import { htmlToXlsById } from 'utils/exportData'
+import { htmlToXlsById, printHtml } from 'utils/exportData'
 import Swal from 'sweetalert2'
 import _ from 'lodash'
 import axios from 'axios'
@@ -395,6 +395,43 @@ class ListPage extends React.Component {
         }
     }
 
+    printAll = async () => {
+        const { parameters } = this.props
+        const { search } = this.state
+
+        try {
+        // All data ?no_page
+        const { data } = await axios.get(
+            `${baseurl}/${this.props.endpoint}/${objectToUrl({ ...parameters, searchtext: search, full: 1, page_size: 0})}`,
+            this.props.config
+        )
+
+       
+       
+        const html = `
+            <table id='to-export' style=''>
+                ${ReactDOMServer.renderToString(this.renderHeader())}
+                ${ReactDOMServer.renderToString(
+                    <Provider store={store}>
+                        {this.renderBody(data)}
+                    </Provider>
+                )}
+            </table>
+        `
+        document.body.insertAdjacentHTML('afterend', html)
+        printHtml(html)
+        }
+        catch(cooperativa) {
+            if (cooperativa.response.status==400) {
+                Swal.fire('', 
+                    ` ${cooperativa.response.data.cooperativa}`, 'error'
+                   // console.log("2" + cooperativa.response.data.cooperativa)
+                )  
+                
+            }
+        }
+    }
+
     renderActionsButtons = () => {
         const { searchable, exportExcel, imprimirPantalla, actionsButtons } = this.props
         return (
@@ -423,6 +460,13 @@ class ListPage extends React.Component {
                 { imprimirPantalla &&
                     <Button onClick={this.imprimirPantalla} title="Imprimir Pantalla">
                         <i className="fa fa-print"/>
+                    </Button>
+                }
+                {' '}
+                { imprimirPantalla &&
+                    <Button onClick={this.printAll} title="Imprimir Pantalla, todos">
+                        <i className="fa fa-print"/>{' '}
+                        <i className="fas fa-sort-numeric-down"/>
                     </Button>
                 }
                 {' '}
