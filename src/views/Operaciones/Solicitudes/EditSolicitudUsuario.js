@@ -92,6 +92,12 @@ class MainView extends React.Component {
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
+                            <Label className="col-sm-3">Descripción</Label>
+                            <div className="col-sm-5">
+                                <Input value={this.props.descripcion} readOnly />
+                            </div>
+                        </FormGroup>
+                        <FormGroup className="row">
                             <Label className="col-sm-3"></Label>
                             { this.props.documentacion_url && !this.props.documentacion_url.toLowerCase().includes('none')
                                 ? (
