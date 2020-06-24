@@ -57,27 +57,26 @@ class RecordRow extends React.Component {
     render(){
         const { fields, record, context, showStatus } = this.props
         
-        return (
-            
-            <tr key={record.id} onDoubleClick={this.onRowDoubleClick} onClick={this.onRowRightClick}>
+         return (
+            <tr key={record.id} onDoubleClick={this.onRowDoubleClick}>
                 {fields.map((field, i) => {
                     const className = typeof this.props.tdBodyClass === 'function' ? this.props.tdBodyClass(record) : this.props.tdBodyClass
                     return (
-                        <td className={className} key={i} >
-                             
+                        <td className={className} key={i}>
                             <ContextMenuTrigger id={this.state.randomid} key={record.id} style={{ width: '100%', height: '100%' }}>
-                               
                                 {typeof field === 'function' ? field(record, context) : record[field]}
-                                <ContextMenu id={this.state.randomid}  style={{ width: '10%', height: '4.8%', }}>
-                                    <label for="Name">Abrir nueva pestaña</label>
-                                </ContextMenu>
                             </ContextMenuTrigger>
-                            
                         </td>
                     )
                 })}
 
-                
+                <ContextMenu id={this.state.randomid} style={{ backgroundColor: '#eee', padding: 15 }}>
+                    <MenuItem onClick={this.onRowRightClick}>
+                        <label className="text-info" style={{cursor: 'pointer'}}>
+                            Abrir en otra pestaña
+                        </label>
+                    </MenuItem>
+                </ContextMenu>
                 { showStatus && <td className={record.className}>{record['is_active'] ? 'Activo' : 'Inactivo'}</td> }
             </tr>
         )
@@ -260,9 +259,10 @@ class ListPage extends React.Component {
                 if(newWindow){
                     window.open(`#/${this.props.urlFront}/edit/?id=${id}`, '_blank')
                 }else{   
+                    const { currentPage: page, search: searchtext } = this.state
                     this.props.history.push({
                         pathname : `/${this.props.urlFront}/edit/`,
-                        search : objectToUrl({ id })
+                        search : objectToUrl({ id, page, searchtext })
                     })
                 }
             }
@@ -400,26 +400,26 @@ class ListPage extends React.Component {
         const { search } = this.state
 
         try {
-        // All data ?no_page
-        const { data } = await axios.get(
-            `${baseurl}/${this.props.endpoint}/${objectToUrl({ ...parameters, searchtext: search, full: 1, page_size: 0})}`,
-            this.props.config
-        )
+            // All data ?no_page
+            const { data } = await axios.get(
+                `${baseurl}/${this.props.endpoint}/${objectToUrl({ ...parameters, searchtext: search, full: 1, page_size: 0})}`,
+                this.props.config
+            )
 
-       
-       
-        const html = `
-            <table id='to-export' style=''>
-                ${ReactDOMServer.renderToString(this.renderHeader())}
-                ${ReactDOMServer.renderToString(
-                    <Provider store={store}>
-                        {this.renderBody(data)}
-                    </Provider>
-                )}
-            </table>
-        `
-        document.body.insertAdjacentHTML('afterend', html)
-        printHtml(html)
+        
+        
+            const html = `
+                <table id='to-export' style=''>
+                    ${ReactDOMServer.renderToString(this.renderHeader())}
+                    ${ReactDOMServer.renderToString(
+                        <Provider store={store}>
+                            {this.renderBody(data)}
+                        </Provider>
+                    )}
+                </table>
+            `
+            document.body.insertAdjacentHTML('afterend', html)
+            printHtml(html)
         }
         catch(cooperativa) {
             if (cooperativa.response.status==400) {
