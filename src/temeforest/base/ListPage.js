@@ -73,7 +73,7 @@ class RecordRow extends React.Component {
                 <ContextMenu id={this.state.randomid} style={{ backgroundColor: '#eee', padding: 15 }}>
                     <MenuItem onClick={this.onRowRightClick}>
                         <label className="text-info" style={{cursor: 'pointer'}}>
-                            Abrir en otra pestaña
+                            Abrir nueva pestaña
                         </label>
                     </MenuItem>
                 </ContextMenu>
