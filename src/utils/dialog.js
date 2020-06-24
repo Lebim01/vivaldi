@@ -92,7 +92,7 @@ async function confirmEndpoint(options){
                 }
                 else {
                     Swal.showValidationMessage(
-                        ` ${"Ocurrió un error inesperado, ¡Por favor contáctese con el administrador!"}`
+                        ` ${response.response.data}`
                     )
                 }
             })
