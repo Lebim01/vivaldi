@@ -129,7 +129,7 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
                                          <span style={{ float: 'right'}}>Emitidas</span>, 
                                          <span style={{ float: 'right'}}>Usadas</span>,
                                          ] : 
-                                        ['Viaje', 
+                                        ['Viaje', 'Fecha' , 'Hora', 'Destino',
                                         <span style={{ float: 'right'}}>Emitidas</span>, 
                                         <span style={{ float: 'right'}}>Usadas</span>,
                                         ]}
@@ -139,7 +139,7 @@ class TasasEmitidasVSUsadasCooperativa extends React.Component {
                                                     (row) => <span style={{ float: 'right'}}>{row.tasas_emitidas}</span>, 
                                                     (row) => <span style={{ float: 'right'}}>{row.tasas_usadas}</span> ] 
                                             
-                                                : ['viaje', 
+                                                : ['viaje', 'fecha' , 'hora' , 'destino' ,
                                                     (row) => <span style={{ float: 'right'}}>{row.tasas_emitidas}</span>,
                                                     (row) => <span style={{ float: 'right'}}>{row.tasas_usadas}</span> ]
                                         }

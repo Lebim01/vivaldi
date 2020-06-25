@@ -185,12 +185,12 @@ class EditRoles extends React.Component {
                 }
             }
         }
-        
-        /*categories.push({
+
+        categories.push({
             id: null,
             name: 'Otros',
             permisos : []
-        })*/
+        })
 
         // setear permisos por categoria
         for(let i in results){
