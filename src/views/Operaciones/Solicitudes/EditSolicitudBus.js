@@ -312,7 +312,14 @@ class EditSolicitudBus extends React.Component {
     render(){
         const { data, id } = this.state
         return (
-            <ApprovePage id={id} data={data} title={'Aceptar/Rechazar Solicitud de buses'} history={this.props.history} endpoint={endpoint} urlFront={urlFront}>
+            <ApprovePage 
+                id={id} 
+                data={data} 
+                title={'Aceptar/Rechazar Solicitud de buses'} 
+                history={this.props.history} 
+                endpoint={endpoint} 
+                urlFront={`/cooperativas/buses/edit/?id=${id}`}
+            >
                 <MainView {...data} onChange={this.onChange} />
             </ApprovePage>
         )

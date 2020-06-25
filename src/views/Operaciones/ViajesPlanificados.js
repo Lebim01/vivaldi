@@ -10,14 +10,17 @@ import { moneyFormat } from 'utils/number'
 import './ViajesPlanificados.css'
 
 axios.defaults.headers.common['Authorization'] = `JWT ${store.getState().token}`
+const MINUTOS = 5
 
 class ViajesPlanificados extends React.Component {
 
     interval = null
+    intervalStatus = null
     state = {
         data : {
             fecha: moment().format('YYYY-MM-DD'),
-            saldo : true
+            saldo : true, 
+            rotarEstados: false
             
         },
         modal : {
@@ -29,8 +32,31 @@ class ViajesPlanificados extends React.Component {
     componentDidMount(){
         this.interval = setInterval(this.refresh, 30 * 1000)
     }
+
     componentWillUnmount(){
         clearInterval(this.interval)
+        this.desactivarIntervalStatus()
+    }
+
+    activarIntervalStatus = () => {
+        this.intervalStatus = setInterval(this.cambiarStatus, MINUTOS * 60 * 1000)
+    }
+
+    desactivarIntervalStatus = () => {
+        if(this.intervalStatus)
+            clearInterval(this.intervalStatus)
+    }
+
+    cambiarStatus = () => {
+        const { data : { estado } } = this.state
+        const index = this.estados.findIndex(r => r.value === estado)
+        const nextIndex = index+1 > this.estados.length-1 ? 0 : index+1
+
+        this.onChange('estado')({
+            target : {
+                value : this.estados[nextIndex].value
+            }
+        })
     }
 
     optionsCooperativa = {
@@ -50,8 +76,9 @@ class ViajesPlanificados extends React.Component {
     }
 
     estados = [
-        { value:'', label: 'Todos' },
-        { value:1, label: 'Finalizados' }
+        { value:'', label: 'En camino' },
+        { value:1, label: 'En andén' },
+        { value:2, label: 'Salió' }
     ]
 
     onChange = name => (e) => {
@@ -151,9 +178,23 @@ class ViajesPlanificados extends React.Component {
                                         </div>
                                         <div className="col-sm-6">
                                             <FormGroup className="row">
-                                                <Label className="col-sm-3">Estado</Label>
-                                                <div className="col-sm-8">
+                                                <Label className="col-sm-2">Estado</Label>
+                                                <div className="col-sm-4">
                                                     <Select options={this.estados} onChange={this.onChange('estado')} value={estado} />
+                                                    
+                                                </div>
+                                                <div className="col-sm-1">{' '}</div>
+                                                <div className="col-sm-4">
+                                                    <input type="checkbox" className="custom-control-input" id="rotarEstados" name="rotarEstados" checked={this.state.rotarStatus} 
+                                                        onChange={(e) => {
+                                                            this.setState({
+                                                                rotarStatus: e.target.checked
+                                                            }, () => {
+                                                                this.state.rotarStatus ? this.activarIntervalStatus() : this.desactivarIntervalStatus()
+                                                            })
+                                                        }} 
+                                                    />
+                                                    <Label onlyClassName="custom-control-label" htmlFor="rotarEstados">Rotar estados</Label>
                                                 </div>
                                             </FormGroup>
                                             <FormGroup className="row">
