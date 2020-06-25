@@ -91,9 +91,7 @@ async function confirmEndpoint(options){
                     Swal.showValidationMessage(response.response.data)
                 }
                 else {
-                    Swal.showValidationMessage(
-                        ` ${response.response.data}`
-                    )
+                    Swal.showValidationMessage(` ${response.response.data}`)
                 }
             })
             .catch(error => {
