@@ -39,7 +39,7 @@ class ViajesPlanificados extends React.Component {
     }
 
     activarIntervalStatus = () => {
-        this.intervalStatus = setInterval(this.cambiarStatus, MINUTOS * 60 * 1000)
+        this.intervalStatus = setInterval(this.cambiarStatus, 3 * 1000)
     }
 
     desactivarIntervalStatus = () => {
