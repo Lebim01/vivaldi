@@ -219,10 +219,10 @@ class TasasUsadasPorViaje extends React.Component {
                                             
 
                                         fieldNames={['Tasa (Código)', 'Usada', 'Pasajero', '# Asiento']}
-                                        fields={['codigo', 
-                                        this.usaapi, 
-                                        'pasajero',
-                                        'asiento']}
+                                        fields={[(row) => typeof row.codigo !== 'undefined' ? row.codigo : 'TOTAL USADAS', 
+                                        (row) => typeof row.usado !== 'undefined' ? this.usaapi(row) : row.total_usadas, 
+                                        (row) => typeof row.usado !== 'undefined' ? row.pasajero : 'TOTAL EMITIDAS', 
+                                        (row) => row.asiento ? row.asiento : row.total_emitidas]}
 
                                         endpoint='recaudaciones/tasas_emitidas_vs_usadas_cooperativa'
                                         parameters={this.state}
