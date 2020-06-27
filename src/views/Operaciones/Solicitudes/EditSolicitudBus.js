@@ -2,6 +2,8 @@ import React from 'react'
 import { FormGroup, Input, Label, ApprovePage, FormValidate, Button } from 'temeforest'
 import { baseurl, getParameter } from 'utils/url'
 import axios from 'axios'
+import { getAsientos } from 'views/Cooperativas/EditDistribucionAsientos'
+import Fila from 'views/Cooperativas/DistribucionAsientos/Fila'
 
 const endpoint = 'venta/solicitud_bus'
 const urlFront = '/operaciones/solicitudes/buses/'
@@ -9,10 +11,37 @@ const urlFront = '/operaciones/solicitudes/buses/'
 const textoBus = {
     'INH' : 'a Inactivar',
     'REE' : 'Nuevo',
+    'DIS' : 'Distribución de bus'
 }
 
 class MainView extends React.Component {
+
+    state = {
+        bus_tipo : {
+            filas : [],
+            asientos_desactivados: []
+        }
+    }
+
+    componentDidUpdate(prevProps){
+        if(this.props.bus_tipo !== prevProps.bus_tipo){
+            this.loadBusTipo()
+        }
+    }
+
+    loadBusTipo = async () => {
+        try {
+            const res = await axios.get(`${baseurl}/busTipo/${this.props.bus_tipo}/`)
+            this.setState({
+                bus_tipo: res.data
+            })
+        }catch(err){
+            console.error('No se pudo cargar el bus tipo', err)
+        }
+    }
+
     render(){
+        const { bus_tipo } = this.state
         return (
             <div>
                 <FormValidate className="mt-4 form-horizontal">
@@ -281,6 +310,53 @@ class MainView extends React.Component {
                                 </FormGroup>
                             </fieldset>
                         </>
+                    }
+
+                    { this.props.tipo_solicitud === 'DIS' &&
+                        <div style={{textAlign:'center'}}>
+                            <fieldset>
+                                <legend>
+                                    Distribución de asientos
+                                </legend>
+                                <label>Piso 1</label>
+                                <div>
+                                    {Array(bus_tipo.filas[0]).fill(0).map((_, index) =>
+                                        <Fila
+                                            toggleActivate={() => {}} 
+                                            asientos={getAsientos({ filas: bus_tipo.filas[0], asientos: [] }, bus_tipo.filas[0], true)} 
+                                            asientos_desactivados={bus_tipo.asientos_desactivados[0]} 
+                                            desactivar_asientos={this.props.desactivar_asientos ? this.props.desactivar_asientos[0] : []}
+                                            activar_asientos={this.props.activar_asientos ? this.props.activar_asientos[0] : []}
+                                            index={index} 
+                                            key={index} 
+                                            isLast={bus_tipo.filas[0] == index+1} 
+                                        />
+                                    )}
+                                </div>
+                            </fieldset>
+                            { bus_tipo.filas[1] &&
+                                <fieldset>
+                                    <legend>
+                                        Distribución de asientos
+                                    </legend>
+                                    <label>Piso 2</label>
+                                    <div>
+                                        {Array(bus_tipo.filas[1]).fill(0).map((_, index) =>
+                                            <Fila
+                                                toggleActivate={() => {}} 
+                                                asientos={getAsientos({ filas: bus_tipo.filas[1], asientos: [] }, bus_tipo.filas[1], true)} 
+                                                asientos_desactivados={bus_tipo.asientos_desactivados[1]}
+                                                desactivar_asientos={this.props.desactivar_asientos ? this.props.desactivar_asientos[1] : []}
+                                                activar_asientos={this.props.activar_asientos ? this.props.activar_asientos[1] : []}
+                                                index={index} 
+                                                key={index} 
+                                                isLast={bus_tipo.filas[1] == index+1} 
+                                            />
+                                        )}
+                                    </div>
+                                </fieldset>
+                            }
+                        </div>
                     }
                 </FormValidate>
             </div>

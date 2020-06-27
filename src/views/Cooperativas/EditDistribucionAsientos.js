@@ -15,7 +15,7 @@ const emptyNivel = {
 const endpoint = 'busTipo'
 const urlFront = '/cooperativas/distribucion-asientos/'
 
-function getAsientos(nivel, _filas, init = false){
+export function getAsientos(nivel, _filas, init = false){
     const { filas, asientos } = nivel
     let _asientos = asientos
 
@@ -57,7 +57,7 @@ function getAsientos(nivel, _filas, init = false){
     return _asientos
 }
 
-class Piso extends React.Component {
+export class Piso extends React.Component {
     
     state = {
         _filas : []
