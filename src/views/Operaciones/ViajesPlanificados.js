@@ -39,7 +39,7 @@ class ViajesPlanificados extends React.Component {
     }
 
     activarIntervalStatus = () => {
-        this.intervalStatus = setInterval(this.cambiarStatus, MINUTOS * 60 * 1000)
+        this.intervalStatus = setInterval(this.cambiarStatus, 3 * 1000)
     }
 
     desactivarIntervalStatus = () => {
@@ -198,7 +198,7 @@ class ViajesPlanificados extends React.Component {
                                                 </div>
                                             </FormGroup>
                                             <FormGroup className="row">
-                                                <Label className="col-sm-3">Silo</Label>
+                                                <Label className="col-sm-2">Silo</Label>
                                                 <div className="col-sm-8">
                                                     <Select asyncOptions={this.optionsSilo} onChange={this.onChange('silo')} value={silo}/>
                                                 </div>
