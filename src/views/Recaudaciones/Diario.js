@@ -7,6 +7,7 @@ import { moneyFormat } from 'utils/number'
 import moment from 'moment'
 import store from 'store/auth'
 import axios from 'axios'
+import { checkPermission } from 'temeforest/base/Permission'
 
 axios.defaults.headers.common['Authorization'] = `JWT ${store.getState().token}`
 
@@ -168,11 +169,11 @@ class Diario extends React.Component {
     fieldImprimir = (row) => {
         return (
             <React.Fragment>
-                { row.a_cobrar !== 0 && row.cooperativa !== "(TOTAL)" &&
+                { row.a_cobrar !== 0 && row.cooperativa !== "(TOTAL)" &&  checkPermission('can_view_print_cobro') &&
                     <Button style={{display:"block", margin:"auto"}} outline onClick={() => this.toWord(row)}>Imprimir</Button>
                 }
                 {
-                    row.a_cobrar!== 0 && row.cooperativa === "(TOTAL)" &&
+                    row.a_cobrar!== 0 && row.cooperativa === "(TOTAL)" &&  checkPermission('can_view_print_cobro') &&
                     <Button style={{display:"block", margin:"auto"}} outline onClick={() => this.imprimirTodos()}>Imprimir Todos</Button>
                 }
             </React.Fragment>
@@ -296,7 +297,6 @@ class Diario extends React.Component {
                                         (row) => <span style={{float:"right"}}>${moneyFormat(row.nc)}</span>,
                                         this.fieldImprimir
                                     ]}
-
                                     endpoint='venta/cobros-diarios'
                                     parameters={this.state}
 
