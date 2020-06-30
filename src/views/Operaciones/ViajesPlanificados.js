@@ -138,7 +138,7 @@ class ViajesPlanificados extends React.Component {
         ]
 
         if(!this.state.data.saldo){
-            let indexSaldo = 5
+            let indexSaldo = 7
             fields.splice(indexSaldo, 1)
             headers.splice(indexSaldo, 1)
         }
