@@ -39,7 +39,7 @@ class ViajesPlanificados extends React.Component {
     }
 
     activarIntervalStatus = () => {
-        this.intervalStatus = setInterval(this.cambiarStatus, MINUTOS * 60 * 1000)
+        this.intervalStatus = setInterval(this.cambiarStatus, 3 * 1000)
     }
 
     desactivarIntervalStatus = () => {
@@ -76,7 +76,7 @@ class ViajesPlanificados extends React.Component {
     }
 
     estados = [
-        { value:'', label: 'En camino' },
+        { value: 0, label: 'En camino' },
         { value:1, label: 'En andén' },
         { value:2, label: 'Salió' }
     ]
@@ -181,20 +181,22 @@ class ViajesPlanificados extends React.Component {
                                                 <Label className="col-sm-2">Estado</Label>
                                                 <div className="col-sm-4">
                                                     <Select options={this.estados} onChange={this.onChange('estado')} value={estado} />
-                                                    
                                                 </div>
                                                 <div className="col-sm-1">{' '}</div>
                                                 <div className="col-sm-4">
-                                                    <input type="checkbox" className="custom-control-input" id="rotarEstados" name="rotarEstados" checked={this.state.rotarStatus} 
-                                                        onChange={(e) => {
-                                                            this.setState({
-                                                                rotarStatus: e.target.checked
-                                                            }, () => {
-                                                                this.state.rotarStatus ? this.activarIntervalStatus() : this.desactivarIntervalStatus()
-                                                            })
-                                                        }} 
-                                                    />
-                                                    <Label onlyClassName="custom-control-label" htmlFor="rotarEstados">Rotar estados</Label>
+                                                    <div className="custom-control custom-checkbox">
+                                                        <input type="checkbox" className="custom-control-input" id="rotarEstados" name="rotarEstados" checked={this.state.rotarStatus} 
+                                                            onChange={(e) => {
+                                                                this.setState({
+                                                                    rotarStatus: e.target.checked
+                                                                }, () => {
+                                                                    this.state.rotarStatus ? this.activarIntervalStatus() : this.desactivarIntervalStatus()
+                                                                })
+                                                            }} 
+                                                        />
+                                                        <Label onlyClassName="custom-control-label"  htmlFor="rotarEstados">Rotar estados</Label>
+                                                
+                                                    </div>
                                                 </div>
                                             </FormGroup>
                                             <FormGroup className="row">
@@ -233,6 +235,31 @@ class ViajesPlanificados extends React.Component {
                                                 <span>{' '}No tiene saldo</span>
                                                 <div className="bg-info d-inline-block" style={{width:20, height:10, marginLeft: 20}}>{' '}</div>
                                                 <span>{' '}Viaje atrasado </span>
+                                                <div className="bg-danger d-inline-block" style={{width:20, height:10, marginLeft: 20}}>{' '}</div>
+                                                {estado !== 0 && estado !== 1 && estado != 2 && !this.state.rotarStatus &&
+                                                <span>{' '}En camino</span>
+                                                }
+                                                {estado === 0 && !this.state.rotarStatus &&
+                                                <span>{' '}En camino</span>
+                                                }
+                                                {estado === 1 && !this.state.rotarStatus &&
+                                                <span>{' '}En andén</span>
+                                                }
+                                                {estado === 2 && !this.state.rotarStatus &&
+                                                <span>{' '}Salió</span>
+                                                }
+                                                {estado !== 0 && estado !== 1 && estado != 2 && this.state.rotarStatus  &&
+                                                <span>{' '}En camino</span>
+                                                }
+                                                {estado === 0 && this.state.rotarStatus  &&
+                                                <span>{' '}En camino</span>
+                                                }
+                                                {estado === 1 && this.state.rotarStatus &&
+                                                <span>{' '}En andén</span>
+                                                }
+                                                {estado === 2 && this.state.rotarStatus &&
+                                                <span>{' '}Salió</span>
+                                                }
                                             </div>
                                         </div>
                                     </div>
