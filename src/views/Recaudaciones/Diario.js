@@ -169,11 +169,11 @@ class Diario extends React.Component {
     fieldImprimir = (row) => {
         return (
             <React.Fragment>
-                { row.a_cobrar !== 0 && row.cooperativa !== "(TOTAL)" &&  checkPermission('can_view_print_cobro') &&
+                { row.a_cobrar !== 0 && row.cooperativa !== "(TOTAL)" &&
                     <Button style={{display:"block", margin:"auto"}} outline onClick={() => this.toWord(row)}>Imprimir</Button>
                 }
                 {
-                    row.a_cobrar!== 0 && row.cooperativa === "(TOTAL)" &&  checkPermission('can_view_print_cobro') &&
+                    row.a_cobrar!== 0 && row.cooperativa === "(TOTAL)" &&
                     <Button style={{display:"block", margin:"auto"}} outline onClick={() => this.imprimirTodos()}>Imprimir Todos</Button>
                 }
             </React.Fragment>
