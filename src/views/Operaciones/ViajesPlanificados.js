@@ -48,11 +48,11 @@ class ViajesPlanificados extends React.Component {
     }
 
     cambiarStatus = () => {
-        const { data : { estado } } = this.state
-        const index = this.estados.findIndex(r => r.value === estado)
+        const { data : { marcaciones } } = this.state
+        const index = this.estados.findIndex(r => r.value === marcaciones)
         const nextIndex = index+1 > this.estados.length-1 ? 0 : index+1
 
-        this.onChange('estado')({
+        this.onChange('marcaciones')({
             target : {
                 value : this.estados[nextIndex].value
             }
@@ -76,9 +76,10 @@ class ViajesPlanificados extends React.Component {
     }
 
     estados = [
-        { value: 0, label: 'En camino' },
-        { value:1, label: 'En andén' },
-        { value:2, label: 'Salió' }
+        { value: 'vigente', label: 'Vigente' },
+        { value: 'ruta', label: 'En ruta' },
+        { value: 'anden', label: 'En andén' },
+        { value: 'salida', label: 'Salió' }
     ]
 
     onChange = name => (e) => {
@@ -118,7 +119,7 @@ class ViajesPlanificados extends React.Component {
     }
  
     render(){
-        const { cooperativa, localidad, silo, estado } = this.state.data
+        const { cooperativa, localidad, silo, marcaciones } = this.state.data
         
 
         let headers = ['#','Fecha', 'Usuario Creación', 'Cooperativa', 'Disco', 'Placa', 'Vueltas', 'Saldo', 'Duración', 'Salida', 'Destino', 'Puntos', 'Kit']
@@ -180,7 +181,7 @@ class ViajesPlanificados extends React.Component {
                                             <FormGroup className="row">
                                                 <Label className="col-sm-2">Estado</Label>
                                                 <div className="col-sm-4">
-                                                    <Select options={this.estados} onChange={this.onChange('estado')} value={estado} />
+                                                    <Select options={this.estados} onChange={this.onChange('marcaciones')} value={marcaciones} />
                                                 </div>
                                                 <div className="col-sm-1">{' '}</div>
                                                 <div className="col-sm-4">
@@ -235,29 +236,37 @@ class ViajesPlanificados extends React.Component {
                                                 <span>{' '}No tiene saldo</span>
                                                 <div className="bg-info d-inline-block" style={{width:20, height:10, marginLeft: 20}}>{' '}</div>
                                                 <span>{' '}Viaje atrasado </span>
-                                                <div className="bg-danger d-inline-block" style={{width:20, height:10, marginLeft: 20}}>{' '}</div>
-                                                {estado !== 0 && estado !== 1 && estado != 2 && !this.state.rotarStatus &&
-                                                <span>{' '}En camino</span>
+                                                <div className="border border-secondary d-inline-block " style={{width:20, height:10, marginLeft: 20}}>{' '}</div>
+                                                {marcaciones !== 'vigente' && marcaciones !== 'ruta' && marcaciones != 'anden' && marcaciones != 'salida'
+                                                && !this.state.rotarStatus &&
+                                                <span>{' '}Vigente</span>
                                                 }
-                                                {estado === 0 && !this.state.rotarStatus &&
-                                                <span>{' '}En camino</span>
+                                                {marcaciones === 'vigente' && !this.state.rotarStatus &&
+                                                <span>{' '}Vigente</span>
                                                 }
-                                                {estado === 1 && !this.state.rotarStatus &&
+                                                {marcaciones === 'ruta' && !this.state.rotarStatus &&
+                                                <span>{' '}En ruta</span>
+                                                }
+                                                {marcaciones === 'anden' && !this.state.rotarStatus &&
                                                 <span>{' '}En andén</span>
                                                 }
-                                                {estado === 2 && !this.state.rotarStatus &&
+                                                {marcaciones === 'salida' && !this.state.rotarStatus &&
                                                 <span>{' '}Salió</span>
                                                 }
-                                                {estado !== 0 && estado !== 1 && estado != 2 && this.state.rotarStatus  &&
-                                                <span>{' '}En camino</span>
+                                                {marcaciones !== 'vigente' && marcaciones !== 'ruta' && marcaciones != 'anden' && marcaciones != 'salida'
+                                                && this.state.rotarStatus  &&
+                                                <span>{' '}Vigente</span>
                                                 }
-                                                {estado === 0 && this.state.rotarStatus  &&
-                                                <span>{' '}En camino</span>
+                                                 {marcaciones === 'vigente' && this.state.rotarStatus  &&
+                                                <span>{' '}Vigente</span>
                                                 }
-                                                {estado === 1 && this.state.rotarStatus &&
+                                                {marcaciones === 'ruta' && this.state.rotarStatus  &&
+                                                <span>{' '}En ruta</span>
+                                                }
+                                                {marcaciones === 'anden' && this.state.rotarStatus &&
                                                 <span>{' '}En andén</span>
                                                 }
-                                                {estado === 2 && this.state.rotarStatus &&
+                                                {marcaciones === 'salida' && this.state.rotarStatus &&
                                                 <span>{' '}Salió</span>
                                                 }
                                             </div>
