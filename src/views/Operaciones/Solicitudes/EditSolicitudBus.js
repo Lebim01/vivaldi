@@ -118,19 +118,7 @@ class MainView extends React.Component {
                                 <Input value={this.props.bus_marca_nombre} readOnly />
                             </div>
                         </FormGroup>
-                        <FormGroup className="row">
-                            <Label className="col-sm-3">Identificación propietario</Label>
-                            <div className="col-sm-5">
-                                <Input 
-                                    value={
-                                        ['ACT', 'INH'].includes(this.props.tipo_solicitud)
-                                            ? this.props.bus_detalle.propietario.identificacion
-                                            : this.props.bus_propietario_cedula
-                                    } 
-                                    readOnly 
-                                />
-                            </div>
-                        </FormGroup>
+                       
                         <FormGroup className="row">
                             <Label className="col-sm-3">Propietario</Label>
                             <div className="col-sm-5">
@@ -141,6 +129,21 @@ class MainView extends React.Component {
                             <Label className="col-sm-3">Distribución</Label>
                             <div className="col-sm-5">
                                 <Input value={this.props.bus_distribucion_nombre} readOnly />
+                            </div>
+                        </FormGroup>
+                        { this.props.tipo_solicitud !== 'DIS' &&
+                         <fieldset>
+                         <FormGroup className="row">
+                            <Label className="col-sm-3">Identificación propietario</Label>
+                            <div className="col-sm-5">
+                                <Input 
+                                    value={
+                                        ['ACT', 'INH'].includes(this.props.tipo_solicitud)
+                                            ? this.props.bus_detalle.propietario.identificacion
+                                            : this.props.bus_propietario_cedula
+                                    } 
+                                    readOnly 
+                                />
                             </div>
                         </FormGroup>
                         <FormGroup className="row">
@@ -167,7 +170,8 @@ class MainView extends React.Component {
                                 <Input value={this.props.bus_fecha_vencimiento_rtv} readOnly />
                             </div>
                         </FormGroup>
-
+                        </fieldset>
+                        }
                         <FormGroup className="row">
                             { this.props.documentacion_url && !this.props.documentacion_url.toLowerCase().includes('none')
                                 ? (
