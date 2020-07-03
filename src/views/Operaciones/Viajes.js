@@ -28,12 +28,12 @@ class Viajes extends React.Component {
         { value: 1, label: 'Normal' },
         { value: 2, label: 'Extraordinaria' }
     ]
+    
     estados = [
         { value:'', label: 'Todos' },
         { value:1, label: 'Finalizados' }
     ]
   
-
     onChange = name => (e) => {
         let value = e.target.value
 
@@ -57,6 +57,7 @@ class Viajes extends React.Component {
     nuevo = () => {
         this.props.history.push('/operaciones/viajes/edit?')
     }
+
     render(){
         const { cooperativa, bus, tipo_frecuencia, fecha_inicio, localidad, fecha_fin, estado } = this.state
         return (
@@ -154,11 +155,15 @@ class Viajes extends React.Component {
 
                                             searchable={false}
                                             fieldNames={['Fecha', 'Frecuencia','Hora salida', 'Disco', 'Placa', 'Cooperativa' ,'Destino/Via', 'Pasajero']}
-                                            fields={['fecha','frecuencia_nombre', 'hora_salida',
-                                            (row) => <span style={{textAlign:"right", position: 'relative', right:'-5%'}}>{row.bus_disco}</span>,
-                                            'bus_placa', 'cooperativa_nombre', 'ruta_nombre',
-                                            'pasajeros'
-                                            
+                                            fields={[
+                                                'fecha',
+                                                'frecuencia_nombre', 
+                                                'hora_salida',
+                                                (row) => <span style={{textAlign:"right", position: 'relative', right:'-5%'}}>{row.bus_disco}</span>,
+                                                'bus_placa', 
+                                                'cooperativa_nombre', 
+                                                'ruta_nombre',
+                                                'pasajeros'
                                             ]}
 
                                             endpoint='viaje'

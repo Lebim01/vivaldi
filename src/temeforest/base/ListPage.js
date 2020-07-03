@@ -100,7 +100,9 @@ class ListPage extends React.Component {
         // 
         numBeginVisibleFooterPages : 1,
         numEndVisibleFooterPages : 1,
-        cancelRequest : null
+        cancelRequest : null,
+        //
+        loadingPersistedFilters: true
     }
 
     componentDidMount(){
@@ -228,12 +230,19 @@ class ListPage extends React.Component {
 
     componentDidUpdate(prevProps, prevState){
         if(!_.isEqual(prevProps, this.props) || prevState.search !== this.state.search){
+            console.log('1')
             if(!_.isEqual(prevProps.parameters, this.props.parameters) || 
                 prevState.currentPage !== this.state.currentPage ||
                 prevState.search !== this.state.search
             ){
-                if(!_.isEqual(prevProps.parameters, this.props.parameters)){
+                console.log('2')
+                if(!_.isEqual(prevProps.parameters, this.props.parameters) && !this.state.loadingPersistedFilters){
                     this.setPage(1, false)
+                }
+                if(this.state.loadingPersistedFilters){
+                    this.setState({
+                        loadingPersistedFilters: false
+                    })
                 }
                 this.replaceUrlParams()
             }
@@ -262,7 +271,7 @@ class ListPage extends React.Component {
                     const { currentPage: page, search: searchtext } = this.state
                     this.props.history.push({
                         pathname : `/${this.props.urlFront}/edit/`,
-                        search : objectToUrl({ id, page, searchtext })
+                        search : objectToUrl({ id, page, searchtext, ...this.props.parameters })
                     })
                 }
             }
@@ -322,6 +331,7 @@ class ListPage extends React.Component {
             this.setState({
                 currentPage : page
             }, () => {
+                this.replaceUrlParams()
                 if(loadList)
                     this.loadList({ ...parameters, page })
             })
@@ -344,46 +354,35 @@ class ListPage extends React.Component {
         const { parameters } = this.props
         const { search } = this.state
 
-        //debugger;
-
         // All data ?no_page
         
         try {
-        const { data } = await axios.get(
-            `${baseurl}/${this.props.endpoint}/${objectToUrl({ ...parameters, searchtext: search, full: 1, page_size: 0})}`,
-            this.props.configs
-           
-        )
-    
-        const html = `
-            <table id='to-export' style='display:none;'>
-                ${ReactDOMServer.renderToString(this.renderHeader())}
-                ${ReactDOMServer.renderToString(
-                    <Provider store={store}>
-                        {this.renderBody(data)}
-                    </Provider>
-                )}
-            </table>
-        `
-        document.body.insertAdjacentHTML('afterend', html)
-        htmlToXlsById('to-export')
+            const { data } = await axios.get(
+                `${baseurl}/${this.props.endpoint}/${objectToUrl({ ...parameters, searchtext: search, full: 1, page_size: 0})}`,
+                this.props.configs
+            
+            )
+        
+            const html = `
+                <table id='to-export' style='display:none;'>
+                    ${ReactDOMServer.renderToString(this.renderHeader())}
+                    ${ReactDOMServer.renderToString(
+                        <Provider store={store}>
+                            {this.renderBody(data)}
+                        </Provider>
+                    )}
+                </table>
+            `
+            document.body.insertAdjacentHTML('afterend', html)
+            htmlToXlsById('to-export')
         }
         catch(cooperativa) {
-            /*if(cooperativa.response.status > 400 && cooperativa.response.status < 500){
-                Swal.showValidationMessage(cooperativa.response.data)
-                console.log("1" + cooperativa.response.data)
-            }*/
             if (cooperativa.response.status==400) {
                 Swal.fire('', 
                     ` ${cooperativa.response.data.cooperativa}`, 'error'
-                   // console.log("2" + cooperativa.response.data.cooperativa)
-                )  
-                
+                )
             }
-        }
-    
-
-        
+        }        
     }
 
     imprimirPantalla = () => {
@@ -406,8 +405,6 @@ class ListPage extends React.Component {
                 this.props.config
             )
 
-        
-        
             const html = `
                 <table id='to-export' style=''>
                     ${ReactDOMServer.renderToString(this.renderHeader())}
@@ -425,9 +422,7 @@ class ListPage extends React.Component {
             if (cooperativa.response.status==400) {
                 Swal.fire('', 
                     ` ${cooperativa.response.data.cooperativa}`, 'error'
-                   // console.log("2" + cooperativa.response.data.cooperativa)
                 )  
-                
             }
         }
     }
