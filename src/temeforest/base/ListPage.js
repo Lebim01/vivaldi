@@ -69,7 +69,7 @@ class RecordRow extends React.Component {
                         </td>
                     )
                 })}
-
+                { showStatus && <td className={record.className}>{record['is_active'] ? 'Activo' : 'Inactivo'}</td> }
                 <ContextMenu id={this.state.randomid} style={{ backgroundColor: '#eee', padding: 15 }}>
                     <MenuItem onClick={this.onRowRightClick}>
                         <label className="text-info" style={{cursor: 'pointer'}}>
@@ -77,7 +77,7 @@ class RecordRow extends React.Component {
                         </label>
                     </MenuItem>
                 </ContextMenu>
-                { showStatus && <td className={record.className}>{record['is_active'] ? 'Activo' : 'Inactivo'}</td> }
+                
             </tr>
         )
     }
